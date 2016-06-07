@@ -5,7 +5,10 @@
     "angular-ui-router": "latest",
     "templates": "latest",
     "angular-aria": "latest",
-    "angular-material": "latest"
+    "angular-material": "latest",
+    "angular-animate": "latest",
+    "ng-token-auth": "latest",
+    "material-design-icons": "latest"
   },
   "resolutions": {
   }

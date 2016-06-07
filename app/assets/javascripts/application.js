@@ -17,6 +17,8 @@
 //= require angular-animate/angular-animate.js
 //= require angular-aria/angular-aria.js
 //= require angular-material/angular-material.js
+//= require angular-cookie/angular-cookie
+//= require ng-token-auth/dist/ng-token-auth
 //= require app
 //= require controllers/UserController
 //= require angular-rails-templates

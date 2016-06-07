@@ -51,3 +51,7 @@ gem 'bower-rails'
 gem 'sprockets', '2.12.3'
 
 gem 'angular-rails-templates'
+
+gem 'devise_token_auth'
+
+gem 'omniauth'

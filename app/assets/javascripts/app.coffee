@@ -4,7 +4,7 @@ angular.module('lessons', [
   'ui.router'
   'templates'
   'ngMaterial'
-
+  'ng-token-auth'
 ])
 
 angular.module('lessons').config ($stateProvider, $urlRouterProvider) ->
@@ -14,3 +14,8 @@ angular.module('lessons').config ($stateProvider, $urlRouterProvider) ->
     url: '/user'
     templateUrl: "user.html"
     controller: "UserController"
+
+angular.module('lessons').config ( $mdThemingProvider ) ->
+  $mdThemingProvider.theme('default')
+    .primaryPalette('green')
+    .accentPalette('blue-grey')
