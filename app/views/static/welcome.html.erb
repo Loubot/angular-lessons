@@ -1,2 +1,15 @@
+<md-toolbar>
+  <h1 >Angular Material Starter</h1>
+</md-toolbar>
 
-<div></div>
+<div class="container" layout="row" flex>
+  <md-sidenav class="sidenav white_text" md-component-id="left">Sidenav</md-sidenav>
+  <md-content id="content" flex class="main_page">
+    <md-button> Flat Button </md-button>
+    <md-button href="http://google.com"> Flat link </md-button>
+    <md-button class="md-raised" ng-click="openLeftMenu()"> Raised Button </md-button>
+    <md-button ng-disabled="true"> Disabled Button </md-button>
+
+
+  </md-content>
+</div>
