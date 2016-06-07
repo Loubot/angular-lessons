@@ -3,6 +3,7 @@
 angular.module('lessons', [
   'ui.router'
   'templates'
+  'ngMaterial'
 
 ])
 

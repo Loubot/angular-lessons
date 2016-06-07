@@ -1,3 +1,6 @@
 asset 'angular'
 asset 'angular-ui-router'
 asset 'templates'
+asset 'angular-aria'
+asset 'angular-material'
+asset 'angular-animate'
