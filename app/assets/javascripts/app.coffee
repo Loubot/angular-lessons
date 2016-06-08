@@ -21,6 +21,11 @@ angular.module('lessons').config ($stateProvider, $urlRouterProvider) ->
     templateUrl: "user.html"
     controller: "UserController"
 
+angular.module('lessons').config ( $authProvider ) ->
+  $authProvider.configure({
+      apiUrl: "http://localhost:3000/api"
+    })
+
 angular.module('lessons').config ( $mdThemingProvider ) ->
   $mdThemingProvider.theme('default')
     .primaryPalette('green')
@@ -40,7 +45,7 @@ angular.module('lessons').service 'COMMS', ( $http, $state, RESOURCES, $rootScop
       ).then( ( result ) ->
         usSpinnerService.stop('spinner-1')
         if result.user != undefined
-          $rootScope.USER = result.user
+          $rootScope.USER = result.userf
         resolve result
       ).catch( ( err_result ) ->
         usSpinnerService.stop('spinner-1')

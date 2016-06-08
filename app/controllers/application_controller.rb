@@ -8,8 +8,10 @@ class ApplicationController < ActionController::Base
 
   def configure_permitted_parameters
     params.delete(:registration)
+    params.delete(:config_name)
+    params.delete(:confirm_success_url)
     p params[:registration]
-    devise_parameter_sanitizer.permit(:sign_up, keys: [:name, :password, :confirm_success_url, :registration])
+    devise_parameter_sanitizer.permit(:sign_up, keys: [:name, :password])
   end
   protect_from_forgery with: :exception
 end
