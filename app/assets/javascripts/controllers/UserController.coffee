@@ -12,7 +12,7 @@ angular.module('lessons').controller('UserController', [
     $scope.register_teacher = ->
       console.log $scope.teacher
       COMMS.POST(
-        '/auth/sign_in'
+        '/api/auth'
         $scope.teacher
       ).then ( ( res ) ->
         console.log res

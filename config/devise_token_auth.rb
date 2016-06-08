@@ -1,0 +1,1 @@
+config.default_confirm_success_url = "confirmed"

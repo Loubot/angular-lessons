@@ -46,6 +46,8 @@ end
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 
+gem 'angular_rails_csrf'
+
 gem 'bower-rails'
 
 gem 'sprockets', '2.12.3'

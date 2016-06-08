@@ -35,6 +35,7 @@ angular.module('lessons').service 'COMMS', ( $http, $state, RESOURCES, $rootScop
       $http(
         method: 'POST'
         url: "#{ RESOURCES.DOMAIN }#{ url }"
+        data: data
       ).then( ( result ) ->
         usSpinnerService.stop('spinner-1')
         if result.user != undefined
