@@ -12,7 +12,7 @@ angular.module('lessons').controller('UserController', [
     $scope.openLeftMenu = ->
       $mdSidenav('left').toggle()
 
-
+    
 
     $scope.register_teacher = ->
 
