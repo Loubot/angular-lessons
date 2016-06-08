@@ -21,6 +21,7 @@
 //= require ng-token-auth/dist/ng-token-auth
 //= require spin.js/spin
 //= require angular-spinner/angular-spinner
+//= require alertify.js/dist/js/ngAlertify
 //= require app
 //= require controllers/UserController
 //= require angular-rails-templates

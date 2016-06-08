@@ -6,6 +6,7 @@ angular.module('lessons', [
   'ngMaterial'
   'ng-token-auth'
   'angularSpinner'
+  'ngAlertify'
 ])
 
 angular.module('lessons').constant "RESOURCES", do ->

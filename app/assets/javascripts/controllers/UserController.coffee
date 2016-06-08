@@ -3,9 +3,11 @@
 angular.module('lessons').controller('UserController', [
   '$scope'
   '$mdSidenav'
+  'alertify'
   'COMMS'
-  ( $scope, $mdSidenav, COMMS ) ->
+  ( $scope, $mdSidenav, alertify, COMMS ) ->
     console.log "User Controller"
+    alertify.success 'Hello'
     $scope.openLeftMenu = ->
       $mdSidenav('left').toggle()
 
@@ -16,6 +18,8 @@ angular.module('lessons').controller('UserController', [
         $scope.teacher
       ).then ( ( res ) ->
         console.log res
+        alertify.success "Teacher created"
       ), ( err ) ->
         console.log err
+        alertify.error "Couldn't register"
 ])
