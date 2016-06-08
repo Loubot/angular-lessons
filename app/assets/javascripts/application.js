@@ -19,6 +19,8 @@
 //= require angular-material/angular-material.js
 //= require angular-cookie/angular-cookie
 //= require ng-token-auth/dist/ng-token-auth
+//= require spin.js/spin
+//= require angular-spinner/angular-spinner
 //= require app
 //= require controllers/UserController
 //= require angular-rails-templates
