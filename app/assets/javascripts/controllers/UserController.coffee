@@ -9,7 +9,8 @@ angular.module('lessons').controller('UserController', [
   'COMMS'
   'AUTH'
   '$http'
-  ( $scope, $rootScope, USER, $mdSidenav, alertify, COMMS, AUTH, $http ) ->
+  '$interval'
+  ( $scope, $rootScope, USER, $mdSidenav, alertify, COMMS, AUTH, $http, $interval ) ->
     console.log "User Controller"
     
 
@@ -40,16 +41,15 @@ angular.module('lessons').controller('UserController', [
           
         )
       
+    $scope.slides = []
+    $scope.index = 1
+
+    $interval((->
+      $scope.index = ++$scope.index 
+      $scope.index = 1 if $scope.index == 4
+      console.log $scope.index
+      return
+    ), 3000 )
       
 ])
-
-$('.welcome_fotorama').fotorama
-  # width: "100%"
-  # height: "100%"
-  transition: "crossfade"
-  loop: true
-  autoplay: false
-  nav: false
-  allowfullscreen: true
-  
-  arrows: true     
+ 

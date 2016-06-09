@@ -4,20 +4,12 @@
   <h1 class="welcome_how_it_works_header">How it works</h1>
   <strong>From finding the perfect teacher to managing bookings or full payments, and scheduling lessons - we take care of all the details, so you can focus on learning.</strong> <br>
   <div class="row text-center">
-    <div ng-init='slides = [
-          {image: "<%= asset_url 'how_it_works_1.jpg' %>", index: 1, description: "Image 00"},
-          {image: "<%= asset_url 'how_it_works_2.jpg' %>", index: 2, description: "Image 01"},
-          {image: "<%= asset_url 'how_it_works_3.jpg' %>", index: 3, description: "Image 02"},
-          {image: "<%= asset_url 'how_it_works_4.jpg' %>", index: 4, description: "Image 03"},
-          
-      ]'></div>
     
-    </script>
-    
-    <div class="welcome_fotorama">
-      
-      <img ng-repeat="slide in slides" class="slide" ng-src="{{slide.image}}" ng-show="slide.index==index">     
-      
+    <div class="welcome_fotorama col-xs-12">
+      <%= image_tag 'how_it_works_1.jpg', class: 'img-responsive' %>
+      <%= image_tag 'how_it_works_2.jpg', class: 'img-responsive' %>
+      <%= image_tag 'how_it_works_3.jpg', class: 'img-responsive' %>
+      <%= image_tag 'how_it_works_4.jpg', class: 'img-responsive' %>
     </div>
     
   </div>
