@@ -24,7 +24,7 @@ angular.module('lessons').config ($stateProvider, $urlRouterProvider) ->
 
   $stateProvider.state 'how_it_works',
     url: '/how-it-works'
-    templateUrl: 'how_it_works.html'
+    templateUrl: 'static/how_it_works.html'
     controller: "UserController"
 
 angular.module('lessons').config ( $authProvider ) ->
