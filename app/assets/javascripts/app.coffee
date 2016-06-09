@@ -7,11 +7,12 @@ angular.module('lessons', [
   'ng-token-auth'
   'angularSpinner'
   'ngAlertify'
+  'ap.fotorama'
 ])
 
 angular.module('lessons').constant "RESOURCES", do ->
   url = window.location.origin
-  DOMAIN: url
+  DOMAIN: url + '/api'
 
 angular.module('lessons').config ($stateProvider, $urlRouterProvider) ->
   $urlRouterProvider.otherwise "/"
@@ -19,6 +20,11 @@ angular.module('lessons').config ($stateProvider, $urlRouterProvider) ->
   $stateProvider.state 'user',
     url: '/user'
     templateUrl: "user.html"
+    controller: "UserController"
+
+  $stateProvider.state 'how_it_works',
+    url: '/how-it-works'
+    templateUrl: 'how_it_works.html'
     controller: "UserController"
 
 angular.module('lessons').config ( $authProvider ) ->
@@ -30,6 +36,67 @@ angular.module('lessons').config ( $mdThemingProvider ) ->
   $mdThemingProvider.theme('default')
     .primaryPalette('green')
     .accentPalette('blue-grey')
+
+
+angular.module('lessons').service 'USER', ( $http, $rootScope, RESOURCES, $q, usSpinnerService ) ->
+  usSpinnerService.spin('spinner-1')
+  get_user: ->
+    $q ( resolve, reject ) ->
+      $http(
+        method: 'GET'
+        url: "http://localhost:3000/api/teacher/get"
+        headers: { "Content-Type": "application/json" }
+        # params: 
+        #   email: 
+      ).then( ( result ) ->
+        $rootScope.USER = result.data
+        resolve result.data
+      ).catch( ( err_result ) ->
+        
+        console.log err_result
+        reject err_result
+      )
+
+angular.module('lessons').service 'AUTH', ( $http, $rootScope, RESOURCES, $q, $auth, alertify, usSpinnerService ) ->
+  usSpinnerService.spin('spinner-1')
+
+  signin: ( auth_hash ) ->
+    $q ( resolve, reject ) ->
+      $auth.submitLogin( auth_hash )
+        .then( (resp) ->
+          # handle success response
+          console.log resp
+          alertify.success "Registered successfully"
+          window.localStorage.setItem 'user_email', resp.data.email
+          $rootScope.USER = resp.data
+          resolve resp
+        )
+        .catch( (resp) ->
+          # handle error response
+          console.log resp
+          alertify.error resp.data.errors.full_messages
+          $rootScope.USER = null
+          reject resp
+        )
+
+  signup: ( auth_hash ) ->
+    $q ( resolve, reject ) ->
+      $auth.submitRegistration( auth_hash )
+        .then( (resp) ->
+          # handle success response
+          console.log resp
+          alertify.success "Registered successfully"
+          window.localStorage.setItem 'user_email', resp.data.email
+          $rootScope.USER = resp.data
+          resolve resp
+        )
+        .catch( (resp) ->
+          # handle error response
+          console.log resp
+          alertify.error resp.data.errors.full_messages
+          $rootScope.USER = null
+          reject resp
+        )
 
 
 angular.module('lessons').service 'COMMS', ( $http, $state, RESOURCES, $rootScope, $q, usSpinnerService ) ->

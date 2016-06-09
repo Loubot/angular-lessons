@@ -1,0 +1,28 @@
+{
+  "name": "ap.fotorama",
+  "main": "ap.fotorama.js",
+  "homepage": "https://github.com/tamtakoe/ap.fotorama",
+  "authors": [
+    "tamtakoe@gmail.com"
+  ],
+  "description": "Angular module for Fotorama jQuery plugin",
+  "keywords": [
+    "fotorama",
+    "amgular",
+    "gallery"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "fotorama": "~4.5.1"
+  },
+  "_release": "691dcbd44c",
+  "_resolution": {
+    "type": "branch",
+    "branch": "master",
+    "commit": "691dcbd44cca7e3d3896d64c186bc80815910895"
+  },
+  "_source": "https://github.com/tamtakoe/ap.fotorama.git",
+  "_target": "*",
+  "_originalSource": "ap.fotorama",
+  "_direct": true
+}

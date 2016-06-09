@@ -3,9 +3,11 @@ Rails.application.routes.draw do
   scope '/api' do
     mount_devise_token_auth_for 'Teacher', at: '/auth'
     resources :groups, except: [:new, :edit]
+    get 'teacher/get' => 'teacher#get'
   end
   as :teacher do
     # Define routes for Teacher within this block.
+
   end
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

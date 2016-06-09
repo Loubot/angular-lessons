@@ -1,13 +1,28 @@
 <span us-spinner spinner-key="spinner-1"></span>
-<md-toolbar>
-  <h1 >Angular Material Starter</h1>
+
+
+<md-toolbar md-scroll-shrink aria-hidden="false" class="md-default-theme white_text" >
+  <div class="md-toolbar-tools" layout="row" layout-align="space-around center">
+    
+    <img src="<%= asset_path('lylLogo.png') %>" class="md-48">
+    
+    <button class="md-button md-default-theme white_text" ui-sref="register">Become a teacher</button>
+    <button ui-sref="how_it_works" class="md-button md-default-theme white_text">How it works</button>
+    <button tabindex="0" aria-label="Search" ui-sref="mailing_list" class="md-button md-default-theme white_text" >
+      <i class="material-icons">email</i>
+    </button>
+    <button tabindex="0" ng-click="openLeftMenu()" hide-gt-md="" aria-label="Menu" class="md-button md-default-theme white_text" >
+      <ng-md-icon class="ng-scope" icon="menu"><i class="material-icons">view_headline</i></ng-md-icon>
+    </button>
+  </div>
+ 
 </md-toolbar>
 
 <div class="container" layout="row" flex>
   <md-sidenav class="sidenav white_text" md-component-id="left">
 
 
-    <div layout="column" layout-padding ng-cloak>
+    <div layout="column" layout-padding ng-cloak ng-if="!USER">
       <br/>
       <md-content class="md-no-momentum">
         <form ng-submit="register_teacher()">
@@ -53,11 +68,7 @@
 
 
   <md-content id="content" flex class="main_page">
-    <md-button> Flat Button </md-button>
-    <md-button href="http://google.com"> Flat link </md-button>
-    <md-button class="md-raised" ng-click="openLeftMenu()"> Raised Button </md-button>
-    <md-button ng-disabled="true"> Disabled Button </md-button>
-
+    
 
   </md-content>
 </div>

@@ -2,39 +2,54 @@
 
 angular.module('lessons').controller('UserController', [
   '$scope'
+  '$rootScope'
+  'USER'
   '$mdSidenav'
   'alertify'
   'COMMS'
-  '$auth'
-  ( $scope, $mdSidenav, alertify, COMMS, $auth ) ->
+  'AUTH'
+  '$http'
+  ( $scope, $rootScope, USER, $mdSidenav, alertify, COMMS, AUTH, $http ) ->
     console.log "User Controller"
-    alertify.success 'Hello'
+    
+
+    USER.get_user().then( ( user ) ->
+      alertify.success = "Got user"
+      console.log $rootScope.USER
+
+    ).catch( ( err ) ->
+      alertify.error "No user"
+      $rootScope.USER = null
+    )
     $scope.openLeftMenu = ->
       $mdSidenav('left').toggle()
 
     
 
     $scope.register_teacher = ->
+      $scope.teacher.is_teacher = true
 
-      $auth.submitRegistration($scope.teacher)
+      AUTH.signup( $scope.teacher )
         .then( (resp) ->
           # handle success response
           console.log resp
-          alertrify.success "Registered successfully"
+          console.log $rootScope.USER
         )
         .catch( (resp) ->
           # handle error response
-          console.log resp
-          alertify.error resp.data.errors.full_messages
+          
         )
-      console.log $scope.teacher
-      # COMMS.POST(
-      #   '/api/auth'
-      #   $scope.teacher
-      # ).then ( ( res ) ->
-      #   console.log res
-      #   alertify.success "Teacher created"
-      # ), ( err ) ->
-      #   console.log err
-      #   alertify.error err.errors.full_messages
+      
+      
 ])
+
+$('.welcome_fotorama').fotorama
+  # width: "100%"
+  # height: "100%"
+  transition: "crossfade"
+  loop: true
+  autoplay: false
+  nav: false
+  allowfullscreen: true
+  
+  arrows: true     

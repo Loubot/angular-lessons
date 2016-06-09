@@ -22,6 +22,7 @@
 //= require spin.js/spin
 //= require angular-spinner/angular-spinner
 //= require alertify.js/dist/js/ngAlertify
+//= require ap.fotorama/ap.fotorama.js
 //= require app
 //= require controllers/UserController
 //= require angular-rails-templates
