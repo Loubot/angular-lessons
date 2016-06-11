@@ -25,6 +25,7 @@
 //= require ap.fotorama/ap.fotorama.js
 //= require app
 //= require controllers/UserController
+//= require controllers/NavController
 //= require angular-rails-templates
 // Templates in app/assets/templates (but see step 5)
 //= require_tree ../templates

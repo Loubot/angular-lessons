@@ -12,6 +12,8 @@ angular.module('lessons').controller('UserController', [
   '$interval'
   ( $scope, $rootScope, USER, $mdSidenav, alertify, COMMS, AUTH, $http, $interval ) ->
     console.log "User Controller"
+
+    $scope.teacher = {}
     
 
     USER.get_user().then( ( user ) ->
@@ -28,6 +30,7 @@ angular.module('lessons').controller('UserController', [
     
 
     $scope.register_teacher = ->
+      console.log $scope.teacher
       $scope.teacher.is_teacher = true
 
       AUTH.signup( $scope.teacher )
