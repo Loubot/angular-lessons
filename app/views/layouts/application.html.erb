@@ -8,72 +8,100 @@
   <%= csrf_meta_tags %>
 </head>
 <body  layout="column">
-  <md-toolbar md-scroll-shrink aria-hidden="false" class="md-default-theme white_text" ng-controller="NavController">
-    <div class="md-toolbar-tools" layout="row" layout-align="space-around center">
-      
-      <img src="<%= asset_path('lylLogo.png') %>" class="md-48">
-      
-      <button class="md-button md-default-theme white_text" ui-sref="register">Become a teacher</button>
-      <button ui-sref="how_it_works" class="md-button md-default-theme white_text">How it works</button>
-      <button tabindex="0" aria-label="Search" ui-sref="mailing_list" class="md-button md-default-theme white_text" >
-        <i class="material-icons">email</i>
-      </button>
-      <button tabindex="0" ng-click="openLeftMenu()" hide-gt-md="" aria-label="Menu" class="md-button md-default-theme white_text" >
-        <ng-md-icon class="ng-scope" icon="menu"><i class="material-icons">view_headline</i></ng-md-icon>
-      </button>
-    </div>
-   
-  </md-toolbar>
-
-  <div class="container" layout="row" flex>
-    <md-sidenav class="sidenav white_text" md-component-id="left">
-
-
-      <div layout="column" layout-padding ng-cloak ng-if="!USER">
-        <br/>
-        <md-content class="md-no-momentum">
-          <form ng-submit="register_teacher()">
-            <md-input-container class="md-icon-float md-block" >
-              <!-- Use floating label instead of placeholder -->
-              <label>First Name</label>
-              <md-icon class="name"></md-icon>
-              <input ng-model="teacher.name" type="text" required>
-            </md-input-container>
-
-            <!-- <md-input-container class="md-block">
-              <md-icon class="lastName"></md-icon>
-              <input ng-model="teacher.lastName" type="text" placeholder="Last Name" required>
-            </md-input-container>
-   -->
-            <md-input-container class="md-block">
-              <!-- Use floating placeholder instead of label -->
-              <md-icon  class="email"></md-icon>
-              <input ng-model="teacher.email" type="email" placeholder="Email (required)" required>
-            </md-input-container>
-            
-            <md-input-container class="md-block">
-              <!-- Use floating placeholder instead of label -->
-              <md-icon  class="password"></md-icon>
-              <input ng-model="teacher.password" type="password" placeholder="Password (required)" required>
-            </md-input-container>
-
-            <!-- <md-input-container class="md-icon-float md-icon-right md-block">
-              <label>Donation Amount</label>
-              <md-icon ></md-icon>
-              <input ng-model="teacher.donation" type="number" step="0.01">
-              <md-icon ></md-icon>
-            </md-input-container> -->
-            <md-button class="md-primary" ng-click="register_teacher()"> 
-              Submit
+  <div ng-controller="NavController">
+    <md-toolbar md-scroll-shrink aria-hidden="false" class="md-default-theme white_text" >
+      <div class="md-toolbar-tools" layout="row" layout-align="space-around center">
+      <md-fab-speed-dial ng-hide="demo.hidden" md-direction="left" md-open="demo.isOpen"
+                         class="md-scale md-fab-top-left" ng-class="{ 'md-hover-full': demo.hover }"
+                         ng-mouseenter="demo.isOpen=true" ng-mouseleave="demo.isOpen=false">
+        <md-fab-trigger>
+          <md-button aria-label="menu" class="md-fab md-warn">
+            <md-tooltip md-direction="top" md-visible="tooltipVisible">Menu</md-tooltip>
+            <md-icon  aria-label="menu"><i class="material-icons">menu</i></md-icon>
+          </md-button>
+        </md-fab-trigger>
+        <md-fab-actions>
+          <div ng-repeat="item in demo.items">
+            <md-button aria-label="{{item.name}}" class="md-fab md-raised md-mini"
+                       ng-click="demo.openDialog($event, item)">
+              <md-tooltip md-direction="{{item.direction}}" md-visible="tooltipVisible"
+                          md-autohide="false">
+                {{item.name}}
+              </md-tooltip>
+              <md-icon md-svg-src="{{item.icon}}" aria-label="{{item.name}}"></md-icon>
             </md-button>
-          </form>
-        </md-content>
+          </div>
+        </md-fab-actions>
+      </md-fab-speed-dial>>
+        
+        <img src="<%= asset_path('lylLogo.png') %>" class="md-48">
+        
+        <button class="md-button md-default-theme white_text" ui-sref="register">Become a teacher</button>
+        <button ui-sref="how_it_works" class="md-button md-default-theme white_text">How it works</button>
+        <button tabindex="0" aria-label="Search" ui-sref="mailing_list" class="md-button md-default-theme white_text" >
+          <i class="material-icons">email</i>
+        </button>
+        
       </div>
+     
+    </md-toolbar>
+
+    <div class="container" layout="row" flex>
+      <md-sidenav class="sidenav white_text" md-component-id="left">
 
 
-    </md-sidenav>
-    <div ui-view class="main"></div>
+        <div layout="column" layout-padding ng-cloak ng-if="!USER">
+          <br/>
+          <md-content class="md-no-momentum">
+            <form ng-submit="register_teacher()">
+              <md-input-container class="md-icon-float md-block" >
+                <!-- Use floating label instead of placeholder -->
+                <label>First Name</label>
+                <md-icon class="name"></md-icon>
+                <input ng-model="teacher.name" type="text" required>
+              </md-input-container>
+
+              <!-- <md-input-container class="md-block">
+                <md-icon class="lastName"></md-icon>
+                <input ng-model="teacher.lastName" type="text" placeholder="Last Name" required>
+              </md-input-container>
+     -->
+              <md-input-container class="md-block">
+                <!-- Use floating placeholder instead of label -->
+                <md-icon  class="email"></md-icon>
+                <input ng-model="teacher.email" type="email" placeholder="Email (required)" required>
+              </md-input-container>
+              
+              <md-input-container class="md-block">
+                <!-- Use floating placeholder instead of label -->
+                <md-icon  class="password"></md-icon>
+                <input ng-model="teacher.password" type="password" placeholder="Password (required)" required>
+              </md-input-container>
+
+              <!-- <md-input-container class="md-icon-float md-icon-right md-block">
+                <label>Donation Amount</label>
+                <md-icon ></md-icon>
+                <input ng-model="teacher.donation" type="number" step="0.01">
+                <md-icon ></md-icon>
+              </md-input-container> -->
+              <md-button class="md-primary" ng-click="register_teacher()"> 
+                Submit
+              </md-button>
+            </form>
+            <button class="md-button md-default-theme" ng-click="openLeftMenu()"hide-gt-md="">
+              <i class="material-icons">keyboard_arrow_left</i>
+            </button>
+          </md-content>
+        </div>
+
+
+      </md-sidenav>
+      <div ui-view class="main"></div>
+  </div>
 <%= yield %>
 
 </body>
 </html>
+
+
+

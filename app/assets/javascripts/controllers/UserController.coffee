@@ -4,13 +4,12 @@ angular.module('lessons').controller('UserController', [
   '$scope'
   '$rootScope'
   'USER'
-  '$mdSidenav'
   'alertify'
   'COMMS'
   'AUTH'
   '$http'
   '$interval'
-  ( $scope, $rootScope, USER, $mdSidenav, alertify, COMMS, AUTH, $http, $interval ) ->
+  ( $scope, $rootScope, USER, alertify, COMMS, AUTH, $http, $interval ) ->
     console.log "User Controller"
 
     $scope.teacher = {}
@@ -24,8 +23,7 @@ angular.module('lessons').controller('UserController', [
       alertify.error "No user"
       $rootScope.USER = null
     )
-    $scope.openLeftMenu = ->
-      $mdSidenav('left').toggle()
+    
 
     
 
