@@ -22,8 +22,8 @@
         </md-fab-trigger>
 
         <md-fab-actions ng-if="!USER">
-          <md-button class="md-button md-default-theme">Login</md-button>
-          <md-button class="md-button md-default-theme" ng-click="openLeftMenu()">Register</md-button>
+          <md-button class="md-button md-default-theme" ng-click="openLeftMenu(0)">Login</md-button>
+          <md-button class="md-button md-default-theme" ng-click="openLeftMenu(1)">Register</md-button>
         </md-fab-actions> <!-- end of if !USER -->
 
         <md-fab-actions ng-if="USER">

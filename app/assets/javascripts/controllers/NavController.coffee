@@ -8,6 +8,7 @@ angular.module('lessons').controller('NavController', [
   'alertify'
   ( $scope, $rootScope, USER, $mdSidenav, alertify ) ->
     console.log "NavController"
+    $scope.logging_in = false
 
     USER.get_user().then( ( user ) ->
       alertify.success = "Got user"
@@ -17,8 +18,8 @@ angular.module('lessons').controller('NavController', [
       alertify.error "No user"
       $rootScope.USER = null
     )
-    $scope.openLeftMenu = ->
-      console.log 'yep'
+    $scope.openLeftMenu = ( request_type ) -> # 0=login; 1= register
+      console.log request_type
       $mdSidenav('left').toggle()
 
     $scope.$watch('demo.isOpen', ( isOpen ) ->
