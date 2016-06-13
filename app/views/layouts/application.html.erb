@@ -7,47 +7,9 @@
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <%= csrf_meta_tags %>
 </head>
-<body  layout="column">
-  <div ng-controller="NavController">
-    <md-toolbar md-scroll-shrink aria-hidden="false" class="md-default-theme white_text" >
-      <div class="md-toolbar-tools" layout="row" layout-align="space-around center">
-      <md-fab-speed-dial ng-hide="demo.hidden" md-direction="down" md-open="demo.isOpen"
-                         class="md-scale md-fab-top-left" ng-class="{ 'md-hover-full': demo.hover }"
-                         ng-mouseenter="demo.isOpen=true" ng-mouseleave="demo.isOpen=false">
-        <md-fab-trigger>
-          <md-button aria-label="menu" class="md-fab md-warn">
-            <md-tooltip md-direction="top" md-visible="tooltipVisible">Menu</md-tooltip>
-            <md-icon  aria-label="menu"><i class="material-icons">menu</i></md-icon>
-          </md-button>
-        </md-fab-trigger>
-
-        <md-fab-actions ng-if="!USER">
-          <md-button class="md-button md-default-theme" ng-click="openLeftMenu(0)">Login</md-button>
-          <md-button class="md-button md-default-theme" ng-click="openLeftMenu(1)">Register</md-button>
-        </md-fab-actions> <!-- end of if !USER -->
-
-        <md-fab-actions ng-if="USER">
-          <md-button class="md-button md-default-theme">Profile</md-button>
-          <md-button class="md-button md-default-theme" href="/api/auth/sign_out">Logout</md-button>
-          <md-button class="md-button md-default-theme">content</md-button>
-
-        </md-fab-actions>
-
-      </md-fab-speed-dial>
-        
-        <img src="<%= asset_path('lylLogo.png') %>" class="md-48">
-        
-        <button class="md-button md-default-theme white_text" ui-sref="register">Become a teacher</button>
-        <button ui-sref="how_it_works" class="md-button md-default-theme white_text">How it works</button>
-        <button tabindex="0" aria-label="Search" ui-sref="mailing_list" class="md-button md-default-theme white_text" >
-          <i class="material-icons">email</i>
-        </button>
-        
-      </div>
-     
-    </md-toolbar>
-
-    <div class="container" layout="row" flex>
+<body >
+  <div ng-controller="NavController" layout="column" style="height:500px;" ng-cloak>
+    <section layout="row" flex>
       <md-sidenav class="sidenav white_text" md-component-id="left">
 
 
@@ -125,7 +87,68 @@
 
 
       </md-sidenav>
-      <div ui-view class="main"></div>
+
+      <div layout="column" layout-fill>
+        <md-toolbar md-scroll-shrink aria-hidden="false" class="md-default-theme white_text" >
+          <div class="md-toolbar-tools" layout="row" layout-align="space-around center">
+            <md-fab-speed-dial ng-hide="demo.hidden" md-direction="down" md-open="demo.isOpen"
+                             class="md-scale md-fab-top-left" ng-class="{ 'md-hover-full': demo.hover }"
+                             >
+              <md-fab-trigger>
+                <md-button aria-label="menu" class="md-fab md-warn">
+                  <md-tooltip md-direction="top" md-visible="tooltipVisible">Menu</md-tooltip>
+                  <md-icon  aria-label="menu"><i class="material-icons">menu</i></md-icon>
+                </md-button>
+              </md-fab-trigger>
+
+              <md-fab-actions ng-if="!USER">
+                <md-button class="md-button md-default-theme" ng-click="openLeftMenu(0)">Login</md-button>
+                <md-button class="md-button md-default-theme" ng-click="openLeftMenu(1)">Register</md-button>
+              </md-fab-actions> <!-- end of if !USER -->
+
+              <md-fab-actions ng-if="USER">
+                <md-button class="md-button md-default-theme">Profile</md-button>
+                <md-button class="md-button md-default-theme" href="/api/auth/sign_out">Logout</md-button>
+                <md-button class="md-button md-default-theme">content</md-button>
+
+              </md-fab-actions>
+
+            </md-fab-speed-dial>
+            
+            <img src="<%= asset_path('lylLogo.png') %>" class="md-48">
+            
+            <button class="md-button md-default-theme white_text" ui-sref="register">Become a teacher</button>
+            <button ui-sref="how_it_works" class="md-button md-default-theme white_text">How it works</button>
+            <button tabindex="0" aria-label="Search" ui-sref="mailing_list" class="md-button md-default-theme white_text" >
+              <i class="material-icons">email</i>
+            </button>
+            
+          </div>
+         
+        </md-toolbar>
+        <md-content>
+          abxf
+        </md-content>
+      </div> <!-- end of layout="column" -->
+
+      <md-sidenav class="md-sidenav-right md-whiteframe-4dp" md-component-id="right" md-is-locked-open="true">
+        <md-toolbar class="md-theme-light">
+          <h1 class="md-toolbar-tools">Sidenav Right</h1>
+        </md-toolbar>
+        <md-content  layout-padding>
+          <form>
+            <md-input-container>
+              <label for="testInput">Test input</label>
+              <input type="text" id="testInput"
+                     ng-model="data" md-autofocus>
+            </md-input-container>
+          </form>
+          <md-button ng-click="close()" class="md-primary">
+            Close Sidenav Right
+          </md-button>
+        </md-content>
+      </md-sidenav>
+    </section>
   </div>
 <%= yield %>
 
