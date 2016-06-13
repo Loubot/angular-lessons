@@ -54,36 +54,69 @@
         <div layout="column" layout-padding ng-cloak ng-if="!USER">
           <br/>
           <md-content class="md-no-momentum">
-            <form ng-submit="register_teacher()">
-              <md-input-container class="md-icon-float md-block" >
-                <!-- Use floating label instead of placeholder -->
-                <label>First Name</label>
-                <md-icon class="name"></md-icon>
-                <input ng-model="teacher.name" type="text" required>
-              </md-input-container>
+            <md-input-container ng-if="auth_type==1">
+              <md-subheader>Register</md-subheader>
+              <form ng-submit="register_teacher()" >
+                <md-input-container class="md-icon-float md-block" >
+                  <!-- Use floating label instead of placeholder -->
+                  <label>First Name</label>
+                  <md-icon class="name"></md-icon>
+                  <input ng-model="teacher.name" type="text" required>
+                </md-input-container>
 
-              <!-- <md-input-container class="md-block">
-                <md-icon class="lastName"></md-icon>
-                <input ng-model="teacher.lastName" type="text" placeholder="Last Name" required>
-              </md-input-container>
-     -->
-              <md-input-container class="md-block">
-                <!-- Use floating placeholder instead of label -->
-                <md-icon  class="email"></md-icon>
-                <input ng-model="teacher.email" type="email" placeholder="Email (required)" required>
-              </md-input-container>
-              
-              <md-input-container class="md-block">
-                <!-- Use floating placeholder instead of label -->
-                <md-icon  class="password"></md-icon>
-                <input ng-model="teacher.password" type="password" placeholder="Password (required)" required>
-              </md-input-container>
+                <!-- <md-input-container class="md-block">
+                  <md-icon class="lastName"></md-icon>
+                  <input ng-model="teacher.lastName" type="text" placeholder="Last Name" required>
+                </md-input-container>
+       -->
+                <md-input-container class="md-block">
+                  <!-- Use floating placeholder instead of label -->
+                  <md-icon  class="email"></md-icon>
+                  <input ng-model="teacher.email" type="email" placeholder="Email (required)" required>
+                </md-input-container>
+                
+                <md-input-container class="md-block">
+                  <!-- Use floating placeholder instead of label -->
+                  <md-icon  class="password"></md-icon>
+                  <input ng-model="teacher.password" type="password" placeholder="Password (required)" required>
+                </md-input-container>
 
-              
-              <md-button class="md-primary" ng-click="register_teacher()"> 
-                Submit
-              </md-button>
-            </form>
+                
+                <md-button class="md-primary" ng-click="register_teacher()"> 
+                  Submit
+                </md-button>
+              </form>
+            </md-input-container> <!-- end of ng-if="auth_type==1" -->
+
+            <md-input-container ng-if="auth_type==0">
+              <md-subheader>Login</md-subheader>
+              <form ng-submit="login()" >
+                <md-input-container class="md-icon-float md-block" >
+                  <!-- Use floating label instead of placeholder -->
+                  <label>First Name</label>
+                  <md-icon class="name"></md-icon>
+                  <input ng-model="teacher.name" type="text" required>
+                </md-input-container>
+
+                <!-- <md-input-container class="md-block">
+                  <md-icon class="lastName"></md-icon>
+                  <input ng-model="teacher.lastName" type="text" placeholder="Last Name" required>
+                </md-input-container>
+       -->
+                <md-input-container class="md-block">
+                  <!-- Use floating placeholder instead of label -->
+                  <md-icon  class="email"></md-icon>
+                  <input ng-model="teacher.email" type="email" placeholder="Email (required)" required>
+                </md-input-container>
+
+                
+                <md-button class="md-primary" ng-click="register_teacher()"> 
+                  Submit
+                </md-button>
+              </form>
+            </md-input-container> <!-- end of ng-if="auth_type==1" -->
+
+
             <button class="md-button md-default-theme" ng-click="openLeftMenu()"hide-gt-md="">
               <i class="material-icons">keyboard_arrow_left</i>
             </button>

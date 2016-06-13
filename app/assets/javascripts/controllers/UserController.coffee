@@ -6,10 +6,10 @@ angular.module('lessons').controller('UserController', [
   'USER'
   'alertify'
   'COMMS'
-  'AUTH'
+  '$auth'
   '$http'
   '$interval'
-  ( $scope, $rootScope, USER, alertify, COMMS, AUTH, $http, $interval ) ->
+  ( $scope, $rootScope, USER, alertify, COMMS, $auth, $http, $interval ) ->
     console.log "User Controller"
 
     $scope.teacher = {}
@@ -27,20 +27,7 @@ angular.module('lessons').controller('UserController', [
 
     
 
-    $scope.register_teacher = ->
-      console.log $scope.teacher
-      $scope.teacher.is_teacher = true
-
-      AUTH.signup( $scope.teacher )
-        .then( (resp) ->
-          # handle success response
-          console.log resp
-          console.log $rootScope.USER
-        )
-        .catch( (resp) ->
-          # handle error response
-          
-        )
+    
       
     $scope.slides = []
     $scope.index = 1
