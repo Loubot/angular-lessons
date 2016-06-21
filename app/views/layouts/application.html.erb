@@ -71,8 +71,14 @@
                   <input ng-model="teacher.email" type="email" placeholder="Email (required)" required>
                 </md-input-container>
 
+                <md-input-container class="md-block">
+                  <!-- Use floating placeholder instead of label -->
+                  <md-icon  class="password"></md-icon>
+                  <input ng-model="teacher.password" type="password" placeholder="Password (required)" required>
+                </md-input-container>
+
                 
-                <md-button class="md-primary" ng-click="register_teacher()"> 
+                <md-button class="md-primary" ng-click="login()"> 
                   Submit
                 </md-button>
               </form>
@@ -108,7 +114,7 @@
 
               <md-fab-actions ng-if="USER">
                 <md-button class="md-button md-default-theme">Profile</md-button>
-                <md-button class="md-button md-default-theme" href="/api/auth/sign_out">Logout</md-button>
+                <md-button class="md-button md-default-theme" ng-click="logout()">Logout</md-button>
                 <md-button class="md-button md-default-theme">content</md-button>
 
               </md-fab-actions>

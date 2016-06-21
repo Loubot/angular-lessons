@@ -13,7 +13,7 @@ angular.module('lessons').controller('NavController', [
     $scope.auth_type = null
 
     USER.get_user().then( ( user ) ->
-      alertify.success = "Got user"
+      alertify.success "Got user"
       console.log $rootScope.USER
 
     ).catch( ( err ) ->
@@ -43,6 +43,7 @@ angular.module('lessons').controller('NavController', [
           # handle success response
           console.log resp
           console.log $rootScope.USER
+
         )
         .catch( (resp) ->
           # handle error response
@@ -55,11 +56,24 @@ angular.module('lessons').controller('NavController', [
       $auth.submitLogin( $scope.teacher )
         .then( (resp) ->
           # handle success response
+          $rootScope.USER = resp
           console.log resp
-          console.log $rootScope.USER
+          
+          $mdSidenav('left').toggle()
+          alertify.success "Welcome back #{ $rootScope.USER.name }"
         )
         .catch( (resp) ->
           # handle error response
           
+        )
+
+    $scope.logout = ->
+      $auth.signOut()
+        .then( ( resp ) ->
+          console.log resp
+          alertify.success "Logged out successfully"
+        ).catch( ( err ) ->
+          console.log err 
+          alertify.error "Failed to log out"
         )
 ])
