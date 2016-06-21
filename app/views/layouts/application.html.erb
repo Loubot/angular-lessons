@@ -120,42 +120,39 @@
               </md-fab-actions>
 
             </md-fab-speed-dial>
-            
+            <span flex="30"></span>
+            <h4>Learn your lesson</h4>
             <img src="<%= asset_path('lylLogo.png') %>" class="md-48">
+            <span flex="20"></span>
+           
+            <button class="md-button md-default-theme white_text" ng-click="openRightMenu()"><i class="material-icons">menu</i></button>
             
-            <button class="md-button md-default-theme white_text" ui-sref="register">Become a teacher</button>
-            <button ui-sref="how_it_works" class="md-button md-default-theme white_text">How it works</button>
-            <button tabindex="0" aria-label="Search" ui-sref="mailing_list" class="md-button md-default-theme white_text" >
-              <i class="material-icons">email</i>
-            </button>
-            
-          </div>
+          </div> <!-- dnf of md-toolbar-tools -->
          
         </md-toolbar>
-        <md-content class="main_page">
-          abxf
+        <md-content class="main_page" ui-view class="main" layout-align="center">
+          
         </md-content>
       </div> <!-- end of layout="column" -->
 
-      <md-sidenav class="md-sidenav-right md-whiteframe-4dp" md-component-id="right" md-is-locked-open="true">
+      <md-sidenav class="md-sidenav-right md-whiteframe-4dp" md-component-id="right" >
         <md-toolbar class="md-theme-light">
           <h1 class="md-toolbar-tools">Sidenav Right</h1>
         </md-toolbar>
         <md-content  layout-padding>
-          <form>
-            <md-input-container>
-              <label for="testInput">Test input</label>
-              <input type="text" id="testInput"
-                     ng-model="data" md-autofocus>
-            </md-input-container>
-          </form>
+          <button class="md-button md-default-theme " ui-sref="register">Become a teacher</button>
+          <button ui-sref="how_it_works" class="md-button md-default-theme ">How it works</button><br>
+          <button ui-sref="mailing_list" class="md-button md-default-theme ">
+            Mailing list
+          </button><br>
           <md-button ng-click="close()" class="md-primary">
             Close Sidenav Right
           </md-button>
         </md-content>
-      </md-sidenav>
+      </md-sidenav> <!-- end of md-sidenav right -->
     </section>
   </div>
+
 <%= yield %>
 
 </body>

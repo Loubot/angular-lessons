@@ -34,6 +34,10 @@ angular.module('lessons').controller('NavController', [
       console.log isOpen
     )
 
+    $scope.openRightMenu = ->
+      console.log "yep"
+      $mdSidenav('right').toggle()
+
     $scope.register_teacher = ->
       console.log $scope.teacher
       $scope.teacher.is_teacher = true
