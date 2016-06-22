@@ -76,8 +76,10 @@ angular.module('lessons').controller('NavController', [
         .then( ( resp ) ->
           console.log resp
           alertify.success "Logged out successfully"
+          $rootScope.USER = null
         ).catch( ( err ) ->
-          console.log err 
+          console.log err
+          $rootScope.USER = null
           alertify.error "Failed to log out"
         )
 ])

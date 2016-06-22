@@ -17,6 +17,11 @@ angular.module('lessons').constant "RESOURCES", do ->
 angular.module('lessons').config ($stateProvider, $urlRouterProvider) ->
   $urlRouterProvider.otherwise "/"
 
+  $stateProvider.state 'welcome',
+    url: '/'
+    templateUrl: "static/welcome.html"
+    controller: "WelcomeController"
+
   $stateProvider.state 'user',
     url: '/user'
     templateUrl: "user.html"

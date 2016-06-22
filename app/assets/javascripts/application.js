@@ -24,6 +24,7 @@
 //= require alertify.js/dist/js/ngAlertify
 //= require ap.fotorama/ap.fotorama.js
 //= require app
+//= require controllers/WelcomeController
 //= require controllers/UserController
 //= require controllers/NavController
 //= require angular-rails-templates

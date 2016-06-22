@@ -10,7 +10,7 @@
 <body class="main_page">
   <div ng-controller="NavController" layout="column" style="height:500px;" ng-cloak>
     <section layout="row" flex>
-      <md-sidenav class="sidenav white_text" md-component-id="left">
+      <md-sidenav class="sidenav white_text md-whiteframe=12" md-component-id="left">
 
 
         <div layout="column" layout-padding ng-cloak ng-if="!USER">
@@ -53,12 +53,6 @@
             <md-input-container ng-if="auth_type==0">
               <md-subheader>Login</md-subheader>
               <form ng-submit="login()" >
-                <md-input-container class="md-icon-float md-block" >
-                  <!-- Use floating label instead of placeholder -->
-                  <label>First Name</label>
-                  <md-icon class="name"></md-icon>
-                  <input ng-model="teacher.name" type="text" required>
-                </md-input-container>
 
                 <!-- <md-input-container class="md-block">
                   <md-icon class="lastName"></md-icon>
@@ -107,22 +101,22 @@
                 </md-button>
               </md-fab-trigger>
 
-              <md-fab-actions ng-if="!USER">
-                <md-button class="md-button md-default-theme" ng-click="openLeftMenu(0)">Login</md-button>
-                <md-button class="md-button md-default-theme" ng-click="openLeftMenu(1)">Register</md-button>
+              <md-fab-actions ng-if="!USER" >
+                <md-button class="md-button md-default-theme green_text" ng-click="openLeftMenu(0)">Login</md-button>
+                <md-button class="md-button md-default-theme green_text" ng-click="openLeftMenu(1)">Register</md-button>
               </md-fab-actions> <!-- end of if !USER -->
 
-              <md-fab-actions ng-if="USER">
-                <md-button class="md-button md-default-theme">Profile</md-button>
-                <md-button class="md-button md-default-theme" ng-click="logout()">Logout</md-button>
-                <md-button class="md-button md-default-theme">content</md-button>
+              <md-fab-actions ng-if="USER" class="green_text">
+                <md-button class="md-button md-default-theme green_text">Profile</md-button>
+                <md-button class="md-button md-default-theme green_text" ng-click="logout()">Logout</md-button>
+                <md-button class="md-button md-default-theme green_text">content</md-button>
 
               </md-fab-actions>
 
             </md-fab-speed-dial>
             <span flex="30"></span>
             <h4>Learn your lesson</h4>
-            <img src="<%= asset_path('lylLogo.png') %>" class="md-48">
+            <img ui-sref="welcome" src="<%= asset_path('lylLogo.png') %>" class="md-48">
             <span flex="20"></span>
            
             <button class="md-button md-default-theme white_text" ng-click="openRightMenu()"><i class="material-icons">menu</i></button>
@@ -135,14 +129,14 @@
         </md-content>
       </div> <!-- end of layout="column" -->
 
-      <md-sidenav class="md-sidenav-right md-whiteframe-4dp" md-component-id="right" >
+      <md-sidenav class="md-sidenav-right md-whiteframe-12dp" md-component-id="right" >
         <md-toolbar class="md-theme-light">
           <h1 class="md-toolbar-tools">Sidenav Right</h1>
         </md-toolbar>
-        <md-content  layout-padding>
-          <button class="md-button md-default-theme " ui-sref="register">Become a teacher</button>
-          <button ui-sref="how_it_works" class="md-button md-default-theme ">How it works</button><br>
-          <button ui-sref="mailing_list" class="md-button md-default-theme ">
+        <md-content  layout-padding >
+          <button class="md-button md-default-theme" ui-sref="register" md-ink-ripple="#FF0000">Become a teacher</button>
+          <button ui-sref="how_it_works" class="md-button md-default-theme " md-ink-ripple="#FF0000">How it works</button><br>
+          <button ui-sref="mailing_list" class="md-button md-default-theme " md-ink-ripple="#FF0000">
             Mailing list
           </button><br>
           <md-button ng-click="close()" class="md-primary">
