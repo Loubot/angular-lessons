@@ -41,12 +41,13 @@ html, body{
 .subject_search{
   padding: 0 12px;
   line-height: 40px;
-  width: 45%;
+  min-width: 80%;
   -webkit-border-radius: 50px;
   -moz-border-radius: 50px;
   border-radius: 50px;
   background-color: #FFF;
 }
+
 
 
 .main_page_search_container{

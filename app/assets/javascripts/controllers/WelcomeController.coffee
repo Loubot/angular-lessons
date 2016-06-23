@@ -12,15 +12,19 @@ angular.module('lessons').controller('WelcomeController', [
     console.log "WelcomeController"
     $scope.subject = new Object
 
+
+    COMMS.GET(
+      "/subjects"
+      $scope.subject
+    ).then( ( resp ) ->
+      console.log resp
+      $scope.subjects = resp.data
+      alertify.success "Got a subject"
+    ).catch( ( err ) ->
+      console.log err
+      alertify.error "Failed to get subjects "
+    )
+
     $scope.search = ->
-      COMMS.GET(
-        "/subjects"
-        $scope.subject
-      ).then( ( subjects ) ->
-        console.log subjects
-        alertify.success "Got a subject"
-      ).catch( ( err ) ->
-        console.log err
-        alertify.error "Failed to get subjects "
-      )
+      console.log $scope.selected_subject.name
 ])
