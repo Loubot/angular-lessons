@@ -4,6 +4,8 @@ Rails.application.routes.draw do
     mount_devise_token_auth_for 'Teacher', at: '/auth'
     resources :groups, except: [:new, :edit]
     get 'teacher/get' => 'teacher#get'
+
+    get 'subjects' => "subject#index"
   end
   as :teacher do
     # Define routes for Teacher within this block.

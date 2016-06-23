@@ -113,11 +113,29 @@ angular.module('lessons').service 'COMMS', ( $http, $state, RESOURCES, $rootScop
       $http(
         method: 'POST'
         url: "#{ RESOURCES.DOMAIN }#{ url }"
+        headers: { "Content-Type": "application/json" }
         data: data
       ).then( ( result ) ->
         usSpinnerService.stop('spinner-1')
         if result.user != undefined
-          $rootScope.USER = result.userf
+          $rootScope.USER = result.user
+        resolve result
+      ).catch( ( err_result ) ->
+        usSpinnerService.stop('spinner-1')
+        reject err_result
+      )
+
+  GET: ( url, params ) ->
+    usSpinnerService.spin('spinner-1')
+    $q ( resolve, reject ) ->
+      $http(
+        method: 'GET'
+        headers: { "Content-Type": "application/json" }
+        url: "#{ RESOURCES.DOMAIN }#{ url }"
+        params: params
+      ).then( ( result ) ->
+        usSpinnerService.stop('spinner-1')
+        
         resolve result
       ).catch( ( err_result ) ->
         usSpinnerService.stop('spinner-1')
