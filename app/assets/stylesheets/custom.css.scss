@@ -1,6 +1,5 @@
 html, body{
-  height: 100% !important;
-  width: 100% !important;
+  
 }
 
 .white_text{
@@ -10,6 +9,7 @@ html, body{
 .green_text{
   color: #2a602a !important;
 }
+
 .sidenav{
   background-color: #2a602a;
 }
@@ -18,3 +18,11 @@ html, body{
   background-color: #e0ebf4;
 }
 
+
+.main_page_search_container{
+  background-image: asset_url('piano.jpg');
+  -moz-background-size: 100% 100%;
+  -webkit-background-size: 100% 100%;
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+}

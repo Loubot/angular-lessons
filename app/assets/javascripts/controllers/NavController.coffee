@@ -45,9 +45,11 @@ angular.module('lessons').controller('NavController', [
       $auth.submitRegistration( $scope.teacher )
         .then( (resp) ->
           # handle success response
-          console.log resp
+          console.log resp.data.data
+          $mdSidenav('left').toggle()
           console.log $rootScope.USER
-
+          $rootScope.USER = resp.data.data
+          alertify.success "Welcome #{ resp.data.data.email }"
         )
         .catch( (resp) ->
           # handle error response

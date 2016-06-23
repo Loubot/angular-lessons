@@ -1,6 +1,7 @@
 source 'https://rubygems.org'
 
-
+ruby '2.1.8', platforms: [:mingw, :mswin], group: :development
+# ruby '2.0.0', platforms: [:mingw, :mswin], group: :development
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.6'
 # Use sqlite3 as the database for Active Record
@@ -57,5 +58,3 @@ gem 'angular-rails-templates'
 gem 'devise_token_auth'
 
 gem 'omniauth'
-
-gem 'angular-rails-templates'
