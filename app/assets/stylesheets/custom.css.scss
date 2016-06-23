@@ -1,5 +1,5 @@
 html, body{
-  
+  height: 100%;
 }
 
 .white_text{
@@ -10,12 +10,40 @@ html, body{
   color: #2a602a !important;
 }
 
+.black_text{
+  color: #111 !important;
+}
+
+// ::-webkit-input-placeholder {
+//    color: #FFF !important;
+// }
+
+// :-moz-placeholder { /* Firefox 18- */
+//    color: #FFF !important;  
+// }
+
+// ::-moz-placeholder {  /* Firefox 19+ */
+//    color: #FFF !important;  
+// }
+
+// :-ms-input-placeholder {  
+//    color: #FFF !important;  
+// }
+
 .sidenav{
   background-color: #2a602a;
 }
 
 .main_page{
   background-color: #e0ebf4;
+}
+
+.subject_search{
+  width: 45%;
+  -webkit-border-radius: 50px;
+  -moz-border-radius: 50px;
+  border-radius: 50px;
+  background-color: #FFF;
 }
 
 
@@ -27,4 +55,8 @@ html, body{
   background-repeat: no-repeat;
   // padding: 0 100px !important;
 
+}
+
+.not_transparent{
+  rgba: ( 0, 0, 0, 1 )
 }

@@ -1,4 +1,26 @@
-  <div layout="row" class="main_page_search_container white_text" layout-align="center" layout-padding flex> 
-    <div layout="row" layout-align="center start" layout-margin flex><h1>Your place to connect with local teachers on guitar,<br> piano, drums or anything else musical</h1></div>
+  <div layout="column" class="main_page_search_container" layout-align="center center" layout-padding flex > 
+    <div layout-align="center start" class="white_text" layout-margin>
+      <h1>Your place to connect with local teachers on guitar,<br> piano, drums or anything else musical</h1>
+    </div>
+    <div  >
+      <form ng-submit="search()" > 
+        
+          
+          <div layout="row" layout-align="center">
+            <input name="name" class="black_text subject_search" ng-model="subject.name" size="80" required   placeholder=" What do you want to learn today?">
+          
+        
+
+            
+            <input name="location" class="black_text subject_search" ng-model="subject.name" required  placeholder=" County?">
+          </div>
+          
+          <div layout="row" layout-align="center">
+            <md-button type="submit" class="md-primary">Search<i class="material-icons">search</i></md-button>
+          </div>
+      </form> <!-- end of search() -->
+    </div>
+
+  
   </div>
 

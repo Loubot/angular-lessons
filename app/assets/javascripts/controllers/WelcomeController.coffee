@@ -9,5 +9,8 @@ angular.module('lessons').controller('WelcomeController', [
   '$auth'
   ( $scope, $rootScope, USER, $mdSidenav, alertify, $auth ) ->
     console.log "WelcomeController"
+    $scope.subject = new Object
 
+    $scope.search = ->
+      console.log $scope.subject
 ])
