@@ -3,5 +3,6 @@ class Teacher < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
           :recoverable, :rememberable, :trackable, :validatable,
           :omniauthable
+  has_many :photos, as: :imageable, dependent: :destroy
   include DeviseTokenAuth::Concerns::User
 end
