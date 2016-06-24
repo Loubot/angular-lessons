@@ -23,10 +23,12 @@
 //= require angular-spinner/angular-spinner
 //= require alertify.js/dist/js/ngAlertify
 //= require ap.fotorama/ap.fotorama.js
+//= require angularjs-file-upload
 //= require app
 //= require controllers/WelcomeController
 //= require controllers/UserController
 //= require controllers/NavController
+//= require controllers/TeacherController
 //= require angular-rails-templates
 // Templates in app/assets/templates (but see step 5)
 //= require_tree ../templates

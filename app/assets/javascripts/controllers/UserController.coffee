@@ -7,9 +7,8 @@ angular.module('lessons').controller('UserController', [
   'alertify'
   'COMMS'
   '$auth'
-  '$http'
   '$interval'
-  ( $scope, $rootScope, USER, alertify, COMMS, $auth, $http, $interval ) ->
+  ( $scope, $rootScope, USER, alertify, COMMS, $auth, $interval ) ->
     console.log "User Controller"
 
     $scope.teacher = {}

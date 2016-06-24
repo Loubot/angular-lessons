@@ -8,6 +8,7 @@ angular.module('lessons', [
   'angularSpinner'
   'ngAlertify'
   'ap.fotorama'
+  'angularFileUpload'
 ])
 
 angular.module('lessons').constant "RESOURCES", do ->
@@ -22,10 +23,10 @@ angular.module('lessons').config ($stateProvider, $urlRouterProvider) ->
     templateUrl: "static/welcome.html"
     controller: "WelcomeController"
 
-  $stateProvider.state 'user',
-    url: '/user'
-    templateUrl: "user.html"
-    controller: "UserController"
+  $stateProvider.state 'teacher',
+    url: '/teacher/:id'
+    templateUrl: "user/teacher.html"
+    controller: "TeacherController"
 
   $stateProvider.state 'how_it_works',
     url: '/how-it-works'
