@@ -10,16 +10,21 @@ angular.module('lessons').controller('TeacherController', [
   'COMMS'
   'FileUploader'
   '$stateParams'
-  ( $scope, $rootScope, $state, RESOURCES, USER, alertify, COMMS, FileUploader, $stateParams ) ->
+  '$auth'
+  ( $scope, $rootScope, $state, RESOURCES, USER, alertify, COMMS, FileUploader, $stateParams, $auth ) ->
     console.log "TeacherController"
-    $scope.uploader = new FileUploader({
-      headers : 
-        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-      
-      url: "#{ RESOURCES.DOMAIN }/teacher/profile-pic"
+    x = $auth.retrieveData('auth_headers')
+    x['X-CSRF-TOKEN'] = $('meta[name="csrf-token"]').attr('content')
 
-      })
+    # x = $auth.retrieveData('auth_headers')
+    # x['X-CSRF-TOKEN'] = $('meta[name="csrf-token"]').attr('content')
+    # $scope.uploader = new FileUploader({
+    #   headers : 
+    #     x
+    #     # $auth.retrieveData('auth_headers')
+    #   url: "#{ RESOURCES.DOMAIN }/teacher/profile-pic"
 
+    #   })
     
 
     USER.get_user().then( ( user ) ->

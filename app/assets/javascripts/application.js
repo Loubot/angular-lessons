@@ -19,6 +19,7 @@
 //= require angular-material/angular-material.js
 //= require angular-cookie/angular-cookie
 //= require ng-token-auth/dist/ng-token-auth
+//= require ng-flow/dist/ng-flow.min
 //= require spin.js/spin
 //= require angular-spinner/angular-spinner
 //= require alertify.js/dist/js/ngAlertify

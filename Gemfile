@@ -62,5 +62,3 @@ gem 'devise_token_auth'
 gem 'omniauth'
 
 gem 'carrierwave'
-
-gem 'angularjs-file-upload-rails', '~> 2.2.0'

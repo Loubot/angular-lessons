@@ -9,6 +9,7 @@ angular.module('lessons', [
   'ngAlertify'
   'ap.fotorama'
   'angularFileUpload'
+  'flow'
 ])
 
 angular.module('lessons').constant "RESOURCES", do ->
