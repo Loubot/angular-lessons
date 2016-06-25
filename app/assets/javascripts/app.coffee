@@ -35,8 +35,8 @@ angular.module('lessons').config ($stateProvider, $urlRouterProvider) ->
 
 angular.module('lessons').config ( $authProvider ) ->
   $authProvider.configure({
-      apiUrl: "http://localhost:3000/api"
-    })
+    apiUrl: "http://localhost:3000/api"
+  })
 
 angular.module('lessons').config ( $mdThemingProvider ) ->
   $mdThemingProvider.theme('default')

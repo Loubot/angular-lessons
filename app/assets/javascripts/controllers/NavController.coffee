@@ -3,23 +3,24 @@
 angular.module('lessons').controller('NavController', [
   '$scope'
   '$rootScope'
+  '$state'
   'USER'
   '$mdSidenav'
   'alertify'
   '$auth'
-  ( $scope, $rootScope, USER, $mdSidenav, alertify, $auth ) ->
+  ( $scope, $rootScope, $state, USER, $mdSidenav, alertify, $auth ) ->
     console.log "NavController"
     $scope.teacher = {}
     $scope.auth_type = null
 
-    USER.get_user().then( ( user ) ->
-      alertify.success "Got user"
-      console.log $rootScope.USER
+    # USER.get_user().then( ( user ) ->
+    #   # alertify.success = "Got user"
+    #   # console.log $rootScope.USER
 
-    ).catch( ( err ) ->
-      alertify.error "No user"
-      $rootScope.USER = null
-    )
+    # ).catch( ( err ) ->
+    #   alertify.error "No user"
+    #   $rootScope.USER = null
+    # )
     $scope.openLeftMenu = ( auth_type ) -> # 0=login; 1= register
       
       if auth_type == 0
@@ -79,6 +80,7 @@ angular.module('lessons').controller('NavController', [
           console.log resp
           alertify.success "Logged out successfully"
           $rootScope.USER = null
+          $state.go 'welcome'
         ).catch( ( err ) ->
           console.log err
           $rootScope.USER = null
