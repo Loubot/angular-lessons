@@ -1,22 +1,22 @@
-<div layout="row" flex>
-  <md-card>
+<div layout="row" layout-margin layout-wrap layout-align="start center">
+  <md-card flex="50">
     <md-card-header>
       <md-card-avatar>
-        <img class="md-user-avatar" src="<%= asset_url('piano.jpg') %>" style="height:50px">
+        <img class="md-user-avatar" ng-src="{{photos[0].avatar.url}}">
       </md-card-avatar>
       <md-card-header-text>
         <span class="md-title">Title</span>
         <span class="md-subhead">Sub header</span>
       </md-card-header-text>
     </md-card-header>
-    <img src="<%= asset_url('piano.jpg') %>" class="md-card-image" alt="image caption">
+    <img ng-src="{{photos[0].avatar.url}} " class="md-card-image" alt="image caption">
     <md-card-title>
       <md-card-title-text>
         <span class="md-headline">Card headline</span>
         <span class="md-subhead">Card subheader</span>
       </md-card-title-text>
     </md-card-title>
-    <md-card-actions layout="row" layout-align="start center">
+    <md-card-actions layout="row" layout-align="center" flex>
       <md-button>Action 1</md-button>
       <md-button>Action 2</md-button>
       <md-card-icon-actions>
@@ -27,12 +27,8 @@
     </md-card-actions>
     <md-card-content>
       <p>
-       Card content <br>
-      <p ng-repeat="photo in photos">
-        <img  ng-src="{{ photo.avatar.url }}">
+       <div class="button" ngf-select="upload($file)">Upload on file select</div>
       </p>
-      </p>
-      <div class="button" ngf-select="upload($file)">Upload on file select</div>
     </md-card-content>
   </md-card>
 </div> <!-- end of row -->
