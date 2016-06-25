@@ -7,26 +7,28 @@ angular.module('lessons').controller('TeacherController', [
   'RESOURCES'
   'USER'
   'alertify'
-  'COMMS'
- 
+  'COMMS'  
   '$stateParams'
   '$auth'
-  ( $scope, $rootScope, $state, RESOURCES, USER, alertify, COMMS, $stateParams, $auth ) ->
+  'Upload' 
+  ( $scope, $rootScope, $state, RESOURCES, USER, alertify, COMMS, $stateParams, $auth, Upload ) ->
     console.log "TeacherController"
-    $scope.x = {}
-    $scope.x = $auth.retrieveData('auth_headers')
-    $scope.x['X-CSRF-TOKEN'] = $('meta[name="csrf-token"]').attr('content')
-    console.log $scope.x
-    # x = $auth.retrieveData('auth_headers')
-    # x['X-CSRF-TOKEN'] = $('meta[name="csrf-token"]').attr('content')
-    # $scope.uploader = new FileUploader({
-    #   headers : 
-    #     x
-    #     # $auth.retrieveData('auth_headers')
-    #   url: "#{ RESOURCES.DOMAIN }/teacher/profile-pic"
-
-    #   })
+    $scope.photos = null
+   
     
+    $scope.upload = ( file ) ->
+      Upload.upload(
+        url: "#{ RESOURCES.DOMAIN }/teacher/profile-pic"
+        file: file
+        avatar: file
+        data:
+          avatar: file
+          id: $rootScope.USER
+      ).then( ( resp ) -> 
+        console.log resp
+      )
+
+
 
     USER.get_user().then( ( user ) ->
       alertify.success = "Got user"
@@ -41,6 +43,7 @@ angular.module('lessons').controller('TeacherController', [
         id: $rootScope.USER.id
       ).then( ( resp ) ->
         console.log resp
+        $scope.photos = resp.data.photos
       ).catch( ( err ) ->
         console.log err
       )

@@ -15,6 +15,7 @@
 //= require angular/angular
 //= require angular-ui-router/release/angular-ui-router 
 //= require angular-animate/angular-animate.js
+//= require alertify.js/dist/js/ngAlertify
 //= require angular-aria/angular-aria.js
 //= require angular-material/angular-material.js
 //= require angular-cookie/angular-cookie
@@ -22,7 +23,7 @@
 //= require ng-file-upload/ng-file-upload-all.min
 //= require spin.js/spin
 //= require angular-spinner/angular-spinner
-//= require alertify.js/dist/js/ngAlertify
+
 //= require ap.fotorama/ap.fotorama.js
 //= require app
 //= require controllers/WelcomeController

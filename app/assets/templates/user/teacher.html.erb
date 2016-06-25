@@ -1,4 +1,4 @@
-<div layout="row">
+<div layout="row" flex>
   <md-card>
     <md-card-header>
       <md-card-avatar>
@@ -30,11 +30,12 @@
        Card content <br>
        
       </p>
-      
+      <div class="button" ngf-select="upload($file)">Upload on file select</div>
     </md-card-content>
   </md-card>
 </div> <!-- end of row -->
 
-<div layout="row" flex>
-
+<div ng-repeat="photo in photos">
+  <p>{{ photo.avatar.url }}</p>
+  <img src="{{ photo.avatar.url }}">
 </div>

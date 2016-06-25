@@ -8,8 +8,8 @@ class TeacherController < ApplicationController
 
   def profile
     @teacher = Teacher.includes(:photos).find( params[:id] )
-    # pp @teacher
-    render json: @teacher
+    pp @teacher
+    render json: { teacher: @teacher, photos: @teacher.photos }
 
   end
 
@@ -18,9 +18,15 @@ class TeacherController < ApplicationController
   end
 
   def profile_pic
+    # pp params
     @teacher = Teacher.first
-    @photo = @teacher.photos.build( params[:file] )
+    @photo = @teacher.photos.build( pic_params )
     @teacher.save
     render json: @teacher.photos
   end
+
+  private
+    def pic_params
+      params.permit(:photo, :avatar, :id)
+    end
 end
