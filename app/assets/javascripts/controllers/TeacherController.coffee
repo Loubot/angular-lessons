@@ -8,10 +8,10 @@ angular.module('lessons').controller('TeacherController', [
   'USER'
   'alertify'
   'COMMS'
-  'FileUploader'
+ 
   '$stateParams'
   '$auth'
-  ( $scope, $rootScope, $state, RESOURCES, USER, alertify, COMMS, FileUploader, $stateParams, $auth ) ->
+  ( $scope, $rootScope, $state, RESOURCES, USER, alertify, COMMS, $stateParams, $auth ) ->
     console.log "TeacherController"
     x = $auth.retrieveData('auth_headers')
     x['X-CSRF-TOKEN'] = $('meta[name="csrf-token"]').attr('content')

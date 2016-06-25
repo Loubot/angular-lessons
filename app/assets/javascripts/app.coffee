@@ -8,7 +8,6 @@ angular.module('lessons', [
   'angularSpinner'
   'ngAlertify'
   'ap.fotorama'
-  'angularFileUpload'
   'flow'
 ])
 
