@@ -5,7 +5,7 @@ Rails.application.routes.draw do
     resources :groups, except: [:new, :edit]
     get     'teacher/get'               => 'teacher#get'
 
-
+    get     'teacher/profile-pic'  => 'teacher#chunks'
     get     'teacher/profile'           => 'teacher#profile'
     post    'teacher/profile-pic'       => 'teacher#profile_pic'
 

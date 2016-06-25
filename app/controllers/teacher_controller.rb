@@ -8,9 +8,13 @@ class TeacherController < ApplicationController
 
   def profile
     @teacher = Teacher.includes(:photos).find( params[:id] )
-    pp @teacher
+    # pp @teacher
     render json: @teacher
 
+  end
+
+  def chunks
+    render json: 'ok'
   end
 
   def profile_pic

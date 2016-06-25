@@ -13,9 +13,10 @@ angular.module('lessons').controller('TeacherController', [
   '$auth'
   ( $scope, $rootScope, $state, RESOURCES, USER, alertify, COMMS, $stateParams, $auth ) ->
     console.log "TeacherController"
-    x = $auth.retrieveData('auth_headers')
-    x['X-CSRF-TOKEN'] = $('meta[name="csrf-token"]').attr('content')
-
+    $scope.x = {}
+    $scope.x = $auth.retrieveData('auth_headers')
+    $scope.x['X-CSRF-TOKEN'] = $('meta[name="csrf-token"]').attr('content')
+    console.log $scope.x
     # x = $auth.retrieveData('auth_headers')
     # x['X-CSRF-TOKEN'] = $('meta[name="csrf-token"]').attr('content')
     # $scope.uploader = new FileUploader({

@@ -8,12 +8,13 @@ angular.module('lessons', [
   'angularSpinner'
   'ngAlertify'
   'ap.fotorama'
-  'flow'
 ])
 
 angular.module('lessons').constant "RESOURCES", do ->
   url = window.location.origin
+  console.log "Domain #{ url + '/api' }"
   DOMAIN: url + '/api'
+
 
 angular.module('lessons').config ($stateProvider, $urlRouterProvider) ->
   $urlRouterProvider.otherwise "/"
