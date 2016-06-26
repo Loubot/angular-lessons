@@ -27,6 +27,7 @@ angular.module('lessons').controller('TeacherController', [
           id: $rootScope.USER
       ).then( ( resp ) -> 
         console.log resp
+        $scope.photos = resp.data
       )
 
 
