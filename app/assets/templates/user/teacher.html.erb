@@ -4,14 +4,14 @@
     <md-card >
       <md-card-header>
         <md-card-avatar>
-          <img class="md-user-avatar" ng-src="{{photos[0].avatar.url}}">
+          <img class="md-user-avatar" ng-src="{{ profile }}">
         </md-card-avatar>
         <md-card-header-text>
           <span class="md-title">Title</span>
           <span class="md-subhead">Sub header</span>
         </md-card-header-text>
       </md-card-header>
-      <img ng-src="{{photos[0].avatar.url}} " class="md-card-image" alt="image caption">
+      <img ng-src="{{ profile }} " class="md-card-image" alt="image caption">
       <md-card-title>
         <md-card-title-text>
           <span class="md-headline">Card headline</span>
@@ -29,6 +29,7 @@
       </md-card-actions>
       <md-card-content>
         <div class="button" ngf-select="upload($file)">Upload on file select</div>
+
       </md-card-content>
     </md-card> 
     
@@ -44,7 +45,17 @@
             md-rowspan="3" md-colspan="2" md-colspan-sm="1" md-colspan-xs="1" ng-repeat="photo in photos">
           <img ng-src="{{ photo.avatar.url }}">
           <md-grid-tile-footer>
-            <h3>hre</h3>
+            <md-menu>
+         <!-- Trigger element is a md-button with an icon -->
+             <md-button ng-click="$mdOpenMenu($event)" class="md-icon-button" aria-label="Open sample menu">
+               <i class="material-icons">info</i>
+             </md-button>
+             <md-menu-content width="4">
+                <md-menu-item>
+                  <md-button ng-click="make_profile(photo.id)">Make profile?</md-button>
+                </md-menu-item>
+             </md-menu-content>
+            </md-menu>
           </md-grid-tile-footer>
         </md-grid-tile>
         

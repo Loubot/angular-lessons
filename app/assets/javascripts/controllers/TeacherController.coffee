@@ -27,7 +27,12 @@ angular.module('lessons').controller('TeacherController', [
           id: $rootScope.USER
       ).then( ( resp ) -> 
         console.log resp
-        $scope.photos = resp.data
+        $scope.photos = resp.data.photos
+        alertify.success("Photo uploaded ok")
+        if resp.data.status == "updated"
+          $rootScope.USER = resp.data.teacher
+          profile_pic()
+          alertify.success "Profile pic set"
       )
 
 
@@ -46,6 +51,7 @@ angular.module('lessons').controller('TeacherController', [
       ).then( ( resp ) ->
         console.log resp
         $scope.photos = resp.data.photos
+        profile_pic()
       ).catch( ( err ) ->
         console.log err
       )
@@ -54,4 +60,27 @@ angular.module('lessons').controller('TeacherController', [
       $rootScope.USER = null
       return false
     )
+
+    $scope.make_profile = ( id ) ->
+      COMMS.POST(
+        '/teacher'
+        profile: id, id: $rootScope.USER.id
+      ).then( ( resp ) ->
+        console.log resp
+        alertify.success = "Update profile"
+        if resp.data.status == "updated"
+          $rootScope.USER = resp.data.teacher
+          profile_pic()
+      ).catch( ( err ) ->
+        console.log err
+        alertify.error "Failed to update profile"
+      )
+
+    profile_pic = ->
+      for photo in $scope.photos
+        # console.log photo.avatar.url
+        if parseInt( photo.id ) == parseInt( $rootScope.USER.profile )
+          $scope.profile = photo.avatar.url
+          console.log $scope.profile
+          $scope.profile_pic
 ])
