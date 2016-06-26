@@ -1,12 +1,12 @@
 'use strict'
 
 angular.module('lessons', [
+  'ngAlertify'
   'ui.router'
   'templates'
   'ngMaterial'
   'ng-token-auth'
-  'angularSpinner'
-  'ngAlertify'
+  'angularSpinner'  
   'ap.fotorama'
   'ngFileUpload'
 ])

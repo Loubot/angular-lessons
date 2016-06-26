@@ -64,7 +64,23 @@
     </md-card>
   </div>
   
- 
+  <div flex>
+    <md-card>
+
+      <md-autocomplete md-selected-item="selected_subject" md-search-text="searchText" 
+            md-items="subject in get_subjects()" md-item-text="subject.name"
+            md-menu-class="subject_search"
+            md-delay="2000"
+            class="black_text subject_search" placeholder=" What do you want to learn today?">
+        <md-item-template>
+          <span md-highlight-text="searchText">{{subject.name}}</span>
+        </md-item-template>
+        <md-not-found>
+          No matches found.
+        </md-not-found>
+      </md-autocomplete>
+    </md-card>
+  </div>
 
 </div> <!-- end of column -->
 

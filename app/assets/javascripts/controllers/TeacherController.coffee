@@ -14,7 +14,22 @@ angular.module('lessons').controller('TeacherController', [
   ( $scope, $rootScope, $state, RESOURCES, USER, alertify, COMMS, $stateParams, $auth, Upload ) ->
     console.log "TeacherController"
     $scope.photos = null
-   
+    # alertify.success "Got subjects"
+
+    $scope.get_subjects = ->
+      console.log $scope.searchText
+      COMMS.GET(
+        '/subjects'
+        search: $scope.searchText
+      ).then( ( resp ) ->
+        console.log resp
+        # alertify.success "Got subjects"
+        $scope.subjects = resp.data
+        return resp.data
+      ).catch( ( err ) ->
+        console.log err
+        alertify.error "Failed to get subjects"
+      )
     
     $scope.upload = ( file ) ->
       console.log file
