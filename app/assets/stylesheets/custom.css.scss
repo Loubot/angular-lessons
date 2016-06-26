@@ -36,12 +36,13 @@ html, body{
 
 .main_page{
   background-color: #e0ebf4;
+  // height: 100% !important;
 }
 
 .subject_search{
   padding: 0 12px;
   line-height: 40px;
-  min-width: 80%;
+  min-width: 60%;
   -webkit-border-radius: 50px;
   -moz-border-radius: 50px;
   border-radius: 50px;

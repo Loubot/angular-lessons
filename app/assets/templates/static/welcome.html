@@ -1,38 +1,46 @@
-  <div layout="column" class="main_page_search_container" layout-align="center center" layout-padding flex > 
-    <div layout-align="center start" class="white_text" layout-margin>
-      <h1>Your place to connect with local teachers on guitar,<br> piano, drums or anything else musical</h1>
-    </div>
-    <div  >
-      <form ng-submit="search()" > 
-        
-          
-          <div layout="row" layout-align="center">
+<div layout="row" flex>
+  
+    <div  class="main_page_search_container" layout="column" layout-align="center center" layout-padding layout-fill  flex > 
+      <div class="white_text" >
+        <div flex >
+          <h1>Your place to connect with local teachers on guitar,<br> piano, drums or anything else musical</h1>
+        </div>
+      </div>
+      
 
-            <md-autocomplete md-selected-item="selected_subject" md-search-text="searchText" 
-                  md-items="subject in subjects" md-item-text="subject.name"
-                  md-menu-class="subject_search"
-                  class="black_text subject_search" placeholder=" What do you want to learn today?">
-              <md-item-template>
-                <span md-highlight-text="searchText">{{subject.name}}</span>
-              </md-item-template>
-              <md-not-found>
-                No matches found.
-              </md-not-found>
-            </md-autocomplete>
-            <!-- <input name="name" class="black_text subject_search" ng-model="subject.name" size="80" required   placeholder=" What do you want to learn today?"> -->
-          
-        
-
+      <div flex>
+        <form ng-submit="search()" >          
             
-            <input name="location" class="black_text subject_search" ng-model="subject.location" required  placeholder=" County?">
-          </div>
-          
+          <div layout="row" >
+              <div flex>
+                <md-autocomplete md-selected-item="selected_subject" md-search-text="searchText" 
+                      md-items="subject in subjects" md-item-text="subject.name"
+                      md-menu-class="subject_search"
+                      class="black_text subject_search" placeholder=" What do you want to learn today?">
+                  <md-item-template>
+                    <span md-highlight-text="searchText">{{subject.name}}</span>
+                  </md-item-template>
+                  <md-not-found>
+                    No matches found.
+                  </md-not-found>
+                </md-autocomplete>
+              </div>
+              <!-- <input name="name" class="black_text subject_search" ng-model="subject.name" size="80" required   placeholder=" What do you want to learn today?"> -->
+              <div flex>
+                <input name="location" class="black_text subject_search" ng-model="subject.location" required  placeholder=" County?">       
+              </div>  
+            
+          </div> <!-- end of row -->
+
           <div layout="row" layout-align="center">
             <md-button type="submit" class="md-primary">Search<i class="material-icons">search</i></md-button>
-          </div>
-      </form> <!-- end of search() -->
-    </div>
+          </div> <!-- end of row -->
 
-  
-  </div>
+        </form> <!-- end of search() -->
+      </div>
+      
 
+    
+    </div> <!-- end of main_page_search_container -->
+ 
+</div>  <!-- end of column -->
