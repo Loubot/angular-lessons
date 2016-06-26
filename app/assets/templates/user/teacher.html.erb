@@ -69,8 +69,9 @@
 
       <md-autocomplete md-selected-item="selected_subject" md-search-text="searchText" 
             md-items="subject in get_subjects()" md-item-text="subject.name"
+            md-selected-item-change="select_text( subject )"
             md-menu-class="subject_search"
-            md-delay="2000"
+            md-delay="500"
             class="black_text subject_search" placeholder=" What do you want to learn today?">
         <md-item-template>
           <span md-highlight-text="searchText">{{subject.name}}</span>
@@ -79,6 +80,16 @@
           No matches found.
         </md-not-found>
       </md-autocomplete>
+
+      <md-list>
+        <md-list-item class="md-2-line" ng-repeat="subject in subjects">
+          <md-checkbox ng-model="item.done"></md-checkbox>
+          <div class="md-list-item-text">
+            <h3>{{item.title}}</h3>
+            <p>{{item.description}}</p>
+          </div>
+        </md-list-item>
+      </md-list>
     </md-card>
   </div>
 

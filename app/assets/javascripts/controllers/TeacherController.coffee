@@ -16,20 +16,7 @@ angular.module('lessons').controller('TeacherController', [
     $scope.photos = null
     # alertify.success "Got subjects"
 
-    $scope.get_subjects = ->
-      console.log $scope.searchText
-      COMMS.GET(
-        '/subjects'
-        search: $scope.searchText
-      ).then( ( resp ) ->
-        console.log resp
-        # alertify.success "Got subjects"
-        $scope.subjects = resp.data
-        return resp.data
-      ).catch( ( err ) ->
-        console.log err
-        alertify.error "Failed to get subjects"
-      )
+    
     
     $scope.upload = ( file ) ->
       console.log file
@@ -98,4 +85,23 @@ angular.module('lessons').controller('TeacherController', [
           $scope.profile = photo.avatar.url
           console.log $scope.profile
           $scope.profile_pic
+
+
+    $scope.get_subjects = ->
+      console.log $scope.searchText
+      COMMS.GET(
+        '/subjects'
+        search: $scope.searchText
+      ).then( ( resp ) ->
+        console.log resp
+        # alertify.success "Got subjects"
+        $scope.subjects = resp.data
+        return resp.data
+      ).catch( ( err ) ->
+        console.log err
+        alertify.error "Failed to get subjects"
+      )
+
+    $scope.select_text = ( bla )->
+      console.log bla
 ])
