@@ -53,7 +53,7 @@ angular.module('lessons').controller('TeacherController', [
 
 
     USER.get_user().then( ( user ) ->
-      alertify.success = "Got user"
+      alertify.success "Got user"
 
       if $rootScope.USER.id != parseInt( $stateParams.id )
         $state.go 'welcome'
@@ -82,7 +82,7 @@ angular.module('lessons').controller('TeacherController', [
         profile: id, id: $rootScope.USER.id
       ).then( ( resp ) ->
         console.log resp
-        alertify.success = "Update profile"
+        alertify.success "Updated profile pic"
         if resp.data.status == "updated"
           $rootScope.USER = resp.data.teacher
           profile_pic()

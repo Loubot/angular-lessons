@@ -14,7 +14,7 @@ angular.module('lessons').controller('NavController', [
     $scope.auth_type = null
 
     # USER.get_user().then( ( user ) ->
-    #   # alertify.success = "Got user"
+    #   # alertify.success "Got user"
     #   # console.log $rootScope.USER
 
     # ).catch( ( err ) ->
