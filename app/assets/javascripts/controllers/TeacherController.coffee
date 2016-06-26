@@ -17,6 +17,7 @@ angular.module('lessons').controller('TeacherController', [
    
     
     $scope.upload = ( file ) ->
+      console.log file
       Upload.upload(
         url: "#{ RESOURCES.DOMAIN }/teacher/profile-pic"
         file: file
