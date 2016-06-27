@@ -7,7 +7,7 @@
           <img class="md-user-avatar" ng-src="{{ profile }}">
         </md-card-avatar>
         <md-card-header-text>
-          <span class="md-title">Title</span>
+          <span class="md-title">{{ USER.first_name }} {{ USER.last_name }}</span>
           <span class="md-subhead">Sub header</span>
         </md-card-header-text>
       </md-card-header>
@@ -72,7 +72,7 @@
             md-selected-item-change="select_subject( subject )"
             md-menu-class="subject_search"
             md-delay="500"
-            class="black_text subject_search" placeholder="Choose your subject">
+            class="black_text subject_search" placeholder="Choose your subjects">
         <md-item-template>
           <span md-highlight-text="searchText">{{subject.name}}</span>
         </md-item-template>
@@ -104,8 +104,3 @@
   </div>
 
 </div> <!-- end of column -->
-
-
-
-
-

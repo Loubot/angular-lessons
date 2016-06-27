@@ -34,10 +34,12 @@ class AddDeviseToTeachers < ActiveRecord::Migration
       # t.datetime :locked_at
 
       ## User Info
-      t.string :name
-      t.string :nickname
-      t.string :image
+      # t.string :name
+      # t.string :nickname
+      # t.string :image
       t.string :email
+      t.string :first_name
+      t.string :last_name
 
       ## Tokens
       t.text :tokens

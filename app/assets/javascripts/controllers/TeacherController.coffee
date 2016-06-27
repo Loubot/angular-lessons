@@ -61,6 +61,7 @@ angular.module('lessons').controller('TeacherController', [
     ).catch( ( err ) ->
       alertify.error "No user"
       $rootScope.USER = null
+      $state.go 'welcome'
       return false
     )
 
