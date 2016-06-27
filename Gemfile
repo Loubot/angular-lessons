@@ -50,6 +50,7 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem 'annotate'
 
+gem 'date_validator'
 
 gem 'angular_rails_csrf'
 
@@ -62,5 +63,7 @@ gem 'angular-rails-templates'
 gem 'devise_token_auth'
 
 gem 'omniauth'
+
+gem 'validates_overlap', '~> 0'
 
 gem 'carrierwave'

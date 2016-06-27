@@ -33,10 +33,10 @@
       </md-card-content>
     </md-card> 
     
-  </div>
+  </div> <!-- end of flex -->
 
   <div layout-padding flex>
-    <md-card>
+    <md-card flex>
       <md-grid-list
               md-cols-xs="1" md-cols-sm="2" md-cols-md="4" md-cols-gt-md="6"
               md-row-height-gt-md="1:1" md-row-height="2:2"
@@ -62,10 +62,40 @@
       </md-grid-list>
       
     </md-card>
-  </div>
+
+    <md-content class="md-no-momentum" flex>
+      <md-toolbar md-scroll-shrink>
+        <div class="md-toolbar-tools blue_background white_text">Your Experience</div>
+      </md-toolbar>
+
+
+      <md-input-container class="md-icon-float md-block">
+        <!-- Use floating label instead of placeholder -->
+        <label>Title</label>
+        
+        <input ng-model="experience.name" type="text">
+      </md-input-container>
+
+      <md-input-container md-no-float class="md-block">
+        
+        <input ng-model="experience.description" type="text" placeholder="Description">
+      </md-input-container>
+      
+      <md-input-container class="md-block" flex-gt-xs>
+        <md-datepicker ng-model="user.submissionDate" md-placeholder="Start date">
+        </md-datepicker>
+
+        <md-datepicker ng-model="user.submissionDate" md-placeholder="End date">
+        </md-datepicker>
+      </md-input-container>
+      <br>
+      <md-divider></md-divider>
+    </md-content>
+
+  </div> <!-- end of flex -->
   
   <div flex>
-    <md-card layout-padding>
+    <md-card layout-padding flex>
 
       <md-autocomplete md-selected-item="selected_subject" md-search-text="searchText" 
             md-items="subject in get_subjects()" md-item-text="subject.name"
@@ -101,6 +131,6 @@
         </md-list-item>
       </md-list>
     </md-card>
-  </div>
+  </div> <!-- end of flex -->
 
 </div> <!-- end of column -->
