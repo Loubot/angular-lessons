@@ -154,7 +154,7 @@ angular.module('lessons').service 'COMMS', ( $http, $state, RESOURCES, $rootScop
         method: 'DELETE'
         headers: { "Content-Type": "application/json" }
         url: "#{ RESOURCES.DOMAIN }#{ url }"
-        params: params
+        data: params
       ).then( ( result ) ->
         usSpinnerService.stop('spinner-1')
         

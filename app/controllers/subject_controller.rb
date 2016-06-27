@@ -11,17 +11,31 @@ class SubjectController < ApplicationController
   end
 
   def add_subject
-    p subject_params[:subject][:id]
+    # p subject_params[:subject][:id]
     if params[:subject].present?
       subject = Subject.find( subject_params[:subject][:id] )
-      teacher = Teacher.find( subject_params[:teacher][:id] )
-      teacher.subjects << subject
+      teacher = Teacher.find( current_teacher )
+      if !teacher.subjects.include?(subject)
+        teacher.subjects << subject
 
-      render json: { status: 'updated', teacher: teacher }
+        render json: { status: 'updated', teacher: teacher, subjects: teacher.subjects }
+      else
+        render json: { subjects: teacher.subjects, error: "Subject already added" }, status: 404
+      end
       # render json: subject_params[:subject]
     else
-      render json: { error: 'No such subject' }, status: 404
+      teacher = Teacher.includes(:subjects).find( current_teacher )
+      render json: { subjects: teacher.subjects }, status: 404
     end
+  end
+
+  def remove_subject
+    teacher = Teacher.includes(:subjects).find( current_teacher )
+    subject = Subject.find( subject_params[:subject][:id] )
+
+    teacher.subjects.delete( subject_params[:subject][:id] )
+
+    render json: { subjects: teacher.subjects }
   end
 
 

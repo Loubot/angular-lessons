@@ -3,17 +3,18 @@ Rails.application.routes.draw do
   scope '/api' do
     mount_devise_token_auth_for 'Teacher', at: '/auth'
     resources :groups, except: [:new, :edit]
-    get     'teacher/get'               => 'teacher#get'
+    get     'teacher/get'                 => 'teacher#get'
 
-    get     'teacher/profile-pic'       => 'teacher#chunks'
-    get     'teacher/profile'           => 'teacher#profile'
-    post    'teacher/profile-pic'       => 'teacher#profile_pic'
-    post    'teacher'                   => 'teacher#update'
+    get     'teacher/profile-pic'         => 'teacher#chunks'
+    get     'teacher/profile'             => 'teacher#profile'
+    post    'teacher/profile-pic'         => 'teacher#profile_pic'
+    post    'teacher'                     => 'teacher#update'
 
 
-    get      'subjects'                  => "subject#index"
+    get      'subjects'                   => "subject#index"
     as :teacher do
-      post    'teacher/add-subject'      => 'subject#add_subject'
+      post    'teacher/add-subject'       => 'subject#add_subject'
+      delete  'teacher/remove-subject'    => 'subject#remove_subject'
     end
   end
   as :teacher do

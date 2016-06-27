@@ -112,13 +112,24 @@ angular.module('lessons').controller('TeacherController', [
       ).then( ( resp ) ->
         console.log resp
         alertify.success "Successfully added subject"
+        $scope.subjects = resp.data.subjects
+      ).catch( ( err ) ->
+        console.log err
+        alertify.error err.data.error if err.data.error?
+        $scope.subjects = err.data.subjects
+      )
+
+    $scope.remove_subject = ( subject ) ->
+      COMMS.DELETE(
+        '/teacher/remove-subject'
+        subject: subject
+      ).then( ( resp ) ->
+        console.log resp
+        alertify.success "Successfully removed subject"
+        $scope.subjects = resp.data.subjects
       ).catch( ( err ) ->
         console.log err
         alertify.error err.data.error
-
       )
-
-    $scope.remove_subject = ( id ) ->
-      
     ####################### end of Subjects ###############################
 ])
