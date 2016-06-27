@@ -13,9 +13,9 @@ class TeacherController < ApplicationController
   end
 
   def profile
-    @teacher = Teacher.includes(:photos).find( params[:id] )
+    @teacher = Teacher.includes(:photos, :subjects).find( params[:id] )
     pp @teacher
-    render json: { teacher: @teacher, photos: @teacher.photos }
+    render json: { teacher: @teacher, photos: @teacher.photos, subjects: @teacher.subjects }
 
   end
 

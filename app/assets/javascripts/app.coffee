@@ -146,3 +146,20 @@ angular.module('lessons').service 'COMMS', ( $http, $state, RESOURCES, $rootScop
         usSpinnerService.stop('spinner-1')
         reject err_result
       )
+
+  DELETE: ( url, params ) ->
+    usSpinnerService.spin('spinner-1')
+    $q ( resolve, reject ) ->
+      $http(
+        method: 'DELETE'
+        headers: { "Content-Type": "application/json" }
+        url: "#{ RESOURCES.DOMAIN }#{ url }"
+        params: params
+      ).then( ( result ) ->
+        usSpinnerService.stop('spinner-1')
+        
+        resolve result
+      ).catch( ( err_result ) ->
+        usSpinnerService.stop('spinner-1')
+        reject err_result
+      )

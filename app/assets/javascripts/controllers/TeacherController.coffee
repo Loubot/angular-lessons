@@ -53,6 +53,7 @@ angular.module('lessons').controller('TeacherController', [
       ).then( ( resp ) ->
         console.log resp
         $scope.photos = resp.data.photos
+        $scope.subjects = resp.data.subjects
         profile_pic()
       ).catch( ( err ) ->
         console.log err
@@ -87,6 +88,8 @@ angular.module('lessons').controller('TeacherController', [
           $scope.profile_pic
 
 
+    ####################### Subjects ###############################
+
     $scope.get_subjects = ->
       console.log $scope.searchText
       COMMS.GET(
@@ -108,10 +111,14 @@ angular.module('lessons').controller('TeacherController', [
         subject: subject, teacher: $rootScope.USER
       ).then( ( resp ) ->
         console.log resp
-        alertify.success = "Successfully added subject"
+        alertify.success "Successfully added subject"
       ).catch( ( err ) ->
         console.log err
         alertify.error err.data.error
 
       )
+
+    $scope.remove_subject = ( id ) ->
+      
+    ####################### end of Subjects ###############################
 ])

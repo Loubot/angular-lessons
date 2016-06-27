@@ -65,7 +65,7 @@
   </div>
   
   <div flex>
-    <md-card>
+    <md-card layout-padding>
 
       <md-autocomplete md-selected-item="selected_subject" md-search-text="searchText" 
             md-items="subject in get_subjects()" md-item-text="subject.name"
@@ -83,10 +83,20 @@
 
       <md-list>
         <md-list-item class="md-2-line" ng-repeat="subject in subjects">
-          <md-checkbox ng-model="item.done"></md-checkbox>
-          <div class="md-list-item-text">
-            <h3>{{item.title}}</h3>
-            <p>{{item.description}}</p>
+          
+          <div class="md-list-item-text" layout="row">
+
+            <div flex="90">
+              <md-icon><i class="material-icons">insert_emoticon</i></md-icon>
+              <span>{{subject.name}}</span>
+            </div> <!-- end of flex=90 -->
+
+            <div flex="10">
+              <md-button class="md-icon-button" ng-click="remove_subject( subject.id )">
+                <md-icon><i class="material-icons">thumb_down</i></md-icon>
+              </md-button>
+            </div> <!-- end of flex=10 -->
+            
           </div>
         </md-list-item>
       </md-list>
