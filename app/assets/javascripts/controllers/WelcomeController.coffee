@@ -12,6 +12,8 @@ angular.module('lessons').controller('WelcomeController', [
     console.log "WelcomeController"
     $scope.subject = new Object
 
+    USER.get_user()
+
 
     COMMS.GET(
       "/subjects"
@@ -19,7 +21,7 @@ angular.module('lessons').controller('WelcomeController', [
     ).then( ( resp ) ->
       console.log resp
       $scope.subjects = resp.data
-      alertify.success "Got a subject"
+      alertify.success "Fetched subjects"
     ).catch( ( err ) ->
       console.log err
       alertify.error "Failed to get subjects "

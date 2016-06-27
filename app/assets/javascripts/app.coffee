@@ -13,7 +13,7 @@ angular.module('lessons', [
 
 angular.module('lessons').constant "RESOURCES", do ->
   url = window.location.origin
-  console.log "Domain #{ url + '/api' }"
+  # console.log "Domain #{ url + '/api' }"
   DOMAIN: url + '/api'
 
 
@@ -57,6 +57,8 @@ angular.module('lessons').service 'USER', ( $http, $rootScope, RESOURCES, $q, us
         # params: 
         #   email: 
       ).then( ( result ) ->
+        # console.log "get user"
+        # console.log result.data
         $rootScope.USER = result.data
         resolve result.data
       ).catch( ( err_result ) ->

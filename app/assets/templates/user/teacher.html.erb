@@ -69,10 +69,10 @@
 
       <md-autocomplete md-selected-item="selected_subject" md-search-text="searchText" 
             md-items="subject in get_subjects()" md-item-text="subject.name"
-            md-selected-item-change="select_text( subject )"
+            md-selected-item-change="select_subject( subject )"
             md-menu-class="subject_search"
             md-delay="500"
-            class="black_text subject_search" placeholder=" What do you want to learn today?">
+            class="black_text subject_search" placeholder="Choose your subject">
         <md-item-template>
           <span md-highlight-text="searchText">{{subject.name}}</span>
         </md-item-template>

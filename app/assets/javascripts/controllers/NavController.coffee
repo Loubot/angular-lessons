@@ -31,9 +31,9 @@ angular.module('lessons').controller('NavController', [
         $scope.auth_type = 1
       $mdSidenav('left').toggle()
 
-    $scope.$watch('demo.isOpen', ( isOpen ) ->
-      console.log isOpen
-    )
+    # $scope.$watch('demo.isOpen', ( isOpen ) ->
+    #   console.log isOpen
+    # )
 
     $scope.openRightMenu = ->
       console.log "yep"

@@ -4,5 +4,7 @@ class Teacher < ActiveRecord::Base
           :recoverable, :rememberable, :trackable, :validatable,
           :omniauthable
   has_many :photos, as: :imageable, dependent: :destroy
+
+  has_and_belongs_to_many :subjects, touch: true
   include DeviseTokenAuth::Concerns::User
 end

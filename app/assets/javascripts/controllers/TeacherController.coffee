@@ -102,6 +102,16 @@ angular.module('lessons').controller('TeacherController', [
         alertify.error "Failed to get subjects"
       )
 
-    $scope.select_text = ( bla )->
-      console.log bla
+    $scope.select_subject = ( subject )->
+      COMMS.POST(
+        "/teacher/add-subject"
+        subject: subject, teacher: $rootScope.USER
+      ).then( ( resp ) ->
+        console.log resp
+        alertify.success = "Successfully added subject"
+      ).catch( ( err ) ->
+        console.log err
+        alertify.error err.data.error
+
+      )
 ])

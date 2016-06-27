@@ -12,6 +12,9 @@ Rails.application.routes.draw do
 
 
     get      'subjects'                  => "subject#index"
+    as :teacher do
+      post    'teacher/add-subject'      => 'subject#add_subject'
+    end
   end
   as :teacher do
     # Define routes for Teacher within this block.
