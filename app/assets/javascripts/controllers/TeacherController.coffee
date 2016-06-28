@@ -147,6 +147,9 @@ angular.module('lessons').controller('TeacherController', [
         console.log resp
         $scope.experiences = resp.data.experiences
         alertify.success "Experience added"
+        $scope.experience.title = null
+        $scope.experience.description = null
+
       ).catch( ( err ) ->
         console.log err
         alertify.error "Failed to add experience"
@@ -158,7 +161,7 @@ angular.module('lessons').controller('TeacherController', [
         experience
       ).then( ( resp ) ->
         console.log resp
-        $scope.experiences = resp.experiences
+        $scope.experiences = resp.data.experiences
         alertify.success "Removed experience"
       ).catch( ( err ) ->
         console.log err

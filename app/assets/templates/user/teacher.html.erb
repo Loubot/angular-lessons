@@ -1,4 +1,4 @@
-<div layout="row">
+<div layout="row" layout-wrap flex>
   
   <div flex>
     <md-card >
@@ -111,7 +111,7 @@
       </md-toolbar>
 
 
-      <form ng-submit="add_experience()">
+      <form ng-submit="add_experience()" name="experience_form">
         <md-input-container class="md-icon-float md-block">
           <!-- Use floating label instead of placeholder -->
           <label>Title</label>
@@ -160,4 +160,16 @@
     </md-card>
   </div> <!-- end of flex -->
 
-</div> <!-- end of column -->
+  <div layout="row" layout-padding flex="100">
+    <md-content layout-padding style="background-color:#22ffc6;" flex="50">
+      <h3>Enter your overview</h3>
+      <md-input-container style="width:75%">
+        <label>Overview</label>
+        <textarea ng-model="overview.description" class="black_text" md-maxlength="150" rows="5" md-select-on-focus></textarea>
+      </md-input-container>
+    </md-content>
+      
+  </div>
+
+</div> <!-- end of row -->
+
