@@ -68,3 +68,15 @@ html, body{
 .not_transparent{
   rgba: ( 0, 0, 0, 1 )
 }
+
+.green_add_icon{
+  color: #2a602a;
+  background-color: #FFF;
+  font-size: 50px !important;
+}
+
+.red_remove_icon{
+  color: rgb(255,87,34);
+  background-color: #FFF;
+  // font-size: 50px !important;
+}

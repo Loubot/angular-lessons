@@ -36,7 +36,7 @@
   </div> <!-- end of flex -->
 
   <div layout-padding flex>
-    <md-card flex>
+    <md-card flex ng-if="photos.length>0">
       <md-grid-list
               md-cols-xs="1" md-cols-sm="2" md-cols-md="4" md-cols-gt-md="6"
               md-row-height-gt-md="1:1" md-row-height="2:2"
@@ -63,34 +63,7 @@
       
     </md-card>
 
-    <md-content class="md-no-momentum" flex>
-      <md-toolbar md-scroll-shrink>
-        <div class="md-toolbar-tools blue_background white_text">Your Experience</div>
-      </md-toolbar>
-
-
-      <md-input-container class="md-icon-float md-block">
-        <!-- Use floating label instead of placeholder -->
-        <label>Title</label>
-        
-        <input ng-model="experience.name" type="text">
-      </md-input-container>
-
-      <md-input-container md-no-float class="md-block">
-        
-        <input ng-model="experience.description" type="text" placeholder="Description">
-      </md-input-container>
-      
-      <md-input-container class="md-block" flex-gt-xs>
-        <md-datepicker ng-model="user.submissionDate" md-placeholder="Start date">
-        </md-datepicker>
-
-        <md-datepicker ng-model="user.submissionDate" md-placeholder="End date">
-        </md-datepicker>
-      </md-input-container>
-      <br>
-      <md-divider></md-divider>
-    </md-content>
+    
 
   </div> <!-- end of flex -->
   
@@ -127,7 +100,61 @@
               </md-button>
             </div> <!-- end of flex=10 -->
             
-          </div>
+          </div> <!-- end of md-list-item-text -->
+        </md-list-item>
+      </md-list>
+    </md-card>
+
+    <md-card class="md-no-momentum" flex>
+      <md-toolbar md-scroll-shrink>
+        <div class="md-toolbar-tools blue_background white_text">Your Experience</div>
+      </md-toolbar>
+
+
+      <form ng-submit="add_experience()">
+        <md-input-container class="md-icon-float md-block">
+          <!-- Use floating label instead of placeholder -->
+          <label>Title</label>
+          
+          <input ng-model="experience.title" type="text">
+        </md-input-container>
+
+        <md-input-container md-no-float class="md-block">
+          <textarea ng-model="experience.description" md-maxlength="150" rows="5" md-select-on-focus></textarea>
+          <!-- <input ng-model="experience.description" type="text" placeholder="Description"> -->
+        </md-input-container>
+        
+        
+
+
+        <div flex="40" >
+          <md-button type="submit"><i class="material-icons green_add_icon">add_box</i></md-button>
+        </div>
+        
+        
+      </form> <!-- end of add_experience() -->
+      
+    </md-card> 
+
+    <md-card layout-padding flex ng-if="experiences.length>0">
+      <md-list>
+        <md-list-item ng-repeat="experience in experiences" >
+          <div class="md-list-item-text" layout="row" flex>
+
+            <div layout="row" layout-fill flex>
+              <div flex="90">
+                <md-icon><i class="material-icons">insert_emoticon</i></md-icon>
+                <span>{{experience.title}}</span>
+              </div> <!-- end of flex=90 -->
+
+              <div flex="10">
+                <md-button class="md-icon-button " ng-click="remove_experience( experience )">
+                  <i class="material-icons red_remove_icon">remove_circle</i>
+                </md-button>
+              </div> <!-- end of flex=10 -->
+            </div>
+            
+          </div> <!-- end of md-list-item-text -->
         </md-list-item>
       </md-list>
     </md-card>

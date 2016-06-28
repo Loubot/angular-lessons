@@ -31,7 +31,7 @@ class SubjectController < ApplicationController
 
   def remove_subject
     teacher = Teacher.includes(:subjects).find( current_teacher )
-    subject = Subject.find( subject_params[:subject][:id] )
+    # subject = Subject.find( subject_params[:subject][:id] )
 
     teacher.subjects.delete( subject_params[:subject][:id] )
 

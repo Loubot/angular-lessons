@@ -13,9 +13,9 @@ class TeacherController < ApplicationController
   end
 
   def profile
-    @teacher = Teacher.includes(:photos, :subjects).find( params[:id] )
+    @teacher = Teacher.includes( :photos, :subjects, :experiences ).find( params[:id] )
     pp @teacher
-    render json: { teacher: @teacher, photos: @teacher.photos, subjects: @teacher.subjects }
+    render json: { teacher: @teacher, photos: @teacher.photos, subjects: @teacher.subjects, experiences: @teacher.experiences }
 
   end
 
@@ -23,31 +23,12 @@ class TeacherController < ApplicationController
     render json: 'ok'
   end
 
-  def profile_pic
-    # pp params
-    @teacher = Teacher.first
-    @photo = @teacher.photos.build( pic_params )
-    if @teacher.profile == nil
-
-      
-      @teacher.save
-      p "Made it here"
-      p @photo.id
-      @teacher.update_attributes( profile: @photo.id )
-      render json: { :status => :updated, photos: @teacher.photos, teacher: @teacher }
-    else
-      @teacher.save
-      render json: { photos: @teacher.photos }
-    end
-    
-  end
+  
 
   private
-    def pic_params
-      params.permit(:photo, :avatar, :id)
-    end
+    
 
     def teacher_params
-      params.permit( :profile, :id )
+      params.permit( :profile, :id, :experience )
     end
 end

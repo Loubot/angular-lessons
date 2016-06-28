@@ -21,7 +21,7 @@ angular.module('lessons').controller('TeacherController', [
     $scope.upload = ( file ) ->
       console.log file
       Upload.upload(
-        url: "#{ RESOURCES.DOMAIN }/teacher/profile-pic"
+        url: "#{ RESOURCES.DOMAIN }/teacher/pic"
         file: file
         avatar: file
         data:
@@ -29,12 +29,14 @@ angular.module('lessons').controller('TeacherController', [
           id: $rootScope.USER
       ).then( ( resp ) -> 
         console.log resp
-        $scope.photos = resp.data.photos
+        $scope.photos = resp.data.photos if resp.data != ""
         alertify.success("Photo uploaded ok")
         if resp.data.status == "updated"
           $rootScope.USER = resp.data.teacher
           profile_pic()
           alertify.success "Profile pic set"
+
+        $file = null
       )
 
 
@@ -54,6 +56,7 @@ angular.module('lessons').controller('TeacherController', [
         console.log resp
         $scope.photos = resp.data.photos
         $scope.subjects = resp.data.subjects
+        $scope.experiences = resp.data.experiences
         profile_pic()
       ).catch( ( err ) ->
         console.log err
@@ -133,4 +136,34 @@ angular.module('lessons').controller('TeacherController', [
         alertify.error err.data.error
       )
     ####################### end of Subjects ###############################
+
+    ####################### Experience ###################################
+
+    $scope.add_experience = ->
+      COMMS.POST(
+        "/experience"
+        $scope.experience
+      ).then( ( resp ) ->
+        console.log resp
+        $scope.experiences = resp.data.experiences
+        alertify.success "Experience added"
+      ).catch( ( err ) ->
+        console.log err
+        alertify.error "Failed to add experience"
+      )
+
+    $scope.remove_experience = ( experience ) ->
+      COMMS.DELETE(
+        "/experience/#{ experience.id }"
+        experience
+      ).then( ( resp ) ->
+        console.log resp
+        $scope.experiences = resp.experiences
+        alertify.success "Removed experience"
+      ).catch( ( err ) ->
+        console.log err
+        alertify.error "Failed to delete subject"
+      )
+
+    ####################### end of experience ############################
 ])

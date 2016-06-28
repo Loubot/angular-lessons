@@ -7,14 +7,18 @@ Rails.application.routes.draw do
 
     get     'teacher/profile-pic'         => 'teacher#chunks'
     get     'teacher/profile'             => 'teacher#profile'
-    post    'teacher/profile-pic'         => 'teacher#profile_pic'
+    
     post    'teacher'                     => 'teacher#update'
 
 
     get      'subjects'                   => "subject#index"
     as :teacher do
       post    'teacher/add-subject'       => 'subject#add_subject'
+      post    'teacher/pic'               => "photos#create"
       delete  'teacher/remove-subject'    => 'subject#remove_subject'
+
+      resources :experience, only: [ :create, :destroy ]
+
     end
   end
   as :teacher do
