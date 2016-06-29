@@ -120,7 +120,7 @@
         </md-input-container>
 
         <md-input-container md-no-float class="md-block">
-          <textarea ng-model="experience.description" md-maxlength="150" rows="5" md-select-on-focus></textarea>
+          <textarea ng-model="experience.description" aria-label="Experience description" md-maxlength="150" rows="5" md-select-on-focus></textarea>
           <!-- <input ng-model="experience.description" type="text" placeholder="Description"> -->
         </md-input-container>
         
@@ -143,13 +143,18 @@
 
             <div layout="row" layout-fill flex>
               <div flex="90">
-                <md-icon><i class="material-icons">insert_emoticon</i></md-icon>
-                <span>{{experience.title}}</span>
+                <md-icon><i class="material-icons icon_yellow">insert_emoticon</i></md-icon>
+                <span>
+                  {{experience.title}} 
+                  <md-tooltip>
+                    {{ experience.description }}
+                  </md-tooltip>
+                </span>
               </div> <!-- end of flex=90 -->
 
               <div flex="10">
                 <md-button class="md-icon-button " ng-click="remove_experience( experience )">
-                  <i class="material-icons red_remove_icon">remove_circle</i>
+                  <i class="material-icons icon_red">remove_circle</i>
                 </md-button>
               </div> <!-- end of flex=10 -->
             </div>
@@ -163,12 +168,13 @@
 
     <md-content layout-padding  class="lime_background white_text" flex="75">
       <h3>Overview</h3>
+      <md-divider></md-divider>
       <p ng-if="USER.overview!=null">{{ USER.overview }}</p>
-      <p ng-if"USER.overview==null">No overview set yet.</p>
-      <p ng-if"USER.overview==null">It's important to write a strong overview. Let people know about yourself</p>
+      <p ng-if="USER.overview==null">No overview set yet.</p>
+      <p ng-if="USER.overview==null">It's important to write a strong overview. Let people know about yourself</p>
 
-
-      <md-button flex="100" class="strong_blue white_text md-raised" ng-click="show_overview_sheet()">Update your overview</md-button>
+      <md-divider></md-divider>
+      <md-button  class="strong_blue white_text md-raised" ng-click="show_overview_sheet()">Update your overview</md-button>
       
       
     </md-content>

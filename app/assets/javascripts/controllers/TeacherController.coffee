@@ -174,10 +174,10 @@ angular.module('lessons').controller('TeacherController', [
 
     ####################### Overview #####################################
     $scope.update_teacher = ->
-      $scope.teacher.id = $rootScope.USER.id
+
       COMMS.POST(
         '/teacher'
-        $scope.teacher
+        $scope.USER
       ).then( ( resp) ->
         console.log resp
         alertify.success "Updated your profile"
