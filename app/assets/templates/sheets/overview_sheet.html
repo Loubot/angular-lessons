@@ -4,9 +4,15 @@
    <md-subheader class="md-primary lime_background">Give a detailed account of yourself</md-subheader>
   </div>
   <div>
-    <md-input-container class="width_75">
-      <label >Overview</label>
-      <textarea ng-model="overview.description" class="black_text" md-maxlength="150" rows="5" md-select-on-focus></textarea>
-    </md-input-container>
+    <form ng-submit="update_teacher()">
+      <md-input-container class="width_75">
+        <label >Overview</label>
+        <textarea ng-model="teacher.overview" class="black_text" md-maxlength="150" rows="5" md-select-on-focus></textarea>
+      </md-input-container>
+
+      <div flex="40" >
+        <md-button class="tricolor_button_hover padding_t_10" type="submit"><i class="material-icons green_add_icon">add_box</i></md-button>
+      </div>
+    </form>
   </div>
 </md-bottom-sheet>

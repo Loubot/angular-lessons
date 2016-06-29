@@ -45,7 +45,7 @@ angular.module('lessons').controller('TeacherController', [
 
     USER.get_user().then( ( user ) ->
       alertify.success "Got user"
-
+      console.log $rootScope.USER.overview == null
       if $rootScope.USER.id != parseInt( $stateParams.id )
         $state.go 'welcome'
         alertify.error "You are not allowed to view this"
@@ -171,6 +171,25 @@ angular.module('lessons').controller('TeacherController', [
       )
 
     ####################### end of experience ############################
+
+    ####################### Overview #####################################
+    $scope.update_teacher = ->
+      $scope.teacher.id = $rootScope.USER.id
+      COMMS.POST(
+        '/teacher'
+        $scope.teacher
+      ).then( ( resp) ->
+        console.log resp
+        alertify.success "Updated your profile"
+        $rootScope.USER = resp.data.teacher
+        $mdBottomSheet.hide()
+      ).catch( ( err ) ->
+        console.log err
+        alertify.error "Failed to update teacher"
+
+      )
+
+    ####################### End of overview ##############################
 
     ####################### Sheets #######################################
     $scope.show_overview_sheet = ->

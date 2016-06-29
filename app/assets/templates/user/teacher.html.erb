@@ -128,7 +128,7 @@
 
 
         <div flex="40" >
-          <md-button type="submit"><i class="material-icons green_add_icon">add_box</i></md-button>
+          <md-button type="submit" class="tricolor_button_hover padding_t_10"><i class="material-icons green_add_icon">add_box</i></md-button>
         </div>
         
         
@@ -159,12 +159,13 @@
       </md-list>
     </md-card>
   </div> <!-- end of flex -->
-
   <div layout="row" layout-padding flex="100">
 
-    <md-content layout-padding class="lime_background" >
-
-      {{ teacher.overview }}
+    <md-content layout-padding  class="lime_background white_text" flex="75">
+      <h3>Overview</h3>
+      <p ng-if="USER.overview!=null">{{ USER.overview }}</p>
+      <p ng-if"USER.overview==null">No overview set yet.</p>
+      <p ng-if"USER.overview==null">It's important to write a strong overview. Let people know about yourself</p>
 
 
       <md-button flex="100" class="strong_blue white_text md-raised" ng-click="show_overview_sheet()">Update your overview</md-button>

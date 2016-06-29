@@ -30,6 +30,10 @@ html, body{
   width: 75%;
 }
 
+.padding_t_10{
+  padding-top: 10px !important;
+}
+
 // ::-webkit-input-placeholder {
 //    color: #FFF !important;
 // }
@@ -85,6 +89,10 @@ html, body{
   color: #2a602a;
   background-color: #FFF;
   font-size: 50px !important;
+}
+
+.tricolor_button_hover:hover{
+  background-color: #c86c10 !important;
 }
 
 .red_remove_icon{

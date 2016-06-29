@@ -13,7 +13,9 @@ Rails.application.routes.draw do
 
     get      'subjects'                   => "subject#index"
     as :teacher do
+      resources :teacher, only: [ :update ]
       post    'teacher/add-subject'       => 'subject#add_subject'
+
       post    'teacher/pic'               => "photos#create"
       delete  'teacher/remove-subject'    => 'subject#remove_subject'
 
