@@ -10,8 +10,9 @@ angular.module('lessons').controller('TeacherController', [
   'COMMS'  
   '$stateParams'
   '$auth'
-  'Upload' 
-  ( $scope, $rootScope, $state, RESOURCES, USER, alertify, COMMS, $stateParams, $auth, Upload ) ->
+  'Upload'
+  '$mdBottomSheet'
+  ( $scope, $rootScope, $state, RESOURCES, USER, alertify, COMMS, $stateParams, $auth, Upload, $mdBottomSheet ) ->
     console.log "TeacherController"
     $scope.photos = null
     # alertify.success "Got subjects"
@@ -19,13 +20,12 @@ angular.module('lessons').controller('TeacherController', [
     
     
     $scope.upload = ( file ) ->
-      console.log file
       Upload.upload(
         url: "#{ RESOURCES.DOMAIN }/teacher/pic"
-        file: file
-        avatar: file
+        file: $scope.file
+        avatar: $scope.file
         data:
-          avatar: file
+          avatar: $scope.file
           id: $rootScope.USER
       ).then( ( resp ) -> 
         console.log resp
@@ -36,7 +36,9 @@ angular.module('lessons').controller('TeacherController', [
           profile_pic()
           alertify.success "Profile pic set"
 
-        $file = null
+        $scope.file = null
+      ).catch( ( err ) ->
+        console.log err
       )
 
 
@@ -169,4 +171,14 @@ angular.module('lessons').controller('TeacherController', [
       )
 
     ####################### end of experience ############################
+
+    ####################### Sheets #######################################
+    $scope.show_overview_sheet = ->
+      $mdBottomSheet.show(
+        templateUrl: "sheets/overview_sheet.html"
+        controller: "TeacherController"
+      )
+
+
+    ####################### end of sheets ################################
 ])

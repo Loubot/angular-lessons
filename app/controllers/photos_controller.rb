@@ -2,6 +2,8 @@ class PhotosController < ApplicationController
   before_action :authenticate_teacher!
 
   def create
+    p "Params #{ pic_params[:avatar] }"
+    render json: { message: 'No params' }, status: 400 and return if pic_params[:avatar] == "null"
     @teacher = Teacher.first
     @photo = @teacher.photos.build( pic_params )
     if @teacher.profile == nil

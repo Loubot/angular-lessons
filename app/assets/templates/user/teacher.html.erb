@@ -28,7 +28,7 @@
         </md-card-icon-actions>
       </md-card-actions>
       <md-card-content>
-        <div class="button" ngf-select="upload($file)">Upload on file select</div>
+        <div class="button" ng-model="file" ngf-select="upload()">Upload on file select</div>
 
       </md-card-content>
     </md-card> 
@@ -161,12 +161,15 @@
   </div> <!-- end of flex -->
 
   <div layout="row" layout-padding flex="100">
-    <md-content layout-padding style="background-color:#22ffc6;" flex="50">
-      <h3>Enter your overview</h3>
-      <md-input-container style="width:75%">
-        <label>Overview</label>
-        <textarea ng-model="overview.description" class="black_text" md-maxlength="150" rows="5" md-select-on-focus></textarea>
-      </md-input-container>
+
+    <md-content layout-padding class="lime_background" >
+
+      {{ teacher.overview }}
+
+
+      <md-button flex="100" class="strong_blue white_text md-raised" ng-click="show_overview_sheet()">Update your overview</md-button>
+      
+      
     </md-content>
       
   </div>
