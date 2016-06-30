@@ -192,13 +192,13 @@
       <h3>Qualifications</h3>
       <md-divider></md-divider>
       
-      <md-list ng-if="qualifications.length>0">
-        <md-list-item ng-repeat="qual in qualifications">
+      <md-list ng-if="quals.length>0">
+        <md-list-item ng-repeat="qual in quals">
           {{ qual }}
         </md-list-item>
       </md-list>
 
-      <p ng-if="qualifications.length==0">You can add qualifications here. e.g. Degrees, Diplomas</p>
+      <p ng-if="quals.length==0">You can add qualifications here. e.g. Degrees, Diplomas</p>
 
       
       <div layout="row" layout-align="end start" flex="100">
@@ -207,6 +207,6 @@
       
     </md-content>
   </div> <!-- end of row -->
-{{ qualifications }}
+{{ quals.length }}
 </div> <!-- end of row -->
 

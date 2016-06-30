@@ -12,8 +12,7 @@ angular.module('lessons').controller('TeacherController', [
   '$auth'
   'Upload'
   '$mdBottomSheet'
-  '$timeout'
-  ( $scope, $rootScope, $state, RESOURCES, USER, alertify, COMMS, $stateParams, $auth, Upload, $mdBottomSheet, $timeout ) ->
+  ( $scope, $rootScope, $state, RESOURCES, USER, alertify, COMMS, $stateParams, $auth, Upload, $mdBottomSheet ) ->
     console.log "TeacherController"
     $scope.photos = null
     # alertify.success "Got subjects"
@@ -200,10 +199,9 @@ angular.module('lessons').controller('TeacherController', [
         $scope.qualification
       ).then( ( resp ) ->
         console.log resp
-        $scope.qualifications = resp.data.qualifications
+        $scope.quals = resp.data.qualifications
         alertify.success "Created qualification"
-        console.log $scope.qualifications
-        $timeout($scope.$apply(), 4000)
+        console.log $scope.quals
         $mdBottomSheet.hide()
       ).catch( ( err ) ->
         console.log err
