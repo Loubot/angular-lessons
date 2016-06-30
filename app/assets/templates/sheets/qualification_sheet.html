@@ -8,14 +8,24 @@
 
       <md-input-container class="width_75">
         <label >Qualificaion title</label>
-        <input ng-model="qualification.title">
+        <input ng-model="qualification.title" required>
       </md-input-container>
 
       <md-input-container class="width_75">
         <label >Qualificaion school</label>
-        <input ng-model="qualification.school">
-      </md-input-container><br>
-      <md-datepicker ng-model="myDate" md-placeholder="Enter date"></md-datepicker>
+        <input ng-model="qualification.school" required>
+      </md-input-container>
+
+      <md-input-container class="width_75">
+        <label>Start date</label>
+        <input type="month" ng-model="qualification.start" required>
+      </md-input-container>
+
+      <md-input-container class="width_75">
+        <label>End date</label>
+        <input type="month" ng-model="qualification.end_time" required>
+      </md-input-container>
+
       <div flex="40" >
         <md-button class="tricolor_button_hover padding_t_10" type="submit"><i class="material-icons green_add_icon">add_box</i></md-button>
       </div>

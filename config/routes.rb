@@ -19,7 +19,8 @@ Rails.application.routes.draw do
       post    'teacher/pic'               => "photos#create"
       delete  'teacher/remove-subject'    => 'subject#remove_subject'
 
-      resources :experience, only: [ :create, :destroy ]
+      resources :experience,          only: [ :create, :destroy ]
+      resources :qualification,       only: [ :create, :destroy ]
 
     end
   end

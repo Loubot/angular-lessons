@@ -173,7 +173,7 @@ angular.module('lessons').controller('TeacherController', [
 
     ####################### end of experience ############################
 
-    ####################### Overview #####################################
+    ####################### Update teacher #####################################
     $scope.update_teacher = ->
 
       COMMS.POST(
@@ -190,7 +190,14 @@ angular.module('lessons').controller('TeacherController', [
 
       )
 
-    ####################### End of overview ##############################
+    ####################### End of update teacher ##############################
+
+    ####################### Qualification ######################################
+    $scope.create_qualification = ->
+      COMMS.POST(
+
+      )
+    ####################### End of qualification ###############################
 
     ####################### Sheets #######################################
     $scope.show_overview_sheet = ->
