@@ -15,15 +15,15 @@
 
 class Qualification < ActiveRecord::Base
 	belongs_to :teacher, touch: true
-	validates :start, :end_time, date: true
-	validates :start, date: { before: :end_time, message: 'must be after end time' }
-	validates :title, :school, :start, :end_time, :teacher_id, presence: true
+	# validates :start, :end_time, date: true
+	# validates :start, date: { before: :end_time, message: 'must be after end time' }
+	validates :title, :school, :teacher_id, presence: true #:start, :end_time,
 
-	before_validation :addTime
+	# before_validation :addTime
 
-	def addTime
-		if self.present == '1'
-			self.end_time = Time.now()
-		end
-	end
+	# def addTime
+	# 	if self.present == '1'
+	# 		self.end_time = Time.now()
+	# 	end
+	# end
 end

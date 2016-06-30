@@ -12,7 +12,8 @@ angular.module('lessons').controller('TeacherController', [
   '$auth'
   'Upload'
   '$mdBottomSheet'
-  ( $scope, $rootScope, $state, RESOURCES, USER, alertify, COMMS, $stateParams, $auth, Upload, $mdBottomSheet ) ->
+  '$timeout'
+  ( $scope, $rootScope, $state, RESOURCES, USER, alertify, COMMS, $stateParams, $auth, Upload, $mdBottomSheet, $timeout ) ->
     console.log "TeacherController"
     $scope.photos = null
     # alertify.success "Got subjects"
@@ -59,7 +60,7 @@ angular.module('lessons').controller('TeacherController', [
           $scope.photos = resp.data.photos
           $scope.subjects = resp.data.subjects
           $scope.experiences = resp.data.experiences
-          $scope.qualifications = resp.data.qualifications
+          $scope.quals = resp.data.qualifications
           profile_pic()
         ).catch( ( err ) ->
           console.log err
@@ -195,7 +196,18 @@ angular.module('lessons').controller('TeacherController', [
     ####################### Qualification ######################################
     $scope.create_qualification = ->
       COMMS.POST(
-
+        "/teacher/#{ $rootScope.USER.id }/qualification"
+        $scope.qualification
+      ).then( ( resp ) ->
+        console.log resp
+        $scope.qualifications = resp.data.qualifications
+        alertify.success "Created qualification"
+        console.log $scope.qualifications
+        $timeout($scope.$apply(), 4000)
+        $mdBottomSheet.hide()
+      ).catch( ( err ) ->
+        console.log err
+        alertify.error err.errors.full_messages
       )
     ####################### End of qualification ###############################
 

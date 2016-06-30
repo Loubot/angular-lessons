@@ -9,7 +9,6 @@ angular.module('lessons', [
   'angularSpinner'  
   'ap.fotorama'
   'ngFileUpload'
-  '720kb.datepicker'
 ])
 
 angular.module('lessons').constant "RESOURCES", do ->
