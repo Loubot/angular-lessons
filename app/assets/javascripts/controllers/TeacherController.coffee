@@ -42,33 +42,34 @@ angular.module('lessons').controller('TeacherController', [
       )
 
 
+    if !( $rootScope.USER? )
+      USER.get_user().then( ( user ) ->
+        alertify.success "Got user"
+        console.log $rootScope.USER.overview == null
+        if $rootScope.USER.id != parseInt( $stateParams.id )
+          $state.go 'welcome'
+          alertify.error "You are not allowed to view this"
+          return false
 
-    USER.get_user().then( ( user ) ->
-      alertify.success "Got user"
-      console.log $rootScope.USER.overview == null
-      if $rootScope.USER.id != parseInt( $stateParams.id )
-        $state.go 'welcome'
-        alertify.error "You are not allowed to view this"
-        return false
-
-      COMMS.GET(
-        "/teacher/profile"
-        id: $rootScope.USER.id
-      ).then( ( resp ) ->
-        console.log resp
-        $scope.photos = resp.data.photos
-        $scope.subjects = resp.data.subjects
-        $scope.experiences = resp.data.experiences
-        profile_pic()
+        COMMS.GET(
+          "/teacher/profile"
+          id: $rootScope.USER.id
+        ).then( ( resp ) ->
+          console.log resp
+          $scope.photos = resp.data.photos
+          $scope.subjects = resp.data.subjects
+          $scope.experiences = resp.data.experiences
+          $scope.qualifications = resp.data.qualifications
+          profile_pic()
+        ).catch( ( err ) ->
+          console.log err
+        )
       ).catch( ( err ) ->
-        console.log err
+        alertify.error "No user"
+        $rootScope.USER = null
+        $state.go 'welcome'
+        return false
       )
-    ).catch( ( err ) ->
-      alertify.error "No user"
-      $rootScope.USER = null
-      $state.go 'welcome'
-      return false
-    )
 
     $scope.make_profile = ( id ) ->
       COMMS.POST(
@@ -195,6 +196,12 @@ angular.module('lessons').controller('TeacherController', [
     $scope.show_overview_sheet = ->
       $mdBottomSheet.show(
         templateUrl: "sheets/overview_sheet.html"
+        controller: "TeacherController"
+      )
+
+    $scope.show_qualification_sheet = ->
+      $mdBottomSheet.show(
+        templateUrl: "sheets/qualification_sheet.html"
         controller: "TeacherController"
       )
 

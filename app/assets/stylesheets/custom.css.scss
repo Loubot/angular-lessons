@@ -18,12 +18,24 @@ html, body{
   background-color: rgb(16,108,200) !important;
 }
 
+.yellow_background{
+  background-color: #ffff00 !important;
+}
+
+.greyish_orange_background{
+  background-color: #d7b8ad !important;
+}
+
 .strong_blue{
   background-color: #106cc8 !important;
 }
 
 .lime_background{
-  background-color: #00d59e;
+  background-color: #00d59e !important;
+} 
+
+.greyish_blue{
+  background-color: #85b3c4 !important;
 }
 
 .width_75{
@@ -33,22 +45,6 @@ html, body{
 .padding_t_10{
   padding-top: 10px !important;
 }
-
-// ::-webkit-input-placeholder {
-//    color: #FFF !important;
-// }
-
-// :-moz-placeholder { /* Firefox 18- */
-//    color: #FFF !important;  
-// }
-
-// ::-moz-placeholder {  /* Firefox 19+ */
-//    color: #FFF !important;  
-// }
-
-// :-ms-input-placeholder {  
-//    color: #FFF !important;  
-// }
 
 .sidenav{
   background-color: #2a602a;
@@ -103,6 +99,9 @@ html, body{
 
 .icon_yellow{
   color: #111;
-  background-color: #ffff00;;
+  background-color: #ffff00;
 }
 
+.margin_s_100.md-grid{
+  margin: 0 100px !important;
+}

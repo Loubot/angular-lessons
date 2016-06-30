@@ -90,12 +90,15 @@
           <div class="md-list-item-text" layout="row">
 
             <div flex="90">
-              <md-icon><i class="material-icons">insert_emoticon</i></md-icon>
+              <md-icon><i class="material-icons icon_yellow">insert_emoticon</i></md-icon>
               <span>{{subject.name}}</span>
             </div> <!-- end of flex=90 -->
 
             <div flex="10">
               <md-button class="md-icon-button" ng-click="remove_subject( subject )">
+                <md-tooltip md-direction="left">
+                  Remove subject
+                </md-tooltip>
                 <md-icon><i class="material-icons">thumb_down</i></md-icon>
               </md-button>
             </div> <!-- end of flex=10 -->
@@ -133,27 +136,28 @@
         
         
       </form> <!-- end of add_experience() -->
-      
-    </md-card> 
-
-    <md-card layout-padding flex ng-if="experiences.length>0">
-      <md-list>
+      <md-divider></md-divider>
+      <md-list layout-padding>
         <md-list-item ng-repeat="experience in experiences" >
           <div class="md-list-item-text" layout="row" flex>
 
             <div layout="row" layout-fill flex>
               <div flex="90">
+                <md-tooltip>
+                  {{ experience.description }}
+                </md-tooltip>
                 <md-icon><i class="material-icons icon_yellow">insert_emoticon</i></md-icon>
                 <span>
                   {{experience.title}} 
-                  <md-tooltip>
-                    {{ experience.description }}
-                  </md-tooltip>
+                  
                 </span>
               </div> <!-- end of flex=90 -->
 
               <div flex="10">
                 <md-button class="md-icon-button " ng-click="remove_experience( experience )">
+                  <md-tooltip md-direction="left">
+                    Remove experiences
+                  </md-tooltip>
                   <i class="material-icons icon_red">remove_circle</i>
                 </md-button>
               </div> <!-- end of flex=10 -->
@@ -162,7 +166,9 @@
           </div> <!-- end of md-list-item-text -->
         </md-list-item>
       </md-list>
-    </md-card>
+    </md-card> 
+
+    
   </div> <!-- end of flex -->
   <div layout="row" layout-padding flex="100">
 
@@ -180,6 +186,24 @@
     </md-content>
       
   </div>
+
+  <div layout="row"  layout-align="end start"  layout-padding flex="100">
+    <md-content class="greyish_orange_background" flex="90">
+      <h3>Qualifications</h3>
+      <md-divider></md-divider>
+      <md-list>
+        <md-list-item ng-repeate="qualification in qualifications">
+          {{ qualification.title }}
+        </md-list-item>
+      </md-list>
+
+      <md-divider></md-divider>
+      <div layout="row" layout-align="end start" flex="100">
+        <md-button  class="greyish_blue white_text md-raised" ng-click="show_qualification_sheet()">Create a qualification</md-button>
+      </div>
+      
+    </md-content>
+  </div> <!-- end of row -->
 
 </div> <!-- end of row -->
 

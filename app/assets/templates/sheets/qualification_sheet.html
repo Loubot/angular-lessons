@@ -1,0 +1,25 @@
+<md-bottom-sheet class="md-grid margin_s_100" layout="column" ng-cloak>
+  <div layout="row" layout-align="center center">
+   <h3 >List your qualification</h3>
+   <!-- <md-subheader class="md-primary">Give a detailed account of yourself</md-subheader> -->
+  </div>
+  <div>
+    <form ng-submit="create_qualification()">
+
+      <md-input-container class="width_75">
+        <label >Qualificaion title</label>
+        <input ng-model="qualification.title">
+      </md-input-container>
+
+      <md-input-container class="width_75">
+        <label >Qualificaion school</label>
+        <input ng-model="qualification.school">
+      </md-input-container><br>
+      <md-datepicker ng-model="myDate" md-placeholder="Enter date"></md-datepicker>
+      <div flex="40" >
+        <md-button class="tricolor_button_hover padding_t_10" type="submit"><i class="material-icons green_add_icon">add_box</i></md-button>
+      </div>
+    </form>
+  </div>
+
+</md-bottom-sheet>

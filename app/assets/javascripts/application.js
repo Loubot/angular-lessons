@@ -17,7 +17,7 @@
 //= require angular-ui-router/release/angular-ui-router 
 //= require angular-animate/angular-animate.js
 //= require angular-aria/angular-aria.js
-//= require angular-material/angular-material.js
+//= require angular-material/temp/angular-material.min.js
 //= require angular-cookie/angular-cookie
 //= require ng-token-auth/dist/ng-token-auth
 //= require ng-file-upload/ng-file-upload-all.min
