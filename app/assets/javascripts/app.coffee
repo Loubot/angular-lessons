@@ -30,6 +30,11 @@ angular.module('lessons').config ($stateProvider, $urlRouterProvider) ->
     templateUrl: "user/teacher.html"
     controller: "TeacherController"
 
+  $stateProvider.state 'teacher_area',
+    url: '/teacher-area'
+    templateUrl: "user/teacher_area.html"
+    controller: "TeacherAreaController"
+
   $stateProvider.state 'how_it_works',
     url: '/how-it-works'
     templateUrl: 'static/how_it_works.html'
