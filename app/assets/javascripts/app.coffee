@@ -9,7 +9,6 @@ angular.module('lessons', [
   'angularSpinner'  
   'ap.fotorama'
   'ngFileUpload'
-  'angular-google-gapi'
 ])
 
 angular.module('lessons').constant "RESOURCES", do ->
@@ -31,6 +30,11 @@ angular.module('lessons').config ($stateProvider, $urlRouterProvider) ->
     templateUrl: "user/teacher.html"
     controller: "TeacherController"
 
+  $stateProvider.state 'teacher_area',
+    url: "/teacher-area/:id"
+    templateUrl: "user/teacher_area.html"
+    controller: "TeacherAreaController"
+
   $stateProvider.state 'how_it_works',
     url: '/how-it-works'
     templateUrl: 'static/how_it_works.html'
@@ -45,6 +49,7 @@ angular.module('lessons').config ( $mdThemingProvider ) ->
   $mdThemingProvider.theme('default')
     .primaryPalette('green')
     .accentPalette('blue-grey')
+
 
 
 angular.module('lessons').service 'USER', ( $http, $rootScope, RESOURCES, $q, usSpinnerService ) ->
