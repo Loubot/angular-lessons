@@ -21,7 +21,6 @@
 //= require angular-cookie/angular-cookie
 //= require ng-token-auth/dist/ng-token-auth
 //= require ng-file-upload/ng-file-upload-all.min
-//= require angular-google-client/dist/angular-google-client
 //= require angular-sanitize/angular-sanitize
 //= require material-calendar/dist/angular-material-calendar
 //= require spin.js/spin

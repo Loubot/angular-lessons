@@ -9,25 +9,8 @@ angular.module('lessons', [
   'angularSpinner'  
   'ap.fotorama'
   'ngFileUpload'
-  'cmGoogleApi'
   'materialCalendar'
 ])
-
-
-angular.module('lessons').config ( googleClientProvider ) ->
-  googleClientProvider
-    .loadPickerLibrary()
-    .loadGoogleAuth(
-      cookie_policy: 'single_host_origin'
-      # hosted_domain: 'http://localhost:3000/oauth2/callback'
-      fetch_basic_profile: true
-    )
-    .setClientId("25647890980-aachcueqqsk0or6qm49hi1e23vvvluqd.apps.googleusercontent.com")
-    .addScope("https://www.googleapis.com/auth/userinfo.email")
-    .addScope("https://www.googleapis.com/auth/calendar.readonly")
-    .addScope("https://www.googleapis.com/auth/admin.directory.resource.calendar")
-    .addScope('https://www.googleapis.com/auth/plus.login')
-    .addApi('oauth2', 'v2')
 
 angular.module('lessons').constant "RESOURCES", do ->
   url = window.location.origin
