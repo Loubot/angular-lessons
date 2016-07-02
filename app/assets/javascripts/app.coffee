@@ -10,6 +10,7 @@ angular.module('lessons', [
   'ap.fotorama'
   'ngFileUpload'
   'cmGoogleApi'
+  'materialCalendar'
 ])
 
 
