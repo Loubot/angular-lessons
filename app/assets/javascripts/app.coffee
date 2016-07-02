@@ -9,7 +9,21 @@ angular.module('lessons', [
   'angularSpinner'  
   'ap.fotorama'
   'ngFileUpload'
+  'cmGoogleApi'
 ])
+
+
+angular.module('lessons').config ( googleClientProvider ) ->
+  googleClientProvider
+    .loadPickerLibrary()
+    .loadGoogleAuth(
+      cookie_policy: 'single_host_origin'
+      # hosted_domain: 'http://localhost:3000'
+      fetch_basic_profile: true
+    )
+    .setClientId("25647890980-aachcueqqsk0or6qm49hi1e23vvvluqd.apps.googleusercontent.com")
+    .addScope("https://www.googleapis.com/auth/calendar.readonly")
+    .addApi('oauth2', 'v2')
 
 angular.module('lessons').constant "RESOURCES", do ->
   url = window.location.origin
