@@ -21,6 +21,7 @@
 //= require angular-cookie/angular-cookie
 //= require ng-token-auth/dist/ng-token-auth
 //= require ng-file-upload/ng-file-upload-all.min
+//= require angular-google-gapi/dist/angular-google-gapi.min
 //= require spin.js/spin
 //= require angular-spinner/angular-spinner
 //= require ap.fotorama/ap.fotorama.js

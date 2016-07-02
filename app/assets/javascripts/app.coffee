@@ -9,6 +9,7 @@ angular.module('lessons', [
   'angularSpinner'  
   'ap.fotorama'
   'ngFileUpload'
+  'angular-google-gapi'
 ])
 
 angular.module('lessons').constant "RESOURCES", do ->
