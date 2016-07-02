@@ -51,7 +51,6 @@ angular.module('lessons').config ( $mdThemingProvider ) ->
     .accentPalette('blue-grey')
 
 
-
 angular.module('lessons').service 'USER', ( $http, $rootScope, RESOURCES, $q, usSpinnerService ) ->
   usSpinnerService.spin('spinner-1')
   get_user: ->
