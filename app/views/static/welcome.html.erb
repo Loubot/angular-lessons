@@ -1,7 +1,7 @@
 <div class="main_page" layout="column" layout-fill ng-controller="NavController">
   <md-toolbar>
     <div class="md-toolbar-tools" layout="row" layout-align="space-around center">
-      <md-fab-speed-dial ng-hide="demo.hidden" md-direction="down" md-open="demo.isOpen"
+      <md-fab-speed-dial ng-hide="demo.hidden" md-direction="right" md-open="demo.isOpen"
                        class="md-scale md-fab-top-left" ng-class="{ 'md-hover-full': demo.hover }"
                        >
         <md-fab-trigger>
@@ -18,6 +18,7 @@
 
         <md-fab-actions ng-if="USER" class="green_text">
           <md-button ui-sref="teacher({id:USER.id})" class="md-button md-default-theme green_text">Profile</md-button>
+          <md-button ui-sref="teacher_area({id:USER.id})" class="md-button md-default-theme green_text">Your area</md-button>
           <md-button class="md-button md-default-theme green_text" ng-click="logout()">Logout</md-button>
           <md-button class="md-button md-default-theme green_text">content</md-button>
 

@@ -23,7 +23,10 @@ angular.module('lessons').config ( googleClientProvider ) ->
       fetch_basic_profile: true
     )
     .setClientId("25647890980-aachcueqqsk0or6qm49hi1e23vvvluqd.apps.googleusercontent.com")
+    .addScope("https://www.googleapis.com/auth/userinfo.email")
     .addScope("https://www.googleapis.com/auth/calendar.readonly")
+    .addScope("https://www.googleapis.com/auth/admin.directory.resource.calendar")
+    .addScope('https://www.googleapis.com/auth/plus.login')
     .addApi('oauth2', 'v2')
 
 angular.module('lessons').constant "RESOURCES", do ->
