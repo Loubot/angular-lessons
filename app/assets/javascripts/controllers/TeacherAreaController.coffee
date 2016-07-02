@@ -9,8 +9,7 @@ angular.module('lessons').controller('TeacherAreaController', [
   'alertify'
   'COMMS'
   'googleClient'
-  'cmApiService'
-  ( $scope, $rootScope, $state, RESOURCES, USER, alertify, COMMS, googleClient, cmApiService ) ->
+  ( $scope, $rootScope, $state, RESOURCES, USER, alertify, COMMS, googleClient ) ->
     
     console.log "TeacherAreaController"
     googleClient.afterApiLoaded().then(  ->
@@ -19,7 +18,7 @@ angular.module('lessons').controller('TeacherAreaController', [
         gapi.client.calendar.events.list(
           calendarId: 'primary'
         ).execute( ( resp) ->
-          console.log resp
+          console.log resp.items
         )
       )
     )

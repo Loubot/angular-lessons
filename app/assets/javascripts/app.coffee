@@ -18,7 +18,7 @@ angular.module('lessons').config ( googleClientProvider ) ->
     .loadPickerLibrary()
     .loadGoogleAuth(
       cookie_policy: 'single_host_origin'
-      # hosted_domain: 'http://localhost:3000'
+      # hosted_domain: 'http://localhost:3000/oauth2/callback'
       fetch_basic_profile: true
     )
     .setClientId("25647890980-aachcueqqsk0or6qm49hi1e23vvvluqd.apps.googleusercontent.com")
