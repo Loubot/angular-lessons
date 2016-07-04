@@ -22,7 +22,6 @@
 //= require ng-token-auth/dist/ng-token-auth
 //= require ng-file-upload/ng-file-upload-all.min
 //= require angular-sanitize/angular-sanitize
-//= require material-calendar/dist/angular-material-calendar
 //= require spin.js/spin
 //= require angular-spinner/angular-spinner
 //= require ap.fotorama/ap.fotorama.js
