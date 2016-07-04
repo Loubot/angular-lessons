@@ -12,6 +12,7 @@ angular.module('lessons').controller('TeacherAreaController', [
   ( $scope, $rootScope, $state, RESOURCES, USER, alertify, COMMS, usSpinnerService ) ->
     console.log "TeacherAreaController"
     $scope.events = []
+    usSpinnerService.spin('spinner-1')
 
     $scope.uiConfig = calendar:
       height: 450
@@ -25,7 +26,7 @@ angular.module('lessons').controller('TeacherAreaController', [
       eventResize: $scope.alertOnResize
 
     window.init = ->
-      usSpinnerService.spin('spinner-1')
+      
       console.log "loaded"
       # console.log gapi
       gapi.client.load('calendar', 'v3', calendar_loaded)
@@ -43,7 +44,7 @@ angular.module('lessons').controller('TeacherAreaController', [
         events = resp.items
         # events = resp.items
 
-        create_events_list( resp.items )
+        
         appendPre 'Upcoming events:'
         if events.length > 0
           i = 0
@@ -54,7 +55,7 @@ angular.module('lessons').controller('TeacherAreaController', [
               bla = event.start.date
             appendPre event.summary + ' (' + bla + ')'
             i++
-            usSpinnerService.stop('spinner-1')
+          usSpinnerService.stop('spinner-1')
         else
           appendPre 'No upcoming events found.'
           usSpinnerService.stop('spinner-1')
@@ -62,14 +63,7 @@ angular.module('lessons').controller('TeacherAreaController', [
         
       )
 
-    create_events_list = ( event_list ) ->
-      $scope.events = [
-          {
-            title: 'All Day Event',start: new Date('Mon Jul 04 2016 09:00:00 GMT+0530 (IST)')
-              
-          }
-      ]
-      $scope.$apply()
+    
 
       
 ])
