@@ -9,6 +9,7 @@ angular.module('lessons', [
   'angularSpinner'  
   'ap.fotorama'
   'ngFileUpload'
+  'ui.calendar'
 ])
 
 angular.module('lessons').constant "RESOURCES", do ->
