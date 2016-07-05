@@ -21,6 +21,8 @@ angular.module('lessons').controller('TeacherAreaController', [
           startTime: event.start.dateTime
           endTime: event.end.dateTime
           # allDay: true
+      usSpinnerService.stop('spinner-1')
+      alertify.success "Loaded #{ events.length } events"
       $scope.$apply()
 
     $scope.uiConfig = calendar:
@@ -40,6 +42,12 @@ angular.module('lessons').controller('TeacherAreaController', [
       # console.log gapi
       gapi.client.load('calendar', 'v3', calendar_loaded)
 
+    window.handleAuthResult = ( auth ) ->
+      console.log !( auth == false && !auth.error)
+      $scope.show_auth_button = !( auth == true && !auth.error)
+      $scope.$apply()
+    
+
     calendar_loaded = ->
       gapi.client.calendar.events.list(
         'calendarId': 'primary'
@@ -49,26 +57,26 @@ angular.module('lessons').controller('TeacherAreaController', [
         'maxResults': 10
         'orderBy': 'startTime'
       ).execute( ( resp ) ->
-        console.log resp
-        events = resp.items
-        # events = resp.items
-        format_events( events )
+        # console.log resp
         
-        appendPre 'Upcoming events:'
-        if events.length > 0
-          i = 0
-          while i < events.length
-            event = events[i]
-            bla = event.start.dateTime
-            if !bla
-              bla = event.start.date
-            appendPre event.summary + ' (' + bla + ')'
-            i++
-          usSpinnerService.stop('spinner-1')
-        else
-          appendPre 'No upcoming events found.'
-          usSpinnerService.stop('spinner-1')
-        return
+        
+        format_events( resp.items )
+        
+        # appendPre 'Upcoming events:'
+        # if events.length > 0
+        #   i = 0
+        #   while i < events.length
+        #     event = events[i]
+        #     bla = event.start.dateTime
+        #     if !bla
+        #       bla = event.start.date
+        #     appendPre event.summary + ' (' + bla + ')'
+        #     i++
+        #   usSpinnerService.stop('spinner-1')
+        # else
+        #   appendPre 'No upcoming events found.'
+        #   usSpinnerService.stop('spinner-1')
+        # return
         
       )
 
@@ -137,8 +145,6 @@ angular.module('lessons').controller('TeacherAreaController', [
       return
 
     return
-
-    
     
       
 ])
