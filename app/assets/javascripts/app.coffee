@@ -136,6 +136,24 @@ angular.module('lessons').service 'COMMS', ( $http, $state, RESOURCES, $rootScop
         reject err_result
       )
 
+  PUT: ( url, data ) ->
+      usSpinnerService.spin('spinner-1')
+      $q ( resolve, reject ) ->
+        $http(
+          method: 'PUT'
+          url: "#{ RESOURCES.DOMAIN }#{ url }"
+          headers: { "Content-Type": "application/json" }
+          data: data
+        ).then( ( result ) ->
+          usSpinnerService.stop('spinner-1')
+          if result.user != undefined
+            $rootScope.USER = result.user
+          resolve result
+        ).catch( ( err_result ) ->
+          usSpinnerService.stop('spinner-1')
+          reject err_result
+        )
+
   GET: ( url, params ) ->
     usSpinnerService.spin('spinner-1')
     $q ( resolve, reject ) ->

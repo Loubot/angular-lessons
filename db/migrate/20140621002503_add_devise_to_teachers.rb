@@ -40,6 +40,7 @@ class AddDeviseToTeachers < ActiveRecord::Migration
       t.string :email
       t.string :first_name
       t.string :last_name
+      t.string :calendar_id
       t.text :overview
 
       ## Tokens

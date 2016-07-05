@@ -23,7 +23,14 @@ angular.module('lessons').controller('TeacherAreaController', [
               ]
     usSpinnerService.spin('spinner-1')
 
-    USER.get_user()
+    USER.get_user().then( ( user ) ->
+      console.log "got user"
+    ).catch( ( err ) ->
+      alertify.error "Not authorised"
+      $rootScope.USER = null
+      $state.go 'welcome'
+      return false
+    )
 
     format_events = ( events ) ->
       for event in events
@@ -60,22 +67,27 @@ angular.module('lessons').controller('TeacherAreaController', [
       gapi.client.load('oauth2', 'v2', oauth2_loaded)
 
     calendar_loaded = ->
-      gapi.client.calendar.events.list(
-        'calendarId': 'primary'
-        # 'timeMin': (new Date()).toISOString()
-        'showDeleted': false
-        'singleEvents': true
-        'maxResults': 10
-        'orderBy': 'startTime'
-      ).execute( ( resp ) ->
-        # console.log resp
-        format_events( resp.items )
+      gapi.client.calendar.calendarList.list().execute( ( resp ) ->
+        console.log "Calendar list"
+        console.log resp
+        usSpinnerService.stop('spinner-1')
       )
+      # gapi.client.calendar.events.list(
+      #   'calendarId': 'primary'
+      #   # 'timeMin': (new Date()).toISOString()
+      #   'showDeleted': false
+      #   'singleEvents': true
+      #   'maxResults': 10
+      #   'orderBy': 'startTime'
+      # ).execute( ( resp ) ->
+      #   # console.log resp
+      #   format_events( resp.items )
+      # )
 
     oauth2_loaded = ->
       console.log "Oauth"
       gapi.client.oauth2.userinfo.get().execute( ( resp ) ->
-        console.log resp
+        $scope.google_id_email =  resp.email
       )
 
     
@@ -108,22 +120,34 @@ angular.module('lessons').controller('TeacherAreaController', [
         {
           'client_id': CLIENT_ID,
           'scope': SCOPES.join(' '),
-          'immediate': false
+          'immediate': true
           'fetch_basic_profile': true
         }, handleAuthResult)
       
        
     $scope.create_calendar = ->
+      usSpinnerService.spin('spinner-1')
       console.log "Create calendar"
-
+      console.log "user:#{ $scope.google_id_email }"
       gapi.client.calendar.calendars.insert(
-        'description': "LYL calendar for #{ $rootScope.USER.firstName } #{ $rootScope.USER.lastName }"
-        'summary': "View all your LYL events here"
-        'id': 1
-        'timeZone': "GMT+01:00"
+        'description': "LYL calendar for #{ $rootScope.USER.first_name } #{ $rootScope.USER.last_name }"
+        'summary': "LYL Calendar"
+        # 'id': "user:#{ $scope.google_id_email }"
+        'timeZone': "GMT+01:00 Dublin"
         'backgroundColor': '#2a602a'
       ).execute( ( resp ) ->
-        console.log resp
+        usSpinnerService.stop('spinner-1')
+        alertify.success "Created calendar for you"
+        COMMS.PUT(
+          "/teacher/#{ $rootScope.USER.id }"
+          calendar_id: resp.result.id
+        ).then( ( user ) ->
+          console.log user
+          alertify.success "Updated calendar id"
+        ).catch( ( err ) ->
+          console.log err
+          alertify.error "Failed to update user"
+        )
       )
 
     ###################### google auth ###############################
