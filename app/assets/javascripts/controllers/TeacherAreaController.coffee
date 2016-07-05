@@ -11,7 +11,7 @@ angular.module('lessons').controller('TeacherAreaController', [
   'usSpinnerService'
   ( $scope, $rootScope, $state, RESOURCES, USER, alertify, COMMS, usSpinnerService ) ->
     console.log "TeacherAreaController"
-    $scope.eventSource = []
+    
 
     CLIENT_ID = '25647890980-aachcueqqsk0or6qm49hi1e23vvvluqd.apps.googleusercontent.com'
 
@@ -32,27 +32,21 @@ angular.module('lessons').controller('TeacherAreaController', [
       return false
     )
 
+
+
     format_events = ( events ) ->
+      bla = []
       for event in events
-        $scope.eventSource.push
+        bla.push
           title: event.summary
-          startTime: event.start.dateTime
-          endTime: event.end.dateTime
+          startTime: new Date( event.start.dateTime )
+          endTime: new Date ( event.end.dateTime )
           # allDay: true
+
+      $scope.eventSource = bla
       usSpinnerService.stop('spinner-1')
       alertify.success "Loaded #{ events.length } events"
       $scope.$apply()
-
-    $scope.uiConfig = calendar:
-      height: 450
-      editable: true
-      header:
-        left: 'month basicWeek basicDay agendaWeek agendaDay'
-        center: 'title'
-        right: 'today prev,next'
-      dayClick: $scope.alertEventOnClick
-      eventDrop: $scope.alertOnDrop
-      eventResize: $scope.alertOnResize
 
 
 
@@ -72,6 +66,7 @@ angular.module('lessons').controller('TeacherAreaController', [
           'calendarId': "#{ $rootScope.USER.calendar_id }"
         ).execute( ( resp ) ->
           console.log "List events"
+          format_events( resp.items )
           console.log resp
           alertify.success "Got events"
           usSpinnerService.stop('spinner-1')
