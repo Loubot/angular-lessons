@@ -67,11 +67,21 @@ angular.module('lessons').controller('TeacherAreaController', [
       gapi.client.load('oauth2', 'v2', oauth2_loaded)
 
     calendar_loaded = ->
-      gapi.client.calendar.calendarList.list().execute( ( resp ) ->
-        console.log "Calendar list"
-        console.log resp
-        usSpinnerService.stop('spinner-1')
-      )
+      if $rootScope.USER.calendar_id?
+        gapi.client.calendar.events.list(
+          'calendarId': "#{ $rootScope.USER.calendar_id }"
+        ).execute( ( resp ) ->
+          console.log "List events"
+          console.log resp
+          alertify.success "Got events"
+          usSpinnerService.stop('spinner-1')
+        )
+
+      # gapi.client.calendar.calendarList.list().execute( ( resp ) ->
+      #   console.log "Calendar list"
+      #   console.log resp
+      #   usSpinnerService.stop('spinner-1')
+      # )
       # gapi.client.calendar.events.list(
       #   'calendarId': 'primary'
       #   # 'timeMin': (new Date()).toISOString()
