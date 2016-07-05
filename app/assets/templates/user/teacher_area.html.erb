@@ -2,8 +2,7 @@
 
 
 
-    <script src="https://apis.google.com/js/client.js?onload=checkAuth">
-    </script>
+<script src="https://apis.google.com/js/client.js?onload=checkAuth"></script>
     
     <!-- <pre id="output"></pre> -->
 
@@ -26,22 +25,11 @@
       </md-card-title-media>
     </md-card-title>
     <md-card-actions layout="row" layout-align="end center">
-      <md-button  ng-if="show_auth_button" aria-label="google" onclick="handleAuthClick(event)">
+      <md-button  ng-if="show_auth_button" aria-label="google" ng-click="handleAuthClick(event)">
         <%= image_tag('google_sign_in.png')  %>
       </md-button>
-      <!-- <md-button>Action 2</md-button> -->
+      <md-button ng-click="create_calendar()">Create calendar</md-button>
     </md-card-actions>
   </md-card>
 
 </md-content>
-
-
-<div id="authorize-div" ng-if="show_auth_button" style="display:inline;">
-  <span>Authorize access to Google Calendar API</span>
-  <!--Button for the user to click to initiate auth sequence -->
-  <a href="" id="authorize-button" onclick="handleAuthClick(event)">
-    
-  </a>
-</div>
-
-{{ show_auth_button }}
