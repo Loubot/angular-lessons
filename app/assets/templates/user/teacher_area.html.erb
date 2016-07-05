@@ -1,6 +1,6 @@
 <span us-spinner spinner-key="spinner-1"></span>
 
-{{ events }}
+{{ eventSource }}
 <script type="text/javascript">
       // Your Client ID can be retrieved from your project in the Google
       // Developer Console, https://console.developers.google.com
@@ -121,3 +121,7 @@
 
 
 
+<calendar  ng-model="currentDate" calendar-mode="mode" event-source="eventSource"
+                          range-changed="reloadSource(startTime, endTime)"
+                          event-selected="onEventSelected(event)"
+                          time-selected="onTimeSelected(selectedTime)"></calendar>

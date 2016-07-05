@@ -22,10 +22,8 @@
 //= require ng-token-auth/dist/ng-token-auth
 //= require ng-file-upload/ng-file-upload-all.min
 //= require angular-sanitize/angular-sanitize
-//= require moment/min/moment.min
-//= require angular-ui-calendar/src/calendar.js
-//= require fullcalendar/dist/fullcalendar.js
-//= require fullcalendar/dist/gcal.js
+//= require bootstrap/dist/js/bootstrap
+//= require ng-responsive-calendar/dist/js/calendar-tpls.js
 //= require spin.js/spin
 //= require angular-spinner/angular-spinner
 //= require ap.fotorama/ap.fotorama.js

@@ -11,8 +11,17 @@ angular.module('lessons').controller('TeacherAreaController', [
   'usSpinnerService'
   ( $scope, $rootScope, $state, RESOURCES, USER, alertify, COMMS, usSpinnerService ) ->
     console.log "TeacherAreaController"
-    $scope.events = []
+    $scope.eventSource = []
     usSpinnerService.spin('spinner-1')
+
+    format_events = ( events ) ->
+      for event in events
+        $scope.eventSource.push
+          title: event.summary
+          startTime: event.start.dateTime
+          endTime: event.end.dateTime
+          # allDay: true
+      $scope.$apply()
 
     $scope.uiConfig = calendar:
       height: 450
@@ -43,7 +52,7 @@ angular.module('lessons').controller('TeacherAreaController', [
         console.log resp
         events = resp.items
         # events = resp.items
-
+        format_events( events )
         
         appendPre 'Upcoming events:'
         if events.length > 0
@@ -63,8 +72,74 @@ angular.module('lessons').controller('TeacherAreaController', [
         
       )
 
+    # createRandomEvents = ->
+    #   events = []
+    #   i = 0
+    #   while i < 50
+    #     date = new Date
+    #     eventType = Math.floor(Math.random() * 2)
+    #     startDay = Math.floor(Math.random() * 90) - 45
+    #     endDay = Math.floor(Math.random() * 2) + startDay
+    #     startTime = undefined
+    #     endTime = undefined
+    #     if eventType == 0
+    #       startTime = new Date(Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate() + startDay))
+    #       if endDay == startDay
+    #         endDay += 1
+    #       endTime = new Date(Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate() + endDay))
+    #       events.push
+    #         title: 'All Day - ' + i
+    #         startTime: startTime
+    #         endTime: endTime
+    #         allDay: true
+    #       console.log events
+    #     else
+    #       startMinute = Math.floor(Math.random() * 24 * 60)
+    #       endMinute = Math.floor(Math.random() * 180) + startMinute
+    #       startTime = new Date(date.getFullYear(), date.getMonth(), date.getDate() + startDay, 0, date.getMinutes() + startMinute)
+    #       endTime = new Date(date.getFullYear(), date.getMonth(), date.getDate() + endDay, 0, date.getMinutes() + endMinute)
+    #       events.push
+    #         title: 'Event - ' + i
+    #         startTime: startTime
+    #         endTime: endTime
+    #         allDay: false
+    #     i += 1
+    #   events
+
     
 
+    $scope.changeMode = (mode) ->
+      $scope.mode = mode
+      return
+
+    $scope.today = ->
+      $scope.currentDate = new Date
+      return
+
+    $scope.isToday = ->
+      today = new Date
+      currentCalendarDate = new Date($scope.currentDate)
+      today.setHours 0, 0, 0, 0
+      currentCalendarDate.setHours 0, 0, 0, 0
+      today.getTime() == currentCalendarDate.getTime()
+
+    $scope.loadEvents = ->
+      $scope.eventSource = createRandomEvents()
+      
+      return
+
+    $scope.onEventSelected = (event) ->
+      $scope.event = event
+      return
+
+    $scope.onTimeSelected = (selectedTime) ->
+      console.log 'Selected time: ' + selectedTime
+      return
+
+    return
+
+    
+    
       
 ])
 
