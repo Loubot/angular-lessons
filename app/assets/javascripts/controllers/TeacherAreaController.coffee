@@ -43,9 +43,14 @@ angular.module('lessons').controller('TeacherAreaController', [
       gapi.client.load('calendar', 'v3', calendar_loaded)
 
     window.handleAuthResult = ( auth ) ->
-      console.log !( auth == false && !auth.error)
-      $scope.show_auth_button = !( auth == true && !auth.error)
-      $scope.$apply()
+      if ( auth? and !auth.error? )
+        $scope.show_auth_button = false
+        $scope.$apply()
+        init()
+      else
+
+        $scope.show_auth_button = true
+        $scope.$apply()
     
 
     calendar_loaded = ->

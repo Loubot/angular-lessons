@@ -132,8 +132,10 @@
       </md-card-title-media>
     </md-card-title>
     <md-card-actions layout="row" layout-align="end center">
-      <md-button>Action 1</md-button>
-      <md-button>Action 2</md-button>
+      <md-button  ng-if="show_auth_button" aria-label="google" onclick="handleAuthClick(event)">
+        <%= image_tag('google_sign_in.png')  %>
+      </md-button>
+      <!-- <md-button>Action 2</md-button> -->
     </md-card-actions>
   </md-card>
 
@@ -143,33 +145,9 @@
 <div id="authorize-div" ng-if="show_auth_button" style="display:inline;">
   <span>Authorize access to Google Calendar API</span>
   <!--Button for the user to click to initiate auth sequence -->
-  <button id="authorize-button" onclick="handleAuthClick(event)">
-    Authorize
-  </button>
+  <a href="" id="authorize-button" onclick="handleAuthClick(event)">
+    
+  </a>
 </div>
 
-<meta name="google-signin-client_id" content="'25647890980-aachcueqqsk0or6qm49hi1e23vvvluqd.apps.googleusercontent.com';">
-
-
-<div id="my-signin2"></div>
-  <script>
-    function onSuccess(googleUser) {
-      console.log('Logged in as: ' + googleUser.getBasicProfile().getName());
-    }
-    function onFailure(error) {
-      console.log(error);
-    }
-    function renderButton() {
-      gapi.signin2.render('my-signin2', {
-        'scope': 'profile email',
-        'width': 240,
-        'height': 50,
-        'longtitle': true,
-        'theme': 'dark',
-        'onsuccess': onSuccess,
-        'onfailure': onFailure
-      });
-    }
-  </script>
-
-  <script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script>
+{{ show_auth_button }}
