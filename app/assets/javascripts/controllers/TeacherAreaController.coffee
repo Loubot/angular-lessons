@@ -4,12 +4,13 @@ angular.module('lessons').controller('TeacherAreaController', [
   '$scope'
   '$rootScope'
   '$state'
+  '$stateParams'
   'RESOURCES'
   'USER'
   'alertify'
   'COMMS'
   'usSpinnerService'
-  ( $scope, $rootScope, $state, RESOURCES, USER, alertify, COMMS, usSpinnerService ) ->
+  ( $scope, $rootScope, $state, $stateParams, RESOURCES, USER, alertify, COMMS, usSpinnerService ) ->
     console.log "TeacherAreaController"
     
 
@@ -25,7 +26,11 @@ angular.module('lessons').controller('TeacherAreaController', [
 
     USER.get_user().then( ( user ) ->
       console.log "got user"
-
+      console.log $rootScope.USER.id != parseInt( $stateParams.id )
+      if $rootScope.USER.id != parseInt( $stateParams.id )
+        $state.go 'welcome'
+        alertify.error "You are not allowed to view this"
+        return false
     ).catch( ( err ) ->
       alertify.error "Not authorised"
       $rootScope.USER = null
@@ -108,7 +113,7 @@ angular.module('lessons').controller('TeacherAreaController', [
 
     handleAuthResult = ( auth ) ->
       console.log "auth"
-      console.log auth
+      # console.log auth
       if ( auth? and !auth.error? )
         $scope.show_auth_button = false
         

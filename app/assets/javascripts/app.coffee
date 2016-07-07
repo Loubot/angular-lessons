@@ -36,6 +36,11 @@ angular.module('lessons').config ($stateProvider, $urlRouterProvider) ->
     templateUrl: "user/teacher_area.html"
     controller: "TeacherAreaController"
 
+  $stateProvider.state 'teacher_location',
+    url: '/teacher-location/:id'
+    templateUrl: "user/teacher_location.html"
+    controller: "TeacherLocationController"
+
   $stateProvider.state 'how_it_works',
     url: '/how-it-works'
     templateUrl: 'static/how_it_works.html'
@@ -64,7 +69,7 @@ angular.module('lessons').service 'USER', ( $http, $rootScope, RESOURCES, $q, us
         #   email: 
       ).then( ( result ) ->
         # console.log "get user"
-        console.log result.data
+        # console.log result.data
         $rootScope.USER = result.data
         resolve result.data
       ).catch( ( err_result ) ->

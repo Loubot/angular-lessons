@@ -33,6 +33,7 @@
 //= require controllers/NavController
 //= require controllers/TeacherController
 //= require controllers/TeacherAreaController
+//= require controllers/TeacherLocationController
 //= require angular-rails-templates
 // Templates in app/assets/templates (but see step 5)
 //= require_tree ../templates
