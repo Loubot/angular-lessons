@@ -7,7 +7,8 @@ angular.module('lessons').controller( "TeacherLocationController" , [
   '$stateParams'
   "COMMS"
   "USER"
+  "NgMap"
 
-  ( $scope, $rootScope, $state, $stateParams, COMMS, USER ) ->
+  ( $scope, $rootScope, $state, $stateParams, COMMS, USER, NgMap ) ->
     console.log "TeacherLocationController"
 ])

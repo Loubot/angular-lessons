@@ -10,6 +10,7 @@ angular.module('lessons', [
   'ap.fotorama'
   'ngFileUpload'
   'ui.rCalendar'
+  'ngMap'
 ])
 
 angular.module('lessons').constant "RESOURCES", do ->
