@@ -25,6 +25,7 @@ angular.module('lessons').controller('TeacherAreaController', [
 
     USER.get_user().then( ( user ) ->
       console.log "got user"
+
     ).catch( ( err ) ->
       alertify.error "Not authorised"
       $rootScope.USER = null
@@ -35,18 +36,19 @@ angular.module('lessons').controller('TeacherAreaController', [
 
 
     format_events = ( events ) ->
-      bla = []
-      for event in events
-        bla.push
-          title: event.summary
-          startTime: new Date( event.start.dateTime )
-          endTime: new Date ( event.end.dateTime )
-          # allDay: true
+      if events? && events.length > 0
+        bla = []
+        for event in events
+          bla.push
+            title: event.summary
+            startTime: new Date( event.start.dateTime )
+            endTime: new Date ( event.end.dateTime )
+            # allDay: true
 
-      $scope.eventSource = bla
-      usSpinnerService.stop('spinner-1')
-      alertify.success "Loaded #{ events.length } events"
-      $scope.$apply()
+        $scope.eventSource = bla
+        usSpinnerService.stop('spinner-1')
+        alertify.success "Loaded #{ events.length } events"
+        $scope.$apply()
 
 
 
@@ -61,17 +63,24 @@ angular.module('lessons').controller('TeacherAreaController', [
       gapi.client.load('oauth2', 'v2', oauth2_loaded)
 
     calendar_loaded = ->
-      if $rootScope.USER.calendar_id?
+      if !$rootScope.USER.calendar_id or $rootScope.USER.calendar_id == ""  
+        usSpinnerService.stop('spinner-1')
+      else
         gapi.client.calendar.events.list(
           'calendarId': "#{ $rootScope.USER.calendar_id }"
         ).execute( ( resp ) ->
-          console.log "List events"
-          format_events( resp.items )
+          console.log "Calendar list"
           console.log resp
-          alertify.success "Got events"
-          usSpinnerService.stop('spinner-1')
-        )
+          if resp.error?  
+            alertify.error "Couldn't load your calendar"
+          else
 
+            console.log "List events"
+            format_events( resp.items )
+            alertify.success "Got events"
+          usSpinnerService.stop('spinner-1')  
+        )
+        
       # gapi.client.calendar.calendarList.list().execute( ( resp ) ->
       #   console.log "Calendar list"
       #   console.log resp
@@ -146,8 +155,9 @@ angular.module('lessons').controller('TeacherAreaController', [
         COMMS.PUT(
           "/teacher/#{ $rootScope.USER.id }"
           calendar_id: resp.result.id
-        ).then( ( user ) ->
-          console.log user
+        ).then( ( resp ) ->
+          console.log resp
+          $rootScope.USER = resp.data.teacher
           alertify.success "Updated calendar id"
         ).catch( ( err ) ->
           console.log err

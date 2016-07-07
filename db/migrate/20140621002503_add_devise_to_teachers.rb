@@ -40,7 +40,7 @@ class AddDeviseToTeachers < ActiveRecord::Migration
       t.string :email
       t.string :first_name
       t.string :last_name
-      t.string :calendar_id, default: :null, null: false
+      t.string :calendar_id, default: nil
       t.text :overview
 
       ## Tokens

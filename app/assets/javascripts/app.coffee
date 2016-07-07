@@ -64,7 +64,7 @@ angular.module('lessons').service 'USER', ( $http, $rootScope, RESOURCES, $q, us
         #   email: 
       ).then( ( result ) ->
         # console.log "get user"
-        # console.log result.data
+        console.log result.data
         $rootScope.USER = result.data
         resolve result.data
       ).catch( ( err_result ) ->
