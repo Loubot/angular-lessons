@@ -1,20 +1,47 @@
-<!-- <div map-lazy-load="https://maps.google.com/maps/api/js?key=AIzaSyChcs8vpn-yfbfT9hIQ8x0i1cZeyGf5eFo">
-  <ng-map center="41,-87" zoom="3"></ng-map>
-</div> -->
 
 
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBpOd04XM28WtAk1LcJyhlQzNW6P6OT2Q0&callback=initMap"
-    async defer></script>
 
-<div id="map" style="height:400px;"></div>
+<md-content class="md-padding" layout-xs="column" layout="column" >
+  <md-card>
+    <md-card-header>
+      <md-card-avatar>
+        <img class="md-user-avatar" src="avatar.png">
+      </md-card-avatar>
+      <md-card-header-text>
+        <span class="md-title">Title</span>
+        <span class="md-subhead">Sub header</span>
+      </md-card-header-text>
+    </md-card-header>
+    <img ng-src="card-image.png" class="md-card-image" alt="image caption">
+    <md-card-title>
+      <md-card-title-text>
+        <span class="md-headline">Card headline</span>
+        <span class="md-subhead">Card subheader</span>
+      </md-card-title-text>
+    </md-card-title>
+    <md-card-actions layout="row" layout-align="start center">
+      <md-button>Action 1</md-button>
+      <md-button>Action 2</md-button>
+      <md-card-icon-actions>
+        <md-button class="md-icon-button" aria-label="icon">
+          <md-icon md-svg-icon="icon"></md-icon>
+        </md-button>
+      </md-card-icon-actions>
+    </md-card-actions>
+    <md-card-content >
+      <div layout="row" layout-align="end center" flex>
+        <div  flex="75">
+          <div map-lazy-load="https://maps.google.com/maps/api/js?key=AIzaSyBpOd04XM28WtAk1LcJyhlQzNW6P6OT2Q0">
+            <ng-map center="53.416185, -7.950045" zoom="6"></ng-map>
+          </div>
+        </div>
+      </div>
+      
+    </md-card-content>
+  </md-card>
 
-<script type="text/javascript">
+  
 
-  var map;
-      function initMap() {
-        map = new google.maps.Map(document.getElementById('map'), {
-          center: {lat: -34.397, lng: 150.644},
-          zoom: 8
-        });
-      }
-</script>
+</md-content>
+
+
