@@ -35,6 +35,6 @@ class TeacherController < ApplicationController
     
 
     def teacher_params
-      params.permit( :profile, :id, :overview, :experience )
+      params.permit( :profile, :id, :overview, :experience, :calendar_id )
     end
 end

@@ -21,7 +21,7 @@ angular.module('lessons').controller('TeacherController', [
     
     $scope.upload = ( file ) ->
       Upload.upload(
-        url: "#{ RESOURCES.DOMAIN }/teacher/pic"
+        url: "#{ RESOURCES.DOMAIN }/teacher/#{ $rootScope.USER.id }/pic"
         file: $scope.file
         avatar: $scope.file
         data:
@@ -114,7 +114,7 @@ angular.module('lessons').controller('TeacherController', [
 
     $scope.select_subject = ( subject )->
       COMMS.POST(
-        "/teacher/add-subject"
+        "/teacher/#{ $rootScope.USER.id }/add-subject"
         subject: subject, teacher: $rootScope.USER
       ).then( ( resp ) ->
         console.log resp
@@ -144,7 +144,7 @@ angular.module('lessons').controller('TeacherController', [
 
     $scope.add_experience = ->
       COMMS.POST(
-        "/experience"
+        "/teacher/#{ $rootScope.USER.id }/experience"
         $scope.experience
       ).then( ( resp ) ->
         console.log resp

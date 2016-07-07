@@ -21,7 +21,9 @@
 //= require angular-cookie/angular-cookie
 //= require ng-token-auth/dist/ng-token-auth
 //= require ng-file-upload/ng-file-upload-all.min
-//= require angular-google-gapi/dist/angular-google-gapi.min.js
+//= require angular-sanitize/angular-sanitize
+//= require bootstrap/dist/js/bootstrap
+//= require ng-responsive-calendar/dist/js/calendar-tpls.js
 //= require spin.js/spin
 //= require angular-spinner/angular-spinner
 //= require ap.fotorama/ap.fotorama.js
@@ -31,6 +33,7 @@
 //= require controllers/NavController
 //= require controllers/TeacherController
 //= require controllers/TeacherAreaController
+//= require controllers/TeacherLocationController
 //= require angular-rails-templates
 // Templates in app/assets/templates (but see step 5)
 //= require_tree ../templates

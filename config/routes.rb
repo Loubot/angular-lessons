@@ -14,16 +14,18 @@ Rails.application.routes.draw do
     get      'subjects'                   => "subject#index"
     resources :teacher, only: [ :update ] do
       
-      post    'teacher/add-subject'       => 'subject#add_subject'
+      post    'add-subject'               => 'subject#add_subject'
 
-      post    'teacher/pic'               => "photos#create"
-      delete  'teacher/remove-subject'    => 'subject#remove_subject'
+      post    'pic'                       => "photos#create"
+      delete  'remove-subject'            => 'subject#remove_subject'
 
       resources :experience,          only: [ :create, :destroy ]
       resources :qualification,       only: [ :create, :destroy ]
 
     end
   end
+
+  get 'oauth2/callback' => 'static#welcome'
   as :teacher do
     # Define routes for Teacher within this block.
 
