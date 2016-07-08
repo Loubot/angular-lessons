@@ -7,11 +7,12 @@ angular.module('lessons').controller( "TeacherLocationController" , [
   '$stateParams'
   "COMMS"
   "USER"
-  "NgMap"
+ 
 
-  ( $scope, $rootScope, $state, $stateParams, COMMS, USER, NgMap ) ->
+  ( $scope, $rootScope, $state, $stateParams, COMMS, USER ) ->
     console.log "TeacherLocationController"
 
-    window.initMap = ->
+    
       
+
 ])

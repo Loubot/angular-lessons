@@ -24,7 +24,6 @@
 //= require angular-sanitize/angular-sanitize
 //= require bootstrap/dist/js/bootstrap
 //= require ng-responsive-calendar/dist/js/calendar-tpls.js
-//= require ngmap/build/scripts/ng-map
 //= require spin.js/spin
 //= require angular-spinner/angular-spinner
 //= require ap.fotorama/ap.fotorama.js
