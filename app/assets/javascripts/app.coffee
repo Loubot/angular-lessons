@@ -10,12 +10,21 @@ angular.module('lessons', [
   'ap.fotorama'
   'ngFileUpload'
   'ui.rCalendar'
+  'uiGmapgoogle-maps'
+
 ])
 
 angular.module('lessons').constant "RESOURCES", do ->
   url = window.location.origin
   # console.log "Domain #{ url + '/api' }"
   DOMAIN: url + '/api'
+
+
+angular.module('lessons').config (uiGmapGoogleMapApiProvider) ->
+  uiGmapGoogleMapApiProvider.configure
+    key: 'AIzaSyBpOd04XM28WtAk1LcJyhlQzNW6P6OT2Q0'
+    v: '3.23'
+    libraries: 'weather,geometry,visualization,places'
 
 
 angular.module('lessons').config ($stateProvider, $urlRouterProvider) ->

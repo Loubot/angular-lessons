@@ -12,6 +12,7 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require lodash/dist/lodash
 //= require angular/angular
 //= require alertify.js/dist/js/ngAlertify
 //= require angular-ui-router/release/angular-ui-router 
@@ -24,6 +25,8 @@
 //= require angular-sanitize/angular-sanitize
 //= require bootstrap/dist/js/bootstrap
 //= require ng-responsive-calendar/dist/js/calendar-tpls.js
+//= require angular-simple-logger/dist/angular-simple-logger
+//= require angular-google-maps/dist/angular-google-maps
 //= require spin.js/spin
 //= require angular-spinner/angular-spinner
 //= require ap.fotorama/ap.fotorama.js
