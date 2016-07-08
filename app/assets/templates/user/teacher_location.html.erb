@@ -1,7 +1,7 @@
 
-<md-content>
-  <div flex-xs flex-gt-xs="50" layout="column">
-    <md-card>
+<md-content layout="row" flex="auto">
+  <div flex-xs flex-gt-xs="50" >
+    <md-card flex>
       <%= image_tag 'location_search.png', class: 'percent_10_w' %>
       <md-card-title>
         <md-card-title-text>
@@ -23,6 +23,12 @@
       <md-card-content>
         <ui-gmap-google-map center='map.center' zoom='map.zoom'></ui-gmap-google-map>
       </md-card-content>
+    </md-card>
+  </div>
+
+  <div flex-xs flex-gt-xs="50">
+    <md-card flex>
+
     </md-card>
   </div>
 </md-content>
