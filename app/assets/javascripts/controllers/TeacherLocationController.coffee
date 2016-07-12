@@ -30,6 +30,7 @@ angular.module('lessons').controller( "TeacherLocationController" , [
             coords: 
               latitude: lat
               longitude: lon
+          $scope.map.markers = []
           $scope.map.markers.push marker
           console.log $scope.map.markers
           $scope.$apply()
