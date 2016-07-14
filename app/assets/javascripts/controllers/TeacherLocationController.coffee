@@ -12,21 +12,58 @@ angular.module('lessons').controller( "TeacherLocationController" , [
   'alertify'
   '$mdBottomSheet' 
   '$mdToast'
-  ( $scope, $rootScope, $state, $stateParams, COMMS, USER, uiGmapGoogleMapApi, uiGmapIsReady, alertify, $mdBottomSheet, $mdToast ) ->
+  '$q'
+  ( $scope, $rootScope, $state, $stateParams, COMMS, USER, uiGmapGoogleMapApi, uiGmapIsReady, alertify, $mdBottomSheet, $mdToast, $q ) ->
     console.log "TeacherLocationController"
     $scope.addresses = null
 
-    USER.get_user().then( ( resp ) ->
-      $rootScope.USER = resp
-    )
-
     $scope.map = 
-      center: 
-        latitude: 53.416185, longitude: -7.950045
-      zoom: 8
-      markers: []
+      center:
+        latitude: 53.416185
+        longitude: -7.950045
 
-      events:
+    $scope.searchbox = 
+      template: 'map/search_template.html'
+      events: places_changed: (searchBox) ->
+        loc = searchBox.getPlaces()[0].geometry.location
+        # console.log loc.lat()
+        $scope.map.center.latitude = loc.lat()
+        $scope.map.center.longitude = loc.lng()
+        $scope.map.zoom = 15
+        # console.log loc
+
+
+
+    begin_map = -> 
+      if $rootScope.associations.location != null
+        console.log 'yep'
+        $scope.map = 
+          center:  
+
+            latitude:   $rootScope.associations.location.latitude
+            longitude:  $rootScope.associations.location.longitude
+          
+          zoom: 15
+          markers: [
+            marker = 
+              id: Date.now()
+              coords: 
+                latitude:   $rootScope.associations.location.latitude
+                longitude:  $rootScope.associations.location.longitude
+          ]
+          
+        
+        
+      else
+        $scope.map = 
+          center:
+            latitude: 53.416185
+            longitude: -7.950045
+          zoom: 8
+          markers: []
+      
+
+      $scope.map.events =
         click: ( map, eventName, originalEventArgs ) ->
           e = originalEventArgs[0]
           lat = e.latLng.lat()
@@ -50,29 +87,41 @@ angular.module('lessons').controller( "TeacherLocationController" , [
           )
 
 
-    $scope.searchbox = 
-      template: 'map/search_template.html'
-      events: places_changed: (searchBox) ->
-        loc = searchBox.getPlaces()[0].geometry.location
-        # console.log loc.lat()
-        $scope.map.center.latitude = loc.lat()
-        $scope.map.center.longitude = loc.lng()
-        $scope.map.zoom = 15
-        # console.log loc
-    uiGmapGoogleMapApi.then( ( maps ) ->
-      console.log maps
-    )
+      
 
-    uiGmapIsReady.promise(1).then( ( insts ) ->
-      for inst in insts
-        map = inst.map
-        uuid = map.uiGmap_id
-        mapInstanceNumber = inst.instance # Starts at 1.
-      console.log map
+    if !$rootScope.USER
+
+      $q.all([
+        USER.get_user()
+        uiGmapGoogleMapApi
+        
+      ]).then( ( resp ) ->
+        console.log "promise"
+        console.log resp
+        begin_map()
+      )
+      
+      
+      
+    else
+      begin_map()
+
+    
+
+    # uiGmapGoogleMapApi.then( ( maps ) ->
+    #   console.log maps
+    # )
+
+    # uiGmapIsReady.promise(1).then( ( insts ) ->
+    #   for inst in insts
+    #     map = inst.map
+    #     uuid = map.uiGmap_id
+    #     mapInstanceNumber = inst.instance # Starts at 1.
+    #   console.log map
 
 
         
-    )
+    # )
 
     ################################# Address update ############################################################
 
@@ -92,6 +141,7 @@ angular.module('lessons').controller( "TeacherLocationController" , [
       ).then( ( resp ) ->
         console.log resp
         alertify.success "Location updated"
+        $rootScope.associations.location = resp.data.location
       ).catch( ( err ) ->
         console.log err
         alertify.error err.data.error[0]
@@ -121,6 +171,7 @@ angular.module('lessons').controller( "TeacherLocationController" , [
       ).then( ( resp ) ->
         console.log resp
         alertify.success "Location updated ok"
+        $rootScope.associations.location = resp.data.location
         $mdBottomSheet.hide()
       ).catch( ( err ) ->
         console.log err

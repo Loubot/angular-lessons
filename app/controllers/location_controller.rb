@@ -2,7 +2,7 @@ class LocationController < ApplicationController
   before_action :authenticate_teacher!
 
   def create
-    teacher = Teacher.find( current_teacher.id )
+    teacher = Teacher.includes(:location).find( current_teacher.id )
     if teacher.location.nil?
       location = Location.create( location_params )
       if location.save
@@ -17,7 +17,7 @@ class LocationController < ApplicationController
       location = teacher.location.update_attributes( location_params )
       p "Location updated"
       pp location
-      render json: { location: location }
+      render json: { location: teacher.location }
     end
   end
 

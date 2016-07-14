@@ -3,7 +3,16 @@ class TeacherController < ApplicationController
   require 'pp'
   def get
     
-    render json: current_teacher
+    @teacher = Teacher.includes( :photos, :subjects, :experiences, :qualifications, :location ).find( current_teacher.id )
+    pp @teacher
+    render json: { 
+                    teacher: @teacher, 
+                    photos: @teacher.photos, 
+                    subjects: @teacher.subjects, 
+                    experiences: @teacher.experiences,
+                    qualifications: @teacher.qualifications,
+                    location: @teacher.location
+                  }
   end
 
   def update
@@ -13,14 +22,15 @@ class TeacherController < ApplicationController
   end
 
   def profile
-    @teacher = Teacher.includes( :photos, :subjects, :experiences, :qualifications ).find( params[:id] )
+    @teacher = Teacher.includes( :photos, :subjects, :experiences, :qualifications, :location ).find( params[:id] )
     pp @teacher
     render json: { 
                     teacher: @teacher, 
                     photos: @teacher.photos, 
                     subjects: @teacher.subjects, 
                     experiences: @teacher.experiences,
-                    qualifications: @teacher.qualifications
+                    qualifications: @teacher.qualifications,
+                    location: @teacher.location
                   }
 
   end

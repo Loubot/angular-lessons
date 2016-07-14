@@ -68,7 +68,7 @@ angular.module('lessons').config ( $mdThemingProvider ) ->
 
 angular.module('lessons').service 'USER', ( $http, $rootScope, RESOURCES, $q ) ->
   
-  get_user: ->
+  get_user: -> # get user and all associations
     $q ( resolve, reject ) ->
       $http(
         method: 'GET'
@@ -79,7 +79,10 @@ angular.module('lessons').service 'USER', ( $http, $rootScope, RESOURCES, $q ) -
       ).then( ( result ) ->
         # console.log "get user"
         # console.log result.data
-        $rootScope.USER = result.data
+        $rootScope.USER = result.data.teacher
+        delete result.data.teacher
+        $rootScope.associations = result.data
+        # console.log $rootScope.associations
         resolve result.data
       ).catch( ( err_result ) ->
         
