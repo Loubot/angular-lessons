@@ -1,11 +1,10 @@
-<span us-spinner spinner-key="spinner-1"></span>
 <md-content layout="row" flex="auto">
   <div flex-xs flex-gt-xs="75" >
     <md-card flex>
       <%= image_tag 'location_search.png', class: 'percent_10_w' %>
       <md-card-title>
         <md-card-title-text>
-          <span class="md-headline">In-card mixed actions</span>
+          <span class="md-headline">Search and click on your location</span>
         </md-card-title-text>
       </md-card-title>
       <md-card-actions layout="row" layout-align="start center">
@@ -31,9 +30,9 @@
   </div>
 
   <div flex-xs flex-gt-xs="50">
-    <md-card flex>
-
-    </md-card>
+    <md-content>
+      <p ng-repeat="address in addresses">{{ address.formatted_address }}</p>
+    </md-content>
   </div>
 </md-content>
 

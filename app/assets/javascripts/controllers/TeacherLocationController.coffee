@@ -7,12 +7,10 @@ angular.module('lessons').controller( "TeacherLocationController" , [
   '$stateParams'
   "COMMS"
   "USER"
-  "usSpinnerService"
   "uiGmapGoogleMapApi"
   "uiGmapIsReady"
-  ( $scope, $rootScope, $state, $stateParams, COMMS, USER, usSpinnerService, uiGmapGoogleMapApi, uiGmapIsReady ) ->
+  ( $scope, $rootScope, $state, $stateParams, COMMS, USER, uiGmapGoogleMapApi, uiGmapIsReady ) ->
     console.log "TeacherLocationController"
-    usSpinnerService.spin('spinner-1')
 
     $scope.map = 
       center: 
@@ -34,10 +32,17 @@ angular.module('lessons').controller( "TeacherLocationController" , [
           $scope.map.markers.push marker
           console.log $scope.map.markers
           $scope.$apply()
+          geocoder = new google.maps.Geocoder
+          geocoder.geocode( 'location': { lat: e.latLng.lat(), lng: e.latLng.lng() }, ( results, status ) ->
+            if results[1]
+              console.log results
+              $scope.addresses = results
+              console.log status
+          )
 
 
     $scope.searchbox = 
-      template: 'search_template.html'
+      template: 'map/search_template.html'
       events: places_changed: (searchBox) ->
         loc = searchBox.getPlaces()[0].geometry.location
         # console.log loc.lat()
@@ -56,23 +61,7 @@ angular.module('lessons').controller( "TeacherLocationController" , [
         mapInstanceNumber = inst.instance # Starts at 1.
       console.log map
 
-      google.maps.event.addListener( map, 'click', ( e ) ->
-        # console.log "#{ e.latLng.lat() } #{ e.latLng.lng() }"
-        # $scope.map.markers = []
-        # marker = 
-        #   id: Date.now()
-        #   coords:
-        #     latitude: e.latLng.lat()
-        #     longitude: e.latLng.lng()
 
-        # $scope.map.markers.push marker
-        # console.log $scope.markers
-        # $scope.$apply()
-      )
-
-
-
-      usSpinnerService.stop('spinner-1')
         
     )
        

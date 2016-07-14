@@ -5,13 +5,12 @@ angular.module('lessons', [
   'ui.router'
   'templates'
   'ngMaterial'
-  'ng-token-auth'
-  'angularSpinner'  
+  'ng-token-auth'  
   'ap.fotorama'
   'ngFileUpload'
   'ui.rCalendar'
   'uiGmapgoogle-maps'
-
+  'angular-loading-bar'
 ])
 
 angular.module('lessons').constant "RESOURCES", do ->
@@ -66,8 +65,8 @@ angular.module('lessons').config ( $mdThemingProvider ) ->
     .accentPalette('blue-grey')
 
 
-angular.module('lessons').service 'USER', ( $http, $rootScope, RESOURCES, $q, usSpinnerService ) ->
-  usSpinnerService.spin('spinner-1')
+angular.module('lessons').service 'USER', ( $http, $rootScope, RESOURCES, $q ) ->
+  
   get_user: ->
     $q ( resolve, reject ) ->
       $http(
@@ -87,8 +86,7 @@ angular.module('lessons').service 'USER', ( $http, $rootScope, RESOURCES, $q, us
         reject err_result
       )
 
-angular.module('lessons').service 'AUTH', ( $http, $rootScope, RESOURCES, $q, $auth, alertify, usSpinnerService ) ->
-  usSpinnerService.spin('spinner-1')
+angular.module('lessons').service 'AUTH', ( $http, $rootScope, RESOURCES, $q, $auth, alertify ) ->
 
   signin: ( auth_hash ) ->
     $q ( resolve, reject ) ->
@@ -129,11 +127,10 @@ angular.module('lessons').service 'AUTH', ( $http, $rootScope, RESOURCES, $q, $a
         )
 
 
-angular.module('lessons').service 'COMMS', ( $http, $state, RESOURCES, $rootScope, $q, usSpinnerService ) ->
+angular.module('lessons').service 'COMMS', ( $http, $state, RESOURCES, $rootScope, $q ) ->
   console.log "comms service"
   
   POST: ( url, data ) ->
-    usSpinnerService.spin('spinner-1')
     $q ( resolve, reject ) ->
       $http(
         method: 'POST'
@@ -141,17 +138,13 @@ angular.module('lessons').service 'COMMS', ( $http, $state, RESOURCES, $rootScop
         headers: { "Content-Type": "application/json" }
         data: data
       ).then( ( result ) ->
-        usSpinnerService.stop('spinner-1')
-        if result.user != undefined
           $rootScope.USER = result.user
         resolve result
       ).catch( ( err_result ) ->
-        usSpinnerService.stop('spinner-1')
         reject err_result
       )
 
   PUT: ( url, data ) ->
-      usSpinnerService.spin('spinner-1')
       $q ( resolve, reject ) ->
         $http(
           method: 'PUT'
@@ -159,17 +152,14 @@ angular.module('lessons').service 'COMMS', ( $http, $state, RESOURCES, $rootScop
           headers: { "Content-Type": "application/json" }
           data: data
         ).then( ( result ) ->
-          usSpinnerService.stop('spinner-1')
           if result.user != undefined
             $rootScope.USER = result.user
           resolve result
         ).catch( ( err_result ) ->
-          usSpinnerService.stop('spinner-1')
           reject err_result
         )
 
   GET: ( url, params ) ->
-    usSpinnerService.spin('spinner-1')
     $q ( resolve, reject ) ->
       $http(
         method: 'GET'
@@ -177,16 +167,13 @@ angular.module('lessons').service 'COMMS', ( $http, $state, RESOURCES, $rootScop
         url: "#{ RESOURCES.DOMAIN }#{ url }"
         params: params
       ).then( ( result ) ->
-        usSpinnerService.stop('spinner-1')
         
         resolve result
       ).catch( ( err_result ) ->
-        usSpinnerService.stop('spinner-1')
         reject err_result
       )
 
   DELETE: ( url, params ) ->
-    usSpinnerService.spin('spinner-1')
     $q ( resolve, reject ) ->
       $http(
         method: 'DELETE'
@@ -194,10 +181,8 @@ angular.module('lessons').service 'COMMS', ( $http, $state, RESOURCES, $rootScop
         url: "#{ RESOURCES.DOMAIN }#{ url }"
         data: params
       ).then( ( result ) ->
-        usSpinnerService.stop('spinner-1')
         
         resolve result
       ).catch( ( err_result ) ->
-        usSpinnerService.stop('spinner-1')
         reject err_result
       )
