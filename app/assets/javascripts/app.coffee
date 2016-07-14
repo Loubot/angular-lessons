@@ -11,6 +11,7 @@ angular.module('lessons', [
   'ui.rCalendar'
   'uiGmapgoogle-maps'
   'angular-loading-bar'
+  'ngAnimate'
 ])
 
 angular.module('lessons').constant "RESOURCES", do ->

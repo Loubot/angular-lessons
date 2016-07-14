@@ -30,8 +30,17 @@
   </div>
 
   <div flex-xs flex-gt-xs="50">
-    <md-content>
-      <p ng-repeat="address in addresses">{{ address.formatted_address }}</p>
+    <md-content  ng-show="addresses">
+      <md-list ng-cloak>
+        <md-subheader class="md-no-sticky">Select your address</md-subheader>
+        <div class="location_results ">
+          <md-list-item ng-repeat="address in addresses">
+            <p>{{ address.formatted_address }}</p>
+            <md-checkbox ng-model="address"> </md-checkbox>
+          </md-list-item>
+        </div>
+        
+      </md-list>
     </md-content>
   </div>
 </md-content>

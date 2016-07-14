@@ -38,6 +38,7 @@ angular.module('lessons').controller( "TeacherLocationController" , [
               console.log results
               $scope.addresses = results
               console.log status
+              $scope.$apply()
           )
 
 
