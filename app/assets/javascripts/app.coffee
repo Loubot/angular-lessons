@@ -139,6 +139,7 @@ angular.module('lessons').service 'COMMS', ( $http, $state, RESOURCES, $rootScop
         headers: { "Content-Type": "application/json" }
         data: data
       ).then( ( result ) ->
+        if result.user != undefined
           $rootScope.USER = result.user
         resolve result
       ).catch( ( err_result ) ->

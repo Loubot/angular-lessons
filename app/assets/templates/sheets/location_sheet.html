@@ -1,0 +1,12 @@
+{{ addresses }}
+<md-bottom-sheet class="md-grid margin_s_100" layout="column" ng-cloak>
+  <md-content class="md-no-momentum ">
+    <md-input-container md-no-float class="md-block">
+      <input ng-model="address" type="text" placeholder="Address" >
+      <md-icon style="display:inline-block;"><i class="material-icons">location_on</i></md-icon>
+    </md-input-container>
+    <md-input-container>
+      <md-button class="md-raised md-primary white_text" ng-click="manual_address(addresses)">Add address</md-button>
+    </md-input-container>
+  </md-content>
+</md-bottom-sheet>
