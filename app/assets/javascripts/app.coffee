@@ -9,7 +9,6 @@ angular.module('lessons', [
   'ap.fotorama'
   'ngFileUpload'
   'ui.rCalendar'
-  'uiGmapgoogle-maps'
   'angular-loading-bar'
   'ngAnimate'
 ])
@@ -20,11 +19,11 @@ angular.module('lessons').constant "RESOURCES", do ->
   DOMAIN: url + '/api'
 
 
-angular.module('lessons').config (uiGmapGoogleMapApiProvider) ->
-  uiGmapGoogleMapApiProvider.configure
-    key: 'AIzaSyBpOd04XM28WtAk1LcJyhlQzNW6P6OT2Q0'
-    v: '3.23'
-    libraries: 'places'
+# angular.module('lessons').config (uiGmapGoogleMapApiProvider) ->
+#   uiGmapGoogleMapApiProvider.configure
+#     key: 'AIzaSyBpOd04XM28WtAk1LcJyhlQzNW6P6OT2Q0'
+#     v: '3.23'
+#     libraries: 'places'
 
 
 angular.module('lessons').config ($stateProvider, $urlRouterProvider) ->

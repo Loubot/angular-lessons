@@ -26,7 +26,6 @@
 //= require bootstrap/dist/js/bootstrap
 //= require ng-responsive-calendar/dist/js/calendar-tpls.js
 //= require angular-simple-logger/dist/angular-simple-logger
-//= require angular-google-maps/dist/angular-google-maps
 //= require angular-loading-bar/src/loading-bar
 //= require ap.fotorama/ap.fotorama.js
 //= require app

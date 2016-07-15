@@ -1,3 +1,6 @@
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBpOd04XM28WtAk1LcJyhlQzNW6P6OT2Q0&callback=initMap"
+    async defer></script>
+<div id="map"></div>
 <md-content layout="row" flex="auto">
   <div flex-xs flex-gt-xs="75" >
     <md-card flex>
@@ -20,11 +23,8 @@
         <md-button>Action 2</md-button>
       </md-card-actions>
       <md-card-content>
-        <ui-gmap-google-map center='map.center' zoom='map.zoom' events="map.events">
-          <ui-gmap-search-box template="searchbox.template" events="searchbox.events"></ui-gmap-search-box>
-          <ui-gmap-marker ng-repeat="m in map.markers" coords="m.coords" icon="m.icon" idkey="m.id">
-          </ui-gmap-marker>
-        </ui-gmap-google-map>
+        
+
       </md-card-content>
     </md-card>
   </div>

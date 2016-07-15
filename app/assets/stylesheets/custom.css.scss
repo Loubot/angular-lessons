@@ -118,10 +118,9 @@ html, body{
   width: 400px;
 }
 
-.angular-google-map-container { height: 400px; }
-
-.controls{
-  width: 70%;
+#map { 
+  height: 400px; 
+  width: 100%;
 }
 
 #loading-bar {
