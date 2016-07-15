@@ -5,16 +5,16 @@
 <div id="map"></div>
 
 
-<md-content layout="row" flex="auto" class="map_results">
+<md-content layout="row" layout-margin flex="auto" class="map_results">
   <div flex-xs flex-gt-xs="75" >
     <md-card flex>
       <%= image_tag 'location_search.png', class: 'percent_10_w' %>
       <md-card-title>
         <md-card-title-text>
-          <span class="md-headline">Search and click on your location</span>
+          <span class="md-headline">{{ associations.location.address || "Awaiting your address" }}</span>
         </md-card-title-text>
       </md-card-title>
-      <md-card-actions layout="row" layout-align="start center">
+      <!-- <md-card-actions layout="row" layout-align="start center">
         <md-card-icon-actions>
           <md-button class="md-icon-button" aria-label="Favorite">
             s
@@ -25,7 +25,7 @@
         </md-card-icon-actions>
         <md-button>Action 1</md-button>
         <md-button>Action 2</md-button>
-      </md-card-actions>
+      </md-card-actions> -->
       <md-card-content>
         
 
