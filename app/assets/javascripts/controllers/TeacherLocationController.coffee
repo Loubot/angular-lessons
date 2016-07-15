@@ -21,12 +21,17 @@ angular.module('lessons').controller( "TeacherLocationController" , [
           lat: 53.416185
           lng: -7.950045
         zoom: 8
+        mapTypeId: google.maps.MapTypeId.ROADMAP
       })
 
       $scope.map.addListener( 'click', ( position ) ->
         console.log position.latLng.lat()
         console.log position.latLng.lng()
       )
+
+      input = document.getElementById('pac-input')
+      searchBox = new google.maps.places.SearchBox(input)
+      $scope.map.controls[google.maps.ControlPosition.TOP_LEFT].push(input)
     ################################# Address update ############################################################
 
     $scope.updateSelection = (position, addresses) ->
