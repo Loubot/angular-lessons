@@ -1,0 +1,73 @@
+<div layout="column" layout-align="center stretch" layout-fill>
+  <div class="main_page_search_container" flex >
+
+
+    <div class="white_text" layout="row" layout-align="center" >
+      <h1>Your place to connect with local teachers on guitar,<br> piano, drums or anything else musical</h1>
+    </div> <!-- end of white_text -->
+
+    <form ng-submit="search()" layout="row" layout-align="center center" flex>          
+          
+        
+      <div layout="row">
+        <div flex>
+            <md-autocomplete md-selected-item="selected_subject" md-search-text="searchText" 
+              md-items="subject in subjects" md-item-text="subject.name"
+              md-menu-class="subject_search"
+              class="black_text subject_search" placeholder="Subject?">
+            <md-item-template>
+              <span md-highlight-text="searchText">{{subject.name}}</span>
+            </md-item-template>
+            <md-not-found>
+              No matches found.
+            </md-not-found>
+          </md-autocomplete>
+
+        </div>
+
+        <div layout="row" layout-align="center center" flex>
+          <input name="location" class="black_text subject_search" ng-model="subject.location" required  placeholder=" County?">     
+        </div>
+
+        
+      </div> <!-- end of row -->   
+    </form> <!-- end of search() -->
+    <div layout="row" layout-align="center center" flex>
+      <md-button type="submit" class="md-raised md-primary white_text">Search<i class="material-icons">search</i></md-button>
+    </div> <!-- end of row -->
+
+    
+    
+  </div> <!-- end of main_page_search_container -->
+
+  <div layout-margin flex>
+    <md-content >
+      <div >
+        <h1 >How it works</h1>
+        <strong>From finding the perfect teacher to managing bookings or full payments, and scheduling lessons - we take care of all the details, so you can focus on learning. <a ui-sref="how_it_works"></a></strong> <br>
+      </div>
+      <div >
+        <%= image_tag 'search_for_a_teacher.jpg' %>
+        <h3>Search for your teacher</h3>
+        Compare teachers based on the criteria that matter to to you -from age and location to experience and price.
+      </div> <!-- end of col-xs-4 -->
+
+      <div >
+        <%= image_tag 'schedule_your_lessons.jpg' %>
+        <h3>Schedule your lessons</h3>
+        When you've found your preferred teacher, schedule your lessons online using the teacher's real-time availability and pay a small booking
+        deposit to confirm the lesson.
+      </div> <!-- end of col-xs-4 -->
+
+      <div >
+        <%= image_tag 'connect_with_your_teacher.jpg' %>
+        <h3>Connect with your teacher</h3>
+        On the scheduled date and at the agreed venue - you can meet your teacher and learn your lesson. Our platform also facilitates online learning using your webcam.
+      </div> <!-- end of col-xs-4 -->
+    </md-content>
+  </div>
+</div> <!-- end of column -->
+
+
+
+

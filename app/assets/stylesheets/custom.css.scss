@@ -69,16 +69,18 @@ html, body{
   -webkit-border-radius: 50px;
   -moz-border-radius: 50px;
   border-radius: 50px;
+  max-width: 200px !important;
   background-color: #FFF;
 }
 
 
 
 .main_page_search_container{
+  // min-height: 500px;
   background-image: asset_url('piano.jpg');
-  -moz-background-size: 100% 75%;
-  -webkit-background-size: 100% 75%;
-  background-size: 100% 75%;
+  -moz-background-size: 100% 100%;
+  -webkit-background-size: 100% 100%;
+  background-size: 100% 100%;
   background-repeat: no-repeat;
   // padding: 0 100px !important;
 
@@ -196,3 +198,4 @@ html, body{
   height: 100%;
   overflow-y: visible !important;
 }
+
