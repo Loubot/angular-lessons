@@ -9,8 +9,7 @@ angular.module('lessons').controller('TeacherAreaController', [
   'USER'
   'alertify'
   'COMMS'
-  'usSpinnerService'
-  ( $scope, $rootScope, $state, $stateParams, RESOURCES, USER, alertify, COMMS, usSpinnerService ) ->
+  ( $scope, $rootScope, $state, $stateParams, RESOURCES, USER, alertify, COMMS ) ->
     console.log "TeacherAreaController"
     
 
@@ -22,7 +21,7 @@ angular.module('lessons').controller('TeacherAreaController', [
                 "https://www.googleapis.com/auth/userinfo.email"
                 "https://www.googleapis.com/auth/userinfo.profile"
               ]
-    usSpinnerService.spin('spinner-1')
+    
 
     USER.get_user().then( ( user ) ->
       console.log "got user"
@@ -51,7 +50,6 @@ angular.module('lessons').controller('TeacherAreaController', [
             # allDay: true
 
         $scope.eventSource = bla
-        usSpinnerService.stop('spinner-1')
         alertify.success "Loaded #{ events.length } events"
         $scope.$apply()
 
@@ -69,7 +67,6 @@ angular.module('lessons').controller('TeacherAreaController', [
 
     calendar_loaded = ->
       if !$rootScope.USER.calendar_id or $rootScope.USER.calendar_id == ""  
-        usSpinnerService.stop('spinner-1')
       else
         gapi.client.calendar.events.list(
           'calendarId': "#{ $rootScope.USER.calendar_id }"
@@ -82,14 +79,12 @@ angular.module('lessons').controller('TeacherAreaController', [
 
             console.log "List events"
             format_events( resp.items )
-            alertify.success "Got events"
-          usSpinnerService.stop('spinner-1')  
+            alertify.success "Got events" 
         )
         
       # gapi.client.calendar.calendarList.list().execute( ( resp ) ->
       #   console.log "Calendar list"
       #   console.log resp
-      #   usSpinnerService.stop('spinner-1')
       # )
       # gapi.client.calendar.events.list(
       #   'calendarId': 'primary'
@@ -121,7 +116,6 @@ angular.module('lessons').controller('TeacherAreaController', [
         
         load_calendar_api()
       else
-        usSpinnerService.stop('spinner-1')
         $scope.show_auth_button = true
         alertify.confirm "Please log in with google to use the calendar"
         $scope.$apply()
@@ -145,7 +139,6 @@ angular.module('lessons').controller('TeacherAreaController', [
       
        
     $scope.create_calendar = ->
-      usSpinnerService.spin('spinner-1')
       console.log "Create calendar"
       console.log "user:#{ $scope.google_id_email }"
       gapi.client.calendar.calendars.insert(
@@ -155,7 +148,6 @@ angular.module('lessons').controller('TeacherAreaController', [
         'timeZone': "GMT+01:00 Dublin"
         'backgroundColor': '#2a602a'
       ).execute( ( resp ) ->
-        usSpinnerService.stop('spinner-1')
         alertify.success "Created calendar for you"
         COMMS.PUT(
           "/teacher/#{ $rootScope.USER.id }"

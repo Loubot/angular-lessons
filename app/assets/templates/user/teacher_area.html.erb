@@ -1,6 +1,3 @@
-<span us-spinner spinner-key="spinner-1"></span>
-
-
 
 <script src="https://apis.google.com/js/client.js?onload=checkAuth"></script>
     
@@ -19,24 +16,24 @@
       </md-card-title-text>
       <md-card-title-media>
         <div class="btn-group">
-            <button type="button" class="btn btn-default" ng-class="{active:mode==='month'}"
+            <md-button type="button" class="btn btn-default" ng-class="{active:mode==='month'}"
                     ng-click="changeMode('month')">
                 Month
-            </button>
-            <button type="button" class="btn btn-default" ng-class="{active:mode==='week'}"
+            </md-button>
+            <md-button type="button" class="btn btn-default" ng-class="{active:mode==='week'}"
                     ng-click="changeMode('week')">
                 Week
-            </button>
-            <button type="button" class="btn btn-default" ng-class="{active:mode==='day'}"
+            </md-button>
+            <md-button type="button" class="btn btn-default" ng-class="{active:mode==='day'}"
                     ng-click="changeMode('day')">
                 Day
-            </button>
+            </md-button>
         </div>
         <div class="btn-group">
-            <button type="button" class="btn btn-default" ng-disabled="isToday()"
+            <md-button type="button" class="btn btn-default" ng-disabled="isToday()"
                     ng-click="today()">
                 Today
-            </button>
+            </md-button>
         </div>
         <calendar id="calendar" ng-model="currentDate" ui-calendar
                             calendar-mode="mode" event-source="eventSource"

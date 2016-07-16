@@ -50,6 +50,8 @@ class Teacher < ActiveRecord::Base
   has_and_belongs_to_many :subjects, touch: true
 
   has_many :experiences, dependent: :destroy
+
+  has_one :location, dependent: :destroy
   
   has_many :qualifications, dependent: :destroy
   include DeviseTokenAuth::Concerns::User

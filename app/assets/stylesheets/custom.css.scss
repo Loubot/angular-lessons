@@ -2,11 +2,20 @@ html, body{
   height: 100%;
 }
 
+.center_text{
+  text-align: center !important;
+
+}
+
 .white_text{
   color: #FFF !important;
 }
 
 .green_text{
+  color: #548235;
+}
+
+.green_blue_text{
   color: #2a602a !important;
   color: #fff;
   text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #fff, 0 0 20px #2d95ff, 0 0 30px #2d95ff, 0 0 40px #2d95ff, 0 0 50px #2d95ff, 0 0 75px #2d95ff;
@@ -17,8 +26,16 @@ html, body{
   color: #111 !important;
 }
 
+.grey_green_background{
+  background-color: #d7eacb;
+}
+
 .blue_background{
   background-color: rgb(16,108,200) !important;
+}
+
+.pale_orange_background{
+  background-color: #fff2cc;
 }
 
 .yellow_background{
@@ -41,12 +58,26 @@ html, body{
   background-color: #85b3c4 !important;
 }
 
+.blue_button{
+  color: #fff !important;
+  background-color: #5bc0de !important;
+  border-color: #46b8da !important;
+}
+
 .width_75{
   width: 75%;
 }
 
+.x_large_font{
+  font-size: x-large;
+}
+
 .padding_t_10{
   padding-top: 10px !important;
+}
+
+.percent_10_w{
+  width: 10%;
 }
 
 .sidenav{
@@ -65,12 +96,14 @@ html, body{
   -webkit-border-radius: 50px;
   -moz-border-radius: 50px;
   border-radius: 50px;
+  max-width: 200px !important;
   background-color: #FFF;
 }
 
 
 
 .main_page_search_container{
+  // min-height: 500px;
   background-image: asset_url('piano.jpg');
   -moz-background-size: 100% 100%;
   -webkit-background-size: 100% 100%;
@@ -107,4 +140,92 @@ html, body{
 
 .margin_s_100.md-grid{
   margin: 0 100px !important;
+}
+
+
+
+
+#loading-bar {
+  pointer-events: all;
+  z-index: 99999;
+  border: none;
+  margin: 0px;
+  padding: 0px;
+  width: 100%;
+  height: 100%;
+  top: 0px;
+  left: 0px;
+  cursor: wait;
+  position: fixed;
+  background-color: rgba(0, 0, 0, 0.6);
+}
+
+// map
+
+#map { 
+  height: 400px; 
+  width: 100%;
+}
+.location_results{
+  max-height: 200px;
+  overflow-y: scroll;
+
+}
+
+// search box for map
+
+.controls {
+  margin-top: 10px;
+  border: 1px solid transparent;
+  border-radius: 2px 0 0 2px;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  height: 32px;
+  outline: none;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+}
+
+#pac-input {
+  background-color: #fff;
+  font-family: Roboto;
+  font-size: 15px;
+  font-weight: 300;
+  margin-left: 12px;
+  padding: 0 11px 0 13px;
+  text-overflow: ellipsis;
+  width: 300px;
+}
+
+#pac-input:focus {
+  border-color: #4d90fe;
+}
+
+.pac-container {
+  font-family: Roboto;
+}
+
+#type-selector {
+  color: #fff;
+  background-color: #4d90fe;
+  padding: 5px 11px 0px 11px;
+}
+
+#type-selector label {
+  font-family: Roboto;
+  font-size: 13px;
+  font-weight: 300;
+}
+#target {
+  width: 345px;
+}
+
+//  end of search box for map
+
+.map_results{
+  height: 100%;
+  overflow-y: visible !important;
+}
+
+.how_it_works{
+  overflow: hidden !important;
 }
