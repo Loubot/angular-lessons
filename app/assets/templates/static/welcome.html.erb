@@ -1,4 +1,4 @@
-<div layout="column" layout-align="center stretch" layout-fill>
+<div >
   <div class="main_page_search_container" flex >
 
 
@@ -40,28 +40,29 @@
     
   </div> <!-- end of main_page_search_container -->
 
-  <div layout-margin flex>
-    <md-content class="explanation" >
+  <div layout="row" layout-margin flex >
+    
+    <md-content class="grey_green_background how_it_works" >
       <div layout="column" class="center_text">
         <h1 class="green_text" flex="100">How it works</h1><br><br>
         <h4 flex="100">From finding the perfect teacher to managing bookings or full payments, and scheduling lessons - we take care of all the details, so you can focus on learning. <a ui-sref="how_it_works"></a></h4> <br>
       </div>
-      <div layout="row">
+      <div layout="row" >
         
-        <div flex>
+        <div class="center_text " flex>
           <%= image_tag 'search_for_a_teacher.jpg' %>
           <h3>Search for your teacher</h3>
           Compare teachers based on the criteria that matter to to you -from age and location to experience and price.
         </div> <!-- end of col-xs-4 -->
 
-        <div flex>
+        <div class="center_text " flex>
           <%= image_tag 'schedule_your_lessons.jpg' %>
           <h3>Schedule your lessons</h3>
           When you've found your preferred teacher, schedule your lessons online using the teacher's real-time availability and pay a small booking
           deposit to confirm the lesson.
         </div> <!-- end of col-xs-4 -->
 
-        <div flex>
+        <div class="center_text " flex>
           <%= image_tag 'connect_with_your_teacher.jpg' %>
           <h3>Connect with your teacher</h3>
           On the scheduled date and at the agreed venue - you can meet your teacher and learn your lesson. Our platform also facilitates online learning using your webcam.
@@ -70,6 +71,47 @@
       
       
     </md-content>
+   
+  </div> <!-- end of flex -->
+
+  <div flex class="x_large_font">
+    <div layout="row" flex="100">
+      <md-content layout-margin class="center_text pale_orange_background">
+        <h1><strong>Are you a teacher?</strong></h1>
+        <p>Learn your lesson can help you grow the number of students you teach - therefor increasing your income from lessons, whilst helping you manage your teaching schedules and incoming finances. </p>
+        <%= image_tag 'are_you_a_teacher_list.jpg' %>
+        <p>As a teacher you know that teachers face the battle of finding new students. Now, did you know that everyday students also face the battle of finding teachers?</p><br><br>
+        <p>Well, call us the middle man. We have built a platform that students rely on to find teachers and we help teachers get more students without having to invest time and money on marketing. With a free profile on LearnYourLesson.ie, your skills will be visible to the students who search our site every day for teachers like you. And with mobile optimisation and online lesson options, you'll extend your reach even further.</p>
+
+
+        <div >
+          <div >
+            <h3 ><strong>Free Profile</strong></h3>
+            <p>Extend your reach to thousands of students actively searching for teachers like you</p>
+          </div> <!-- end of are_you_a_teacher_container -->
+
+          <div >
+            <h3 ><strong>National Reach</strong></h3>
+            <p>Use our reach to connect with students anywhere in Ireland through live, online lessons.</p>
+          </div> <!-- end of are_you_a_teacher_container -->
+
+          <div >
+            <h3 ><strong>Risk-Free</strong></h3>
+            <p>Get started with no upfront costs. You get your first month free and then it's just €5 a month to keep your account online.</p>
+          </div> <!-- end of are_you_a_teacher_container -->
+
+          <div>
+            <h3 ><strong>Manage Your Business</strong></h3>
+            <p>With LearnYourLesson, you can manage your lessons, earnings, and more all in one place. With our platform you can reset the balance of power: more teaching, less administration. You can personalise your prices, teaching instruments, location and lesson duration.</p>
+          </div> <!-- end of are_you_a_teacher_container -->
+
+          <div class="center_text">
+            <md-button ui-sref="" class="md-raised blue_button">Become a teacher</md-button>
+          </div>
+
+        </div> <!-- end of are_you_a_teacher -->
+      </md-content> <!-- end of are_you_a_teacher -->
+    </div>
   </div>
 </div> <!-- end of column -->
 

@@ -26,8 +26,16 @@ html, body{
   color: #111 !important;
 }
 
+.grey_green_background{
+  background-color: #d7eacb;
+}
+
 .blue_background{
   background-color: rgb(16,108,200) !important;
+}
+
+.pale_orange_background{
+  background-color: #fff2cc;
 }
 
 .yellow_background{
@@ -50,8 +58,18 @@ html, body{
   background-color: #85b3c4 !important;
 }
 
+.blue_button{
+  color: #fff !important;
+  background-color: #5bc0de !important;
+  border-color: #46b8da !important;
+}
+
 .width_75{
   width: 75%;
+}
+
+.x_large_font{
+  font-size: x-large;
 }
 
 .padding_t_10{
@@ -208,6 +226,6 @@ html, body{
   overflow-y: visible !important;
 }
 
-.explanation{
-  background-color: #d7eacb;
+.how_it_works{
+  overflow: hidden !important;
 }
