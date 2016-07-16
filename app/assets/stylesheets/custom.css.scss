@@ -76,6 +76,10 @@ html, body{
   padding-top: 10px !important;
 }
 
+.margin_t_0{
+  margin-top: 0px !important;
+}
+
 .percent_10_w{
   width: 10%;
 }
@@ -103,7 +107,7 @@ html, body{
 
 
 .main_page_search_container{
-  // min-height: 500px;
+  min-height: 400px;
   background-image: asset_url('piano.jpg');
   -moz-background-size: 100% 100%;
   -webkit-background-size: 100% 100%;
