@@ -24,6 +24,8 @@ Rails.application.routes.draw do
 
     end
   end
+
+  get 'oauth2/callback' => 'static#welcome'
   as :teacher do
     # Define routes for Teacher within this block.
 

@@ -9,7 +9,7 @@ angular.module('lessons', [
   'angularSpinner'  
   'ap.fotorama'
   'ngFileUpload'
-  'angular-google-gapi'
+  'ui.rCalendar'
 ])
 
 angular.module('lessons').constant "RESOURCES", do ->
@@ -32,9 +32,14 @@ angular.module('lessons').config ($stateProvider, $urlRouterProvider) ->
     controller: "TeacherController"
 
   $stateProvider.state 'teacher_area',
-    url: '/teacher-area'
+    url: "/teacher-area/:id"
     templateUrl: "user/teacher_area.html"
     controller: "TeacherAreaController"
+
+  $stateProvider.state 'teacher_location',
+    url: '/teacher-location/:id'
+    templateUrl: "user/teacher_location.html"
+    controller: "TeacherLocationController"
 
   $stateProvider.state 'how_it_works',
     url: '/how-it-works'
@@ -50,41 +55,6 @@ angular.module('lessons').config ( $mdThemingProvider ) ->
   $mdThemingProvider.theme('default')
     .primaryPalette('green')
     .accentPalette('blue-grey')
-
-angular.module('lessons').run( [
-  'GAuth'
-    'GApi'
-    'GData'
-    '$state'
-    '$rootScope'
-    (GAuth, GApi, GData, $state, $rootScope) ->
-      $rootScope.gdata = GData
-      CLIENT = 'yourGoogleAuthAPIKey' 
-      GApi.load 'calendar', 'v3'
-      # for google api (https://developers.google.com/apis-explorer/)
-      GAuth.setClient CLIENT
-      GAuth.setScope 'https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/calendar.readonly'
-      # default scope is only https://www.googleapis.com/auth/userinfo.email
-      # load the auth api so that it doesn't have to be loaded asynchronously
-      # when the user clicks the 'login' button. 
-      # That would lead to popup blockers blocking the auth window
-      GAuth.load()
-      # or just call checkAuth, which in turn does load the oauth api.
-      # if you do that, GAuth.load(); is unnecessary
-      GAuth.checkAuth().then ((user) ->
-        console.log user.name + 'is login'
-        $state.go 'welcome'
-        # an example of action if it's possible to
-        # authenticate user at startup of the application
-        return
-      ), ->
-        $state.go 'login'
-        # an example of action if it's impossible to
-        # authenticate user at startup of the application
-        return
-      return
-])
-
 
 
 angular.module('lessons').service 'USER', ( $http, $rootScope, RESOURCES, $q, usSpinnerService ) ->
@@ -170,6 +140,24 @@ angular.module('lessons').service 'COMMS', ( $http, $state, RESOURCES, $rootScop
         usSpinnerService.stop('spinner-1')
         reject err_result
       )
+
+  PUT: ( url, data ) ->
+      usSpinnerService.spin('spinner-1')
+      $q ( resolve, reject ) ->
+        $http(
+          method: 'PUT'
+          url: "#{ RESOURCES.DOMAIN }#{ url }"
+          headers: { "Content-Type": "application/json" }
+          data: data
+        ).then( ( result ) ->
+          usSpinnerService.stop('spinner-1')
+          if result.user != undefined
+            $rootScope.USER = result.user
+          resolve result
+        ).catch( ( err_result ) ->
+          usSpinnerService.stop('spinner-1')
+          reject err_result
+        )
 
   GET: ( url, params ) ->
     usSpinnerService.spin('spinner-1')

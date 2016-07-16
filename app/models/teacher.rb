@@ -21,6 +21,8 @@
 #  email                  :string
 #  first_name             :string
 #  last_name              :string
+#  calendar_id            :string
+#  overview               :text
 #  tokens                 :text
 #  created_at             :datetime
 #  updated_at             :datetime
