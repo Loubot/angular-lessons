@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-
+ruby "2.3.1"
 
 # ruby '2.1.8', platforms: [:mingw, :mswin, :x64_mingw]
 # ruby '2.0.0', platforms: [:mingw, :mswin], group: :development
@@ -67,3 +67,5 @@ gem 'omniauth'
 gem 'validates_overlap', '~> 0'
 
 gem 'carrierwave'
+
+gem 'rails_12factor', group: :production
