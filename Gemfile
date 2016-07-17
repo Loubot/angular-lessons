@@ -77,3 +77,5 @@ gem 'validates_overlap', '~> 0'
 gem 'carrierwave'
 
 gem 'rails_12factor', group: :production
+
+gem 'unicorn', '~> 4.8', platforms: [:ruby]
