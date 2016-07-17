@@ -282,7 +282,6 @@ ActiveRecord::Schema.define(version: 20160113214504) do
     t.boolean  "is_active",              default: false,   null: false
     t.boolean  "will_travel",            default: false,   null: false
     t.string   "stripe_user_id"
-    t.string   "address",                default: ""
     t.boolean  "paid_up",                default: false
     t.date     "paid_up_date"
     t.integer  "profile_views",          default: 0
