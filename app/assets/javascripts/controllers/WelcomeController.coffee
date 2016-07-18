@@ -13,6 +13,8 @@ angular.module('lessons').controller('WelcomeController', [
     console.log "WelcomeController"
     $elems = $('.animateblock')
     $scope.subject = {}
+    $scope.searchText = {}
+    $scope.subjects = []
     winheight = $(window).height()
     fullheight = $(document).height()
    
@@ -47,19 +49,25 @@ angular.module('lessons').controller('WelcomeController', [
     USER.get_user()
 
 
-    COMMS.GET(
-      "/subjects"
-      $scope.subject
-    ).then( ( resp ) ->
-      # console.log resp
-      $scope.subjects = resp.data
-      alertify.success "Fetched subjects"
-    ).catch( ( err ) ->
-      console.log err
-      alertify.error "Failed to get subjects "
-    )
+    $scope.get_subjects = ( searchText ) ->
+      console.log "search"
 
+      console.log $scope.searchText.name
+      if $scope.searchText != {}
+        return COMMS.GET(
+          "/search-subjects"
+          $scope.searchText
+        ).then( ( resp ) ->
+          console.log resp
+          return resp.data.subjects
+        ).catch( ( err ) ->
+          console.log err
+
+        )
+
+    # $scope.get_subjects()
     $scope.search = ->
+
       console.log $scope.searchText
       COMMS.GET(
         "/search"
@@ -67,6 +75,9 @@ angular.module('lessons').controller('WelcomeController', [
       ).then( ( resp ) ->
         console.log "search results"
         console.log resp
+
+        if resp.data.teachers.length > 0
+          $state.go( "search", { name: $scope.searchText.name, location: $scope.searchText.location } )
       ).catch( ( err ) ->
         console.log "search error"
         console.log err

@@ -13,7 +13,9 @@ Rails.application.routes.draw do
 
     get      'subjects'                   => "subject#index"
 
+
     get      'search'                     => "search#search"
+    get      'search-subjects'            => "search#search_subjects"
     resources :teacher, only: [ :update ] do
       
       post    'add-subject'               => 'subject#add_subject'
