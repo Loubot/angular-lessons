@@ -4,11 +4,12 @@ angular.module('lessons').controller('NavController', [
   '$scope'
   '$rootScope'
   '$state'
+  '$window'
   'USER'
   '$mdSidenav'
   'alertify'
   '$auth'
-  ( $scope, $rootScope, $state, USER, $mdSidenav, alertify, $auth ) ->
+  ( $scope, $rootScope, $state, $window, USER, $mdSidenav, alertify, $auth ) ->
     console.log "NavController"
     $scope.teacher = {}
     $scope.auth_type = null
@@ -65,10 +66,12 @@ angular.module('lessons').controller('NavController', [
         .then( (resp) ->
           # handle success response
           $rootScope.USER = resp
-          console.log resp
+          # console.log resp
+
+          console.log $rootScope.USER
           
           $mdSidenav('left').toggle()
-          alertify.success "Welcome back #{ $rootScope.USER.name }"
+          alertify.success "Welcome back #{ $rootScope.USER.first_name }"
         )
         .catch( (resp) ->
           # handle error response
@@ -82,6 +85,7 @@ angular.module('lessons').controller('NavController', [
           alertify.success "Logged out successfully"
           $rootScope.USER = null
           $state.go 'welcome'
+          $window.location.reload()
         ).catch( ( err ) ->
           console.log err
           $rootScope.USER = null
