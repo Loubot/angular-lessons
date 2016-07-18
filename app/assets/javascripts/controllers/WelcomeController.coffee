@@ -11,8 +11,8 @@ angular.module('lessons').controller('WelcomeController', [
   '$window'
   ( $scope, $rootScope, USER, $mdSidenav, alertify, $auth, COMMS, $window ) ->
     console.log "WelcomeController"
-    $scope.subject = new Object
     $elems = $('.animateblock')
+    $scope.subject = {}
     winheight = $(window).height()
     fullheight = $(document).height()
    
@@ -51,7 +51,7 @@ angular.module('lessons').controller('WelcomeController', [
       "/subjects"
       $scope.subject
     ).then( ( resp ) ->
-      console.log resp
+      # console.log resp
       $scope.subjects = resp.data
       alertify.success "Fetched subjects"
     ).catch( ( err ) ->
@@ -60,5 +60,15 @@ angular.module('lessons').controller('WelcomeController', [
     )
 
     $scope.search = ->
-      console.log $scope.selected_subject.name
+      console.log $scope.searchText
+      COMMS.GET(
+        "/search"
+        $scope.searchText
+      ).then( ( resp ) ->
+        console.log "search results"
+        console.log resp
+      ).catch( ( err ) ->
+        console.log "search error"
+        console.log err
+      )
 ])

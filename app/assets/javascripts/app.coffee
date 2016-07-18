@@ -44,6 +44,11 @@ angular.module('lessons').config ($stateProvider, $urlRouterProvider) ->
     templateUrl: "static/welcome.html"
     controller: "WelcomeController"
 
+  $stateProvider.state 'search',
+    url: '/search/:name/:location'
+    templateUrl: "static/search.html"
+    controller: "SearchController"
+
   $stateProvider.state 'teacher',
     url: '/teacher/:id'
     templateUrl: "user/teacher.html"

@@ -1,12 +1,11 @@
 source 'https://rubygems.org'
 
-ruby "2.3.1"
+
 
 # ruby '2.1.8', platforms: [:mingw, :mswin, :x64_mingw]
 # ruby '2.0.0', platforms: [:mingw, :mswin], group: :development
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.2.6'
-# Use sqlite3 as the database for Active Record
+gem 'rails'
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
@@ -14,9 +13,6 @@ gem 'sass-rails', '~> 5.0'
 gem 'uglifier', '>= 1.3.0'
 # Use CoffeeScript for .coffee assets and views
 gem 'coffee-rails', '~> 4.1.0'
-
-gem 'sqlite3', group: :development
-gem 'pg', platforms: [:ruby]
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
 
@@ -38,19 +34,20 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
+group :production do
+  gem 'pg'
+end
+
 group :development, :test do
+  # Use sqlite3 as the database for Active Record
+  gem 'sqlite3'
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
-  # gem 'sqlite3'
 end
 
 group :development do
   # Access an IRB console on exception pages or by using <%= console %> in views
   gem 'web-console', '~> 2.0'
-end
-
-group :production do
- 
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
@@ -75,7 +72,3 @@ gem 'omniauth'
 gem 'validates_overlap', '~> 0'
 
 gem 'carrierwave'
-
-gem 'rails_12factor', group: :production
-
-gem 'unicorn', '~> 4.8', platforms: [:ruby]

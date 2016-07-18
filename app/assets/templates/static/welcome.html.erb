@@ -6,15 +6,16 @@
       <h1>Your place to connect with local teachers on guitar,<br> piano, drums or anything else musical</h1>
     </div> <!-- end of white_text -->
 
-    <form ng-submit="search()" layout="row" layout-align="center center" flex>          
+    <form  layout="row" layout-align="center center" flex>          
           
         
       <div layout="row">
         <div flex>
-            <md-autocomplete md-selected-item="selected_subject" md-search-text="searchText" 
+            <md-autocomplete md-selected-item="selected_subject" md-search-text="searchText.name" 
               md-items="subject in subjects" md-item-text="subject.name"
               md-menu-class="subject_search"
-              class="black_text subject_search" placeholder="Subject?">
+              class="black_text subject_search" placeholder="Subject?"
+              md-selected-item="subject.name">
             <md-item-template>
               <span md-highlight-text="searchText">{{subject.name}}</span>
             </md-item-template>
@@ -26,14 +27,14 @@
         </div>
 
         <div layout="row" layout-align="center center" flex>
-          <input name="location" class="black_text subject_search" ng-model="subject.location" required  placeholder=" County?">     
+          <input name="location" class="black_text subject_search" ng-model="searchText.location" required  placeholder=" County?">     
         </div>
 
         
       </div> <!-- end of row -->   
     </form> <!-- end of search() -->
     <div layout="row" layout-align="center center" flex>
-      <md-button type="submit" class="md-raised md-primary white_text">Search<i class="material-icons">search</i></md-button>
+      <md-button ng-click="search( subject )" class="md-raised md-primary white_text">Search<i class="material-icons">search</i></md-button>
     </div> <!-- end of row -->
 
     
@@ -126,3 +127,4 @@
 
 
 
+<a ui-sref="search({name:'louis', location:'cork'})">asdf</a>

@@ -12,6 +12,8 @@ Rails.application.routes.draw do
 
 
     get      'subjects'                   => "subject#index"
+
+    get      'search'                     => "search#search"
     resources :teacher, only: [ :update ] do
       
       post    'add-subject'               => 'subject#add_subject'
@@ -86,5 +88,5 @@ Rails.application.routes.draw do
   #     resources :products
   #   end
   # resources :teachers, only: [:index, :create, :destroy], defaults: {format: :json}
-  root to: 'static#welcome'
+  root to: 'static#index'
 end
