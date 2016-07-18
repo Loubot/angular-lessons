@@ -7,12 +7,12 @@ angular.module('lessons').controller( 'SearchController', [
   "COMMS"
   "alertify"
   ( $scope, $rootScope, $stateParams, COMMS, alertify ) ->
-    console.log "SearchController"
-    console.log $stateParams
+    # console.log "SearchController"
+    # console.log $stateParams
 
     $scope.search_params = $stateParams
 
-    console.log $stateParams
+    # console.log $stateParams
 
     COMMS.GET(
       "/subjects"

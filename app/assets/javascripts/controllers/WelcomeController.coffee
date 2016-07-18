@@ -3,13 +3,14 @@
 angular.module('lessons').controller('WelcomeController', [
   '$scope'
   '$rootScope'
+  '$state'
   'USER'
   '$mdSidenav'
   'alertify'
   '$auth'
   'COMMS'
   '$window'
-  ( $scope, $rootScope, USER, $mdSidenav, alertify, $auth, COMMS, $window ) ->
+  ( $scope, $rootScope, $state, USER, $mdSidenav, alertify, $auth, COMMS, $window ) ->
     console.log "WelcomeController"
     $elems = $('.animateblock')
     $scope.subject = {}
@@ -65,21 +66,8 @@ angular.module('lessons').controller('WelcomeController', [
 
         )
 
-    # $scope.get_subjects()
-    $scope.search = ->
-
-      console.log $scope.searchText
-      COMMS.GET(
-        "/search"
-        $scope.searchText
-      ).then( ( resp ) ->
-        console.log "search results"
-        console.log resp
-
-        if resp.data.teachers.length > 0
-          $state.go( "search", { name: $scope.searchText.name, location: $scope.searchText.location } )
-      ).catch( ( err ) ->
-        console.log "search error"
-        console.log err
-      )
+    $scope.subject_picked = ( subject )->
+      console.log subject
+      if !( Object.keys(subject).length == 0 && subject.constructor == Object )
+        $state.go("search", { name: subject.name, location: $scope.searchText.location })
 ])

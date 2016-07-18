@@ -16,7 +16,8 @@
               class="black_text subject_search" placeholder="Subject?"
               md-selected-item="subject.name"
               md-delay="1000"
-              md-min-length="2">
+              md-min-length="2"
+              md-selected-item-change="subject_picked( subject )">
             <md-item-template>
               <span md-highlight-text="searchText">{{subject.name}}</span>
             </md-item-template>
