@@ -7,10 +7,28 @@ angular.module('lessons').controller( 'SearchController', [
   "COMMS"
   "alertify"
   ( $scope, $rootScope, $stateParams, COMMS, alertify ) ->
-    # console.log "SearchController"
+    console.log "SearchController"
     # console.log $stateParams
-
+    $scope.subject = null
+    $scope.searchText = {}
+    $scope.subjects = []
     $scope.search_params = $stateParams
+
+    $scope.get_subjects = ( searchText ) ->
+      console.log "search"
+
+      console.log $scope.searchText.name
+      if $scope.searchText != {}
+        return COMMS.GET(
+          "/search-subjects"
+          $scope.searchText
+        ).then( ( resp ) ->
+          console.log resp
+          return resp.data.subjects
+        ).catch( ( err ) ->
+          console.log err
+
+        )
 
     # console.log $stateParams
 
@@ -34,6 +52,9 @@ angular.module('lessons').controller( 'SearchController', [
     ).catch( ( err ) ->
       console.log err
     )
+
+    $scope.subject_picked = ( a ) ->
+      console.log a
 
     $scope.counties = ['Antrim','Armagh','Carlow','Cavan','Clare','Cork','Derry','Donegal','Down','Dublin',
           'Fermanagh','Galway','Kerry','Kildare','Kilkenny','Laois','Leitrim','Limerick','Longford',

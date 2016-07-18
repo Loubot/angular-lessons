@@ -1,25 +1,30 @@
+{{ subject }}<br>
+{{ searchText }}
 <div layout="row">
   <div flex="30" layout="column" class="boxWithHeight" layout-padding>
     <md-content class="md-padding">
       <form ng-submit="$event.preventDefault()" name="searchForm">
         <p>The following example demonstrates floating labels being used as a normal form element.</p>
-        <div layout-gt-sm="column">
-          <md-input-container class="md-icon-float md-block" flex>
-            <md-autocomplete md-selected-item="selected_subject" md-search-text="searchText.name" 
-                md-items="subject in subjects" md-item-text="subject.name"
-                md-menu-class="black_text"
-                class="black_text" md-floating-label="Subject"
-                md-selected-item="subject.name">
-              <md-item-template>
-                <span md-highlight-text="ctrl.searchText">{{subject.name}}</span>
-              </md-item-template>
-              <div ng-messages="searchForm.autocompleteField.$error" ng-if="searchForm.autocompleteField.$touched">
-                <div ng-message="required">You <b>must</b> have a favorite state.</div>
-                <div ng-message="minlength">Your entry is not long enough.</div>
-                <div ng-message="maxlength">Your entry is too long.</div>
-              </div>
-            </md-autocomplete>
-          </md-input-container>
+        <div layout-gt-sm="column" flex>
+          
+          <md-autocomplete 
+              md-selected-item="selected_subject" 
+              md-search-text="searchText.name" 
+              md-items="subject in get_subjects( searchText )" 
+              md-item-text="subject.name"
+              class="black_text" 
+              md-selected-item="subject.name"
+              md-delay="1000"
+              md-min-length="2"
+              md-selected-item-change="subject_picked( subject )">
+            <md-item-template>
+              <span md-highlight-text="searchText">{{subject.name}}</span>
+            </md-item-template>
+            <md-not-found>
+              No matches found.
+            </md-not-found>
+          </md-autocomplete>
+          
 
           <md-input-container class="md-icon-float md-block" flex>
             <md-autocomplete md-selected-item="selected_subject" md-search-text="searchText.name" 

@@ -11,9 +11,13 @@
         
       <div layout="row">
         <div flex>
-            <md-autocomplete md-selected-item="selected_subject" md-search-text="searchText.name" 
-              md-items="subject in get_subjects( searchText )" md-item-text="subject.name"
-              class="black_text subject_search" placeholder="Subject?"
+            <md-autocomplete 
+              md-selected-item="selected_subject" 
+              md-search-text="searchText.name" 
+              md-items="subject in get_subjects( searchText )" 
+              md-item-text="subject.name"
+              class="black_text subject_search" 
+              placeholder="Subject?"
               md-selected-item="subject.name"
               md-delay="1000"
               md-min-length="2"
