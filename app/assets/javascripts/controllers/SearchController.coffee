@@ -58,7 +58,6 @@ angular.module('lessons').controller( 'SearchController', [
     $scope.subject_picked = ( subject ) ->
       console.log subject
       $scope.ctrl.subject = subject
-      search_teachers( $scope.ctrl )
 
     define_counties = ->
       return $scope.counties = ['Antrim','Armagh','Carlow','Cavan','Clare','Cork','Derry','Donegal','Down','Dublin',

@@ -12,16 +12,16 @@
         </md-chips>
         <div layout-gt-sm="column" flex>
           <md-autocomplete 
-              md-selected-item="ctrl.selected_location" 
+              md-selected-item="ctrl.subject.name" 
               md-input-name="subject"
               md-search-text="ctrl.subject_name" 
               md-items="subject in subjects" 
               md-item-text="subject.name" 
-              md-floating-label="County"
+              md-floating-label="Subject"
               md-search-text-change="search_subjects()"
               md-selected-item-change="subject_picked( subject )">
             <md-item-template>
-              <span md-highlight-text="ctrl.subject_text">{{subject.name}}</span>
+              <span md-highlight-text="subject.name">{{subject.name}}</span>
             </md-item-template>
             
           </md-autocomplete>
@@ -30,7 +30,7 @@
 
           
           <md-autocomplete 
-              md-selected-item="ctrl.selected_subject" 
+              md-selected-item="ctrl.county" 
               md-input-name="county"
               md-search-text="ctrl.county_name" 
               md-items="county in counties" 
@@ -39,7 +39,7 @@
               md-search-text-change="search_counties()"
               md-selected-item-change="county_picked( county )">
             <md-item-template>
-              <span md-highlight-text="ctrl.county_text">{{county}}</span>
+              <span md-highlight-text="county">{{county}}</span>
             </md-item-template>
             
           </md-autocomplete>
