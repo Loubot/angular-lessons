@@ -4,9 +4,10 @@ angular.module('lessons').controller( 'SearchController', [
   "$scope"
   "$rootScope"
   "$stateParams"
+  "$filter"
   "COMMS"
   "alertify"
-  ( $scope, $rootScope, $stateParams, COMMS, alertify ) ->
+  ( $scope, $rootScope, $stateParams, $filter, COMMS, alertify ) ->
     console.log "SearchController"
     $scope.ctrl = {}
     $scope.querySearch = ( a ) ->
@@ -24,7 +25,15 @@ angular.module('lessons').controller( 'SearchController', [
 
         )
 
-    $scope.counties = ['Antrim','Armagh','Carlow','Cavan','Clare','Cork','Derry','Donegal','Down','Dublin',
+    $scope.search_counties = ->
+      if $scope.ctrl.county_name == ""
+        define_counties()
+        return false
+      console.log $scope.ctrl.county_name
+      $scope.counties =  $filter('filter')( $scope.counties, $scope.ctrl.county_name )
+
+    define_counties = ->
+      return $scope.counties = ['Antrim','Armagh','Carlow','Cavan','Clare','Cork','Derry','Donegal','Down','Dublin',
           'Fermanagh','Galway','Kerry','Kildare','Kilkenny','Laois','Leitrim','Limerick','Longford',
           'Louth','Mayo','Meath','Monaghan','Offaly','Roscommon','Sligo','Tipperary','Tyrone',
           'Waterford','Westmeath','Wexford','Wicklow']

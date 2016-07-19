@@ -1,4 +1,4 @@
-{{ ctrl }} <br>
+{{ counties }} <br>
 
 <div layout="row">
   <div flex="30" layout="column" class="boxWithHeight" layout-padding>
@@ -22,18 +22,21 @@
           
           
 
-          <md-input-container class="md-icon-float md-block" flex>
-            <md-autocomplete md-selected-item="selected_subject" md-search-text="searchText.name" 
-                md-items="county in counties" md-item-text="county"
-                md-menu-class="black_text"
-                class="black_text" md-floating-label="County"
-                md-selected-item="subject.name">
-              <md-item-template>
-                <span md-highlight-text="ctrl.searchText">{{subject.location}}</span>
-              </md-item-template>
-              
-            </md-autocomplete>
-          </md-input-container>
+          
+          <md-autocomplete md-selected-item="selected_subject" 
+              md-input-name="county"
+              md-search-text="ctrl.county_name" 
+              md-items="county in counties" 
+              md-item-text="county" 
+              md-floating-label="County"
+              md-search-text-change="search_counties()"
+              md-selected-item="ctrl.county">
+            <md-item-template>
+              <span md-highlight-text="ctrl.county_text">{{county}}</span>
+            </md-item-template>
+            
+          </md-autocomplete>
+          
         </div>
       </form>
     </md-content>
