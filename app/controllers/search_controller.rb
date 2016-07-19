@@ -9,7 +9,7 @@ class SearchController < ApplicationController
   end
 
   def search_subjects
-    p search_params[:name]
+    p params
     p "search subjects controller"  
     subjects = Subject.where( "name LIKE ?", "%#{ search_params[:name] }%" ).select([ :name, :id ])
     pp subjects
