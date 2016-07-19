@@ -65,9 +65,19 @@ angular.module('lessons').controller('WelcomeController', [
           console.log err
 
         )
+    $scope.search = ->
+      console.log "search"
+      if !( Object.keys($scope.searchText).length == 0 && $scope.subject.constructor == Object )
+        $state.go("search", { name: $scope.searchText.name, location: $scope.searchText.location })
 
     $scope.subject_picked = ( subject )->
       console.log subject
       if !( Object.keys(subject).length == 0 && subject.constructor == Object )
-        $state.go("search", { name: subject.name, location: $scope.searchText.location })
+        $state.go("search", { name: $scope.searchText.name, location: $scope.searchText.location })
+
+    define_counties = ->
+      return $scope.counties = ['Antrim','Armagh','Carlow','Cavan','Clare','Cork','Derry','Donegal','Down','Dublin',
+          'Fermanagh','Galway','Kerry','Kildare','Kilkenny','Laois','Leitrim','Limerick','Longford',
+          'Louth','Mayo','Meath','Monaghan','Offaly','Roscommon','Sligo','Tipperary','Tyrone',
+          'Waterford','Westmeath','Wexford','Wicklow']
 ])

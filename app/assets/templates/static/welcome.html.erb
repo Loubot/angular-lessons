@@ -1,3 +1,5 @@
+{{ searchText }}<br>
+
 <div >
   <div class="main_page_search_container" flex  ng-cloak>
 
@@ -20,8 +22,7 @@
               placeholder="Subject?"
               md-selected-item="subject.name"
               md-delay="1000"
-              md-min-length="2"
-              md-selected-item-change="subject_picked( subject )">
+              md-min-length="2">
             <md-item-template>
               <span md-highlight-text="searchText">{{subject.name}}</span>
             </md-item-template>
@@ -40,7 +41,7 @@
       </div> <!-- end of row -->   
     </form> <!-- end of search() -->
     <div layout="row" layout-align="center center" flex>
-      <md-button ng-click="search( subject )" class="md-raised md-primary white_text">Search<i class="material-icons">search</i></md-button>
+      <md-button ng-click="search()" class="md-raised md-primary white_text">Search<i class="material-icons">search</i></md-button>
     </div> <!-- end of row -->
 
     
