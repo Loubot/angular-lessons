@@ -72,3 +72,5 @@ gem 'omniauth'
 gem 'validates_overlap', '~> 0'
 
 gem 'carrierwave'
+
+gem "mini_magick"

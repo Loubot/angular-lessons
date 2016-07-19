@@ -6,7 +6,7 @@ class SearchController < ApplicationController
     p "Subject found: "
     pp subject
     teachers = subject.teachers.select( "email, id" )
-    render json: { teachers: teachers.to_json(include: :photos) }
+    render json: { teachers: teachers.as_json(include: :photos) }
   end
 
   def search_subjects
