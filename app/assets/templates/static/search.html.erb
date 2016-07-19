@@ -1,4 +1,5 @@
-{{ ctrl }}
+{{ ctrl }}<br>
+{{ subject }}
 <div layout="row">
   <div flex="30" layout="column" class="boxWithHeight" layout-padding>
     <md-content class="md-padding">
@@ -10,18 +11,17 @@
           
         </md-chips>
         <div layout-gt-sm="column" flex>
-          <md-autocomplete flex required
-              md-input-name="autocompleteField"
-              md-selected-item="ctrl.subject"
-              md-search-text="ctrl.name"
-              md-items="item in querySearch(ctrl.name)"
-              md-item-text="item.name"
-              md-min-length="2"
-              ng-model-options="{debounce: 500}"
-              md-floating-label="Subject"
-              md-selected-item-change="subject_picked( ctrl.subject.name )">
+          <md-autocomplete 
+              md-selected-item="ctrl.selected_location" 
+              md-input-name="subject"
+              md-search-text="ctrl.subject_name" 
+              md-items="subject in subjects" 
+              md-item-text="subject.name" 
+              md-floating-label="County"
+              md-search-text-change="search_subjects()"
+              md-selected-item-change="subject_picked( subject )">
             <md-item-template>
-              <span md-highlight-text="ctrl.searchText">{{item.name}}</span>
+              <span md-highlight-text="ctrl.subject_text">{{subject.name}}</span>
             </md-item-template>
             
           </md-autocomplete>
@@ -29,7 +29,8 @@
           
 
           
-          <md-autocomplete md-selected-item="selected_subject" 
+          <md-autocomplete 
+              md-selected-item="ctrl.selected_subject" 
               md-input-name="county"
               md-search-text="ctrl.county_name" 
               md-items="county in counties" 

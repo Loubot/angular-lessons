@@ -30,25 +30,19 @@ angular.module('lessons').controller( 'SearchController', [
         console.log err
       )
 
-    if $stateParams.name? || $stateParams.location?
-      search_teachers( $stateParams )
+    COMMS.GET(
+      '/search-subjects'
+    ).then( ( resp ) ->
+      console.log resp
+      $scope.subjects = resp.data.subjects
+    ).catch( ( err ) ->
+      console.log resp
+    )
 
-
-
-    $scope.querySearch = ( a ) ->
-      console.log a
-      console.log $scope.ctrl
-      if $scope.ctrl.searchText != null
-        return COMMS.GET(
-          "/search-subjects"
-          $scope.ctrl
-        ).then( ( resp ) ->
-          console.log resp
-          return resp.data.subjects
-        ).catch( ( err ) ->
-          console.log err
-
-        )
+    
+    $scope.search_subjects = ->
+      console.log $scope.ctrl.subject_name
+      $scope.subjects = $filter('filter')( $scope.subjects, $scope.ctrl.subject_name )
 
     $scope.search_counties = ->
       if $scope.ctrl.county_name == ""
