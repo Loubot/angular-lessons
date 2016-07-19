@@ -30,6 +30,9 @@ angular.module('lessons').controller( 'SearchController', [
         console.log err
       )
 
+    if $stateParams.name? or $stateParams.location?
+      search_teachers( $stateParams )
+
     COMMS.GET(
       '/search-subjects'
     ).then( ( resp ) ->
