@@ -3,6 +3,7 @@ class SearchController < ApplicationController
   def search
     p "search controller"
     subject = Subject.includes(:teachers).where('name LIKE ?', "%#{ params[:name] }%").select( [ :name, :id ] ).first
+    p "Subject found: "
     pp subject
     teachers = subject.teachers.select( "email, id" )
     render json: { teachers: teachers, subject: subject }
