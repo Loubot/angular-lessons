@@ -4,7 +4,7 @@ class PhotosController < ApplicationController
   def create
     p "Params #{ pic_params[:avatar] }"
     render json: { message: 'No params' }, status: 400 and return if pic_params[:avatar] == "null"
-    @teacher = Teacher.first
+    @teacher = Teacher.find( current_teacher.id )
     @photo = @teacher.photos.build( pic_params )
     if @teacher.profile == nil
 
@@ -23,6 +23,6 @@ class PhotosController < ApplicationController
 
   private
     def pic_params
-      params.permit(:photo, :avatar, :id)
+      params.permit(:photo, :avatar)
     end
 end

@@ -26,7 +26,6 @@ angular.module('lessons').controller('TeacherController', [
         avatar: $scope.file
         data:
           avatar: $scope.file
-          id: $rootScope.USER
       ).then( ( resp ) -> 
         console.log resp
         $scope.photos = resp.data.photos if resp.data != ""
