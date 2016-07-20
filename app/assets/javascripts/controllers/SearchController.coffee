@@ -25,7 +25,7 @@ angular.module('lessons').controller( 'SearchController', [
       ).then( ( resp ) ->
         console.log resp
         $scope.teachers = resp.data.teachers
-        alertify.success "Found #{ resp.data.teachers.lenght } teacher(s)"
+        alertify.success "Found #{ resp.data.teachers.length } teacher(s)"
       ).catch( ( err ) ->
         console.log err
       )

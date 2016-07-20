@@ -70,6 +70,20 @@ angular.module('lessons').controller('TeacherController', [
         $state.go 'welcome'
         return false
       )
+    else
+      COMMS.GET(
+          "/teacher/profile"
+          id: $rootScope.USER.id
+        ).then( ( resp ) ->
+          console.log resp
+          $scope.photos = resp.data.photos
+          $scope.subjects = resp.data.subjects
+          $scope.experiences = resp.data.experiences
+          $scope.quals = resp.data.qualifications
+          profile_pic()
+        ).catch( ( err ) ->
+          console.log err
+        )
 
     $scope.make_profile = ( id ) ->
       COMMS.POST(
@@ -90,9 +104,10 @@ angular.module('lessons').controller('TeacherController', [
       for photo in $scope.photos
         # console.log photo.avatar.url
         if parseInt( photo.id ) == parseInt( $rootScope.USER.profile )
-          $scope.profile = photo.avatar.url
+          console.log photo
+          $scope.profile = photo
           console.log $scope.profile
-          $scope.profile_pic
+          $scope.profile
 
 
     ####################### Subjects ###############################

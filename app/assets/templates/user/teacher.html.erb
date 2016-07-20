@@ -4,14 +4,14 @@
     <md-card >
       <md-card-header>
         <md-card-avatar>
-          <img class="md-user-avatar" ng-src="{{ profile }}">
+          <img class="md-user-avatar pic_thumb" ng-src="{{ profile.avatar.thumb.url }}">
         </md-card-avatar>
         <md-card-header-text>
           <span class="md-title">{{ USER.first_name }} {{ USER.last_name }}</span>
           <span class="md-subhead">Sub header</span>
         </md-card-header-text>
       </md-card-header>
-      <img ng-src="{{ profile }} " class="md-card-image" alt="image caption">
+      <img ng-src="{{ profile.avatar.url }}" class="md-card-image" alt="image caption">
       <md-card-title>
         <md-card-title-text>
           <span class="md-headline">Card headline</span>
@@ -32,7 +32,6 @@
 
       </md-card-content>
     </md-card> 
-    
   </div> <!-- end of flex -->
 
   <div layout-padding flex>

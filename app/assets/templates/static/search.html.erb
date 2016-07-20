@@ -51,26 +51,26 @@
 
 
 
-  <div flex layout="column" class="boxWithHeight" layout-padding>
-    <md-content class="md-padding" layout-xs="column" layout="row">
+  <div layout="column" class="boxWithHeight" >
+    <md-content  layout-xs="column" layout="row">
       <md-card ng-repeat="teacher in teachers" md-theme-watch>
         <md-card-title>
           <md-card-title-text>
-            <span class="md-headline">Card with image</span>
-            <span class="md-subhead">Extra Large</span>
+            <span class="md-headline">{{ teacher.first_name }} {{ teacher.last_name }}  </span>
+            <span class="md-subhead">{{ teacher.location.address }}</span>
           </md-card-title-text>
         </md-card-title>
         <md-card-content layout="row" layout-align="space-between">
-          <img ng-src="{{ teacher.photos[1].avatar.thumb.url }}" class="md-media-sm">
+          <img ng-src="{{ teacher.photos[0].avatar.url }}" class="md-media-xl">
           <md-card-actions layout="column">
             <md-button class="md-icon-button" aria-label="Favorite">
-              <!-- <md-icon md-svg-icon="img/icons/favorite.svg"></md-icon> -->
+              <i class="material-icons">person</i>
             </md-button>
             <md-button class="md-icon-button" aria-label="Settings">
-              <!-- <md-icon md-svg-icon="img/icons/menu.svg"></md-icon> -->
+              <i class="material-icons">menu</i>
             </md-button>
             <md-button class="md-icon-button" aria-label="Share">
-              <!-- <md-icon md-svg-icon="img/icons/share-arrow.svg"></md-icon> -->
+              <i class="material-icons">share</i>
             </md-button>
           </md-card-actions>
         </md-card-content>
@@ -78,3 +78,5 @@
     </md-content>
   </div> <!-- end of column -->
 </div>
+
+

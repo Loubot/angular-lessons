@@ -69,6 +69,18 @@ html, body{
   height: auto;
 }
 
+.pic_thumb{
+  width: 30px !important;
+  height: 30px !important;
+  border-radius: 50%;
+}
+
+.md-media-sm{height:80px;width:80px}
+.boxWithHeight {
+  box-sizing: border-box;
+  height: 100%;
+}
+
 .width_75{
   width: 75%;
 }
