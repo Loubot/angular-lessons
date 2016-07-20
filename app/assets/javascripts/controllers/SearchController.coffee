@@ -3,11 +3,12 @@
 angular.module('lessons').controller( 'SearchController', [
   "$scope"
   "$rootScope"
+  "$state"
   "$stateParams"
   "$filter"
   "COMMS"
   "alertify"
-  ( $scope, $rootScope, $stateParams, $filter, COMMS, alertify ) ->
+  ( $scope, $rootScope, $state, $stateParams, $filter, COMMS, alertify ) ->
     console.log "SearchController"
     $scope.ctrl = 
       subject:
@@ -17,6 +18,14 @@ angular.module('lessons').controller( 'SearchController', [
         null
     $scope.ctrl.subject.name = $stateParams.name
     $scope.ctrl.county = $stateParams.location
+
+    $scope.view_teacher = ( teacher ) ->
+      $state.go('view_teacher', id: teacher.id )
+
+
+    $scope.scrollevent = ( $e ) ->
+      
+      return
 
     search_teachers = ( params ) ->
       COMMS.GET(

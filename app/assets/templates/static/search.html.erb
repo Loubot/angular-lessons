@@ -1,5 +1,3 @@
-{{ ctrl }}<br>
-{{ subject }}
 <div layout="row">
   <div flex="30" layout="column" class="boxWithHeight" layout-padding>
     <md-content class="md-padding">
@@ -52,8 +50,8 @@
 
 
   <div layout="column" class="boxWithHeight" >
-    <md-content  layout-xs="column" layout="row">
-      <md-card ng-repeat="teacher in teachers" md-theme-watch>
+    <md-content  layout-xs="column" layout="row" layout-wrap>
+      <md-card ng-repeat="teacher in teachers" md-theme-watch ng-click="view_teacher( teacher )">
         <md-card-title>
           <md-card-title-text>
             <span class="md-headline">{{ teacher.first_name }} {{ teacher.last_name }}  </span>

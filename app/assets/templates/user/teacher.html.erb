@@ -66,109 +66,114 @@
 
   </div> <!-- end of flex -->
   
-  <div flex>
-    <md-card layout-padding flex>
+  <div layout="column" layout-padding layout-fill flex="100" >
+   
+      <md-card layout-padding flex class="gutter">
+        <md-autocomplete md-selected-item="selected_subject" md-search-text="searchText" 
+              md-items="subject in get_subjects()" md-item-text="subject.name"
+              md-selected-item-change="select_subject( subject )"
+              md-delay="500"
+              class="black_text" placeholder="Choose your subjects">
+          <md-item-template>
+            <span md-highlight-text="searchText">{{subject.name}}</span>
+          </md-item-template>
+          <md-not-found>
+            No matches found.
+          </md-not-found>
+        </md-autocomplete>
+        <md-list>
+          <md-list-item class="md-2-line" ng-repeat="subject in subjects">            
+            <div class="md-list-item-text" layout="row">
 
-      <md-autocomplete md-selected-item="selected_subject" md-search-text="searchText" 
-            md-items="subject in get_subjects()" md-item-text="subject.name"
-            md-selected-item-change="select_subject( subject )"
-            md-menu-class="subject_search"
-            md-delay="500"
-            class="black_text subject_search" placeholder="Choose your subjects">
-        <md-item-template>
-          <span md-highlight-text="searchText">{{subject.name}}</span>
-        </md-item-template>
-        <md-not-found>
-          No matches found.
-        </md-not-found>
-      </md-autocomplete>
-
-      <md-list>
-        <md-list-item class="md-2-line" ng-repeat="subject in subjects">
-          
-          <div class="md-list-item-text" layout="row">
-
-            <div flex="90">
-              <md-icon><i class="material-icons icon_yellow">insert_emoticon</i></md-icon>
-              <span>{{subject.name}}</span>
-            </div> <!-- end of flex=90 -->
-
-            <div flex="10">
-              <md-button class="md-icon-button" ng-click="remove_subject( subject )">
-                <md-tooltip md-direction="left">
-                  Remove subject
-                </md-tooltip>
-                <md-icon><i class="material-icons">thumb_down</i></md-icon>
-              </md-button>
-            </div> <!-- end of flex=10 -->
-            
-          </div> <!-- end of md-list-item-text -->
-        </md-list-item>
-      </md-list>
-    </md-card>
-
-    <md-card class="md-no-momentum" flex>
-      <md-toolbar md-scroll-shrink>
-        <div class="md-toolbar-tools blue_background white_text">Your Experience</div>
-      </md-toolbar>
-
-
-      <form ng-submit="add_experience()" name="experience_form">
-        <md-input-container class="md-icon-float md-block">
-          <!-- Use floating label instead of placeholder -->
-          <label>Title</label>
-          
-          <input ng-model="experience.title" type="text">
-        </md-input-container>
-
-        <md-input-container md-no-float class="md-block">
-          <textarea ng-model="experience.description" aria-label="Experience description" md-maxlength="150" rows="5" md-select-on-focus></textarea>
-          <!-- <input ng-model="experience.description" type="text" placeholder="Description"> -->
-        </md-input-container>
-        
-        
-
-
-        <div flex="40" >
-          <md-button type="submit" class="tricolor_button_hover padding_t_10"><i class="material-icons green_add_icon">add_box</i></md-button>
-        </div>
-        
-        
-      </form> <!-- end of add_experience() -->
-      <md-divider></md-divider>
-      <md-list layout-padding>
-        <md-list-item ng-repeat="experience in experiences" >
-          <div class="md-list-item-text" layout="row" flex>
-
-            <div layout="row" layout-fill flex>
               <div flex="90">
-                <md-tooltip>
-                  {{ experience.description }}
-                </md-tooltip>
                 <md-icon><i class="material-icons icon_yellow">insert_emoticon</i></md-icon>
-                <span>
-                  {{experience.title}} 
-                  
-                </span>
+                <span>{{subject.name}}</span>
               </div> <!-- end of flex=90 -->
 
               <div flex="10">
-                <md-button class="md-icon-button " ng-click="remove_experience( experience )">
+                <md-button class="md-icon-button" ng-click="remove_subject( subject )">
                   <md-tooltip md-direction="left">
-                    Remove experiences
+                    Remove subject
                   </md-tooltip>
                   <i class="material-icons icon_red">remove_circle</i>
                 </md-button>
               </div> <!-- end of flex=10 -->
-            </div>
-            
-          </div> <!-- end of md-list-item-text -->
-        </md-list-item>
-      </md-list>
-    </md-card> 
+              
+            </div> <!-- end of md-list-item-text -->
+          </md-list-item>
+        </md-list>
+      </md-card>
 
-    
-  </div> <!-- end of flex -->
+      <md-card layout-padding layout-margin class="gutter margin_t_10">
+        <div layout="column" layout-fill>
+          <md-toolbar>
+            <div class="md-toolbar-tools">
+              <span layout-margin>Your Experience</span>
+              <!-- fill up the space between left and right area -->
+              
+            </div>
+          </md-toolbar>
+          <md-content>
+            <form ng-submit="add_experience()" name="experience_form">
+              <md-input-container class="md-icon-float md-block">
+                <!-- Use floating label instead of placeholder -->
+                <label>Title</label>
+                
+                <input ng-model="experience.title" type="text">
+              </md-input-container>
+
+              <md-input-container md-no-float class="md-block">
+                <textarea ng-model="experience.description" aria-label="Experience description" md-maxlength="150" rows="2" md-select-on-focus></textarea>
+                <!-- <input ng-model="experience.description" type="text" placeholder="Description"> -->
+              </md-input-container>
+              
+              
+
+
+              <div flex="10" >
+                <md-button type="submit" class="tricolor_button_hover "><i class="material-icons green_add_icon">add_box</i></md-button>
+              </div>
+              
+              
+            </form> <!-- end of add_experience() -->
+          </md-content>
+        </div>
+
+
+        
+        <md-divider></md-divider>
+        <md-list layout-padding>
+          <md-list-item ng-repeat="experience in experiences" >
+            <div class="md-list-item-text" layout="row" flex>
+
+              <div layout="row" layout-fill flex>
+                <div flex="90">
+                  <md-tooltip>
+                    {{ experience.description }}
+                  </md-tooltip>
+                  <md-icon><i class="material-icons icon_yellow">insert_emoticon</i></md-icon>
+                  <span>
+                    {{experience.title}} 
+                    
+                  </span>
+                </div> <!-- end of flex=90 -->
+
+                <div flex="10">
+                  <md-button class="md-icon-button " ng-click="remove_experience( experience )">
+                    <md-tooltip md-direction="left">
+                      Remove experiences
+                    </md-tooltip>
+                    <i class="material-icons icon_red">remove_circle</i>
+                  </md-button>
+                </div> <!-- end of flex=10 -->
+              </div>
+              
+            </div> <!-- end of md-list-item-text -->
+          </md-list-item>
+        </md-list>
+      </md-card>
+  </div>
+
   <div layout="row" layout-padding flex="100">
 
     <md-content layout-padding  class="lime_background white_text" flex="75">

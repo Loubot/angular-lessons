@@ -17,7 +17,12 @@ angular.module('lessons').controller('TeacherController', [
     $scope.photos = null
     # alertify.success "Got subjects"
 
-    
+    $scope.scrollevent = ( $e ) ->
+      
+      # animate_elems()
+      # @scrollPos = document.body.scrollTop or document.documentElement.scrollTop or 0
+      # $scope.$digest()
+      return
     
     $scope.upload = ( file ) ->
       Upload.upload(
