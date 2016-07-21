@@ -62,7 +62,7 @@ angular.module('lessons').controller('TeacherController', [
           console.log resp
           $scope.photos = resp.data.photos
           $scope.subjects = resp.data.subjects
-          $scope.experiences = resp.data.experiences
+          $scope.experience = resp.data.experience
           $scope.quals = resp.data.qualifications
           profile_pic()
         ).catch( ( err ) ->
@@ -82,7 +82,7 @@ angular.module('lessons').controller('TeacherController', [
           console.log resp
           $scope.photos = resp.data.photos
           $scope.subjects = resp.data.subjects
-          $scope.experiences = resp.data.experiences
+          $scope.experience = resp.data.experience
           $scope.quals = resp.data.qualifications
           profile_pic()
         ).catch( ( err ) ->
@@ -167,7 +167,7 @@ angular.module('lessons').controller('TeacherController', [
         $scope.experience
       ).then( ( resp ) ->
         console.log resp
-        $scope.experiences = resp.data.experiences
+        $scope.experience = resp.data.experience
         alertify.success "Experience added"
         $scope.experience.title = null
         $scope.experience.description = null
@@ -183,7 +183,7 @@ angular.module('lessons').controller('TeacherController', [
         experience
       ).then( ( resp ) ->
         console.log resp
-        $scope.experiences = resp.data.experiences
+        $scope.experience = resp.data.experience
         alertify.success "Removed experience"
       ).catch( ( err ) ->
         console.log err
@@ -233,12 +233,16 @@ angular.module('lessons').controller('TeacherController', [
       $mdBottomSheet.show(
         templateUrl: "sheets/overview_sheet.html"
         controller: "TeacherController"
+        scope: $scope
+        preserveScope: true
       )
 
     $scope.show_qualification_sheet = ->
       $mdBottomSheet.show(
         templateUrl: "sheets/qualification_sheet.html"
         controller: "TeacherController"
+        scope: $scope
+        preserveScope: true
       )
 
 
