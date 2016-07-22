@@ -6,31 +6,31 @@ class TeacherController < ApplicationController
     @teacher = Teacher.includes( :photos, :subjects, :experience, :qualifications, :location ).find( current_teacher.id )
     pp @teacher
     render json: { 
-                    teacher: @teacher, 
-                    photos: @teacher.photos, 
-                    subjects: @teacher.subjects, 
+                    teacher: @teacher.as_json, 
+                    photos: @teacher.photos.as_json, 
+                    subjects: @teacher.subjects.as_json, 
                     experience: @teacher.experience,
-                    qualifications: @teacher.qualifications,
-                    location: @teacher.location
+                    qualifications: @teacher.qualifications.as_json,
+                    location: @teacher.location.as_json
                   }
   end
 
   def update
     @teacher = Teacher.find( params[:id] )
     @teacher.update_attributes( teacher_params )
-    render json: { :status => :updated, teacher: @teacher }
+    render json: { :status => :updated, teacher: @teacher.as_json }
   end
 
   def profile
     @teacher = Teacher.includes( :photos, :subjects, :experience, :qualifications, :location ).find( params[:id] )
     pp @teacher
     render json: { 
-                    teacher: @teacher, 
-                    photos: @teacher.photos, 
-                    subjects: @teacher.subjects, 
-                    experience: @teacher.experience,
-                    qualifications: @teacher.qualifications,
-                    location: @teacher.location
+                    teacher: @teacher.as_json, 
+                    photos: @teacher.photos.as_json, 
+                    subjects: @teacher.subjects.as_json, 
+                    experience: @teacher.experience.as_json,
+                    qualifications: @teacher.qualifications.as_json,
+                    location: @teacher.location.as_json
                   }
 
   end

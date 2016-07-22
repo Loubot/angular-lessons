@@ -10,3 +10,11 @@ Category.create(name: 'Music')
 Subject.create(name: 'Guitar', category_id: 1)
 Subject.create(name: 'Drums', category_id: 1)
 Subject.create(name: 'Piano', category_id: 1)
+
+Teacher.create( first_name: "Bob", last_name: "Builder", password: "Football1", email: "lllouis1@yahoo.com")
+Teacher.create( first_name: "Tim", last_name: "Shanks", password: "Football1", email: "lllouis2@yahoo.com")
+Teacher.create( first_name: "Karl", last_name: "Beans", password: "Football1", email: "lllouis3@yahoo.com")
+
+Teacher.all.each do |t|
+  t.subjects << Subject.first
+end

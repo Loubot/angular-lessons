@@ -2,23 +2,22 @@ class ExperienceController < ApplicationController
   before_action :authenticate_teacher!
 
   def create
-    teacher = Teacher.includes( :experiences ).find( current_teacher.id )
-    experience = Experience.create( experience_params )
-
-    teacher.experiences << experience
-    teacher.save
-    render json: { experiences: teacher.experiences }
+    experience = Experience.find_or_create_by( teacher_id: current_teacher.id )
+    experience.update_attributes( experience_params )
+    if experience.save
+      render json: { experience: experience.as_json }
+    end
   end
 
   def destroy
-    teacher = Teacher.includes( :experiences ).find( current_teacher.id )
+    teacher = Teacher.includes( :experience ).find( current_teacher.id )
     # experience = Experience.find( params[:id] )
-    teacher.experiences.delete( experience_params[:id] )
-    render json: { experiences: teacher.experiences }
+    teacher.experience.delete( experience_params[:id] )
+    render json: { experience: teacher.experience.as_json }
   end
 
   private
     def experience_params
-      params.permit( :title, :description, :id )
+      params.permit( :description, :id, :teacher_id )
     end
 end

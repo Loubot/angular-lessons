@@ -47,7 +47,7 @@ class Teacher < ActiveRecord::Base
           :omniauthable
   has_many :photos, as: :imageable, dependent: :destroy
 
-  has_and_belongs_to_many :subjects, touch: true
+  has_and_belongs_to_many :subjects, -> { uniq }, touch: true
 
   has_one :experience, dependent: :destroy
 
@@ -55,4 +55,8 @@ class Teacher < ActiveRecord::Base
   
   has_many :qualifications, dependent: :destroy
   include DeviseTokenAuth::Concerns::User
+
+  validates :email,  uniqueness: { case_sensitive: false }
+  validates :email, :first_name, :last_name, presence: true
+  validates_confirmation_of :password, message: "should match verification"
 end

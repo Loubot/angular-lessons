@@ -162,6 +162,7 @@ angular.module('lessons').controller('TeacherController', [
     ####################### Experience ###################################
 
     $scope.add_experience = ->
+      $scope.experience.teacher_id = $rootScope.USER.id
       COMMS.POST(
         "/teacher/#{ $rootScope.USER.id }/experience"
         $scope.experience
@@ -169,7 +170,6 @@ angular.module('lessons').controller('TeacherController', [
         console.log resp
         $scope.experience = resp.data.experience
         alertify.success "Experience added"
-        $scope.experience.title = null
         $scope.experience.description = null
 
       ).catch( ( err ) ->
