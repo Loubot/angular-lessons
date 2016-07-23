@@ -57,6 +57,7 @@ angular.module('lessons').config ($stateProvider, $urlRouterProvider) ->
   $stateProvider.state 'view_teacher',
     url: '/view-teacher/:id'
     templateUrl: "user/view_teacher.html"
+    controller: "ViewTeacherController"
 
   $stateProvider.state 'teacher_area',
     url: "/teacher-area/:id"
