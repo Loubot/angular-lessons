@@ -37,7 +37,7 @@ class TeacherController < ApplicationController
 
   def show_teacher
     teacher = Teacher.includes( :photos, :subjects, :location, :experience, :qualifications )\
-              .select( :id, :email, :first_name, :last_name, :profile )\
+              .select( :id, :email, :first_name, :last_name, :profile, :overview )\
               .find( params[:teacher_id])
     render json: { teacher: teacher.as_json( include: [ :photos, :subjects, :location, :experience, :qualifications ] ) }
   end

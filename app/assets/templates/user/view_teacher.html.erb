@@ -22,8 +22,8 @@
         </md-card-title-text>
       </md-card-title>
       <md-card-actions layout="row" layout-align="start center">
-        <md-button>Action 1</md-button>
-        <md-button>Action 2</md-button>
+        <md-button class="md-raised md-primary white_text ">Book a lesson</md-button>
+        <md-button ><i class="material-icons">history</i></md-button>
         <md-card-icon-actions>
           <md-button class="md-icon-button" aria-label="icon">
             <md-icon md-svg-icon="icon"></md-icon>
@@ -40,22 +40,67 @@
 
 
   <div flex="70">
+
+
+    <!--  map div -->
+    <div id="map" class="margin_t_10" ></div>
+
+    <!-- end of map div -->
+
     <md-content>
       <md-card>
         <md-card-title>
           <md-card-title-text>
-            <span class="md-headline">Card with image</span>
-            <span class="md-subhead">Medium</span>
+            <span class="md-headline">Overview</span>
           </md-card-title-text>
-          <md-card-title-media>
-            <div class="md-media-md card-media"></div>
-          </md-card-title-media>
+          
         </md-card-title>
-        <md-card-actions layout="row" layout-align="end center">
-          <md-button>Action 1</md-button>
-          <md-button>Action 2</md-button>
-        </md-card-actions>
+        <md-card-content>
+          
+           {{ teacher.overview }}
+        </md-card-content>
+      </md-card>
+    </md-content>
+
+    <md-content>
+      <md-card>
+        <md-card-title>
+          <md-card-title-text>
+            <span class="md-headline">Experience</span>
+          </md-card-title-text>
+          
+        </md-card-title>
+        <md-card-content>
+          
+           {{ teacher.experience.description }}
+        </md-card-content>
+      </md-card>
+    </md-content>
+
+    <md-content ng-if"teacher.qualifications">
+      <md-toolbar>
+        <div class="md-toolbar-tools">
+          <span layout-margin>Qualifications</span>
+          <!-- fill up the space between left and right area -->
+          
+        </div>
+      </md-toolbar>
+      <md-card ng-repeat="qual in teacher.qualifications">
+        <md-card-title>
+          <md-card-title-text>
+            <span class="md-headline"><strong>Title: </strong>{{ qual.title }}</span>
+          </md-card-title-text>
+          
+        </md-card-title>
+        <md-card-content>
+          
+           <strong>School: </strong>{{ qual.school }}
+        </md-card-content>
       </md-card>
     </md-content>
   </div> <!-- end of flex="70" -->
 </div>
+
+
+ <script src="https://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyBpOd04XM28WtAk1LcJyhlQzNW6P6OT2Q0&callback=initMap"
+        async defer></script>

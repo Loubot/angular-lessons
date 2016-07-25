@@ -74,11 +74,12 @@ angular.module('lessons').config ($stateProvider, $urlRouterProvider) ->
     templateUrl: 'static/how_it_works.html'
     controller: "UserController"
 
-angular.module('lessons').config ( $authProvider ) ->
+angular.module('lessons').config ( $authProvider, RESOURCES ) ->
   $authProvider.configure({
-    apiUrl: "http://localhost:3000/api"
+    apiUrl: RESOURCES.DOMAIN
   })
 
+############## Theme #######################################
 angular.module('lessons').config ( $mdThemingProvider ) ->
   $mdThemingProvider.theme('default')
     .primaryPalette('green')
@@ -91,7 +92,7 @@ angular.module('lessons').service 'USER', ( $http, $rootScope, RESOURCES, $q ) -
     $q ( resolve, reject ) ->
       $http(
         method: 'GET'
-        url: "http://localhost:3000/api/teacher/get"
+        url: "#{ RESOURCES.DOMAIN }/teacher/get"
         headers: { "Content-Type": "application/json" }
         # params: 
         #   email: 

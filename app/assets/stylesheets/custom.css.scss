@@ -101,6 +101,10 @@ html, body{
   margin-top: 0px !important;
 }
 
+.margin_t_10{
+  margin-top: 10px !important;
+}
+
 .gutter{
   min-width: 75% !important;
   max-width: 75%;
@@ -111,9 +115,7 @@ html, body{
 .clear_both{
   clear: both !important;
 }
-.margin_t_10{
-  margin-top: 10px !important;
-}
+
 
 .percent_10_w{
   width: 10%;
@@ -206,6 +208,7 @@ html, body{
   height: 400px; 
   width: 100%;
 }
+
 .location_results{
   max-height: 200px;
   overflow-y: scroll;
