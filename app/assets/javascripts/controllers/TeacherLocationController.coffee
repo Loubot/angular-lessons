@@ -62,8 +62,6 @@ angular.module('lessons').controller( "TeacherLocationController" , [
 
       input = document.getElementById('pac-input')
       $scope.searchBox = new google.maps.places.SearchBox(input)
-      console.log "SearchBox"
-      console.log $scope.searchBox
       $scope.map.controls[google.maps.ControlPosition.TOP_LEFT].push(input)
       geocoder = new google.maps.Geocoder
       $scope.searchBox.addListener('places_changed', ->
