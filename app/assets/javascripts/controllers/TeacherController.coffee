@@ -59,6 +59,7 @@ angular.module('lessons').controller('TeacherController', [
           "/teacher/profile"
           id: $rootScope.USER.id
         ).then( ( resp ) ->
+          console.log "got teacher"
           console.log resp
           $scope.photos = resp.data.photos
           $scope.subjects = resp.data.subjects
@@ -108,7 +109,6 @@ angular.module('lessons').controller('TeacherController', [
       for photo in $scope.photos
         # console.log photo.avatar.url
         if parseInt( photo.id ) == parseInt( $rootScope.USER.profile )
-          console.log photo
           $scope.profile = photo
           console.log $scope.profile
           $scope.profile
@@ -124,7 +124,7 @@ angular.module('lessons').controller('TeacherController', [
       ).then( ( resp ) ->
         console.log resp
         # alertify.success "Got subjects"
-        $scope.subjects = resp.data
+        $scope.search_subjects = resp.data
         return resp.data
       ).catch( ( err ) ->
         console.log err
@@ -147,7 +147,7 @@ angular.module('lessons').controller('TeacherController', [
 
     $scope.remove_subject = ( subject ) ->
       COMMS.DELETE(
-        '/teacher/remove-subject'
+        "/teacher/#{ $rootScope.USER.id }/remove-subject"
         subject: subject
       ).then( ( resp ) ->
         console.log resp

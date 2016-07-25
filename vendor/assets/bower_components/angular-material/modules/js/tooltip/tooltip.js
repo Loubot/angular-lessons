@@ -2,7 +2,7 @@
  * Angular Material Design
  * https://github.com/angular/material
  * @license MIT
- * v1.1.0-rc4-master-f9738f5
+ * v1.1.0-rc4-master-c26842a
  */
 (function( window, angular, undefined ){
 "use strict";
@@ -58,13 +58,7 @@ function MdTooltipDirective($timeout, $window, $$rAF, $document, $mdUtil, $mdThe
       autohide: '=?mdAutohide',
       direction: '@?mdDirection'    // only expect raw or interpolated string value; not expression
     },
-    compile: function(tElement, tAttr) {
-      if (!tAttr.mdDirection) {
-        tAttr.$set('mdDirection', 'bottom');
-      }
-
-      return postLink;
-    }
+    link: postLink
   };
 
   function postLink(scope, element, attr) {

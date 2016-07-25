@@ -89,6 +89,10 @@ html, body{
   font-size: x-large;
 }
 
+.no_padding{
+  padding: 0px !important;
+}
+
 .padding_t_10{
   padding-top: 10px !important;
 }
@@ -104,6 +108,9 @@ html, body{
   margin-right: auto !important;
 }
 
+.clear_both{
+  clear: both !important;
+}
 .margin_t_10{
   margin-top: 10px !important;
 }

@@ -17,5 +17,6 @@
 
 @import "ng-alertify/dist/ng-alertify.css";
 @import "bootstrap/dist/css/bootstrap.css";
+@import "angular-material/angular-material.css";
 @import "ng-responsive-calendar/dist/css/calendar.css";
 @import "angular-loading-bar/src/loading-bar.css"

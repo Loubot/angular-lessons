@@ -1,81 +1,89 @@
-<div layout="row" layout-wrap flex>
-  
-  <div flex="50">
-    <md-card >
-      <md-card-header>
-        <md-card-avatar>
-          <img ng-src="{{ profile.avatar.thumb.url }}" class="md-user-avatar ">
-        </md-card-avatar>
-        <md-card-header-text>
-          <span class="md-title">{{ USER.first_name }} {{ USER.last_name }}</span>
-          <span class="md-subhead">{{ USER.first_name }} {{ USER.last_name }}</span>
-        </md-card-header-text>
-      </md-card-header>
-      <img ng-src="{{ profile.avatar.url }}" 
-          class="md-card-image" 
-          alt="{{ USER.first_name }} profile pic">
-      <md-card-title>
-        <md-card-title-text>
-          <span class="md-headline">Add pictures</span>
-          <span class="md-subhead">Click camera below</span>
-        </md-card-title-text>
-      </md-card-title>
-      <md-card-actions layout="row" layout-align="start center">
-        <md-button  
-          ng-model="file" 
-          ngf-select="upload()">
-            <i class="material-icons">add_a_photo</i>
-        </md-button>
-        <md-button>Action 2</md-button>
-        <md-card-icon-actions>
-          <md-button class="md-icon-button" aria-label="icon">
-            <md-icon md-svg-icon="icon"></md-icon>
+<div >
+  <div layout="row">
+    <div flex="50">
+      <md-card >
+        <md-card-header>
+          <md-card-avatar>
+            <img ng-src="{{ profile.avatar.thumb.url }}" class="md-user-avatar ">
+          </md-card-avatar>
+          <md-card-header-text>
+            <span class="md-title">{{ USER.first_name }} {{ USER.last_name }}</span>
+            <span class="md-subhead">{{ USER.first_name }} {{ USER.last_name }}</span>
+          </md-card-header-text>
+        </md-card-header>
+        <img ng-src="{{ profile.avatar.url }}" 
+            class="md-card-image" 
+            alt="{{ USER.first_name }} profile pic">
+        <md-card-title>
+          <md-card-title-text>
+            <span class="md-headline">Add pictures</span>
+            <span class="md-subhead">Click camera below</span>
+          </md-card-title-text>
+        </md-card-title>
+        <md-card-actions layout="row" layout-align="start center">
+          <md-button  
+            ng-model="file" 
+            ngf-select="upload()">
+              <i class="material-icons">add_a_photo</i>
           </md-button>
-        </md-card-icon-actions>
-      </md-card-actions>
-      <md-card-content>
-        <p>
-         Card content
-        </p>
-      </md-card-content>
-    </md-card> 
-  </div> <!-- end of flex -->
+          <md-button>Action 2</md-button>
+          <md-card-icon-actions>
+            <md-button class="md-icon-button" aria-label="icon">
+              <md-icon md-svg-icon="icon"></md-icon>
+            </md-button>
+          </md-card-icon-actions>
+        </md-card-actions>
+        <md-card-content>
+          <p>
+           Card content
+          </p>
+        </md-card-content>
+      </md-card> 
+    </div> <!-- end of flex -->
 
-  <div layout-padding flex="auto">
-    <md-card flex ng-if="photos.length>0">
-      <md-grid-list md-cols="3" md-row-height="50px">
-        <md-grid-tile class="gray"
-            md-rowspan="3" md-colspan="1" md-colspan-sm="1" md-colspan-xs="1" ng-repeat="photo in photos">
-          <img ng-src="{{ photo.avatar.url }}">
-          <md-grid-tile-footer>
-            <md-menu>
-         <!-- Trigger element is a md-button with an icon -->
-             <md-button ng-click="$mdOpenMenu($event)" class="md-icon-button" aria-label="Open sample menu">
-               <i class="material-icons">info</i>
-             </md-button>
-             <md-menu-content width="4">
-                <md-menu-item>
-                  <md-button ng-click="make_profile(photo.id)">Make profile?</md-button>
-                </md-menu-item>
-             </md-menu-content>
-            </md-menu>
-          </md-grid-tile-footer>
-        </md-grid-tile>
+    <div flex="50">
+      <md-card ng-if="photos.length>0">
+        <md-grid-list md-cols="3" md-row-height="6:2">
+          <md-grid-tile class="gray"
+              md-rowspan="3" md-colspan="1" md-colspan-sm="1" md-colspan-xs="1" ng-repeat="photo in photos">
+            <img ng-src="{{ photo.avatar.url }}">
+            <md-grid-tile-footer>
+              <md-menu>
+           <!-- Trigger element is a md-button with an icon -->
+               <md-button ng-click="$mdOpenMenu($event)" class="md-icon-button" aria-label="Open sample menu">
+                 <i class="material-icons">info</i>
+               </md-button>
+               <md-menu-content width="4">
+                  <md-menu-item>
+                    <md-button ng-click="make_profile(photo.id)">Make profile?</md-button>
+                  </md-menu-item>
+               </md-menu-content>
+              </md-menu>
+            </md-grid-tile-footer>
+          </md-grid-tile>
+          
+        </md-grid-list>
         
-      </md-grid-list>
-      
-    </md-card>    
+      </md-card>    
 
-  </div> <!-- end of flex -->
+    </div> 
+  </div>
+</div> 
+
+<div layout="column" layout-fill>
   
-  <div layout="column" layout-padding layout-fill flex="100" >
+  
+  
+  <div layout-padding layout-fill flex >
    
     <md-card layout-padding flex class="gutter"> <!-- SUBJECT select -->
-      <md-autocomplete md-selected-item="selected_subject" md-search-text="searchText" 
-            md-items="subject in get_subjects()" md-item-text="subject.name"
+      <md-autocomplete md-selected-item="selected_subject" 
+            md-search-text="searchText" 
+            md-items="subject in get_subjects()" 
+            md-item-text="subject.name"
             md-selected-item-change="select_subject( subject )"
             md-delay="500"
-            class="black_text" placeholder="Choose your subjects">
+            class="black_text no_padding" placeholder="Choose your subjects">
         <md-item-template>
           <span md-highlight-text="searchText">{{subject.name}}</span>
         </md-item-template>
@@ -155,7 +163,7 @@
     <!-- END OF OVERVIEW -->
 
     <!-- QUALIFICATIONS -->
-    <md-content class="gutter margin_t_10" flex="90">
+    <md-content class="gutter margin_t_10" >
       <h3>Qualifications</h3>
       <md-divider></md-divider>
       
