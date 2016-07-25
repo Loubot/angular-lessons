@@ -17,63 +17,64 @@ angular.module('lessons').controller( "TeacherLocationController" , [
 
     
 
-    window.initMap = ->
-      USER.get_user().then( ( user ) ->
-        if $rootScope.associations? && $rootScope.associations.location
+    
+    
+    USER.get_user().then( ( user ) ->
+      if $rootScope.associations? && $rootScope.associations.location
 
-          $scope.map = new google.maps.Map(document.getElementById('map'), {
-            center: 
-              lat: $rootScope.associations.location.latitude
-              lng: $rootScope.associations.location.longitude
-            zoom: 15
-            mapTypeId: google.maps.MapTypeId.ROADMAP
-          })
+        $scope.map = new google.maps.Map(document.getElementById('map'), {
+          center: 
+            lat: $rootScope.associations.location.latitude
+            lng: $rootScope.associations.location.longitude
+          zoom: 15
+          mapTypeId: google.maps.MapTypeId.ROADMAP
+        })
 
-          console.log 'yep'
-          marker = new google.maps.Marker
-            position: 
-              lat:    $rootScope.associations.location.latitude
-              lng:    $rootScope.associations.location.longitude
-            title:  $rootScope.associations.location.name
-            map:    $scope.map
-        else
-          $scope.map = new google.maps.Map(document.getElementById('map'), {
-            center: 
-              lat: 53.416185
-              lng: -7.950045
-            zoom: 8
-            mapTypeId: google.maps.MapTypeId.ROADMAP
-          })
+        console.log 'yep'
+        marker = new google.maps.Marker
+          position: 
+            lat:    $rootScope.associations.location.latitude
+            lng:    $rootScope.associations.location.longitude
+          title:  $rootScope.associations.location.name
+          map:    $scope.map
+      else
+        $scope.map = new google.maps.Map(document.getElementById('map'), {
+          center: 
+            lat: 53.416185
+            lng: -7.950045
+          zoom: 8
+          mapTypeId: google.maps.MapTypeId.ROADMAP
+        })
 
-      
+    
 
-        $scope.map.addListener( 'click', ( position ) ->
-          console.log position.latLng.lat()
-          console.log position.latLng.lng()
-          geocoder.geocode( 'location': { lat: position.latLng.lat(), lng: position.latLng.lng() }, ( results, status ) ->
+      $scope.map.addListener( 'click', ( position ) ->
+        console.log position.latLng.lat()
+        console.log position.latLng.lng()
+        geocoder.geocode( 'location': { lat: position.latLng.lat(), lng: position.latLng.lng() }, ( results, status ) ->
 
-            console.log results
-            console.log status
-            $scope.addresses = results
-            $scope.$apply()
-          )
-        )
-
-        input = document.getElementById('pac-input')
-        $scope.searchBox = new google.maps.places.SearchBox(input)
-        $scope.map.controls[google.maps.ControlPosition.TOP_LEFT].push(input)
-        geocoder = new google.maps.Geocoder
-        $scope.searchBox.addListener('places_changed', ->
-          places = $scope.searchBox.getPlaces()
-          console.log places
-          $scope.map.setCenter(
-            lat: places[0].geometry.location.lat()
-            lng: places[0].geometry.location.lng()
-          )
-          $scope.map.setZoom( 15 )
-          
+          console.log results
+          console.log status
+          $scope.addresses = results
+          $scope.$apply()
         )
       )
+
+      input = document.getElementById('pac-input')
+      $scope.searchBox = new google.maps.places.SearchBox(input)
+      $scope.map.controls[google.maps.ControlPosition.TOP_LEFT].push(input)
+      geocoder = new google.maps.Geocoder
+      $scope.searchBox.addListener('places_changed', ->
+        places = $scope.searchBox.getPlaces()
+        console.log places
+        $scope.map.setCenter(
+          lat: places[0].geometry.location.lat()
+          lng: places[0].geometry.location.lng()
+        )
+        $scope.map.setZoom( 15 )
+        
+      )
+    )
 
       
 

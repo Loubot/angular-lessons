@@ -46,24 +46,24 @@ angular.module('lessons').controller( 'ViewTeacherController', [
           title: "#{ $scope.teacher.first_name } location"
         )
 
-    window.initMap = ->
-      USER.get_user().then( ( user ) ->
-        COMMS.GET(
-          "/teacher/#{ $stateParams.id }/show-teacher"
-        ).then( ( resp ) ->
-          console.log resp
-          $scope.teacher = resp.data.teacher
-          set_profile()
-          create_map()
+    
+    USER.get_user().then( ( user ) ->
+      COMMS.GET(
+        "/teacher/#{ $stateParams.id }/show-teacher"
+      ).then( ( resp ) ->
+        console.log resp
+        $scope.teacher = resp.data.teacher
+        set_profile()
+        create_map()
 
-         
+       
 
 
-        ).catch( ( err ) ->
-          console.log err
-          alertify.error err.data.errors.full_messages
-        )
+      ).catch( ( err ) ->
+        console.log err
+        alertify.error err.data.errors.full_messages
       )
+    )
       
 
 
