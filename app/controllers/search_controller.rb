@@ -1,4 +1,5 @@
 class SearchController < ApplicationController
+  include SearchHelper
   require 'pp'
   def search
     p "search controller"
@@ -23,5 +24,8 @@ class SearchController < ApplicationController
     def search_params
       params.permit( :name, :location, :search )
     end
+
+
+
 
 end

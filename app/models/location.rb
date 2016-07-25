@@ -21,14 +21,9 @@ class Location < ActiveRecord::Base
 
   validates :longitude, :latitude, numericality: { only_float: true }
 
-  # geocoded_by :full_street_address
+  acts_as_mappable :default_units => :kms,
+                   :lat_column_name => :latitude,
+                   :lng_column_name => :longitude
 
-
-  # after_create :geocode
-  # reverse_geocoded_by :latitude, :longitude
-  # before_create :reverse_geocode  # auto-fetch address
-
-  def full_street_address
-    self.address
-  end
+  
 end

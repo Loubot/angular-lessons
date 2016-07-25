@@ -81,6 +81,10 @@ GEM
       rails (< 6)
     erubis (2.7.0)
     execjs (2.7.0)
+    geokit (1.10.0)
+    geokit-rails (2.2.0)
+      geokit (~> 1.5)
+      rails (>= 3.0)
     globalid (0.3.6)
       activesupport (>= 4.1.0)
     hashie (3.4.4)
@@ -211,6 +215,7 @@ DEPENDENCIES
   coffee-rails (~> 4.1.0)
   date_validator
   devise_token_auth
+  geokit-rails
   jbuilder (~> 2.0)
   jquery-rails
   mini_magick

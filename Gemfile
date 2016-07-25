@@ -75,3 +75,5 @@ gem 'validates_overlap', '~> 0'
 gem 'carrierwave'
 
 gem "mini_magick"
+
+gem 'geokit-rails'
