@@ -13,8 +13,12 @@
       <img ng-src="{{ profile.avatar.url }}" class="md-card-image" alt="image caption">
       <md-card-title>
         <md-card-title-text>
-          <span class="md-headline">Card headline</span>
-          <span class="md-subhead">Card subheader</span>
+          <span class="md-headline">Subject(s)</span>
+          <md-chips>
+            <md-chip ng-repeat="subject in teacher.subjects">{{ subject.name }}</md-chip>           
+          </md-chips>
+          <span class="md-headline">Address</span>
+          {{ teacher.location.address }}
         </md-card-title-text>
       </md-card-title>
       <md-card-actions layout="row" layout-align="start center">
@@ -33,4 +37,25 @@
       </md-card-content>
     </md-card>
   </div> <!-- end of flex=30 -->
+
+
+  <div flex="70">
+    <md-content>
+      <md-card>
+        <md-card-title>
+          <md-card-title-text>
+            <span class="md-headline">Card with image</span>
+            <span class="md-subhead">Medium</span>
+          </md-card-title-text>
+          <md-card-title-media>
+            <div class="md-media-md card-media"></div>
+          </md-card-title-media>
+        </md-card-title>
+        <md-card-actions layout="row" layout-align="end center">
+          <md-button>Action 1</md-button>
+          <md-button>Action 2</md-button>
+        </md-card-actions>
+      </md-card>
+    </md-content>
+  </div> <!-- end of flex="70" -->
 </div>

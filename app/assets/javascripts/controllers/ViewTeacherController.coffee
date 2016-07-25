@@ -11,10 +11,17 @@ angular.module('lessons').controller( 'ViewTeacherController', [
   "alertify"
   ( $scope, $rootScope, $state, $stateParams, USER, $filter, COMMS, alertify ) ->
     console.log "ViewTeacherController"
+    $scope.scrollevent = ( $e ) ->
+      
+      # animate_elems()
+      # @scrollPos = document.body.scrollTop or document.documentElement.scrollTop or 0
+      # $scope.$digest()
+      return
+
 
     USER.get_user().then( ( user ) ->
       COMMS.GET(
-        "/teacher/#{ $rootScope.USER.id }/show-teacher"
+        "/teacher/#{ $stateParams.id }/show-teacher"
       ).then( ( resp ) ->
         console.log resp
         $scope.teacher = resp.data.teacher
@@ -30,9 +37,9 @@ angular.module('lessons').controller( 'ViewTeacherController', [
       for photo in $scope.teacher.photos
         # console.log photo.avatar.url
         if parseInt( photo.id ) == parseInt( $scope.teacher.profile )
-          console.log photo
+          # console.log photo
           $scope.profile = photo
-          console.log $scope.profile
+          # console.log $scope.profile
           $scope.profile
 
     
