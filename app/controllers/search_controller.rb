@@ -3,11 +3,10 @@ class SearchController < ApplicationController
   require 'pp'
   def search
     p "search controller"
-    subject = Subject.includes(:teachers).where('name LIKE ?', "%#{ params[:name] }%").select( [ :name, :id ] ).first
-    p "Subject found: "
-    pp subject
-    teachers = subject.teachers.select( "email, id, first_name, last_name" )
-    render json: { teachers: teachers.as_json(include: [ :photos, :location, :subjects ]) }
+    
+    teachers = search_query( search_params )
+    
+    render json: { teachers: teachers }
   end
 
   def search_subjects
