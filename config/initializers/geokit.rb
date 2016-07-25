@@ -1,0 +1,1 @@
+Geokit::Geocoders::GoogleGeocoder.api_key = 'AIzaSyBpOd04XM28WtAk1LcJyhlQzNW6P6OT2Q0'
