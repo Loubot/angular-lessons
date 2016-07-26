@@ -26,6 +26,11 @@ html, body{
   color: #111 !important;
 }
 
+.center_block{
+  display: block !important;
+  margin: 0 auto !important;
+}
+
 .grey_green_background{
   background-color: #d7eacb;
 }
@@ -76,8 +81,6 @@ html, body{
 }
 
 .slide_container{
-  margin-left: auto !important;
-  margin-right: auto !important;
   min-height: 40vw;
   min-width: 100%;
 }
