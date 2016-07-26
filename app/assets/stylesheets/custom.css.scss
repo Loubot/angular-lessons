@@ -75,6 +75,18 @@ html, body{
   border-radius: 50%;
 }
 
+.slide_container{
+  margin-left: auto !important;
+  margin-right: auto !important;
+  min-height: 40vw;
+  min-width: 100%;
+}
+
+.slide{
+  width: 40vw;
+  max-height: 40vw;
+}
+
 .md-media-sm{height:80px;width:80px}
 .boxWithHeight {
   box-sizing: border-box;

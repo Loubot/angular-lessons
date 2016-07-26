@@ -11,7 +11,6 @@ angular.module('lessons').controller( 'ViewTeacherController', [
   "alertify"
   ( $scope, $rootScope, $state, $stateParams, USER, $filter, COMMS, alertify ) ->
     console.log "ViewTeacherController"
-    console.log $state
     $scope.scrollevent = ( $e ) ->
       
       # animate_elems()
@@ -52,7 +51,7 @@ angular.module('lessons').controller( 'ViewTeacherController', [
       COMMS.GET(
         "/teacher/#{ $stateParams.id }/show-teacher"
       ).then( ( resp ) ->
-        console.log resp
+        # console.log resp
         alertify.success "Got teacher info"
         $scope.teacher = resp.data.teacher
         set_profile()
@@ -98,6 +97,7 @@ angular.module('lessons').controller( 'ViewTeacherController', [
           return false
         $scope.index = ++$scope.index 
         $scope.index = 1 if $scope.index == $scope.teacher.photos.length + 1
+        $scope.$apply()
         console.log $scope.index
         return
       ), 3000 )

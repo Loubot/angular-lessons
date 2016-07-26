@@ -101,7 +101,10 @@
   </div> <!-- end of flex="70" -->
 
   <div flex="70" flex-offset="30">
-    <img ng-repeat="slide in slides" class="slide" ng-src="{{slide.image}}" ng-show="slide.index==index">        
+    <div class="slide_container">
+      <img ng-repeat="slide in slides" class="slide" ng-src="{{slide.image}}" ng-show="slide.index==index">    
+    </div> <!-- end of slide container -->
+        {{ index }}
 
   </div> <!-- end of flex = 100 -->
 </div> <!-- end of row -->
