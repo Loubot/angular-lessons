@@ -11,6 +11,7 @@ angular.module('lessons').controller( 'ViewTeacherController', [
   "alertify"
   ( $scope, $rootScope, $state, $stateParams, USER, $filter, COMMS, alertify ) ->
     console.log "ViewTeacherController"
+    console.log $state
     $scope.scrollevent = ( $e ) ->
       
       # animate_elems()
@@ -52,13 +53,11 @@ angular.module('lessons').controller( 'ViewTeacherController', [
         "/teacher/#{ $stateParams.id }/show-teacher"
       ).then( ( resp ) ->
         console.log resp
+        alertify.success "Got teacher info"
         $scope.teacher = resp.data.teacher
         set_profile()
         create_map()
-
-       
-
-
+        create_fotorama()
       ).catch( ( err ) ->
         console.log err
         alertify.error err.data.errors.full_messages
@@ -78,6 +77,30 @@ angular.module('lessons').controller( 'ViewTeacherController', [
           $scope.profile = photo
           # console.log $scope.profile
           $scope.profile
+
+
+    #################### fotrama ########################################
+    create_fotorama = ->
+      $scope.slides = []
+      for photo, index in $scope.teacher.photos
+        $scope.slides.push(
+          image: photo.avatar.url
+          index: index + 1
+          description: "Image #{ index + 1 }"
+        )
+
+      console.log $scope.slides
+      $scope.index = 1
+
+      id = setInterval((->
+        if $state.$current.name != "view_teacher"
+          clearInterval( id )
+          return false
+        $scope.index = ++$scope.index 
+        $scope.index = 1 if $scope.index == $scope.teacher.photos.length + 1
+        console.log $scope.index
+        return
+      ), 3000 )
 
     
 ])

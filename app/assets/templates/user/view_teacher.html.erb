@@ -1,5 +1,5 @@
-<div layout="row" flex>
-  <div flex="30">
+<div layout="row" layout-wrap  flex>
+  <div flex="30" layout-fill>
     <md-card>
       <md-card-header>
         <md-card-avatar>
@@ -99,4 +99,9 @@
       </md-card>
     </md-content>
   </div> <!-- end of flex="70" -->
-</div>
+
+  <div flex="70" flex-offset="30">
+    <img ng-repeat="slide in slides" class="slide" ng-src="{{slide.image}}" ng-show="slide.index==index">        
+
+  </div> <!-- end of flex = 100 -->
+</div> <!-- end of row -->
