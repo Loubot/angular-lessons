@@ -98,7 +98,6 @@ angular.module('lessons').controller( 'ViewTeacherController', [
         $scope.index = ++$scope.index 
         $scope.index = 1 if $scope.index == $scope.teacher.photos.length + 1
         $scope.$apply()
-        console.log $scope.index
         return
       ), 3000 )
 

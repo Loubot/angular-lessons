@@ -27,7 +27,6 @@
 //= require ng-responsive-calendar/dist/js/calendar-tpls.js
 //= require angular-simple-logger/dist/angular-simple-logger
 //= require angular-loading-bar/src/loading-bar
-//= require ap.fotorama/ap.fotorama.js
 //= require app
 //= require controllers/WelcomeController
 //= require controllers/UserController
