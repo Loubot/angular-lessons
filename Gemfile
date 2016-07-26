@@ -77,3 +77,5 @@ gem 'carrierwave'
 gem "mini_magick"
 
 gem 'geokit-rails'
+
+gem "fog-aws"
