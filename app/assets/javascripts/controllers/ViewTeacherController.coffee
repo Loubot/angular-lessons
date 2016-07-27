@@ -9,7 +9,8 @@ angular.module('lessons').controller( 'ViewTeacherController', [
   "$filter"
   "COMMS"
   "alertify"
-  ( $scope, $rootScope, $state, $stateParams, USER, $filter, COMMS, alertify ) ->
+  "$mdDialog"
+  ( $scope, $rootScope, $state, $stateParams, USER, $filter, COMMS, alertify, $mdDialog ) ->
     console.log "ViewTeacherController"
     $scope.scrollevent = ( $e ) ->
       
@@ -60,6 +61,7 @@ angular.module('lessons').controller( 'ViewTeacherController', [
     ).catch( ( err ) ->
       console.log err
       alertify.error err.data.errors.full_messages
+      $state.go 'welcome'
     )
     
       
@@ -102,4 +104,13 @@ angular.module('lessons').controller( 'ViewTeacherController', [
       ), 3000 )
 
     
+    ####################### Message dialog #############################
+
+    $scope.open_message_dialog = ->
+      $mdDialog.show(
+        clickOutsideToClose: true
+        scope: $scope
+        preserveScope: true
+        templateUrl: "dialogs/message_teacher_dialog.html"
+      )
 ])

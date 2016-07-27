@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160113214504) do
+ActiveRecord::Schema.define(version: 20160111225334) do
 
   create_table "categories", force: :cascade do |t|
     t.string   "name"
@@ -20,8 +20,6 @@ ActiveRecord::Schema.define(version: 20160113214504) do
   end
 
   create_table "conversations", force: :cascade do |t|
-    t.integer  "teacher_id"
-    t.integer  "student_id"
     t.string   "teacher_email"
     t.string   "student_email"
     t.string   "teacher_name"
@@ -31,8 +29,7 @@ ActiveRecord::Schema.define(version: 20160113214504) do
   end
 
   add_index "conversations", ["student_email"], name: "index_conversations_on_student_email"
-  add_index "conversations", ["student_id"], name: "index_conversations_on_student_id"
-  add_index "conversations", ["teacher_id"], name: "index_conversations_on_teacher_id"
+  add_index "conversations", ["teacher_email"], name: "index_conversations_on_teacher_email"
 
   create_table "delayed_jobs", force: :cascade do |t|
     t.integer  "priority",   default: 0, null: false
@@ -67,7 +64,6 @@ ActiveRecord::Schema.define(version: 20160113214504) do
   add_index "events", ["review_id"], name: "index_events_on_review_id"
 
   create_table "experiences", force: :cascade do |t|
-    t.string   "title"
     t.text     "description"
     t.integer  "teacher_id"
     t.datetime "start"
@@ -136,17 +132,6 @@ ActiveRecord::Schema.define(version: 20160113214504) do
   end
 
   add_index "locations", ["teacher_id"], name: "index_locations_on_teacher_id"
-
-  create_table "messages", force: :cascade do |t|
-    t.text     "message"
-    t.text     "sender_email"
-    t.integer  "conversation_id"
-    t.text     "random"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
-  end
-
-  add_index "messages", ["conversation_id"], name: "index_messages_on_conversation_id"
 
   create_table "openings", force: :cascade do |t|
     t.datetime "mon_open"
@@ -275,6 +260,7 @@ ActiveRecord::Schema.define(version: 20160113214504) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "admin"
+    t.float    "lon"
     t.integer  "profile"
     t.boolean  "is_teacher",             default: false,   null: false
     t.string   "paypal_email",           default: ""
@@ -282,6 +268,7 @@ ActiveRecord::Schema.define(version: 20160113214504) do
     t.boolean  "is_active",              default: false,   null: false
     t.boolean  "will_travel",            default: false,   null: false
     t.string   "stripe_user_id"
+    t.string   "address",                default: ""
     t.boolean  "paid_up",                default: false
     t.date     "paid_up_date"
     t.integer  "profile_views",          default: 0
