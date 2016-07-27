@@ -26,6 +26,7 @@ Rails.application.routes.draw do
       resources :experience,          only: [ :create, :destroy ]
       resources :qualification,       only: [ :create, :destroy ]
       resources :location,            only: [ :create, :destroy ]
+      resources :conversation,        only: [ :create ]
 
     end
   end

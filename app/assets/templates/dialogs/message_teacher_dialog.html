@@ -1,12 +1,31 @@
-<md-dialog aria-label="List dialog">
+<md-dialog aria-label="List dialog" flex="80">
   <md-dialog-content>
-    <md-list>
-      <md-list-item ng-repeat="item in items">
-        <p>Number 1</p>
-      </md-list-item>
-    </md-list>
+    <md-content class="md-no-momentum">
+      <md-input-container class=" md-block">
+        <!-- Use floating label instead of placeholder -->
+        
+        <i class="material-icons">person_outline</i>
+        <input ng-model="user.name" type="text">
+      </md-input-container>
+      <md-input-container md-no-float placeholder="Name" class="md-block">
+        <i class="material-icons">phone</i>
+        <input ng-model="user.phone" type="text" placeholder="Phone Number">
+      </md-input-container>
+      <md-input-container class="md-block">
+        <!-- Use floating placeholder instead of label -->
+        <i class="material-icons">email</i>
+        <input ng-model="user.email" type="email" ng-pattern="/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/" placeholder="Email (required)" ng-required="true">
+      </md-input-container>
+      <!-- <md-input-container md-no-float class="md-block">
+        <input ng-model="user.address" type="text" placeholder="Address" >
+        <md-icon md-svg-src="img/icons/ic_place_24px.svg" style="display:inline-block;"></md-icon>
+      </md-input-container> -->
+      
+    </md-content>
   </md-dialog-content>
   <md-dialog-actions>
     <md-button ng-click="closeDialog()" class="md-primary">Close Dialog</md-button>
   </md-dialog-actions>
 </md-dialog>
+
+
