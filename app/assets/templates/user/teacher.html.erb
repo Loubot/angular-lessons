@@ -76,7 +76,7 @@
   
   <div layout-padding layout-fill flex >
    
-    <md-card layout-padding flex class="gutter"> <!-- SUBJECT select -->
+    <md-card layout-padding flex class="gutter_75"> <!-- SUBJECT select -->
       <md-autocomplete md-selected-item="selected_subject" 
             md-search-text="searchText" 
             md-items="subject in get_subjects()" 
@@ -116,7 +116,7 @@
     <!-- end of subject select -->
 
     <!-- EXPERIENCE -->
-    <md-card layout-padding layout-margin class="gutter margin_t_10"> 
+    <md-card layout-padding layout-margin class="gutter_75 margin_t_10"> 
       <div layout="column" layout-fill>
         <md-toolbar>
           <div class="md-toolbar-tools">
@@ -148,7 +148,7 @@
     <!-- END OF EXPERIENCE -->
 
     <!-- OVERVIEW -->
-    <md-content layout-padding  class="gutter margin_t_10" >
+    <md-content layout-padding  class="gutter_75 margin_t_10" >
       <h3>Overview</h3>
       <md-divider></md-divider>
       <p ng-if="USER.overview!=null">{{ USER.overview }}</p>
@@ -163,7 +163,7 @@
     <!-- END OF OVERVIEW -->
 
     <!-- QUALIFICATIONS -->
-    <md-content class="gutter margin_t_10" >
+    <md-content class="gutter_75 margin_t_10" >
       <h3>Qualifications</h3>
       <md-divider></md-divider>
       

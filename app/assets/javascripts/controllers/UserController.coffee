@@ -12,7 +12,13 @@ angular.module('lessons').controller('UserController', [
     console.log "User Controller"
 
     $scope.teacher = {}
-    
+    $scope.scrollevent = ( $e ) ->
+      
+      # animate_elems()
+      # @scrollPos = document.body.scrollTop or document.documentElement.scrollTop or 0
+      # $scope.$digest()
+      return
+
 
     USER.get_user().then( ( user ) ->
       alertify.success "Got user"
@@ -24,17 +30,13 @@ angular.module('lessons').controller('UserController', [
     )
     
 
-    
-
-    
-      
     $scope.slides = []
     $scope.index = 1
 
     $interval((->
       $scope.index = ++$scope.index 
-      $scope.index = 1 if $scope.index == 4
-      console.log $scope.index
+      $scope.index = 1 if $scope.index == 5
+      # console.log $scope.index
       return
     ), 3000 )
       

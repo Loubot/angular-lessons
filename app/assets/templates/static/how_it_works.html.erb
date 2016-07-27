@@ -1,9 +1,9 @@
-
-
-<div class="row full_width welcome_how_it_works text-center">
-  <h1 class="welcome_how_it_works_header">How it works</h1>
-  <strong>From finding the perfect teacher to managing bookings or full payments, and scheduling lessons - we take care of all the details, so you can focus on learning.</strong> <br>
-  <div class="row text-center">
+<div >
+  <div flex>
+    <div class="center_text">
+      <h1 class="md-display-3">How it works</h1>
+      <strong class="md-body-2">From finding the perfect teacher to managing bookings or full payments, and scheduling lessons -<br> we take care of all the details, so you can focus on learning.</strong> 
+    </div> <!-- end of center_text -->
     <div ng-init='slides = [
           {image: "<%= asset_url 'how_it_works_1.jpg' %>", index: 1, description: "Image 00"},
           {image: "<%= asset_url 'how_it_works_2.jpg' %>", index: 2, description: "Image 01"},
@@ -11,71 +11,73 @@
           {image: "<%= asset_url 'how_it_works_4.jpg' %>", index: 4, description: "Image 03"},
           
       ]'>
+
+    </div> <!-- end of ng-init="slides" -->
+
+    <div flex  class="slide_container ">
+      <img ng-repeat="slide in slides" class="big_slide center_block" ng-src="{{ slide.image }}" ng-show="slide.index==index">
     </div>
     
-    </script>
-    
-    <div class="welcome_fotorama">
-      
-      <img ng-repeat="slide in slides" class="slide" ng-src="{{slide.image}}" ng-show="slide.index==index">     
-      
-    </div>
-    
-  </div>
-</div> <!-- end of welcome_how_it_works -->
 
-<div class="container-fluid how_it_works_page">
-  
-  <div class="row how_it_works_row center-block">
-    <div class="page-header center_text"><h1><strong>How Learn Your Lesson Works</strong></h1></div>
-    <p class="center_text">We provide the platform for you to find the best teachers and tutors closest to you, teaching the lessons and skills you want to learn.</p>
-      
+  </div> <!-- end of flex -->
 
-  </div> <!-- end of how_it_works_row -->
-  <div class="row how_it_works_row">
-    <div class="col-md-4 col-sm-4 col-xs-12">
-      <%= image_tag "set-up-your-account.jpg", class: "img-responsive", alt: "Set up your account" %>
-    </div>
-    <div class="col-md-8 col-sm-8 col-xs-12">
-      <h1><strong>Set up your account</strong></h1>
-      <p>Create your account in seconds and you are ready to start learning</p>
-    </div> <!-- end of col-md-9 -->
-  </div> <!-- end of how_it_works_row -->
+  <div flex>
+    <div class="center_text">
+      <h1 class="md-display-3"><strong>How Learn Your Lesson Works</strong></h1>
+      <p class="md-body-2">We provide the platform for you to find the best teachers and tutors closest to you, teaching the lessons and skills you want to learn.</p>
+    </div> <!-- end of center_text -->
+  </div> <!-- end of flex -->
 
-  <div class="row how_it_works_row center-block">
-    <div class="col-md-4 col-sm-4 col-xs-12">
-      <%= image_tag 'teach_guitar.jpg', class: "img-responsive", alt: 'Select your teacher, picture of teacher and student' %>      
-    </div> <!-- end of col-md-9 -->
-    <div class="col-md-8 col-sm-8 col-xs-12">
-      <h1><strong>Select Your Teacher</strong></h1>
-      <p>Use our search engine to find the nearest and best teachers in your area. Compare the information and experience of each teacher before making your choice</p>
-    </div> <!-- end of col-md-4 -->
-  </div> <!-- end of how_it_works_row -->
+  <div flex>
 
-  <div class="row how_it_works_row center-block">
-    <div class="col-md-4 col-sm-4 col-xs-12">
-      <%= image_tag 'phone.jpg', class: "img-responsive", alt: "Book online with confidence, mobile, phone, book from anywhere" %>
-    </div> <!-- end of col-md-3 -->
-    <div class="col-md-8 col-sm-8 col-xs-12">
-      <h1 class="how_it_works_header"><strong>Book Online With Confidence</strong></h1>
-      <p>Choose your desired date and time with your teacher and book the lesson in less than a minute. Your teacher will be in contact with you to confirm the booking. If you are not 100% happy with the lesson we will refund the cost.</p>
-    </div> <!-- end of col-md-9 -->
-  </div> <!-- end of how_it_works_row -->
+    <div class="gutter_85" layout="row" flex>
+      <div flex="33">
+        <%= image_tag "set-up-your-account.jpg", alt: "Set up your account" %>
+      </div>
+      <div flex="77">
+        <h1 class="md-display-3"><strong>Set up your account</strong></h1>
+        <p class="md-body-2">Create your account in seconds and you are ready to start learning</p>
+      </div> <!-- end of flex="77" -->
+    </div> <!-- end of gutter_85 -->
 
-  <div class="row">
-    <div class="page-header center-block text-center"><h1><strong>FAQs</strong></h1></div>
-    <div class="col-md-6">
-      <p><strong>How much do you charge for lessons?</strong></p>
-      <p>Lesson prices are set by the instructor. 
-        The price will be displayed on each teacher’s profile.</p>
-    </div> <!-- end of col-md-6 -->
-    <div class="col-md-6">
-      <p><strong>Can I pay the instructor in person?</strong></p>
-      <p>Yes, you can pay either online or in person. If you choose to pay online, we will guarantee you a refund if you are not happy with the lesson you have received.</p>
-    </div> <!-- end of col-md-6 -->
-    <div class="col-md-6">
-      <p><strong>What forms of payment do you accept?</strong></p>
-      <p>You can pay online via Paypal or Stripe. </p>
-    </div> <!-- end of col-md-6 -->
-  </div> <!-- end of row -->
-</div> <!-- end of container -->
+    <div class="gutter_85" layout="row" flex>
+      <div flex="33">
+        <%= image_tag "teach_guitar.jpg", alt: "Select your teacher, picture of teacher and student" %>
+      </div>
+      <div flex="77">
+        <h1 class="md-display-3"><strong>Select Your Teacher</strong></h1>
+        <p class="md-body-2">Use our search engine to find the nearest and best teachers in your area. Compare the information and experience of each teacher before making your choice</p>
+      </div> <!-- end of flex="77" -->
+    </div> <!-- end of gutter_85 -->
+
+    <div class="gutter_85" layout="row" flex>
+      <div flex="33">
+        <%= image_tag "phone.jpg", alt: "Book online with confidence, mobile, phone, book from anywhere" %>
+      </div>
+      <div flex="77">
+        <h1 class="md-display-3"><strong>Book Online With Confidence</strong></h1>
+        <p class="md-body-2">Choose your desired date and time with your teacher and book the lesson in less than a minute. Your teacher will be in contact with you to confirm the booking. If you are not 100% happy with the lesson we will refund the cost.</p>
+      </div> <!-- end of flex="77" -->
+    </div> <!-- end of gutter_85 -->
+
+  </div> <!-- end of flex -->
+
+  <md-divider ></md-divider>
+
+  <div layout="row" flex>
+    <div layout-padding layout-margin flex="50" >
+      <p class="md-body-2"><strong>How much do you charge for lessons?</strong></p>
+      <p class="md-body-2">Lesson prices are set by the instructor. 
+        The price will be displayed on each teacher’s profile.
+      </p>
+
+      <p class="md-body-2"><strong>What forms of payment do you accept?</strong></p>
+      <p class="md-body-2">You can pay online via Paypal or Stripe. </p>
+
+    </div> <!-- end of flex=50 -->
+    <div layout-padding layout-margin flex="50">
+      <p class="md-body-2"><strong>What forms of payment do you accept?</strong></p>
+      <p class="md-body-2">You can pay online via Paypal or Stripe. </p>
+    </div> <!-- end of layout = 50 -->
+  </div> <!-- end of flex -->
+</div> <!-- end of column -->
