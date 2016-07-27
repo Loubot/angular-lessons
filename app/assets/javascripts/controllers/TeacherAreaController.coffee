@@ -56,18 +56,15 @@ angular.module('lessons').controller('TeacherAreaController', [
 
 
     ###################### google auth ###############################
+    check_if_calendar_exists = ( calendars ) ->
+      calendar_exists = false
+      for calendar in calendars
+        if calendar.summary == "LYL Calendar"
+          alertify.success "Found your calendar"
+          console.log calendar
+          calendar_exists = true
 
-
-    load_calendar_api = ->
-      
-      console.log "loaded"
-      # console.log gapi
-      gapi.client.load('calendar', 'v3', calendar_loaded)
-      gapi.client.load('oauth2', 'v2', oauth2_loaded)
-
-    calendar_loaded = ->
-      if !$rootScope.USER.calendar_id or $rootScope.USER.calendar_id == ""  
-      else
+      if calendar_exists
         gapi.client.calendar.events.list(
           'calendarId': "#{ $rootScope.USER.calendar_id }"
         ).execute( ( resp ) ->
@@ -79,29 +76,39 @@ angular.module('lessons').controller('TeacherAreaController', [
 
             console.log "List events"
             format_events( resp.items )
-            alertify.success "Got events" 
         )
+      else
+        $scope.create_calendar()
         
-      # gapi.client.calendar.calendarList.list().execute( ( resp ) ->
-      #   console.log "Calendar list"
-      #   console.log resp
-      # )
-      # gapi.client.calendar.events.list(
-      #   'calendarId': 'primary'
-      #   # 'timeMin': (new Date()).toISOString()
-      #   'showDeleted': false
-      #   'singleEvents': true
-      #   'maxResults': 10
-      #   'orderBy': 'startTime'
-      # ).execute( ( resp ) ->
-      #   # console.log resp
-      #   format_events( resp.items )
-      # )
+
+    load_calendar_api = ->
+      
+      console.log "loaded"
+      # console.log gapi
+      gapi.client.load('calendar', 'v3', calendar_loaded)
+      gapi.client.load('oauth2', 'v2', oauth2_loaded)
+
+    calendar_loaded = ->
+      alertify.success "Calendar api loaded"
+      
+      
 
     oauth2_loaded = ->
       console.log "Oauth"
       gapi.client.oauth2.userinfo.get().execute( ( resp ) ->
         $scope.google_id_email =  resp.email
+        # get user email and then load calendar list
+        gapi.client.calendar.calendarList.list().execute( ( resp ) ->
+          # console.log "Calendar list"
+          # console.log resp
+          if resp.error?  
+            alertify.error "Couldn't load your calendar"
+          else
+            check_if_calendar_exists ( resp.items )
+            console.log "List events"
+            # format_events( resp.items )
+            alertify.success "Got events" 
+        )
       )
 
     
@@ -140,6 +147,7 @@ angular.module('lessons').controller('TeacherAreaController', [
        
     $scope.create_calendar = ->
       console.log "Create calendar"
+      alertify.success "Trying to create a new calendar"
       console.log "user:#{ $scope.google_id_email }"
       gapi.client.calendar.calendars.insert(
         'description': "LYL calendar for #{ $rootScope.USER.first_name } #{ $rootScope.USER.last_name }"

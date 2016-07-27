@@ -35,6 +35,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 # gem 'capistrano-rails', group: :development
 
 group :production do
+  gem "fog-aws"
   gem 'unicorn'
   gem 'pg'
 end
@@ -77,5 +78,3 @@ gem 'carrierwave'
 gem "mini_magick"
 
 gem 'geokit-rails'
-
-gem "fog-aws"
