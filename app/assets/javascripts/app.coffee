@@ -10,7 +10,7 @@ angular.module('lessons', [
   'ui.rCalendar'
   'angular-loading-bar'
   'ngAnimate'
-
+  'validation.match'
 ])
 
 angular.module('lessons').constant "RESOURCES", do ->

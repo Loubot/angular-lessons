@@ -113,4 +113,10 @@ angular.module('lessons').controller( 'ViewTeacherController', [
         preserveScope: true
         templateUrl: "dialogs/message_teacher_dialog.html"
       )
+
+    $scope.closeDialog = ->
+      $mdDialog.hide()
+
+    $scope.send_message = ->
+      console.log "send"
 ])

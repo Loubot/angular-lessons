@@ -74,8 +74,9 @@ angular.module('lessons').controller('NavController', [
           alertify.success "Welcome back #{ $rootScope.USER.first_name }"
         )
         .catch( (resp) ->
-          # handle error response
-          
+          console.log "Login error"
+          console.log resp
+          alertify.error "Invalid credentials"
         )
 
     $scope.logout = ->
