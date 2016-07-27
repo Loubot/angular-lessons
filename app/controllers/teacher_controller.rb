@@ -1,5 +1,5 @@
 class TeacherController < ApplicationController
-  before_action :authenticate_teacher!
+  before_action :authenticate_teacher!, except: [ :show_teacher]
   require 'pp'
   def get
     
@@ -52,6 +52,6 @@ class TeacherController < ApplicationController
     
 
     def teacher_params
-      params.permit( :profile, :id, :overview, :experience, :calendar_id )
+      params.permit( :profile, :id, :teacher_id, :overview, :experience, :calendar_id )
     end
 end

@@ -34,7 +34,6 @@
 #  is_active              :boolean          default(FALSE), not null
 #  will_travel            :boolean          default(FALSE), not null
 #  stripe_user_id         :string
-#  address                :string           default("")
 #  paid_up                :boolean          default(FALSE)
 #  paid_up_date           :date
 #  profile_views          :integer          default(0)

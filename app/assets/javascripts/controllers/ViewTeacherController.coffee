@@ -47,21 +47,21 @@ angular.module('lessons').controller( 'ViewTeacherController', [
         )
 
     
-    USER.get_user().then( ( user ) ->
-      COMMS.GET(
-        "/teacher/#{ $stateParams.id }/show-teacher"
-      ).then( ( resp ) ->
-        # console.log resp
-        alertify.success "Got teacher info"
-        $scope.teacher = resp.data.teacher
-        set_profile()
-        create_map()
-        create_fotorama()
-      ).catch( ( err ) ->
-        console.log err
-        alertify.error err.data.errors.full_messages
-      )
+    
+    COMMS.GET(
+      "/teacher/#{ $stateParams.id }/show-teacher"
+    ).then( ( resp ) ->
+      # console.log resp
+      alertify.success "Got teacher info"
+      $scope.teacher = resp.data.teacher
+      set_profile()
+      create_map()
+      create_fotorama()
+    ).catch( ( err ) ->
+      console.log err
+      alertify.error err.data.errors.full_messages
     )
+    
       
 
 
