@@ -305,6 +305,11 @@ html, body{
 }
 
 
+.md-button>.material-icons{
+  position: relative;
+  transform: translateY(20%);
+}
+
 
 .gridListdemoBasicUsage md-grid-list {
   margin: 8px; }

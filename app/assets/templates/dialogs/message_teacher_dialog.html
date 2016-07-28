@@ -6,16 +6,17 @@
           <!-- Use floating label instead of placeholder -->
           
           <i class="material-icons">person_outline</i>
-          <input ng-model="user.name" type="text">
+          <input ng-model="message.name" type="text">
         </md-input-container>
         <md-input-container md-no-float placeholder="Name" class="md-block">
           <i class="material-icons">phone</i>
-          <input ng-model="user.phone" type="text" placeholder="Phone Number (Optional)">
+          <input ng-model="message.phone" type="tel" placeholder="Phone Number (Optional)">
         </md-input-container>
-        <md-input-container class="md-block">
+
+        <md-input-container class="md-block" md-no-float>
           <!-- Use floating placeholder instead of label -->
           <i class="material-icons">email</i>
-          <input ng-model="user.email" 
+          <input ng-model="message.email" 
                   type="email" 
                   ng-pattern="/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/" 
                   placeholder="Email (required)"
@@ -24,16 +25,17 @@
                   ng-required="true">
         </md-input-container>
 
-        <md-input-container class="md-block">
+        <md-input-container class="md-block" md-no-float>
           <i class="material-icons">email</i>
-          <input ng-model="user.confirm_email" 
+          <input ng-model="message.confirm_email" 
                   type="email" 
                   ng-pattern="/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/" 
                   name="confirm_email" 
                   value="confirm email"
                   type="password" 
+                  placeholder="Retype email (required)"
                   required
-                  match="user.email">
+                  match="message.email">
         </md-input-container>
 
 
