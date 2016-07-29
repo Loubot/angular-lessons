@@ -123,6 +123,8 @@ angular.module('lessons').controller( 'ViewTeacherController', [
         conversation: $scope.message
       ).then( ( resp ) ->
         console.log resp
+        alertify.success "Message sent!"
+        $mdDialog.hide()
       ).catch( ( err ) ->
         console.log err
       )

@@ -14,4 +14,11 @@
 class Message < ActiveRecord::Base
   validates :message, :conversation_id, presence: true
   belongs_to :conversation
+
+  before_validation :add_random
+
+
+  def add_random
+    self.random =  Digest::SHA1.hexdigest([Time.now, rand].join)
+  end
 end
