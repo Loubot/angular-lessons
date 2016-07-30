@@ -5,6 +5,7 @@ class CreateConversations < ActiveRecord::Migration
       t.string :student_email
       t.string :teacher_name
       t.string :student_name
+      t.text :random
 
       t.timestamps null: false
     end

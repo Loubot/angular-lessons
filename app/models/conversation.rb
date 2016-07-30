@@ -14,4 +14,11 @@
 class Conversation < ActiveRecord::Base
 
   has_many :messages, dependent: :destroy
+
+  before_validation :add_random
+
+
+  def add_random
+    self.random =  Digest::SHA1.hexdigest([Time.now, rand].join)
+  end
 end

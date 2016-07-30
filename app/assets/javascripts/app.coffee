@@ -73,6 +73,11 @@ angular.module('lessons').config ($stateProvider, $urlRouterProvider) ->
     templateUrl: 'static/how_it_works.html'
     controller: "UserController"
 
+  $stateProvider.state 'conversation',
+    url: "/conversation/:number/:id"
+    templateUrl: "conversation/messages.html"
+    controller: "ConversationController"
+
 angular.module('lessons').config ( $authProvider, RESOURCES ) ->
   $authProvider.configure({
     apiUrl: RESOURCES.DOMAIN

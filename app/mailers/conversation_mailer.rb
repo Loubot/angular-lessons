@@ -1,6 +1,6 @@
 class ConversationMailer < ActionMailer::Base
 
-  def send_message( params, teacher_email )
+  def send_message( params, teacher_email, url )
     begin
       require 'mandrill'
       m = mandrill = Mandrill::API.new ENV['MANDRILL_APIKEY']
@@ -20,7 +20,8 @@ class ConversationMailer < ActionMailer::Base
                                 "vars" =>  [
                                           { "name"=>"MESSAGE",          "content"=>params[:conversation][:message]  },
                                           { "name"=>"PHONE",            "content"=>params[:conversation][:phone]  },                                        
-                                          { "name"=>"NAME",             "content"=>params[:conversation][:name]  }                                        
+                                          { "name"=>"NAME",             "content"=>params[:conversation][:name]  },
+                                          { "name"=>"URL",              "content"=>url}                                      
                                         ]
                           }],
                   
