@@ -1,113 +1,120 @@
-<div layout="row" layout-wrap  flex>
-  <div flex="30" layout-fill>
-    <md-card>
-      <md-card-header>
-        <md-card-avatar>
-          <img class="md-user-avatar" ng-src="{{ profile.avatar.url }}">
-        </md-card-avatar>
-        <md-card-header-text>
-          <span class="md-title">Title</span>
-          <span class="md-subhead">Sub header</span>
-        </md-card-header-text>
-      </md-card-header>
-      <img ng-src="{{ profile.avatar.url }}" class="md-card-image" alt="image caption">
-      <md-card-title>
-        <md-card-title-text>
-          <span class="md-headline">Subject(s)</span>
-          <md-chips>
-            <md-chip ng-repeat="subject in teacher.subjects">{{ subject.name }}</md-chip>           
-          </md-chips>
-          <span class="md-headline">Address</span>
-          {{ teacher.location.address }}
-        </md-card-title-text>
-      </md-card-title>
-      <md-card-actions layout="row" layout-align="start center">
-        <md-button class="md-raised md-primary white_text icon_button" ng-click="open_message_dialog()">
-          Book <i class="material-icons">thumb_up</i>
-        </md-button>
-        <!-- <md-button ><i class="material-icons">history</i></md-button> -->
-        <md-card-icon-actions>
-          <md-button class="md-icon-button" aria-label="icon">
-            <md-icon md-svg-icon="icon"></md-icon>
+
+<div>
+  <div layout="row" layout-wrap  flex>
+    <div flex="30" layout-fill>
+      <md-card>
+        <md-card-header>
+          <md-card-avatar>
+            <img class="md-user-avatar" ng-src="{{ profile.avatar.url }}">
+          </md-card-avatar>
+          <md-card-header-text>
+            <span class="md-title">Title</span>
+            <span class="md-subhead">Sub header</span>
+          </md-card-header-text>
+        </md-card-header>
+        <img ng-src="{{ profile.avatar.url }}" class="md-card-image" alt="image caption">
+        <md-card-title>
+          <md-card-title-text>
+            <span class="md-headline">Subject(s)</span>
+            <md-chips>
+              <md-chip ng-repeat="subject in teacher.subjects">{{ subject.name }}</md-chip>           
+            </md-chips>
+            <span class="md-headline">Address</span>
+            {{ teacher.location.address }}
+          </md-card-title-text>
+        </md-card-title>
+        <md-card-actions layout="row" layout-align="start center">
+          <md-button class="md-raised md-primary white_text icon_button" ng-click="open_message_dialog()">
+            Book <i class="material-icons">thumb_up</i>
           </md-button>
-        </md-card-icon-actions>
-      </md-card-actions>
-      <md-card-content>
-        <p>
-         Card content
-        </p>
-      </md-card-content>
-    </md-card>
-  </div> <!-- end of flex=30 -->
-
-
-  <div flex="70">
-
-
-    <!--  map div -->
-    <div id="map" class="margin_t_10" ></div>
-
-    <!-- end of map div -->
-
-    <md-content>
-      <md-card>
-        <md-card-title>
-          <md-card-title-text>
-            <span class="md-headline">Overview</span>
-          </md-card-title-text>
-          
-        </md-card-title>
+          <!-- <md-button ><i class="material-icons">history</i></md-button> -->
+          <md-card-icon-actions>
+            <md-button class="md-icon-button" aria-label="icon">
+              <md-icon md-svg-icon="icon"></md-icon>
+            </md-button>
+          </md-card-icon-actions>
+        </md-card-actions>
         <md-card-content>
-          
-           {{ teacher.overview }}
+          <p>
+           Card content
+          </p>
         </md-card-content>
       </md-card>
-    </md-content>
+    </div> <!-- end of flex=30 -->
 
-    <md-content>
-      <md-card>
-        <md-card-title>
-          <md-card-title-text>
-            <span class="md-headline">Experience</span>
-          </md-card-title-text>
-          
-        </md-card-title>
-        <md-card-content>
-          
-           {{ teacher.experience.description }}
-        </md-card-content>
-      </md-card>
-    </md-content>
 
-    <md-content ng-if"teacher.qualifications">
-      <md-toolbar>
-        <div class="md-toolbar-tools">
-          <span layout-margin>Qualifications</span>
-          <!-- fill up the space between left and right area -->
-          
-        </div>
-      </md-toolbar>
-      <md-card ng-repeat="qual in teacher.qualifications">
-        <md-card-title>
-          <md-card-title-text>
-            <span class="md-headline"><strong>Title: </strong>{{ qual.title }}</span>
-          </md-card-title-text>
-          
-        </md-card-title>
-        <md-card-content>
-          
-           <strong>School: </strong>{{ qual.school }}
-        </md-card-content>
-      </md-card>
-    </md-content>
-  </div> <!-- end of flex="70" -->
+    <div flex="70">
 
-  <div flex="70" flex-offset="30">
+
+      <!--  map div -->
+      <div id="map" class="margin_t_10" ></div>
+
+      <!-- end of map div -->
+
+      <md-content>
+        <md-card>
+          <md-card-title>
+            <md-card-title-text>
+              <span class="md-headline">Overview</span>
+            </md-card-title-text>
+            
+          </md-card-title>
+          <md-card-content>
+            
+             {{ teacher.overview }}
+          </md-card-content>
+        </md-card>
+      </md-content>
+
+      <md-content>
+        <md-card>
+          <md-card-title>
+            <md-card-title-text>
+              <span class="md-headline">Experience</span>
+            </md-card-title-text>
+            
+          </md-card-title>
+          <md-card-content>
+            
+             {{ teacher.experience.description }}
+          </md-card-content>
+        </md-card>
+      </md-content>
+
+      <md-content ng-if"teacher.qualifications">
+        <md-toolbar>
+          <div class="md-toolbar-tools">
+            <span layout-margin>Qualifications</span>
+            <!-- fill up the space between left and right area -->
+            
+          </div>
+        </md-toolbar>
+        <md-card ng-repeat="qual in teacher.qualifications">
+          <md-card-title>
+            <md-card-title-text>
+              <span class="md-headline"><strong>Title: </strong>{{ qual.title }}</span>
+            </md-card-title-text>
+            
+          </md-card-title>
+          <md-card-content>
+            
+             <strong>School: </strong>{{ qual.school }}
+          </md-card-content>
+        </md-card>
+      </md-content>
+    </div> <!-- end of flex="70" -->
+
+    
+  </div> <!-- end of row -->
+
+</div>
+
+<div>
+  <div flex="100" flex-offset="30" class="margin_t_10">
     <div class="slide_container">
       <img ng-repeat="slide in slides" class="slide center_block" ng-src="{{slide.image}}" ng-show="slide.index==index">    
     </div> <!-- end of slide container -->
-        {{ index }}
+       `
 
   </div> <!-- end of flex = 100 -->
-</div> <!-- end of row -->
-
+</div>
