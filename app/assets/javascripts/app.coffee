@@ -68,15 +68,17 @@ angular.module('lessons').config ($stateProvider, $urlRouterProvider) ->
     templateUrl: "user/teacher_location.html"
     controller: "TeacherLocationController"
 
+  $stateProvider.state 'conversation',
+    url: "/conversation/:conversation_id/:id"
+    templateUrl: "conversation/messages.html"
+    controller: "ConversationController"
+
   $stateProvider.state 'how_it_works',
     url: '/how-it-works'
     templateUrl: 'static/how_it_works.html'
     controller: "UserController"
 
-  $stateProvider.state 'conversation',
-    url: "/conversation/:number/:id"
-    templateUrl: "conversation/messages.html"
-    controller: "ConversationController"
+  
 
 angular.module('lessons').config ( $authProvider, RESOURCES ) ->
   $authProvider.configure({

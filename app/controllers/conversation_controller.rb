@@ -23,6 +23,13 @@ class ConversationController < ApplicationController
     render json: { conversation: conversation.as_json }
   end
 
+  def index
+    conversation = Conversation.find_by( teacher_email: params[ :teacher_email ])
+
+    render json: { conversation: conversation.as_json }
+
+  end
+
 
   private
     def conversation_params
