@@ -38,4 +38,10 @@ angular.module('lessons').controller('ConversationController', [
       $rootScope.USER = null
     )
 
+    $scope.select_conversation = ( id ) ->
+      for convo in $scope.conversations
+        if convo.id == id
+          $scope.conversation = convo
+          return false
+
 ])

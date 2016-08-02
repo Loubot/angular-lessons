@@ -20,6 +20,9 @@ Teacher.all.each do |t|
 end
 
 conversation = Conversation.create( teacher_email: "lllouis@yahoo.com", student_email: "louisangelini@gmail.com", teacher_name: "Louis", student_name: "Aidan" )
+conversationb = Conversation.create( teacher_email: "lllouis@yahoo.com", student_email: "louisangelini2@gmail.com", teacher_name: "Louis", student_name: "Paul" )
+
 (0..5).each do |i|
   Message.create( message: "hello there", conversation_id: conversation.id, sender_email: "louisangelini@gmail.com" )
+  Message.create( message: "Alright boi", conversation_id: conversationb.id, sender_email: "louisangelini2@gmail.com")
 end

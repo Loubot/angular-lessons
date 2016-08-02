@@ -4,7 +4,8 @@
     <div flex="30" layout-margin>
 
       <md-content class="md-padding">
-        <span ng-repeat="conversation in conversations">{{ conversation.student_email }}</span>
+        <input placeholder="Search for student" >
+        <span ng-repeat="conversation in conversations" ng-click="select_conversation( conversation.id )">{{ conversation.student_email }}</span>
       </md-content>
 
     </div> <!-- end of flex=30 -->
