@@ -1,17 +1,19 @@
 'use strict'
 
 angular.module('lessons').controller('ConversationController', [
+  "$scope"
   "$state"
   "$rootScope"
   "$stateParams"
   "alertify"
   "COMMS"
   "USER"
-  ( $state, $rootScope, $stateParams, alertify, COMMS, USER ) ->
+  ( $scope, $state, $rootScope, $stateParams, alertify, COMMS, USER ) ->
     console.log "ConversationController"
     console.log $stateParams
-    USER.get_user().then(
-      if parseInt( $stateParams.id ) != parseInt( USER.id )
+
+    USER.get_user().then( ( user ) ->
+      if parseInt( $stateParams.id ) != parseInt( $rootScope.USER.id )
         alertify.error "You are not authorised to view this"
         $state.go "welcome"
         
@@ -19,10 +21,13 @@ angular.module('lessons').controller('ConversationController', [
 
         COMMS.GET(
           "/conversation"
-          teacher_email: USER.email
+          teacher_email: $rootScope.USER.email
+          
         ).then( ( resp ) ->
           console.log resp
           alertify.success "Got conversation"
+          $scope.conversations = resp.data.conversations
+          $scope.conversation = $scope.conversations[0]
         ).catch( ( err ) ->
           console.log err
           alertify.error "Failed to get conversation"

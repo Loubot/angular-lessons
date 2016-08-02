@@ -24,9 +24,10 @@ class ConversationController < ApplicationController
   end
 
   def index
-    conversation = Conversation.find_by( teacher_email: params[ :teacher_email ])
+    p params
+    conversations = Conversation.includes(:messages).where( teacher_email: params[ :teacher_email ]).order(:created_at).limit( 10 )
 
-    render json: { conversation: conversation.as_json }
+    render json: { conversations: conversations.as_json( include: [ :messages ] ) }
 
   end
 

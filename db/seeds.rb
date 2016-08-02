@@ -18,3 +18,8 @@ Teacher.create( first_name: "Karl", last_name: "Beans", password: "Football1", e
 Teacher.all.each do |t|
   t.subjects << Subject.first
 end
+
+conversation = Conversation.create( teacher_email: "lllouis@yahoo.com", student_email: "louisangelini@gmail.com", teacher_name: "Louis", student_name: "Aidan" )
+(0..5).each do |i|
+  Message.create( message: "hello there", conversation_id: conversation.id, sender_email: "louisangelini@gmail.com" )
+end

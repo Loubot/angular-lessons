@@ -1,1 +1,23 @@
-asdf
+
+<div>
+  <div layout="row">
+    <div flex="30" layout-margin>
+
+      <md-content class="md-padding">
+        <span ng-repeat="conversation in conversations">{{ conversation.student_email }}</span>
+      </md-content>
+
+    </div> <!-- end of flex=30 -->
+
+    <div flex="70" layout-margin >
+      <div layout="column" layout-wrap flex>
+        <div class="message_container" ng-repeat="message in conversation.messages" >
+          <span class="receiver">{{ message.message }}</span> 
+        </div> <!-- end of message_container -->
+      </div> <!-- end of column -->
+
+    </div> <!-- end of flex=70 -->
+  </div> <!-- end of row -->
+</div>
+
+

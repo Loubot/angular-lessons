@@ -109,6 +109,10 @@ html, body{
   width: 75%;
 }
 
+.width_25{
+  width: 25%;
+}
+
 .x_large_font{
   font-size: x-large;
 }
@@ -328,3 +332,36 @@ html, body{
 .gridListdemoBasicUsage md-grid-tile {
   transition: all 400ms ease-out 50ms; }
 
+  // Messages
+
+.message_container{
+  display: inline-flex;
+  flex-direction: column;
+}
+
+.message{
+  word-wrap: break-word;
+  min-height: 20%;
+  background-color: red;
+  -webkit-border-radius: 30px;
+  -moz-border-radius: 30px;
+  border-radius: 30px;
+  text-align: center;
+  -webkit-box-shadow: 2px 2px 4px #888;
+  -moz-box-shadow: 2px 2px 4px #888;
+  box-shadow: 2px 2px 4px #888;
+}
+
+.sender{
+  @extend .width_25;
+  @extend .message;
+  align-self: flex-end;
+}
+
+.receiver{
+  @extend .width_25;
+  @extend .message;
+  align-self: flex-start;
+}
+
+// End of messages
