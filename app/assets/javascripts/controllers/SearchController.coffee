@@ -11,12 +11,10 @@ angular.module('lessons').controller( 'SearchController', [
   ( $scope, $rootScope, $state, $stateParams, $filter, COMMS, alertify ) ->
     console.log "SearchController"
     $scope.ctrl = 
-      subject:
-        name: null
-        id: null
-      county: 
-        null
-    $scope.ctrl.subject.name = $stateParams.name
+      subject: null
+      county:  null
+    console.log $stateParams
+    $scope.ctrl.subject = $stateParams.name
     $scope.ctrl.county = $stateParams.location
 
     $scope.view_teacher = ( teacher ) ->
@@ -27,7 +25,8 @@ angular.module('lessons').controller( 'SearchController', [
       
       return
 
-    search_teachers = ( params ) ->
+    $scope.search_teachers = ( params ) ->
+      console.log params
       COMMS.GET(
         '/search'
         params
@@ -40,40 +39,61 @@ angular.module('lessons').controller( 'SearchController', [
       )
 
     if $stateParams.name? or $stateParams.location?
-      search_teachers( $stateParams )
+      $scope.search_teachers( $stateParams )
+
+   
+    
+    $scope.search_subjects = ->
+      console.log $scope.ctrl.subject_name
+      $scope.subjects = $filter('filter')( $scope.subjects_list, $scope.ctrl.subject_name )
+
+    $scope.search_counties = ->
+      
+      console.log $scope.ctrl.county_name
+      $scope.counties =  $filter('filter')( $scope.county_list, $scope.ctrl.county_name )
+
+    $scope.county_picked = ( county ) ->
+      console.log county
+      $scope.ctrl.county = county
+      set_params()
+
+    $scope.subject_picked = ( subject ) ->
+      if subject != ""
+        console.log subject
+        $scope.ctrl.subject = subject
+        set_params()
+
+    define_subjects = ( subjects ) ->
+      $scope.subjects_list = []
+      for subject in subjects
+        $scope.subjects_list.push( subject.name )
+
+      console.log $scope.subjects_list
+     
+
+    $scope.county_list = ['Antrim','Armagh','Carlow','Cavan','Clare','Cork','Derry','Donegal','Down','Dublin',
+          'Fermanagh','Galway','Kerry','Kildare','Kilkenny','Laois','Leitrim','Limerick','Longford',
+          'Louth','Mayo','Meath','Monaghan','Offaly','Roscommon','Sligo','Tipperary','Tyrone',
+          'Waterford','Westmeath','Wexford','Wicklow']
 
     COMMS.GET(
-      '/search-subjects'
+        '/search-subjects'
     ).then( ( resp ) ->
       console.log resp
-      $scope.subjects = resp.data.subjects
+      $scope.subjects_list = resp.data.subjects
+      define_subjects( resp.data.subjects )
     ).catch( ( err ) ->
       console.log resp
     )
 
-    
-    $scope.search_subjects = ->
-      console.log $scope.ctrl.subject_name
-      $scope.subjects = $filter('filter')( $scope.subjects, $scope.ctrl.subject_name )
+    set_params = ->
+      $state.transitionTo(
+        'search',
+        { name: $scope.ctrl.subject, location: $scope.ctrl.county }
+        { notify: false }
+      )
 
-    $scope.search_counties = ->
-      if $scope.ctrl.county_name == ""
-        define_counties()
-        return false
-      console.log $scope.ctrl.county_name
-      $scope.counties =  $filter('filter')( $scope.counties, $scope.ctrl.county_name )
+    ################# Get teachers by subject on page load
 
-    $scope.county_picked = ( county ) ->
-      console.log 'a'
-      $scope.ctrl.county = county
 
-    $scope.subject_picked = ( subject ) ->
-      console.log subject
-      $scope.ctrl.subject = subject
-
-    define_counties = ->
-      return $scope.counties = ['Antrim','Armagh','Carlow','Cavan','Clare','Cork','Derry','Donegal','Down','Dublin',
-          'Fermanagh','Galway','Kerry','Kildare','Kilkenny','Laois','Leitrim','Limerick','Longford',
-          'Louth','Mayo','Meath','Monaghan','Offaly','Roscommon','Sligo','Tipperary','Tyrone',
-          'Waterford','Westmeath','Wexford','Wicklow']
 ])

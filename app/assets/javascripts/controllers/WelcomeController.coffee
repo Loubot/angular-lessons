@@ -4,13 +4,14 @@ angular.module('lessons').controller('WelcomeController', [
   '$scope'
   '$rootScope'
   '$state'
+  '$filter'
   'USER'
   '$mdSidenav'
   'alertify'
   '$auth'
   'COMMS'
   '$window'
-  ( $scope, $rootScope, $state, USER, $mdSidenav, alertify, $auth, COMMS, $window ) ->
+  ( $scope, $rootScope, $state, $filter, USER, $mdSidenav, alertify, $auth, COMMS, $window ) ->
     console.log "WelcomeController"
     $elems = $('.animateblock')
     $scope.subject = {}
@@ -50,21 +51,12 @@ angular.module('lessons').controller('WelcomeController', [
     USER.get_user()
 
 
-    $scope.get_subjects = ( searchText ) ->
-      console.log "search"
+    $scope.search_subjects = ( subject ) ->
+      console.log subject.name
+      console.log $filter('filter')( $scope.subjects_list, subject.name )
+      $scope.search_subjects = $filter('filter')( $scope.subjects_list, subject.name )
 
-      console.log $scope.searchText.name
-      if $scope.searchText != {}
-        return COMMS.GET(
-          "/search-subjects"
-          $scope.searchText
-        ).then( ( resp ) ->
-          console.log resp
-          return resp.data.subjects
-        ).catch( ( err ) ->
-          console.log err
 
-        )
     $scope.search = ->
       console.log "search"
       if !( Object.keys($scope.searchText).length == 0 && $scope.subject.constructor == Object )
@@ -75,9 +67,27 @@ angular.module('lessons').controller('WelcomeController', [
       if !( Object.keys(subject).length == 0 && subject.constructor == Object )
         $state.go("search", { name: $scope.searchText.name, location: $scope.searchText.location })
 
-    define_counties = ->
-      return $scope.counties = ['Antrim','Armagh','Carlow','Cavan','Clare','Cork','Derry','Donegal','Down','Dublin',
+    define_subjects = ( subjects ) ->
+      $scope.subjects_list = []
+      for subject in subjects
+        $scope.subjects_list.push( subject.name )
+
+      console.log $scope.subjects_list
+     
+
+    $scope.county_list = ['Antrim','Armagh','Carlow','Cavan','Clare','Cork','Derry','Donegal','Down','Dublin',
           'Fermanagh','Galway','Kerry','Kildare','Kilkenny','Laois','Leitrim','Limerick','Longford',
           'Louth','Mayo','Meath','Monaghan','Offaly','Roscommon','Sligo','Tipperary','Tyrone',
           'Waterford','Westmeath','Wexford','Wicklow']
+
+    COMMS.GET(
+        '/search-subjects'
+    ).then( ( resp ) ->
+      console.log resp
+      $scope.subjects_list = resp.data.subjects
+      define_subjects( resp.data.subjects )
+    ).catch( ( err ) ->
+      console.log resp
+    )
+
 ])
