@@ -57,7 +57,7 @@ angular.module('lessons').controller('NavController', [
         .catch( (resp) ->
           # handle error response
           console.log resp
-          alertify.error resp.data.errors.full_messages
+          alertify.error "Failed to register"
           
         )
 
