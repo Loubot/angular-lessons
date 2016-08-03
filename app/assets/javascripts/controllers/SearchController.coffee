@@ -16,6 +16,7 @@ angular.module('lessons').controller( 'SearchController', [
     console.log $stateParams
     $scope.ctrl.subject_name = $stateParams.name
     $scope.ctrl.county = $stateParams.location
+    $scope.selected_subject = $stateParams.name
 
     $scope.view_teacher = ( teacher ) ->
       $state.go('view_teacher', id: teacher.id )
