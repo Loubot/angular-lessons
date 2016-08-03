@@ -42,8 +42,8 @@ angular.module('lessons').controller( 'SearchController', [
       $scope.search_teachers()
 
     $scope.search_subjects = ( subject ) ->
-      console.log subject.name
-      console.log $filter('filter')( $scope.subjects_list, subject.name )
+      # console.log subject.name
+      # console.log $filter('filter')( $scope.subjects_list, subject.name )
       $scope.search_subjects = $filter('filter')( $scope.subjects_list, subject.name )
 
 
@@ -60,11 +60,13 @@ angular.module('lessons').controller( 'SearchController', [
       for subject in subjects
         $scope.subjects_list.push( subject.name )
 
-      console.log $scope.subjects_list
+      # console.log $scope.subjects_list
      
 
-    $scope.search_counties = ->
-      $scope.counties = $filter('filter')( $scope.county_list, $scope.county )
+    $scope.search_counties = ( county ) ->
+      console.log county
+      console.log $filter('filter')( $scope.county_list, county )
+      $scope.counties = $filter('filter')( $scope.county_list, county )
 
 
     $scope.county_list = ['Antrim','Armagh','Carlow','Cavan','Clare','Cork','Derry','Donegal','Down','Dublin',

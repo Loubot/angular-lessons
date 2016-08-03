@@ -36,11 +36,11 @@
           <md-autocomplete 
               md-selected-item="selected.county_name" 
               md-input-name="county"
-              md-search-text="ctrl.county_name" 
+              md-search-text="searchText.county_name" 
               md-items="county in counties" 
               md-item-text="county" 
               md-floating-label="County"
-              md-search-text-change="search_counties()"
+              md-search-text-change="search_counties( searchText.county_name )"
               md-selected-item-change="county_picked( county )">
             <md-item-template>
               <span md-highlight-text="county">{{county}}</span>
