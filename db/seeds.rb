@@ -6,23 +6,25 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-Category.create(name: 'Music')
-Subject.create(name: 'Guitar', category_id: 1)
-Subject.create(name: 'Drums', category_id: 1)
-Subject.create(name: 'Piano', category_id: 1)
+# Category.create(name: 'Music')
+# Subject.create(name: 'Guitar', category_id: 1)
+# Subject.create(name: 'Drums', category_id: 1)
+# Subject.create(name: 'Piano', category_id: 1)
 
-Teacher.create( first_name: "Bob", last_name: "Builder", password: "Football1", email: "lllouis1@yahoo.com")
-Teacher.create( first_name: "Tim", last_name: "Shanks", password: "Football1", email: "lllouis2@yahoo.com")
-Teacher.create( first_name: "Karl", last_name: "Beans", password: "Football1", email: "lllouis3@yahoo.com")
+# Teacher.create( first_name: "Bob", last_name: "Builder", password: "Football1", email: "lllouis1@yahoo.com")
+# Teacher.create( first_name: "Tim", last_name: "Shanks", password: "Football1", email: "lllouis2@yahoo.com")
+# Teacher.create( first_name: "Karl", last_name: "Beans", password: "Football1", email: "lllouis3@yahoo.com")
 
-Teacher.all.each do |t|
-  t.subjects << Subject.first
-end
+# Teacher.all.each do |t|
+#   t.subjects << Subject.first
+# end
 
 conversation = Conversation.create( teacher_email: "lllouis@yahoo.com", student_email: "louisangelini@gmail.com", teacher_name: "Louis", student_name: "Aidan" )
 conversationb = Conversation.create( teacher_email: "lllouis@yahoo.com", student_email: "louisangelini2@gmail.com", teacher_name: "Louis", student_name: "Paul" )
 
 (0..5).each do |i|
   Message.create( message: "hello there", conversation_id: conversation.id, sender_email: "louisangelini@gmail.com" )
+  Message.create( message: "I am ze teacher", conversation_id: conversation.id, sender_email: "lllouis@yahoo.com" )
   Message.create( message: "Alright boi", conversation_id: conversationb.id, sender_email: "louisangelini2@gmail.com")
+  Message.create( message: "hahahaha", conversation_id: conversationb.id, sender_email: "lllouis@yahoo.com")
 end

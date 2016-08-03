@@ -17,13 +17,14 @@
       <md-content>
         <div layout="column" layout-wrap flex>
           <div class="message_container" ng-repeat="message in conversation.messages track by $index" >
-            <div ng-class="{ sender: message.sender_email!=USER.email }" >{{ message.message }}</div> 
-
+            <div ng-class="{margin_t_10: $index>0}">
+              <div ng-class="{ sender: message.sender_email!=USER.email, receiver: message.sender_email==USER.email }" >{{ message.message }}</div> 
+            </div>
           </div> <!-- end of message_container -->
         </div> <!-- end of column -->
       </md-content>
     </div> <!-- end of flex=70 -->
   </div> <!-- end of row -->
 </div>
-{{ USER.email }}
+{{ USER.email}}
 

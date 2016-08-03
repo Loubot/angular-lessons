@@ -133,6 +133,10 @@ html, body{
   padding-top: 10px !important;
 }
 
+.padding_t_15{
+  padding-top: 15px !important;
+}
+
 .margin_t_0{
   margin-top: 0px !important;
 }
@@ -346,35 +350,34 @@ html, body{
 
   // Messages
 
-
-
-.sender 
-{
+.bubble{
+  overflow: hidden;
+  display:block;
+  text-align:center;
   word-wrap: break-word;
-  // white-space: nowrap;
-    // text-overflow: ellipsis;
-    overflow: hidden;
-    display:block;
-    text-align:center;
+  
   position: relative;
   width: 250px;
-  height: 120px;
+  // height: 120px;
   padding: 0px;
-  background: #7FB3D8;
   -webkit-border-radius: 28px;
   -moz-border-radius: 28px;
   border-radius: 28px;
+}
+
+.sender 
+{
+  @extend .padding_t_15;
+  @extend .bubble;
+  
+  background: #7FB3D8;
+  
   border: #7F8191 solid 1px;
 }
 
 .sender:after 
 {
   word-wrap: break-word;
-  // white-space: nowrap;
-    // text-overflow: ellipsis;
-    overflow: hidden;
-    display:block;
-    text-align:center;
   content: '';
   position: absolute;
   border-style: solid;
@@ -390,11 +393,6 @@ html, body{
 .sender:before 
 {
   word-wrap: break-word;
-  // white-space: nowrap;
-    // text-overflow: ellipsis;
-    overflow: hidden;
-    display:block;
-    text-align:center;
   content: '';
   position: absolute;
   border-style: solid;
@@ -407,6 +405,44 @@ html, body{
   top: 45px;
 }
 
+
+.receiver 
+{
+  @extend .padding_t_15;
+  @extend .bubble;
+  float: right;
+  background: #29F968;
+  
+  border: #7F8191 solid 1px;
+}
+
+.receiver:after 
+{
+  content: '';
+  position: absolute;
+  border-style: solid;
+  border-width: 15px 15px 15px 0;
+  border-color: transparent #29F968;
+  display: block;
+  width: 0;
+  z-index: 1;
+  left: -15px;
+  top: 45px;
+}
+
+.receiver:before 
+{
+  content: '';
+  position: absolute;
+  border-style: solid;
+  border-width: 15px 15px 15px 0;
+  border-color: transparent #7F8191;
+  display: block;
+  width: 0;
+  z-index: 0;
+  left: -16px;
+  top: 45px;
+}
 .message_box{
   @extend .padding_t_10;
   
