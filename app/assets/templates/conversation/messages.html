@@ -6,7 +6,7 @@
       <md-content class="md-padding">
         <input placeholder="Search for student" >
         <div ng-repeat="conversation in conversations" ng-click="select_conversation( conversation.student_email )" flex="100">
-          <div class="message_box">{{ conversation.student_email }}</div>
+          <div class="message_box">{{ conversation.student_name }}</div>
           <md-divider></md-divider>
         </div> <!-- end of conversations -->
       </md-content>
@@ -18,7 +18,8 @@
         <div layout="column" layout-wrap flex>
           <div class="message_container" ng-repeat="message in conversation.messages track by $index" >
             <div ng-class="{margin_t_10: $index>0}">
-              <div ng-class="{ sender: message.sender_email!=USER.email, receiver: message.sender_email==USER.email }" >{{ message.message }}</div> 
+              <div ng-class="{ sender: message.sender_email!=USER.email, 'receiver flex-offset-60 flex-80': message.sender_email==USER.email }" 
+              >{{ message.message }}</div> 
             </div>
           </div> <!-- end of message_container -->
         </div> <!-- end of column -->
@@ -26,5 +27,3 @@
     </div> <!-- end of flex=70 -->
   </div> <!-- end of row -->
 </div>
-{{ USER.email}}
-

@@ -133,8 +133,8 @@ html, body{
   padding-top: 10px !important;
 }
 
-.padding_t_15{
-  padding-top: 15px !important;
+.padding_t_8{
+  padding-top: 8px !important;
 }
 
 .margin_t_0{
@@ -357,19 +357,19 @@ html, body{
   word-wrap: break-word;
   
   position: relative;
-  width: 250px;
+  width: 40%;
   // height: 120px;
   padding: 0px;
-  -webkit-border-radius: 28px;
-  -moz-border-radius: 28px;
-  border-radius: 28px;
+  -webkit-border-radius: 16px;
+  -moz-border-radius: 16px;
+  border-radius: 16px;
 }
 
 .sender 
 {
-  @extend .padding_t_15;
+  @extend .padding_t_8;
   @extend .bubble;
-  
+  clear: both;
   background: #7FB3D8;
   
   border: #7F8191 solid 1px;
@@ -408,9 +408,9 @@ html, body{
 
 .receiver 
 {
-  @extend .padding_t_15;
+  @extend .padding_t_8;
   @extend .bubble;
-  float: right;
+  // float: right;
   background: #29F968;
   
   border: #7F8191 solid 1px;
@@ -443,6 +443,8 @@ html, body{
   left: -16px;
   top: 45px;
 }
+
+
 .message_box{
   @extend .padding_t_10;
   
