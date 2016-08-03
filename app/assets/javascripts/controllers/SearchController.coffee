@@ -10,12 +10,11 @@ angular.module('lessons').controller( 'SearchController', [
   "alertify"
   ( $scope, $rootScope, $state, $stateParams, $filter, COMMS, alertify ) ->
     console.log "SearchController"
-    $scope.ctrl = 
-      subject: null
-      county:  null
+    
     console.log $stateParams
-    $scope.ctrl.subject_name = $stateParams.name
-    $scope.ctrl.county = $stateParams.location
+    $scope.selected = {}
+    $scope.selected.subject_name = $stateParams.name
+    $scope.selected.county_name = $stateParams.location
     $scope.selected_subject = $stateParams.name
 
     $scope.view_teacher = ( teacher ) ->
@@ -26,10 +25,10 @@ angular.module('lessons').controller( 'SearchController', [
       
       return
 
-    $scope.search_teachers = ( subject ) ->
+    $scope.search_teachers = ->
       COMMS.GET(
         "/search"
-        subject
+        $scope.selected
       ).then( ( resp ) ->
         console.log resp
         alertify.success "Found #{ resp.data.teachers.length } teacher(s)"
@@ -39,21 +38,22 @@ angular.module('lessons').controller( 'SearchController', [
         alertify.error "Failed to find teachers"
       )
 
+    if $stateParams.name? or $stateParams.location
+      $scope.search_teachers()
+
     $scope.search_subjects = ( subject ) ->
       console.log subject.name
       console.log $filter('filter')( $scope.subjects_list, subject.name )
       $scope.search_subjects = $filter('filter')( $scope.subjects_list, subject.name )
 
 
-    $scope.search = ->
-      console.log "search"
-      if !( Object.keys($scope.searchText).length == 0 && $scope.subject.constructor == Object )
-        $state.go("search", { name: $scope.searchText.name, location: $scope.searchText.location })
-
     $scope.subject_picked = ( subject )->
-      console.log subject
-      if !( Object.keys(subject).length == 0 && subject.constructor == Object )
-        $state.go("search", { name: $scope.searchText.name, location: $scope.searchText.location })
+      $scope.selected.subject_name = subject
+      set_params()
+
+    $scope.county_picked = ( county )->
+      $scope.selected.county_name = county
+      set_params()
 
     define_subjects = ( subjects ) ->
       $scope.subjects_list = []
@@ -62,6 +62,10 @@ angular.module('lessons').controller( 'SearchController', [
 
       console.log $scope.subjects_list
      
+
+    $scope.search_counties = ->
+      $scope.counties = $filter('filter')( $scope.county_list, $scope.county )
+
 
     $scope.county_list = ['Antrim','Armagh','Carlow','Cavan','Clare','Cork','Derry','Donegal','Down','Dublin',
           'Fermanagh','Galway','Kerry','Kildare','Kilkenny','Laois','Leitrim','Limerick','Longford',
@@ -79,9 +83,10 @@ angular.module('lessons').controller( 'SearchController', [
     )
 
     set_params = ->
+      console.log $scope.selected.subject_name
       $state.transitionTo(
         'search',
-        { name: $scope.ctrl.subject, location: $scope.ctrl.county }
+        { name: $scope.selected.subject_name, location: $scope.selected.county_name }
         { notify: false }
       )
 

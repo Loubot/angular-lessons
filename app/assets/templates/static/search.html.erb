@@ -1,17 +1,17 @@
 <div layout="row">
   <div flex="30" layout="column" class="boxWithHeight" layout-padding>
     <md-content class="md-padding">
-      <form ng-submit="search_teachers( selected_subject )" name="searchForm">
+      <form ng-submit="search_teachers()" name="searchForm">
         <p>Change your search</p>
         <md-chips>
-          <md-chip ng-show="ctrl.subject_name">{{ ctrl.subject_name }}</md-chip>
-          <md-chip ng-show="ctrl.county">{{ ctrl.county }}</md-chip>
+          <md-chip ng-show="selected.subject_name">{{ selected.subject_name }}</md-chip>
+          <md-chip ng-show="selected.county_name">{{ selected.county_name }}</md-chip>
           
           
         </md-chips>
         <div layout-gt-sm="column" flex>
           <md-autocomplete 
-              md-selected-item="selected_subject" 
+              md-selected-item="selected.subject_name" 
               md-search-text="searchText.name" 
               md-items="subject in search_subjects( searchText )" 
               md-item-text="subject"
@@ -20,6 +20,7 @@
               md-selected-item="subject"
               md-floating-label="Subject?"
               md-delay="1000"
+              md-selected-item-change="subject_picked( subject )"
               md-min-length="2">
             <md-item-template>
               <span md-highlight-text="searchText">{{subject}}</span>
@@ -33,7 +34,7 @@
 
           
           <md-autocomplete 
-              md-selected-item="ctrl.county" 
+              md-selected-item="selected.county_name" 
               md-input-name="county"
               md-search-text="ctrl.county_name" 
               md-items="county in counties" 
