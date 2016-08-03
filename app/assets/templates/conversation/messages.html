@@ -5,22 +5,25 @@
 
       <md-content class="md-padding">
         <input placeholder="Search for student" >
-        <div ng-repeat="conversation in conversations" ng-click="select_conversation( conversation.id )" flex="100">
+        <div ng-repeat="conversation in conversations" ng-click="select_conversation( conversation.student_email )" flex="100">
           <div class="message_box">{{ conversation.student_email }}</div>
+          <md-divider></md-divider>
         </div> <!-- end of conversations -->
       </md-content>
 
     </div> <!-- end of flex=30 -->
 
-    <div flex="70" layout-margin >
-      <div layout="column" layout-wrap flex>
-        <div class="message_container" ng-repeat="message in conversation.messages" >
-          <span class="receiver">{{ message.message }}</span> 
-        </div> <!-- end of message_container -->
-      </div> <!-- end of column -->
+    <div flex="70"  >
+      <md-content>
+        <div layout="column" layout-wrap flex>
+          <div class="message_container" ng-repeat="message in conversation.messages track by $index" >
+            <div ng-class="{ sender: message.sender_email!=USER.email }" >{{ message.message }}</div> 
 
+          </div> <!-- end of message_container -->
+        </div> <!-- end of column -->
+      </md-content>
     </div> <!-- end of flex=70 -->
   </div> <!-- end of row -->
 </div>
-
+{{ USER.email }}
 

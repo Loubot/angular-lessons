@@ -12,6 +12,10 @@ angular.module('lessons').controller('ConversationController', [
     console.log "ConversationController"
     console.log $stateParams
 
+    $scope.scrollevent = ( $e ) ->
+      
+      return
+
     USER.get_user().then( ( user ) ->
       if parseInt( $stateParams.id ) != parseInt( $rootScope.USER.id )
         alertify.error "You are not authorised to view this"
@@ -38,10 +42,19 @@ angular.module('lessons').controller('ConversationController', [
       $rootScope.USER = null
     )
 
-    $scope.select_conversation = ( id ) ->
-      for convo in $scope.conversations
-        if convo.id == id
-          $scope.conversation = convo
-          return false
+    $scope.select_conversation = ( email ) ->
+      
+      COMMS.GET(
+        "/conversation"
+        student_email: email
+        selected_conversation: true
+      ).then( ( resp ) ->
+        console.log resp
+        alertify.success "Got conversation"
+        $scope.conversation = resp.data.conversation
+      ).catch( ( err ) ->
+        console.log err
+        alertify.error "Failed to get conversation"
+      )
 
 ])

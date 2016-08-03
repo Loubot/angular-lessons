@@ -25,9 +25,15 @@ class ConversationController < ApplicationController
 
   def index
     p params
-    conversations = Conversation.includes(:messages).where( teacher_email: params[ :teacher_email ]).order(:created_at).limit( 10 )
+    if index_params.has_key?(:selected_conversation)
+      conversation = Conversation.where( student_email: index_params[:student_email] ).includes( :messages ).order( "messages.created_at" )
+      render json: { conversation: conversation.first.as_json( include: [ :messages ] ) }
+    else
+      conversations = Conversation.includes(:messages).where( teacher_email: params[ :teacher_email ]).order(:created_at).limit( 10 )
 
-    render json: { conversations: conversations.as_json( include: [ :messages ] ) }
+      render json: { conversations: conversations.as_json( include: [ :messages ] ) }
+    end
+    
 
   end
 
@@ -37,6 +43,10 @@ class ConversationController < ApplicationController
       params.permit( { conversation: [ :name, :phone, :email, :teacher_id, :message ] }, :teacher_id )
       # params.permit( :name, :phone, :email, :teacher_id )
 
+    end
+
+    def index_params
+      params.permit( :student_email, :selected_conversation )
     end
 
 end

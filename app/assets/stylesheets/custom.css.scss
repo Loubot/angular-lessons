@@ -141,6 +141,10 @@ html, body{
   margin-top: 10px !important;
 }
 
+.padding_s_20{
+  padding: 0px 20px;
+}
+
 .gutter_75{
   min-width: 75% !important;
   max-width: 75%;
@@ -342,43 +346,73 @@ html, body{
 
   // Messages
 
-.message_container{
-  display: inline-flex;
-  flex-direction: column;
-}
 
-.message{
+
+.sender 
+{
   word-wrap: break-word;
-  min-height: 20%;
-  background-color: red;
-  -webkit-border-radius: 30px;
-  -moz-border-radius: 30px;
-  border-radius: 30px;
-  text-align: center;
-  -webkit-box-shadow: 2px 2px 4px #888;
-  -moz-box-shadow: 2px 2px 4px #888;
-  box-shadow: 2px 2px 4px #888;
+  // white-space: nowrap;
+    // text-overflow: ellipsis;
+    overflow: hidden;
+    display:block;
+    text-align:center;
+  position: relative;
+  width: 250px;
+  height: 120px;
+  padding: 0px;
+  background: #7FB3D8;
+  -webkit-border-radius: 28px;
+  -moz-border-radius: 28px;
+  border-radius: 28px;
+  border: #7F8191 solid 1px;
 }
 
-.sender{
-  @extend .width_25;
-  @extend .message;
-  align-self: flex-end;
+.sender:after 
+{
+  word-wrap: break-word;
+  // white-space: nowrap;
+    // text-overflow: ellipsis;
+    overflow: hidden;
+    display:block;
+    text-align:center;
+  content: '';
+  position: absolute;
+  border-style: solid;
+  border-width: 15px 0 15px 15px;
+  border-color: transparent #7FB3D8;
+  display: block;
+  width: 0;
+  z-index: 1;
+  right: -15px;
+  top: 45px;
 }
 
-.receiver{
-  @extend .width_25;
-  @extend .message;
-  align-self: flex-start;
+.sender:before 
+{
+  word-wrap: break-word;
+  // white-space: nowrap;
+    // text-overflow: ellipsis;
+    overflow: hidden;
+    display:block;
+    text-align:center;
+  content: '';
+  position: absolute;
+  border-style: solid;
+  border-width: 15px 0 15px 15px;
+  border-color: transparent #7F8191;
+  display: block;
+  width: 0;
+  z-index: 0;
+  right: -16px;
+  top: 45px;
 }
 
 .message_box{
   @extend .padding_t_10;
-  -webkit-box-shadow: 7px 10px 5px -7px rgba(0,0,0,0.31);
-  -moz-box-shadow: 7px 10px 5px -7px rgba(0,0,0,0.31);
-  box-shadow: 7px 10px 5px -7px rgba(0,0,0,0.31);
+  
   @extend .width_100;
 
 }
 
 // End of messages
+
