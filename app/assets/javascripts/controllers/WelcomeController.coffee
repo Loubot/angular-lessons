@@ -87,7 +87,7 @@ angular.module('lessons').controller('WelcomeController', [
       $scope.subjects_list = resp.data.subjects
       define_subjects( resp.data.subjects )
     ).catch( ( err ) ->
-      console.log resp
+      console.log err
     )
 
 ])
