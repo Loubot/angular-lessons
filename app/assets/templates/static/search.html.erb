@@ -1,28 +1,32 @@
 <div layout="row">
   <div flex="30" layout="column" class="boxWithHeight" layout-padding>
     <md-content class="md-padding">
-      <form ng-submit="search_teachers( ctrl )" name="searchForm">
+      <form ng-submit="search_teachers( selected_subject )" name="searchForm">
         <p>Change your search</p>
         <md-chips>
-          <md-chip ng-show="ctrl.subject_name!=''">{{ ctrl.subject }}</md-chip>
+          <md-chip ng-show="ctrl.subject_name">{{ ctrl.subject_name }}</md-chip>
           <md-chip ng-show="ctrl.county">{{ ctrl.county }}</md-chip>
           
           
         </md-chips>
         <div layout-gt-sm="column" flex>
           <md-autocomplete 
-              md-selected-item="ctrl.subject" 
-              md-input-name="subject"
-              md-search-text="ctrl.subject_name" 
-              md-items="subject in subjects" 
-              md-item-text="subject" 
-              md-floating-label="Subject"
-              md-search-text-change="search_subjects()"
-              md-selected-item-change="subject_picked( subject )">
+              md-selected-item="selected_subject" 
+              md-search-text="searchText.name" 
+              md-items="subject in search_subjects( searchText )" 
+              md-item-text="subject"
+              class="black_text" 
+              placeholder="Subject?"
+              md-selected-item="subject"
+              md-floating-label="Subject?"
+              md-delay="1000"
+              md-min-length="2">
             <md-item-template>
-              <span md-highlight-text="county">{{subject}}</span>
+              <span md-highlight-text="searchText">{{subject}}</span>
             </md-item-template>
-            
+            <md-not-found>
+              No matches found.
+            </md-not-found>
           </md-autocomplete>
           
           

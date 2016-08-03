@@ -14,7 +14,7 @@ angular.module('lessons').controller( 'SearchController', [
       subject: null
       county:  null
     console.log $stateParams
-    $scope.ctrl.subject = $stateParams.name
+    $scope.ctrl.subject_name = $stateParams.name
     $scope.ctrl.county = $stateParams.location
 
     $scope.view_teacher = ( teacher ) ->
@@ -25,43 +25,34 @@ angular.module('lessons').controller( 'SearchController', [
       
       return
 
-    $scope.search_teachers = ( params ) ->
-      console.log params
+    $scope.search_teachers = ( subject ) ->
       COMMS.GET(
-        '/search'
-        params
+        "/search"
+        subject
       ).then( ( resp ) ->
         console.log resp
-        $scope.teachers = resp.data.teachers
         alertify.success "Found #{ resp.data.teachers.length } teacher(s)"
+        $scope.teachers = resp.data.teachers
       ).catch( ( err ) ->
         console.log err
+        alertify.error "Failed to find teachers"
       )
 
-    if $stateParams.name? or $stateParams.location?
-      $scope.search_teachers( $stateParams )
+    $scope.search_subjects = ( subject ) ->
+      console.log subject.name
+      console.log $filter('filter')( $scope.subjects_list, subject.name )
+      $scope.search_subjects = $filter('filter')( $scope.subjects_list, subject.name )
 
-   
-    
-    $scope.search_subjects = ->
-      console.log $scope.ctrl.subject_name
-      $scope.subjects = $filter('filter')( $scope.subjects_list, $scope.ctrl.subject_name )
 
-    $scope.search_counties = ->
-      
-      console.log $scope.ctrl.county_name
-      $scope.counties =  $filter('filter')( $scope.county_list, $scope.ctrl.county_name )
+    $scope.search = ->
+      console.log "search"
+      if !( Object.keys($scope.searchText).length == 0 && $scope.subject.constructor == Object )
+        $state.go("search", { name: $scope.searchText.name, location: $scope.searchText.location })
 
-    $scope.county_picked = ( county ) ->
-      console.log county
-      $scope.ctrl.county = county
-      set_params()
-
-    $scope.subject_picked = ( subject ) ->
-      if subject != ""
-        console.log subject
-        $scope.ctrl.subject = subject
-        set_params()
+    $scope.subject_picked = ( subject )->
+      console.log subject
+      if !( Object.keys(subject).length == 0 && subject.constructor == Object )
+        $state.go("search", { name: $scope.searchText.name, location: $scope.searchText.location })
 
     define_subjects = ( subjects ) ->
       $scope.subjects_list = []
@@ -92,8 +83,6 @@ angular.module('lessons').controller( 'SearchController', [
         { name: $scope.ctrl.subject, location: $scope.ctrl.county }
         { notify: false }
       )
-
-    ################# Get teachers by subject on page load
 
 
 ])
