@@ -7,6 +7,7 @@
 #  student_email :string
 #  teacher_name  :string
 #  student_name  :string
+#  random        :text
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
 #
