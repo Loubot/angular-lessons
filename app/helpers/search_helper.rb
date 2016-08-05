@@ -1,7 +1,9 @@
 module SearchHelper
 
   def search_query( params )
-    if params.has_key?( :county_name ) && params.has_key?( :subject_name )
+    if params.has_key?( :county_name ) && params.has_key?( :subject_name ) \
+      && params[ :county_name ] != "" && params[ :subject_name ] != ""
+      p "county_name and subject_name"
       ids = Location.within( 50, origin: params[:county_name] ).select( [ 'teacher_id' ] ).map( &:teacher_id )
       teachers =  Subject.where( name: params[ :subject_name ] )\
                   .first.teachers.includes( :photos, :location, :subjects )\
@@ -9,7 +11,7 @@ module SearchHelper
       teachers.as_json( include: [ :photos, :location, :subjects ] )
     else
       p "Searhc helper params #{ params }"
-      subject = Subject.includes(:teachers).where('name ILIKE ?', "%#{ params[:subject_name] }%").select( [ :name, :id ] ).first
+      subject = Subject.includes(:teachers).where('name LIKE ?', "%#{ params[:subject_name] }%").select( [ :name, :id ] ).first
       teachers = subject.teachers.select( "email, id, first_name, last_name" )
       teachers.as_json(include: [ :photos, :location, :subjects ])
     end

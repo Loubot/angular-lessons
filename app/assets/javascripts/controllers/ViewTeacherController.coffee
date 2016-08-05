@@ -118,8 +118,9 @@ angular.module('lessons').controller( 'ViewTeacherController', [
       $mdDialog.hide()
 
     $scope.send_message = ->
+      $scope.message.teacher_id = $scope.teacher.id
       COMMS.POST(
-        "/teacher/#{ $scope.teacher.id }/conversation"
+        "/conversation"
         conversation: $scope.message
       ).then( ( resp ) ->
         console.log resp

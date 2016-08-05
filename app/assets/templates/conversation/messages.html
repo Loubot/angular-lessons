@@ -15,13 +15,13 @@
 
     <div flex="70"  >
       <md-content>
-        <div layout="column" layout-wrap flex>
-          <div class="message_container" ng-repeat="message in conversation.messages track by $index" >
-            <div ng-class="{margin_t_10: $index>0}">
-              <div ng-class="{ sender: message.sender_email!=USER.email, 'receiver flex-offset-60 flex-80': message.sender_email==USER.email }" 
-              >{{ message.message }}</div> 
+        <div layout="column" >
+          <div  ng-class="{ 'flex-50 flex-offset-50': message.sender_email==USER.email, 'flex-50': message.sender_email!=USER.email }"
+                ng-repeat="message in conversation.messages">
+            <div ng-class="{ 'sender': message.sender_email==USER.email, 'receiver': message.                  sender_email!=USER.email }">
+              {{ message.message }}
             </div>
-          </div> <!-- end of message_container -->
+          </div>          
         </div> <!-- end of column -->
       </md-content>
     </div> <!-- end of flex=70 -->

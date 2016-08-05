@@ -23,8 +23,9 @@
 
         <div layout="row">
           <div flex="50">
-            <i class="material-icons">email</i>
-            <input ng-model="message.email" 
+            <md-input-container md-no-float>
+              <i class="material-icons">email</i>
+              <input ng-model="message.email" 
                     type="email" 
                     ng-pattern="/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/" 
                     placeholder="Email (required)"
@@ -32,13 +33,15 @@
                     type="password"
                     ng-required="true"
                     aria-label="email">
+            </md-input-container>
           </div> <!-- end of flex=50 -->
         
 
         
           <div flex="50">
-            <i class="material-icons">email</i>
-            <input ng-model="message.confirm_email" 
+            <md-input-container md-no-float>
+              <i class="material-icons">email</i>
+              <input ng-model="message.confirm_email"
                     type="email" 
                     ng-pattern="/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/" 
                     name="confirm_email" 
@@ -48,6 +51,7 @@
                     required
                     match="message.email"
                     aria-label="email confirm">
+            </md-input-container>
           </div>
         </div> <!-- end of row -->
 
