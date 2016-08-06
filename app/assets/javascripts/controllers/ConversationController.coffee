@@ -57,4 +57,16 @@ angular.module('lessons').controller('ConversationController', [
         alertify.error "Failed to get conversation"
       )
 
+    $scope.send_message = ->
+      $scope.message.teacher_email = $scope.conversation.teacher_email
+      $scope.message.student_email = $scope.conversation.student_email
+      COMMS.POST(
+        "/conversation"
+        conversation: $scope.message
+      ).then( ( resp ) ->
+        console.log resp
+      ).catch( ( err ) ->
+        console.log err
+      )
+
 ])

@@ -67,6 +67,10 @@ html, body{
   background-color: #85b3c4 !important;
 }
 
+.white_background{
+  background-color: #FFF;
+}
+
 .blue_button{
   color: #fff !important;
   background-color: #5bc0de !important;
@@ -109,6 +113,19 @@ html, body{
   height: 100%;
 }
 
+.break_word{
+  word-wrap: break-all;
+}
+
+.no_border{
+  background-color:transparent;
+  border: 0px solid;
+}
+
+.no_border:focus{
+  outline: none;
+}
+
 .width_75{
   width: 75%;
 }
@@ -123,6 +140,15 @@ html, body{
 
 .x_large_font{
   font-size: x-large;
+}
+
+
+.height_100{
+  height: 100% !important;
+}
+
+.height_80{
+  height: 80% !important;
 }
 
 .no_padding{
@@ -147,6 +173,14 @@ html, body{
 
 .margin_t_10{
   margin-top: 10px !important;
+}
+
+.padding_5{
+  padding: 5px !important;
+}
+
+.padding_10{
+  padding: 10px !important;
 }
 
 .padding_s_20{
@@ -377,6 +411,22 @@ html, body{
   background: #29F968;
   @extend .bubble;
 }
+
+.message_response_container{
+  @extend .padding_10;
+  bottom: 0px;
+  height: 25%;
+  width: 100%;
+}
+
+.message_form{
+  height: 100%;
+  width: 99%;
+  @extend .white_background;
+  border: 1px solid #cdcecf;
+  word-wrap: break-word;
+}
+
 
 // End of messages
 
