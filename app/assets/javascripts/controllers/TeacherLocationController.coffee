@@ -74,9 +74,13 @@ angular.module('lessons').controller( "TeacherLocationController" , [
         $scope.map.setZoom( 15 )
         
       )
+    ).catch( ( err ) ->
+      console.log err
+      alertify.error "You are not authorised to view this"
+      $state.go 'welcome'
     )
 
-      
+       
 
       
 

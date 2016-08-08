@@ -1,0 +1,48 @@
+
+
+  <div layout="row" class="height_100 margin_t_10">
+    <div flex="30" layout-margin>
+
+      <md-content class="md-padding">
+        <input placeholder="Search for student" >
+        <div ng-repeat="conversation in conversations" ng-click="select_conversation( conversation.student_email )" flex="100">
+          <div class="message_box">{{ conversation.student_name }}</div>
+          <md-divider></md-divider>
+        </div> <!-- end of conversations -->
+      </md-content>
+
+    </div> <!-- end of flex=30 -->
+
+    <div flex="70" class="height_100">
+      <md-content class="height_80 padding_5">
+        <div layout="column" layout-fill flex>
+          <div        ng-class="{ 'flex-50 flex-offset-50': message.sender_email==USER.email, 'flex-50': message.            sender_email!=USER.email }"
+                      ng-repeat="message in conversation.messages">
+            <div ng-class="{ 'sender': message.sender_email==USER.email, 'receiver': message.                  sender_email!=USER.email }">
+              {{ message.message }}
+            </div> <!-- end of sender/receiver -->
+
+
+          </div> <!-- end of ng-repeat messages -->  
+          
+        </div> <!-- end of column -->
+
+        
+      </md-content>
+      <div class="message_response_container">
+        <form name="message_form" ng-submit="send_message()" class="message_form">
+           <md-input-container md-no-float class="md-block">
+              <textarea ng-model="message.message" 
+                        aria-label="Experience description" 
+                        md-maxlength="200" 
+                        rows="4" 
+                        md-select-on-focus
+                        placeholder="Enter your message here">
+              </textarea>
+            </md-input-container>
+            <input type="submit" value="Submit message" class="md-button md-primary md-raised white_text">
+        </form> <!-- end of send_message -->
+      </div>
+    </div> <!-- end of flex=70 -->
+  </div> <!-- end of row -->
+

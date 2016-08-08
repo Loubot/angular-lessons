@@ -10,7 +10,7 @@ angular.module('lessons', [
   'ui.rCalendar'
   'angular-loading-bar'
   'ngAnimate'
-
+  'validation.match'
 ])
 
 angular.module('lessons').constant "RESOURCES", do ->
@@ -68,10 +68,17 @@ angular.module('lessons').config ($stateProvider, $urlRouterProvider) ->
     templateUrl: "user/teacher_location.html"
     controller: "TeacherLocationController"
 
+  $stateProvider.state 'conversation',
+    url: "/conversation/:id"
+    templateUrl: "conversation/messages.html"
+    controller: "ConversationController"
+
   $stateProvider.state 'how_it_works',
     url: '/how-it-works'
     templateUrl: 'static/how_it_works.html'
     controller: "UserController"
+
+  
 
 angular.module('lessons').config ( $authProvider, RESOURCES ) ->
   $authProvider.configure({

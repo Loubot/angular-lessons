@@ -3,7 +3,6 @@
 # Table name: experiences
 #
 #  id          :integer          not null, primary key
-#  title       :string
 #  description :text
 #  teacher_id  :integer
 #  start       :datetime

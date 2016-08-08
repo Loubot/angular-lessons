@@ -4,7 +4,6 @@ class CreateMessages < ActiveRecord::Migration
       t.text :message
       t.text :sender_email
       t.integer :conversation_id
-      t.text :random
 
       t.timestamps null: false
     end

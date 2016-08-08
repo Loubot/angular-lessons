@@ -27,6 +27,7 @@
 #  created_at             :datetime
 #  updated_at             :datetime
 #  admin                  :boolean
+#  lon                    :float
 #  profile                :integer
 #  is_teacher             :boolean          default(FALSE), not null
 #  paypal_email           :string           default("")

@@ -1,5 +1,5 @@
 class TeacherController < ApplicationController
-  before_action :authenticate_teacher!
+  before_action :authenticate_teacher!, except: [ :show_teacher]
   require 'pp'
   def get
     
@@ -38,8 +38,13 @@ class TeacherController < ApplicationController
   def show_teacher
     teacher = Teacher.includes( :photos, :subjects, :location, :experience, :qualifications )\
               .select( :id, :email, :first_name, :last_name, :profile, :overview )\
-              .find( params[:teacher_id])
-    render json: { teacher: teacher.as_json( include: [ :photos, :subjects, :location, :experience, :qualifications ] ) }
+              .find_by_id( params[:teacher_id])
+    if teacher
+      render json: { teacher: teacher.as_json( include: [ :photos, :subjects, :location, :experience, :qualifications ] ) }
+    else
+      render json: { errors: { full_messages: "Can't find teacher with that id" } }, status: 404
+    end
+    
   end
 
   def chunks
@@ -52,6 +57,6 @@ class TeacherController < ApplicationController
     
 
     def teacher_params
-      params.permit( :profile, :id, :overview, :experience, :calendar_id )
+      params.permit( :profile, :id, :teacher_id, :overview, :experience, :calendar_id )
     end
 end

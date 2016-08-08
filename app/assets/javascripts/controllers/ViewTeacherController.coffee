@@ -9,7 +9,8 @@ angular.module('lessons').controller( 'ViewTeacherController', [
   "$filter"
   "COMMS"
   "alertify"
-  ( $scope, $rootScope, $state, $stateParams, USER, $filter, COMMS, alertify ) ->
+  "$mdDialog"
+  ( $scope, $rootScope, $state, $stateParams, USER, $filter, COMMS, alertify, $mdDialog ) ->
     console.log "ViewTeacherController"
     $scope.scrollevent = ( $e ) ->
       
@@ -47,21 +48,22 @@ angular.module('lessons').controller( 'ViewTeacherController', [
         )
 
     
-    USER.get_user().then( ( user ) ->
-      COMMS.GET(
-        "/teacher/#{ $stateParams.id }/show-teacher"
-      ).then( ( resp ) ->
-        # console.log resp
-        alertify.success "Got teacher info"
-        $scope.teacher = resp.data.teacher
-        set_profile()
-        create_map()
-        create_fotorama()
-      ).catch( ( err ) ->
-        console.log err
-        alertify.error err.data.errors.full_messages
-      )
+    
+    COMMS.GET(
+      "/teacher/#{ $stateParams.id }/show-teacher"
+    ).then( ( resp ) ->
+      # console.log resp
+      alertify.success "Got teacher info"
+      $scope.teacher = resp.data.teacher
+      set_profile()
+      create_map()
+      create_fotorama()
+    ).catch( ( err ) ->
+      console.log err
+      alertify.error err.data.errors.full_messages
+      $state.go 'welcome'
     )
+    
       
 
 
@@ -102,4 +104,29 @@ angular.module('lessons').controller( 'ViewTeacherController', [
       ), 3000 )
 
     
+    ####################### Message dialog #############################
+
+    $scope.open_message_dialog = ->
+      $mdDialog.show(
+        clickOutsideToClose: true
+        scope: $scope
+        preserveScope: true
+        templateUrl: "dialogs/message_teacher_dialog.html"
+      )
+
+    $scope.closeDialog = ->
+      $mdDialog.hide()
+
+    $scope.send_message = ->
+      $scope.message.teacher_id = $scope.teacher.id
+      COMMS.POST(
+        "/conversation"
+        conversation: $scope.message
+      ).then( ( resp ) ->
+        console.log resp
+        alertify.success "Message sent!"
+        $mdDialog.hide()
+      ).catch( ( err ) ->
+        console.log err
+      )
 ])

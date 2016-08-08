@@ -15,7 +15,7 @@ html, body{
 
 .green_blue_text{
   color: #2a602a !important;
-  color: #fff;
+
   text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #fff, 0 0 20px #2d95ff, 0 0 30px #2d95ff, 0 0 40px #2d95ff, 0 0 50px #2d95ff, 0 0 75px #2d95ff;
   letter-spacing: 5px;
 }
@@ -67,6 +67,10 @@ html, body{
   background-color: #85b3c4 !important;
 }
 
+.white_background{
+  background-color: #FFF;
+}
+
 .blue_button{
   color: #fff !important;
   background-color: #5bc0de !important;
@@ -85,7 +89,7 @@ html, body{
 }
 
 .slide_container{
-  min-height: 40vw;
+  // min-height: 40vw;
   min-width: 100%;
 }
 
@@ -99,26 +103,68 @@ html, body{
   max-height: 40vw;
 }
 
-.md-media-sm{height:80px;width:80px}
+.md-media-sm{
+  height:80px;
+  width:80px
+}
+
 .boxWithHeight {
   box-sizing: border-box;
   height: 100%;
+}
+
+.break_word{
+  word-wrap: break-all;
+}
+
+.no_border{
+  background-color:transparent;
+  border: 0px solid;
+}
+
+.no_border:focus{
+  outline: none;
 }
 
 .width_75{
   width: 75%;
 }
 
+.width_25{
+  width: 25%;
+}
+
+.width_100{
+  width: 100% !important;
+}
+
 .x_large_font{
   font-size: x-large;
+}
+
+
+.height_100{
+  height: 100% !important;
+}
+
+.height_80{
+  height: 80% !important;
 }
 
 .no_padding{
   padding: 0px !important;
 }
 
+.no_margin{
+  margin: 0px !important;
+}
+
 .padding_t_10{
   padding-top: 10px !important;
+}
+
+.padding_t_8{
+  padding-top: 8px !important;
 }
 
 .margin_t_0{
@@ -127,6 +173,18 @@ html, body{
 
 .margin_t_10{
   margin-top: 10px !important;
+}
+
+.padding_5{
+  padding: 5px !important;
+}
+
+.padding_10{
+  padding: 10px !important;
+}
+
+.padding_s_20{
+  padding: 0px 20px;
 }
 
 .gutter_75{
@@ -305,6 +363,11 @@ html, body{
 }
 
 
+.icon_button>.material-icons{
+  position: relative;
+  transform: translateY(20%);
+}
+
 
 .gridListdemoBasicUsage md-grid-list {
   margin: 8px; }
@@ -322,4 +385,48 @@ html, body{
   background: #ff8a80; }
 .gridListdemoBasicUsage md-grid-tile {
   transition: all 400ms ease-out 50ms; }
+
+  // Messages
+
+.bubble{
+  word-wrap: break-word;
+  border-radius: 5px;
+  box-shadow: 0 0 6px #B2B2B2;
+  display: inline-block;
+  width: 20rem;
+  padding: 10px 18px;
+  position: relative;
+  vertical-align: top;
+}
+
+
+
+.receiver{
+  background: #7FB3D8;
+  @extend .bubble;
+}
+
+
+.sender{
+  background: #29F968;
+  @extend .bubble;
+}
+
+.message_response_container{
+  @extend .padding_10;
+  bottom: 0px;
+  height: 25%;
+  width: 100%;
+}
+
+.message_form{
+  height: 100%;
+  width: 99%;
+  @extend .white_background;
+  border: 1px solid #cdcecf;
+  word-wrap: break-word;
+}
+
+
+// End of messages
 

@@ -25,10 +25,13 @@ Rails.application.routes.draw do
 
       resources :experience,          only: [ :create, :destroy ]
       resources :qualification,       only: [ :create, :destroy ]
-      resources :location,            only: [ :create, :destroy ]
+      resources :location,            only: [ :create, :destroy ]      
 
     end
+    resources :conversation,        only: [ :create, :index ]
   end
+
+
 
   get 'oauth2/callback' => 'static#welcome'
   as :teacher do
