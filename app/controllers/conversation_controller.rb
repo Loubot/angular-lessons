@@ -6,9 +6,9 @@ class ConversationController < ApplicationController
     teacher = Teacher.find_by( email: conversation_params[:conversation][:teacher_email] )
     conversation = Conversation.find_or_create_by( 
       teacher_email: teacher.email,
-      student_email: conversation_params[:conversation][:email]
+      student_email: conversation_params[:conversation][:student_email]
 
-    )    
+    )
     ConversationMailer.send_message( 
       conversation_params, 
       teacher.email,
@@ -20,22 +20,45 @@ class ConversationController < ApplicationController
       sender_email:     params[:conversation][:email],
       conversation_id:  conversation.id
     )
-    render json: { conversation: conversation.as_json }
+
+    conversation = Conversation.find( conversation.id ).includes( :messages )
+
+    render json: { conversation: conversation.as_json( include: [ :messages ] ) }
   end
 
   def index
     p params
-    if index_params.has_key?(:selected_conversation)
-      conversation = Conversation.where( student_email: index_params[:student_email] ).includes( :messages ).order( "messages.created_at" )
-      render json: { conversation: conversation.first.as_json( include: [ :messages ] ) }
-    elsif index_params.has_key?(:random)
-      conversation = Conversation.find_by( random: index_params[ :random ] )
-      render json: { conversation: conversation.as_json }
-    else
-      conversations = Conversation.includes(:messages).where( teacher_email: params[ :teacher_email ]).order(:created_at).limit( 10 )
+    if ( index_params.has_key?( :teacher_email ) && index_params[ :teacher_email ] != "" )\
+      && ( index_params.has_key?( :student_email ) && index_params[:student_email ] != "" )
+      conversation = Conversation.where( teacher_email: index_params[ :teacher_email ], student_email: index_params[ :student_email ] ).includes( :messages ).first
 
+      render json: { conversation: conversation.as_json( include: [ :messages ] ) }
+
+    elsif index_params.has_key?( :conversation_id ) && index_params[ :conversation_id ] != ""
+      conversation = Conversation.find( index_params[ :conversation_id ] ).includes( :messages )
+
+      render json: { conversation: conversation.as_json( include: [ :messages ] ) }
+
+    elsif index_params.has_key?( :teacher_email ) && index_params[ :teacher_email ] != ""
+      conversations = Conversation.where( teacher_email: index_params[ :teacher_email ] ).includes( :messages )
       render json: { conversations: conversations.as_json( include: [ :messages ] ) }
+    elsif index_params.has_key?( :random ) && index_params[ :random ] != ""
+      conversation = Conversation.find_by( random: index_params[ :random ] ).includes( :messages )
+      render json: { conversation: conversation.as_json( include: [ :messages ] ) }
+
+    else
+      render json: { error: "Not found"}, status: 404
     end
+    #   conversation = Conversation.where( student_email: index_params[:student_email] ).includes( :messages ).order( "messages.created_at" )
+    #   render json: { conversation: conversation.first.as_json( include: [ :messages ] ) }
+    # elsif index_params.has_key?(:random)
+    #   conversation = Conversation.find_by( random: index_params[ :random ] )
+    #   render json: { conversation: conversation.as_json }
+    # else
+    #   conversations = Conversation.includes(:messages).where( teacher_email: params[ :teacher_email ]).order(:created_at).limit( 10 )
+
+    #   render json: { conversations: conversations.as_json( include: [ :messages ] ) }
+    # end
     
 
   end
@@ -49,7 +72,7 @@ class ConversationController < ApplicationController
     end
 
     def index_params
-      params.permit( :student_email, :selected_conversation, :random )
+      params.permit( :teacher_email, :student_email, :conversation_id, :random )
     end
 
 end

@@ -20,27 +20,32 @@ angular.module('lessons').controller('ConversationController', [
 
       USER.get_user().then( ( user ) ->
         alertify.success "Got user"
+        COMMS.GET(
+          "/conversation"
+          random: $stateParams.random
+          # conversation_id: $stateParams.id
+          teacher_email: $rootScope.USER.email
+        ).then( ( resp ) ->
+          console.log resp
+          alertify.success "Got conversation"
+          $scope.conversation =   resp.data.conversation
+          $scope.conversations =  resp.data.conversations if resp.data.conversations?
+        ).catch( ( err ) ->
+          console.log err
+          alertify.error "Failed to get conversation"
+        )
+
       ).catch( ( err ) ->
         alertify.error "Failed to get user"
       )
 
-    COMMS.GET(
-      "/conversation"
-      random: $stateParams.random
-    ).then( ( resp ) ->
-      console.log resp
-      alertify.success "Got conversation"
-    ).catch( ( err ) ->
-      console.log err
-      alertify.error "Failed to get conversation"
-    )
     
     $scope.select_conversation = ( email ) ->
       
       COMMS.GET(
         "/conversation"
         student_email: email
-        selected_conversation: true
+        teacher_email: $rootScope.USER.email
       ).then( ( resp ) ->
         console.log resp
         alertify.success "Got conversation"
