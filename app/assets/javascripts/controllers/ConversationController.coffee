@@ -26,7 +26,8 @@ angular.module('lessons').controller('ConversationController', [
       ).then( ( resp ) ->
         console.log resp
         alertify.success "Got conversation"
-        $scope.conversation =   resp.data.conversations[0]
+        $scope.conversation = resp.data.conversation if resp.data.conversation?
+        $scope.conversation =   resp.data.conversations[0] if ( resp.data.conversations? > 0  && resp.data.conversations.length > 0 )
         $scope.conversations =  resp.data.conversations if resp.data.conversations?
         $timeout (->
           $(".message_container").animate({ scrollTop: $(".message_container").height() }, "slow");

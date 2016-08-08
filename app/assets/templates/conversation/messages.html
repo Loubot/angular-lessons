@@ -16,7 +16,7 @@
 
     </div> <!-- end of flex=30 -->
 
-    <div flex="70" class="height_100">
+    <div flex="70" class="height_100" style="overflow-y:hidden;">
 
       <md-content class="height_75 padding_5 message_container">
         <div layout="column" layout-fill flex>
@@ -36,7 +36,7 @@
         
       </md-content>
       
-      <div class="message_response_container">
+      <div class="message_response_container height_25">
         <form name="message_form" ng-submit="send_message()" class="message_form">
             
               <textarea ng-model="message.message" 

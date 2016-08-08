@@ -45,8 +45,12 @@ class ConversationController < ApplicationController
     elsif index_params.has_key?( :teacher_email ) && index_params[ :teacher_email ] != ""
       conversations = Conversation.where( teacher_email: index_params[ :teacher_email ] ).includes( :messages )
       render json: { conversations: conversations.as_json( include: [ :messages ] ) }
+
     elsif index_params.has_key?( :random ) && index_params[ :random ] != ""
+
       conversation = Conversation.where( random: index_params[ :random ] ).includes( :messages ).first
+      p "random convo"
+      pp conversation
       render json: { conversation: conversation.as_json( include: [ :messages ] ) }
 
     else
