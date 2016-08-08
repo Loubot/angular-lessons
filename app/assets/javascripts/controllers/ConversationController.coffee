@@ -16,32 +16,25 @@ angular.module('lessons').controller('ConversationController', [
       
       return
 
-    USER.get_user().then( ( user ) ->
-      if parseInt( $stateParams.id ) != parseInt( $rootScope.USER.id )
-        alertify.error "You are not authorised to view this"
-        $state.go "welcome"
-        
-      else
+    if $stateParams.id?
 
-        COMMS.GET(
-          "/conversation"
-          teacher_email: $rootScope.USER.email
-          
-        ).then( ( resp ) ->
-          console.log resp
-          alertify.success "Got conversation"
-          $scope.conversations = resp.data.conversations
-          $scope.conversation = $scope.conversations[0]
-        ).catch( ( err ) ->
-          console.log err
-          alertify.error "Failed to get conversation"
-        )
+      USER.get_user().then( ( user ) ->
+        alertify.success "Got user"
+      ).catch( ( err ) ->
+        alertify.error "Failed to get user"
+      )
+
+    COMMS.GET(
+      "/conversation"
+      random: $stateParams.random
+    ).then( ( resp ) ->
+      console.log resp
+      alertify.success "Got conversation"
     ).catch( ( err ) ->
-      alertify.error "Failed to get user"
-      $state.go "welcome"
-      $rootScope.USER = null
+      console.log err
+      alertify.error "Failed to get conversation"
     )
-
+    
     $scope.select_conversation = ( email ) ->
       
       COMMS.GET(

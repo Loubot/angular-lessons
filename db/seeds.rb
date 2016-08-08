@@ -6,22 +6,22 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-# Category.create(name: 'Music')
-# Subject.create(name: 'Guitar', category_id: 1)
-# Subject.create(name: 'Drums', category_id: 1)
-# Subject.create(name: 'Piano', category_id: 1)
+Category.create(name: 'Music')
+Subject.create(name: 'Guitar', category_id: 1)
+Subject.create(name: 'Drums', category_id: 1)
+Subject.create(name: 'Piano', category_id: 1)
 
-# t1 = Teacher.create( first_name: "Bob", last_name: "Builder", password: "Football1", email: "lllouis1@yahoo.com")
-# t2 = Teacher.create( first_name: "Tim", last_name: "Shanks", password: "Football1", email: "lllouis2@yahoo.com")
-# t3 = Teacher.create( first_name: "Karl", last_name: "Beans", password: "Football1", email: "lllouis3@yahoo.com")
+t1 = Teacher.create( first_name: "Bob", last_name: "Builder", password: "Football1", email: "lllouis1@yahoo.com")
+t2 = Teacher.create( first_name: "Tim", last_name: "Shanks", password: "Football1", email: "lllouis2@yahoo.com")
+t3 = Teacher.create( first_name: "Karl", last_name: "Beans", password: "Football1", email: "lllouis3@yahoo.com")
 
-# Location.create( latitude: 53.268382, longitude: -9.056652, name: "Galway", address: "Galway", teacher_id: t1.id )
-# Location.create( latitude: 52.665655, longitude: -8.635292, name: "Limerick", address: "Limerick", teacher_id: t2.id )
-# Location.create( latitude: 53.344739, longitude: -6.267685, name: "Dublin", address: "Dublin", teacher_id: t3.id )
+Location.create( latitude: 53.268382, longitude: -9.056652, name: "Galway", address: "Galway", teacher_id: t1.id )
+Location.create( latitude: 52.665655, longitude: -8.635292, name: "Limerick", address: "Limerick", teacher_id: t2.id )
+Location.create( latitude: 53.344739, longitude: -6.267685, name: "Dublin", address: "Dublin", teacher_id: t3.id )
 
-# Teacher.all.each do |t|
-#   t.subjects << Subject.first
-# end
+Teacher.all.each do |t|
+  t.subjects << Subject.first
+end
 
 conversation = Conversation.create( teacher_email: "lllouis@yahoo.com", student_email: "louisangelini@gmail.com", teacher_name: "Louis", student_name: "Aidan" )
 conversationb = Conversation.create( teacher_email: "lllouis@yahoo.com", student_email: "louisangelini2@gmail.com", teacher_name: "Louis", student_name: "Paul" )

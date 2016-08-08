@@ -167,6 +167,18 @@ html, body{
   margin: 0px !important;
 }
 
+.margin_10{
+  margin: 10px !important;
+}
+
+.margin_t_10{
+  margin-top: 10px !important;
+}
+
+.margin_b_10{
+  margin-bottom: 3rem;
+}
+
 .padding_t_10{
   padding-top: 10px !important;
 }
@@ -177,10 +189,6 @@ html, body{
 
 .margin_t_0{
   margin-top: 0px !important;
-}
-
-.margin_t_10{
-  margin-top: 10px !important;
 }
 
 .padding_5{
@@ -421,7 +429,8 @@ html, body{
 }
 
 .message_response_container{
-  // @extend .padding_10;
+  @extend .padding_10;
+  @extend .height_25;
   bottom: 0px;
   height: 25%;
   width: 100%;

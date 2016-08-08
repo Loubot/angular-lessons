@@ -69,7 +69,7 @@ angular.module('lessons').config ($stateProvider, $urlRouterProvider) ->
     controller: "TeacherLocationController"
 
   $stateProvider.state 'conversation',
-    url: "/conversation/:id"
+    url: "/conversation/:random/:id"
     templateUrl: "conversation/messages.html"
     controller: "ConversationController"
 

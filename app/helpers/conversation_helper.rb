@@ -1,7 +1,7 @@
 module ConversationHelper
 
   def format_url( number, id)
-    p "url #{ request.base_url }/#/a/g"
+    p "urlssssssssss #{ request.base_url }/#/conversation?#{ number }/#{ id }"
 
     "#{ request.base_url }/#/conversation/#{ number }/#{ id }"
   end

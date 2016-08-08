@@ -1,11 +1,14 @@
 
 
   <div layout="row" class="height_100 ">
-    <div flex="30" layout-margin>
+    <div flex="30" layout-padding ng-show="USER" class="fancy">
 
       <md-content class="md-padding">
-        <input placeholder="Search for student" >
-        <div ng-repeat="conversation in conversations" ng-click="select_conversation( conversation.student_email )" flex="100">
+        <input placeholder="Search for student" class="margin_b_10">
+        <div  ng-repeat="conversation in conversations" 
+              ng-click="select_conversation( conversation.student_email )" 
+              class="margin_t_10"
+              flex="100">
           <div class="message_box">{{ conversation.student_name }}</div>
           <md-divider></md-divider>
         </div> <!-- end of conversations -->
@@ -16,9 +19,9 @@
     <div flex="70" class="height_100">
       <md-content class="height_75 padding_5">
         <div layout="column" layout-fill flex>
-          <div        ng-class="{ 'flex-50 flex-offset-50': message.sender_email==USER.email, 'flex-50': message.            sender_email!=USER.email }"
+          <div        ng-class="{ 'flex-50 flex-offset-50': message.sender_email==USER.email, 'flex-50': message.sender_email!=USER.email }"
                       ng-repeat="message in conversation.messages">
-            <div ng-class="{ 'sender': message.sender_email==USER.email, 'receiver': message.                  sender_email!=USER.email }">
+            <div ng-class="{ 'sender': message.sender_email==USER.email, 'receiver': message.sender_email!=USER.email }">
               {{ message.message }}
             </div> <!-- end of sender/receiver -->
 
@@ -29,7 +32,8 @@
 
         
       </md-content>
-      <div class="message_response_container height_25">
+      
+      <div class="message_response_container">
         <form name="message_form" ng-submit="send_message()" class="message_form">
             <md-input-container md-no-float class="md-block">
               <textarea ng-model="message.message" 
@@ -41,10 +45,11 @@
               </textarea>
             </md-input-container>
             <md-input-container>
-              <input type="submit" value="Submit message" class="md-button md-primary md-raised white_text">
+              <input type="submit" value="Submit message" class="md-button md-primary md-raised white_text" aria-label="Submit messages">
             </md-input-container>
         </form> <!-- end of send_message -->
-      </div>
+      </div> <!-- end of message_response_container -->
+    
     </div> <!-- end of flex=70 -->
   </div> <!-- end of row -->
 
