@@ -151,6 +151,14 @@ html, body{
   height: 80% !important;
 }
 
+.height_75{
+  height: 75% !important;
+}
+
+.height_25{
+  height: 25% !important;
+}
+
 .no_padding{
   padding: 0px !important;
 }
@@ -413,7 +421,7 @@ html, body{
 }
 
 .message_response_container{
-  @extend .padding_10;
+  // @extend .padding_10;
   bottom: 0px;
   height: 25%;
   width: 100%;
@@ -421,7 +429,7 @@ html, body{
 
 .message_form{
   height: 100%;
-  width: 99%;
+  // width: 99%;
   @extend .white_background;
   border: 1px solid #cdcecf;
   word-wrap: break-word;
