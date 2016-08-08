@@ -8,7 +8,8 @@ angular.module('lessons').controller('ConversationController', [
   "alertify"
   "COMMS"
   "USER"
-  ( $scope, $state, $rootScope, $stateParams, alertify, COMMS, USER ) ->
+  "$timeout"
+  ( $scope, $state, $rootScope, $stateParams, alertify, COMMS, USER, $timeout ) ->
     console.log "ConversationController"
     console.log $stateParams
 
@@ -16,28 +17,34 @@ angular.module('lessons').controller('ConversationController', [
       
       return
 
-    if $stateParams.id?
-
-      USER.get_user().then( ( user ) ->
-        alertify.success "Got user"
-        COMMS.GET(
-          "/conversation"
-          random: $stateParams.random
-          # conversation_id: $stateParams.id
-          teacher_email: $rootScope.USER.email
-        ).then( ( resp ) ->
-          console.log resp
-          alertify.success "Got conversation"
-          $scope.conversation =   resp.data.conversation
-          $scope.conversations =  resp.data.conversations if resp.data.conversations?
-        ).catch( ( err ) ->
-          console.log err
-          alertify.error "Failed to get conversation"
-        )
-
+    fetch_conversations = ->
+      COMMS.GET(
+        "/conversation"
+        random: $stateParams.random
+        # conversation_id: $stateParams.id
+        teacher_email: $rootScope.USER.email if $rootScope.USER?
+      ).then( ( resp ) ->
+        console.log resp
+        alertify.success "Got conversation"
+        $scope.conversation =   resp.data.conversations[0]
+        $scope.conversations =  resp.data.conversations if resp.data.conversations?
+        $timeout (->
+          $(".message_container").animate({ scrollTop: $(".message_container").height() }, "slow");
+        ), 1500
       ).catch( ( err ) ->
-        alertify.error "Failed to get user"
+        console.log err
+        alertify.error "Failed to get conversation"
       )
+    
+
+    USER.get_user().then( ( user ) ->
+      alertify.success "Got user"
+      fetch_conversations()
+
+    ).catch( ( err ) ->
+      alertify.error "Failed to get user"
+      fetch_conversations()
+    )
 
     
     $scope.select_conversation = ( email ) ->
@@ -64,8 +71,12 @@ angular.module('lessons').controller('ConversationController', [
         conversation: $scope.message
       ).then( ( resp ) ->
         console.log resp
+        alertify.success "Message sent ok"
+        $scope.conversation = resp.data.conversation
+        $(".message_container").animate({ scrollTop: $(".message_container").height() }, "slow");
       ).catch( ( err ) ->
         console.log err
+        alertify.error "Failed to send message"
       )
 
 ])

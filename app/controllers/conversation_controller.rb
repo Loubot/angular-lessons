@@ -9,6 +9,9 @@ class ConversationController < ApplicationController
       student_email: conversation_params[:conversation][:student_email]
 
     )
+
+    p "got conversation"
+    pp conversation.id
     ConversationMailer.send_message( 
       conversation_params, 
       teacher.email,
@@ -21,7 +24,7 @@ class ConversationController < ApplicationController
       conversation_id:  conversation.id
     )
 
-    conversation = Conversation.find( conversation.id ).includes( :messages )
+    conversation = Conversation.where( id: conversation.id ).includes( :messages ).first
 
     render json: { conversation: conversation.as_json( include: [ :messages ] ) }
   end
@@ -43,7 +46,7 @@ class ConversationController < ApplicationController
       conversations = Conversation.where( teacher_email: index_params[ :teacher_email ] ).includes( :messages )
       render json: { conversations: conversations.as_json( include: [ :messages ] ) }
     elsif index_params.has_key?( :random ) && index_params[ :random ] != ""
-      conversation = Conversation.find_by( random: index_params[ :random ] ).includes( :messages )
+      conversation = Conversation.where( random: index_params[ :random ] ).includes( :messages ).first
       render json: { conversation: conversation.as_json( include: [ :messages ] ) }
 
     else
@@ -66,7 +69,7 @@ class ConversationController < ApplicationController
 
   private
     def conversation_params
-      params.permit( { conversation: [ :name, :phone, :email, :teacher_email, :teacher_id, :message ] }, :teacher_id )
+      params.permit( { conversation: [ :name, :phone, :email, :teacher_email, :teacher_id, :message, :student_email ] }, :teacher_id )
       # params.permit( :name, :phone, :email, :teacher_id )
 
     end

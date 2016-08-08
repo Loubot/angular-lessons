@@ -16,6 +16,8 @@ class Conversation < ActiveRecord::Base
 
   has_many :messages, dependent: :destroy
 
+  validates :student_email, :teacher_email, presence: true
+
   before_validation :add_random
 
 

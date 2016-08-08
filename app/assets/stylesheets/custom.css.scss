@@ -142,6 +142,9 @@ html, body{
   font-size: x-large;
 }
 
+.overflow_scroll{
+  overflow-y: scroll !important;
+}
 
 .height_100{
   height: 100% !important;
@@ -442,6 +445,12 @@ html, body{
   @extend .white_background;
   border: 1px solid #cdcecf;
   word-wrap: break-word;
+}
+
+.message_text_area{
+  width: 100% !important;
+  resize: none;
+  overflow-y:hidden;
 }
 
 
