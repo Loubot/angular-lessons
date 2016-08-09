@@ -18,7 +18,7 @@
 
     <div flex="70" class="height_100" style="overflow-y:hidden;">
 
-      <md-content class="height_75 padding_5 message_container">
+      <md-content class="height_70 padding_5 message_container">
         <div layout="column" layout-fill flex>
           <div        class="margin_t_10"
                       ng-class="{ 'flex-50 flex-offset-50': message.sender_email==USER.email, 'flex-50': message.sender_email!=USER.email }"
@@ -49,9 +49,8 @@
               </textarea>
             
             <md-input-container>
-              <input ng-if="!USER" ng-click="open_login_or_register()" value="Submit message" class="md-button md-primary md-raised white_text" aria-label="Signup or signin">
-              <input ng-if="USER" type="submit" value="Submit message" class="md-button md-primary md-raised white_text" aria-label="Submit messages">
-            </md-input-container>
+              <input ng-click="send_message()" value="Submit message" class="md-button md-primary md-raised white_text" aria-label="Send message">
+              
         </form> <!-- end of send_message -->
       </div> <!-- end of message_response_container -->
     

@@ -4,16 +4,15 @@
       <div>
         <div>
           <div class="x_large_font ">
-            <md-button ng-click="openLeftMenu(0)">Signup</md-button> 
-            <md-button ng-click="openLeftMenu(1)">Signin</md-button> 
-            <span class="button_font">or </span>
+            You must be registered to respond <br>
+            <md-button ng-click="openLeftMenu(1);close_login_or_register()">Signup</md-button> or
+            <md-button ng-click="openLeftMenu(0);close_login_or_register()">Signin</md-button> 
+            <!-- <span class="button_font">or </span> -->
           </div>
-        </div>
-
-        
+        </div>        
 
         <div flex >
-          <form name="user_email_form" ng-submit="update_user_email()">
+          <!-- <form name="user_email_form" ng-submit="update_user_email()">
             <md-input-container class="width_50">
               <input ng-model="user_email" type="email" ng-pattern="/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/" placeholder="enter your email" required>
 
@@ -22,7 +21,7 @@
               <input type="submit" class="md-button md-raised md-primary white_text" value="Check email">
 
             </md-input-container>
-          </form>
+          </form> -->
         </div>
       </div>
       

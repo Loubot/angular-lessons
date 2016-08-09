@@ -52,10 +52,6 @@ angular.module('lessons').controller('ConversationController', [
       fetch_conversations()
     )
 
-    $scope.update_user_email = ->
-      if $scope.conversation?
-        if $scope.user_email == $scope.conversation.teacher_email
-          console.log 'bl'
     
     $scope.select_conversation = ( email ) ->
       
@@ -74,39 +70,48 @@ angular.module('lessons').controller('ConversationController', [
       )
 
     $scope.send_message = ->
-      $scope.message.teacher_email = $scope.conversation.teacher_email
-      $scope.message.student_email = $scope.conversation.student_email
-      $scope.message.name = $scope.conversation.student_name
-      COMMS.POST(
-        "/conversation"
-        conversation: $scope.message
-      ).then( ( resp ) ->
-        console.log resp
-        alertify.success "Message sent ok"
-        $scope.conversation = resp.data.conversation
-        $scope.message.message = ""
-        $('.message_text_area').text ""
-        scroll_to_bottom()
-      ).catch( ( err ) ->
-        console.log err
-        alertify.error "Failed to send message"
-      )
+      if !$rootScope.USER?
+        alertify.logPosition("bottom left")
+        alertify.log("You must be registered to respond")
+        open_login_or_register()
+      else
+        $scope.message.teacher_email = $scope.conversation.teacher_email
+        $scope.message.student_email = $scope.conversation.student_email
+        $scope.message.name = $scope.conversation.student_name
+        COMMS.POST(
+          "/conversation"
+          conversation: $scope.message
+        ).then( ( resp ) ->
+          console.log resp
+          alertify.success "Message sent ok"
+          $scope.conversation = resp.data.conversation
+          $scope.message.message = ""
+          $('.message_text_area').text ""
+          scroll_to_bottom()
+        ).catch( ( err ) ->
+          console.log err
+          alertify.error "Failed to send message"
+        )
 
     scroll_to_bottom = ->
       $timeout (->
         $(".message_container").animate({ scrollTop: $(".message_container").css "height" }, "slow");
       ), 1500
 
-    # $scope.open_login_or_register = ->
-    $mdDialog.show(
-      templateUrl: "dialogs/login_or_register_dialog.html"
-      scope: $scope
-      openFrom: "left"
-      closeTo: "right"
-      preserveScope: true
-      clickOutsideToClose: false
-    )
+    open_login_or_register = ->
+      $mdDialog.show(
+        templateUrl: "dialogs/login_or_register_dialog.html"
+        scope: $scope
+        openFrom: "left"
+        closeTo: "right"
+        preserveScope: true
+        clickOutsideToClose: false
+      )
 
     $scope.close_login_or_register = ->
+      $mdDialog.hide()
+
+    $scope.choose_credentials = ( index ) ->
+      openLeftMenu( index )
       $mdDialog.hide()
 ])
