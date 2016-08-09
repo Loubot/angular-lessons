@@ -30,6 +30,10 @@ html, body{
 
 }
 
+.opacity_0{
+  opacity: 0;
+}
+
 .center_block{
   display: block !important;
   margin: 0 auto !important;
@@ -130,6 +134,10 @@ html, body{
   width: 75%;
 }
 
+.width_50{
+  width: 50% !important;
+}
+
 .width_25{
   width: 25%;
 }
@@ -140,6 +148,16 @@ html, body{
 
 .x_large_font{
   font-size: x-large;
+}
+
+.button_font{
+  text-transform: uppercase;
+  font-weight: 500;
+  font-size: 14px;
+  font-style: inherit;
+  font-variant: inherit;
+  font-family: inherit;
+  text-decoration: none;
 }
 
 .overflow_scroll{
@@ -160,6 +178,10 @@ html, body{
 
 .height_25{
   height: 25% !important;
+}
+
+.height_0{
+  height: 0;
 }
 
 .no_padding{

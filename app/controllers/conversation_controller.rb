@@ -56,16 +56,6 @@ class ConversationController < ApplicationController
     else
       render json: { error: "Not found"}, status: 404
     end
-    #   conversation = Conversation.where( student_email: index_params[:student_email] ).includes( :messages ).order( "messages.created_at" )
-    #   render json: { conversation: conversation.first.as_json( include: [ :messages ] ) }
-    # elsif index_params.has_key?(:random)
-    #   conversation = Conversation.find_by( random: index_params[ :random ] )
-    #   render json: { conversation: conversation.as_json }
-    # else
-    #   conversations = Conversation.includes(:messages).where( teacher_email: params[ :teacher_email ]).order(:created_at).limit( 10 )
-
-    #   render json: { conversations: conversations.as_json( include: [ :messages ] ) }
-    # end
     
 
   end

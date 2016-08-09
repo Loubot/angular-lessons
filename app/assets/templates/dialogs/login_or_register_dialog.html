@@ -1,0 +1,37 @@
+<md-dialog aria-label="List dialog" flex="80">
+  <md-dialog-content>
+    <md-content class="md-no-momentum center_text">
+      <div>
+        <div>
+          <div class="x_large_font ">
+            <md-button ng-click="openLeftMenu(0)">Signup</md-button> 
+            <md-button ng-click="openLeftMenu(1)">Signin</md-button> 
+            <span class="button_font">or simply enter your</span>
+            <md-button  ng-click="show_form = !show_form">email</md-button>
+          </div>
+        </div>
+
+        
+
+        <div flex ng-show="show_form" class="cssFade " >
+          <form name="user_email_form" ng-submit="update_user_email()">
+            <md-input-container class="width_50">
+              <input ng-model="user_email" type="email" ng-pattern="/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/"  required>
+
+            </md-input-container>
+            <md-input-container>
+              <input type="submit" class="md-button md-raised md-primary white_text" value="Submit email">
+
+            </md-input-container>
+          </form>
+        </div>
+      </div>
+      
+    </md-content>
+  </md-dialog-content>
+  <md-dialog-actions>
+    <md-button ng-click="close_login_or_register()" class="md-raised md-warn">Close Dialog</md-button>
+  </md-dialog-actions>
+</md-dialog>
+
+

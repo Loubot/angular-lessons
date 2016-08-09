@@ -22,6 +22,6 @@ class Conversation < ActiveRecord::Base
 
 
   def add_random
-    self.random =  Digest::SHA1.hexdigest([Time.now, rand].join)
+    self.random =  Digest::SHA1.hexdigest( [ Time.now, rand ].join )
   end
 end

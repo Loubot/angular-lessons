@@ -9,9 +9,11 @@ angular.module('lessons').controller('ConversationController', [
   "COMMS"
   "USER"
   "$timeout"
-  ( $scope, $state, $rootScope, $stateParams, alertify, COMMS, USER, $timeout ) ->
+  "$mdDialog"
+  ( $scope, $state, $rootScope, $stateParams, alertify, COMMS, USER, $timeout , $mdDialog) ->
     console.log "ConversationController"
     console.log $stateParams
+    $scope.show_form = false
 
     $scope.scrollevent = ( $e ) ->
       
@@ -25,13 +27,16 @@ angular.module('lessons').controller('ConversationController', [
         teacher_email: $rootScope.USER.email if $rootScope.USER?
       ).then( ( resp ) ->
         console.log resp
-        alertify.success "Got conversation"
+        
         $scope.conversation = resp.data.conversation if resp.data.conversation?
         $scope.conversation =   resp.data.conversations[0] if ( resp.data.conversations? > 0  && resp.data.conversations.length > 0 )
         $scope.conversations =  resp.data.conversations if resp.data.conversations?
-        $timeout (->
-          $(".message_container").animate({ scrollTop: $(".message_container").height() }, "slow");
-        ), 1500
+
+        if $scope.conversation?
+          alertify.success "Got conversation"
+        else
+          alertify.error "Failed to find messages"
+        scroll_to_bottom()
       ).catch( ( err ) ->
         console.log err
         alertify.error "Failed to get conversation"
@@ -58,6 +63,7 @@ angular.module('lessons').controller('ConversationController', [
         console.log resp
         alertify.success "Got conversation"
         $scope.conversation = resp.data.conversation
+        scroll_to_bottom()
       ).catch( ( err ) ->
         console.log err
         alertify.error "Failed to get conversation"
@@ -74,10 +80,29 @@ angular.module('lessons').controller('ConversationController', [
         console.log resp
         alertify.success "Message sent ok"
         $scope.conversation = resp.data.conversation
-        $(".message_container").animate({ scrollTop: $(".message_container").height() }, "slow");
+        $scope.message.message = ""
+        $('.message_text_area').text ""
+        scroll_to_bottom()
       ).catch( ( err ) ->
         console.log err
         alertify.error "Failed to send message"
       )
 
+    scroll_to_bottom = ->
+      $timeout (->
+        $(".message_container").animate({ scrollTop: $(".message_container").css "height" }, "slow");
+      ), 1500
+
+    # $scope.open_login_or_register = ->
+    $mdDialog.show(
+      templateUrl: "dialogs/login_or_register_dialog.html"
+      scope: $scope
+      openFrom: "left"
+      closeTo: "right"
+      preserveScope: true
+      clickOutsideToClose: false
+    )
+
+    $scope.close_login_or_register = ->
+      $mdDialog.hide()
 ])
