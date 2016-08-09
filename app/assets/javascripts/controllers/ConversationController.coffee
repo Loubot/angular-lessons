@@ -52,6 +52,10 @@ angular.module('lessons').controller('ConversationController', [
       fetch_conversations()
     )
 
+    $scope.update_user_email = ->
+      if $scope.conversation?
+        if $scope.user_email == $scope.conversation.teacher_email
+          console.log 'bl'
     
     $scope.select_conversation = ( email ) ->
       
