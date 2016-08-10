@@ -1,6 +1,8 @@
 class ConversationController < ApplicationController
   include ConversationHelper
 
+  before_action :authenticate_teacher!
+
   def create
     p "con params #{ conversation_params }"
     teacher = Teacher.find_by( email: conversation_params[:conversation][:teacher_email] )
@@ -12,9 +14,11 @@ class ConversationController < ApplicationController
 
     p "got conversation"
     pp conversation.id
+    sender_email =  conversation_params[:conversation][:teacher_email] == current_teacher.email ? \
+                    conversation_params[:conversation][:student_email] : conversation_params[:conversation][:teacher_email]
     ConversationMailer.send_message( 
       conversation_params, 
-      teacher.email,
+      sender_email,
       format_url( conversation.random, conversation.id ) 
     ).deliver_now
 
@@ -31,11 +35,14 @@ class ConversationController < ApplicationController
 
   def index
     p params
-    if ( index_params.has_key?( :teacher_email ) && index_params[ :teacher_email ] != "" )\
-      && ( index_params.has_key?( :student_email ) && index_params[:student_email ] != "" )
-      conversation = Conversation.where( teacher_email: index_params[ :teacher_email ], student_email: index_params[ :student_email ] ).includes( :messages ).first
+    if index_params.has_key?( :random ) && index_params[ :random ] != ""
 
-      render json: { conversation: conversation.as_json( include: [ :messages ] ) }
+      conversation = Conversation.where( random: index_params[ :random ] ).includes( :messages ).first
+      p "random convo"
+      pp conversation
+      render json: { conversation: conversation.as_json( include: [ :messages ] ) } 
+
+      
 
     elsif index_params.has_key?( :conversation_id ) && index_params[ :conversation_id ] != ""
       conversation = Conversation.find( index_params[ :conversation_id ] ).includes( :messages )
@@ -46,11 +53,10 @@ class ConversationController < ApplicationController
       conversations = Conversation.where( teacher_email: index_params[ :teacher_email ] ).includes( :messages )
       render json: { conversations: conversations.as_json( include: [ :messages ] ) }
 
-    elsif index_params.has_key?( :random ) && index_params[ :random ] != ""
+    elsif ( index_params.has_key?( :teacher_email ) && index_params[ :teacher_email ] != "" )\
+      && ( index_params.has_key?( :student_email ) && index_params[:student_email ] != "" )
+      conversation = Conversation.where( teacher_email: index_params[ :teacher_email ], student_email: index_params[ :student_email ] ).includes( :messages ).first
 
-      conversation = Conversation.where( random: index_params[ :random ] ).includes( :messages ).first
-      p "random convo"
-      pp conversation
       render json: { conversation: conversation.as_json( include: [ :messages ] ) }
 
     else

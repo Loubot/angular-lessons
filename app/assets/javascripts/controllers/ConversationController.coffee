@@ -20,12 +20,15 @@ angular.module('lessons').controller('ConversationController', [
       return
 
     fetch_conversations = ->
+      console.log $rootScope.USER.email if $rootScope.USER?
       if $rootScope.USER?
         COMMS.GET(
           "/conversation"
-          random: $stateParams.random if $stateParams.random?
-          # conversation_id: $stateParams.id
-          teacher_email: $rootScope.USER.email if $rootScope.USER?
+          {
+            random: $stateParams.random if $stateParams.random? && $stateParams.random != ""
+            # conversation_id: $stateParams.id
+            teacher_email: $rootScope.USER.email if $rootScope.USER?
+          }
         ).then( ( resp ) ->
           console.log resp
           
@@ -43,10 +46,13 @@ angular.module('lessons').controller('ConversationController', [
           alertify.error "Failed to get conversation"
         )
     
-
+    $rootScope.$watch "USER", ->
+      console.log "Changed"
+      fetch_conversations()
+      
     USER.get_user().then( ( user ) ->
       alertify.success "Got user"
-      fetch_conversations()
+      
 
     ).catch( ( err ) ->
       alertify.error "Failed to get user"
@@ -113,9 +119,7 @@ angular.module('lessons').controller('ConversationController', [
     $scope.close_login_or_register = ->
       $mdDialog.hide()
 
-    $rootScope.$watch "USER", ->
-      console.log "Changed"
-      fetch_conversations()
+    
 
     $scope.choose_credentials = ( index ) ->
       openLeftMenu( index )
