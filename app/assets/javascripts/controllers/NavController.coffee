@@ -43,6 +43,9 @@ angular.module('lessons').controller('NavController', [
       console.log "yep"
       $mdSidenav('right').toggle()
 
+    $scope.closeRightMenu = ->
+      $mdSidenav('right').toggle()
+
     $scope.register_teacher = ->
       console.log $scope.teacher
       $scope.teacher.is_teacher = true if $scope.auth_type == 1
