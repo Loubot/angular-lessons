@@ -20,13 +20,20 @@
                   name="email2"
                   id="email2"
                   required>
-          <div ng-messages="register_teacher_form.email2.$error">
-            <div ng-message="matching_email">Emails don't match</div>
-            <div ng-message="pattern">Not a valid email</div>
+
+          <div ng-messages="register_teacher_form.email2.$error" role="alert">
+            <div ng-message-exp="['matching_email', 'pattern']">
+              <p>Must be a valid email</p>
+              <p>Emails must match</p>
+            </div>
           </div>
+          
         </md-input-container>
         <input type="submit" class="md-primary md-raised white_text">
       </form> 
     </div>
   </div>
 </div>
+
+
+{{ register_teacher_form.email2.$error }}

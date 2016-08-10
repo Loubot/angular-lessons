@@ -11,6 +11,7 @@ angular.module('lessons', [
   'angular-loading-bar'
   'ngAnimate'
   'validation.match'
+  'ngMessages'
 ])
 
 angular.module('lessons').constant "RESOURCES", do ->
