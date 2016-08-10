@@ -27,8 +27,11 @@ angular.module('lessons').controller('NavController', [
       if auth_type == 0
         console.log 'Login'
         $scope.auth_type = 0
+      else if auth_type == 2
+        console.log "register student"
+        $scope.auth_type == 2
       else
-        console.log 'register'
+        console.log 'register teacher'
         $scope.auth_type = 1
       $mdSidenav('left').toggle()
 
@@ -42,7 +45,7 @@ angular.module('lessons').controller('NavController', [
 
     $scope.register_teacher = ->
       console.log $scope.teacher
-      $scope.teacher.is_teacher = true
+      $scope.teacher.is_teacher = true if $scope.auth_type == 1
 
       $auth.submitRegistration( $scope.teacher )
         .then( (resp) ->

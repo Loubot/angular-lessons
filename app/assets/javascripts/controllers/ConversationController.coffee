@@ -20,27 +20,28 @@ angular.module('lessons').controller('ConversationController', [
       return
 
     fetch_conversations = ->
-      COMMS.GET(
-        "/conversation"
-        random: $stateParams.random
-        # conversation_id: $stateParams.id
-        teacher_email: $rootScope.USER.email if $rootScope.USER?
-      ).then( ( resp ) ->
-        console.log resp
-        
-        $scope.conversation = resp.data.conversation if resp.data.conversation?
-        $scope.conversation =   resp.data.conversations[0] if ( resp.data.conversations? && resp.data.conversations.length > 0 )
-        $scope.conversations =  resp.data.conversations if resp.data.conversations?
+      if $rootScope.USER?
+        COMMS.GET(
+          "/conversation"
+          random: $stateParams.random if $stateParams.random?
+          # conversation_id: $stateParams.id
+          teacher_email: $rootScope.USER.email if $rootScope.USER?
+        ).then( ( resp ) ->
+          console.log resp
+          
+          $scope.conversation = resp.data.conversation if resp.data.conversation?
+          $scope.conversation =   resp.data.conversations[0] if ( resp.data.conversations? && resp.data.conversations.length > 0 )
+          $scope.conversations =  resp.data.conversations if resp.data.conversations?
 
-        if $scope.conversation?
-          alertify.success "Got conversation"
-        else
-          alertify.error "Failed to find messages"
-        scroll_to_bottom()
-      ).catch( ( err ) ->
-        console.log err
-        alertify.error "Failed to get conversation"
-      )
+          if $scope.conversation?
+            alertify.success "Got conversation"
+          else
+            alertify.error "Failed to find messages"
+          scroll_to_bottom()
+        ).catch( ( err ) ->
+          console.log err
+          alertify.error "Failed to get conversation"
+        )
     
 
     USER.get_user().then( ( user ) ->
@@ -49,7 +50,7 @@ angular.module('lessons').controller('ConversationController', [
 
     ).catch( ( err ) ->
       alertify.error "Failed to get user"
-      fetch_conversations()
+      open_login_or_register()
     )
 
     
@@ -112,7 +113,12 @@ angular.module('lessons').controller('ConversationController', [
     $scope.close_login_or_register = ->
       $mdDialog.hide()
 
+    $rootScope.$watch "USER", ->
+      console.log "Changed"
+      fetch_conversations()
+
     $scope.choose_credentials = ( index ) ->
       openLeftMenu( index )
       $mdDialog.hide()
+      
 ])

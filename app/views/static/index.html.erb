@@ -44,7 +44,7 @@
        <div  ng-cloak ng-if="!USER">
          <br/>
          <md-content class="md-no-momentum">
-           <md-input-container ng-if="auth_type==1">
+           <md-input-container ng-if="auth_type!=0">
              <md-subheader>Register</md-subheader>
              <form ng-submit="register_teacher()" >
                <md-input-container class="md-icon-float md-block black_text" >
