@@ -8,7 +8,10 @@
 #  updated_at :datetime         not null
 #
 
-class Category < ActiveRecord::Base
-	has_many :subjects, dependent: :destroy
-	validates :name, presence: true, uniqueness: true
+require 'test_helper'
+
+class CategoryTest < ActiveSupport::TestCase
+  # test "the truth" do
+  #   assert true
+  # end
 end

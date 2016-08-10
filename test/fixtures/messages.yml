@@ -10,9 +10,14 @@
 #  updated_at      :datetime         not null
 #
 
-class Message < ActiveRecord::Base
-  validates :message, :conversation_id, presence: true
-  belongs_to :conversation
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-  
-end
+one:
+  message: MyText
+  sender_email: MyString
+  conversation_id: 1
+
+two:
+  message: MyText
+  sender_email: MyString
+  conversation_id: 1

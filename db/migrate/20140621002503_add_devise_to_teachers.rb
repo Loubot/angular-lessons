@@ -37,6 +37,7 @@ class AddDeviseToTeachers < ActiveRecord::Migration
       # t.string :name
       # t.string :nickname
       # t.string :image
+      t.integer :profile
       t.string :email
       t.string :first_name
       t.string :last_name
