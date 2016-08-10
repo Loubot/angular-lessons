@@ -73,6 +73,11 @@ angular.module('lessons').config ($stateProvider, $urlRouterProvider) ->
     templateUrl: "conversation/messages.html"
     controller: "ConversationController"
 
+  $stateProvider.state 'register',
+    url: "/register"
+    templateUrl: "static/register.html"
+    controller: "RegisterController"
+
   $stateProvider.state 'how_it_works',
     url: '/how-it-works'
     templateUrl: 'static/how_it_works.html'
