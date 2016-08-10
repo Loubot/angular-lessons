@@ -49,7 +49,7 @@ angular.module('lessons').controller('ConversationController', [
     $rootScope.$watch "USER", ->
       console.log "Changed"
       fetch_conversations()
-      
+
     USER.get_user().then( ( user ) ->
       alertify.success "Got user"
       
@@ -85,16 +85,16 @@ angular.module('lessons').controller('ConversationController', [
         $scope.message.teacher_email = $scope.conversation.teacher_email
         $scope.message.student_email = $scope.conversation.student_email
         $scope.message.sender_email = $rootScope.USER.email
+        $scope.message.name = "#{ $rootScope.USER.first_name } #{ $rootScope.USER.last_name }"
         # $scope.message.name = $scope.conversation.student_name
         COMMS.POST(
           "/conversation"
           conversation: $scope.message
         ).then( ( resp ) ->
           console.log resp
-          alertify.success "Message sent ok"
+          alertify.success "Email sent ok"
           $scope.conversation = resp.data.conversation
           $scope.message.message = ""
-          $('.message_text_area').text ""
           scroll_to_bottom()
         ).catch( ( err ) ->
           console.log err

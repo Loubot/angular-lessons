@@ -14,7 +14,7 @@ class ConversationMailer < ActionMailer::Base
                      # :name=> "#{student_name}"  
                    }  
                  ],
-                :from_email=> "loubot@learnyourlesson.ie",
+                :from_email=> "LYL@learnyourlesson.ie",
                 "merge_vars"=>[
                               { "rcpt"   =>  email,
                                 "vars" =>  [
