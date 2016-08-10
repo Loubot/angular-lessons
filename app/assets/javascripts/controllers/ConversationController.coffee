@@ -29,7 +29,7 @@ angular.module('lessons').controller('ConversationController', [
         console.log resp
         
         $scope.conversation = resp.data.conversation if resp.data.conversation?
-        $scope.conversation =   resp.data.conversations[0] if ( resp.data.conversations? > 0  && resp.data.conversations.length > 0 )
+        $scope.conversation =   resp.data.conversations[0] if ( resp.data.conversations? && resp.data.conversations.length > 0 )
         $scope.conversations =  resp.data.conversations if resp.data.conversations?
 
         if $scope.conversation?
@@ -77,7 +77,8 @@ angular.module('lessons').controller('ConversationController', [
       else
         $scope.message.teacher_email = $scope.conversation.teacher_email
         $scope.message.student_email = $scope.conversation.student_email
-        $scope.message.name = $scope.conversation.student_name
+        $scope.message.sender_email = $rootScope.USER.email
+        # $scope.message.name = $scope.conversation.student_name
         COMMS.POST(
           "/conversation"
           conversation: $scope.message

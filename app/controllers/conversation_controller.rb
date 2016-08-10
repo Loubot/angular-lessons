@@ -20,7 +20,7 @@ class ConversationController < ApplicationController
 
     conversation.messages.create(
       message:          params[:conversation][:message],
-      sender_email:     params[:conversation][:email],
+      sender_email:     params[:conversation][:sender_email],
       conversation_id:  conversation.id
     )
 
@@ -63,7 +63,7 @@ class ConversationController < ApplicationController
 
   private
     def conversation_params
-      params.permit( { conversation: [ :name, :phone, :email, :teacher_email, :teacher_id, :message, :student_email ] }, :teacher_id )
+      params.permit( { conversation: [ :name, :phone, :sender_email, :teacher_email, :teacher_id, :message, :student_email ] }, :teacher_id )
       # params.permit( :name, :phone, :email, :teacher_id )
 
     end

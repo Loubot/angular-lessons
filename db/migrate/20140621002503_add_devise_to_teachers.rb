@@ -42,6 +42,7 @@ class AddDeviseToTeachers < ActiveRecord::Migration
       t.string :last_name
       t.string :calendar_id, default: nil
       t.text :overview
+      t.boolean :is_teacher, default: false
 
       ## Tokens
       t.text :tokens
