@@ -19,14 +19,11 @@
                   placeholder="Confirm Email" 
                   name="email2"
                   id="email2"
-                  pw-check="email1"
                   required>
         </md-input-container>
-        <div class="msg-block" ng-show="myForm.$error">
-          <span class="msg-error" ng-show="register_teacher.email2.$error.pwmatch">
-            Passwords don't match.
-          </span>
-        </div>
+        <span ng-show="(register_teacher.email.$modelValue !== register_teacher.confirm_email.$modelValue) 
+                && formName.confirm_email.$touched
+                && !formName.confirm_email.$error.required">Email does not match.</span>
       </form>
     </div>
   </div>
