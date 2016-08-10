@@ -1,7 +1,7 @@
 <div class="register_page_main_div">
   <div layout="row">
     <div flex="50">
-      <form name="register_teacher" ng-submit="register_teacher()">
+      <form name="register_teacher_form" ng-submit="register_teacher()" novalidate>
         <md-input-container md-no-float>
           <input  type="email" 
                   ng-model="teacher.email"
@@ -20,12 +20,13 @@
                   name="email2"
                   id="email2"
                   required>
+          <div ng-messages="register_teacher_form.email2.$error">
+            <div ng-message="matching_email">Emails don't match</div>
+            <div ng-message="pattern">Not a valid email</div>
+          </div>
         </md-input-container>
-        <span ng-show="(register_teacher.email.$modelValue !== register_teacher.confirm_email.$modelValue) 
-                && formName.confirm_email.$touched
-                && !formName.confirm_email.$error.required">Email does not match.</span>
-      </form>
+        <input type="submit" class="md-primary md-raised white_text">
+      </form> 
     </div>
   </div>
 </div>
-{{ (register_teacher.email.$modelValue !== register_teacher.email2.$modelValue)  }}
