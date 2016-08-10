@@ -287,7 +287,14 @@ html, body{
   background-color: #FFF;
 }
 
-
+.register_page_main_div{
+  min-height: 400px;
+  background-image: asset_url('tree.jpg');
+  -moz-background-size: 100% 100%;
+  -webkit-background-size: 100% 100%;
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+}
 
 .main_page_search_container{
   min-height: 400px;

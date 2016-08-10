@@ -1,1 +1,33 @@
-sdf
+<div class="register_page_main_div">
+  <div layout="row">
+    <div flex="50">
+      <form name="register_teacher" ng-submit="register_teacher()">
+        <md-input-container md-no-float>
+          <input  type="email" 
+                  ng-model="teacher.email"
+                  ng-pattern="/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/" 
+                  name="email1"
+                  id="email1"
+                  placeholder="Email" 
+                  required>
+        </md-input-container>
+
+        <md-input-container md-no-float>
+          <input  type="email" 
+                  ng-model="teacher.confirm_email" 
+                  ng-pattern="/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/" 
+                  placeholder="Confirm Email" 
+                  name="email2"
+                  id="email2"
+                  pw-check="email1"
+                  required>
+        </md-input-container>
+        <div class="msg-block" ng-show="myForm.$error">
+          <span class="msg-error" ng-show="register_teacher.email2.$error.pwmatch">
+            Passwords don't match.
+          </span>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

@@ -222,3 +222,19 @@ angular.module('lessons').service 'COMMS', ( $http, $state, RESOURCES, $rootScop
       ).catch( ( err_result ) ->
         reject err_result
       )
+
+angular.module('lessons').directive 'pwCheck', [ ->
+  {
+    require: 'ngModel'
+    link: (scope, elem, attrs, ctrl) ->
+      firstPassword = '#' + attrs.pwCheck
+      elem.add(firstPassword).on 'keyup', ->
+        scope.$apply ->
+          v = elem.val() == $(firstPassword).val()
+          ctrl.$setValidity 'pwmatch', v
+          return
+        return
+      return
+
+  }
+ ]
