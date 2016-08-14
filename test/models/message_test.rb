@@ -10,9 +10,10 @@
 #  updated_at      :datetime         not null
 #
 
-class Message < ActiveRecord::Base
-  validates :message, :conversation_id, presence: true
-  belongs_to :conversation
+require 'test_helper'
 
-  
+class MessageTest < ActiveSupport::TestCase
+  # test "the truth" do
+  #   assert true
+  # end
 end

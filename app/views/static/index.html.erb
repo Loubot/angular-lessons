@@ -134,12 +134,12 @@
         <h1 class="md-toolbar-tools">Sidenav Right</h1>
       </md-toolbar>
       <md-content  layout-padding >
-        <button class="md-button md-default-theme" ui-sref="register" md-ink-ripple="#FF0000">Become a teacher</button>
-        <button ui-sref="how_it_works" class="md-button md-default-theme " md-ink-ripple="#FF0000">How it works</button><br>
-        <button ui-sref="mailing_list" class="md-button md-default-theme " md-ink-ripple="#FF0000">
+        <button class="md-button md-default-theme" ui-sref="register" ng-click="closeRightMenu()" md-ink-ripple="#FF0000">Become a teacher</button>
+        <button ui-sref="how_it_works" ng-click="closeRightMenu()" class="md-button md-default-theme " md-ink-ripple="#FF0000">How it works</button><br>
+        <button ui-sref="mailing_list" ng-click="closeRightMenu()" class="md-button md-default-theme " md-ink-ripple="#FF0000">
           Mailing list
         </button><br>
-        <md-button ng-click="close()" class="md-primary">
+        <md-button ng-click="closeRightMenu()" class="md-primary">
           Close Sidenav Right
         </md-button>
       </md-content>

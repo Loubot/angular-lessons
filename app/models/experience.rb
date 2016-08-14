@@ -3,13 +3,14 @@
 # Table name: experiences
 #
 #  id          :integer          not null, primary key
-#  description :text
+#  description :string
+#  text        :string
 #  teacher_id  :integer
 #  start       :datetime
 #  end_time    :datetime
 #  present     :binary
-#  created_at  :datetime
-#  updated_at  :datetime
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
 #
 
 class Experience < ActiveRecord::Base

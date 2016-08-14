@@ -21,6 +21,7 @@
 //= require angular-material/angular-material.min.js
 //= require angular-cookie/angular-cookie
 //= require ng-token-auth/dist/ng-token-auth
+//= require angular-messages/angular-messages
 //= require ng-file-upload/ng-file-upload-all.min
 //= require angular-sanitize/angular-sanitize
 //= require bootstrap/dist/js/bootstrap
@@ -38,6 +39,7 @@
 //= require controllers/SearchController
 //= require controllers/ViewTeacherController
 //= require controllers/ConversationController
+//= require controllers/RegisterController
 //= require angular-rails-templates
 // Templates in app/assets/templates (but see step 5)
 //= require_tree ../templates

@@ -1,0 +1,29 @@
+# == Schema Information
+#
+# Table name: conversations
+#
+#  id            :integer          not null, primary key
+#  teacher_email :string
+#  student_email :string
+#  teacher_name  :string
+#  student_name  :string
+#  random        :text
+#  created_at    :datetime         not null
+#  updated_at    :datetime         not null
+#
+
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  teacher_email: MyString
+  student_email: MyString
+  teacher_name: MyString
+  student_name: MyString
+  random: MyText
+
+two:
+  teacher_email: MyString
+  student_email: MyString
+  teacher_name: MyString
+  student_name: MyString
+  random: MyText

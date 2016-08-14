@@ -11,6 +11,7 @@ angular.module('lessons', [
   'angular-loading-bar'
   'ngAnimate'
   'validation.match'
+  'ngMessages'
 ])
 
 angular.module('lessons').constant "RESOURCES", do ->
@@ -72,6 +73,11 @@ angular.module('lessons').config ($stateProvider, $urlRouterProvider) ->
     url: "/conversation/:random/:id"
     templateUrl: "conversation/messages.html"
     controller: "ConversationController"
+
+  $stateProvider.state 'register',
+    url: "/register"
+    templateUrl: "static/register.html"
+    controller: "RegisterController"
 
   $stateProvider.state 'how_it_works',
     url: '/how-it-works'
@@ -217,3 +223,5 @@ angular.module('lessons').service 'COMMS', ( $http, $state, RESOURCES, $rootScop
       ).catch( ( err_result ) ->
         reject err_result
       )
+
+      

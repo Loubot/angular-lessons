@@ -49,15 +49,17 @@ class ConversationController < ApplicationController
 
       render json: { conversation: conversation.as_json( include: [ :messages ] ) }
 
-    elsif index_params.has_key?( :teacher_email ) && index_params[ :teacher_email ] != ""
-      conversations = Conversation.where( teacher_email: index_params[ :teacher_email ] ).includes( :messages )
-      render json: { conversations: conversations.as_json( include: [ :messages ] ) }
-
     elsif ( index_params.has_key?( :teacher_email ) && index_params[ :teacher_email ] != "" )\
       && ( index_params.has_key?( :student_email ) && index_params[:student_email ] != "" )
       conversation = Conversation.where( teacher_email: index_params[ :teacher_email ], student_email: index_params[ :student_email ] ).includes( :messages ).first
 
       render json: { conversation: conversation.as_json( include: [ :messages ] ) }
+
+    elsif index_params.has_key?( :teacher_email ) && index_params[ :teacher_email ] != ""
+      conversations = Conversation.where( teacher_email: index_params[ :teacher_email ] ).includes( :messages )
+      render json: { conversations: conversations.as_json( include: [ :messages ] ) }
+
+    
 
     else
       render json: { error: "Not found"}, status: 404

@@ -23,22 +23,10 @@
 #  last_name              :string
 #  calendar_id            :string
 #  overview               :text
+#  is_teacher             :boolean          default(FALSE)
 #  tokens                 :text
 #  created_at             :datetime
 #  updated_at             :datetime
-#  admin                  :boolean
-#  lon                    :float
-#  profile                :integer
-#  is_teacher             :boolean          default(FALSE), not null
-#  paypal_email           :string           default("")
-#  stripe_access_token    :string           default("")
-#  is_active              :boolean          default(FALSE), not null
-#  will_travel            :boolean          default(FALSE), not null
-#  stripe_user_id         :string
-#  address                :string           default("")
-#  paid_up                :boolean          default(FALSE)
-#  paid_up_date           :date
-#  profile_views          :integer          default(0)
 #
 
 class Teacher < ActiveRecord::Base
