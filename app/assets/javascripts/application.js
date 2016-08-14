@@ -10,10 +10,10 @@
 // Read Sprockets README (https://github.com/rails/sprockets#sprockets-directives) for details
 // about supported directives.
 
+//= require angular/angular
 //= require jquery
 //= require jquery_ujs
 //= require lodash/dist/lodash
-//= require angular/angular
 //= require alertify.js/dist/js/ngAlertify
 //= require angular-ui-router/release/angular-ui-router 
 //= require angular-animate/angular-animate.js
