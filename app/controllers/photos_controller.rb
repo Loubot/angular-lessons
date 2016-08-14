@@ -21,8 +21,22 @@ class PhotosController < ApplicationController
     
   end
 
+  def destroy
+    photo = Photo.find( pic_params[ :id ] )
+    if photo.destroy
+      teacher = Teacher.includes( :photos ).find( current_teacher.id )
+      if Integer( teacher.profile ) == Integer( pic_params[ :id ] )
+        p "Update teacher profile"
+        teacher.update_attributes( profile: nil )
+      end
+      render json: { teacher: teacher.as_json( include: [ :photos ] ) }
+    else
+      render json: { error: "Failed to destroy photo" }, status: 500
+    end
+  end
+
   private
     def pic_params
-      params.permit(:photo, :avatar)
+      params.permit( :photo, :avatar, :id )
     end
 end

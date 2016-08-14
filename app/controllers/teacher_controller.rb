@@ -24,13 +24,8 @@ class TeacherController < ApplicationController
   def profile
     @teacher = Teacher.includes( :photos, :subjects, :experience, :qualifications, :location ).find( params[:id] )
     pp @teacher
-    render json: { 
-                    teacher: @teacher.as_json, 
-                    photos: @teacher.photos.as_json, 
-                    subjects: @teacher.subjects.as_json, 
-                    experience: @teacher.experience.as_json,
-                    qualifications: @teacher.qualifications.as_json,
-                    location: @teacher.location.as_json
+    render json: {  teacher: @teacher.as_json( include: [ :photos, :subjects, :experience, :qualifications, :location ] )
+                    
                   }
 
   end

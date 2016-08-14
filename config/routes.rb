@@ -20,12 +20,14 @@ Rails.application.routes.draw do
       get     'show-teacher'              => 'teacher#show_teacher'
       post    'add-subject'               => 'subject#add_subject'
 
-      post    'pic'                       => "photos#create"
+      # post    'pic'                       => "photos#create"
+      # delete  'delete-pic'                => "photos#destroy"
       delete  'remove-subject'            => 'subject#remove_subject'
 
       resources :experience,          only: [ :create, :destroy ]
       resources :qualification,       only: [ :create, :destroy ]
-      resources :location,            only: [ :create, :destroy ]      
+      resources :location,            only: [ :create, :destroy ] 
+      resources :photos,              only: [ :create, :destroy ]     
 
     end
     resources :conversation,        only: [ :create, :index ]

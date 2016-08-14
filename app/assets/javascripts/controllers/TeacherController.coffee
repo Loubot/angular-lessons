@@ -26,7 +26,7 @@ angular.module('lessons').controller('TeacherController', [
     
     $scope.upload = ( file ) ->
       Upload.upload(
-        url: "#{ RESOURCES.DOMAIN }/teacher/#{ $rootScope.USER.id }/pic"
+        url: "#{ RESOURCES.DOMAIN }/teacher/#{ $rootScope.USER.id }/photos"
         file: $scope.file
         avatar: $scope.file
         data:
@@ -61,10 +61,10 @@ angular.module('lessons').controller('TeacherController', [
         ).then( ( resp ) ->
           console.log "got teacher"
           console.log resp
-          $scope.photos = resp.data.photos
-          $scope.subjects = resp.data.subjects
-          $scope.experience = resp.data.experience
-          $scope.quals = resp.data.qualifications
+          $scope.photos = resp.data.teacher.photos
+          $scope.subjects = resp.data.teacher.subjects
+          $scope.experience = resp.data.teacher.experience
+          $scope.quals = resp.data.teacher.qualifications
           profile_pic()
         ).catch( ( err ) ->
           console.log err
@@ -106,12 +106,30 @@ angular.module('lessons').controller('TeacherController', [
       )
 
     profile_pic = ->
+      if !$rootScope.USER.profile?
+        console.log "No profile"
+        $scope.profile = null
+        return false
       for photo in $scope.photos
         # console.log photo.avatar.url
         if parseInt( photo.id ) == parseInt( $rootScope.USER.profile )
           $scope.profile = photo
           console.log $scope.profile
           $scope.profile
+
+    $scope.destroy_pic = ( id ) ->
+      COMMS.DELETE(
+        "/teacher/#{ $rootScope.USER.id }/photos/#{ id }"
+      ).then( ( resp ) ->
+        console.log resp
+        alertify.success "Deleted photo ok"
+        $scope.photos = resp.data.teacher.photos
+        $rootScope.USER.profile = resp.data.teacher.profile
+        profile_pic()
+      ).catch( ( err ) ->
+        console.log err
+        alertify.error "Failed to delete photo"
+      )
 
 
     ####################### Subjects ###############################

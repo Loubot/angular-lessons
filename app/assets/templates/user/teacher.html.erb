@@ -1,9 +1,10 @@
+{{ profile }}
 <div >
   <div layout="row">
     <div flex="50">
       <md-card >
         <md-card-header>
-          <md-card-avatar>
+          <md-card-avatar ng-if="profile">
             <img ng-src="{{ profile.avatar.thumb.url }}" class="md-user-avatar ">
           </md-card-avatar>
           <md-card-header-text>
@@ -11,7 +12,7 @@
             <span class="md-subhead">{{ USER.first_name }} {{ USER.last_name }}</span>
           </md-card-header-text>
         </md-card-header>
-        <img ng-src="{{ profile.avatar.url }}" 
+        <img ng-if="profile" ng-src="{{ profile.avatar.url }}" 
             class="md-card-image" 
             alt="{{ USER.first_name }} profile pic">
         <md-card-title>
@@ -55,7 +56,12 @@
                </md-button>
                <md-menu-content width="4">
                   <md-menu-item>
-                    <md-button ng-click="make_profile(photo.id)">Make profile?</md-button>
+                    <md-button ng-click="make_profile( photo.id )">Make profile?</md-button>
+                  </md-menu-item>
+
+                  <md-menu-item>
+                    <md-button ng-click="destroy_pic( photo.id )" class="width_100">Delete</md-button>
+                    
                   </md-menu-item>
                </md-menu-content>
               </md-menu>
