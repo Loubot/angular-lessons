@@ -1,17 +1,12 @@
 class TeacherController < ApplicationController
   before_action :authenticate_teacher!, except: [ :show_teacher]
   require 'pp'
-  def get
+  def show
     
     @teacher = Teacher.includes( :photos, :subjects, :experience, :qualifications, :location ).find( current_teacher.id )
     pp @teacher
-    render json: { 
-                    teacher: @teacher.as_json, 
-                    photos: @teacher.photos.as_json, 
-                    subjects: @teacher.subjects.as_json, 
-                    experience: @teacher.experience,
-                    qualifications: @teacher.qualifications.as_json,
-                    location: @teacher.location.as_json
+    render json: { teacher: @teacher.as_json( include: [ :photos, :subjects, :experience, :qualifications, :location ] )
+                  
                   }
   end
 

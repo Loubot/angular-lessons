@@ -46,49 +46,28 @@ angular.module('lessons').controller('TeacherController', [
       )
 
 
-    if !( $rootScope.USER? )
-      USER.get_user().then( ( user ) ->
-        alertify.success "Got user"
-        console.log $rootScope.USER.overview == null
-        if $rootScope.USER.id != parseInt( $stateParams.id )
-          $state.go 'welcome'
-          alertify.error "You are not allowed to view this"
-          return false
-
-        COMMS.GET(
-          "/teacher/profile"
-          id: $rootScope.USER.id
-        ).then( ( resp ) ->
-          console.log "got teacher"
-          console.log resp
-          $scope.photos = resp.data.teacher.photos
-          $scope.subjects = resp.data.teacher.subjects
-          $scope.experience = resp.data.teacher.experience
-          $scope.quals = resp.data.teacher.qualifications
-          profile_pic()
-        ).catch( ( err ) ->
-          console.log err
-        )
-      ).catch( ( err ) ->
-        alertify.error "No user"
-        $rootScope.USER = null
+    
+    USER.get_user().then( ( user ) ->
+      alertify.success "Got user"
+      console.log $rootScope.USER.overview == null
+      if $rootScope.USER.id != parseInt( $stateParams.id )
         $state.go 'welcome'
+        alertify.error "You are not allowed to view this"
         return false
-      )
-    else
-      COMMS.GET(
-          "/teacher/profile"
-          id: $rootScope.USER.id
-        ).then( ( resp ) ->
-          console.log resp
-          $scope.photos = resp.data.photos
-          $scope.subjects = resp.data.subjects
-          $scope.experience = resp.data.experience
-          $scope.quals = resp.data.qualifications
-          profile_pic()
-        ).catch( ( err ) ->
-          console.log err
-        )
+      $scope.photos = $rootScope.USER.photos
+      $scope.subjects = $rootScope.USER.subjects
+      $scope.experience = $rootScope.USER.experience
+      $scope.quals = $rootScope.USER.qualifications
+      profile_pic()
+
+
+    ).catch( ( err ) ->
+      alertify.error "No user"
+      $rootScope.USER = null
+      $state.go 'welcome'
+      return false
+    )
+    
 
     $scope.make_profile = ( id ) ->
       COMMS.POST(

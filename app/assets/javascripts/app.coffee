@@ -109,12 +109,10 @@ angular.module('lessons').service 'USER', ( $http, $rootScope, RESOURCES, $q ) -
         # params: 
         #   email: 
       ).then( ( result ) ->
-        # console.log "get user"
-        # console.log result.data
+        console.log "get user"
+        console.log result.data
         $rootScope.USER = result.data.teacher
-        delete result.data.teacher
-        $rootScope.associations = result.data
-        # console.log $rootScope.associations
+       
         resolve result.data
       ).catch( ( err_result ) ->
         

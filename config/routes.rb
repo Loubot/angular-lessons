@@ -3,7 +3,6 @@ Rails.application.routes.draw do
   scope '/api' do
     mount_devise_token_auth_for 'Teacher', at: '/auth'
     # resources :groups, except: [:new, :edit]
-    get     'teacher/get'                 => 'teacher#get'
 
     get     'teacher/profile-pic'         => 'teacher#chunks'
     get     'teacher/profile'             => 'teacher#profile'
@@ -16,7 +15,7 @@ Rails.application.routes.draw do
 
     get      'search'                     => "search#search"
     get      'search-subjects'            => "search#search_subjects"
-    resources :teacher, only: [ :update ] do
+    resources :teacher, only: [ :show, :update ] do
       get     'show-teacher'              => 'teacher#show_teacher'
       post    'add-subject'               => 'subject#add_subject'
 
