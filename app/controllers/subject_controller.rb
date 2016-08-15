@@ -4,7 +4,7 @@ class SubjectController < ApplicationController
   def index
 
     # subjects = Subject.all
-    subjects = Subject.where('name LIKE ?', "%#{ params[:search] }%")
+    subjects = Subject.where('name ILIKE ?', "%#{ params[:search] }%")
     pp subjects
     render :json =>
       subjects.to_json
