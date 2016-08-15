@@ -20,12 +20,12 @@ angular.module('lessons').controller( "TeacherLocationController" , [
     
     
     USER.get_user().then( ( user ) ->
-      if $rootScope.associations? && $rootScope.associations.location
+      if $rootScope.USER? && $rootScope.USER.location
 
         $scope.map = new google.maps.Map(document.getElementById('map'), {
           center: 
-            lat: $rootScope.associations.location.latitude
-            lng: $rootScope.associations.location.longitude
+            lat: $rootScope.USER.location.latitude
+            lng: $rootScope.USER.location.longitude
           zoom: 15
           mapTypeId: google.maps.MapTypeId.ROADMAP
         })
@@ -33,9 +33,9 @@ angular.module('lessons').controller( "TeacherLocationController" , [
         console.log 'yep'
         marker = new google.maps.Marker
           position: 
-            lat:    $rootScope.associations.location.latitude
-            lng:    $rootScope.associations.location.longitude
-          title:  $rootScope.associations.location.name
+            lat:    $rootScope.USER.location.latitude
+            lng:    $rootScope.USER.location.longitude
+          title:  $rootScope.USER.location.name
           map:    $scope.map
       else
         $scope.map = new google.maps.Map(document.getElementById('map'), {
@@ -102,7 +102,7 @@ angular.module('lessons').controller( "TeacherLocationController" , [
       ).then( ( resp ) ->
         console.log resp
         alertify.success "Location updated"
-        $rootScope.associations.location = resp.data.location
+        $rootScope.USER.location = resp.data.location
         $scope.addresses = null
       ).catch( ( err ) ->
         console.log err
@@ -133,7 +133,7 @@ angular.module('lessons').controller( "TeacherLocationController" , [
       ).then( ( resp ) ->
         console.log resp
         alertify.success "Location updated ok"
-        $rootScope.associations.location = resp.data.location
+        $rootScope.USER.location = resp.data.location
         $mdBottomSheet.hide()
         $scope.addresses = null
       ).catch( ( err ) ->
