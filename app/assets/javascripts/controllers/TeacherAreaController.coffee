@@ -96,6 +96,8 @@ angular.module('lessons').controller('TeacherAreaController', [
     oauth2_loaded = ->
       console.log "Oauth"
       gapi.client.oauth2.userinfo.get().execute( ( resp ) ->
+        console.log "should be here " 
+        console.log resp
         $scope.google_id_email =  resp.email
         # get user email and then load calendar list
         gapi.client.calendar.calendarList.list().execute( ( resp ) ->
@@ -115,7 +117,7 @@ angular.module('lessons').controller('TeacherAreaController', [
 
     handleAuthResult = ( auth ) ->
       console.log "auth"
-      # console.log auth
+      console.log auth
       if ( auth? and !auth.error? )
         $scope.show_auth_button = false
         
