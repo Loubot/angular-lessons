@@ -137,7 +137,6 @@ angular.module('lessons').controller('TeacherAreaController', [
       return false
       
     window.checkAuth = ->
-      alert('wahey')
       console.log "Checkauth"
       gapi.auth.authorize(
         {
