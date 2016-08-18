@@ -29,6 +29,7 @@
 //= require angular-simple-logger/dist/angular-simple-logger
 //= require angular-loading-bar/src/loading-bar
 //= require angular-validation-match/dist/angular-validation-match
+//= require fm-timepicker/dist/fm-timepicker.min.js
 //= require app
 //= require controllers/WelcomeController
 //= require controllers/UserController

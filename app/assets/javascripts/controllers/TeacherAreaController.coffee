@@ -19,7 +19,7 @@ angular.module('lessons').controller('TeacherAreaController', [
 
     $scope.calendar_event_details = {}
 
-    $sceope.calendar_event_details.sendNotifications = true
+    $scope.calendar_event_details.sendNotifications = true
 
     $scope.calendar_event_details.student_email = $stateParams.student_email if $stateParams.student_email?
     
@@ -74,7 +74,7 @@ angular.module('lessons').controller('TeacherAreaController', [
       for calendar in calendars
         if calendar.summary == "LYL Calendar"
           alertify.success "Found your calendar"
-          # console.log calendar
+          console.log calendar
           $scope.calendar_event_details.calendar_id = calendar.id
           calendar_exists = true
 
@@ -224,17 +224,20 @@ angular.module('lessons').controller('TeacherAreaController', [
 
     ####################### Create event##############################
 
-    $scope.create_event = ->
+    # $scope.create_event = ->
       
-      $mdDialog.show(
-        scope: $scope
-        preserveScope: true
-        templateUrl: "dialogs/calendar_event_dialog.html"
-        openFrom: 'left'
-        closeTo: 'right'
-        escapeToClose: true
+    $mdDialog.show(
+      scope: $scope
+      preserveScope: true
+      templateUrl: "dialogs/calendar_event_dialog.html"
+      openFrom: 'left'
+      closeTo: 'right'
+      escapeToClose: true
 
-      )
+    )
+
+    $scope.submit_event_details = ->
+      console.log $scope.calendar_event_details
     
       
 ])

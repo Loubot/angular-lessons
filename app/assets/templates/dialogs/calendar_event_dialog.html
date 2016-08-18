@@ -1,9 +1,56 @@
-<md-dialog>
-  <form ng-submit="submit_event_details">
-    <md-input-container md-nofloat>
-      <label>Student email</label>
-      <input ng-model="calendar_event_details.student_email">
-    </md-input-container>
-  </form>
-  
-</md-dialog>
+<div class="width_75">
+  <md-dialog>
+    <form ng-submit="submit_event_details">
+      <md-input-container md-no-float>
+        <label>Student email</label>
+        <input ng-model="calendar_event_details.student_email">
+      </md-input-container>
+
+      <div class="padding_10" layout="row">
+        <label flex="15">Start time:</label>
+        <div flex>
+          <input type="date"
+            ng-model="calendar_event_details.start_date"
+          >
+        </div>
+        <div flex>
+          <input  type="time" 
+                  ng-model="calendar_event_details.start_time"
+                  min="08:00:00" max="21:00:00">
+        </div>
+      </div>
+
+      <div class="padding_10" layout="row">
+        <label flex="15">End time:</label>
+        <div flex>
+          <input type="date"
+            ng-model="calendar_event_details.end_date"
+          >
+        </div>
+        <div flex>
+          <input  type="time" 
+                  ng-model="calendar_event_details.end_time"
+                  min="08:00:00" max="22:00:00">
+        </div>
+      </div>
+
+      <md-divider class="margin_b_10"></md-divider>
+      <md-input-container md-no-float>
+        <label>Description</label>
+        <textarea ng-model="calendar_event_details.description" 
+                  aria-label="Event description" 
+                  md-maxlength="200" 
+                  rows="4" 
+                  md-select-on-focus
+                  placeholder="Enter event description">
+        </textarea>
+      </md-input-container>
+      
+      <md-input-container>
+        <input type="submit" value="Create event" class="md-button blue_button width_25 float_right">
+      </md-input-container>
+      
+    </form>
+    
+  </md-dialog>
+</div>
