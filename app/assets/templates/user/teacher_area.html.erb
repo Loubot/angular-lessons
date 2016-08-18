@@ -48,9 +48,10 @@
         <%= image_tag('google_sign_in.png')  %>
       </md-button>
       <md-button ng-if="!USER.calendar_id" ng-click="create_calendar()">Create calendar</md-button>
+      <md-button class="blue_button" ng-if="create_event_button_bool" ng-click="create_event()">Create a new event</md-button>
     </md-card-actions>
   </md-card>
 
 </md-content>
 
-{{ USER.calendar_id }}
+{{ calendar_event_details }}

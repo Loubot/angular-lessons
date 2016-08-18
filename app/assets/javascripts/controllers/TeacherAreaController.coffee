@@ -9,11 +9,21 @@ angular.module('lessons').controller('TeacherAreaController', [
   'USER'
   'alertify'
   'COMMS'
-  ( $scope, $rootScope, $state, $stateParams, RESOURCES, USER, alertify, COMMS ) ->
+  '$mdDialog'
+  ( $scope, $rootScope, $state, $stateParams, RESOURCES, USER, alertify, COMMS, $mdDialog ) ->
     console.log "TeacherAreaController"
+    $scope.create_event_button_bool = false
 
-    console.log $stateParams
+    ############### Define event details ###########################
+    #https://developers.google.com/apis-explorer/#p/calendar/v3/calendar.events.insert
+
+    $scope.calendar_event_details = {}
+
+    $sceope.calendar_event_details.sendNotifications = true
+
+    $scope.calendar_event_details.student_email = $stateParams.student_email if $stateParams.student_email?
     
+    ###############End of define event details #########################
 
     CLIENT_ID = '25647890980-aachcueqqsk0or6qm49hi1e23vvvluqd.apps.googleusercontent.com'
 
@@ -27,7 +37,7 @@ angular.module('lessons').controller('TeacherAreaController', [
 
     USER.get_user().then( ( user ) ->
       console.log "got user"
-      console.log $rootScope.USER.id != parseInt( $stateParams.id )
+      # console.log $rootScope.USER.id != parseInt( $stateParams.id )
       if $rootScope.USER.id != parseInt( $stateParams.id )
         $state.go 'welcome'
         alertify.error "You are not allowed to view this"
@@ -53,6 +63,7 @@ angular.module('lessons').controller('TeacherAreaController', [
 
         $scope.eventSource = bla
         alertify.success "Loaded #{ events.length } events"
+        $scope.create_event_button_bool = true
         $scope.$apply()
 
 
@@ -63,7 +74,8 @@ angular.module('lessons').controller('TeacherAreaController', [
       for calendar in calendars
         if calendar.summary == "LYL Calendar"
           alertify.success "Found your calendar"
-          console.log calendar
+          # console.log calendar
+          $scope.calendar_event_details.calendar_id = calendar.id
           calendar_exists = true
 
       if calendar_exists
@@ -71,13 +83,16 @@ angular.module('lessons').controller('TeacherAreaController', [
           'calendarId': "#{ $rootScope.USER.calendar_id }"
         ).execute( ( resp ) ->
           console.log "Calendar list"
-          console.log resp
+          # console.log resp
           if resp.error?  
             alertify.error "Couldn't load your calendar"
           else
 
             console.log "List events"
+
             format_events( resp.items )
+            $scope.create_event_button_bool = true
+            $scope.$digest()
         )
       else
         $scope.create_calendar()
@@ -85,7 +100,7 @@ angular.module('lessons').controller('TeacherAreaController', [
 
     load_calendar_api = ->
       
-      console.log "loaded"
+      # console.log "loaded"
       # console.log gapi
       gapi.client.load('calendar', 'v3', calendar_loaded)
       gapi.client.load('oauth2', 'v2', oauth2_loaded)
@@ -98,13 +113,13 @@ angular.module('lessons').controller('TeacherAreaController', [
     oauth2_loaded = ->
       console.log "Oauth"
       gapi.client.oauth2.userinfo.get().execute( ( resp ) ->
-        console.log "should be here " 
-        console.log resp
+        # console.log "should be here " 
+        # console.log resp
         $scope.google_id_email =  resp.email
         # get user email and then load calendar list
         gapi.client.calendar.calendarList.list().execute( ( resp ) ->
           console.log "Calendar list"
-          console.log resp
+          # console.log resp
           if resp.error?  
             alertify.error "Couldn't load your calendar"
           else
@@ -119,7 +134,7 @@ angular.module('lessons').controller('TeacherAreaController', [
 
     handleAuthResult = ( auth ) ->
       console.log "auth"
-      console.log auth
+      # console.log auth
       if ( auth? and !auth.error? )
         $scope.show_auth_button = false
         
@@ -152,7 +167,7 @@ angular.module('lessons').controller('TeacherAreaController', [
     $scope.create_calendar = ->
       console.log "Create calendar"
       alertify.success "Trying to create a new calendar"
-      console.log "user:#{ $scope.google_id_email }"
+      # console.log "user:#{ $scope.google_id_email }"
       gapi.client.calendar.calendars.insert(
         'description': "LYL calendar for #{ $rootScope.USER.first_name } #{ $rootScope.USER.last_name }"
         'summary': "LYL Calendar"
@@ -205,7 +220,21 @@ angular.module('lessons').controller('TeacherAreaController', [
       console.log 'Selected time: ' + selectedTime
       return
 
-    return
+    
+
+    ####################### Create event##############################
+
+    $scope.create_event = ->
+      
+      $mdDialog.show(
+        scope: $scope
+        preserveScope: true
+        templateUrl: "dialogs/calendar_event_dialog.html"
+        openFrom: 'left'
+        closeTo: 'right'
+        escapeToClose: true
+
+      )
     
       
 ])
