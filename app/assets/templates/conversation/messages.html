@@ -48,9 +48,19 @@
                         placeholder="Enter your message here">
               </textarea>
             
-            <md-input-container>
-              <input ng-click="send_message()" value="Submit message" class="md-button md-primary md-raised white_text" aria-label="Send message">
-              
+            <div layout="row">
+              <div flex>
+                <md-input-container>
+                  <input ng-click="send_message()" value="Submit message" class="md-button md-primary md-raised white_text" aria-label="Send message">
+                </md-input-container>
+              </div>
+              <div flex flex-offset="25">
+                <md-input-container>
+                  <input ng-click="create_event()" value="Create event" class="md-button blue_button" aria-label="Create event">
+                </md-input-container>
+              </div>
+            </div>
+            
         </form> <!-- end of send_message -->
       </div> <!-- end of message_response_container -->
     

@@ -11,6 +11,8 @@ angular.module('lessons').controller('TeacherAreaController', [
   'COMMS'
   ( $scope, $rootScope, $state, $stateParams, RESOURCES, USER, alertify, COMMS ) ->
     console.log "TeacherAreaController"
+
+    console.log $stateParams
     
 
     CLIENT_ID = '25647890980-aachcueqqsk0or6qm49hi1e23vvvluqd.apps.googleusercontent.com'
@@ -101,8 +103,8 @@ angular.module('lessons').controller('TeacherAreaController', [
         $scope.google_id_email =  resp.email
         # get user email and then load calendar list
         gapi.client.calendar.calendarList.list().execute( ( resp ) ->
-          # console.log "Calendar list"
-          # console.log resp
+          console.log "Calendar list"
+          console.log resp
           if resp.error?  
             alertify.error "Couldn't load your calendar"
           else

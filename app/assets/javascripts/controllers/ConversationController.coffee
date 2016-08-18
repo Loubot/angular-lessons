@@ -46,9 +46,11 @@ angular.module('lessons').controller('ConversationController', [
           alertify.error "Failed to get conversation"
         )
     
-    $rootScope.$watch "USER", ->
+    user_listener = $rootScope.$watch "USER", ->
       console.log "Changed"
       fetch_conversations()
+
+
 
     USER.get_user().then( ( user ) ->
       alertify.success "Got user"
@@ -68,7 +70,7 @@ angular.module('lessons').controller('ConversationController', [
         teacher_email: $rootScope.USER.email
       ).then( ( resp ) ->
         console.log resp
-        alertify.success "Got conversation"
+        alertify.success "Got conversations"
         $scope.conversation = resp.data.conversation
         scroll_to_bottom()
       ).catch( ( err ) ->
@@ -124,5 +126,10 @@ angular.module('lessons').controller('ConversationController', [
     $scope.choose_credentials = ( index ) ->
       openLeftMenu( index )
       $mdDialog.hide()
+
+    ########################### Create event ######################################
+    $scope.create_event = ->
+      $state.go('teacher_area', student_email: $scope.conversation.student_email, id: $rootScope.USER.id )
+      user_listener() #clear watch on USER
       
 ])
