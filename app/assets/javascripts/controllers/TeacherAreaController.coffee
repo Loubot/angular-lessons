@@ -79,6 +79,7 @@ angular.module('lessons').controller('TeacherAreaController', [
         if calendar.summary == "LYL Calendar"
           alertify.success "Found your calendar"
           # console.log calendar
+          $scope.calendar_id = calendar.id
           $scope.calendar_event_details.calendar_id = calendar.id
           calendar_exists = true
 
@@ -229,17 +230,17 @@ angular.module('lessons').controller('TeacherAreaController', [
 
     ####################### Create event##############################
 
-    # $scope.create_event = ->
+    $scope.create_event = ->
       
-    $mdDialog.show(
-      scope: $scope
-      preserveScope: true
-      templateUrl: "dialogs/calendar_event_dialog.html"
-      openFrom: 'left'
-      closeTo: 'right'
-      escapeToClose: true
-      
-    )
+      $mdDialog.show(
+        scope: $scope
+        preserveScope: true
+        templateUrl: "dialogs/calendar_event_dialog.html"
+        openFrom: 'left'
+        closeTo: 'right'
+        escapeToClose: true
+        
+      )
 
 
     $scope.submit_event_details = ->
@@ -267,14 +268,23 @@ angular.module('lessons').controller('TeacherAreaController', [
      
       
       
-      
-      gapi.client.calendar.events.insert(
-        summary: $scope.calendar_event_details.summary if $scope.calendar_event_details.summary?
-        location: $rootScope.USER.location.address if $rootScope.USER.location?
-        description: $scope.calendar_event_details.description
-        start: {
-          dateTime: $scope
+      resource = {
+        'summary': "Lesson with #{ $scope.calendar_event_details.student_email }" if $scope.calendar_event_details.student_email?
+        # location: $rootScope.USER.location.address if $rootScope.USER.location?
+        'description': $scope.calendar_event_details.description
+        'start': {
+          'dateTime': start_date_time.toISOString()
+          'timeZone': 'GMT'
         }
+        'end':{
+          'dateTime': end_date_time.toISOString()
+          'timeZone': 'GMT'
+        }
+      }
+      console.log resource
+      gapi.client.calendar.events.insert(
+        'calendarId': $scope.calendar_id
+        'resource': resource
       ).execute( ( event ) ->
         console.log event
       )
