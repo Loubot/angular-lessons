@@ -254,28 +254,30 @@ angular.module('lessons').controller('TeacherAreaController', [
       end_date_time.minute( moment( $scope.calendar_event_details.end_time).format( "mm" ) )
       console.log end_date_time.toString()
       if start_date_time == end_date_time
-        console.log "Times are equal"
+        alertify.error "Times are equal"
         $scope.event_creation_form.end_date.$error.not_the_same = true
         return false
       else if !$scope.calendar_event_details.start_date? or !$scope.calendar_event_details.start_time? or !$scope.calendar_event_details.end_date? or !$scope.calendar_event_details.end_time?
 
-        console.log "Something not defined"
+        alertify.error "Something not defined"
         $scope.event_creation_form.end_date.$error.not_the_same = true
         return false
       else
         $scope.event_creation_form.end_date.$error.not_the_same = false
      
       
-      # "#{ moment( $scope.calendar_event_details.start_date ).format( 'YYYY-MM-DD' ) } " + "#{ moment( $scope.calendar_event_details.start_time ).format( 'HH:mm' ) }"
       
-      # gapi.client.calendar.events.insert(
-      #   summary: $scope.calendar_event_details.summary if $scope.calendar_event_details.summary?
-      #   location: $rootScope.USER.location.address if $rootScope.USER.location.address
-      #   description: $scope.calendar_event_details.description
-      #   start: {
-      #     dateTime: $scope
-      #   }
-      # )
+      
+      gapi.client.calendar.events.insert(
+        summary: $scope.calendar_event_details.summary if $scope.calendar_event_details.summary?
+        location: $rootScope.USER.location.address if $rootScope.USER.location?
+        description: $scope.calendar_event_details.description
+        start: {
+          dateTime: $scope
+        }
+      ).execute( ( event ) ->
+        console.log event
+      )
     
       
 ])
