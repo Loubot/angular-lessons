@@ -1,6 +1,6 @@
 <div class="width_75">
   <md-dialog>
-    <form ng-submit="submit_event_details()">
+    <form name="event_creation_form" ng-submit="submit_event_details()">
 
       
       
@@ -11,13 +11,35 @@
       </md-input-container>
 
       <div layout="row">
-        <div flex><mdp-date-picker mdp-placeholder="Date" ng-model="calendar_event_details.start_date" aria-label="Event start date"></mdp-date-picker ></div>
-        <div flex><mdp-time-picker ng-model="calendar_event_details.start_time"></mdp-time-picker aria-label="event start time"></div>
+        <div flex>
+          <mdp-date-picker mdp-placeholder="Date" ng-model="calendar_event_details.start_date" aria-label="Event start date" ng-required="true">
+          </mdp-date-picker >
+        </div>
+
+        <div flex>
+          <mdp-time-picker mdp-auto-switch="true" ng-model="calendar_event_details.start_time" aria-label="event start time" ng-required="true">
+          </mdp-time-picker >
+        </div>
+
       </div>
 
       <div layout="row">
-        <div flex><mdp-date-picker mdp-placeholder="Date" ng-model="calendar_event_details.end_date" aria-label="event end date"></mdp-date-picker></div>
-        <div flex><mdp-time-picker ng-model="calendar_event_details.end_time" aria-label="event end time"></mdp-time-picker></div>
+        <div flex>
+          <mdp-date-picker mdp-placeholder="Date" ng-model="event_creation_form.end_date" name="end_date" aria-label="event end date" ng-required="true">
+            <div ng-messages="event_creation_form.end_date.$error">
+              <div ng-message-exp="['not_the_same', 'pattern']">
+                <p>Must be a valid email</p>
+                <p>Emails must match</p>
+            </div>
+            </div>
+          </mdp-date-picker>
+        </div>
+
+        <div flex>
+          <mdp-time-picker mdp-auto-switch="true" ng-model="calendar_event_details.end_time" aria-label="event end time" ng-required="true">
+
+          </mdp-time-picker>
+        </div>
       </div>
 
       <md-divider class="margin_b_10"></md-divider>

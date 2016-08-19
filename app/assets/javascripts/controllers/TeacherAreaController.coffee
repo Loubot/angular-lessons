@@ -22,6 +22,8 @@ angular.module('lessons').controller('TeacherAreaController', [
     $scope.calendar_event_details = {}
 
     $scope.calendar_event_details.sendNotifications = true
+    $scope.calendar_event_details.end_date = null
+    $scope.calendar_event_details.end_time = null
 
     $scope.calendar_event_details.student_email = $stateParams.student_email if $stateParams.student_email?
     
@@ -76,7 +78,7 @@ angular.module('lessons').controller('TeacherAreaController', [
       for calendar in calendars
         if calendar.summary == "LYL Calendar"
           alertify.success "Found your calendar"
-          console.log calendar
+          # console.log calendar
           $scope.calendar_event_details.calendar_id = calendar.id
           calendar_exists = true
 
@@ -139,8 +141,8 @@ angular.module('lessons').controller('TeacherAreaController', [
       # console.log auth
       if ( auth? and !auth.error? )
         $scope.show_auth_button = false
-        
-        $scope.$apply()
+        console.log "Begin calendar api load"
+        $scope.$digest()
         
         load_calendar_api()
       else
@@ -178,6 +180,7 @@ angular.module('lessons').controller('TeacherAreaController', [
         'backgroundColor': '#2a602a'
       ).execute( ( resp ) ->
         alertify.success "Created calendar for you"
+        $scope.create_event_button_bool = true
         COMMS.PUT(
           "/teacher/#{ $rootScope.USER.id }"
           calendar_id: resp.result.id
@@ -241,6 +244,28 @@ angular.module('lessons').controller('TeacherAreaController', [
 
     $scope.submit_event_details = ->
       console.log $scope.calendar_event_details
+      start_date_time = moment( $scope.calendar_event_details.start_date )     
+      start_date_time.hour( moment( $scope.calendar_event_details.start_time ).format( "HH" ) )
+      start_date_time.minute( moment( $scope.calendar_event_details.start_time ).format( 'mm' ) )
+      console.log start_date_time.toString()
+
+      end_date_time = moment( $scope.calendar_event_details.end_date )
+      end_date_time.hour( moment( $scope.calendar_event_details.end_time ).format( "HH" ) )
+      end_date_time.minute( moment( $scope.calendar_event_details.end_time).format( "mm" ) )
+      console.log end_date_time.toString()
+      # if start_date_time == end_date_time
+      $scope.not_the_same = true
+      $scope.event_creation_form.end_date.$error.not_the_same = true
+      # "#{ moment( $scope.calendar_event_details.start_date ).format( 'YYYY-MM-DD' ) } " + "#{ moment( $scope.calendar_event_details.start_time ).format( 'HH:mm' ) }"
+      
+      # gapi.client.calendar.events.insert(
+      #   summary: $scope.calendar_event_details.summary if $scope.calendar_event_details.summary?
+      #   location: $rootScope.USER.location.address if $rootScope.USER.location.address
+      #   description: $scope.calendar_event_details.description
+      #   start: {
+      #     dateTime: $scope
+      #   }
+      # )
     
       
 ])
