@@ -1,41 +1,23 @@
 <div class="width_75">
   <md-dialog>
-    <form ng-submit="submit_event_details">
+    <form ng-submit="submit_event_details()">
 
-      <mdp-date-picker mdp-placeholder="Date" ng-model="currentDate"></mdp-date-picker>
-      <mdp-time-picker ng-model="currentDate"></mdp-time-picker>
+      
+      
 
       <md-input-container md-no-float>
         <label>Student email</label>
         <input ng-model="calendar_event_details.student_email">
       </md-input-container>
 
-      <div class="padding_10" layout="row">
-        <label flex="15">Start time:</label>
-        <div flex>
-          <input type="date"
-            ng-model="calendar_event_details.start_date"
-          >
-        </div>
-        <div flex>
-          <input  type="time" 
-                  ng-model="calendar_event_details.start_time"
-                  min="08:00:00" max="21:00:00">
-        </div>
+      <div layout="row">
+        <div flex><mdp-date-picker mdp-placeholder="Date" ng-model="calendar_event_details.start_date" aria-label="Event start date"></mdp-date-picker ></div>
+        <div flex><mdp-time-picker ng-model="calendar_event_details.start_time"></mdp-time-picker aria-label="event start time"></div>
       </div>
 
-      <div class="padding_10" layout="row">
-        <label flex="15">End time:</label>
-        <div flex>
-          <input type="date"
-            ng-model="calendar_event_details.end_date"
-          >
-        </div>
-        <div flex>
-          <input  type="time" 
-                  ng-model="calendar_event_details.end_time"
-                  min="08:00:00" max="22:00:00">
-        </div>
+      <div layout="row">
+        <div flex><mdp-date-picker mdp-placeholder="Date" ng-model="calendar_event_details.end_date" aria-label="event end date"></mdp-date-picker></div>
+        <div flex><mdp-time-picker ng-model="calendar_event_details.end_time" aria-label="event end time"></mdp-time-picker></div>
       </div>
 
       <md-divider class="margin_b_10"></md-divider>
@@ -51,7 +33,7 @@
       </md-input-container>
       
       <md-input-container>
-        <input type="submit" value="Create event" class="md-button blue_button width_25 float_right">
+        <input type="submit" value="Create event" class="md-button blue_button width_25 float_right" aria-label="Create event">
       </md-input-container>
       
     </form>
