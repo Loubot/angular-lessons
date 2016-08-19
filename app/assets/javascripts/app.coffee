@@ -12,6 +12,7 @@ angular.module('lessons', [
   'ngAnimate'
   'validation.match'
   'ngMessages'
+  'mdPickers'
 ])
 
 angular.module('lessons').constant "RESOURCES", do ->

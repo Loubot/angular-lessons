@@ -19,4 +19,5 @@
 @import "bootstrap/dist/css/bootstrap.css";
 @import "angular-material/angular-material.css";
 @import "ng-responsive-calendar/dist/css/calendar.css";
-@import "angular-loading-bar/src/loading-bar.css"
+@import "angular-loading-bar/src/loading-bar.css";
+@import "mdPickers/dist/mdPickers.min.css"

@@ -1,6 +1,10 @@
 <div class="width_75">
   <md-dialog>
     <form ng-submit="submit_event_details">
+
+      <mdp-date-picker mdp-placeholder="Date" ng-model="currentDate"></mdp-date-picker>
+      <mdp-time-picker ng-model="currentDate"></mdp-time-picker>
+
       <md-input-container md-no-float>
         <label>Student email</label>
         <input ng-model="calendar_event_details.student_email">
@@ -54,3 +58,4 @@
     
   </md-dialog>
 </div>
+

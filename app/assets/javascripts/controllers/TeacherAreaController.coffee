@@ -10,7 +10,9 @@ angular.module('lessons').controller('TeacherAreaController', [
   'alertify'
   'COMMS'
   '$mdDialog'
-  ( $scope, $rootScope, $state, $stateParams, RESOURCES, USER, alertify, COMMS, $mdDialog ) ->
+  '$mdpDatePicker'
+  '$mdpTimePicker'
+  ( $scope, $rootScope, $state, $stateParams, RESOURCES, USER, alertify, COMMS, $mdDialog, $mdpDatePicker, $mdpTimePicker ) ->
     console.log "TeacherAreaController"
     $scope.create_event_button_bool = false
 
@@ -233,8 +235,9 @@ angular.module('lessons').controller('TeacherAreaController', [
       openFrom: 'left'
       closeTo: 'right'
       escapeToClose: true
-
+      
     )
+
 
     $scope.submit_event_details = ->
       console.log $scope.calendar_event_details
