@@ -253,9 +253,19 @@ angular.module('lessons').controller('TeacherAreaController', [
       end_date_time.hour( moment( $scope.calendar_event_details.end_time ).format( "HH" ) )
       end_date_time.minute( moment( $scope.calendar_event_details.end_time).format( "mm" ) )
       console.log end_date_time.toString()
-      # if start_date_time == end_date_time
-      $scope.not_the_same = true
-      $scope.event_creation_form.end_date.$error.not_the_same = true
+      if start_date_time == end_date_time
+        console.log "Times are equal"
+        $scope.event_creation_form.end_date.$error.not_the_same = true
+        return false
+      else if !$scope.calendar_event_details.start_date? or !$scope.calendar_event_details.start_time? or !$scope.calendar_event_details.end_date? or !$scope.calendar_event_details.end_time?
+
+        console.log "Something not defined"
+        $scope.event_creation_form.end_date.$error.not_the_same = true
+        return false
+      else
+        $scope.event_creation_form.end_date.$error.not_the_same = false
+     
+      
       # "#{ moment( $scope.calendar_event_details.start_date ).format( 'YYYY-MM-DD' ) } " + "#{ moment( $scope.calendar_event_details.start_time ).format( 'HH:mm' ) }"
       
       # gapi.client.calendar.events.insert(

@@ -25,9 +25,9 @@
 
       <div layout="row">
         <div flex>
-          <mdp-date-picker mdp-placeholder="Date" ng-model="event_creation_form.end_date" name="end_date" aria-label="event end date" ng-required="true">
+          <mdp-date-picker mdp-placeholder="Date" ng-model="calendar_event_details.end_date" name="end_date" aria-label="event end date" ng-required="true">
             <div ng-messages="event_creation_form.end_date.$error">
-              <div ng-message-exp="['not_the_same', 'pattern']">
+              <div ng-message-exp="['not_the_same', 'required']">
                 <p>Must be a valid email</p>
                 <p>Emails must match</p>
             </div>
