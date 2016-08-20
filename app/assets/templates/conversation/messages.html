@@ -54,7 +54,7 @@
                   <input ng-click="send_message()" value="Submit message" class="md-button md-primary md-raised white_text" aria-label="Send message">
                 </md-input-container>
               </div>
-              <div flex flex-offset="25">
+              <div flex flex-offset="25" ng-if="USER.is_teacher">
                 <md-input-container>
                   <input ng-click="create_event()" value="Create event" class="md-button blue_button" aria-label="Create event">
                 </md-input-container>
