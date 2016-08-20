@@ -119,6 +119,7 @@ angular.module('lessons').controller( 'ViewTeacherController', [
 
     $scope.send_message = ->
       $scope.message.teacher_id = $scope.teacher.id
+      $scope.message.teacher_email = $scope.teacher.email
       $scope.message.student_email = $rootScope.USER.email
       COMMS.POST(
         "/conversation"

@@ -7,8 +7,10 @@
           <!-- Use floating label instead of placeholder -->
           
           <i class="material-icons">person_outline</i>
-          <input  ng-model="message.name" 
-                  type="text" 
+          <input  ng-model="message.name"
+                  class="black_text" 
+                  type="text"
+                  ng-value="USER.first_name + ' ' + USER.last_name"
                   placeholder="Your full name (required)"
                   aria-label="Name"
                   required>
