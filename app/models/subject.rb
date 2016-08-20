@@ -15,7 +15,7 @@ class Subject < ActiveRecord::Base
   has_many :packages, dependent: :destroy
   has_many :grinds, dependent: :destroy
   validates :name, :category_id, presence: true
-  validates :name, uniqueness: true
+  validates :name, uniqueness: true, presence: true
 
 	has_and_belongs_to_many :teachers, touch: true
 end

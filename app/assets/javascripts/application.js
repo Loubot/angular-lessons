@@ -42,6 +42,7 @@
 //= require controllers/ViewTeacherController
 //= require controllers/ConversationController
 //= require controllers/RegisterController
+//= require controllers/AdminController
 //= require angular-rails-templates
 // Templates in app/assets/templates (but see step 5)
 //= require_tree ../templates

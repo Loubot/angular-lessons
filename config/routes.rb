@@ -26,7 +26,10 @@ Rails.application.routes.draw do
       resources :experience,          only: [ :create, :destroy ]
       resources :qualification,       only: [ :create, :destroy ]
       resources :location,            only: [ :create, :destroy ] 
-      resources :photos,              only: [ :create, :destroy ]     
+      resources :photos,              only: [ :create, :destroy ]
+      resources :category,            only: [ :create, :index ]   do
+        post "create-subject"             =>  'category#create_subject'
+      end
 
     end
     resources :conversation,        only: [ :create, :index ]

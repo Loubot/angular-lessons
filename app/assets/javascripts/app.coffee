@@ -85,6 +85,12 @@ angular.module('lessons').config ($stateProvider, $urlRouterProvider) ->
     templateUrl: 'static/how_it_works.html'
     controller: "UserController"
 
+
+  $stateProvider.state 'admin',
+    url: "/admin"
+    templateUrl: "admin/manage.html"
+    controller: "AdminController"
+
   
 
 angular.module('lessons').config ( $authProvider, RESOURCES ) ->
