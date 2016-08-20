@@ -24,9 +24,15 @@
           </md-card-title-text>
         </md-card-title>
         <md-card-actions layout="row" layout-align="start center">
-          <md-button class="md-raised md-primary white_text icon_button" ng-click="open_message_dialog()">
+          <md-button ng-if="USER" class="md-raised md-primary white_text icon_button" ng-click="open_message_dialog()">
             Book <i class="material-icons">thumb_up</i>
           </md-button>
+
+          <md-button ng-if="!USER" class="md-raised md-primary white_text icon_button" ng-click="open_login_or_register()">
+            Book <i class="material-icons">thumb_up</i>
+          </md-button>
+
+
           <!-- <md-button ><i class="material-icons">history</i></md-button> -->
           <md-card-icon-actions>
             <md-button class="md-icon-button" aria-label="icon">

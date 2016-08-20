@@ -119,6 +119,7 @@ angular.module('lessons').controller( 'ViewTeacherController', [
 
     $scope.send_message = ->
       $scope.message.teacher_id = $scope.teacher.id
+      $scope.message.student_email = $rootScope.USER.email
       COMMS.POST(
         "/conversation"
         conversation: $scope.message
@@ -129,4 +130,17 @@ angular.module('lessons').controller( 'ViewTeacherController', [
       ).catch( ( err ) ->
         console.log err
       )
+
+    $scope.open_login_or_register = ->
+      $mdDialog.show(
+        templateUrl: "dialogs/login_or_register_dialog.html"
+        scope: $scope
+        openFrom: "left"
+        closeTo: "right"
+        preserveScope: true
+        clickOutsideToClose: false
+      )
+
+    $scope.close_login_or_register = ->
+      $mdDialog.hide()
 ])
