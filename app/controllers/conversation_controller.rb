@@ -1,7 +1,7 @@
 class ConversationController < ApplicationController
   include ConversationHelper
 
-  before_action :authenticate_teacher!
+  before_action :authenticate_teacher!, except: [ :create ]
 
   def create
     p "con params #{ conversation_params }"
