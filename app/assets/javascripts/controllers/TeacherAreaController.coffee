@@ -29,6 +29,12 @@ angular.module('lessons').controller('TeacherAreaController', [
     
     ###############End of define event details #########################
 
+    ############### Don't display create calendar button ##############
+
+    $scope.calendar_id = true 
+
+    ###########################################
+
     CLIENT_ID = '25647890980-aachcueqqsk0or6qm49hi1e23vvvluqd.apps.googleusercontent.com'
 
     SCOPES =  [
@@ -74,23 +80,27 @@ angular.module('lessons').controller('TeacherAreaController', [
 
     ###################### google auth ###############################
     check_if_calendar_exists = ( calendars ) ->
+      console.log calendars
       calendar_exists = false
       for calendar in calendars
         if calendar.summary == "LYL Calendar"
-          alertify.success "Found your calendar"
+          
           # console.log calendar
           $scope.calendar_id = calendar.id
           $scope.calendar_event_details.calendar_id = calendar.id
           calendar_exists = true
 
       if calendar_exists
+        alertify.success "Found your calendar"
+        console.log $scope.calendar_id
         gapi.client.calendar.events.list(
-          'calendarId': "#{ $rootScope.USER.calendar_id }"
+          'calendarId': "#{ $scope.calendar_id }"
         ).execute( ( resp ) ->
           console.log "Calendar list"
           # console.log resp
           if resp.error?  
             alertify.error "Couldn't load your calendar"
+            $scope.calendar_id = null
           else
 
             console.log "List events"
@@ -100,6 +110,9 @@ angular.module('lessons').controller('TeacherAreaController', [
             $scope.$digest()
         )
       else
+        alertify.error "Couldn't find your calender"
+        console.log "Can't find calendar"
+        $scope.calendar_id = null
         $scope.create_calendar()
         
 
@@ -180,19 +193,22 @@ angular.module('lessons').controller('TeacherAreaController', [
         'timeZone': "GMT+01:00 Dublin"
         'backgroundColor': '#2a602a'
       ).execute( ( resp ) ->
+        console.log resp
+        $scope.calendar_id = resp.id
         alertify.success "Created calendar for you"
         $scope.create_event_button_bool = true
-        COMMS.PUT(
-          "/teacher/#{ $rootScope.USER.id }"
-          calendar_id: resp.result.id
-        ).then( ( resp ) ->
-          console.log resp
-          $rootScope.USER = resp.data.teacher
-          alertify.success "Updated calendar id"
-        ).catch( ( err ) ->
-          console.log err
-          alertify.error "Failed to update user"
-        )
+        $scope.$digest()
+        # COMMS.PUT(
+        #   "/teacher/#{ $rootScope.USER.id }"
+        #   calendar_id: resp.result.id
+        # ).then( ( resp ) ->
+        #   console.log resp
+        #   $rootScope.USER = resp.data.teacher
+        #   alertify.success "Updated calendar id"
+        # ).catch( ( err ) ->
+        #   console.log err
+        #   alertify.error "Failed to update user"
+        # )
       )
 
     ###################### google auth ###############################
