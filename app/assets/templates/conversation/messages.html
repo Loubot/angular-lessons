@@ -6,10 +6,11 @@
       <md-content class="md-padding">
         <input placeholder="Search for student" class="margin_b_10">
         <div  ng-repeat="conversation in conversations" 
-              ng-click="select_conversation( conversation.student_email )" 
+              ng-click="select_conversation( conversation.id )" 
               class="margin_t_10"
               flex="100">
-          <div class="message_box">{{ conversation.student_name }}</div>
+          <div ng-if="USER.is_teacher" class="message_box">{{ conversation.student_name }}</div>
+          <div ng-if="!USER.is_teacher" class="message_box">{{ conversation.teacher_name }}</div>
           <md-divider></md-divider>
         </div> <!-- end of conversations -->
       </md-content>
@@ -18,14 +19,13 @@
 
     <div flex="70" class="height_100" style="overflow-y:hidden;">
 
-      <md-content class="height_70 padding_5 message_container">
+      <md-content class="height_70 padding_5 message_container" id="message_container">
         <div layout="column" layout-fill flex>
           <div        class="margin_t_10"
                       ng-class="{ 'flex-50 flex-offset-50': message.sender_email==USER.email, 'flex-50': message.sender_email!=USER.email }"
                       ng-repeat="message in conversation.messages">
             <div ng-class="{ 'sender': message.sender_email==USER.email, 'receiver': message.sender_email!=USER.email }">
-              <!-- <span ng-if="message.sender_email==USER.email">{{ conversation.teacher_name }}: </span>
-              <span ng-if="message.sender_email!=USER.email">{{ conversation.student_name }}: </span> -->
+              
               {{ message.message }}
             </div> <!-- end of sender/receiver -->
 
@@ -66,4 +66,3 @@
     
     </div> <!-- end of flex=70 -->
   </div> <!-- end of row -->
-

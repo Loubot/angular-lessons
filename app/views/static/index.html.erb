@@ -16,14 +16,17 @@
           <md-button class="md-button md-default-theme green_blue_text" ng-click="openLeftMenu(1)">Register</md-button>
         </md-fab-actions> <!-- end of if !USER -->
 
-        <md-fab-actions ng-if="USER" class="green_blue_text">
+        <md-fab-actions ng-if="USER && USER.is_teacher" class="green_blue_text">
           <md-button ui-sref="teacher({id:USER.id})" class="md-button md-default-theme green_text">Profile</md-button>
           <md-button ui-sref="teacher_area({id:USER.id})" class="md-button md-default-theme green_text">Your area</md-button>
           <md-button ui-sref="teacher_location({id:USER.id})" class="md-button md-default-theme green_text">Location</md-button>
           <md-button ui-sref="conversation({id:USER.id})" class="md-button md-default-theme green_text">Messages</md-button>
           <md-button class="md-button md-default-theme green_blue_text" ng-click="logout()">Logout</md-button>
-          
+        </md-fab-actions>
 
+        <md-fab-actions ng-if="USER && !USER.is_teacher" class="green_blue_text">
+          <md-button ui-sref="conversation({id:USER.id})" class="md-button md-default-theme green_text">Messages</md-button>
+          <md-button class="md-button md-default-theme green_blue_text" ng-click="logout()">Logout</md-button>
         </md-fab-actions>
 
       </md-fab-speed-dial>

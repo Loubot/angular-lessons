@@ -27,7 +27,8 @@ angular.module('lessons').controller('ConversationController', [
           {
             random: $stateParams.random if $stateParams.random? && $stateParams.random != ""
             # conversation_id: $stateParams.id
-            teacher_email: $rootScope.USER.email if $rootScope.USER?
+            teacher_email: $rootScope.USER.email if $rootScope.USER? && $rootScope.USER.is_teacher
+            student_email: $rootScope.USER.email if $rootScope.USER? && !$rootScope.USER.is_teacher
           }
         ).then( ( resp ) ->
           console.log resp
@@ -62,12 +63,11 @@ angular.module('lessons').controller('ConversationController', [
     )
 
     
-    $scope.select_conversation = ( email ) ->
+    $scope.select_conversation = ( id ) ->
       
       COMMS.GET(
         "/conversation"
-        student_email: email
-        teacher_email: $rootScope.USER.email
+        conversation_id: id
       ).then( ( resp ) ->
         console.log resp
         alertify.success "Got conversations"
@@ -105,8 +105,9 @@ angular.module('lessons').controller('ConversationController', [
 
     scroll_to_bottom = ->
       $timeout (->
-        $(".message_container").animate({ scrollTop: $(".message_container").css "height" }, "slow");
-      ), 1500
+        height = document.getElementById("message_container").scrollHeight
+        $(".message_container").animate({ scrollTop: height }, "slow");
+      ), 2000
 
     open_login_or_register = ->
       $mdDialog.show(
