@@ -19,6 +19,8 @@ DeviseTokenAuth.setup do |config|
   # still using the same auth token.
   # config.batch_request_buffer_throttle = 5.seconds
 
+  config.default_confirm_success_url = "confirmed"
+
   # This route will be the prefix for all oauth2 redirect callbacks. For
   # example, using the default '/omniauth', the github oauth2 provider will
   # redirect successful authentications to '/omniauth/github/callback'

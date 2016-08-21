@@ -10,7 +10,9 @@ angular.module('lessons').controller( 'ViewTeacherController', [
   "COMMS"
   "alertify"
   "$mdDialog"
-  ( $scope, $rootScope, $state, $stateParams, USER, $filter, COMMS, alertify, $mdDialog ) ->
+  "$http"
+  "$auth"
+  ( $scope, $rootScope, $state, $stateParams, USER, $filter, COMMS, alertify, $mdDialog, $http, $auth ) ->
     console.log "ViewTeacherController"
 
     $scope.message = {}
@@ -154,4 +156,13 @@ angular.module('lessons').controller( 'ViewTeacherController', [
 
     $scope.close_login_or_register = ->
       $mdDialog.hide()
+
+
+    
+    $auth.requestPasswordReset(email:"lllouis@yahoo.com").then((resp) ->
+      console.log resp
+      return
+    ).catch (resp) ->
+      console.log resp
+      return
 ])
