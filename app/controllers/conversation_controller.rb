@@ -25,7 +25,7 @@ class ConversationController < ApplicationController
     p "sender email #{ sender_email }"
     
 
-    p "Deliverd #{ delivered }"
+    # p "Deliverd #{ delivered }"
 
     message = conversation.messages.create(
       message:          params[:conversation][:message],
