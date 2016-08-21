@@ -53,7 +53,7 @@
 
 
       <!--  map div -->
-      <div id="map" class="margin_t_10" ></div>
+      <div id="map" class="margin_t_10" ng-show="teacher.location"></div>
 
       <!-- end of map div -->
 
@@ -108,6 +108,11 @@
           </md-card-content>
         </md-card>
       </md-content>
+
+      <div class="slide_container">
+        <img ng-repeat="slide in slides" class="slide center_block" ng-src="{{slide.image}}" ng-show="slide.index==index">    
+      </div> <!-- end of slide container -->
+      
     </div> <!-- end of flex="70" -->
 
     
@@ -115,12 +120,9 @@
 
 </div>
 
-<div>
+<!-- <div>
   <div flex="100" flex-offset="30" class="margin_t_10">
-    <div class="slide_container">
-      <img ng-repeat="slide in slides" class="slide center_block" ng-src="{{slide.image}}" ng-show="slide.index==index">    
-    </div> <!-- end of slide container -->
-       `
+    slide container used to be here
 
-  </div> <!-- end of flex = 100 -->
-</div>
+  </div> 
+</div> -->

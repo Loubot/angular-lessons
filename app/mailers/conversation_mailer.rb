@@ -1,6 +1,7 @@
 class ConversationMailer < ActionMailer::Base
 
   def send_message( params, email, url )
+    phone = params[ :conversation ][ :phone ] ? params[ :conversation ][ :phone ] : "Not provided by student"
     begin
       require 'mandrill'
       m = mandrill = Mandrill::API.new ENV['MANDRILL_APIKEY']
@@ -19,7 +20,7 @@ class ConversationMailer < ActionMailer::Base
                               { "rcpt"   =>  email,
                                 "vars" =>  [
                                           { "name"=>"MESSAGE",          "content"=>params[:conversation][:message]  },
-                                          { "name"=>"PHONE",            "content"=>params[:conversation][:phone]  },                                        
+                                          { "name"=>"PHONE",            "content"=>phone  },                                        
                                           { "name"=>"NAME",             "content"=>params[:conversation][:name]  },
                                           { "name"=>"URL",              "content"=>url}                                      
                                         ]

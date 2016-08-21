@@ -5,7 +5,12 @@ class ConversationController < ApplicationController
 
   def create
     p "con params #{ conversation_params }"
-    teacher = Teacher.find_by( email: conversation_params[:conversation][:teacher_email] )
+    if conversation_params.has_key?( :teacher_id ) && conversation_params[ :teacher_id ] != ""
+      teacher = Teacher.find( conversation_params[ :teacher_id ])
+    else
+      teacher = Teacher.find_by( email: conversation_params[:conversation][:teacher_email] )
+    end
+
     conversation = Conversation.find_or_create_by( 
       teacher_email: teacher.email,
       student_email: conversation_params[:conversation][:student_email]
@@ -16,6 +21,7 @@ class ConversationController < ApplicationController
     pp conversation.id
     sender_email =  conversation_params[:conversation][:teacher_email] == current_teacher.email ? \
                     conversation_params[:conversation][:student_email] : conversation_params[:conversation][:teacher_email]
+                    
     ConversationMailer.send_message( 
       conversation_params, 
       sender_email,

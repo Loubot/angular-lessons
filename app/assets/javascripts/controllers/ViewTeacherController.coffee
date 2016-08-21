@@ -12,6 +12,9 @@ angular.module('lessons').controller( 'ViewTeacherController', [
   "$mdDialog"
   ( $scope, $rootScope, $state, $stateParams, USER, $filter, COMMS, alertify, $mdDialog ) ->
     console.log "ViewTeacherController"
+
+    $scope.message = {}
+
     $scope.scrollevent = ( $e ) ->
       
       # animate_elems()
@@ -52,11 +55,11 @@ angular.module('lessons').controller( 'ViewTeacherController', [
     COMMS.GET(
       "/teacher/#{ $stateParams.id }/show-teacher"
     ).then( ( resp ) ->
-      # console.log resp
+      console.log resp
       alertify.success "Got teacher info"
       $scope.teacher = resp.data.teacher
       set_profile()
-      create_map()
+      create_map() if $scope.teacher.location?
       create_fotorama()
     ).catch( ( err ) ->
       console.log err
@@ -106,6 +109,12 @@ angular.module('lessons').controller( 'ViewTeacherController', [
     
     ####################### Message dialog #############################
 
+    user_listener = $rootScope.$watch "USER", ->
+      console.log "User changed"
+      if $rootScope.USER?
+        
+        $scope.message.name = "#{ $rootScope.USER.first_name } #{ $rootScope.USER.last_name }"
+
     $scope.open_message_dialog = ->
       $mdDialog.show(
         clickOutsideToClose: true
@@ -118,6 +127,7 @@ angular.module('lessons').controller( 'ViewTeacherController', [
       $mdDialog.hide()
 
     $scope.send_message = ->
+      console.log $scope.message
       $scope.message.teacher_id = $scope.teacher.id
       $scope.message.teacher_email = $scope.teacher.email
       $scope.message.student_email = $rootScope.USER.email
