@@ -21,18 +21,23 @@ class ConversationController < ApplicationController
     pp conversation.id
     sender_email =  conversation_params[:conversation][:teacher_email] == current_teacher.email ? \
                     conversation_params[:conversation][:student_email] : conversation_params[:conversation][:teacher_email]
-                    
-    ConversationMailer.send_message( 
+
+    p "sender email #{ sender_email }"
+    delivered = ConversationMailer.send_message( 
       conversation_params, 
       sender_email,
       format_url( conversation.random, conversation.id ) 
     ).deliver_now
 
-    conversation.messages.create(
+    p "Deliverd #{ delivered }"
+
+    message = conversation.messages.create(
       message:          params[:conversation][:message],
       sender_email:     params[:conversation][:sender_email],
       conversation_id:  conversation.id
     )
+
+    p "message #{ message }"
 
     conversation = Conversation.where( id: conversation.id ).includes( :messages ).first
 
