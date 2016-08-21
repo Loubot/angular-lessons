@@ -159,10 +159,30 @@ angular.module('lessons').controller( 'ViewTeacherController', [
 
 
     
-    $auth.requestPasswordReset(email:"lllouis@yahoo.com").then((resp) ->
+    
+    $auth.requestPasswordReset(email: "lllouis@yahoo.com").then((resp) ->
       console.log resp
       return
     ).catch (resp) ->
       console.log resp
       return
-])
+    
+
+    $scope.$on 'auth:registration-email-success', (ev, message)->
+      alert("A registration email was sent to " + message.email);
+
+
+    # $scope.$on 'auth:password-reset-request-error', (ev, resp) ->
+    #   alert 'Password reset request failed: ' + resp.errors[0]
+      
+
+    $scope.$on 'auth:password-reset-request-success', (ev, data) -> 
+      alert("Password reset instructions were sent to " + data.email)
+
+    $rootScope.$on 'auth:password-reset-confirm-success', -> 
+      # $state.go('account.password-reset')
+      alert "reset what?"
+    
+  
+
+  ])
