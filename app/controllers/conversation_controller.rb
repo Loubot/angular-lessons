@@ -29,6 +29,11 @@ class ConversationController < ApplicationController
       format_url( conversation.random, conversation.id ) 
     ).deliver_now
 
+    ConversationMailer.send_message_copy(
+      conversation_params,
+      current_teacher.email
+    ).deliver_now
+
     p "Deliverd #{ delivered }"
 
     message = conversation.messages.create(
