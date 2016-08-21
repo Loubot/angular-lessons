@@ -182,6 +182,16 @@ angular.module('lessons').controller( 'ViewTeacherController', [
     $rootScope.$on 'auth:password-reset-confirm-success', -> 
       # $state.go('account.password-reset')
       alert "reset what?"
+
+
+    $scope.update_password = ->
+
+      $auth.updatePassword($scope.passwordResetForm).then((resp) ->
+        console.log resp
+        return
+      ).catch (resp) ->
+        console.log resp
+        return
     
   
 
