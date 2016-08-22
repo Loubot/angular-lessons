@@ -238,7 +238,7 @@ Devise.setup do |config|
   # OpenSSL::SSL::VERIFY_PEER = OpenSSL::SSL::VERIFY_NONE
 
 
-  Devise::TRUE_VALUES << ["on"]
+  # Devise::TRUE_VALUES << ["on"]
 
   #
   # ==> Warden configuration

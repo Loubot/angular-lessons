@@ -11,8 +11,8 @@ class TeacherMailer < Devise::Mailer
        :subject=> "Password reset",  
        :from_name=> "Learn Your Lesson",  
        :text=> %Q(<html>Reset your password  <br>
-
-                <a href='#{ opts[:redirect_url] }'>Reset password</a></html>), 
+                <a href="#{ opts[:redirect_url] }?client_id=5qzNUaA__3Qlx9zrMEIygA&config=default&expiry=&reset_password=true&token=#{ token }&uid=#{opts[:email]}">Reset Password</a>),
+                # <a href='#{ opts[:redirect_url] }'>Reset password</a>), 
        :to=>[  
          {  
            :email=> record.email,
@@ -21,7 +21,7 @@ class TeacherMailer < Devise::Mailer
        ],  
        :html=> %Q(<html>Reset your password  <br>
 
-                <a href='#{ opts[:redirect_url] }'>Reset password</a></html>), 
+                <a href="#{ opts[:redirect_url] }?client_id=5qzNUaA__3Qlx9zrMEIygA&config=default&expiry=&reset_password=true&token=#{ token }&uid=#{opts[:email]}">Reset Password</a>),
        :from_email=> "alan@learnyourlesson.ie"  
       }
       async = false
@@ -37,3 +37,5 @@ class TeacherMailer < Devise::Mailer
 end
 
 # http://localhost:3000/#/teachers/password/edit?reset_password_token=yay5s7yqAaBj1osHKDD1
+# http://localhost:3000/?client_id=5qzNUaA__3Qlx9zrMEIygA&config=default&expiry=&reset_password=true&token=v_Uy3f9OM_C4ykSGpigomA&uid=lllouis%40yahoo.com#/view-teacher/10
+# http://localhost:3000/#/reset-password?client_id=5qzNUaA__3Qlx9zrMEIygA&config=default&expiry=&reset_password=true&token=v_Uy3f9OM_C4ykSGpigomA&uid=lllouis@yahoo.com#%2F

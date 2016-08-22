@@ -126,20 +126,3 @@
 
   </div> 
 </div> -->
-
-<form ng-submit="update_password()" role="form">
-  <div class="form-group">
-    <label>Password</label>
-    <input type="password" name="email" ng-model="passwordResetForm.current_password" required="required" class="form-control"/>
-  </div>
-  <div class="form-group">
-    <label>New Password</label>
-    <input type="password" name="email" ng-model="passwordResetForm.password" required="required" class="form-control"/>
-  </div>
-  <div class="form-group">
-    <label>Confirm Password</label>
-    <input type="password" name="email" ng-model="passwordResetForm.password_confirmation" required="required" class="form-control"/>
-  </div>
-
-  <button type="submit" class="btn btn-primary btn-lg">Request password reset</button>
-</form>

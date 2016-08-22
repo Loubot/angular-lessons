@@ -85,6 +85,11 @@ angular.module('lessons').config ($stateProvider, $urlRouterProvider) ->
     templateUrl: 'static/how_it_works.html'
     controller: "UserController"
 
+  $stateProvider.state 'reset_password',
+    url: '/reset-password'
+    templateUrl: 'password/reset_password.html'
+    controller: "PasswordController"
+
 
   $stateProvider.state 'admin',
     url: "/admin"
@@ -93,9 +98,9 @@ angular.module('lessons').config ($stateProvider, $urlRouterProvider) ->
 
   
 
-angular.module('lessons').config ( $authProvider, RESOURCES ) ->
+angular.module('lessons').config ( $authProvider ) ->
   $authProvider.configure({
-    apiUrl: RESOURCES.DOMAIN
+    apiUrl: '/api'
   })
 
 ############## Theme #######################################
