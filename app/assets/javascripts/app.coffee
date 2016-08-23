@@ -85,11 +85,17 @@ angular.module('lessons').config ($stateProvider, $urlRouterProvider) ->
     templateUrl: 'static/how_it_works.html'
     controller: "UserController"
 
+  # $stateProvider.state 'reset_password',
+  #   url: '/reset-password'
+  #   templateUrl: 'password/reset_password.html'
+  #   controller: "PasswordController"
+
   $stateProvider.state 'reset_password',
-    url: '/reset-password'
-    templateUrl: 'password/reset_password.html'
+    url: '/reset-password/:client_id/:config/:expiry/:reset_password/:token'
+    templateUrl: 'password/receive_password.html'
     controller: "PasswordController"
 
+# http://localhost:3000/#/reset-password?client_id=5qzNUaA__3Qlx9zrMEIygA&config=default&expiry=&reset_password=true&token=SqUXWqRNNxqceN1KYFNy&uid=lllouis@yahoo.com
 
   $stateProvider.state 'admin',
     url: "/admin"

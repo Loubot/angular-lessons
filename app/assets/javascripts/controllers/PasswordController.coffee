@@ -5,11 +5,13 @@ angular.module('lessons').controller( "PasswordController", [
   "$rootScope"
   "$auth"
   "$http"
-  ( $scope, $rootScope, $auth, $http ) ->
+  "$stateParams"
+  ( $scope, $rootScope, $auth, $http, $stateParams ) ->
     console.log "PasswordController"
-
-    $scope.requestPasswordReset = ->
-      $auth.requestPasswordReset($scope.pwdResetForm).then((resp) ->
+    console.log $stateParams
+    $scope.requestPasswordReset = ( pwdResetForm ) ->
+      console.log pwdResetForm
+      $auth.requestPasswordReset(pwdResetForm).then((resp) ->
         console.log resp
         return
       ).catch (resp) ->
