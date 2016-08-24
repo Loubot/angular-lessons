@@ -91,8 +91,8 @@ angular.module('lessons').config ($stateProvider, $urlRouterProvider) ->
   #   controller: "PasswordController"
 
   $stateProvider.state 'reset_password',
-    url: '/reset-password/:client_id/:config/:expiry/:reset_password/:token'
-    templateUrl: 'password/receive_password.html'
+    url: '/reset-password/:client_id/:config/:expiry/:reset_password/:token/:uid/:redirect_url'
+    templateUrl: 'password/reset_password.html'
     controller: "PasswordController"
 
 # http://localhost:3000/#/reset-password?client_id=5qzNUaA__3Qlx9zrMEIygA&config=default&expiry=&reset_password=true&token=SqUXWqRNNxqceN1KYFNy&uid=lllouis@yahoo.com
@@ -107,6 +107,8 @@ angular.module('lessons').config ($stateProvider, $urlRouterProvider) ->
 angular.module('lessons').config ( $authProvider ) ->
   $authProvider.configure({
     apiUrl: '/api'
+    passwordResetPath:       '/auth/password'
+    passwordUpdatePath:      '/auth/password'
   })
 
 ############## Theme #######################################

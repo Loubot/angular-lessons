@@ -1,6 +1,8 @@
 class TeacherMailer < Devise::Mailer
+  require 'pp'
   def reset_password_instructions(record, token, opts={})
-    puts "record: #{record.first_name} token: #{token} opts: #{opts}  #{:reset_password_instructions}"
+    pp record.reset_password_token
+    puts "record: #{record} token: #{token} opts: #{opts}  #{:reset_password_instructions}"
     p "<a href=#{ opts[:redirect_url] }>Reset password</a></html>)"
     @token = token    
     #devise_mail(record, :reset_password_instructions, opts)
@@ -11,7 +13,7 @@ class TeacherMailer < Devise::Mailer
        :subject=> "Password reset",  
        :from_name=> "Learn Your Lesson",  
        :text=> %Q(<html>Reset your password  <br>
-                <a href="#{ opts[:redirect_url] }?client_id=5qzNUaA__3Qlx9zrMEIygA&config=default&expiry=&reset_password=true&token=#{ token }&uid=#{opts[:email]}">Reset Password</a>),
+                <a href="http://localhost:3000?client_id=5qzNUaA__3Qlx9zrMEIygA&config=default&expiry=&reset_password=true&token=#{ record.reset_password_token }&uid=#{opts[:email]}">Reset Password</a>),
                 # <a href='#{ opts[:redirect_url] }'>Reset password</a>), 
        :to=>[  
          {  
@@ -21,7 +23,8 @@ class TeacherMailer < Devise::Mailer
        ],  
        :html=> %Q(<html>Reset your password  <br>
 
-                <a href="#{ opts[:redirect_url] }?client_id=5qzNUaA__3Qlx9zrMEIygA&config=default&expiry=&reset_password=true&token=#{ token }&uid=#{opts[:email]}">Reset Password</a>),
+                <a href="http://localhost:3000/#/reset-password/5qzNUaA__3Qlx9zrMEIygA/default/expiry/true/#{ record.reset_password_token }/#{opts[:email]}/#{ opts[:redirect_url]}">Reset Password</a>),
+                # <a href="#{ opts[:red#/irect_url] }?client_id=5qzNUaA__3Qlx9zrMEIygA&config=default&expiry=&reset_password=true&token=#{ record.reset_password_token }&uid=#{opts[:email]}">Reset Password</a>),
        :from_email=> "alan@learnyourlesson.ie"  
       }
       async = false
