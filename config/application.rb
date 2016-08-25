@@ -25,7 +25,7 @@ module AngularLessons
     config.assets.paths << Rails.root.join("app","javascripts","views")
     # config.assets.paths << Rails.root.join("vendor","assets","bower_components","bootstrap-sass-official","assets","fonts")
 
-    config.action_mailer.default_url_options = { host: 'http://localhost:3000' }
+    
 
     # Do not swallow errors in after_commit/after_rollback callbacks.
     config.active_record.raise_in_transactional_callbacks = true
