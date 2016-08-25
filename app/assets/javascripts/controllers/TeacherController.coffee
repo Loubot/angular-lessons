@@ -12,7 +12,8 @@ angular.module('lessons').controller('TeacherController', [
   '$auth'
   'Upload'
   '$mdBottomSheet'
-  ( $scope, $rootScope, $state, RESOURCES, USER, alertify, COMMS, $stateParams, $auth, Upload, $mdBottomSheet ) ->
+  '$mdDialog'
+  ( $scope, $rootScope, $state, RESOURCES, USER, alertify, COMMS, $stateParams, $auth, Upload, $mdBottomSheet, $mdDialog ) ->
     console.log "TeacherController"
     $scope.photos = null
     # alertify.success "Got subjects"
@@ -244,4 +245,41 @@ angular.module('lessons').controller('TeacherController', [
 
 
     ####################### end of sheets ################################
+
+
+    ####################### Password #####################################
+    $scope.open_change_password = ->
+      console.log "Hup"
+      $mdDialog.show(
+        templateUrl: "dialogs/change_password.html"
+        openFrom: '#left'
+        closeTo: '#right'
+        scope: $scope
+        preserveScope: true
+
+      )
+
+    $scope.closeDialog = ->
+      $mdDialog.hide()
+
+    $scope.change_password = ->
+      $auth.updatePassword($scope.update_password).then((resp) ->
+        console.log resp
+        return
+      ).catch (resp) ->
+        console.log resp
+        return
+
+    $scope.$on 'auth:password-change-success', (ev) ->
+      alertify.success 'Your password has been successfully updated!'
+      $scope.closeDialog()
+      $scope.update_password = null
+      return
+
+    $scope.$on 'auth:password-change-error', (ev, reason) ->
+      $scope.closeDialog()
+      $scope.update_password = null
+      alertify.error 'Registration failed: ' + reason.errors[0]
+      return
+    ####################### End of password ##############################
 ])

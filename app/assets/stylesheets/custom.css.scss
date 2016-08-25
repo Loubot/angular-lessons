@@ -40,7 +40,7 @@ html, body{
 }
 
 .grey_green_background{
-  background-color: #d7eacb;
+  background-color: #d7eacb !important;
 }
 
 .blue_background{
@@ -283,6 +283,10 @@ html, body{
 .main_page{
   background-color: #e0ebf4;
   // height: 100% !important;
+}
+
+.match_background{
+  background-color: #e0ebf4 !important;
 }
 
 .subject_search{
