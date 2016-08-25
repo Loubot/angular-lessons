@@ -7,41 +7,24 @@ angular.module('lessons').controller( "PasswordController", [
   "$http"
   "$stateParams"
   "$state"
-  ( $scope, $rootScope, $auth, $http, $stateParams, $state ) ->
+  "alertify"
+  ( $scope, $rootScope, $auth, $http, $stateParams, $state, alertify ) ->
     console.log "PasswordController"
     console.log $stateParams
+    $scope.disable_button = false
     $scope.requestPasswordReset = ( pwdResetForm ) ->
+      $scope.disable_button = true
       console.log pwdResetForm
       $auth.requestPasswordReset(pwdResetForm).then((resp) ->
         console.log resp
+
         return
       ).catch (resp) ->
         console.log resp
         return
 
-
-      
-      # $http(
-      #   url: "/api/auth/password"
-      #   method: "POST"
-      #   headers: { 
-      #       "Content-Type": "application/json"
-      #     }
-      #   params:
-      #     email: "lllouis@yahoo.com"
-      #     # redirect_url: "/api/auth/password"
-      #     password: 
-      #       email: "lllouis@yahoo.com"
-      #       # redirect_url: "/api/auth/password"
-
-      # ).then( ( resp ) ->
-      #   console.log resp
-      # ).catch( ( err ) ->
-      #   console.log err
-      # )
-
     $scope.$on 'auth:password-reset-request-success', (ev, data) ->
-      alert 'Password reset instructions were sent to ' + data.email
+      alertify.success 'Password reset instructions were sent to ' + data.email
       console.log ev
       console.log data
       return
@@ -72,7 +55,7 @@ angular.module('lessons').controller( "PasswordController", [
         return
 
     $scope.$on 'auth:password-change-success', (ev) ->
-      alert 'Your password has been successfully updated!'
+      alertify.success 'Your password has been successfully updated!'
       return
     $scope.$on 'auth:password-change-error', (ev, reason) ->
       alert 'Registration failed: ' + reason.errors[0]
