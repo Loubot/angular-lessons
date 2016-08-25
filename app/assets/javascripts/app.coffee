@@ -85,13 +85,22 @@ angular.module('lessons').config ($stateProvider, $urlRouterProvider) ->
     templateUrl: 'static/how_it_works.html'
     controller: "UserController"
 
+  $stateProvider.state "pl",
+    url: "api/auth/password/edit"
+    templateUrl: "password/reset_password.html"
+    controller: "PasswordController"
+
+  $stateProvider.state "change_password",
+    url: "/change-password"
+    templateUrl: "password/change_password.html"
+    controller: "PasswordController"
   # $stateProvider.state 'reset_password',
   #   url: '/reset-password'
   #   templateUrl: 'password/reset_password.html'
   #   controller: "PasswordController"
 
   $stateProvider.state 'reset_password',
-    url: '/reset-password/:client_id/:config/:expiry/:reset_password/:token/:uid/:redirect_url'
+    url: '/reset-password/'
     templateUrl: 'password/reset_password.html'
     controller: "PasswordController"
 
