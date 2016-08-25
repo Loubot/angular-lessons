@@ -1,8 +1,7 @@
 class TeacherMailer < Devise::Mailer
   require 'pp'
   def reset_password_instructions(record, token, opts={})
-    p root_url 
-    p root_path
+    p root_url
     pp record.reset_password_token
     puts "record: #{record} token: #{token} opts: #{opts}  #{:reset_password_instructions}"
     p "<a href=#{ opts[:redirect_url] }>Reset password</a></html>)"
