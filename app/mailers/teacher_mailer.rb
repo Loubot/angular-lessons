@@ -8,6 +8,8 @@ class TeacherMailer < Devise::Mailer
     p
     p "blablablabla"
     p URI.encode( opts[:redirect_url] )
+
+    p %Q("#{ root_url }api/auth/password/edit?config=default&redirect_url=#{ URI.encode( opts[:redirect_url] ) }&reset_password_token=#{ token }")
     
     pp record.reset_password_token
     puts "record: #{record} token: #{token} opts: #{opts}  #{:reset_password_instructions}"
