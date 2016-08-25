@@ -167,7 +167,7 @@ angular.module('lessons').controller('TeacherController', [
         console.log resp
         $scope.experience = resp.data.experience
         alertify.success "Experience added"
-        $scope.experience.description = null
+        # $scope.experience.description = null
 
       ).catch( ( err ) ->
         console.log err
