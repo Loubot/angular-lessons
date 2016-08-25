@@ -11,9 +11,6 @@ class TeacherMailer < Devise::Mailer
 
     p %Q("#{ root_url }api/auth/password/edit?config=default&redirect_url=#{ URI.encode( opts[:redirect_url] ) }&reset_password_token=#{ token }")
     
-    pp record.reset_password_token
-    puts "record: #{record} token: #{token} opts: #{opts}  #{:reset_password_instructions}"
-    p "<a href=#{ opts[:redirect_url] }>Reset password</a></html>)"
     @token = token    
     #devise_mail(record, :reset_password_instructions, opts)
     begin
@@ -51,3 +48,7 @@ end
 
 
 # <p><a href="http://localhost:3000/api/auth/password/edit?config=default&redirect_url=http%3A%2F%2Flocalhost%3A3000%2F%23%2Freset-password%2F&reset_password_token=iBYSdkgPRMSBCfvxtePj">Change my password</a></p>
+
+
+##http://angular-lessons.herokuapp.com/api/auth/password/edit?config=default&redirect_url=https://angular-lessons.herokuapp.com/%23/reset-password&reset_password_token=g5vaCzYuXiTxVZRQ_MPM
+#https://angular-lessons.herokuapp.com/?client_id=Sh2xa7INjooHV6suhNz9fQ&config=default&expiry=&reset_password=true&token=L5xIg73ycqHKNMJVeSJmWA&uid=lllouis%40yahoo.com#/change-password
