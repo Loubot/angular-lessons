@@ -29,10 +29,10 @@ angular.module('lessons').controller( "PasswordController", [
       #     }
       #   params:
       #     email: "lllouis@yahoo.com"
-      #     # redirect_url: "http://localhost:3000/#/reset-password///////"
+      #     # redirect_url: "/api/auth/password"
       #     password: 
       #       email: "lllouis@yahoo.com"
-      #       # redirect_url: "http://localhost:3000/#/reset-password///////"
+      #       # redirect_url: "/api/auth/password"
 
       # ).then( ( resp ) ->
       #   console.log resp

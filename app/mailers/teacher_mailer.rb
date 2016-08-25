@@ -13,7 +13,7 @@ class TeacherMailer < Devise::Mailer
        :subject=> "Password reset",  
        :from_name=> "Learn Your Lesson",  
        :text=> %Q(<html>Reset your password  <br>
-                <a href="http://localhost:3000?client_id=5qzNUaA__3Qlx9zrMEIygA&config=default&expiry=&reset_password=true&token=#{ record.reset_password_token }&uid=#{opts[:email]}">Reset Password</a>),
+                <p><a href="http://localhost:3000/api/auth/password/edit?config=default&redirect_url=http%3A%2F%2Flocalhost%3A3000%2F%23%2Freset-password%2F&reset_password_token=#{ token }">Change my password</a></p>),
                 # <a href='#{ opts[:redirect_url] }'>Reset password</a>), 
        :to=>[  
          {  
@@ -23,7 +23,7 @@ class TeacherMailer < Devise::Mailer
        ],  
        :html=> %Q(<html>Reset your password  <br>
 
-                <a href="http://localhost:3000/#/reset-password/5qzNUaA__3Qlx9zrMEIygA/default/expiry/true/#{ record.reset_password_token }/#{opts[:email]}/#{ opts[:redirect_url]}">Reset Password</a>),
+                <p><a href="http://localhost:3000/api/auth/password/edit?config=default&redirect_url=http%3A%2F%2Flocalhost%3A3000%2F%23%2Freset-password%2F&reset_password_token=#{ token }">Change my password</a></p>),
                 # <a href="#{ opts[:red#/irect_url] }?client_id=5qzNUaA__3Qlx9zrMEIygA&config=default&expiry=&reset_password=true&token=#{ record.reset_password_token }&uid=#{opts[:email]}">Reset Password</a>),
        :from_email=> "alan@learnyourlesson.ie"  
       }
@@ -39,6 +39,5 @@ class TeacherMailer < Devise::Mailer
   end
 end
 
-# http://localhost:3000/#/teachers/password/edit?reset_password_token=yay5s7yqAaBj1osHKDD1
-# http://localhost:3000/?client_id=5qzNUaA__3Qlx9zrMEIygA&config=default&expiry=&reset_password=true&token=v_Uy3f9OM_C4ykSGpigomA&uid=lllouis%40yahoo.com#/view-teacher/10
-# http://localhost:3000/#/reset-password?client_id=5qzNUaA__3Qlx9zrMEIygA&config=default&expiry=&reset_password=true&token=v_Uy3f9OM_C4ykSGpigomA&uid=lllouis@yahoo.com#%2F
+
+# <p><a href="http://localhost:3000/api/auth/password/edit?config=default&redirect_url=http%3A%2F%2Flocalhost%3A3000%2F%23%2Freset-password%2F&reset_password_token=iBYSdkgPRMSBCfvxtePj">Change my password</a></p>
