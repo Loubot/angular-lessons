@@ -1,13 +1,29 @@
 class SubjectController < ApplicationController
   before_action :authenticate_teacher!, only: [ :add_subject ]
   require 'pp'
-  def index
+  
 
+
+  def create
+    subject = Subject.new( create_subject_params )
+    if subject.save
+      render json: { subjects: Subject.all }, status: 201
+    else
+      render json: { errors: subject.errors }, status: 422
+    end
+  end
+
+
+  def destroy
+
+  end
+
+  def index
     # subjects = Subject.all
-    subjects = Subject.where('name ILIKE ?', "%#{ params[:search] }%")
+    subjects = Subject.where('name LIKE ?', "%#{ params[:search] }%")
+    subjects = Subject.all if subjects.length == 0
     pp subjects
-    render :json =>
-      subjects.to_json
+    render json: { subjects: subjects.as_json }, status: 200
   end
 
   def add_subject
@@ -42,6 +58,10 @@ class SubjectController < ApplicationController
   private
     def subject_params
       params.permit( teacher: [:name, :id], subject: [:id] )
+    end
+
+    def create_subject_params
+      params.permit( :category_id, :subject, :name )
     end
 
 end

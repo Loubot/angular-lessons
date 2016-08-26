@@ -1,0 +1,12 @@
+<md-dialog aria-label="List dialog">
+  <md-dialog-content>
+    <md-list>
+      <md-list-item ng-repeat="category in categories">
+        <p>{{ category.name }}</p>
+      </md-list-item>
+    </md-list>
+  </md-dialog-content>
+  <md-dialog-actions>
+    <md-button ng-click="close_dialog()" class="md-primary">Close Dialog</md-button>
+  </md-dialog-actions>
+</md-dialog>

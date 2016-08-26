@@ -6,7 +6,8 @@ angular.module('lessons').controller('AdminController', [
   "USER"
   "COMMS"
   "alertify"
-  ( $scope, $rootScope, USER, COMMS, alertify ) ->
+  "$mdDialog"
+  ( $scope, $rootScope, USER, COMMS, alertify, $mdDialog ) ->
     console.log "AdminController"
 
     USER.get_user().then( ( resp ) ->
@@ -41,7 +42,7 @@ angular.module('lessons').controller('AdminController', [
     $scope.create_subject = ->
       console.log $scope.subject.category
       COMMS.POST(
-        "/teacher/#{ $rootScope.USER.id }/category/#{ $scope.subject.category }/create-subject"
+        "/teacher/#{ $rootScope.USER.id }/category/#{ $scope.subject.category }/subject"
         $scope.subject
       ).then( ( resp ) ->
         console.log resp
@@ -50,4 +51,42 @@ angular.module('lessons').controller('AdminController', [
         console.log err
         alertify.error "Failed to create subject"
       )
+
+    $scope.delete_category = ->
+
+
+
+    ######################### Dialogs ####################################
+
+    $scope.edit_categories = ->
+      $mdDialog.show(
+        templateUrl: "dialogs/category_dialog.html"
+        scope: $scope
+        preserveScope: true
+        
+      )
+
+    $scope.edit_subjects = ->
+      $mdDialog.show(
+        templateUrl: "dialogs/subject_dialog.html"
+        scope: $scope
+        preserveScope: true
+        onComplete: ->
+          console.log 'hup'
+          COMMS.GET(
+            "/subject"
+          ).then( ( resp ) ->
+            console.log resp
+            alertify.success "Got subjects"
+            $scope.subjects = resp.data.subjects
+          ).catch( ( err ) ->
+            console.log err
+            alertify.error "Failed to get subjects"
+          )      
+      )
+
+
+    $scope.close_dialog = ->
+      $mdDialog.hide()
+
 ])
