@@ -55,6 +55,10 @@ angular.module('lessons').controller('AdminController', [
     $scope.delete_category = ->
 
 
+    $scope.update_subject = ( a, b ) ->
+      console.log a
+      console.log b
+      
 
     ######################### Dialogs ####################################
 
@@ -88,5 +92,6 @@ angular.module('lessons').controller('AdminController', [
 
     $scope.close_dialog = ->
       $mdDialog.hide()
+
 
 ])

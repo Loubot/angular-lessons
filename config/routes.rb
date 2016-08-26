@@ -35,7 +35,7 @@ Rails.application.routes.draw do
 
     end
     resources :conversation,        only: [ :create, :index ]
-    resources :subject,             only: [ :index ]
+    resources :subject,             only: [ :index, :update ]
   end
 
 

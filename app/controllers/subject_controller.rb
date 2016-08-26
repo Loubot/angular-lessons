@@ -13,6 +13,15 @@ class SubjectController < ApplicationController
     end
   end
 
+  def update
+    subject = Subject.find( params[:id] )
+    if subject.update_attributes( create_subject_params )
+      render json: { subjects: Subject.all }, status: 204
+    else
+      render json: { errors: subject.errors }, status: 422
+    end
+  end
+
 
   def destroy
 

@@ -2,7 +2,18 @@
   <md-dialog-content>
     <md-list>
       <md-list-item ng-repeat="subject in subjects">
-        <p>{{ subject.name }}</p>
+        <p ng-click="edit_item=true">{{ subject.name }}</p>
+
+        <div>
+          <form ng-if="edit_item"  ng-submit="update_subject()">
+            <span>
+              <input ng-model="new_subject" placeholder="{{subject.name}}" >
+              <i class="material-icons" ng-click="update_subject( new_subject, subject.id )">done</i>
+            </span>
+            
+          </form>
+        </div>
+        
       </md-list-item>
     </md-list>
   </md-dialog-content>
