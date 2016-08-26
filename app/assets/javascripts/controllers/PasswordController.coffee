@@ -30,13 +30,14 @@ angular.module('lessons').controller( "PasswordController", [
       return
 
     $scope.$on 'auth:password-reset-request-error', (ev, resp) ->
-      alert 'Password reset request failed: ' + resp.errors[0]
+      alertify.error 'Password reset request failed: ' + resp.errors[0]
       console.log ev
       console.log resp
       return
 
     $rootScope.$on 'auth:password-reset-confirm-success', ->
-      alert 'it worked'
+      alertify.success "Temporary log in successful."
+      alertify.success "Please change your password immediately"
       $state.go "change_password"
       return
 
