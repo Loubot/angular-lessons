@@ -8,8 +8,9 @@ class TeacherMailer < Devise::Mailer
     p
     p "blablablabla"
     p URI.encode( opts[:redirect_url] )
-
-    p %Q("#{ root_url }api/auth/password/edit?config=default&redirect_url=#{ URI.encode( opts[:redirect_url] ) }&reset_password_token=#{ token }")
+    url = "#{ root_url }api/auth/password/edit?config=default&redirect_url=#{ URI.encode( opts[:redirect_url] ) }&reset_password_token=#{ URI.encode( token ) }"
+    
+    p url
     
     @token = token    
     #devise_mail(record, :reset_password_instructions, opts)
@@ -20,7 +21,7 @@ class TeacherMailer < Devise::Mailer
        :subject=> "Password reset",  
        :from_name=> "Learn Your Lesson",  
        :text=> %Q(<html>Reset your password  <br>
-                <p><a href="#{ root_url }api/auth/password/edit?config=default&redirect_url=#{ URI.encode( opts[:redirect_url] ) }&reset_password_token=#{ token }">Change my password</a></p>),
+                <p><a href="#{ url }">Change my password</a></p>),
                 # <a href='#{ opts[:redirect_url] }'>Reset password</a>), 
        :to=>[  
          {  
@@ -30,7 +31,7 @@ class TeacherMailer < Devise::Mailer
        ],  
        :html=> %Q(<html>Reset your password  <br>
 
-                <p><a href="#{ root_url }api/auth/password/edit?config=default&redirect_url=#{ URI.encode( opts[:redirect_url] ) }&reset_password_token=#{ token }">Change my password</a></p>),
+                <p><a href="#{ url }">Change my password</a></p>),
                 # <a href="#{ opts[:red#/irect_url] }?client_id=5qzNUaA__3Qlx9zrMEIygA&config=default&expiry=&reset_password=true&token=#{ record.reset_password_token }&uid=#{opts[:email]}">Reset Password</a>),
        :from_email=> "alan@learnyourlesson.ie"  
       }
