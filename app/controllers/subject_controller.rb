@@ -16,7 +16,7 @@ class SubjectController < ApplicationController
   def update
     subject = Subject.find( params[:id] )
     if subject.update_attributes( create_subject_params )
-      render json: { subjects: Subject.all }, status: 204
+      render json: { subjects: Subject.all }, status: 200
     else
       render json: { errors: subject.errors }, status: 422
     end

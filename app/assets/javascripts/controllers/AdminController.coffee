@@ -56,9 +56,20 @@ angular.module('lessons').controller('AdminController', [
 
 
     $scope.update_subject = ( a, b ) ->
-      console.log a
-      console.log b
-      
+      COMMS.PUT(
+        "/subject/#{ b }"
+        name: a
+      ).then( ( resp ) ->
+        console.log resp
+        alertify.success "Update subject successfully"
+        $scope.subjects = resp.data.subjects
+        $scope.edit_item = false
+      ).catch( ( err ) ->
+        console.log err
+        alertify.error "Failed to update subjects"
+        $scope.edit_item = false
+      )
+
 
     ######################### Dialogs ####################################
 
