@@ -29,7 +29,7 @@ class SubjectController < ApplicationController
 
   def index
     # subjects = Subject.all
-    subjects = Subject.where('name LIKE ?', "%#{ params[:search] }%")
+    subjects = Subject.where('name ILIKE ?', "%#{ params[:search] }%")
     subjects = Subject.all if subjects.length == 0
     pp subjects
     render json: { subjects: subjects.as_json }, status: 200
