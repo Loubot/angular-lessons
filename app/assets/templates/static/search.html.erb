@@ -1,16 +1,24 @@
-<md-toolbar hide-sm>
-  <div class="md-toolbar-tools" style="background-color:rgb(250, 250, 250) !important;" >
-    <p ng-click="search_nav()"><i class="material-icons">search</i> Refine</p>
-  </div>
-</md-toolbar>
+
+
+<div hide-gt-xs>
+  <md-toolbar>
+    <div class="md-toolbar-tools" style="background-color:rgb(250, 250, 250) !important;" >
+      <p ng-click="search_nav()"><i class="material-icons">search</i> Refine</p>
+    </div>
+  </md-toolbar>
+</div>
 
 <div layout="row">
 
-  <md-sidenav  md-component-id="search_nav" class="md-sidenav-left height_75" md-is-locked-open="$mdMedia('gt-xs')">
+  <md-sidenav  
+          md-component-id="search_nav" 
+          class="md-sidenav-left height_75" 
+          md-is-locked-open="$mdMedia('gt-xs')"
+          md-is-open="search_nav_opened">
     
     <form ng-submit="search_teachers()" name="searchForm">
       <p>Change your search</p>
-      <md-chips>
+      <md-chips >
         <md-chip ng-show="selected.subject_name">{{ selected.subject_name }}</md-chip>
         <md-chip ng-show="selected.county_name">{{ selected.county_name }}</md-chip>
         
@@ -62,7 +70,7 @@
       </md-input-container>
 <br>
       
-        <md-button ng-click="search_nav()">Close search</md-button>
+        <md-button ng-click="search_nav()" hide-gt-xs>Close search</md-button>
       
     </form>
     
@@ -114,3 +122,4 @@
 
 
 
+{{ search_nav_opened}}
