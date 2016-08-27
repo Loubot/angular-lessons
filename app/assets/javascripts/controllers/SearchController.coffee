@@ -8,7 +8,8 @@ angular.module('lessons').controller( 'SearchController', [
   "$filter"
   "COMMS"
   "alertify"
-  ( $scope, $rootScope, $state, $stateParams, $filter, COMMS, alertify ) ->
+  "$mdSidenav"
+  ( $scope, $rootScope, $state, $stateParams, $filter, COMMS, alertify, $mdSidenav ) ->
     console.log "SearchController"
     
     console.log $stateParams
@@ -92,5 +93,6 @@ angular.module('lessons').controller( 'SearchController', [
         { notify: false }
       )
 
-
+    $scope.search_nav = ->
+      $mdSidenav('search_nav').toggle()
 ])
