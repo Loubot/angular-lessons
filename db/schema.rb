@@ -112,12 +112,13 @@ ActiveRecord::Schema.define(version: 20160827125309) do
     t.string   "email"
     t.string   "first_name"
     t.string   "last_name"
+    t.string   "calendar_id"
     t.text     "overview"
     t.boolean  "is_teacher",             default: false
     t.text     "tokens"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "admin"
+    t.boolean  "admin",                  default: false
     t.integer  "view_count",             default: 0
   end
 
