@@ -8,6 +8,15 @@ class CategoryController < ApplicationController
     render json: { categories: Category.all.as_json }
   end
 
+  def update
+    category = Category.find( params[:id] )
+    if category.update_attributes( category_params )
+      render json: { categories: Category.all.as_json }, status: 200
+    else
+      render json: { errors: category.errors.as_json }, status: 422
+    end
+  end
+
   # def create_subject
   #   subject = Subject.create( category_params )
   #   render json: { subjects: Subject.all.as_json }

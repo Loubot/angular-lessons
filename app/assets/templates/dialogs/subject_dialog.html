@@ -12,7 +12,7 @@
             <form ng-if="edit_item"  ng-submit="update_subject()">
               <span>
                 <input ng-model="new_subject" placeholder="{{subject.name}}" >
-                <i class="material-icons" ng-click="update_subject( new_subject, subject.id )">done</i>
+                <i class="material-icons green_text" ng-click="update_subject( new_subject, subject.id )">done</i>
               </span>
               
             </form>

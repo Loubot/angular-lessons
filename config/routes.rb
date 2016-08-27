@@ -27,13 +27,16 @@ Rails.application.routes.draw do
       resources :qualification,       only: [ :create, :destroy ]
       resources :location,            only: [ :create, :destroy ] 
       resources :photos,              only: [ :create, :destroy ]
-      resources :category,            only: [ :create, :index, :destroy ]  do
-        resources :subject,             only: [ :create, :destroy ]
-      end
+      
 
 
 
     end
+    
+    resources :category,            only: [ :create, :update, :index, :destroy ]  do
+      resources :subject,             only: [ :create, :destroy ]
+    end
+
     resources :conversation,        only: [ :create, :index ]
     resources :subject,             only: [ :index, :update ]
   end

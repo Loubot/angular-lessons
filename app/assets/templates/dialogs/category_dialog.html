@@ -2,7 +2,21 @@
   <md-dialog-content>
     <md-list>
       <md-list-item ng-repeat="category in categories">
-        <p>{{ category.name }}</p>
+        <div layout="column">
+          <div flex>
+            <p ng-click="edit_item=true">{{ category.name }}</p>
+          </div>
+
+          <div flex>
+            <form ng-if="edit_item"  ng-submit="update_category()">
+              <span>
+                <input ng-model="new_category" placeholder="{{category.name}}" >
+                <i class="material-icons green_text" ng-click="update_category( new_category, category.id )">done</i>
+              </span>
+              
+            </form>
+          </div>
+        </div>
       </md-list-item>
     </md-list>
   </md-dialog-content>

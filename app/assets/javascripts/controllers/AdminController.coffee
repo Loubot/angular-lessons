@@ -12,7 +12,7 @@ angular.module('lessons').controller('AdminController', [
 
     USER.get_user().then( ( resp ) ->
       COMMS.GET(
-          "/teacher/#{ $rootScope.USER.id }/category"
+          "/category"
         ).then( ( resp ) ->
           console.log resp
           alertify.success "Got categories"
@@ -55,10 +55,25 @@ angular.module('lessons').controller('AdminController', [
     $scope.delete_category = ->
 
 
-    $scope.update_subject = ( a, b ) ->
+    $scope.update_category = ( name, id ) ->
       COMMS.PUT(
-        "/subject/#{ b }"
-        name: a
+        "/category/#{ id }"
+        name: name
+      ).then( ( resp ) ->
+        console.log resp
+        alertify.success "Update category ok"
+        $scope.categories = resp.data.categories
+      ).catch( ( err ) ->
+        console.log err
+        alertify.error "Couldn't update category"
+
+      )
+
+
+    $scope.update_subject = ( name, id ) ->
+      COMMS.PUT(
+        "/subject/#{ id }"
+        name: name
       ).then( ( resp ) ->
         console.log resp
         alertify.success "Update subject successfully"
