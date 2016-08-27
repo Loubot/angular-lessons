@@ -3,13 +3,14 @@
 
 
     <div class="white_text center_text" layout="row" layout-align="center"  >
-      <h1><span class="header_font">Learn Your Lesson</span> <br>is your place to connect with local teachers on guitar,<br> piano, drums or anything else musical</h1>
+      <h1><span class="header_font">Learn Your Lesson</span> 
+        <span hide-xs><br>is your place to connect with local teachers on guitar,<br> piano, drums or anything else musical</span></h1>
     </div> <!-- end of white_text -->
 
     <form  layout="row" layout-align="center center" flex>          
           
         
-      <div layout="row">
+      <div layout="row" layout-xs="column">
         <div flex>
             <md-autocomplete 
               md-selected-item="selected_subject" 
@@ -31,8 +32,8 @@
 
         </div>
 
-        <div layout="row" layout-align="center center" flex>
-          <input name="location" class="black_text subject_search" ng-model="searchText.location" required  placeholder=" County?">     
+        <div  layout-align="center center" flex>
+          <input name="location" class="black_text subject_search"  ng-model="searchText.location" required  placeholder=" County?">     
         </div>
 
         
@@ -46,14 +47,14 @@
     
   </div> <!-- end of main_page_search_container -->
 
-  <div layout="row" layout-margin flex >
+  <div layout="row"  layout-margin flex >
     
     <md-content class="grey_green_background how_it_works" >
       <div layout="column" class="center_text">
         <h1 class="green_text" flex="100">How it works</h1><br><br>
         <h4 flex="100">From finding the perfect teacher to managing bookings and scheduling lessons - we take care of all the details, so you can focus on learning. <a ui-sref="how_it_works"></a></h4> <br>
       </div>
-      <div layout="row" >
+      <div layout="row" layout-xs="column" >
         
         <div class="center_text " flex>
           <%= image_tag 'search_for_a_teacher.jpg' %>

@@ -297,6 +297,7 @@ html, body{
   -moz-border-radius: 50px;
   border-radius: 50px;
   max-width: 200px !important;
+  min-width: 200px !important;
   background-color: #FFF;
 }
 
@@ -316,16 +317,7 @@ html, body{
   background-repeat: no-repeat;
 }
 
-.main_page_search_container{
-  min-height: 400px;
-  background-image: asset_url('piano.jpg');
-  -moz-background-size: 100% 100%;
-  -webkit-background-size: 100% 100%;
-  background-size: 100% 100%;
-  background-repeat: no-repeat;
-  // padding: 0 100px !important;
 
-}
 
 .not_transparent{
   rgba: ( 0, 0, 0, 1 )
@@ -522,3 +514,29 @@ html, body{
 
 // End of messages
 
+
+
+@media (min-width: 250px){
+  .main_page_search_container{
+    min-height: 30em;
+    background-image: asset_url('portrait_piano.jpg');
+      -moz-background-size: 100% 100%;
+    -webkit-background-size: 100% 100%;
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    
+  }
+}
+
+@media ( min-width: 768px ){
+  .main_page_search_container{
+    min-height: 400px;
+    background-image: asset_url('piano.jpg');
+    -moz-background-size: 100% 100%;
+    -webkit-background-size: 100% 100%;
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    // padding: 0 100px !important;
+
+  }
+}
