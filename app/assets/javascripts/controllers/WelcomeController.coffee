@@ -22,8 +22,8 @@ angular.module('lessons').controller('WelcomeController', [
     winheight = $(window).height()
     fullheight = $(document).height()
 
-    if $stateParams.message?
-      alertify.delay(0).closeLogOnClick(true).log($stateParams.message + " Click to dismiss")
+    # if $stateParams.message?
+    #   alertify.delay(0).closeLogOnClick(true).log($stateParams.message + " Click to dismiss")
    
 
     animate_elems = ->

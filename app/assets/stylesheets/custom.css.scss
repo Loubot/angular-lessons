@@ -9,6 +9,22 @@ html, body{
   color: #FFF !important;
 }
 
+.white_placeholder::-webkit-input-placeholder { /* WebKit, Blink, Edge */
+    color:    #FFF;
+}
+.white_placeholder:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+   color:    #FFF;
+   opacity:  1;
+}
+.white_placeholder::-moz-placeholder { /* Mozilla Firefox 19+ */
+   color:    #FFF;
+   opacity:  1;
+}
+.white_placeholder:-ms-input-placeholder { /* Internet Explorer 10-11 */
+   color:    #FFF;
+}
+
+
 .green_text{
   color: #548235;
 }
