@@ -5,20 +5,25 @@ angular.module('lessons').controller('WelcomeController', [
   '$rootScope'
   '$state'
   '$filter'
+  '$stateParams'
   'USER'
   '$mdSidenav'
   'alertify'
   '$auth'
   'COMMS'
   '$window'
-  ( $scope, $rootScope, $state, $filter, USER, $mdSidenav, alertify, $auth, COMMS, $window ) ->
+  ( $scope, $rootScope, $state, $filter, $stateParams, USER, $mdSidenav, alertify, $auth, COMMS, $window ) ->
     console.log "WelcomeController"
+
     $elems = $('.animateblock')
     $scope.subject = {}
     $scope.searchText = {}
     $scope.subjects = []
     winheight = $(window).height()
     fullheight = $(document).height()
+
+    if $stateParams.message?
+      alertify.delay(0).closeLogOnClick(true).log($stateParams.message + " Click to dismiss")
    
 
     animate_elems = ->

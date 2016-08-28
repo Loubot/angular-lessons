@@ -41,7 +41,7 @@ angular.module('lessons').config ($stateProvider, $urlRouterProvider) ->
   $urlRouterProvider.otherwise "/"
 
   $stateProvider.state 'welcome',
-    url: '/'
+    url: '/:message'
     templateUrl: "static/welcome.html"
     controller: "WelcomeController"
 
