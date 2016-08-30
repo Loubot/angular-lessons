@@ -145,6 +145,21 @@ angular.module('lessons').controller( "TeacherLocationController" , [
         alertify.error err.errors.full_messages
       )
 
+    ################## Delete location ########################
+    $scope.delete_location = ->
+      COMMS.DELETE(
+        "/teacher/#{ $rootScope.USER.id }/location/#{ $rootScope.USER.location.id }"
+      ).then( ( resp ) ->
+        console.log resp
+        alertify.success "Deleted location successfully"
+        $rootScope.USER.location = null
+      ).catch( ( err ) ->
+        console.log err
+        alertify.error "Failed to delete location"
+      )
+
+    ################## End of delete location ################
+
     ######### open location_sheet ########################
     $scope.open_location_sheet = ->
       console.log 'location sheet'
