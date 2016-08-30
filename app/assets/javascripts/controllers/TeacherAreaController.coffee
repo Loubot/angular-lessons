@@ -283,7 +283,7 @@ angular.module('lessons').controller('TeacherAreaController', [
         $scope.event_creation_form.end_date.$error.not_the_same = false
      
       
-      
+      console.log $scope.calendar_event_details.student_email
       resource = {
         'summary': "Lesson with #{ $scope.calendar_event_details.student_email }" if $scope.calendar_event_details.student_email?
         # location: $rootScope.USER.location.address if $rootScope.USER.location?
@@ -303,6 +303,7 @@ angular.module('lessons').controller('TeacherAreaController', [
         'resource': resource
       ).execute( ( event ) ->
         console.log event
+        $mdDialog.hide()
       )
     
       

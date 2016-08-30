@@ -42,13 +42,26 @@
 
       <md-divider class="margin_b_10"></md-divider>
       <md-input-container md-no-float>
+        <label>Title</label>
+        <textarea ng-model="calendar_event_details.summary" 
+                  aria-label="Event title" 
+                  md-maxlength="200" 
+                  rows="4" 
+                  md-select-on-focus
+                  placeholder="Enter event title"
+                  required>
+        </textarea>
+      </md-input-container>
+
+      <md-input-container md-no-float>
         <label>Description</label>
         <textarea ng-model="calendar_event_details.description" 
                   aria-label="Event description" 
                   md-maxlength="200" 
                   rows="4" 
                   md-select-on-focus
-                  placeholder="Enter event description">
+                  placeholder="Enter event description"
+                  required>
         </textarea>
       </md-input-container>
       

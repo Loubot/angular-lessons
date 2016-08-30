@@ -60,6 +60,11 @@ angular.module('lessons').config ($stateProvider, $urlRouterProvider) ->
     templateUrl: "user/view_teacher.html"
     controller: "ViewTeacherController"
 
+  $stateProvider.state 'register_teacher',
+    url: "/register-teacher"
+    templateUrl: "static/register.html"
+    controller: "RegisterController"
+
   $stateProvider.state 'teacher_area',
     url: "/teacher-area/:id/:student_email"
     templateUrl: "user/teacher_area.html"
@@ -74,11 +79,6 @@ angular.module('lessons').config ($stateProvider, $urlRouterProvider) ->
     url: "/conversation/:random/:id"
     templateUrl: "conversation/messages.html"
     controller: "ConversationController"
-
-  $stateProvider.state 'register',
-    url: "/register"
-    templateUrl: "static/register.html"
-    controller: "RegisterController"
 
   $stateProvider.state 'how_it_works',
     url: '/how-it-works'
