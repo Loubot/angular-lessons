@@ -26,7 +26,10 @@
       </md-card-actions> -->
       <md-card-content>
         <md-card-actions layout="row" layout-align="end center">
-          <md-button class="md-raised md-warn" ng-click="delete_location()">Delete this location?</md-button>
+          <md-button class="md-raised md-warn" 
+                      ng-click="delete_location()"
+                      ng-if="USER.location"
+                      >Delete this location?</md-button>
         </md-card-actions>
 
       </md-card-content>

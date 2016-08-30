@@ -123,7 +123,7 @@ angular.module('lessons').controller('TeacherController', [
         console.log resp
         # alertify.success "Got subjects"
         $scope.search_subjects = resp.data
-        return resp.data
+        return resp.data.subjects
       ).catch( ( err ) ->
         console.log err
         alertify.error "Failed to get subjects"

@@ -273,13 +273,6 @@ html, body{
   padding: 0px 20px;
 }
 
-.gutter_75{
-  min-width: 75% !important;
-  max-width: 75%;
-  margin-left: auto !important;
-  margin-right: auto !important;
-}
-
 .gutter_85{
   min-width: 85% !important;
   max-width: 85%;
@@ -546,6 +539,13 @@ html, body{
     background-repeat: no-repeat;
     
   }
+
+  .gutter_75{
+    min-width: auto;
+    max-width: auto;
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
 }
 
 @media ( min-width: 768px ){
@@ -558,5 +558,11 @@ html, body{
     background-repeat: no-repeat;
     // padding: 0 100px !important;
 
+  }
+  .gutter_75{
+    min-width: 75% !important;
+    max-width: 75%;
+    margin-left: auto !important;
+    margin-right: auto !important;
   }
 }
