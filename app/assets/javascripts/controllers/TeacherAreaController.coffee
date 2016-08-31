@@ -79,6 +79,25 @@ angular.module('lessons').controller('TeacherAreaController', [
 
 
     ###################### google auth ###############################
+
+    fetch_events = ->
+      gapi.client.calendar.events.list(
+        'calendarId': "#{ $scope.calendar_id }"
+      ).execute( ( resp ) ->
+        console.log "Calendar list"
+        # console.log resp
+        if resp.error?  
+          alertify.error "Couldn't load your calendar"
+          $scope.calendar_id = null
+        else
+
+          console.log "List events"
+
+          format_events( resp.items )
+          $scope.create_event_button_bool = true
+          $scope.$digest()
+      )
+
     check_if_calendar_exists = ( calendars ) ->
       console.log calendars
       calendar_exists = false
@@ -93,22 +112,7 @@ angular.module('lessons').controller('TeacherAreaController', [
       if calendar_exists
         alertify.success "Found your calendar"
         console.log $scope.calendar_id
-        gapi.client.calendar.events.list(
-          'calendarId': "#{ $scope.calendar_id }"
-        ).execute( ( resp ) ->
-          console.log "Calendar list"
-          # console.log resp
-          if resp.error?  
-            alertify.error "Couldn't load your calendar"
-            $scope.calendar_id = null
-          else
-
-            console.log "List events"
-
-            format_events( resp.items )
-            $scope.create_event_button_bool = true
-            $scope.$digest()
-        )
+        fetch_events()
       else
         alertify.error "Couldn't find your calender"
         console.log "Can't find calendar"
@@ -303,6 +307,7 @@ angular.module('lessons').controller('TeacherAreaController', [
         'resource': resource
       ).execute( ( event ) ->
         console.log event
+        fetch_events()
         $mdDialog.hide()
       )
     

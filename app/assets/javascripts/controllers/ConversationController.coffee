@@ -38,24 +38,27 @@ angular.module('lessons').controller('ConversationController', [
           $scope.conversations =  resp.data.conversations if resp.data.conversations?
 
           if $scope.conversation?
-            alertify.success "Got conversation"
+            alertify.success "Got conversations"
           else
-            alertify.error "Failed to find messages"
+            alertify.error "Failed to find conversations"
           scroll_to_bottom()
         ).catch( ( err ) ->
           console.log err
           alertify.error "Failed to get conversation"
         )
     
-    user_listener = $rootScope.$watch "USER", ->
-      console.log "Changed"
-      fetch_conversations()
+    # user_listener = $rootScope.$watch "USER", (newValue, oldValue) ->
+    #   console.log newValue
+    #   console.log oldValue
+    #   console.log "Changed"
+    #   if $state.current.name == "conversation"
+        # fetch_conversations()
 
 
 
     USER.get_user().then( ( user ) ->
       alertify.success "Got user"
-      
+      fetch_conversations()
 
     ).catch( ( err ) ->
       alertify.error "Failed to get user"
@@ -70,7 +73,7 @@ angular.module('lessons').controller('ConversationController', [
         conversation_id: id
       ).then( ( resp ) ->
         console.log resp
-        alertify.success "Got conversations"
+        alertify.success "Got conversation"
         $scope.conversation = resp.data.conversation
         scroll_to_bottom()
       ).catch( ( err ) ->
