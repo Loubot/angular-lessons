@@ -3,9 +3,9 @@
 <div id="map"></div>
 
 
-<md-content layout="row" layout-xs="column" layout-margin flex="auto" class="map_results">
-  <div flex="50" flex-xs="100" ng-show="addresses">
-    <md-content   class="fancy">
+<md-content layout="row" ng-show="addresses" layout-xs="column" layout-margin flex="50" class="map_results">
+  <div flex="50" flex-xs="100" >
+    <md-content   class="fancy" >
       <md-list ng-cloak>
         <md-subheader class="md-no-sticky">Select your address</md-subheader>
         <form class="location_results ">
@@ -15,20 +15,31 @@
           </md-list-item>
           
         </form>
-        <md-button type="submit" class="md-raised md-primary white_text" ng-click="update_address()">Update address</md-button>
-        <md-button class="md-raised md-warn white_text" ng-click="open_location_sheet()">Or enter manually</md-button>
+        
       </md-list>
     </md-content>
+    
   </div>
 
-  <div flex="50" flex-xs="100">
-    <%= image_tag 'location_search.png', class: 'percent_10_w' %>
-    <h4>{{ USER.location.address || "Awaiting your address" }}</h4>
-    <md-button class="md-raised md-warn" 
-                      ng-click="delete_location()"
-                      ng-if="USER.location"
-                      >Delete this location?</md-button>
-  </div>
+ 
 
   
 </md-content>
+
+<div ng-if="addresses" layout-margin style="background-color:#fff;">
+  <md-button type="submit" class="md-raised md-primary white_text" ng-click="update_address()">Update address</md-button>
+  <md-button class="md-raised md-warn white_text" ng-click="open_location_sheet()">Or enter manually</md-button>
+</div>
+
+<div ng-hide="addresses">
+  <md-content>
+    <div flex="50" flex-xs="100">
+      <%= image_tag 'location_search.png', class: 'percent_10_w' %>
+      <h4>{{ USER.location.address || "Awaiting your address" }}</h4>
+      <md-button class="md-raised md-warn" 
+                        ng-click="delete_location()"
+                        ng-if="USER.location"
+                        >Delete this location?</md-button>
+    </div>
+  </md-content>
+</div>

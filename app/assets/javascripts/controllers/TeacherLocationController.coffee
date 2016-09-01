@@ -57,8 +57,12 @@ angular.module('lessons').controller( "TeacherLocationController" , [
           console.log status
           $scope.addresses = results
           $scope.$apply()
-          alertify.logPosition("top left").success("Select your address from the list by checking the box next to it")
-          alertify.logPosition("top left").success("""If you don't see your address then click "Enter manually" and type it in yourself """)
+
+          $mdToast.showSimple "Select your address from the list by checking the box next to it"
+          $mdToast.showSimple """If you don't see your address then click "Enter manually" and type it in yourself """
+          # alertify.logPosition("top left")
+          # alertify.log("Select your address from the list by checking the box next to it")
+          # alertify.log("""If you don't see your address then click "Enter manually" and type it in yourself """)
 
         )
       )
@@ -75,7 +79,8 @@ angular.module('lessons').controller( "TeacherLocationController" , [
           lng: places[0].geometry.location.lng()
         )
         $scope.map.setZoom( 15 )
-        alertify.delay(10000).log("Click on the map to locate your address")
+        $mdToast.showSimple "Click on the map to locate your address"
+        # alertify.log("Click on the map to locate your address")
       )
     ).catch( ( err ) ->
       console.log err
@@ -92,7 +97,7 @@ angular.module('lessons').controller( "TeacherLocationController" , [
     $scope.updateSelection = (position, addresses) ->
       $scope.selected_address = addresses[position] #this is the address tha user wants to save. Uploaded in update_address
       console.log addresses[position]
-      alertify.delay(10000).log("Click Update address to save this address");
+      $mdToast.showSimple("Click Update address to save this address");
       angular.forEach addresses, (address, index) ->
         if position != index
           address.checked = false
