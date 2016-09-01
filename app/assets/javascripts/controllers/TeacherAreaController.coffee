@@ -9,10 +9,10 @@ angular.module('lessons').controller('TeacherAreaController', [
   'USER'
   'alertify'
   'COMMS'
-  '$mdPanel'
+  '$mdDialog'
   '$mdpDatePicker'
   '$mdpTimePicker'
-  ( $scope, $rootScope, $state, $stateParams, RESOURCES, USER, alertify, COMMS, $mdPanel, $mdpDatePicker, $mdpTimePicker ) ->
+  ( $scope, $rootScope, $state, $stateParams, RESOURCES, USER, alertify, COMMS, $mdDialog, $mdpDatePicker, $mdpTimePicker ) ->
     console.log "TeacherAreaController"
     $scope.create_event_button_bool = false
 
@@ -250,21 +250,16 @@ angular.module('lessons').controller('TeacherAreaController', [
 
     ####################### Create event##############################
 
-    $scope.create_event = ->
-      $mdPanel.open(
-        templateUrl: "panels/test.html"
-      )
-
+    # $scope.create_event = ->      
+    $mdDialog.show(
+      scope: $scope
+      preserveScope: true
+      templateUrl: "dialogs/calendar_event_dialog.html"
+      openFrom: 'left'
+      closeTo: 'right'
+      escapeToClose: true
       
-      # $mdDialog.show(
-      #   scope: $scope
-      #   preserveScope: true
-      #   templateUrl: "dialogs/calendar_event_dialog.html"
-      #   openFrom: 'left'
-      #   closeTo: 'right'
-      #   escapeToClose: true
-        
-      # )
+    )
 
 
     $scope.submit_event_details = ->
@@ -274,7 +269,7 @@ angular.module('lessons').controller('TeacherAreaController', [
       start_date_time.minute( moment( $scope.calendar_event_details.start_time ).format( 'mm' ) )
       console.log start_date_time.toString()
 
-      end_date_time = moment( $scope.calendar_event_details.end_date )
+      end_date_time = moment( $scope.calendar_event_details.start_date )
       end_date_time.hour( moment( $scope.calendar_event_details.end_time ).format( "HH" ) )
       end_date_time.minute( moment( $scope.calendar_event_details.end_time).format( "mm" ) )
       console.log end_date_time.toString()

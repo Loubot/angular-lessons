@@ -556,6 +556,10 @@ html, body{
     margin-left: auto !important;
     margin-right: auto !important;
   }
+
+  .calendar_dialog{
+    width: 100% !important;
+  }
 }
 
 @media ( min-width: 768px ){
@@ -574,5 +578,9 @@ html, body{
     max-width: 75%;
     margin-left: auto !important;
     margin-right: auto !important;
+  }
+
+  .calendar_dialog{
+    width: 75% !important;
   }
 }

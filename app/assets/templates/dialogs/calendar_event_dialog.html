@@ -1,5 +1,5 @@
-<div class="width_75">
-  <md-dialog>
+<div class="calendar_dialog ">
+  <md-dialog class="md-dialog-fullscreen">
     <form name="event_creation_form" ng-submit="submit_event_details()">
 
       
@@ -19,21 +19,20 @@
           </mdp-date-picker >
         </div>
 
+        
+
+      </div> <!-- end of row -->
+
+      <div layout="row">
+        
         <div flex>
+          <label>Start time:</label>
           <mdp-time-picker mdp-auto-switch="true" ng-model="calendar_event_details.start_time" aria-label="event start time" ng-required="true">
           </mdp-time-picker >
         </div>
 
-      </div>
-
-      <div layout="row">
         <div flex>
-          <mdp-date-picker mdp-placeholder="Date" ng-model="calendar_event_details.end_date" name="end_date" aria-label="event end date" ng-required="true">
-            
-          </mdp-date-picker>
-        </div>
-
-        <div flex>
+          <label>End time:</label>
           <mdp-time-picker mdp-auto-switch="true" ng-model="calendar_event_details.end_time" aria-label="event end time" ng-required="true">
 
           </mdp-time-picker>
@@ -66,7 +65,7 @@
       </md-input-container>
       
       <md-input-container>
-        <input type="submit" value="Create event" class="md-button blue_button width_25 float_right" aria-label="Create event">
+        <input type="submit" value="Create" class="md-button blue_button width_25 float_right" aria-label="Create event">
       </md-input-container>
       
     </form>
