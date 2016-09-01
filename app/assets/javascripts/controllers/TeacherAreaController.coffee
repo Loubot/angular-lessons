@@ -250,7 +250,12 @@ angular.module('lessons').controller('TeacherAreaController', [
     
 
     ####################### Create event##############################
-    $mdToast.showSimple("hello")
+    toast = $mdToast.simple(
+      textContent: "hello"
+      hideDelay: 0
+    )
+
+    $mdToast.show toast
     $scope.create_event = ->      
       $mdDialog.show(
         scope: $scope
