@@ -38,8 +38,7 @@ angular.module('lessons').directive 'scroll', ($window) ->
 
 
 angular.module('lessons').config ($stateProvider, $urlRouterProvider) ->
-  $urlRouterProvider.otherwise "/"
-
+  
   $stateProvider.state 'welcome',
     url: '/:message'
     templateUrl: "static/welcome.html"
@@ -62,7 +61,7 @@ angular.module('lessons').config ($stateProvider, $urlRouterProvider) ->
 
   $stateProvider.state 'register_teacher',
     url: "/register-teacher"
-    templateUrl: "static/register.html"
+    templateUrl: "static/register_teacher.html"
     controller: "RegisterController"
 
   $stateProvider.state 'teacher_area',
@@ -94,22 +93,19 @@ angular.module('lessons').config ($stateProvider, $urlRouterProvider) ->
     url: "/change-password"
     templateUrl: "password/change_password.html"
     controller: "PasswordController"
-  # $stateProvider.state 'reset_password',
-  #   url: '/reset-password'
-  #   templateUrl: 'password/reset_password.html'
-  #   controller: "PasswordController"
 
   $stateProvider.state 'reset_password',
     url: '/reset-password/'
     templateUrl: 'password/reset_password.html'
     controller: "PasswordController"
 
-# http://localhost:3000/#/reset-password?client_id=5qzNUaA__3Qlx9zrMEIygA&config=default&expiry=&reset_password=true&token=SqUXWqRNNxqceN1KYFNy&uid=lllouis@yahoo.com
-
   $stateProvider.state 'admin',
     url: "/admin"
     templateUrl: "admin/manage.html"
     controller: "AdminController"
+
+  $urlRouterProvider.otherwise "/"
+
 
   
 

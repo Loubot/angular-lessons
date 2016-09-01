@@ -9,10 +9,10 @@ angular.module('lessons').controller('TeacherAreaController', [
   'USER'
   'alertify'
   'COMMS'
-  '$mdDialog'
+  '$mdPanel'
   '$mdpDatePicker'
   '$mdpTimePicker'
-  ( $scope, $rootScope, $state, $stateParams, RESOURCES, USER, alertify, COMMS, $mdDialog, $mdpDatePicker, $mdpTimePicker ) ->
+  ( $scope, $rootScope, $state, $stateParams, RESOURCES, USER, alertify, COMMS, $mdPanel, $mdpDatePicker, $mdpTimePicker ) ->
     console.log "TeacherAreaController"
     $scope.create_event_button_bool = false
 
@@ -72,7 +72,7 @@ angular.module('lessons').controller('TeacherAreaController', [
             # allDay: true
 
         $scope.eventSource = bla
-        alertify.success "Loaded #{ events.length } events"
+        alertify.success "Loaded #{ events.length } event(s)"
         $scope.create_event_button_bool = true
         $scope.$apply()
 
@@ -251,16 +251,20 @@ angular.module('lessons').controller('TeacherAreaController', [
     ####################### Create event##############################
 
     $scope.create_event = ->
-      
-      $mdDialog.show(
-        scope: $scope
-        preserveScope: true
-        templateUrl: "dialogs/calendar_event_dialog.html"
-        openFrom: 'left'
-        closeTo: 'right'
-        escapeToClose: true
-        
+      $mdPanel.open(
+        templateUrl: "panels/test.html"
       )
+
+      
+      # $mdDialog.show(
+      #   scope: $scope
+      #   preserveScope: true
+      #   templateUrl: "dialogs/calendar_event_dialog.html"
+      #   openFrom: 'left'
+      #   closeTo: 'right'
+      #   escapeToClose: true
+        
+      # )
 
 
     $scope.submit_event_details = ->
@@ -289,7 +293,7 @@ angular.module('lessons').controller('TeacherAreaController', [
       
       console.log $scope.calendar_event_details.student_email
       resource = {
-        'summary': "Lesson with #{ $scope.calendar_event_details.student_email }" if $scope.calendar_event_details.student_email?
+        'summary': "Lesson with #{ $scope.calendar_event_details.student_email }" if $scope.calendar_event_details.student_email? and $scope.calendar_event_details.student_email != ""
         # location: $rootScope.USER.location.address if $rootScope.USER.location?
         'description': $scope.calendar_event_details.description
         'start': {

@@ -54,14 +54,14 @@
                  <!-- Use floating label instead of placeholder -->
                  <label>First Name</label>
                  <md-icon class="name"></md-icon>
-                 <input ng-model="teacher.first_name" type="text" required class="black_text">
+                 <input ng-model="teacher.first_name" type="text" name="first name" required class="black_text">
                </md-input-container>
 
                <md-input-container class="md-icon-float md-block black_text" >
                  <!-- Use floating label instead of placeholder -->
                  <label>Last Name</label>
                  <md-icon class="name"></md-icon>
-                 <input ng-model="teacher.last_name" type="text" class="black_text" required>
+                 <input ng-model="teacher.last_name" type="text" name="last name" class="black_text" required>
                </md-input-container>
 
                <!-- <md-input-container class="md-block">
@@ -72,17 +72,17 @@
                <md-input-container class="md-block">
                  <!-- Use floating placeholder instead of label -->
                  <md-icon  class="email"></md-icon>
-                 <input ng-model="teacher.email" type="email" placeholder="Email (required)"  class="black_text" required>
+                 <input ng-model="teacher.email" type="email" name="email" placeholder="Email (required)"  class="black_text" required>
                </md-input-container>
                
                <md-input-container class="md-block">
                  <!-- Use floating placeholder instead of label -->
                  <md-icon  class="password"></md-icon>
-                 <input ng-model="teacher.password" type="password" placeholder="Password (required)" class="black_text" required>
+                 <input ng-model="teacher.password" type="password" name="password" placeholder="Password (required)" class="black_text" required>
                </md-input-container>
 
                
-               <md-button class="md-primary md-raised not_transparent" type="submit"> 
+               <md-button class="md-primary md-raised not_transparent" name="submit" type="submit"> 
                  Submit
                </md-button>
 

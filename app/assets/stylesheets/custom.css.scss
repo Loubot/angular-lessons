@@ -526,7 +526,17 @@ html, body{
 
 
 // End of messages
+.calendar_container{
+  height: 100% !important;
+}
+#calendar{
+  max-height: 12em !important;
+}
 
+.calendar_buttons{
+  position: absolute;
+  bottom: 20px;
+}
 
 
 @media (min-width: 250px){
