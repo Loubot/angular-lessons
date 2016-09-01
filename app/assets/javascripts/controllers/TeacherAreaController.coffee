@@ -257,8 +257,7 @@ angular.module('lessons').controller('TeacherAreaController', [
       templateUrl: "dialogs/calendar_event_dialog.html"
       openFrom: 'left'
       closeTo: 'right'
-      escapeToClose: true
-      
+      fullscreen: true
     )
 
 
