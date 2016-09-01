@@ -10,9 +10,10 @@ angular.module('lessons').controller('TeacherAreaController', [
   'alertify'
   'COMMS'
   '$mdDialog'
+  '$mdToast'
   '$mdpDatePicker'
   '$mdpTimePicker'
-  ( $scope, $rootScope, $state, $stateParams, RESOURCES, USER, alertify, COMMS, $mdDialog, $mdpDatePicker, $mdpTimePicker ) ->
+  ( $scope, $rootScope, $state, $stateParams, RESOURCES, USER, alertify, COMMS, $mdDialog, $mdToast, $mdpDatePicker, $mdpTimePicker ) ->
     console.log "TeacherAreaController"
     $scope.create_event_button_bool = false
 
@@ -249,16 +250,16 @@ angular.module('lessons').controller('TeacherAreaController', [
     
 
     ####################### Create event##############################
-
-    # $scope.create_event = ->      
-    $mdDialog.show(
-      scope: $scope
-      preserveScope: true
-      templateUrl: "dialogs/calendar_event_dialog.html"
-      openFrom: 'left'
-      closeTo: 'right'
-      fullscreen: true
-    )
+    $mdToast.showSimple("hello")
+    $scope.create_event = ->      
+      $mdDialog.show(
+        scope: $scope
+        preserveScope: true
+        templateUrl: "dialogs/calendar_event_dialog.html"
+        openFrom: 'left'
+        closeTo: 'right'
+        fullscreen: true
+      )
 
 
     $scope.submit_event_details = ->
