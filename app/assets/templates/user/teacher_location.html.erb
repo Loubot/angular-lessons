@@ -3,41 +3,9 @@
 <div id="map"></div>
 
 
-<md-content layout="row" layout-margin flex="auto" class="map_results">
-  <div flex-xs flex-gt-xs="75" >
-    <md-card flex>
-      <%= image_tag 'location_search.png', class: 'percent_10_w' %>
-      <md-card-title>
-        <md-card-title-text>
-          <span class="md-headline">{{ USER.location.address || "Awaiting your address" }}</span>
-        </md-card-title-text>
-      </md-card-title>
-      <!-- <md-card-actions layout="row" layout-align="start center">
-        <md-card-icon-actions>
-          <md-button class="md-icon-button" aria-label="Favorite">
-            s
-          </md-button>
-          <md-button class="md-icon-button" aria-label="Share">
-            b
-          </md-button>
-        </md-card-icon-actions>
-        <md-button>Action 1</md-button>
-        <md-button>Action 2</md-button>
-      </md-card-actions> -->
-      <md-card-content>
-        <md-card-actions layout="row" layout-align="end center">
-          <md-button class="md-raised md-warn" 
-                      ng-click="delete_location()"
-                      ng-if="USER.location"
-                      >Delete this location?</md-button>
-        </md-card-actions>
-
-      </md-card-content>
-    </md-card>
-  </div>
-
-  <div flex-xs flex-gt-xs="50">
-    <md-content  ng-show="addresses" class="fancy">
+<md-content layout="row" layout-xs="column" layout-margin flex="auto" class="map_results">
+  <div flex="50" flex-xs="100" ng-show="addresses">
+    <md-content   class="fancy">
       <md-list ng-cloak>
         <md-subheader class="md-no-sticky">Select your address</md-subheader>
         <form class="location_results ">
@@ -52,4 +20,15 @@
       </md-list>
     </md-content>
   </div>
+
+  <div flex="50" flex-xs="100">
+    <%= image_tag 'location_search.png', class: 'percent_10_w' %>
+    <h4>{{ USER.location.address || "Awaiting your address" }}</h4>
+    <md-button class="md-raised md-warn" 
+                      ng-click="delete_location()"
+                      ng-if="USER.location"
+                      >Delete this location?</md-button>
+  </div>
+
+  
 </md-content>

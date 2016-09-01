@@ -57,8 +57,8 @@ angular.module('lessons').controller( "TeacherLocationController" , [
           console.log status
           $scope.addresses = results
           $scope.$apply()
-          alertify.delay(15000).log("Select your address from the list by checking the box next to it")
-          alertify.delay(20000).log("""If you don't see your address then click "Enter manually" and type it in yourself """)
+          alertify.logPosition("top left").success("Select your address from the list by checking the box next to it")
+          alertify.logPosition("top left").success("""If you don't see your address then click "Enter manually" and type it in yourself """)
 
         )
       )
