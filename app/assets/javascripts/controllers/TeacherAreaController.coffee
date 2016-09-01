@@ -250,12 +250,19 @@ angular.module('lessons').controller('TeacherAreaController', [
     
 
     ####################### Create event##############################
-    toast = $mdToast.simple(
-      textContent: "hello"
-      hideDelay: 0
-    )
+    console.log typeof localStorage.getItem( "calendar_explanation" )
+    if localStorage.getItem( "calendar_explanation" ) != "done"
+   
+      toast = $mdToast.simple(
+        templateUrl: 'toasts/calendar_explain_toast.html'
+        hideDelay: 0
+        scope: $scope
+        preserveScope: true
+        position: "top"
+      )
 
-    $mdToast.show toast
+      $mdToast.show toast
+      localStorage.setItem( "calendar_explanation", "done" )
     $scope.create_event = ->      
       $mdDialog.show(
         scope: $scope
