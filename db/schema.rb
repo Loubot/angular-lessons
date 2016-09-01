@@ -117,7 +117,7 @@ ActiveRecord::Schema.define(version: 20160827125309) do
     t.text     "tokens"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "admin"
+    t.boolean  "admin",                  default: false
     t.integer  "view_count",             default: 0
   end
 
