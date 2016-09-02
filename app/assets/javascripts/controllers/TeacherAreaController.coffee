@@ -274,6 +274,9 @@ angular.module('lessons').controller('TeacherAreaController', [
         clickOutsideToClose: true
       )
 
+    $scope.close_event = ->
+      $mdDialog.hide()
+
 
     $scope.submit_event_details = ->
       console.log $scope.calendar_event_details
