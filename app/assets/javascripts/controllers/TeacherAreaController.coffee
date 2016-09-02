@@ -271,6 +271,7 @@ angular.module('lessons').controller('TeacherAreaController', [
         openFrom: 'left'
         closeTo: 'right'
         fullscreen: true
+        clickOutsideToClose: true
       )
 
 
@@ -287,15 +288,15 @@ angular.module('lessons').controller('TeacherAreaController', [
       console.log end_date_time.toString()
       if start_date_time == end_date_time
         alertify.error "Times are equal"
-        $scope.event_creation_form.end_date.$error.not_the_same = true
+        $scope.event_creation_form.start_date.$error.not_the_same = true
         return false
-      else if !$scope.calendar_event_details.start_date? or !$scope.calendar_event_details.start_time? or !$scope.calendar_event_details.end_date? or !$scope.calendar_event_details.end_time?
+      else if !$scope.calendar_event_details.start_date? or !$scope.calendar_event_details.start_time? or !$scope.calendar_event_details.end_time?
 
         alertify.error "Something not defined"
-        $scope.event_creation_form.end_date.$error.not_the_same = true
+        $scope.event_creation_form.start_date.$error.not_the_same = true
         return false
       else
-        $scope.event_creation_form.end_date.$error.not_the_same = false
+        $scope.event_creation_form.start_date.$error.not_the_same = false
      
       
       console.log $scope.calendar_event_details.student_email

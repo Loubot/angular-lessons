@@ -414,7 +414,7 @@ html, body{
   margin-left: 12px;
   padding: 0 11px 0 13px;
   text-overflow: ellipsis;
-  width: 300px;
+  width: 65%;
 }
 
 #pac-input:focus {
@@ -526,6 +526,8 @@ html, body{
 
 
 // End of messages
+
+// Teacher area
 .calendar_container{
   height: 100% !important;
 }
@@ -538,6 +540,7 @@ html, body{
   bottom: 20px;
 }
 
+// End of Teacher area
 
 @media (min-width: 250px){
   .main_page_search_container{
