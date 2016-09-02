@@ -45,6 +45,15 @@ html, body{
 
 }
 
+md-sidenav.user_menu, 
+md-sidenav.md-locked-open.user_menu, 
+md-sidenav.md-closed.md-locked-open-add-active.user_menu {
+    min-width: 100px !important;
+    width: 50vw !important;
+    max-width: 200px !important;
+    max-height: 50vh !important;
+} 
+
 .opacity_0{
   opacity: 0;
 }
@@ -60,6 +69,10 @@ html, body{
 
 .blue_background{
   background-color: rgb(16,108,200) !important;
+}
+
+.dark_moderate_cyan_background{
+  background-color: #4caf82 !important;
 }
 
 .pale_orange_background{
