@@ -3,9 +3,9 @@
 <div id="map"></div>
 
 
-<md-content layout="row" ng-show="addresses" layout-xs="column" layout-margin flex="50" class="map_results">
-  <div flex="50" flex-xs="100" >
-    <md-content   class="fancy" >
+<div layout="row" layout-xs="column" ng-show="addresses" layout="row" layout-margin flex="100" class="map_results">
+  <div flex="100">
+    <md-content class="fancy" >
       <md-list ng-cloak>
         <md-subheader class="md-no-sticky">Select your address</md-subheader>
         <form class="location_results ">
@@ -18,18 +18,14 @@
         
       </md-list>
     </md-content>
-    
+    <div ng-if="addresses" layout-margin style="background-color:#fff;">
+      <md-button type="submit" class="md-raised md-primary white_text" ng-click="update_address()">Update address</md-button>
+      <md-button class="md-raised md-warn white_text" ng-click="open_location_sheet()">Or enter manually</md-button>
+    </div>
   </div>
-
- 
-
-  
-</md-content>
-
-<div ng-if="addresses" layout-margin style="background-color:#fff;">
-  <md-button type="submit" class="md-raised md-primary white_text" ng-click="update_address()">Update address</md-button>
-  <md-button class="md-raised md-warn white_text" ng-click="open_location_sheet()">Or enter manually</md-button>
 </div>
+
+
 
 <div ng-hide="addresses">
   <md-content>
