@@ -2,7 +2,7 @@
 
 html, body{
   height: 100%;
-  
+  max-width: 100% !important;
 }
 
 .white_text{
@@ -23,7 +23,6 @@ html, body{
 .white_placeholder:-ms-input-placeholder { /* Internet Explorer 10-11 */
    color:    #FFF;
 }
-
 
 .green_text{
   color: #548235;
@@ -295,7 +294,7 @@ html, body{
 
 .main_page{
   background-color: #e0ebf4;
-  // height: 100% !important;
+
 }
 
 .match_background{
@@ -546,7 +545,7 @@ html, body{
   .main_page_search_container{
     min-height: 30em;
     background-image: asset_url('portrait_piano.jpg');
-      -moz-background-size: 100% 100%;
+    -moz-background-size: 100% 100%;
     -webkit-background-size: 100% 100%;
     background-size: 100% 100%;
     background-repeat: no-repeat;

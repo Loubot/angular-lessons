@@ -34,7 +34,7 @@
       </md-fab-speed-dial>
 
 
-      <md-button hide-gt-xs ng-click="user_menu()"><md-icon class="white_text"><i class="material-icons">face</i></md-icon></md-button>
+      <md-button hide-gt-xs ng-click="openLeftMenu(0)"><md-icon class="white_text"><i class="material-icons">face</i></md-icon></md-button>
 
 
 
@@ -51,21 +51,7 @@
   </md-toolbar>
 
   <div class="main_page" layout="column" flex>
-    <!-- ##################### User sidenav ######################## -->
-
-    <md-sidenav md-component-id="user_menu" class="md-sidenav-left">
-      <md-toolbar class="white_text">
-        <h1 ng-if="USER" class="md-toolbar-tools">{{ USER.email }}</h1>
-        <h1 ng-if="!USER" class="md-toolbar-tools">Login or register</h1>
-      </md-toolbar>
-    </md-sidenav>
-
-    <!-- End of user sidenav -->
-
-    <md-sidenav md-component-id="user_menu" class="md-sidenav-left">
-      Left nav
-    </md-sidenav>
-
+    
     <!--#################### Left sidenav ############################-->
     <md-sidenav class="sidenav white_text md-whiteframe=12" md-component-id="left" flex>
        <div  ng-cloak ng-if="!USER">
