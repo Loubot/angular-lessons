@@ -18,13 +18,13 @@ angular.module('lessons').controller('TeacherAreaController', [
     console.log "TeacherAreaController"
     $scope.create_event_button_bool = false
     console.log localStorage.getItem "calendar_explanation"
-    if localStorage.getItem("calendar_explanation") != "done"
-      $mdBottomSheet.show(
-        templateUrl: "sheets/calendar_explanation_sheet.html"
-        clickOutsideToClose: false
-        scope: $scope
-        preserveScope: true
-      )
+    # if localStorage.getItem("calendar_explanation") != "done"
+    $mdBottomSheet.show(
+      templateUrl: "sheets/calendar_explanation_sheet.html"
+      clickOutsideToClose: false
+      scope: $scope
+      preserveScope: true
+    )
     $scope.acknowledge = ->
       $mdBottomSheet.hide()
       # localStorage.setItem "calendar_explanation", "done"
