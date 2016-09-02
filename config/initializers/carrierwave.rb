@@ -13,7 +13,4 @@ if Rails.env.production?
 
     
   end
-  config.validate_unique_filename = false
-  config.validate_filename_format = false
-  config.validate_remote_net_url_format = false # this is important
 end

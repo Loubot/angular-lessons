@@ -54,16 +54,18 @@
   <div class="main_page" layout="column" flex>
     <!-- ################## User left menu ############################# -->
     <md-sidenav ng-if="USER" hide-gt-xs md-component-id="user_menu" class="md-sidenav-left user_menu">
-      <md-toolbar class="dark_moderate_cyan_background white_text">
-        <h1 class="md-toolbar-tools">Sidenav Left</h1>
-      </md-toolbar>
-      <md-button ui-sref="teacher({id:USER.id})" class="md-button md-default-theme green_text">Profile</md-button>
-      <md-button ui-sref="teacher_area({id:USER.id})" class="md-button md-default-theme green_text">Calendar</md-button>
-      <md-button ui-sref="teacher_location({id:USER.id})" class="md-button md-default-theme green_text">Location</md-button>
-      <md-button ui-sref="conversation({id:USER.id})" class="md-button md-default-theme green_text">Messages</md-button>
-      <md-button class="md-button md-default-theme green_blue_text" ng-click="logout()">Logout</md-button>
-      <md-divider></md-divider>
-      <md-icon ng-click="user_menu()"><i class="material-icons">arrow_back</i><md-icon>
+      <div layout="column"  layout-align="center end">
+        <md-toolbar class="dark_moderate_cyan_background white_text">
+          <h1 class="md-toolbar-tools">Sidenav Left</h1>
+        </md-toolbar>
+        <md-button ui-sref="teacher({id:USER.id})" class="md-button md-default-theme green_text">Profile</md-button>
+        <md-button ui-sref="teacher_area({id:USER.id})" class="md-button md-default-theme green_text">Calendar</md-button>
+        <md-button ui-sref="teacher_location({id:USER.id})" class="md-button md-default-theme green_text">Location</md-button>
+        <md-button ui-sref="conversation({id:USER.id})" class="md-button md-default-theme green_text">Messages</md-button>
+        <md-button class="md-button md-default-theme green_blue_text" ng-click="logout()">Logout</md-button>
+        <md-divider></md-divider>
+        <md-icon ng-click="user_menu()"><i class="material-icons">arrow_back</i><md-icon>
+      </div>
     </md-sidenav>
     <!-- ################# End of user left menu ######################### -->
 
