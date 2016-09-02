@@ -11,11 +11,23 @@ angular.module('lessons').controller('TeacherAreaController', [
   'COMMS'
   '$mdDialog'
   '$mdToast'
+  "$mdBottomSheet"
   '$mdpDatePicker'
   '$mdpTimePicker'
-  ( $scope, $rootScope, $state, $stateParams, RESOURCES, USER, alertify, COMMS, $mdDialog, $mdToast, $mdpDatePicker, $mdpTimePicker ) ->
+  ( $scope, $rootScope, $state, $stateParams, RESOURCES, USER, alertify, COMMS, $mdDialog, $mdToast, $mdBottomSheet, $mdpDatePicker, $mdpTimePicker ) ->
     console.log "TeacherAreaController"
     $scope.create_event_button_bool = false
+    console.log localStorage.getItem "calendar_explanation"
+    if localStorage.getItem("calendar_explanation") != "done"
+      $mdBottomSheet.show(
+        templateUrl: "sheets/calendar_explanation_sheet.html"
+        clickOutsideToClose: false
+        scope: $scope
+        preserveScope: true
+      )
+    $scope.acknowledge = ->
+      $mdBottomSheet.hide()
+      # localStorage.setItem "calendar_explanation", "done"
 
     ############### Define event details ###########################
     #https://developers.google.com/apis-explorer/#p/calendar/v3/calendar.events.insert
@@ -250,19 +262,7 @@ angular.module('lessons').controller('TeacherAreaController', [
     
 
     ####################### Create event##############################
-    console.log typeof localStorage.getItem( "calendar_explanation" )
-    if localStorage.getItem( "calendar_explanation" ) != "done"
-   
-      toast = $mdToast.simple(
-        templateUrl: 'toasts/calendar_explain_toast.html'
-        hideDelay: 0
-        scope: $scope
-        preserveScope: true
-        position: "top"
-      )
-
-      $mdToast.show toast
-      localStorage.setItem( "calendar_explanation", "done" )
+    
     $scope.create_event = ->      
       $mdDialog.show(
         scope: $scope
