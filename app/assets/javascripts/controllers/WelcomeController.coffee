@@ -68,6 +68,7 @@ angular.module('lessons').controller('WelcomeController', [
         $state.go("search", { name: $scope.searchText.name, location: $scope.searchText.location })
 
     $scope.subject_picked = ( subject )->
+      console.log "subject picked"
       console.log subject
       if !( Object.keys(subject).length == 0 && subject.constructor == Object )
         $state.go("search", { name: $scope.searchText.name, location: $scope.searchText.location })
