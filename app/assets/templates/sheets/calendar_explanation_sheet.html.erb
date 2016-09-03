@@ -10,7 +10,9 @@
     <br>
     Clicking exit will acknowledge you have read this. 
     <div class="center_text">
-      <md-button ng-click="acknowledge()"><md-icon><i class="material-icons icon_red">cancel</i></md-icon></md-button>
+      <md-button ng-click="acknowledge()" ng-if="api_loaded">
+        <md-icon><i class="material-icons icon_red">cancel</i></md-icon>
+      </md-button>
     </div>
   </div>
 </md-bottom-sheet>

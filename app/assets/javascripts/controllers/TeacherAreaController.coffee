@@ -17,16 +17,20 @@ angular.module('lessons').controller('TeacherAreaController', [
   ( $scope, $rootScope, $state, $stateParams, RESOURCES, USER, alertify, COMMS, $mdDialog, $mdToast, $mdBottomSheet, $mdpDatePicker, $mdpTimePicker ) ->
     console.log "TeacherAreaController"
     $scope.create_event_button_bool = false
-    console.log localStorage.getItem "calendar_explanation"
-    # if localStorage.getItem("calendar_explanation") != "done"
-    $mdBottomSheet.show(
-      templateUrl: "sheets/calendar_explanation_sheet.html"
-      clickOutsideToClose: false
-      scope: $scope
-      preserveScope: true
-    )
+    $scope.api_loaded = false # disable acknowledge calendar button will api is loaded
+
+    if localStorage.getItem("calendar_explanation") != "done"
+      $mdBottomSheet.show(
+        templateUrl: "sheets/calendar_explanation_sheet.html"
+        clickOutsideToClose: false
+        scope: $scope
+        preserveScope: true
+      )
+
+
     $scope.acknowledge = ->
       $mdBottomSheet.hide()
+      load_calendar_api()
       # localStorage.setItem "calendar_explanation", "done"
 
     ############### Define event details ###########################
@@ -174,8 +178,10 @@ angular.module('lessons').controller('TeacherAreaController', [
         $scope.show_auth_button = false
         console.log "Begin calendar api load"
         $scope.$digest()
-        
-        load_calendar_api()
+        $scope.api_loaded = true
+        $scope.$digest()
+        if localStorage.getItem("calendar_explanation") == "done"
+          load_calendar_api()
       else
         $scope.show_auth_button = true
         alertify.confirm "Please log in with google to use the calendar"
