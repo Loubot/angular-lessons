@@ -11,7 +11,7 @@
 #
 
 class Message < ActiveRecord::Base
-  validates :message, :conversation_id, presence: true
+  validates :message, :conversation_id, :sender_email, presence: true
   belongs_to :conversation
 
   

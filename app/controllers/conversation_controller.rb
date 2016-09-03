@@ -13,7 +13,9 @@ class ConversationController < ApplicationController
 
     conversation = Conversation.find_or_create_by( 
       teacher_email: teacher.email,
-      student_email: conversation_params[:conversation][:student_email]
+      teacher_name: current_teacher.first_name,
+      student_email: conversation_params[:conversation][:student_email],
+      student_name: conversation_params[:conversation][:name]
 
     )
 
@@ -36,13 +38,14 @@ class ConversationController < ApplicationController
 
     p "Deliverd #{ delivered }"
 
+
     message = conversation.messages.create(
       message:          params[:conversation][:message],
-      sender_email:     params[:conversation][:sender_email],
+      sender_email:     sender_email,
       conversation_id:  conversation.id
     )
-
-    p "message #{ message }"
+    message.save!
+    pp message
 
     conversation = Conversation.where( id: conversation.id ).includes( :messages ).first
 
