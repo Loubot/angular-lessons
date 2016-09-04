@@ -76,6 +76,8 @@ class ConversationController < ApplicationController
 
     elsif index_params.has_key?( :teacher_email ) && index_params[ :teacher_email ] != ""
       conversations = Conversation.where( teacher_email: index_params[ :teacher_email ] ).includes( :messages )
+      p "Found conversations"
+      pp conversations
       render json: { conversations: conversations.as_json( include: [ :messages ] ) }
 
     elsif index_params.has_key?( :student_email ) && index_params[ :student_email ] != ""
