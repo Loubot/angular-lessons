@@ -5,15 +5,19 @@ angular.module('lessons').controller('ConversationController', [
   "$state"
   "$rootScope"
   "$stateParams"
+  "$mdSidenav"
   "alertify"
   "COMMS"
   "USER"
   "$timeout"
   "$mdDialog"
-  ( $scope, $state, $rootScope, $stateParams, alertify, COMMS, USER, $timeout , $mdDialog) ->
+  ( $scope, $state, $rootScope, $stateParams, $mdSidenav, alertify, COMMS, USER, $timeout , $mdDialog) ->
     console.log "ConversationController"
     console.log $stateParams
     $scope.show_form = false
+
+    $scope.search_conversations = ->
+      $mdSidenav('conversation_search').toggle()
 
     $scope.scrollevent = ( $e ) ->
       
@@ -76,10 +80,14 @@ angular.module('lessons').controller('ConversationController', [
         alertify.success "Got conversation"
         $scope.conversation = resp.data.conversation
         scroll_to_bottom()
+        $scope.search_conversations()
       ).catch( ( err ) ->
         console.log err
         alertify.error "Failed to get conversation"
+        $scope.search_conversations()
       )
+
+
 
     $scope.send_message = ->
       if !$rootScope.USER?
