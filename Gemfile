@@ -37,7 +37,8 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 group :production do
   gem "fog-aws"
   gem 'unicorn'
-  gem 'pg'
+  # gem 'pg'
+  gem 'mysql'
 end
 
 group :development, :test do
