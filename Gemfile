@@ -38,7 +38,7 @@ group :production do
   gem "fog-aws"
   gem 'unicorn'
   # gem 'pg'
-  gem 'mysql'
+  gem 'mysql2'
 end
 
 group :development, :test do
