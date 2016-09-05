@@ -1,7 +1,12 @@
 <div hide-gt-xs>
   <md-toolbar>
     <div class="md-toolbar-tools search_toolbar" >
-      <p ng-click="search_conversations()"><i class="material-icons">search</i></p>
+
+      <md-button ng-click="search_conversations()">
+
+        <md-icon ><i class="material-icons">search</i></md-icon> 
+        Search messages
+      </md-button>
     </div>
   </md-toolbar>
 </div>
@@ -14,8 +19,8 @@
           md-is-open="search_nav_opened">
 
     <md-content class="md-padding">
-      <input placeholder="Search for student" class="margin_b_10">
-      <div  ng-repeat="conversation in conversations" 
+      <input placeholder="Search by name" class="margin_b_10" ng-model="search_text">
+      <div  ng-repeat="conversation in conversations | filter:search_text" 
             ng-click="select_conversation( conversation.id )" 
             class="margin_t_10"
             flex="100">
