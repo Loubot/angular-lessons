@@ -132,8 +132,8 @@ md-sidenav.md-closed.md-locked-open-add-active.user_menu {
 }
 
 .slide{
-  width: 40vw;
-  max-height: 40vw;
+  // width: 40vw;
+  // max-height: 40vw;
 }
 
 .md-media-sm{
@@ -395,7 +395,8 @@ md-sidenav.md-closed.md-locked-open-add-active.user_menu {
 // map
 
 #map { 
-  height: 40%; 
+  height: 40%;
+  min-height: 200px !important;
   width: 100%;
 }
 

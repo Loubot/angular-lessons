@@ -1,7 +1,7 @@
 
 <div>
-  <div layout="row" layout-wrap  flex>
-    <div flex="30" layout-fill>
+  <div layout="row" layout-xs="column" layout-wrap  flex>
+    <div flex="30" flex-xs="100" layout-fill>
       <md-card>
         <md-card-header>
           <md-card-avatar>
@@ -49,11 +49,11 @@
     </div> <!-- end of flex=30 -->
 
 
-    <div flex="70">
+    <div flex="70" flex-xs="100" >
 
 
       <!--  map div -->
-      <div id="map" class="margin_t_10" ng-show="teacher.location"></div>
+      <div flex="100" id="map" class="margin_t_10"  ng-show="teacher.location"></div>
 
       <!-- end of map div -->
 
