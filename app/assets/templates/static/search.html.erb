@@ -12,13 +12,13 @@
 
   <md-sidenav  
           md-component-id="search_nav" 
-          class="md-sidenav-left height_75" 
+          class="md-sidenav-left" 
           md-is-locked-open="$mdMedia('gt-xs')"
           md-is-open="search_nav_opened">
     
     <form ng-submit="search_teachers()" name="searchForm">
       <p>Change your search</p>
-      <md-chips >
+      <md-chips style="min-height:200px !important;">
         <md-chip ng-show="selected.subject_name">{{ selected.subject_name }}</md-chip>
         <md-chip ng-show="selected.county_name">{{ selected.county_name }}</md-chip>
         

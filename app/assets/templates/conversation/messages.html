@@ -38,10 +38,10 @@
 
   <div flex="100" class="height_100" style="overflow-y:hidden;">
 
-    <md-content class="height_70 padding_5 message_container" id="message_container">
+    <md-content class="height_70 padding_5" id="message_container">
       <div layout="column" layout-fill flex>
         <div        class="margin_t_10"
-                    ng-class="{ 'flex-50 flex-offset-45': message.sender_email==USER.email, 'flex-50': message.sender_email!=USER.email }"
+                    ng-class="{ 'flex-offset-45': message.sender_email==USER.email }"
                     ng-repeat="message in conversation.messages">
           <div ng-class="{ 'sender': message.sender_email==USER.email, 'receiver': message.sender_email!=USER.email }">
             
@@ -85,3 +85,6 @@
   
   </div> <!-- end of flex=70 -->
 </div> <!-- end of row -->
+
+
+<!-- ng-class="{ 'flex-offset-45': message.sender_email==USER.email, 'flex-50': message.sender_email!=USER.email }" -->

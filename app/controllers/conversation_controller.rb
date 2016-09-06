@@ -11,13 +11,17 @@ class ConversationController < ApplicationController
       teacher = Teacher.find_by( email: conversation_params[:conversation][:teacher_email] )
     end
 
-    conversation = Conversation.find_or_create_by( 
-      teacher_email: teacher.email,
-      teacher_name: current_teacher.first_name,
-      student_email: conversation_params[:conversation][:student_email],
-      student_name: conversation_params[:conversation][:name]
+    if conversation_params[:conversation][:conversation_id].present?
+      conversation = Conversation.find( conversation_params[:conversation][:conversation_id])
+    else
+      conversation = Conversation.find_or_create_by( 
+        teacher_email: teacher.email,
+        teacher_name: current_teacher.first_name,
+        student_email: conversation_params[:conversation][:student_email],
+        student_name: conversation_params[:conversation][:name]
 
-    )
+      )
+    end
 
     p "got conversation"
     pp conversation.id
@@ -95,7 +99,7 @@ class ConversationController < ApplicationController
 
   private
     def conversation_params
-      params.permit( { conversation: [ :name, :phone, :sender_email, :teacher_email, :teacher_id, :message, :student_email ] }, :teacher_id )
+      params.permit( { conversation: [ :name, :phone, :sender_email, :teacher_email, :teacher_id, :message, :student_email, :conversation_id ] }, :teacher_id )
       # params.permit( :name, :phone, :email, :teacher_id )
 
     end

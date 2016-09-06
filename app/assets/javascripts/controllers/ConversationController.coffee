@@ -100,6 +100,7 @@ angular.module('lessons').controller('ConversationController', [
         $scope.message.sender_email = $rootScope.USER.email
         $scope.message.name = "#{ $rootScope.USER.first_name } #{ $rootScope.USER.last_name }"
         # $scope.message.name = $scope.conversation.student_name
+        $scope.message.conversation_id = $scope.conversation.id
         COMMS.POST(
           "/conversation"
           conversation: $scope.message
