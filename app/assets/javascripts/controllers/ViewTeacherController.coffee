@@ -10,12 +10,13 @@ angular.module('lessons').controller( 'ViewTeacherController', [
   "COMMS"
   "alertify"
   "$mdDialog"
-  "$http"
-  "$auth"
-  ( $scope, $rootScope, $state, $stateParams, USER, $filter, COMMS, alertify, $mdDialog, $http, $auth ) ->
+  ( $scope, $rootScope, $state, $stateParams, USER, $filter, COMMS, alertify, $mdDialog ) ->
     console.log "ViewTeacherController"
 
     $scope.message = {}
+
+    USER.get_user()
+
 
     $scope.scrollevent = ( $e ) ->
       
