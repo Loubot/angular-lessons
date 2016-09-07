@@ -41,13 +41,13 @@ angular.module('lessons').controller('ConversationController', [
         ).then( ( resp ) ->
           console.log resp
 
-          if !$stateParams.random?
+          if !$stateParams.random? or $stateParams.random == ""
             $scope.conversation = resp.data.conversation if resp.data.conversation?
 
             $scope.conversation =   resp.data.conversations[0] if ( resp.data.conversations? && resp.data.conversations.length > 0 )
             $scope.conversations =  resp.data.conversations if resp.data.conversations?
           
-          else if $stateParams.random?
+          else if $stateParams.random? and $stateParams.random != ""
             $scope.conversations = resp.data.conversations
             find_conversation_by_random()
           
