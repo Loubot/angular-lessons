@@ -400,6 +400,10 @@ md-sidenav.md-closed.md-locked-open-add-active.user_menu {
   width: 100%;
 }
 
+#map div{
+  min-height: 200px !important;
+}
+
 .location_results{
   max-height: 200px;
   overflow-y: scroll;
