@@ -19,9 +19,13 @@ angular.module('lessons').controller('ConversationController', [
     $scope.search_conversations = ->
       $mdSidenav('conversation_search').toggle()
 
-    $scope.scrollevent = ( $e ) ->
-      
+    $scope.scrollevent = ( $e ) ->      
       return
+
+    find_conversation_by_random = ->
+      for convo in $scope.conversations
+        $scope.conversation = convo if convo.random == $stateParams.random
+        console.log "found it #{ convo }"
 
     fetch_conversations = ->
       console.log $rootScope.USER.email if $rootScope.USER?
@@ -36,10 +40,18 @@ angular.module('lessons').controller('ConversationController', [
           }
         ).then( ( resp ) ->
           console.log resp
+
+          if !$stateParams.random?
+            $scope.conversation = resp.data.conversation if resp.data.conversation?
+
+            $scope.conversation =   resp.data.conversations[0] if ( resp.data.conversations? && resp.data.conversations.length > 0 )
+            $scope.conversations =  resp.data.conversations if resp.data.conversations?
           
-          $scope.conversation = resp.data.conversation if resp.data.conversation?
-          $scope.conversation =   resp.data.conversations[0] if ( resp.data.conversations? && resp.data.conversations.length > 0 )
-          $scope.conversations =  resp.data.conversations if resp.data.conversations?
+          else if $stateParams.random?
+            $scope.conversations = resp.data.conversations
+            find_conversation_by_random()
+          
+            
 
           if $scope.conversation?
             alertify.success "Got conversations"

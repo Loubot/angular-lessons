@@ -58,16 +58,20 @@ class ConversationController < ApplicationController
 
   def index
     p params
-    if index_params.has_key?( :random ) && index_params[ :random ] != ""
+    # if index_params.has_key?( :random ) && index_params[ :random ] != ""
 
-      conversation = Conversation.where( random: index_params[ :random ] ).includes( :messages ).first
-      p "random convo"
-      pp conversation
-      render json: { conversation: conversation.as_json( include: [ :messages ] ) } 
+    #   conversation = Conversation.where( random: index_params[ :random ] ).includes( :messages ).first
+    #   p "random convo"
+    #   pp conversation
+    #   conversations = Conversation.where(
+    #                                       teacher_email: conversation.teacher_email,
+    #                                       student_email: conversation.student_email
+    #                                       ).includes( :messages )
+    #   render json: { conversations: conversation.as_json( include: [ :messages ] ) } 
 
       
 
-    elsif index_params.has_key?( :conversation_id ) && index_params[ :conversation_id ] != ""
+    if index_params.has_key?( :conversation_id ) && index_params[ :conversation_id ] != ""
       conversation = Conversation.where( id: index_params[ :conversation_id ] ).includes( :messages ).first
 
       render json: { conversation: conversation.as_json( include: [ :messages ] ) }
