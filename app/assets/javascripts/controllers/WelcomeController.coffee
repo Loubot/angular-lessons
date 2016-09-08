@@ -16,9 +16,10 @@ angular.module('lessons').controller('WelcomeController', [
     console.log "WelcomeController"
 
     $elems = $('.animateblock')
-    $scope.subject = {}
-    $scope.searchText = {}
-    $scope.subjects = []
+    $scope.selected = {}
+    $scope.selected.subject_name = $stateParams.name
+    $scope.selected.county_name = $stateParams.location
+    $scope.selected_subject = $stateParams.name
     winheight = $(window).height()
     fullheight = $(document).height()
 
@@ -56,30 +57,62 @@ angular.module('lessons').controller('WelcomeController', [
     USER.get_user()
 
 
-    $scope.search_subjects = ( subject ) ->
-      console.log subject.name
-      console.log $filter('filter')( $scope.subjects_list, subject.name )
-      $scope.search_subjects = $filter('filter')( $scope.subjects_list, subject.name )
+    $scope.search_teachers = ->
+      COMMS.GET(
+        "/search"
+        $scope.selected
+      ).then( ( resp ) ->
+        console.log resp
+        alertify.success "Found #{ resp.data.teachers.length } teacher(s)"
+        $scope.teachers = resp.data.teachers
+      ).catch( ( err ) ->
+        console.log err
+        alertify.error "Failed to find teachers"
+      )
+
+    if $stateParams.name? or $stateParams.location
+      $scope.search_teachers()
 
 
     $scope.search = ->
       console.log "search"
-      if !( Object.keys($scope.searchText).length == 0 && $scope.subject.constructor == Object )
-        $state.go("search", { name: $scope.searchText.name, location: $scope.searchText.location })
+      if $scope.selected.subject_name.length > 0
+      
+        $state.go("search", { name: $scope.selected.subject_name, location: $scope.selected.county_name })
 
     $scope.subject_picked = ( subject )->
-      console.log "subject picked"
-      console.log subject
-      if !( Object.keys(subject).length == 0 && subject.constructor == Object )
-        $state.go("search", { name: $scope.searchText.name, location: $scope.searchText.location })
+      
+      if $scope.selected.subject_name?
+        console.log subject
+        $scope.selected.subject_name = subject
+        
+
+    $scope.county_picked = ( county )->
+      if $scope.selected.county_name?
+        $scope.selected.county_name = county
+        
 
     define_subjects = ( subjects ) ->
-      $scope.subjects_list = []
+      $scope.master_subjects_list = []
       for subject in subjects
-        $scope.subjects_list.push( subject.name )
+        $scope.master_subjects_list.push( subject.name )
 
-      console.log $scope.subjects_list
+      # console.log $scope.subjects_list
+
+    $scope.search_subjects = ( subject ) ->
+      $scope.subjects_list = $scope.master_subjects_list
+      console.log subject
+      # console.log $filter('filter')( $scope.subjects_list, subject.name )
+      $scope.subjects_list = $filter('filter')( $scope.subjects_list, subject )
+      # $filter('filter')( $scope.subjects_list, subject )
+
      
+
+    $scope.search_counties = ( county ) ->
+      console.log county
+      console.log $filter('filter')( $scope.county_list, county )
+      $scope.counties = $filter('filter')( $scope.county_list, county )
+
 
     $scope.county_list = ['Antrim','Armagh','Carlow','Cavan','Clare','Cork','Derry','Donegal','Down','Dublin',
           'Fermanagh','Galway','Kerry','Kildare','Kilkenny','Laois','Leitrim','Limerick','Longford',
@@ -93,7 +126,7 @@ angular.module('lessons').controller('WelcomeController', [
       $scope.subjects_list = resp.data.subjects
       define_subjects( resp.data.subjects )
     ).catch( ( err ) ->
-      console.log err
+      console.log resp
     )
 
 ])

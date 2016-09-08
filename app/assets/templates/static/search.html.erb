@@ -26,16 +26,16 @@
       </md-chips>
       <div layout-gt-sm="column" flex>
         <md-autocomplete 
+
             md-selected-item="selected.subject_name" 
-            md-search-text="searchText.name" 
-            md-items="subject in search_subjects( searchText )" 
-            md-item-text="subject"
-            class="black_text" 
-            placeholder="Subject?"
-            md-selected-item="subject"
-            md-floating-label="Subject?"
-            md-delay="1000"
+            md-input-name="subject"
+            md-search-text="searchText.subject_name"
+            md-search-text-change="search_subjects( searchText.subject_name )"
+            md-items="subject in subjects_list" 
+            md-item-text="subject" 
+            md-floating-label="Subject"            
             md-selected-item-change="subject_picked( subject )"
+            ng-model-options="{ debounce: 500 }"
             md-min-length="2">
           <md-item-template>
             <span md-highlight-text="searchText">{{subject}}</span>
@@ -122,4 +122,4 @@
 
 
 
-{{ search_nav_opened}}
+{{ search_subjects( 'dr') }}

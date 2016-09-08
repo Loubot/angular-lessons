@@ -315,15 +315,15 @@ md-sidenav.md-closed.md-locked-open-add-active.user_menu {
 }
 
 .subject_search{
-  padding: 0 12px;
-  line-height: 40px;
+  padding: 0 12px !important;
+  line-height: 40px !important;
   // min-width: 60%;
-  -webkit-border-radius: 50px;
-  -moz-border-radius: 50px;
-  border-radius: 50px;
+  -webkit-border-radius: 50px !important;
+  -moz-border-radius: 50px !important;
+  border-radius: 50px !important;
   max-width: 200px !important;
   min-width: 200px !important;
-  background-color: #FFF;
+  background-color: #FFF !important;
 }
 
 .form_border{

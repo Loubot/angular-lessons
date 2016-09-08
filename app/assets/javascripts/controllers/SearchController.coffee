@@ -42,26 +42,31 @@ angular.module('lessons').controller( 'SearchController', [
     if $stateParams.name? or $stateParams.location
       $scope.search_teachers()
 
-    $scope.search_subjects = ( subject ) ->
-      # console.log subject.name
-      # console.log $filter('filter')( $scope.subjects_list, subject.name )
-      $scope.search_subjects = $filter('filter')( $scope.subjects_list, subject.name )
-
 
     $scope.subject_picked = ( subject )->
-      $scope.selected.subject_name = subject
-      set_params()
+      
+      if $scope.selected.subject_name?
+        console.log subject
+        $scope.selected.subject_name = subject
+        set_params()
 
     $scope.county_picked = ( county )->
-      $scope.selected.county_name = county
-      set_params()
+      if $scope.selected.county_name?
+        $scope.selected.county_name = county
+        set_params()
 
     define_subjects = ( subjects ) ->
-      $scope.subjects_list = []
+      $scope.master_subjects_list = []
       for subject in subjects
-        $scope.subjects_list.push( subject.name )
+        $scope.master_subjects_list.push( subject.name )
 
       # console.log $scope.subjects_list
+
+    $scope.search_subjects = ( subject ) ->
+      $scope.subjects_list = $scope.master_subjects_list
+      console.log subject
+      # console.log $filter('filter')( $scope.subjects_list, subject.name )
+      $scope.subjects_list = $filter('filter')( $scope.subjects_list, subject )
      
 
     $scope.search_counties = ( county ) ->
@@ -86,12 +91,19 @@ angular.module('lessons').controller( 'SearchController', [
     )
 
     set_params = ->
-      console.log $scope.selected.subject_name
-      $state.transitionTo(
-        'search',
-        { name: $scope.selected.subject_name, location: $scope.selected.county_name }
-        { notify: false }
-      )
+      console.log $scope.selected.county_name
+      if $scope.selected.subject_name? and $scope.selected.subject_name != ""
+        $state.transitionTo(
+          'search',
+          { name: $scope.selected.subject_name }
+          { notify: false }
+        )
+      else if $scope.selected.county_name? and $scope.selected.county_name != ""
+        $state.transitionTo(
+          'search',
+          { location: $scope.selected.county_name }
+          { notify: false }
+        )
 
     $scope.search_nav = ->
       $mdSidenav('search_nav').toggle()

@@ -13,14 +13,16 @@
       <div layout="row" layout-xs="column">
         <div flex>
             <md-autocomplete 
-              md-selected-item="selected_subject" 
-              md-search-text="searchText.name" 
-              md-items="subject in search_subjects( searchText )" 
-              md-item-text="subject"
-              class="black_text subject_search" 
+              class="black_text subject_search"
+              md-selected-item="selected.subject_name" 
+              md-input-name="subject"
+              md-search-text="searchText.subject_name"
+              md-search-text-change="search_subjects( searchText.subject_name )"
+              md-items="subject in subjects_list" 
+              md-item-text="subject"            
+              md-selected-item-change="subject_picked( subject )"
+              ng-model-options="{ debounce: 500 }"
               placeholder="Subject?"
-              md-selected-item="subject"
-              md-delay="1000"
               md-min-length="2">
             <md-item-template>
               <span md-highlight-text="searchText">{{subject}}</span>
@@ -33,7 +35,21 @@
         </div>
 
         <div  layout-align="center center" flex>
-          <input name="location" class="black_text subject_search"  ng-model="searchText.location" required  placeholder=" County?">     
+          <md-autocomplete 
+              class="black_text subject_search"
+              md-selected-item="selected.county_name" 
+              md-input-name="county"
+              md-search-text="searchText.county_name" 
+              md-items="county in counties" 
+              md-item-text="county" 
+              md-search-text-change="search_counties( searchText.county_name )"
+              placeholder="County?"
+              md-selected-item-change="county_picked( county )">
+            <md-item-template>
+              <span md-highlight-text="county">{{county}}</span>
+            </md-item-template>
+            
+          </md-autocomplete>    
         </div>
 
         
