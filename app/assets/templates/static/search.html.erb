@@ -18,9 +18,9 @@
     
     <form ng-submit="search_teachers()" name="searchForm">
       <p>Change your search</p>
-      <md-chips style="min-height:200px !important;">
-        <md-chip ng-show="selected.subject_name">{{ selected.subject_name }}</md-chip>
-        <md-chip ng-show="selected.county_name">{{ selected.county_name }}</md-chip>
+      <md-chips >
+        <md-chip class="min_height_32" ng-show="selected.subject_name">{{ selected.subject_name }}</md-chip>
+        <md-chip class="min_height_32" ng-show="selected.county_name">{{ selected.county_name }}</md-chip>
         
         
       </md-chips>
@@ -118,8 +118,3 @@
     </md-content>
   </div> <!-- end of column -->
 </div>
-
-
-
-
-{{ search_subjects( 'dr') }}

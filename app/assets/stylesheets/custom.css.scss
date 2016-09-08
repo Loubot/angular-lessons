@@ -237,6 +237,18 @@ md-sidenav.md-closed.md-locked-open-add-active.user_menu {
   height: 0;
 }
 
+.min_height_32{
+  min-height: 32px !important;
+}
+
+.min_height_32.ng-hide{
+  display: inline !important;
+}
+
+.md-chips > .min_height_32.ng-hide{
+  visibility: hidden !important;
+}
+
 .no_padding{
   padding: 0px !important;
 }
@@ -584,6 +596,10 @@ md-sidenav.md-closed.md-locked-open-add-active.user_menu {
   #pac-input{
     width: 85%;
   }
+
+  .county_search{
+    margin-top: 10px;
+  }
 }
 
 @media ( min-width: 768px ){
@@ -610,6 +626,10 @@ md-sidenav.md-closed.md-locked-open-add-active.user_menu {
 
   #pac-input{
     width: 65%;
+  }
+
+  .county_search{
+    margin-top: 0px;
   }
 }
 
