@@ -71,6 +71,8 @@ gem 'devise_token_auth'
 
 gem 'omniauth'
 
+gem 'omniauth-facebook'
+
 gem 'validates_overlap', '~> 0'
 
 gem 'carrierwave'
