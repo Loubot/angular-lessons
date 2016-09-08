@@ -121,6 +121,11 @@ md-sidenav.md-closed.md-locked-open-add-active.user_menu {
   border-radius: 50%;
 }
 
+.profile_thumbs{
+  max-height: 100% !important;
+  max-width: 100% !important;
+}
+
 .slide_container{
   // min-height: 40vw;
   min-width: 100%;
@@ -133,7 +138,7 @@ md-sidenav.md-closed.md-locked-open-add-active.user_menu {
 
 .slide{
   // width: 40vw;
-  // max-height: 40vw;
+  max-height: 40vw;
 }
 
 .md-media-sm{
