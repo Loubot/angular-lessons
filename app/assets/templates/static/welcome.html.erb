@@ -3,13 +3,14 @@
 
 
     <div class="white_text center_text" layout="row" layout-align="center"  >
-      <h1><span class="header_font">Learn Your Lesson</span> <br>is your place to connect with local teachers on guitar,<br> piano, drums or anything else musical</h1>
+      <h1><span class="header_font">Learn Your Lesson</span> 
+        <span hide-xs><br>is your place to connect with local teachers on guitar,<br> piano, drums or anything else musical</span></h1>
     </div> <!-- end of white_text -->
 
     <form  layout="row" layout-align="center center" flex>          
           
         
-      <div layout="row">
+      <div layout="row" layout-xs="column">
         <div flex>
             <md-autocomplete 
               md-selected-item="selected_subject" 
@@ -31,8 +32,8 @@
 
         </div>
 
-        <div layout="row" layout-align="center center" flex>
-          <input name="location" class="black_text subject_search" ng-model="searchText.location" required  placeholder=" County?">     
+        <div  layout-align="center center" flex>
+          <input name="location" class="black_text subject_search"  ng-model="searchText.location" required  placeholder=" County?">     
         </div>
 
         
@@ -46,14 +47,14 @@
     
   </div> <!-- end of main_page_search_container -->
 
-  <div layout="row" layout-margin flex >
+  <div layout="row"  layout-margin flex >
     
     <md-content class="grey_green_background how_it_works" >
       <div layout="column" class="center_text">
         <h1 class="green_text" flex="100">How it works</h1><br><br>
         <h4 flex="100">From finding the perfect teacher to managing bookings and scheduling lessons - we take care of all the details, so you can focus on learning. <a ui-sref="how_it_works"></a></h4> <br>
       </div>
-      <div layout="row" >
+      <div layout="row" layout-xs="column" >
         
         <div class="center_text " flex>
           <%= image_tag 'search_for_a_teacher.jpg' %>
@@ -80,19 +81,20 @@
    
   </div> <!-- end of flex -->
 
-  <div flex class="x_large_font animateblock centerleft ">
+  <div flex class="x_large_font animateblock centerleft " style="max-width:100vw !important;">
     <div layout="row" flex="100">
       <md-content layout-margin class="center_text pale_orange_background">
         <h1><strong>Are you a teacher?</strong></h1>
         <p>Learn your lesson can help you grow the number of students you teach - whilst helping you manage your teaching schedules and incoming finances. </p>
-        <%= image_tag 'are_you_a_teacher_list.jpg' %>
+        <%= image_tag 'are_you_a_teacher_list_left.jpg', class: "flex-100 flex-xs-50" %>
+        <%= image_tag 'are_you_a_teacher_list_right.jpg', class: "flex-100 flex-xs-50" %>
         <p>As a teacher you know that teachers face the battle of finding new students. Now, did you know that everyday students also face the battle of finding teachers?</p><br><br>
         
       </md-content> <!-- end of are_you_a_teacher -->
     </div>
   </div>
 
-  <div flex class="x_large_font animateblock centerright">
+  <div flex class="x_large_font animateblock centerright" style="max-width:100vw !important;">
     <div layout="row" flex="100">
       <md-content layout-margin class="center_text pale_orange_background">
         <p>Well, call us the middle man. We have built a platform that students rely on to find teachers and we help teachers get more students without having to invest time and money on marketing. With a free profile on LearnYourLesson.ie, your skills will be visible to the students who search our site every day for teachers like you. And with mobile optimisation you'll extend your reach even further.</p>
@@ -120,7 +122,7 @@
           </div> <!-- end of are_you_a_teacher_container -->
 
           <div class="center_text">
-            <md-button class="md-raised blue_button">Become a teacher</md-button>
+            <md-button ui-sref="register_teacher" class="md-raised blue_button">Become a teacher</md-button>
           </div>
 
         </div> <!-- end of are_you_a_teacher -->
@@ -128,8 +130,3 @@
     </div>
   </div>
 </div> <!-- end of column -->
-
-
-
-
-<a ui-sref="search({name:'louis', location:'cork'})">asdf</a>

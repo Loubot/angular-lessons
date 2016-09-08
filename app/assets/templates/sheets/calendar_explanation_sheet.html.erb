@@ -1,0 +1,18 @@
+<md-bottom-sheet class="md-grid" layout="column">
+  <div layout="row" layout-align="center center" ng-cloak>
+    <h4>We use Google Calendar <%= image_tag "google_calendar_logo.png" %></h4>
+  </div>
+  <div ng-cloak>
+    We request permission to create a calendar in your Google account. We will have read and write access to this calendar.
+    When you create an event here it will appear in your google calendar and vice versa. This will be synced across all your google devices. 
+    You can find the google calendar help section <a href="https://support.google.com/calendar/?hl=en#topic=3417969">here</a>.<br>
+    <u>You do not have to avail of this option.</u> It is completely up to you. You may revoke our access to your calendar at any time from your google account settings. 
+    <br>
+    Clicking exit will acknowledge you have read this. 
+    <div class="center_text">
+      <md-button ng-click="acknowledge()" ng-if="api_loaded">
+        <md-icon><i class="material-icons icon_red">cancel</i></md-icon>
+      </md-button>
+    </div>
+  </div>
+</md-bottom-sheet>

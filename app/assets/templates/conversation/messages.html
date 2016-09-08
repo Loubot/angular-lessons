@@ -1,68 +1,90 @@
+<div hide-gt-xs>
+  <md-toolbar>
+    <div class="md-toolbar-tools search_toolbar" >
 
+      <md-button ng-click="search_conversations()">
 
-  <div layout="row" class="height_100 ">
-    <div flex="30" layout-padding ng-show="USER" class="fancy">
+        <md-icon ><i class="material-icons">search</i></md-icon> 
+        Search messages
+      </md-button>
+    </div>
+  </md-toolbar>
+</div>
 
-      <md-content class="md-padding">
-        <input placeholder="Search for student" class="margin_b_10">
-        <div  ng-repeat="conversation in conversations" 
-              ng-click="select_conversation( conversation.id )" 
-              class="margin_t_10"
-              flex="100">
-          <div ng-if="USER.is_teacher" class="message_box">{{ conversation.student_name }}</div>
-          <div ng-if="!USER.is_teacher" class="message_box">{{ conversation.teacher_name }}</div>
-          <md-divider></md-divider>
-        </div> <!-- end of conversations -->
-      </md-content>
+<div layout="row" class="height_100 ">
+  <md-sidenav  
+          md-component-id="conversation_search" 
+          class="md-sidenav-left height_50" 
+          md-is-locked-open="$mdMedia('gt-xs')"
+          md-is-open="search_nav_opened">
 
-    </div> <!-- end of flex=30 -->
+    <md-content class="md-padding">
+      <input placeholder="Search by name" class="margin_b_10" ng-model="search_text">
+      <div  ng-repeat="conversation in conversations | filter:search_text" 
+            ng-click="select_conversation( conversation.id )" 
+            class="margin_t_10"
+            flex="100">
+        <div ng-if="USER.is_teacher" class="message_box">{{ conversation.student_name }}</div>
+        <div ng-if="!USER.is_teacher" class="message_box">{{ conversation.teacher_name }}</div>
+        <md-divider></md-divider>
+      </div> <!-- end of conversations -->
+    </md-content>
 
-    <div flex="70" class="height_100" style="overflow-y:hidden;">
-
-      <md-content class="height_70 padding_5 message_container" id="message_container">
-        <div layout="column" layout-fill flex>
-          <div        class="margin_t_10"
-                      ng-class="{ 'flex-50 flex-offset-50': message.sender_email==USER.email, 'flex-50': message.sender_email!=USER.email }"
-                      ng-repeat="message in conversation.messages">
-            <div ng-class="{ 'sender': message.sender_email==USER.email, 'receiver': message.sender_email!=USER.email }">
-              
-              {{ message.message }}
-            </div> <!-- end of sender/receiver -->
-
-
-          </div> <!-- end of ng-repeat messages -->  
-          
-        </div> <!-- end of column -->
-
-        
-      </md-content>
-      
-      <div class="message_response_container height_25">
-        <form name="message_form" ng-submit="send_message()" class="message_form">
-            
-              <textarea ng-model="message.message" 
-                        aria-label="Experience description" 
-                        class="message_text_area"
-                        rows="3"
-                        wrap="off"
-                        placeholder="Enter your message here">
-              </textarea>
-            
-            <div layout="row">
-              <div flex>
-                <md-input-container>
-                  <input ng-click="send_message()" value="Submit message" class="md-button md-primary md-raised white_text" aria-label="Send message">
-                </md-input-container>
-              </div>
-              <div flex flex-offset="25" ng-if="USER.is_teacher">
-                <md-input-container>
-                  <input ng-click="create_event()" value="Create event" class="md-button blue_button" aria-label="Create event">
-                </md-input-container>
-              </div>
-            </div>
-            
-        </form> <!-- end of send_message -->
-      </div> <!-- end of message_response_container -->
+    <md-button ng-click="search_conversations()" hide-gt-xs>Close search</md-button>
     
-    </div> <!-- end of flex=70 -->
-  </div> <!-- end of row -->
+  </md-sidenav>
+
+
+
+  <div flex="100" class="height_100" style="overflow-y:hidden;">
+
+    <md-content class="height_70 padding_5" id="message_container">
+      <div layout="column" layout-fill flex>
+        <div        class="margin_t_10"
+                    ng-class="{ 'flex-offset-45': message.sender_email==USER.email }"
+                    ng-repeat="message in conversation.messages">
+          <div ng-class="{ 'sender': message.sender_email==USER.email, 'receiver': message.sender_email!=USER.email }">
+            
+            {{ message.message }}
+          </div> <!-- end of sender/receiver -->
+
+
+        </div> <!-- end of ng-repeat messages -->  
+        
+      </div> <!-- end of column -->
+
+      
+    </md-content>
+    
+    <div class="message_response_container height_25">
+      <form name="message_form" ng-submit="send_message()" class="message_form">
+          
+            <textarea ng-model="message.message" 
+                      aria-label="Experience description" 
+                      class="message_text_area"
+                      rows="3"
+                      wrap="off"
+                      placeholder="Enter your message here">
+            </textarea>
+          
+          <div layout="row" class="center_text">
+            <div flex>
+              <md-input-container>
+                <input ng-click="send_message()" value="Submit message" class="md-button no_margin md-primary md-raised white_text" aria-label="Send message">
+              </md-input-container>
+            </div>
+            <div flex flex-offset="25" flex-offset-xs="0" ng-if="USER.is_teacher">
+              <md-input-container>
+                <input ng-click="create_event()" value="Create event" class="md-button no_margin blue_button" aria-label="Create event">
+              </md-input-container>
+            </div>
+          </div>
+          
+      </form> <!-- end of send_message -->
+    </div> <!-- end of message_response_container -->
+  
+  </div> <!-- end of flex=70 -->
+</div> <!-- end of row -->
+
+
+<!-- ng-class="{ 'flex-offset-45': message.sender_email==USER.email, 'flex-50': message.sender_email!=USER.email }" -->

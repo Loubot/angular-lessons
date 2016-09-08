@@ -9,11 +9,15 @@ class PhotosController < ApplicationController
     if @teacher.profile == nil
 
       
-      @teacher.save
-      p "Made it here"
-      p @photo.id
-      @teacher.update_attributes( profile: @photo.id )
-      render json: { :status => :updated, photos: @teacher.photos, teacher: @teacher }
+      if @teacher.save
+        p "Made it here"
+        p @photo.id
+        @teacher.update_attributes( profile: @photo.id )
+        render json: { :status => :updated, photos: @teacher.photos, teacher: @teacher }
+      else
+        p @teacher.errors.full_messages
+        render json: { errors: @teacher.errors }, status: 401
+      end
     else
       @teacher.save
       render json: { photos: @teacher.photos }

@@ -5,20 +5,25 @@ angular.module('lessons').controller('WelcomeController', [
   '$rootScope'
   '$state'
   '$filter'
+  '$stateParams'
   'USER'
   '$mdSidenav'
   'alertify'
   '$auth'
   'COMMS'
   '$window'
-  ( $scope, $rootScope, $state, $filter, USER, $mdSidenav, alertify, $auth, COMMS, $window ) ->
+  ( $scope, $rootScope, $state, $filter, $stateParams, USER, $mdSidenav, alertify, $auth, COMMS, $window ) ->
     console.log "WelcomeController"
+
     $elems = $('.animateblock')
     $scope.subject = {}
     $scope.searchText = {}
     $scope.subjects = []
     winheight = $(window).height()
     fullheight = $(document).height()
+
+    # if $stateParams.message?
+    #   alertify.delay(0).closeLogOnClick(true).log($stateParams.message + " Click to dismiss")
    
 
     animate_elems = ->
@@ -63,6 +68,7 @@ angular.module('lessons').controller('WelcomeController', [
         $state.go("search", { name: $scope.searchText.name, location: $scope.searchText.location })
 
     $scope.subject_picked = ( subject )->
+      console.log "subject picked"
       console.log subject
       if !( Object.keys(subject).length == 0 && subject.constructor == Object )
         $state.go("search", { name: $scope.searchText.name, location: $scope.searchText.location })

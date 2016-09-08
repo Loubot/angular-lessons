@@ -38,10 +38,9 @@ angular.module('lessons').directive 'scroll', ($window) ->
 
 
 angular.module('lessons').config ($stateProvider, $urlRouterProvider) ->
-  $urlRouterProvider.otherwise "/"
-
+  
   $stateProvider.state 'welcome',
-    url: '/'
+    url: '/:message'
     templateUrl: "static/welcome.html"
     controller: "WelcomeController"
 
@@ -60,6 +59,11 @@ angular.module('lessons').config ($stateProvider, $urlRouterProvider) ->
     templateUrl: "user/view_teacher.html"
     controller: "ViewTeacherController"
 
+  $stateProvider.state 'register_teacher',
+    url: "/register-teacher"
+    templateUrl: "static/register_teacher.html"
+    controller: "RegisterController"
+
   $stateProvider.state 'teacher_area',
     url: "/teacher-area/:id/:student_email"
     templateUrl: "user/teacher_area.html"
@@ -75,11 +79,6 @@ angular.module('lessons').config ($stateProvider, $urlRouterProvider) ->
     templateUrl: "conversation/messages.html"
     controller: "ConversationController"
 
-  $stateProvider.state 'register',
-    url: "/register"
-    templateUrl: "static/register.html"
-    controller: "RegisterController"
-
   $stateProvider.state 'how_it_works',
     url: '/how-it-works'
     templateUrl: 'static/how_it_works.html'
@@ -94,22 +93,19 @@ angular.module('lessons').config ($stateProvider, $urlRouterProvider) ->
     url: "/change-password"
     templateUrl: "password/change_password.html"
     controller: "PasswordController"
-  # $stateProvider.state 'reset_password',
-  #   url: '/reset-password'
-  #   templateUrl: 'password/reset_password.html'
-  #   controller: "PasswordController"
 
   $stateProvider.state 'reset_password',
     url: '/reset-password/'
     templateUrl: 'password/reset_password.html'
     controller: "PasswordController"
 
-# http://localhost:3000/#/reset-password?client_id=5qzNUaA__3Qlx9zrMEIygA&config=default&expiry=&reset_password=true&token=SqUXWqRNNxqceN1KYFNy&uid=lllouis@yahoo.com
-
   $stateProvider.state 'admin',
     url: "/admin"
     templateUrl: "admin/manage.html"
     controller: "AdminController"
+
+  $urlRouterProvider.otherwise "/"
+
 
   
 

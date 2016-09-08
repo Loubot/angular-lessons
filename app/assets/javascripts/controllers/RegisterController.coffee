@@ -2,9 +2,17 @@
 
 angular.module('lessons').controller("RegisterController", [
   "$scope"
+  "$rootScope"
+  "$state"
+  "$auth"
+  "alertify"
 
-  ( $scope ) ->
+  ( $scope, $rootScope, $state, $auth, alertify) ->
     console.log "RegisterController"
+
+    $scope.scrollevent = ( $e ) ->
+      
+      return
 
     $scope.register_teacher = ->
       if $scope.teacher.email != $scope.teacher.confirm_email
@@ -19,6 +27,20 @@ angular.module('lessons').controller("RegisterController", [
             console.log att
             $scope.register_teacher_form.email2.$setValidity att, true
 
-        # $scope.register_teacher_form.$setPristine( true )
+      $auth.submitRegistration( $scope.teacher )
+        .then( (resp) ->
+          # handle success response
+          # console.log resp.data.data
+          $rootScope.USER = resp.data.data
+          console.log $rootScope.USER
+          $state.go 'welcome'
+          alertify.success "Welcome #{ resp.data.data.email }"
+        )
+        .catch( (resp) ->
+          # handle error response
+          console.log resp
+          alertify.error "Failed to register"
+          
+        )
         
 ])

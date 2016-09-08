@@ -10,11 +10,28 @@ angular.module('lessons').controller('TeacherAreaController', [
   'alertify'
   'COMMS'
   '$mdDialog'
+  '$mdToast'
+  "$mdBottomSheet"
   '$mdpDatePicker'
   '$mdpTimePicker'
-  ( $scope, $rootScope, $state, $stateParams, RESOURCES, USER, alertify, COMMS, $mdDialog, $mdpDatePicker, $mdpTimePicker ) ->
+  ( $scope, $rootScope, $state, $stateParams, RESOURCES, USER, alertify, COMMS, $mdDialog, $mdToast, $mdBottomSheet, $mdpDatePicker, $mdpTimePicker ) ->
     console.log "TeacherAreaController"
     $scope.create_event_button_bool = false
+    $scope.api_loaded = false # disable acknowledge calendar button will api is loaded
+
+    if localStorage.getItem("calendar_explanation") != "done"
+      $mdBottomSheet.show(
+        templateUrl: "sheets/calendar_explanation_sheet.html"
+        clickOutsideToClose: false
+        scope: $scope
+        preserveScope: true
+      )
+
+
+    $scope.acknowledge = ->
+      $mdBottomSheet.hide()
+      load_calendar_api()
+      # localStorage.setItem "calendar_explanation", "done"
 
     ############### Define event details ###########################
     #https://developers.google.com/apis-explorer/#p/calendar/v3/calendar.events.insert
@@ -72,13 +89,32 @@ angular.module('lessons').controller('TeacherAreaController', [
             # allDay: true
 
         $scope.eventSource = bla
-        alertify.success "Loaded #{ events.length } events"
+        alertify.success "Loaded #{ events.length } event(s)"
         $scope.create_event_button_bool = true
         $scope.$apply()
 
 
 
     ###################### google auth ###############################
+
+    fetch_events = ->
+      gapi.client.calendar.events.list(
+        'calendarId': "#{ $scope.calendar_id }"
+      ).execute( ( resp ) ->
+        console.log "Calendar list"
+        # console.log resp
+        if resp.error?  
+          alertify.error "Couldn't load your calendar"
+          $scope.calendar_id = null
+        else
+
+          console.log "List events"
+
+          format_events( resp.items )
+          $scope.create_event_button_bool = true
+          $scope.$digest()
+      )
+
     check_if_calendar_exists = ( calendars ) ->
       console.log calendars
       calendar_exists = false
@@ -93,22 +129,7 @@ angular.module('lessons').controller('TeacherAreaController', [
       if calendar_exists
         alertify.success "Found your calendar"
         console.log $scope.calendar_id
-        gapi.client.calendar.events.list(
-          'calendarId': "#{ $scope.calendar_id }"
-        ).execute( ( resp ) ->
-          console.log "Calendar list"
-          # console.log resp
-          if resp.error?  
-            alertify.error "Couldn't load your calendar"
-            $scope.calendar_id = null
-          else
-
-            console.log "List events"
-
-            format_events( resp.items )
-            $scope.create_event_button_bool = true
-            $scope.$digest()
-        )
+        fetch_events()
       else
         alertify.error "Couldn't find your calender"
         console.log "Can't find calendar"
@@ -157,8 +178,10 @@ angular.module('lessons').controller('TeacherAreaController', [
         $scope.show_auth_button = false
         console.log "Begin calendar api load"
         $scope.$digest()
-        
-        load_calendar_api()
+        $scope.api_loaded = true
+        $scope.$digest()
+        if localStorage.getItem("calendar_explanation") == "done"
+          load_calendar_api()
       else
         $scope.show_auth_button = true
         alertify.confirm "Please log in with google to use the calendar"
@@ -245,18 +268,20 @@ angular.module('lessons').controller('TeacherAreaController', [
     
 
     ####################### Create event##############################
-
-    $scope.create_event = ->
-      
+    
+    $scope.create_event = ->      
       $mdDialog.show(
         scope: $scope
         preserveScope: true
         templateUrl: "dialogs/calendar_event_dialog.html"
         openFrom: 'left'
         closeTo: 'right'
-        escapeToClose: true
-        
+        fullscreen: true
+        clickOutsideToClose: true
       )
+
+    $scope.close_event = ->
+      $mdDialog.hide()
 
 
     $scope.submit_event_details = ->
@@ -266,26 +291,26 @@ angular.module('lessons').controller('TeacherAreaController', [
       start_date_time.minute( moment( $scope.calendar_event_details.start_time ).format( 'mm' ) )
       console.log start_date_time.toString()
 
-      end_date_time = moment( $scope.calendar_event_details.end_date )
+      end_date_time = moment( $scope.calendar_event_details.start_date )
       end_date_time.hour( moment( $scope.calendar_event_details.end_time ).format( "HH" ) )
       end_date_time.minute( moment( $scope.calendar_event_details.end_time).format( "mm" ) )
       console.log end_date_time.toString()
       if start_date_time == end_date_time
         alertify.error "Times are equal"
-        $scope.event_creation_form.end_date.$error.not_the_same = true
+        $scope.event_creation_form.start_date.$error.not_the_same = true
         return false
-      else if !$scope.calendar_event_details.start_date? or !$scope.calendar_event_details.start_time? or !$scope.calendar_event_details.end_date? or !$scope.calendar_event_details.end_time?
+      else if !$scope.calendar_event_details.start_date? or !$scope.calendar_event_details.start_time? or !$scope.calendar_event_details.end_time?
 
         alertify.error "Something not defined"
-        $scope.event_creation_form.end_date.$error.not_the_same = true
+        $scope.event_creation_form.start_date.$error.not_the_same = true
         return false
       else
-        $scope.event_creation_form.end_date.$error.not_the_same = false
+        $scope.event_creation_form.start_date.$error.not_the_same = false
      
       
-      
+      console.log $scope.calendar_event_details.student_email
       resource = {
-        'summary': "Lesson with #{ $scope.calendar_event_details.student_email }" if $scope.calendar_event_details.student_email?
+        'summary': "Lesson with #{ $scope.calendar_event_details.student_email }" if $scope.calendar_event_details.student_email? and $scope.calendar_event_details.student_email != ""
         # location: $rootScope.USER.location.address if $rootScope.USER.location?
         'description': $scope.calendar_event_details.description
         'start': {
@@ -303,6 +328,8 @@ angular.module('lessons').controller('TeacherAreaController', [
         'resource': resource
       ).execute( ( event ) ->
         console.log event
+        fetch_events()
+        $mdDialog.hide()
       )
     
       

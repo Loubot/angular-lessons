@@ -14,14 +14,9 @@ angular.module('lessons').controller('NavController', [
     $scope.teacher = {}
     $scope.auth_type = null
 
-    # USER.get_user().then( ( user ) ->
-    #   # alertify.success "Got user"
-    #   # console.log $rootScope.USER
-
-    # ).catch( ( err ) ->
-    #   alertify.error "No user"
-    #   $rootScope.USER = null
-    # )
+    $scope.user_menu = ->
+      $mdSidenav('user_menu').toggle()
+      
     $scope.openLeftMenu = ( auth_type ) -> # 0=login; 1= register
       
       if auth_type == 0

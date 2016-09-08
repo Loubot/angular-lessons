@@ -5,19 +5,27 @@ angular.module('lessons').controller('ConversationController', [
   "$state"
   "$rootScope"
   "$stateParams"
+  "$mdSidenav"
   "alertify"
   "COMMS"
   "USER"
   "$timeout"
   "$mdDialog"
-  ( $scope, $state, $rootScope, $stateParams, alertify, COMMS, USER, $timeout , $mdDialog) ->
+  ( $scope, $state, $rootScope, $stateParams, $mdSidenav, alertify, COMMS, USER, $timeout , $mdDialog) ->
     console.log "ConversationController"
     console.log $stateParams
     $scope.show_form = false
 
-    $scope.scrollevent = ( $e ) ->
-      
+    $scope.search_conversations = ->
+      $mdSidenav('conversation_search').toggle()
+
+    $scope.scrollevent = ( $e ) ->      
       return
+
+    find_conversation_by_random = ->
+      for convo in $scope.conversations
+        $scope.conversation = convo if convo.random == $stateParams.random
+        console.log "found it #{ convo }"
 
     fetch_conversations = ->
       console.log $rootScope.USER.email if $rootScope.USER?
@@ -32,30 +40,41 @@ angular.module('lessons').controller('ConversationController', [
           }
         ).then( ( resp ) ->
           console.log resp
+
+          if !$stateParams.random? or $stateParams.random == ""
+            $scope.conversation = resp.data.conversation if resp.data.conversation?
+
+            $scope.conversation =   resp.data.conversations[0] if ( resp.data.conversations? && resp.data.conversations.length > 0 )
+            $scope.conversations =  resp.data.conversations if resp.data.conversations?
           
-          $scope.conversation = resp.data.conversation if resp.data.conversation?
-          $scope.conversation =   resp.data.conversations[0] if ( resp.data.conversations? && resp.data.conversations.length > 0 )
-          $scope.conversations =  resp.data.conversations if resp.data.conversations?
+          else if $stateParams.random? and $stateParams.random != ""
+            $scope.conversations = resp.data.conversations
+            find_conversation_by_random()
+          
+            
 
           if $scope.conversation?
-            alertify.success "Got conversation"
+            alertify.success "Got conversations"
           else
-            alertify.error "Failed to find messages"
+            alertify.error "Failed to find conversations"
           scroll_to_bottom()
         ).catch( ( err ) ->
           console.log err
           alertify.error "Failed to get conversation"
         )
     
-    user_listener = $rootScope.$watch "USER", ->
-      console.log "Changed"
-      fetch_conversations()
+    # user_listener = $rootScope.$watch "USER", (newValue, oldValue) ->
+    #   console.log newValue
+    #   console.log oldValue
+    #   console.log "Changed"
+    #   if $state.current.name == "conversation"
+        # fetch_conversations()
 
 
 
     USER.get_user().then( ( user ) ->
       alertify.success "Got user"
-      
+      fetch_conversations()
 
     ).catch( ( err ) ->
       alertify.error "Failed to get user"
@@ -70,13 +89,17 @@ angular.module('lessons').controller('ConversationController', [
         conversation_id: id
       ).then( ( resp ) ->
         console.log resp
-        alertify.success "Got conversations"
+        alertify.success "Got conversation"
         $scope.conversation = resp.data.conversation
         scroll_to_bottom()
+        $scope.search_conversations()
       ).catch( ( err ) ->
         console.log err
         alertify.error "Failed to get conversation"
+        $scope.search_conversations()
       )
+
+
 
     $scope.send_message = ->
       if !$rootScope.USER?
@@ -89,6 +112,7 @@ angular.module('lessons').controller('ConversationController', [
         $scope.message.sender_email = $rootScope.USER.email
         $scope.message.name = "#{ $rootScope.USER.first_name } #{ $rootScope.USER.last_name }"
         # $scope.message.name = $scope.conversation.student_name
+        $scope.message.conversation_id = $scope.conversation.id
         COMMS.POST(
           "/conversation"
           conversation: $scope.message

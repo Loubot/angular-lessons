@@ -57,6 +57,13 @@ angular.module('lessons').controller( "TeacherLocationController" , [
           console.log status
           $scope.addresses = results
           $scope.$apply()
+
+          $mdToast.showSimple "Select your address from the list by checking the box next to it"
+          $mdToast.showSimple """If you don't see your address then click "Enter manually" and type it in yourself """
+          # alertify.logPosition("top left")
+          # alertify.log("Select your address from the list by checking the box next to it")
+          # alertify.log("""If you don't see your address then click "Enter manually" and type it in yourself """)
+
         )
       )
 
@@ -72,7 +79,8 @@ angular.module('lessons').controller( "TeacherLocationController" , [
           lng: places[0].geometry.location.lng()
         )
         $scope.map.setZoom( 15 )
-        
+        $mdToast.showSimple "Click on the map to locate your address"
+        # alertify.log("Click on the map to locate your address")
       )
     ).catch( ( err ) ->
       console.log err
@@ -89,6 +97,7 @@ angular.module('lessons').controller( "TeacherLocationController" , [
     $scope.updateSelection = (position, addresses) ->
       $scope.selected_address = addresses[position] #this is the address tha user wants to save. Uploaded in update_address
       console.log addresses[position]
+      $mdToast.showSimple("Click Update address to save this address");
       angular.forEach addresses, (address, index) ->
         if position != index
           address.checked = false
@@ -140,6 +149,21 @@ angular.module('lessons').controller( "TeacherLocationController" , [
         console.log err
         alertify.error err.errors.full_messages
       )
+
+    ################## Delete location ########################
+    $scope.delete_location = ->
+      COMMS.DELETE(
+        "/teacher/#{ $rootScope.USER.id }/location/#{ $rootScope.USER.location.id }"
+      ).then( ( resp ) ->
+        console.log resp
+        alertify.success "Deleted location successfully"
+        $rootScope.USER.location = null
+      ).catch( ( err ) ->
+        console.log err
+        alertify.error "Failed to delete location"
+      )
+
+    ################## End of delete location ################
 
     ######### open location_sheet ########################
     $scope.open_location_sheet = ->

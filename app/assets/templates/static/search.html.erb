@@ -1,61 +1,85 @@
+
+
+<div hide-gt-xs>
+  <md-toolbar>
+    <div class="md-toolbar-tools" style="background-color:rgb(250, 250, 250) !important;" >
+      <p ng-click="search_nav()"><i class="material-icons">search</i> Refine</p>
+    </div>
+  </md-toolbar>
+</div>
+
 <div layout="row">
-  <div flex="30" layout="column" class="boxWithHeight" layout-padding>
-    <md-content class="md-padding">
-      <form ng-submit="search_teachers()" name="searchForm">
-        <p>Change your search</p>
-        <md-chips>
-          <md-chip ng-show="selected.subject_name">{{ selected.subject_name }}</md-chip>
-          <md-chip ng-show="selected.county_name">{{ selected.county_name }}</md-chip>
-          
-          
-        </md-chips>
-        <div layout-gt-sm="column" flex>
-          <md-autocomplete 
-              md-selected-item="selected.subject_name" 
-              md-search-text="searchText.name" 
-              md-items="subject in search_subjects( searchText )" 
-              md-item-text="subject"
-              class="black_text" 
-              placeholder="Subject?"
-              md-selected-item="subject"
-              md-floating-label="Subject?"
-              md-delay="1000"
-              md-selected-item-change="subject_picked( subject )"
-              md-min-length="2">
-            <md-item-template>
-              <span md-highlight-text="searchText">{{subject}}</span>
-            </md-item-template>
-            <md-not-found>
-              No matches found.
-            </md-not-found>
-          </md-autocomplete>
-          
-          
 
-          
-          <md-autocomplete 
-              md-selected-item="selected.county_name" 
-              md-input-name="county"
-              md-search-text="searchText.county_name" 
-              md-items="county in counties" 
-              md-item-text="county" 
-              md-floating-label="County"
-              md-search-text-change="search_counties( searchText.county_name )"
-              md-selected-item-change="county_picked( county )">
-            <md-item-template>
-              <span md-highlight-text="county">{{county}}</span>
-            </md-item-template>
-            
-          </md-autocomplete>
-          
-        </div>
+  <md-sidenav  
+          md-component-id="search_nav" 
+          class="md-sidenav-left" 
+          md-is-locked-open="$mdMedia('gt-xs')"
+          md-is-open="search_nav_opened">
+    
+    <form ng-submit="search_teachers()" name="searchForm">
+      <p>Change your search</p>
+      <md-chips style="min-height:200px !important;">
+        <md-chip ng-show="selected.subject_name">{{ selected.subject_name }}</md-chip>
+        <md-chip ng-show="selected.county_name">{{ selected.county_name }}</md-chip>
+        
+        
+      </md-chips>
+      <div layout-gt-sm="column" flex>
+        <md-autocomplete 
+            md-selected-item="selected.subject_name" 
+            md-search-text="searchText.name" 
+            md-items="subject in search_subjects( searchText )" 
+            md-item-text="subject"
+            class="black_text" 
+            placeholder="Subject?"
+            md-selected-item="subject"
+            md-floating-label="Subject?"
+            md-delay="1000"
+            md-selected-item-change="subject_picked( subject )"
+            md-min-length="2">
+          <md-item-template>
+            <span md-highlight-text="searchText">{{subject}}</span>
+          </md-item-template>
+          <md-not-found>
+            No matches found.
+          </md-not-found>
+        </md-autocomplete>
+        
+        
 
-        <md-input-container >
-          <input class="no_padding no_margin md-button md-primary md-raised white_text" type="submit" Value="Search" aria-label="Search">
-        </md-input-container>
-      </form>
-    </md-content>
-  </div>
+        
+        <md-autocomplete 
+            md-selected-item="selected.county_name" 
+            md-input-name="county"
+            md-search-text="searchText.county_name" 
+            md-items="county in counties" 
+            md-item-text="county" 
+            md-floating-label="County"
+            md-search-text-change="search_counties( searchText.county_name )"
+            md-selected-item-change="county_picked( county )">
+          <md-item-template>
+            <span md-highlight-text="county">{{county}}</span>
+          </md-item-template>
+          
+        </md-autocomplete>
+        
+      </div>
+
+      <md-input-container >
+        <input class="no_padding no_margin md-button md-primary md-raised white_text" type="submit" Value="Search" aria-label="Search">
+      </md-input-container>
+<br>
+      
+        <md-button ng-click="search_nav()" hide-gt-xs>Close search</md-button>
+      
+    </form>
+    
+  </md-sidenav>
+
+
+  <!-- <div flex="30" layout="column" class="boxWithHeight" layout-padding>
+    
+  </div> -->
 
 
 
@@ -98,3 +122,4 @@
 
 
 
+{{ search_nav_opened}}

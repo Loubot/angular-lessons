@@ -1,7 +1,9 @@
 <div class="main_page" layout="column" layout-fill ng-controller="NavController" >
   <md-toolbar>
     <div class="md-toolbar-tools" layout="row" layout-align="space-around center">
-      <md-fab-speed-dial ng-hide="demo.hidden" md-direction="right" md-open="demo.isOpen"
+
+      <!-- Hide fab-speed-dial on mobile -->
+      <md-fab-speed-dial hide-xs md-direction="right" md-open="demo.isOpen"
                        class="md-scale md-fab-top-left" ng-class="{ 'md-hover-full': demo.hover }"
                        >
         <md-fab-trigger>
@@ -18,7 +20,7 @@
 
         <md-fab-actions ng-if="USER && USER.is_teacher" class="green_blue_text">
           <md-button ui-sref="teacher({id:USER.id})" class="md-button md-default-theme green_text">Profile</md-button>
-          <md-button ui-sref="teacher_area({id:USER.id})" class="md-button md-default-theme green_text">Your area</md-button>
+          <md-button ui-sref="teacher_area({id:USER.id})" class="md-button md-default-theme green_text">Calendar</md-button>
           <md-button ui-sref="teacher_location({id:USER.id})" class="md-button md-default-theme green_text">Location</md-button>
           <md-button ui-sref="conversation({id:USER.id})" class="md-button md-default-theme green_text">Messages</md-button>
           <md-button class="md-button md-default-theme green_blue_text" ng-click="logout()">Logout</md-button>
@@ -30,6 +32,15 @@
         </md-fab-actions>
 
       </md-fab-speed-dial>
+
+
+      <md-icon ng-show="!USER" hide-gt-xs ng-click="openLeftMenu(0)" class="white_text"><i class="material-icons">face</i></md-icon>
+      <md-icon ng-show="USER" hide-gt-xs ng-click="user_menu()" class="white_text"><i class="material-icons">face</i></md-icon>
+
+
+
+
+
       <span flex="30"></span>
       <!-- <h4 class="white_text">Learn your lesson</h4> -->
       <img ui-sref="welcome" src="<%= asset_path('lylLogo.png') %>" class="md-48">
@@ -41,7 +52,26 @@
   </md-toolbar>
 
   <div class="main_page" layout="column" flex>
+    <!-- ################## User left menu ############################# -->
+    <md-sidenav ng-if="USER" hide-gt-xs md-component-id="user_menu" class="md-sidenav-left user_menu">
+      <div layout="column"  layout-align="center end">
+        <md-toolbar class="dark_moderate_cyan_background white_text">
+          <h1 class="md-toolbar-tools">Sidenav Left</h1>
+        </md-toolbar>
+        <md-button ui-sref="teacher({id:USER.id})" ng-click="user_menu()" class="md-button md-default-theme green_text">Profile</md-button>
+        <md-button ui-sref="teacher_area({id:USER.id})" ng-click="user_menu()" class="md-button md-default-theme green_text">Calendar</md-button>
+        <md-button ui-sref="teacher_location({id:USER.id})" ng-click="user_menu()" class="md-button md-default-theme green_text">Location</md-button>
+        <md-button ui-sref="conversation({id:USER.id})" ng-click="user_menu()" class="md-button md-default-theme green_text">Messages</md-button>
+        <md-button class="md-button md-default-theme green_blue_text" ng-click="logout();user_menu()">Logout</md-button>
+        <md-divider md-inset ></md-divider>
+        <md-icon ng-click="user_menu()"><i class="material-icons">arrow_back</i><md-icon>
+      </div>
+    </md-sidenav>
+    <!-- ################# End of user left menu ######################### -->
 
+
+
+    
     <!--#################### Left sidenav ############################-->
     <md-sidenav class="sidenav white_text md-whiteframe=12" md-component-id="left" flex>
        <div  ng-cloak ng-if="!USER">
@@ -54,14 +84,14 @@
                  <!-- Use floating label instead of placeholder -->
                  <label>First Name</label>
                  <md-icon class="name"></md-icon>
-                 <input ng-model="teacher.first_name" type="text" required class="black_text">
+                 <input ng-model="teacher.first_name" type="text" name="first name" required class="black_text">
                </md-input-container>
 
                <md-input-container class="md-icon-float md-block black_text" >
                  <!-- Use floating label instead of placeholder -->
                  <label>Last Name</label>
                  <md-icon class="name"></md-icon>
-                 <input ng-model="teacher.last_name" type="text" class="black_text" required>
+                 <input ng-model="teacher.last_name" type="text" name="last name" class="black_text" required>
                </md-input-container>
 
                <!-- <md-input-container class="md-block">
@@ -72,20 +102,20 @@
                <md-input-container class="md-block">
                  <!-- Use floating placeholder instead of label -->
                  <md-icon  class="email"></md-icon>
-                 <input ng-model="teacher.email" type="email" placeholder="Email (required)"  class="black_text" required>
+                 <input ng-model="teacher.email" type="email" name="email" placeholder="Email (required)"  class="black_text" required>
                </md-input-container>
                
                <md-input-container class="md-block">
                  <!-- Use floating placeholder instead of label -->
                  <md-icon  class="password"></md-icon>
-                 <input ng-model="teacher.password" type="password" placeholder="Password (required)" class="black_text" required>
+                 <input ng-model="teacher.password" type="password" name="password" placeholder="Password (required)" class="black_text" required>
                </md-input-container>
 
                
-               <md-button class="md-primary md-raised not_transparent" type="submit"> 
+               <md-button class="md-primary md-raised not_transparent" name="submit" type="submit"> 
                  Submit
                </md-button>
-
+               <br>
                <a ui-sref="reset_password">Forgot your password</a>
              </form>
            </md-input-container> <!-- end of ng-if="auth_type==1" -->
@@ -115,6 +145,7 @@
                <md-button class="md-primary" type="submit"> 
                  Submit
                </md-button>
+               <br>
                <a ui-sref="reset_password">Forgot your password</a>
              </form>
            </md-input-container> <!-- end of ng-if="auth_type==1" -->
@@ -140,7 +171,7 @@
         <h1 class="md-toolbar-tools">Sidenav Right</h1>
       </md-toolbar>
       <md-content  layout-padding >
-        <button class="md-button md-default-theme" ui-sref="register" ng-click="closeRightMenu()" md-ink-ripple="#FF0000">Become a teacher</button>
+        <button class="md-button md-default-theme" ui-sref="register_teacher" ng-click="closeRightMenu()" md-ink-ripple="#FF0000">Become a teacher</button>
        <!--  <button ui-sref="how_it_works" ng-click="closeRightMenu()" class="md-button md-default-theme " md-ink-ripple="#FF0000">How it works</button><br> -->
         <button ui-sref="mailing_list" ng-click="closeRightMenu()" class="md-button md-default-theme " md-ink-ripple="#FF0000">
           Mailing list

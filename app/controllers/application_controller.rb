@@ -4,8 +4,13 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   before_action :configure_permitted_parameters, if: :devise_controller?
   include DeviseTokenAuth::Concerns::SetUserByToken
+  rescue_from ActiveRecord::RecordNotFound, :with => :record_not_found
 
   protected
+
+  def record_not_found
+    render json: { errors: [ "Record not found" ] }, status: 404
+  end
 
   def configure_permitted_parameters
     params.delete(:registration)

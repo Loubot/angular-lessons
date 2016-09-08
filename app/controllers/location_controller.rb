@@ -21,6 +21,11 @@ class LocationController < ApplicationController
     end
   end
 
+  def destroy
+    Location.find( params[:id] ).destroy
+    render json: { message: "Location deleted" }, status: 200
+  end
+
 
   private
 
