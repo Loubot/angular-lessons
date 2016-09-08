@@ -38,8 +38,8 @@
       </md-card> 
     </div> <!-- end of flex -->
 
-    <div flex="50" flex-xs="100">
-      <md-card ng-if="photos.length>0">
+    <div flex="50" flex-xs="100" >
+      <md-card ng-if="photos.length>0" class="min_height_100">
         <md-grid-list md-cols="3" md-row-height="6:2">
           <md-grid-tile class="gray"
               md-rowspan="3" md-colspan="1" md-colspan-sm="1" md-colspan-xs="1" ng-repeat="photo in photos">
@@ -68,8 +68,8 @@
         
       </md-card>    
 
-    </div> 
-  </div>
+    </div> <!-- end of flex=50 flex-xs=100 -->
+  </div> <!-- end of layout = row -->
 </div> 
 
 <div layout="column" layout-fill>
