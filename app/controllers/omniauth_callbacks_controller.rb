@@ -29,10 +29,10 @@ class OmniauthCallbacksController < DeviseTokenAuth::ApplicationController
     set_token_on_resource
     create_auth_params
 
-    if resource_class.devise_modules.include?(:confirmable)
-      # don't send confirmation email!!!
-      @resource.skip_confirmation!
-    end
+    # if resource_class.devise_modules.include?(:confirmable)
+    #   # don't send confirmation email!!!
+    #   @resource.skip_confirmation!
+    # end
 
     pp @resource
     sign_in(:user, @resource, store: false, bypass: false)
@@ -234,22 +234,32 @@ class OmniauthCallbacksController < DeviseTokenAuth::ApplicationController
 
   def get_resource_from_auth_hash
     # find or create user by provider and provider uid
-    @resource = resource_class.where({
-      uid:      auth_hash['uid'],
-      provider: auth_hash['provider']
-    }).first_or_initialize
 
-    if @resource.new_record?
-      @oauth_registration = true
-      set_random_password
+    identity = Identity.find_or_initialize_by(uid: auth_hash[:uid], provider: auth_hash[:provider])
+
+    if identity.new_record?
+      @resource = Teacher.find_by( email: auth_hash['info']['email'] )
+      @resource.add_identity( auth_hash )
+    else # Not new identity
+      @resoure = identity.teacher
     end
 
+    # @resource = resource_class.where({
+    #   uid:      auth_hash['uid'],
+    #   provider: auth_hash['provider']
+    # }).first_or_initialize
+
+    # if @resource.new_record?
+    #   @oauth_registration = true
+    #   set_random_password
+    # end
+
     # sync user info with provider, update/generate auth token
-    assign_provider_attrs(@resource, auth_hash)
+    # assign_provider_attrs(@resource, auth_hash)
 
     # assign any additional (whitelisted) attributes
-    extra_params = whitelisted_params
-    @resource.assign_attributes(extra_params) if extra_params
+    # extra_params = whitelisted_params
+    # @resource.assign_attributes(extra_params) if extra_params
 
     @resource
   end
