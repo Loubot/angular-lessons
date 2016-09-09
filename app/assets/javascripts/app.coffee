@@ -115,7 +115,7 @@ angular.module('lessons').config ( $authProvider ) ->
     passwordResetPath:       '/auth/password'
     passwordUpdatePath:      '/auth/password'
     authProviderPaths: 
-      facebook: 'auth/facebook'
+      facebook: '/auth/facebook'
       
   })
 
