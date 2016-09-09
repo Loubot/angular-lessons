@@ -5,12 +5,69 @@ class OmniauthCallbacksController < DeviseTokenAuth::OmniauthCallbacksController
     p "Auth "
     pp auth_hash
 
+
     identity = Identity.find_or_initialize_by( uid: auth_hash['uid'], provider: auth_hash['provider'] )
+
+
+    if identity.new_record?
+      p "It is a new identity"
+
+      if ( @resource = Teacher.find_by( email: auth_hash['info']['email'] ) )
+        p "Found teacher by auth email, new identity"
+        pp @resource
+
+        create_token_info
+        set_token_on_resource
+        create_auth_params
+
+        @resource.add_identity( identity )
+        sign_in(:teacher, @resource, store: false, bypass: false)
+        p "auth_params"
+        p @auth_params
+        yield @resource if block_given?
+        render_data_or_redirect('deliverCredentials', @auth_params.as_json, @resource.as_json)
+
+      else #Can't find teacher, new identity
+        # p "Didn't find teacher, new identity"
+        # teacher = Teacher.find_for_oauth( auth_hash )
+        # teacher.
+      end
+    else # identity exists
+      teacher = identity.teacher
+      sign_in(:teacher, teacher, store: false, bypass: false)
+      yield teacher if block_given?
+      render_data_or_redirect('deliverCredentials', @auth_params.as_json, teacher.as_json)
+
+    end
+
+
+
+
+
+##########################################
 
     if teacher_signed_in?
       p "Teacher is signed in"
+
+
     else #Teacher isn't signed in
+      p "Teacher isn't signed in"
       teacher = Teacher.find_by(email: auth_hash['info']['email'])
+      if teacher
+        p "found teacher"
+        
+        if identity.new_record?
+          teacher.add_identity( auth_hash )
+          sign_in(:teacher, teacher, store: false, bypass: false)
+          yield teacher if block_given?
+          render_data_or_redirect('deliverCredentials', @auth_params.as_json, teacher.as_json)
+        end
+        
+       
+      else # New teacher
+        teacher = Teacher.find_for_oauth( auth_hash )
+      end
+      
 
       if teacher # Not a new teacher
         teacher.add_identity(auth_hash)
@@ -19,9 +76,14 @@ class OmniauthCallbacksController < DeviseTokenAuth::OmniauthCallbacksController
       end
     end
 
-    render json: identity.as_json
+    
 
   end
+
+
+
+
+
 
   def old_one
     @resource = resource_class.where({
@@ -51,6 +113,13 @@ class OmniauthCallbacksController < DeviseTokenAuth::OmniauthCallbacksController
 
     render_data_or_redirect('deliverCredentials', @auth_params.as_json, @resource.as_json)
   end
+
+
+
+
+
+
+
 
   def all
     pp request.env["omniauth.auth"]

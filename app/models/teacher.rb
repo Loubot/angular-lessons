@@ -41,6 +41,8 @@ class Teacher < ActiveRecord::Base
   has_one :experience, dependent: :destroy
 
   has_one :location, dependent: :destroy
+
+  has_many :identities, dependent: :destroy
   
   has_many :qualifications, dependent: :destroy
   include DeviseTokenAuth::Concerns::User
