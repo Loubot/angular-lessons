@@ -1,7 +1,10 @@
 class OmniauthCallbacksController < DeviseTokenAuth::OmniauthCallbacksController
 
   def omniauth_success
-    get_resource_from_auth_hash
+    @resource = resource_class.where({
+      uid:      auth_hash['uid'],
+      provider: auth_hash['provider']
+    }).first_or_initialize
     create_token_info
     set_token_on_resource
     create_auth_params
@@ -11,12 +14,15 @@ class OmniauthCallbacksController < DeviseTokenAuth::OmniauthCallbacksController
       @resource.skip_confirmation!
     end
 
-    p "resource"
+    p "Teacher found"
     pp @resource
 
     sign_in(:teacher, @resource, store: false, bypass: false)
 
-    @resource.save!
+    if @resource
+      p "hup"
+      @resource.save!
+    end
 
     yield @resource if block_given?
 

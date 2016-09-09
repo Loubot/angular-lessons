@@ -87,7 +87,7 @@ angular.module('lessons').controller('NavController', [
           alertify.success "Logged out successfully"
           $rootScope.USER = null
           $state.go 'welcome'
-          $window.location.reload()
+          # $window.location.reload()
         ).catch( ( err ) ->
           console.log err
           $rootScope.USER = null
