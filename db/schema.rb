@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160827125309) do
+ActiveRecord::Schema.define(version: 20160909101026) do
 
   create_table "categories", force: :cascade do |t|
     t.string   "name"
@@ -112,7 +112,6 @@ ActiveRecord::Schema.define(version: 20160827125309) do
     t.string   "email"
     t.string   "first_name"
     t.string   "last_name"
-    t.string   "calendar_id"
     t.text     "overview"
     t.boolean  "is_teacher",             default: false
     t.text     "tokens"
@@ -120,6 +119,7 @@ ActiveRecord::Schema.define(version: 20160827125309) do
     t.datetime "updated_at"
     t.boolean  "admin",                  default: false
     t.integer  "view_count",             default: 0
+    t.string   "nickname"
   end
 
   add_index "teachers", ["email"], name: "index_teachers_on_email"
