@@ -25,7 +25,7 @@ angular.module('lessons').controller('WelcomeController', [
 
     $rootScope.$on 'auth:login-error', (ev, reason) ->
       alert 'auth failed because', reason.errors[0]
-      
+
 
 
     $elems = $('.animateblock')
