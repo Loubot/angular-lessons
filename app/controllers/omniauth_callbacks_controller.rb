@@ -1,6 +1,29 @@
 class OmniauthCallbacksController < DeviseTokenAuth::OmniauthCallbacksController
 
+
   def omniauth_success
+    p "Auth "
+    pp auth_hash
+
+    identity = Identity.find_or_initialize_by( uid: auth_hash['uid'], provider: auth_hash['provider'] )
+
+    if teacher_signed_in?
+      p "Teacher is signed in"
+    else #Teacher isn't signed in
+      teacher = Teacher.find_by(email: auth_hash['info']['email'])
+
+      if teacher # Not a new teacher
+        teacher.add_identity(auth_hash)
+      else
+
+      end
+    end
+
+    render json: identity.as_json
+
+  end
+
+  def old_one
     @resource = resource_class.where({
       uid:      auth_hash['uid'],
       provider: auth_hash['provider']
