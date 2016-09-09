@@ -2,7 +2,7 @@ Rails.application.routes.draw do
 
 
   scope '/api' do
-    mount_devise_token_auth_for 'Teacher', at: '/auth', controllers: { passwords: 'devise/passwords' }
+    mount_devise_token_auth_for 'Teacher', at: 'auth', controllers: { passwords: 'devise/passwords' }
     # resources :groups, except: [:new, :edit]
 
     get     'teacher/profile-pic'         => 'teacher#chunks'
