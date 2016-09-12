@@ -20,7 +20,7 @@ angular.module('lessons').controller('WelcomeController', [
       $auth.authenticate('facebook')
 
     $rootScope.$on 'auth:login-success', (ev, user) ->
-      alert 'Welcome ', user.email
+      # alert 'Welcome ', user.email
       
 
     $rootScope.$on 'auth:login-error', (ev, reason) ->
