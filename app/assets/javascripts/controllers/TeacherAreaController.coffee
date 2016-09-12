@@ -19,7 +19,7 @@ angular.module('lessons').controller('TeacherAreaController', [
     $scope.create_event_button_bool = false
     $scope.api_loaded = false # disable acknowledge calendar button will api is loaded
 
-    if localStorage.getItem("calendar_explanation") != "done"
+    show_explanation_sheet = ->
       $mdBottomSheet.show(
         templateUrl: "sheets/calendar_explanation_sheet.html"
         clickOutsideToClose: false
@@ -27,10 +27,13 @@ angular.module('lessons').controller('TeacherAreaController', [
         preserveScope: true
       )
 
+    if localStorage.getItem("calendar_explanation") != "done"
+      show_explanation_sheet()
+
 
     $scope.acknowledge = ->
       $mdBottomSheet.hide()
-      load_calendar_api()
+      load_calendar_list()
       # localStorage.setItem "calendar_explanation", "done"
 
     ############### Define event details ###########################
@@ -146,17 +149,13 @@ angular.module('lessons').controller('TeacherAreaController', [
 
     calendar_loaded = ->
       alertify.success "Calendar api loaded"
+      console.log "hup0"
+      if !(localStorage.getItem("calendar_explanation") == "done")
+        console.log "hup"
+        show_explanation_sheet()
       
-      
-
-    oauth2_loaded = ->
-      console.log "Oauth"
-      gapi.client.oauth2.userinfo.get().execute( ( resp ) ->
-        # console.log "should be here " 
-        # console.log resp
-        $scope.google_id_email =  resp.email
-        # get user email and then load calendar list
-        gapi.client.calendar.calendarList.list().execute( ( resp ) ->
+    load_calendar_list = ->
+      gapi.client.calendar.calendarList.list().execute( ( resp ) ->
           console.log "Calendar list"
           # console.log resp
           if resp.error?  
@@ -167,6 +166,17 @@ angular.module('lessons').controller('TeacherAreaController', [
             # format_events( resp.items )
             alertify.success "Got events" 
         )
+      
+
+    oauth2_loaded = ->
+      console.log "Oauth"
+      gapi.client.oauth2.userinfo.get().execute( ( resp ) ->
+        # console.log "should be here " 
+        # console.log resp
+        $scope.google_id_email =  resp.email
+        # get user email and then load calendar list
+        if localStorage.getItem("calendar_explanation") == "done"
+          load_calendar_list()
       )
 
     
@@ -180,8 +190,8 @@ angular.module('lessons').controller('TeacherAreaController', [
         $scope.$digest()
         $scope.api_loaded = true
         $scope.$digest()
-        if localStorage.getItem("calendar_explanation") == "done"
-          load_calendar_api()
+        
+        load_calendar_api()
       else
         $scope.show_auth_button = true
         alertify.confirm "Please log in with google to use the calendar"
