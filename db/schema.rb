@@ -138,9 +138,6 @@ ActiveRecord::Schema.define(version: 20160909174743) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "admin",                  default: false
-    t.string   "nickname"
-    t.text     "image"
-    t.string   "name"
     t.integer  "view_count",             default: 0
   end
 
