@@ -34,9 +34,11 @@ class OmniauthCallbacksController < DeviseTokenAuth::ApplicationController
     #   @resource.skip_confirmation!
     # end
 
-    pp @resource
-    sign_in(:user, @resource, store: false, bypass: false)
-
+    p "sign_in"
+    # p sign_in(:user, @resource, store: true, bypass: true)
+    sign_in(:teacher, @resource)
+    p @auth_params
+    p @resource
     # @resource.save!
 
     yield @resource if block_given?
@@ -238,10 +240,12 @@ class OmniauthCallbacksController < DeviseTokenAuth::ApplicationController
     identity = Identity.find_or_initialize_by(uid: auth_hash[:uid], provider: auth_hash[:provider])
 
     if identity.new_record?
+      p "New identity created"
       @resource = Teacher.find_by( email: auth_hash['info']['email'] )
       @resource.add_identity( auth_hash )
     else # Not new identity
-      @resoure = identity.teacher
+      p "Not a new identity create"
+      @resource = identity.teacher
     end
 
     # @resource = resource_class.where({
