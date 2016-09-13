@@ -76,8 +76,6 @@ angular.module('lessons').controller('WelcomeController', [
       # console.log $location.absUrl().split('?')[0]
 
       setTimeout (->
-        
-        $location.url '/'
         $location.search('')
       ), 2000
       

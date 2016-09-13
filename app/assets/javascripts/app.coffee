@@ -13,7 +13,6 @@ angular.module('lessons', [
   'validation.match'
   'ngMessages'
   'mdPickers'
-  'ngRoute'
 ])
 
 angular.module('lessons').constant "RESOURCES", do ->
@@ -106,9 +105,6 @@ angular.module('lessons').config ($stateProvider, $urlRouterProvider) ->
     controller: "AdminController"
 
   $urlRouterProvider.otherwise "/"
-
-angular.module('lessons').config ($locationProvider, $routeProvider) ->
-  $locationProvider.html5Mode true
   
   
 
