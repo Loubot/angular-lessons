@@ -27,8 +27,8 @@ angular.module('lessons').controller('TeacherAreaController', [
         preserveScope: true
       )
 
-    if localStorage.getItem("calendar_explanation") != "done"
-      show_explanation_sheet()
+    # if localStorage.getItem("calendar_explanation") != "done"
+    #   show_explanation_sheet()
 
 
     $scope.acknowledge = ->
