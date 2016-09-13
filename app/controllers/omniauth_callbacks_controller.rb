@@ -238,6 +238,8 @@
         email:    auth_hash['info']['email']
       }).first_or_initialize
 
+      @resource = Teacher.find_for_oauth( auth_hash )
+
       p "new teacher?"
       pp @resource
       if @resource.new_record?
