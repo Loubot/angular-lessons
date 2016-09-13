@@ -84,3 +84,5 @@ gem 'activerecord-session_store'
 gem 'geokit-rails'
 
 gem 'mandrill-api', '~> 1'
+
+gem 'rack-cors'
