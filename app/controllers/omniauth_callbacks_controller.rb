@@ -206,7 +206,9 @@
         render_data(message, user_data.merge(data))
 
       elsif auth_origin_url # default to same-window implementation, which forwards back to auth_origin_url
-
+        p "auth url"
+        logger.debug auth_origin_url
+        p auth_origin_url
         # build and redirect to destination url
         redirect_to DeviseTokenAuth::Url.generate(auth_origin_url, data.merge(blank: true))
       else
@@ -230,23 +232,10 @@
             </html>|
     end
 
-    def convert_hash(hash)
-      hash.each do |k,v|
-        self.instance_variable_set("@#{k}", v.is_a?(Hash) ? Hashit.new(v) : v)
-        self.class.send(:define_method, k, proc{self.instance_variable_get("@#{k}")})
-        self.class.send(:define_method, "#{k}=", proc{|v| self.instance_variable_set("@#{k}", v)})
-      end
-    end
-
     def get_resource_from_auth_hash
       # find or create user by provider and provider uid
-      @resource = resource_class.where({
-        uid:      auth_hash['uid'],
-        provider: auth_hash['provider'],
-        email:    auth_hash['info']['email']
-      }).first_or_initialize
-
-      @resource = Teacher.find_for_oauth( auth_hash )
+     @resource = Teacher.find_for_oauth( auth_hash )
+      
 
       p "new teacher?"
       pp @resource

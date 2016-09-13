@@ -53,7 +53,9 @@ class Teacher < ActiveRecord::Base
 
 
   def add_identity(auth)
-    Identity.create!(uid: auth[:uid], provider: auth[:provider], teacher_id: self.id)
+    p "add identity"
+    pp auth['uid']
+    Identity.create!(uid: auth['uid'], provider: auth['provider'], teacher_id: self.id)
   end
 
   def self.find_for_oauth(auth, signed_in_resource = nil)
