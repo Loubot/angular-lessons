@@ -6,21 +6,24 @@ angular.module('lessons').controller('WelcomeController', [
   '$state'
   '$filter'
   '$stateParams'
+  '$location'
   'USER'
   '$mdSidenav'
   'alertify'
   '$auth'
   'COMMS'
   '$window'
-  ( $scope, $rootScope, $state, $filter, $stateParams, USER, $mdSidenav, alertify, $auth, COMMS, $window ) ->
+  ( $scope, $rootScope, $state, $filter, $stateParams, $location, USER, $mdSidenav, alertify, $auth, COMMS, $window ) ->
     console.log "WelcomeController"
 
     $scope.facebook = ->
       console.log 'facebook'
-      $auth.authenticate('facebook')
+      $auth.authenticate('facebook', {params: {resource_class: 'Teacher'}})
+      # $auth.authenticate('facebook')
 
     $rootScope.$on 'auth:login-success', (ev, user) ->
-      # alert 'Welcome ', user.email
+
+      alert 'Welcome ', user.email
       
 
     $rootScope.$on 'auth:login-error', (ev, reason) ->
@@ -67,7 +70,19 @@ angular.module('lessons').controller('WelcomeController', [
     
       
 
-    USER.get_user()
+    USER.get_user().then( ( resp ) ->
+      console.log "it workds"
+      # console.log $location.host()
+      # console.log $location.absUrl().split('?')[0]
+
+      setTimeout (->
+        alert 'Hello'
+        $location.url '/'
+        $location.search('')
+      ), 3000
+      
+      
+    )
 
 
     $scope.search_teachers = ->
