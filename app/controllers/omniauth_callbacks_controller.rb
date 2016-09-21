@@ -193,7 +193,8 @@
     end
 
     def render_data_or_redirect(message, data, user_data = {})
-
+      logger.debug "data logged"
+      logger.debug data
       # We handle inAppBrowser and newWindow the same, but it is nice
       # to support values in case people need custom implementations for each case
       # (For example, nbrustein does not allow new users to be created if logging in with
@@ -206,11 +207,17 @@
         render_data(message, user_data.merge(data))
 
       elsif auth_origin_url # default to same-window implementation, which forwards back to auth_origin_url
-        p "auth url"
+        logger.debug "auth url"
         logger.debug auth_origin_url
         p auth_origin_url
         # build and redirect to destination url
-        redirect_to DeviseTokenAuth::Url.generate(auth_origin_url, data.merge(blank: true))
+        logger.debug "old url"
+        logger.debug DeviseTokenAuth::Url.generate(auth_origin_url, data.merge(blank: true))
+        logger.debug "new url"
+        logger.debug "#{ auth_origin_url }?auth_token=#{ data['auth_token'] }&blank=true&client_id=#{ data['client_id'] }&expiry=#{ data['expiry'] }&uid=#{ data['uid'] }"
+        redirect_to "#{ auth_origin_url }?auth_token=#{ data['auth_token'] }&blank=true&client_id=#{ data['client_id'] }&expiry=#{ data['expiry'] }&uid=#{ data['uid'] }"
+
+        # redirect_to DeviseTokenAuth::Url.generate(auth_origin_url, data.merge(blank: true))
       else
 
         # there SHOULD always be an auth_origin_url, but if someone does something silly
