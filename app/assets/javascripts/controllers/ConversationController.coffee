@@ -129,8 +129,9 @@ angular.module('lessons').controller('ConversationController', [
 
     scroll_to_bottom = ->
       $timeout (->
+        console.log "scroll it"
         height = document.getElementById("message_container").scrollHeight
-        $(".message_container").animate({ scrollTop: height }, "slow");
+        $("#message_container").animate({ scrollTop: height }, "slow");
       ), 2000
 
     open_login_or_register = ->
