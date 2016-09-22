@@ -11,7 +11,7 @@ module SearchHelper
       teachers.as_json( include: [ :photos, :location, :subjects ] )
     else
       p "Searhc helper params #{ params }"
-      subject = Subject.includes(:teachers).where('name ILIKE ?', "%#{ params[:subject_name] }%").select( [ :name, :id ] ).first
+      subject = Subject.includes(:teachers).where('name LIKE ?', "%#{ params[:subject_name] }%").select( [ :name, :id ] ).first
       teachers = subject.teachers.select( "email, id, first_name, last_name" )
       teachers.as_json(include: [ :photos, :location, :subjects ])
     end
@@ -25,3 +25,5 @@ end
 #Location.geo_scope(:origin => '100 Spear st, San Francisco, CA')
 #ids = Location.within( 5, :origin => "cork" ).select(['teacher_id']).map(&:teacher_id)
 #Subject.where(name: 'Guitar').first.teachers.includes(:qualifications).where(id: ids)
+
+# http://angular-lessons.herokuapp.com/#/

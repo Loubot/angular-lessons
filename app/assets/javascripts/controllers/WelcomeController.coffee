@@ -6,14 +6,17 @@ angular.module('lessons').controller('WelcomeController', [
   '$state'
   '$filter'
   '$stateParams'
+  '$location'
   'USER'
   '$mdSidenav'
   'alertify'
   '$auth'
   'COMMS'
   '$window'
-  ( $scope, $rootScope, $state, $filter, $stateParams, USER, $mdSidenav, alertify, $auth, COMMS, $window ) ->
+  ( $scope, $rootScope, $state, $filter, $stateParams, $location, USER, $mdSidenav, alertify, $auth, COMMS, $window ) ->
     console.log "WelcomeController"
+
+
 
     $elems = $('.animateblock')
     $scope.selected = {}
@@ -54,7 +57,17 @@ angular.module('lessons').controller('WelcomeController', [
     
       
 
-    USER.get_user()
+    USER.get_user().then( ( resp ) ->
+      console.log "it workds"
+      # console.log $location.host()
+      # console.log $location.absUrl().split('?')[0]
+
+      setTimeout (->
+        $location.search('')
+      ), 2000
+      
+      
+    )
 
 
     $scope.search_teachers = ->

@@ -71,12 +71,18 @@ gem 'devise_token_auth'
 
 gem 'omniauth'
 
+gem 'omniauth-facebook'
+
 gem 'validates_overlap', '~> 0'
 
 gem 'carrierwave'
 
 gem "mini_magick"
 
+gem 'activerecord-session_store'
+
 gem 'geokit-rails'
 
 gem 'mandrill-api', '~> 1'
+
+gem 'rack-cors'

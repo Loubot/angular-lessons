@@ -105,8 +105,7 @@ angular.module('lessons').config ($stateProvider, $urlRouterProvider) ->
     controller: "AdminController"
 
   $urlRouterProvider.otherwise "/"
-
-
+  
   
 
 angular.module('lessons').config ( $authProvider ) ->
@@ -114,6 +113,9 @@ angular.module('lessons').config ( $authProvider ) ->
     apiUrl: '/api'
     passwordResetPath:       '/auth/password'
     passwordUpdatePath:      '/auth/password'
+    authProviderPaths: 
+      facebook: '/auth/facebook'
+      
   })
 
 ############## Theme #######################################
