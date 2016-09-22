@@ -16,19 +16,6 @@ angular.module('lessons').controller('WelcomeController', [
   ( $scope, $rootScope, $state, $filter, $stateParams, $location, USER, $mdSidenav, alertify, $auth, COMMS, $window ) ->
     console.log "WelcomeController"
 
-    $scope.facebook = ->
-      console.log 'facebook'
-      $auth.authenticate('facebook', {params: {resource_class: 'Teacher'}})
-      # $auth.authenticate('facebook')
-
-    $rootScope.$on 'auth:login-success', (ev, user) ->
-
-      alert 'Welcome ', user.email
-      
-
-    $rootScope.$on 'auth:login-error', (ev, reason) ->
-      alert 'auth failed because', reason.errors[0]
-
 
 
     $elems = $('.animateblock')

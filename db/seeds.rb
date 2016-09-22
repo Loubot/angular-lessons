@@ -10,6 +10,7 @@ Category.create(name: 'Music')
 Subject.create(name: 'Guitar', category_id: 1)
 Subject.create(name: 'Drums', category_id: 1)
 Subject.create(name: 'Piano', category_id: 1)
+Subject.create(name: "Acoustic Guitar", category_id: 1 )
 
 t1 = Teacher.create( first_name: "Bob", last_name: "Builder", password: "Football1", email: "lllouis1@yahoo.com", is_teacher: true)
 t2 = Teacher.create( first_name: "Tim", last_name: "Shanks", password: "Football1", email: "lllouis2@yahoo.com", is_teacher: true)

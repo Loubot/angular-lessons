@@ -112,9 +112,14 @@
                </md-input-container>
 
                
+
                <md-button class="md-primary md-raised not_transparent" name="submit" type="submit"> 
                  Submit
                </md-button>
+               <p flex-offset="15">or</p>
+               <div ng-click="facebook()">
+                <%= image_tag('facebook_login.jpg', class: 'width_75') %>
+               </div>
                <br>
                <a ui-sref="reset_password">Forgot your password</a>
              </form>
@@ -142,9 +147,16 @@
                </md-input-container>
 
                
+               
                <md-button class="md-primary" type="submit"> 
                  Submit
                </md-button>
+
+               <p flex-offset="15">or</p>
+               <div ng-click="facebook()">
+                <%= image_tag('facebook_login.jpg', class: 'width_75') %>
+               </div>
+
                <br>
                <a ui-sref="reset_password">Forgot your password</a>
              </form>
