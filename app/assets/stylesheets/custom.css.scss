@@ -643,3 +643,8 @@ md-sidenav.md-closed.md-locked-open-add-active.user_menu {
 .alertify{
   max-height: 35% !important;
 }
+
+// move fab completely into toolbar
+md-fab-speed-dial.md-fab-top-left{
+  top: 5px !important;  
+}
