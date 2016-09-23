@@ -7,8 +7,32 @@
             <img ng-src="{{ profile.avatar.thumb.url }}" class="md-user-avatar ">
           </md-card-avatar>
           <md-card-header-text>
-            <span class="md-title">{{ USER.first_name }} {{ USER.last_name }}</span>
-            <span class="md-subhead">{{ USER.first_name }} {{ USER.last_name }}</span>
+            <!-- <span class="md-title">
+
+              {{ USER.first_name }} {{ USER.last_name }}
+
+            </span> -->
+            <span class="md-subhead">
+              <form ng-submit="update_teahcer()">
+                <md-input-container md-no-float>
+                  <label>First name:</label>
+                  <input  type="text"
+                          ng-change="update_teacher()"
+                          ng-model-options="{ debounce:750 }"
+                          ng-model="USER.first_name">
+                </md-input-container>
+
+                <md-input-container md-no-float>
+                  <label>Last name:</label>
+                  <input  type="text"
+                          ng-change="update_teacher()" 
+                          ng-model-options="{ debounce:750 }"
+                          ng-model="USER.last_name">
+                </md-input-container>
+                
+                
+              </form>
+            </span>
           </md-card-header-text>
         </md-card-header>
         <img ng-if="profile" ng-src="{{ profile.avatar.url }}" 

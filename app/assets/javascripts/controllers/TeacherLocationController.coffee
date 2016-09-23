@@ -112,6 +112,7 @@ angular.module('lessons').controller( "TeacherLocationController" , [
         console.log resp
         alertify.success "Location updated"
         $rootScope.USER.location = resp.data.location
+        $('#pac-input').val ''
         $scope.addresses = null
       ).catch( ( err ) ->
         console.log err
