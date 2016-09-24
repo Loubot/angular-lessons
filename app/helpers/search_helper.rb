@@ -10,7 +10,7 @@ module SearchHelper
                   .where( id: ids )
       teachers.as_json( include: [ :photos, :location, :subjects ] )
     else
-      p "Searhc helper params #{ params }"
+      p "Search helper params #{ params }"
       subject = Subject.includes(:teachers).where('name ILIKE ?', "%#{ params[:subject_name] }%").select( [ :name, :id ] ).first
       teachers = subject.teachers.select( "email, id, first_name, last_name" )
       teachers.as_json(include: [ :photos, :location, :subjects ])

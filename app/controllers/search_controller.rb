@@ -3,10 +3,18 @@ class SearchController < ApplicationController
   require 'pp'
   def search
     p "search controller"
+
+    begin
+      teachers = search_query( search_params )
+      render json: { teachers: teachers }
+    rescue Geokit::Geocoders::GeocodeError
+      render json: { errors: "Gecoder failed" }, status: 500
+    end
+  end
     
-    teachers = search_query( search_params )
     
-    render json: { teachers: teachers }
+    
+    
   end
 
   def search_subjects
