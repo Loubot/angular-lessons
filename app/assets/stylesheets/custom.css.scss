@@ -10,18 +10,18 @@ html, body{
 }
 
 .white_placeholder::-webkit-input-placeholder { /* WebKit, Blink, Edge */
-    color:    #FFF;
+    color:    #FFF !important;
 }
 .white_placeholder:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
-   color:    #FFF;
+   color:    #FFF !important;
    opacity:  1;
 }
 .white_placeholder::-moz-placeholder { /* Mozilla Firefox 19+ */
-   color:    #FFF;
+   color:    #FFF !important;
    opacity:  1;
 }
 .white_placeholder:-ms-input-placeholder { /* Internet Explorer 10-11 */
-   color:    #FFF;
+   color:    #FFF !important;
 }
 
 .green_text{
