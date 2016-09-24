@@ -16,8 +16,6 @@ angular.module('lessons').controller( "TeacherLocationController" , [
     $scope.addresses = null
 
     
-
-    
     
     USER.get_user().then( ( user ) ->
       if $rootScope.USER? && $rootScope.USER.location
@@ -31,7 +29,7 @@ angular.module('lessons').controller( "TeacherLocationController" , [
         })
 
         console.log 'yep'
-        marker = new google.maps.Marker
+        $scope.marker = new google.maps.Marker
           position: 
             lat:    $rootScope.USER.location.latitude
             lng:    $rootScope.USER.location.longitude
@@ -112,6 +110,15 @@ angular.module('lessons').controller( "TeacherLocationController" , [
         console.log resp
         alertify.success "Location updated"
         $rootScope.USER.location = resp.data.location
+        $scope.marker.setMap null
+
+        $scope.marker = new google.maps.Marker
+          position: 
+            lat:    resp.data.location.latitude
+            lng:    resp.data.location.longitude
+          title:    resp.data.location.name
+          map:      $scope.map
+
         $('#pac-input').val ''
         $scope.addresses = null
       ).catch( ( err ) ->
