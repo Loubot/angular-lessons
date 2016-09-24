@@ -15,7 +15,8 @@
 
         <md-fab-actions ng-if="!USER" >
           <md-button class="md-button md-default-theme green_blue_text" ng-click="openLeftMenu(0)">Login</md-button>
-          <md-button class="md-button md-default-theme green_blue_text" ng-click="openLeftMenu(1)">Register</md-button>
+          <md-button class="md-button md-default-theme green_blue_text" ng-click="openLeftMenu(1)">Student Register</md-button>
+          <md-button class="md-button md-default-theme green_blue_text" ui-sref="register_teacher">Teacher Register</md-button>
         </md-fab-actions> <!-- end of if !USER -->
 
         <md-fab-actions ng-if="USER && USER.is_teacher" class="green_blue_text">
@@ -34,7 +35,7 @@
       </md-fab-speed-dial>
 
 
-      <md-icon ng-show="!USER" hide-gt-xs ng-click="openLeftMenu(0)" class="white_text"><i class="material-icons">face</i></md-icon>
+      <md-icon ng-show="!USER" hide-gt-xs ng-click="user_menu()" class="white_text"><i class="material-icons">face</i></md-icon>
       <md-icon ng-show="USER" hide-gt-xs ng-click="user_menu()" class="white_text"><i class="material-icons">face</i></md-icon>
 
 
@@ -53,6 +54,12 @@
 
   <div class="main_page" layout="column" flex>
     <!-- ################## User left menu ############################# -->
+    <md-sidenav ng-if="!USER" hide-gt-xs md-component-id="user_menu" class="md-sidenavleft user_menu">
+      <md-button class="md-button md-default-theme " ng-click="openLeftMenu(0)">Login</md-button>
+      <md-button class="md-button md-default-theme " ng-click="openLeftMenu(1)">Student Register</md-button>
+      <md-button class="md-button md-default-theme " ui-sref="register_teacher">Teacher Register</md-button>
+    </md-sidenav>
+
     <md-sidenav ng-if="USER" hide-gt-xs md-component-id="user_menu" class="md-sidenav-left user_menu">
       <div layout="column"  layout-align="center end">
         <md-toolbar class="dark_moderate_cyan_background white_text">
