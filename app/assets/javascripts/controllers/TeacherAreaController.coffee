@@ -34,7 +34,7 @@ angular.module('lessons').controller('TeacherAreaController', [
     $scope.acknowledge = ->
       $mdBottomSheet.hide()
       load_calendar_list()
-      # localStorage.setItem "calendar_explanation", "done"
+      localStorage.setItem "calendar_explanation", "done"
 
     ############### Define event details ###########################
     #https://developers.google.com/apis-explorer/#p/calendar/v3/calendar.events.insert
