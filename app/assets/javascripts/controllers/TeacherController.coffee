@@ -192,7 +192,7 @@ angular.module('lessons').controller('TeacherController', [
 
     ####################### Update teacher #####################################
     $scope.update_teacher = ->
-
+      
       COMMS.POST(
         '/teacher'
         $scope.USER
@@ -206,6 +206,11 @@ angular.module('lessons').controller('TeacherController', [
         alertify.error "Failed to update teacher"
 
       )
+
+    $scope.change_to_student = ->
+      $scope.change_user_type = true
+      $scope.USER.is_teacher = false
+      $scope.update_teacher()
 
     ####################### End of update teacher ##############################
 

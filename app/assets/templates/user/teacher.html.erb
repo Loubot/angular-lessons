@@ -220,6 +220,26 @@
       <span id="right"></span>
     </md-content>
     <!-- End of password -->
+    <md-content class="gutter_75 margin_t_10 center_text match_background">
+      <md-card>
+        <%= image_tag('outta_here.jpg', class: 'md-card-image width_50') %>
+        <md-card-title>
+          <md-card-title-text>
+            <span class="md-headline">Registered as a teacher by mistake?</span>
+          </md-card-title-text>
+        </md-card-title>
+        <md-card-content>
+          <p>
+            Simply click below and we'll change you to a student. 
+          </p>
+        </md-card-content>
+        <md-card-actions layout="column" layout-align="start">
+          <md-button class="md-raised md-warn" ng-click="change_to_student()">I'm a student</md-button>
+        </md-card-actions>
+      </md-card>
+    </md-content>
   </div> <!-- end of column -->
+
+
 </div> <!-- end of row -->
 
