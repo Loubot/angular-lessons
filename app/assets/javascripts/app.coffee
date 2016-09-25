@@ -40,7 +40,7 @@ angular.module('lessons').directive 'scroll', ($window) ->
 angular.module('lessons').config ($stateProvider, $urlRouterProvider) ->
   
   $stateProvider.state 'welcome',
-    url: '/:message'
+    url: '/welcome'
     templateUrl: "static/welcome.html"
     controller: "WelcomeController"
 
@@ -104,7 +104,7 @@ angular.module('lessons').config ($stateProvider, $urlRouterProvider) ->
     templateUrl: "admin/manage.html"
     controller: "AdminController"
 
-  $urlRouterProvider.otherwise "/"
+  $urlRouterProvider.otherwise "/welcome"
   
   
 
@@ -250,30 +250,32 @@ angular.module('lessons').service 'COMMS', ( $http, $state, RESOURCES, $rootScop
       )
 
       
-angular.module('lessons').run [
-  '$rootScope'
-  ($rootScope) ->
-    # see what's going on when the route tries to change
-    $rootScope.$on '$stateChangeStart', (event, toState, toParams, fromState, fromParams) ->
-      console.log toState
-      console.log '$stateChangeStart to ' + JSON.stringify toState + '- fired when the transition begins. toState,toParams : \n', toState, toParams
-      return
-    $rootScope.$on '$stateChangeError', (event, toState, toParams, fromState, fromParams, error) ->
-      console.log '$stateChangeError - fired when an error occurs during transition.'
-      console.log arguments
-      return
-    $rootScope.$on '$stateChangeSuccess', (event, toState, toParams, fromState, fromParams) ->
-      console.log '$stateChangeSuccess to ' + toState.name + '- fired once the state transition is complete.'
-      return
-    $rootScope.$on '$viewContentLoading', (event, viewConfig) ->
-      console.log '$viewContentLoading - view begins loading - dom not rendered', viewConfig
-      return
-    # $rootScope.$on('$viewContentLoaded',function(event){
-    #   // runs on individual scopes, so putting it in "run" doesn't work.
-    #   console.log('$viewContentLoaded - fired after dom rendered',event);
-    $rootScope.$on '$stateNotFound', (event, unfoundState, fromState, fromParams) ->
-      console.log '$stateNotFound ' + unfoundState.to + '  - fired when a state cannot be found by its name.'
-      console.log unfoundState, fromState, fromParams
-      return
+# angular.module('lessons').run [
+#   '$rootScope'
+#   ($rootScope) ->
+#     # see what's going on when the route tries to change
+#     $rootScope.$on '$stateChangeStart', (event, toState, toParams, fromState, fromParams) ->
+#       console.log toState
+#       console.log '$stateChangeStart to ' +  toState + '- fired when the transition begins. toState,toParams : \n' + toState + toParams
+#       return
+#     $rootScope.$on '$stateChangeError', (event, toState, toParams, fromState, fromParams, error) ->
+#       console.log '$stateChangeError - fired when an error occurs during transition.'
+#       console.log arguments
+#       return
+#     $rootScope.$on '$stateChangeSuccess', (event, toState, toParams, fromState, fromParams) ->
+#       console.log '$stateChangeSuccess to ' + toState.name + '- fired once the state transition is complete.'
+#       return
+#     $rootScope.$on '$viewContentLoading', (event, viewConfig) ->
+#       console.log '$viewContentLoading - view begins loading - dom not rendered', viewConfig
+#       console.log viewConfig
+#       console.log event
+#       return
+#     # $rootScope.$on('$viewContentLoaded',function(event){
+#     #   // runs on individual scopes, so putting it in "run" doesn't work.
+#     #   console.log('$viewContentLoaded - fired after dom rendered',event);
+#     $rootScope.$on '$stateNotFound', (event, unfoundState, fromState, fromParams) ->
+#       console.log '$stateNotFound ' + unfoundState.to + '  - fired when a state cannot be found by its name.'
+#       console.log unfoundState, fromState, fromParams
+#       return
 
-]
+# ]

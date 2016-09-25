@@ -10,17 +10,9 @@ angular.module('lessons').controller("RegisterController", [
   ( $scope, $rootScope, $state, $auth, alertify) ->
     console.log "RegisterController"
 
-    $rootScope.$on '$routeChangeStart', (event, next, current) ->
-      # next is an object that is the route that we are starting to go to
-      # current is an object that is the route where we are currently
-      currentPath = current.originalPath
-      nextPath = next.originalPath
-      console.log 'Starting to leave %s to go to %s', currentPath, nextPath
-      return
-
     $scope.scrollevent = ( $e ) ->
       
-      return
+      
 
     $scope.register_teacher = ->
       if $scope.teacher.email != $scope.teacher.confirm_email
