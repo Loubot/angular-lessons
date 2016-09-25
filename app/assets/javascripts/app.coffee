@@ -38,6 +38,11 @@ angular.module('lessons').directive 'scroll', ($window) ->
 
 
 angular.module('lessons').config ($stateProvider, $urlRouterProvider) ->
+
+  $stateProvider.state 'home',
+    url: '/'
+    templateUrl: "static/welcome.html"
+    controller: "WelcomeController"
   
   $stateProvider.state 'welcome',
     url: '/welcome'
@@ -104,7 +109,7 @@ angular.module('lessons').config ($stateProvider, $urlRouterProvider) ->
     templateUrl: "admin/manage.html"
     controller: "AdminController"
 
-  $urlRouterProvider.otherwise "/welcome"
+  $urlRouterProvider.otherwise "/"
   
   
 

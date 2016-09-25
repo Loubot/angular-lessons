@@ -12,7 +12,7 @@ angular.module('lessons').controller("RegisterController", [
 
     $scope.scrollevent = ( $e ) ->
       
-      
+      return
 
     $scope.register_teacher = ->
       if $scope.teacher.email != $scope.teacher.confirm_email
@@ -27,6 +27,8 @@ angular.module('lessons').controller("RegisterController", [
             console.log att
             $scope.register_teacher_form.email2.$setValidity att, true
 
+      $scope.teacher.is_teacher = true
+
       $auth.submitRegistration( $scope.teacher )
         .then( (resp) ->
           # handle success response
@@ -35,6 +37,8 @@ angular.module('lessons').controller("RegisterController", [
           console.log $rootScope.USER
           $state.go 'welcome'
           alertify.success "Welcome #{ resp.data.data.email }"
+          alertify.success "Registered as teacher" if $rootScope.USER.is_teacher
+          alertify.success "Registered as student" if !$rootScope.USER.is_teacher
         )
         .catch( (resp) ->
           # handle error response
