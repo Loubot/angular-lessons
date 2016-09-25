@@ -49,6 +49,7 @@ angular.module('lessons').controller('TeacherController', [
 
     
     USER.get_user().then( ( user ) ->
+      USER.check_user()
       alertify.success "Got user"
       console.log $rootScope.USER.overview == null
       if $rootScope.USER.id != parseInt( $stateParams.id )
@@ -200,6 +201,7 @@ angular.module('lessons').controller('TeacherController', [
         console.log resp
         alertify.success "Updated your profile"
         $rootScope.USER = resp.data.teacher
+        window.location.reload() if $scope.change_user_type
         $mdBottomSheet.hide()
       ).catch( ( err ) ->
         console.log err

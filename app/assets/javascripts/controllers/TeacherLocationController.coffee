@@ -18,6 +18,7 @@ angular.module('lessons').controller( "TeacherLocationController" , [
     
     
     USER.get_user().then( ( user ) ->
+      USER.check_user()
       if $rootScope.USER? && $rootScope.USER.location
 
         $scope.map = new google.maps.Map(document.getElementById('map'), {
@@ -110,7 +111,7 @@ angular.module('lessons').controller( "TeacherLocationController" , [
         console.log resp
         alertify.success "Location updated"
         $rootScope.USER.location = resp.data.location
-        $scope.marker.setMap null
+        $scope.marker.setMap null if $scope.marker?
 
         $scope.marker = new google.maps.Marker
           position: 

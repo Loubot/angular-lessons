@@ -66,6 +66,7 @@ angular.module('lessons').controller('TeacherAreaController', [
     
 
     USER.get_user().then( ( user ) ->
+      USER.check_user()
       console.log "got user"
       # console.log $rootScope.USER.id != parseInt( $stateParams.id )
       if $rootScope.USER.id != parseInt( $stateParams.id )

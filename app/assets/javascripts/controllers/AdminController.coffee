@@ -11,6 +11,11 @@ angular.module('lessons').controller('AdminController', [
     console.log "AdminController"
 
     USER.get_user().then( ( resp ) ->
+      if $rootScope.USER.admin == false
+        alertify.error "You must be an admin to view this"
+        $state.go "welcome"
+        return
+      USER.check_user()
       COMMS.GET(
           "/category"
         ).then( ( resp ) ->

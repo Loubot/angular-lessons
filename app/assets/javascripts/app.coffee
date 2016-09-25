@@ -130,7 +130,7 @@ angular.module('lessons').config ( $mdThemingProvider ) ->
     .accentPalette('blue-grey')
 
 
-angular.module('lessons').service 'USER', ( $http, $rootScope, RESOURCES, $q ) ->
+angular.module('lessons').service 'USER', ( $http, $rootScope, RESOURCES, $q, $state, alertify ) ->
   
   get_user: -> # get user and all associations
     $q ( resolve, reject ) ->
@@ -151,6 +151,11 @@ angular.module('lessons').service 'USER', ( $http, $rootScope, RESOURCES, $q ) -
         console.log err_result
         reject err_result
       )
+
+  check_user: ->
+    if !$rootScope.USER.is_teacher
+      alertify.error "You must be a teacher to view this"
+      $state.go "welcome"
 
 angular.module('lessons').service 'AUTH', ( $http, $rootScope, RESOURCES, $q, $auth, alertify ) ->
 
