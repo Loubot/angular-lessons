@@ -57,7 +57,10 @@ angular.module('lessons').controller('TeacherController', [
         alertify.error "You are not allowed to view this"
         return false
       $scope.photos = $rootScope.USER.photos
+
       $scope.subjects = $rootScope.USER.subjects
+      alertify.error "Your profile is not visible until you select a subject" if $scope.subjects.length == 0
+
       $scope.experience = $rootScope.USER.experience
       $scope.quals = $rootScope.USER.qualifications
       profile_pic()
@@ -138,6 +141,7 @@ angular.module('lessons').controller('TeacherController', [
         console.log resp
         alertify.success "Successfully added subject"
         $scope.subjects = resp.data.subjects
+        alertify.success "Your profile is now visible to students" if resp.data.subjects.length > 0
       ).catch( ( err ) ->
         console.log err
         alertify.error err.data.error if err.data.error?

@@ -192,6 +192,14 @@ md-sidenav.md-closed.md-locked-open-add-active.user_menu {
   -webkit-text-fill-color: transparent;
 }
 
+.reduced_header_font{
+  font-size: 4rem;
+  // font-size: 72px;
+  background: -webkit-linear-gradient(#999, #fff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
 .x_large_font{
   font-size: x-large;
 }
