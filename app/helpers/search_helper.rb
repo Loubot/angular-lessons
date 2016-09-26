@@ -19,11 +19,3 @@ module SearchHelper
   end
 
 end
-
-
-#Location.within(5, :origin => @somewhere)
-#Location.geo_scope(:origin => '100 Spear st, San Francisco, CA')
-#ids = Location.within( 5, :origin => "cork" ).select(['teacher_id']).map(&:teacher_id)
-#Subject.where(name: 'Guitar').first.teachers.includes(:qualifications).where(id: ids)
-
-# http://angular-lessons.herokuapp.com/#/

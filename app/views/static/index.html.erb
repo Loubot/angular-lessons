@@ -55,9 +55,9 @@
   <div class="main_page" layout="column" flex>
     <!-- ################## User left menu ############################# -->
     <md-sidenav ng-if="!USER" hide-gt-xs md-component-id="user_menu" class="md-sidenavleft user_menu">
-      <md-button class="md-button md-default-theme " ng-click="openLeftMenu(0)">Login</md-button>
-      <md-button class="md-button md-default-theme " ng-click="openLeftMenu(1)">Student Register</md-button>
-      <md-button class="md-button md-default-theme " ui-sref="register_teacher">Teacher Register</md-button>
+      <md-button class="md-button md-default-theme " ng-click="openLeftMenu(0); user_menu()">Login</md-button>
+      <md-button class="md-button md-default-theme " ng-click="openLeftMenu(1); user_menu()">Student Register</md-button>
+      <md-button class="md-button md-default-theme " ui-sref="register_teacher" ng-click="user_menu()">Teacher Register</md-button>
     </md-sidenav>
 
     <md-sidenav ng-if="USER" hide-gt-xs md-component-id="user_menu" class="md-sidenav-left user_menu">

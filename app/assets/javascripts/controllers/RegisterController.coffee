@@ -3,16 +3,24 @@
 angular.module('lessons').controller("RegisterController", [
   "$scope"
   "$rootScope"
+  "USER"
   "$state"
   "$auth"
   "alertify"
 
-  ( $scope, $rootScope, $state, $auth, alertify) ->
+  ( $scope, $rootScope, USER, $state, $auth, alertify) ->
     console.log "RegisterController"
+
+    USER.get_user()
 
     $scope.scrollevent = ( $e ) ->
       
       return
+
+    $scope.register_with_facebook = ->
+      $auth.authenticate('facebook', {params: {resource_class: 'Teacher'}})
+
+    
 
     $scope.register_teacher = ->
       if $scope.teacher.email != $scope.teacher.confirm_email

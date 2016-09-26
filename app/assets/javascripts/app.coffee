@@ -289,3 +289,36 @@ angular.module('lessons').service 'COMMS', ( $http, $state, RESOURCES, $rootScop
 #       return
 
 # ]
+
+angular.module('lessons').run(['$rootScope', '$state',
+  ($rootScope, $state)->
+    $rootScope.isAuthenticated = false
+
+    $rootScope.$on('auth:validation-success', (e)->
+      $rootScope.isAuthenticated = true
+      $state.go 'welcome'
+    )
+    $rootScope.$on('auth:login-success', (e)->
+      $rootScope.isAuthenticated = true
+      console.log 2
+    )
+
+    $rootScope.$on('auth:validation-error', (e)->
+      $rootScope.isAuthenticated = false
+    )
+    $rootScope.$on('auth:invalid', (e)->
+      $rootScope.isAuthenticated = false
+    )
+    $rootScope.$on('auth:login-error', (e)->
+      $rootScope.isAuthenticated = false
+    )
+    $rootScope.$on('auth:logout-success', (e)->
+      $rootScope.isAuthenticated = false
+    )
+    $rootScope.$on('auth:account-destroy-success', (e)->
+      $rootScope.isAuthenticated = false
+    )
+    $rootScope.$on('auth:session-expired', (e)->
+      $rootScope.isAuthenticated = false
+    )
+])
