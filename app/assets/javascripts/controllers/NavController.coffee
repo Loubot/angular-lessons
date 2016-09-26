@@ -19,14 +19,6 @@ angular.module('lessons').controller('NavController', [
       $auth.authenticate('facebook', {params: {resource_class: 'Teacher'}})
       # $auth.authenticate('facebook')
 
-    $rootScope.$on 'auth:login-success', (ev, user) ->
-
-      alert 'Welcome ', user.email
-      
-
-    $rootScope.$on 'auth:login-error', (ev, reason) ->
-      alert 'auth failed because', reason.errors[0]
-
     $scope.user_menu = ->
       $mdSidenav('user_menu').toggle()
       
