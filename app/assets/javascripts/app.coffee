@@ -296,11 +296,11 @@ angular.module('lessons').run(['$rootScope', '$state',
 
     $rootScope.$on('auth:validation-success', (e)->
       $rootScope.isAuthenticated = true
-      $state.go 'welcome'
+      
     )
     $rootScope.$on('auth:login-success', (e)->
       $rootScope.isAuthenticated = true
-      console.log 2
+      # $state.go 'welcome'
     )
 
     $rootScope.$on('auth:validation-error', (e)->
