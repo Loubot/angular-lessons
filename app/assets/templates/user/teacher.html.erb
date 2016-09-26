@@ -20,6 +20,7 @@
         <img ng-if="profile" ng-src="{{ profile.avatar.url }}" 
             class="md-card-image" 
             alt="{{ USER.first_name }} profile pic">
+
         <div class="margin_t_10 padding_10">
           <form ng-submit="update_teahcer()">
             <md-input-container md-no-float>
@@ -38,13 +39,13 @@
                       ng-model="USER.last_name">
             </md-input-container>
             
-            
           </form>
         </div>
-        <md-card-title>
+
+        <md-card-title class="no_padding">
           <md-card-title-text>
             <span class="md-headline">Add pictures</span>
-            <span class="md-subhead">Click camera below</span>
+            <!-- <span class="md-subhead">Click camera below</span> -->
           </md-card-title-text>
         </md-card-title>
         <md-card-actions layout="row" layout-align="start center">
@@ -225,7 +226,7 @@
     <!-- End of password -->
     <md-content class="gutter_75 margin_t_10 center_text match_background">
       <md-card>
-        <%= image_tag('outta_here.jpg', class: 'md-card-image width_50') %>
+        <%= image_tag('outta_here.jpg', class: 'md-card-image width_50 center_block') %>
         <md-card-title>
           <md-card-title-text>
             <span class="md-headline">Registered as a teacher by mistake?</span>
