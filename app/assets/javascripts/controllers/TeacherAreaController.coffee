@@ -280,16 +280,16 @@ angular.module('lessons').controller('TeacherAreaController', [
 
     ####################### Create event##############################
     
-    $scope.create_event = ->      
-      $mdDialog.show(
-        scope: $scope
-        preserveScope: true
-        templateUrl: "dialogs/calendar_event_dialog.html"
-        openFrom: 'left'
-        closeTo: 'right'
-        fullscreen: true
-        clickOutsideToClose: true
-      )
+    # $scope.create_event = ->      
+    $mdDialog.show(
+      scope: $scope
+      preserveScope: true
+      templateUrl: "dialogs/calendar_event_dialog.html"
+      openFrom: 'left'
+      closeTo: 'right'
+      fullscreen: true
+      clickOutsideToClose: true
+    )
 
     $scope.close_event = ->
       $mdDialog.hide()
