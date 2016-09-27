@@ -429,7 +429,7 @@ md-sidenav.md-closed.md-locked-open-add-active.user_menu {
 
 
 #map { 
-  height: 40%;
+  height: 45%;
   min-height: 200px !important;
   width: 100%;
 }
@@ -524,6 +524,15 @@ md-sidenav.md-closed.md-locked-open-add-active.user_menu {
   transition: all 400ms ease-out 50ms; }
 
   // Messages
+
+.name_header{
+  position: fixed;
+  top: 10%;
+  left: 50%;
+  opacity: .5;
+  color: #111;
+  z-index: 10;
+}
 
 .bubble{
   word-wrap: break-word;

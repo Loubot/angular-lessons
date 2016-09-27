@@ -15,6 +15,17 @@ angular.module('lessons').controller( "TeacherLocationController" , [
     console.log "TeacherLocationController"
     $scope.addresses = null
 
+    set_marker = ( location ) ->
+      $scope.marker.setMap null if $scope.marker?
+
+      $scope.marker = new google.maps.Marker
+        position: 
+          lat:    location.latitude
+          lng:    location.longitude
+        title:    location.name
+        map:      $scope.map
+
+      $('#pac-input').val ''
     
     
     USER.get_user().then( ( user ) ->
@@ -30,12 +41,7 @@ angular.module('lessons').controller( "TeacherLocationController" , [
         })
 
         console.log 'yep'
-        $scope.marker = new google.maps.Marker
-          position: 
-            lat:    $rootScope.USER.location.latitude
-            lng:    $rootScope.USER.location.longitude
-          title:  $rootScope.USER.location.name
-          map:    $scope.map
+        set_marker( $rootScope.USER.location )
       else
         $scope.map = new google.maps.Map(document.getElementById('map'), {
           center: 
@@ -113,12 +119,7 @@ angular.module('lessons').controller( "TeacherLocationController" , [
         $rootScope.USER.location = resp.data.location
         $scope.marker.setMap null if $scope.marker?
 
-        $scope.marker = new google.maps.Marker
-          position: 
-            lat:    resp.data.location.latitude
-            lng:    resp.data.location.longitude
-          title:    resp.data.location.name
-          map:      $scope.map
+        set_marker( resp.data.location )
 
         $('#pac-input').val ''
         $scope.addresses = null
@@ -153,6 +154,7 @@ angular.module('lessons').controller( "TeacherLocationController" , [
         alertify.success "Location updated ok"
         $rootScope.USER.location = resp.data.location
         $mdBottomSheet.hide()
+        set_marker( resp.data.location )
         $scope.addresses = null
       ).catch( ( err ) ->
         console.log err

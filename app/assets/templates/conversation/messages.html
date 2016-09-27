@@ -1,3 +1,6 @@
+<div ng-if="USER.is_teacher" class="name_header">{{ conversation.student_name }}</div>
+<div ng-if="!USER.is_teacher" class="name_header">{{ conversation.teacher_name }}</div>
+
 <div hide-gt-xs>
   <md-toolbar>
     <div class="md-toolbar-tools search_toolbar" >
