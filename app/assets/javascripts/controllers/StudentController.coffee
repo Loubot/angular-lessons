@@ -10,13 +10,39 @@ angular.module('lessons').controller( 'StudentController', [
   'COMMS'
   '$mdDialog'
   '$auth'
+  'Upload'
+  'RESOURCES'
 
-  ( $scope, $rootScope, $stateParams, $state, USER, alertify, COMMS, $mdDialog, $auth ) ->
+  ( $scope, $rootScope, $stateParams, $state, USER, alertify, COMMS, $mdDialog, $auth, Upload, RESOURCES ) ->
     console.log "StudentController"
 
     $scope.scrollevent = ( $e ) ->
       
       return
+
+    $scope.upload = ( file ) ->
+      Upload.upload(
+        url: "#{ RESOURCES.DOMAIN }/teacher/#{ $rootScope.USER.id }/photos"
+        file: $scope.file
+        avatar: $scope.file
+        data:
+          avatar: $scope.file
+      ).then( ( resp ) -> 
+        console.log resp
+        $rootScope.USER.photos = resp.data.photos if resp.data != ""
+        console.log $rootScope.USER.photos
+        alertify.success("Photo uploaded ok")
+        if resp.data.status == "updated"
+          $rootScope.USER = resp.data.teacher
+          $rootScope.USER.photos = resp.data.photos if resp.data != ""
+          profile_pic()
+          alertify.success "Profile pic set"
+
+        $scope.file = null
+      ).catch( ( err ) ->
+        console.log err
+      )
+
 
     USER.get_user().then( ( user ) ->
       if $rootScope.USER.is_teacher
@@ -44,6 +70,7 @@ angular.module('lessons').controller( 'StudentController', [
       )
 
     profile_pic = ->
+      console.log $rootScope.USER.photos
       if !$rootScope.USER.profile?
         console.log "No profile"
         $scope.profile = null
@@ -54,6 +81,20 @@ angular.module('lessons').controller( 'StudentController', [
           $scope.profile = photo
           console.log $scope.profile
           $scope.profile
+
+    $scope.destroy_pic = ( id ) ->
+      COMMS.DELETE(
+        "/teacher/#{ $rootScope.USER.id }/photos/#{ id }"
+      ).then( ( resp ) ->
+        console.log resp
+        alertify.success "Deleted photo ok"
+        $rootScope.USER.photos = resp.data.teacher.photos
+        $rootScope.USER.profile = resp.data.teacher.profile
+        profile_pic()
+      ).catch( ( err ) ->
+        console.log err
+        alertify.error "Failed to delete photo"
+      )
 
     $scope.update_teacher = ->
       
