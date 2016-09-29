@@ -28,6 +28,7 @@
         </md-fab-actions>
 
         <md-fab-actions ng-if="USER && !USER.is_teacher" class="green_blue_text">
+          <md-button ui-sref="student_profile({id:USER.id})" class="md-button md-default-theme green_text">Profile</md-button>
           <md-button ui-sref="conversation({id:USER.id})" class="md-button md-default-theme green_text">Messages</md-button>
           <md-button class="md-button md-default-theme green_blue_text" ng-click="logout()">Logout</md-button>
         </md-fab-actions>
@@ -54,13 +55,18 @@
 
   <div class="main_page" layout="column" flex>
     <!-- ################## User left menu ############################# -->
-    <md-sidenav ng-if="!USER" hide-gt-xs md-component-id="user_menu" class="md-sidenavleft user_menu">
-      <md-button class="md-button md-default-theme " ng-click="openLeftMenu(0); user_menu()">Login</md-button>
-      <md-button class="md-button md-default-theme " ng-click="openLeftMenu(1); user_menu()">Student Register</md-button>
-      <md-button class="md-button md-default-theme " ui-sref="register_teacher" ng-click="user_menu()">Teacher Register</md-button>
+    <md-sidenav ng-if="!USER" hide-gt-xs md-component-id="user_menu" class="md-sidenavleft user_menu height_50">
+      <md-toolbar class="md-theme-indigo">
+        <h1 class="md-toolbar-tools">Choices</h1>
+      </md-toolbar>
+      <md-content>
+        <md-button class="md-button md-default-theme " ng-click="openLeftMenu(0); user_menu()">Login</md-button>
+        <md-button class="md-button md-default-theme " ng-click="openLeftMenu(1); user_menu()">Student Register</md-button>
+        <md-button class="md-button md-default-theme " ui-sref="register_teacher" ng-click="user_menu()">Teacher Register</md-button>
+      </md-content>
     </md-sidenav>
 
-    <md-sidenav ng-if="USER" hide-gt-xs md-component-id="user_menu" class="md-sidenav-left user_menu">
+    <md-sidenav ng-if="USER && USER.is_teacher" hide-gt-xs md-component-id="user_menu" class="md-sidenav-left user_menu">
       <div layout="column"  layout-align="center end">
         <md-toolbar class="dark_moderate_cyan_background white_text">
           <h1 class="md-toolbar-tools">Sidenav Left</h1>
@@ -73,6 +79,17 @@
         <md-divider md-inset ></md-divider>
         <md-icon ng-click="user_menu()"><i class="material-icons">arrow_back</i><md-icon>
       </div>
+    </md-sidenav>
+
+    <md-sidenav ng-if="USER && !USER.is_teacher" hide-gt-xs md-component-id="user_menu" class="md-sidenav-left user_menu height_30">
+      <md-toolbar class="md-theme-indigo">
+        <h1 class="md-toolbar-tools">Choices</h1>
+      </md-toolbar>
+      <md-content>
+        <md-button ui-sref="student_profile({id:USER.id})" ng-click="user_menu()" class="md-button md-default-theme green_text">Profile</md-button>
+        <md-button ui-sref="conversation({id:USER.id})" class="md-button md-default-theme green_text">Messages</md-button>
+        <md-button class="md-button md-default-theme green_blue_text" ng-click="logout()">Logout</md-button>
+      </md-content>
     </md-sidenav>
     <!-- ################# End of user left menu ######################### -->
 

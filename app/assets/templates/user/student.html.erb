@@ -1,0 +1,126 @@
+<div  class="gutter_75">
+  <div  flex-xs="100">
+
+    <md-card >
+      <md-card-header>
+        <md-card-avatar ng-if="profile">
+          <img ng-src="{{ profile.avatar.thumb.url }}" class="md-user-avatar ">
+        </md-card-avatar>
+        <md-card-header-text>
+          <span class="md-title">
+
+            {{ USER.first_name }} {{ USER.last_name }}
+
+          </span>
+          <span class="md-subhead">
+            
+          </span>
+        </md-card-header-text>
+      </md-card-header>
+      <img ng-if="profile" ng-src="{{ profile.avatar.url }}" 
+          class="md-card-image" 
+          alt="{{ USER.first_name }} profile pic">
+
+      <div class="margin_t_10 padding_10">
+        <form ng-submit="update_teahcer()">
+          <md-input-container md-no-float>
+            <label>First name:</label>
+            <input  type="text"
+                    ng-change="update_teacher()"
+                    ng-model-options="{ debounce:750 }"
+                    ng-model="USER.first_name">
+          </md-input-container>
+
+          <md-input-container md-no-float>
+            <label>Last name:</label>
+            <input  type="text"
+                    ng-change="update_teacher()" 
+                    ng-model-options="{ debounce:750 }"
+                    ng-model="USER.last_name">
+          </md-input-container>
+          
+        </form>
+      </div>
+
+      <md-card-title class="no_padding">
+        <md-card-title-text>
+          <span class="md-headline padding_s_20">Add pictures</span>
+          <!-- <span class="md-subhead">Click camera below</span> -->
+        </md-card-title-text>
+      </md-card-title>
+      <md-card-actions layout="row" layout-align="start center">
+        <md-button  
+          ng-model="file" 
+          ngf-select="upload()">
+            <i class="material-icons ">add_a_photo</i>
+        </md-button>
+        <md-card-icon-actions>
+          <md-button class="md-icon-button" aria-label="icon">
+            <md-icon md-svg-icon="icon"></md-icon>
+          </md-button>
+        </md-card-icon-actions>
+      </md-card-actions>
+      <md-card-content>
+       
+      </md-card-content>
+    </md-card> 
+
+    <md-card ng-if="USER.photos.length>0" class="min_height_128">
+      <md-grid-list md-cols="3" md-row-height="6:2">
+        <md-grid-tile class="gray"
+            md-rowspan="3" md-colspan="1" md-colspan-sm="1" md-colspan-xs="1" ng-repeat="photo in USER.photos">
+          <img class="profile_thumbs" ng-src="{{ photo.avatar.url }}" >
+          <md-grid-tile-footer>
+            <md-menu>
+         <!-- Trigger element is a md-button with an icon -->
+             <md-button ng-click="$mdOpenMenu($event)" class="md-icon-button" aria-label="Open sample menu">
+               <i class="material-icons">info</i>
+             </md-button>
+             <md-menu-content width="4">
+                <md-menu-item>
+                  <md-button ng-click="make_profile( photo.id )">Make profile?</md-button>
+                </md-menu-item>
+
+                <md-menu-item>
+                  <md-button ng-click="destroy_pic( photo.id )" class="width_100">Delete</md-button>
+                  
+                </md-menu-item>
+             </md-menu-content>
+            </md-menu>
+          </md-grid-tile-footer>
+        </md-grid-tile>
+        
+      </md-grid-list>
+      
+    </md-card>
+
+    <md-content class="gutter_75 margin_t_10 center_text match_background" >
+      <span id="left"></span>
+      <div class="center_block">
+        <md-button class="md-raised greyish_blue white_text"  ng-click="open_change_password()">Change your password</md-button>
+      </div>
+      <span id="right"></span>
+    </md-content>
+
+    <md-content class="margin_t_10 center_text match_background">
+      <md-card>
+        <%= image_tag('want_more.jpg', class: 'md-card-image width_50 center_block') %>
+        <md-card-title>
+          <md-card-title-text>
+            <span class="md-headline">Registered as a student by mistake?</span>
+          </md-card-title-text>
+        </md-card-title>
+        <md-card-content>
+          <p>
+            Simply click below and we'll change you to a teacher. <br>
+            <u>Your profile will become viewable to the public and people will be able to message you about bookings</u>
+          </p>
+        </md-card-content>
+        <md-card-actions layout="column" layout-align="start">
+          <md-button class="md-raised md-warn" ng-click="change_to_student()">I'm a teacher</md-button>
+        </md-card-actions>
+      </md-card>
+    </md-content>
+
+  </div>
+</div>

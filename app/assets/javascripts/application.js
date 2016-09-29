@@ -36,6 +36,7 @@
 //= require controllers/UserController
 //= require controllers/NavController
 //= require controllers/TeacherController
+//= require controllers/StudentController
 //= require controllers/TeacherAreaController
 //= require controllers/TeacherLocationController
 //= require controllers/SearchController
