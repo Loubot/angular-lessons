@@ -96,7 +96,7 @@ angular.module('lessons').controller( 'StudentController', [
         alertify.error "Failed to delete photo"
       )
 
-    $scope.update_teacher = ->
+    $scope.update_student = ->
       
       COMMS.POST(
         '/teacher'
@@ -105,7 +105,7 @@ angular.module('lessons').controller( 'StudentController', [
         console.log resp
         alertify.success "Updated your profile"
         $rootScope.USER = resp.data.teacher
-        window.location.reload() if $scope.change_user_type
+        $state.go( 'teacher', id: $rootScope.USER.id ) if $scope.change_user_type
         # $mdBottomSheet.hide()
       ).catch( ( err ) ->
         console.log err
@@ -113,10 +113,10 @@ angular.module('lessons').controller( 'StudentController', [
 
       )
 
-    $scope.change_to_student = ->
+    $scope.change_to_teacher = ->
       $scope.change_user_type = true
-      $scope.USER.is_teacher = false
-      $scope.update_teacher()
+      $scope.USER.is_teacher = true
+      $scope.update_student()
 
     $scope.open_change_password = ->
       console.log "Hup"
