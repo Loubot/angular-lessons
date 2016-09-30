@@ -269,7 +269,18 @@ angular.module('lessons').controller('TeacherAreaController', [
       return
 
     $scope.onEventSelected = (event) ->
+      console.log event
       $scope.event = event
+      # $mdDialog.show(
+      #   scope: $scope
+      #   preserveScope: true
+      #   templateUrl: "dialogs/calendar_event_edit_dialog.html"
+      #   openFrom: 'left'
+      #   closeTo: 'right'
+      #   fullscreen: true
+      #   clickOutsideToClose: true
+      # )
+
       return
 
     $scope.onTimeSelected = (selectedTime) ->
