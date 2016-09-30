@@ -87,7 +87,7 @@
       </md-toolbar>
       <md-content>
         <md-button ui-sref="student_profile({id:USER.id})" ng-click="user_menu()" class="md-button md-default-theme green_text">Profile</md-button>
-        <md-button ui-sref="conversation({id:USER.id})" class="md-button md-default-theme green_text">Messages</md-button>
+        <md-button ui-sref="conversation({id:USER.id})" ng-click="user_menu()" class="md-button md-default-theme green_text">Messages</md-button>
         <md-button class="md-button md-default-theme green_blue_text" ng-click="logout()">Logout</md-button>
       </md-content>
     </md-sidenav>
@@ -172,7 +172,7 @@
 
                
                
-               <md-button class="md-primary" type="submit"> 
+               <md-button class="md-primary md-raised" type="submit"> 
                  Submit
                </md-button>
 

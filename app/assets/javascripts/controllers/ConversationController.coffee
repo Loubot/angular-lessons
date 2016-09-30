@@ -101,26 +101,27 @@ angular.module('lessons').controller('ConversationController', [
 
 
 
-    $scope.send_message = ->
+    $scope.send_message = ( message ) ->
+      console.log message
       if !$rootScope.USER?
         alertify.logPosition("bottom left")
         alertify.log("You must be registered to respond")
         open_login_or_register()
       else
-        $scope.message.teacher_email = $scope.conversation.teacher_email
-        $scope.message.student_email = $scope.conversation.student_email
-        $scope.message.sender_email = $rootScope.USER.email
-        $scope.message.name = "#{ $rootScope.USER.first_name } #{ $rootScope.USER.last_name }"
+        message.teacher_email = $scope.conversation.teacher_email
+        message.student_email = $scope.conversation.student_email
+        message.sender_email = $rootScope.USER.email
+        message.name = "#{ $rootScope.USER.first_name } #{ $rootScope.USER.last_name }"
         # $scope.message.name = $scope.conversation.student_name
-        $scope.message.conversation_id = $scope.conversation.id
+        message.conversation_id = $scope.conversation.id
         COMMS.POST(
           "/conversation"
-          conversation: $scope.message
+          conversation: message
         ).then( ( resp ) ->
           console.log resp
           alertify.success "Email sent ok"
           $scope.conversation = resp.data.conversation
-          $scope.message.message = ""
+          $('.message_text_area').val ""
           scroll_to_bottom()
         ).catch( ( err ) ->
           console.log err

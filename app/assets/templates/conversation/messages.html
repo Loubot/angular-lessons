@@ -59,8 +59,8 @@
       
     </md-content>
     
-    <div class="message_response_container height_25">
-      <form name="message_form" ng-submit="send_message()" class="message_form">
+    <div class="message_response_container height_25" ng-if="conversation">
+      <form name="message_form"  class="message_form">
           
             <textarea ng-model="message.message" 
                       aria-label="Experience description" 
@@ -73,12 +73,12 @@
           <div layout="row" class="center_text">
             <div flex>
               <md-input-container>
-                <input ng-click="send_message()" value="Submit message" class="md-button no_margin md-primary md-raised white_text" aria-label="Send message">
+                <input ng-click="send_message( message )"  value="Submit message" class="md-button no_margin md-primary md-raised white_text" aria-label="Send message">
               </md-input-container>
             </div>
             <div flex flex-offset="25" flex-offset-xs="0" ng-if="USER.is_teacher">
               <md-input-container>
-                <input ng-click="create_event()" value="Create event" class="md-button no_margin blue_button" aria-label="Create event">
+                <input ng-click="create_event()" ng-if="USER.is_teacher" value="Create event" class="md-button no_margin blue_button" aria-label="Create event">
               </md-input-container>
             </div>
           </div>
