@@ -634,6 +634,13 @@ md-sidenav.md-closed.md-locked-open-add-active.user_menu {
   }
 }
 
+@media ( min-width: 600px ){
+  .county_search{
+    margin-top: 0px;
+  }
+
+}
+
 @media ( min-width: 768px ){
   .main_page_search_container{
     min-height: 400px;
