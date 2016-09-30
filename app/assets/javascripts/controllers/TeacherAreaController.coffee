@@ -83,6 +83,7 @@ angular.module('lessons').controller('TeacherAreaController', [
 
 
     format_events = ( events ) ->
+      console.log events
       if events? && events.length > 0
         bla = []
         for event in events
@@ -90,6 +91,8 @@ angular.module('lessons').controller('TeacherAreaController', [
             title: event.summary
             startTime: new Date( event.start.dateTime )
             endTime: new Date ( event.end.dateTime )
+            description: event.description
+            id: event.id
             # allDay: true
 
         $scope.eventSource = bla
@@ -232,17 +235,7 @@ angular.module('lessons').controller('TeacherAreaController', [
         alertify.success "Created calendar for you"
         $scope.create_event_button_bool = true
         $scope.$digest()
-        # COMMS.PUT(
-        #   "/teacher/#{ $rootScope.USER.id }"
-        #   calendar_id: resp.result.id
-        # ).then( ( resp ) ->
-        #   console.log resp
-        #   $rootScope.USER = resp.data.teacher
-        #   alertify.success "Updated calendar id"
-        # ).catch( ( err ) ->
-        #   console.log err
-        #   alertify.error "Failed to update user"
-        # )
+        
       )
 
     ###################### google auth ###############################
@@ -271,15 +264,15 @@ angular.module('lessons').controller('TeacherAreaController', [
     $scope.onEventSelected = (event) ->
       console.log event
       $scope.event = event
-      # $mdDialog.show(
-      #   scope: $scope
-      #   preserveScope: true
-      #   templateUrl: "dialogs/calendar_event_edit_dialog.html"
-      #   openFrom: 'left'
-      #   closeTo: 'right'
-      #   fullscreen: true
-      #   clickOutsideToClose: true
-      # )
+      $mdDialog.show(
+        scope: $scope
+        preserveScope: true
+        templateUrl: "dialogs/calendar_event_edit_dialog.html"
+        openFrom: 'left'
+        closeTo: 'right'
+        fullscreen: true
+        clickOutsideToClose: true
+      )
 
       return
 
@@ -347,6 +340,32 @@ angular.module('lessons').controller('TeacherAreaController', [
       console.log resource
       gapi.client.calendar.events.insert(
         'calendarId': $scope.calendar_id
+        'resource': resource
+      ).execute( ( event ) ->
+        console.log event
+        fetch_events()
+        $mdDialog.hide()
+      )
+
+    $scope.update_event_details = ->
+      resource = {
+        'summary': "Lesson with #{ $scope.event.title }" 
+        # location: $rootScope.USER.location.address if $rootScope.USER.location?
+
+        'description': $scope.event.description
+        'start': {
+          'dateTime': $scope.event.startTime
+          'timeZone': 'GMT'
+        }
+        'end':{
+          'dateTime': $scope.event.endTime
+          'timeZone': 'GMT'
+        }
+      }
+      console.log resource
+      gapi.client.calendar.events.patch(
+        'calendarId': $scope.calendar_id
+        'eventId': $scope.event.id
         'resource': resource
       ).execute( ( event ) ->
         console.log event
