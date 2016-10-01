@@ -1,3 +1,25 @@
+ul.share-buttons{
+  position: fixed;
+  top: 70%;
+  right: 2%;
+  list-style: none;
+  padding: 0;
+}
+
+ul.share-buttons li{
+  display: inline;
+}
+
+ul.share-buttons .sr-only {
+  position: absolute;
+  clip: rect(1px 1px 1px 1px);
+  clip: rect(1px, 1px, 1px, 1px);
+  padding: 0;
+  border: 0;
+  height: 1px;
+  width: 1px;
+  overflow: hidden;
+}
 @import url("https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,400italic");
 
 html, body{
@@ -681,14 +703,3 @@ md-fab-speed-dial.md-fab-top-left{
   top: 5px !important;  
 }
 
-ul.share-buttons{
-  position: fixed;
-  top: 70%;
-  right: 2%;
-  list-style: none;
-  padding: 0;
-}
-
-ul.share-buttons li{
-  display: inline;
-}
