@@ -17,7 +17,20 @@
   
 
 <%= yield %>
-
+  <ul class="share-buttons">
+    <li>
+      <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwww.learnyourlesson.ie&t=" title="Share on Facebook" target="_blank" onclick="window.open('https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(document.URL) + '&t=' + encodeURIComponent(document.URL)); return false;">
+      <%= image_tag('Facebook.png', alt: "Share on facebook") %></a>
+    </li><br>
+    <li>
+      <a href="https://twitter.com/intent/tweet?source=https%3A%2F%2Fwww.learnyourlesson.ie&text=:%20https%3A%2F%2Fwww.learnyourlesson.ie" target="_blank" title="Tweet" onclick="window.open('https://twitter.com/intent/tweet?text=' + encodeURIComponent(document.title) + ':%20'  + encodeURIComponent(document.URL)); return false;">
+      <%= image_tag('Twitter.png', alt: "Share on twitter") %></a>
+    </li><br>
+    <li>
+      <a href="http://www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Fwww.learnyourlesson.ie&title=&summary=&source=https%3A%2F%2Fwww.learnyourlesson.ie" target="_blank" title="Share on LinkedIn" onclick="window.open('http://www.linkedin.com/shareArticle?mini=true&url=' + encodeURIComponent(document.URL) + '&title=' +  encodeURIComponent(document.title)); return false;">
+      <%= image_tag('LinkedIn.png', alt: "Share on linkedin") %></a>
+    </li>
+  </ul>
 </body>
 </html>
 
