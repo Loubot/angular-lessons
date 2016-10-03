@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
 
 
+  mount RailsClientLogger::Engine, :at => "logger"
   scope '/api' do
     mount_devise_token_auth_for 'Teacher', at: 'auth', controllers: { passwords: 'devise/passwords', omniauth_callbacks: 'omniauth_callbacks' }
     # resources :groups, except: [:new, :edit]

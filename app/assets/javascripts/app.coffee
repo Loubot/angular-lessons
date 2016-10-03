@@ -327,3 +327,6 @@ angular.module('lessons').run(['$rootScope', '$state',
       $rootScope.isAuthenticated = false
     )
 ])
+
+window.onerror = (message, url, line_number) ->
+  jsLogger.debug 'Uncaught error in: ' + url + ':' + line_number + '\nDetails: ' + message
