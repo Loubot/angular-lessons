@@ -224,10 +224,17 @@ angular.module('lessons').controller('TeacherAreaController', [
       resource =
         "colorRgbFormat": true 
           
-            
-        "id": $scope.calendar_id,
-        "backgroundColor": "#2a602a",
-        "foregroundColor": "#ffffff"
+        'id': $scope.calendar_id
+        'defaultReminders': [ {
+          'method': 'email'
+          'minutes': 5
+        } ]
+        'notificationSettings': 'notifications': [ {
+          'method': 'email'
+          'type': 'eventCreation'
+        } ]
+        'backgroundColor': '#2a602a'
+        'foregroundColor': '#ffffff'
         'selected': true
           
       gapi.client.calendar.calendarList.insert(
@@ -345,7 +352,7 @@ angular.module('lessons').controller('TeacherAreaController', [
       
       console.log $scope.calendar_event_details.student_email
       resource = {
-        'summary': "Lesson with #{ $scope.calendar_event_details.student_email }" if $scope.calendar_event_details.student_email? and $scope.calendar_event_details.student_email != ""
+        'summary': $scope.calendar_event_details.student_email
         # location: $rootScope.USER.location.address if $rootScope.USER.location?
         'description': $scope.calendar_event_details.description
         'start': {
@@ -369,7 +376,7 @@ angular.module('lessons').controller('TeacherAreaController', [
 
     $scope.update_event_details = ->
       resource = {
-        'summary': "Lesson with #{ $scope.event.title }" 
+        'summary': $scope.event.title
         # location: $rootScope.USER.location.address if $rootScope.USER.location?
 
         'description': $scope.event.description
