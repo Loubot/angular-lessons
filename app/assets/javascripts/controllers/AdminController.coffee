@@ -49,7 +49,7 @@ angular.module('lessons').controller('AdminController', [
     $scope.create_subject = ->
       console.log $scope.subject.category
       COMMS.POST(
-        "/teacher/#{ $rootScope.USER.id }/category/#{ $scope.subject.category }/subject"
+        "/category/#{ $scope.subject.category }/subject"
         $scope.subject
       ).then( ( resp ) ->
         console.log resp
