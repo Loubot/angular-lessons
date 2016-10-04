@@ -128,10 +128,11 @@ angular.module('lessons').controller('TeacherAreaController', [
       for calendar in calendars
         if calendar.summary == "LYL Calendar"
           
-          # console.log calendar
+          console.log calendar
           $scope.calendar_id = calendar.id
           $scope.calendar_event_details.calendar_id = calendar.id
           calendar_exists = true
+          insert_calendar_into_list() if calendar.defaultReminders.length == 0
 
       if calendar_exists
         alertify.success "Found your calendar"
@@ -222,6 +223,7 @@ angular.module('lessons').controller('TeacherAreaController', [
     insert_calendar_into_list = ->
       console.log "start list insert"
       resource =
+        id: $scope.calendar_id
         "colorRgbFormat": true 
           
         'defaultReminders': [ {
