@@ -16,7 +16,9 @@ angular.module('lessons').controller('WelcomeController', [
   ( $scope, $rootScope, $state, $filter, $stateParams, $location, USER, $mdSidenav, alertify, $auth, COMMS, $window ) ->
     console.log "WelcomeController"
 
-
+    window.onerror = (errorMsg, url, lineNumber, column, errorObj) ->
+      alert 'Error: ' + errorMsg + ' Script: ' + url + ' Line: ' + lineNumber + ' Column: ' + column + ' StackTrace: ' + errorObj
+      return
 
     $elems = $('.animateblock')
     $scope.selected = {}
@@ -79,6 +81,7 @@ angular.module('lessons').controller('WelcomeController', [
         alertify.success "Found #{ resp.data.teachers.length } teacher(s)"
         $scope.teachers = resp.data.teachers
       ).catch( ( err ) ->
+        
         console.log err
         alertify.error "Failed to find teachers"
       )

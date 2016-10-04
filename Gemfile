@@ -86,3 +86,5 @@ gem 'geokit-rails'
 gem 'mandrill-api', '~> 1'
 
 gem 'rack-cors'
+
+gem 'rails-client-logger'

@@ -128,10 +128,11 @@ angular.module('lessons').controller('TeacherAreaController', [
       for calendar in calendars
         if calendar.summary == "LYL Calendar"
           
-          # console.log calendar
+          console.log calendar
           $scope.calendar_id = calendar.id
           $scope.calendar_event_details.calendar_id = calendar.id
           calendar_exists = true
+          insert_calendar_into_list() if calendar.defaultReminders.length == 0
 
       if calendar_exists
         alertify.success "Found your calendar"
@@ -218,8 +219,53 @@ angular.module('lessons').controller('TeacherAreaController', [
           'fetch_basic_profile': true
         }, handleAuthResult)
       
+
+    insert_calendar_into_list = ->
+      console.log "start list insert"
+      resource =
+        id: $scope.calendar_id
+        "colorRgbFormat": true 
+          
+        'defaultReminders': [ {
+          'method': 'email'
+          'minutes': 5
+        } ]
+        'notificationSettings': 'notifications': [
+          {
+            'method': 'email'
+            'type': 'eventCreation'
+          }
+          {
+            'method': 'email'
+            'type': 'eventChange'
+          }
+          {
+            'method': 'email'
+            'type': 'eventCancellation'
+          }
+          {
+            'method': 'email'
+            'type': 'eventResponse'
+          }
+          {
+            'method': 'email'
+            'type': 'agenda'
+          }
+        ]
+        'backgroundColor': '#2a602a'
+        'foregroundColor': '#ffffff'
+        'selected': true
+
+          
+      gapi.client.calendar.calendarList.insert(
+        resource
+      ).execute( ( resp ) ->
+        console.log "List insert response"
+        console.log resp
+      )
        
     $scope.create_calendar = ->
+
       console.log "Create calendar"
       alertify.success "Trying to create a new calendar"
       # console.log "user:#{ $scope.google_id_email }"
@@ -234,6 +280,7 @@ angular.module('lessons').controller('TeacherAreaController', [
         $scope.calendar_id = resp.id
         alertify.success "Created calendar for you"
         $scope.create_event_button_bool = true
+        insert_calendar_into_list()
         $scope.$digest()
         
       )
@@ -325,7 +372,7 @@ angular.module('lessons').controller('TeacherAreaController', [
       
       console.log $scope.calendar_event_details.student_email
       resource = {
-        'summary': "Lesson with #{ $scope.calendar_event_details.student_email }" if $scope.calendar_event_details.student_email? and $scope.calendar_event_details.student_email != ""
+        'summary': $scope.calendar_event_details.student_email
         # location: $rootScope.USER.location.address if $rootScope.USER.location?
         'description': $scope.calendar_event_details.description
         'start': {
@@ -349,7 +396,7 @@ angular.module('lessons').controller('TeacherAreaController', [
 
     $scope.update_event_details = ->
       resource = {
-        'summary': "Lesson with #{ $scope.event.title }" 
+        'summary': $scope.event.title
         # location: $rootScope.USER.location.address if $rootScope.USER.location?
 
         'description': $scope.event.description
