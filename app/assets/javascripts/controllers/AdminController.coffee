@@ -3,7 +3,7 @@
 angular.module('lessons').controller('AdminController', [
   "$scope"
   "$rootScope"
-  "state"
+  "$state"
   "USER"
   "COMMS"
   "alertify"
