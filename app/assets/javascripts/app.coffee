@@ -39,6 +39,7 @@ angular.module('lessons').directive 'scroll', ($window) ->
 angular.module('lessons').factory '$exceptionHandler', ->
   (exception, cause) ->
     alert exception.message
+    jsLogger.fatal exception.message
     return
 
 angular.module('lessons').config [

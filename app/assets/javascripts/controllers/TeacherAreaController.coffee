@@ -218,8 +218,27 @@ angular.module('lessons').controller('TeacherAreaController', [
           'fetch_basic_profile': true
         }, handleAuthResult)
       
+
+    insert_calendar_into_list = ->
+      console.log "start list insert"
+      resource =
+        "colorRgbFormat": true 
+          
+            
+        "id": $scope.calendar_id,
+        "backgroundColor": "#2a602a",
+        "foregroundColor": "#ffffff"
+        'selected': true
+          
+      gapi.client.calendar.calendarList.insert(
+        resource
+      ).execute( ( resp ) ->
+        console.log "List insert response"
+        console.log resp
+      )
        
     $scope.create_calendar = ->
+
       console.log "Create calendar"
       alertify.success "Trying to create a new calendar"
       # console.log "user:#{ $scope.google_id_email }"
@@ -234,6 +253,7 @@ angular.module('lessons').controller('TeacherAreaController', [
         $scope.calendar_id = resp.id
         alertify.success "Created calendar for you"
         $scope.create_event_button_bool = true
+        insert_calendar_into_list()
         $scope.$digest()
         
       )
