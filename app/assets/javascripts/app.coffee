@@ -36,6 +36,26 @@ angular.module('lessons').directive 'scroll', ($window) ->
 #     v: '3.23'
 #     libraries: 'places'
 
+angular.module('lessons').factory '$exceptionHandler', ->
+  (exception, cause) ->
+    alert exception.message
+    return
+
+angular.module('lessons').config [
+  '$httpProvider'
+  ($httpProvider) ->
+    console.log 'hey'
+    $httpProvider.interceptors.push ($q) ->
+      { 'responseError': (rejection) ->
+        defer = $q.defer()
+        if rejection?
+          jsLogger.fatal( "Statustext: " + rejection.statusText + " status: " + rejection.status + " url: " +  rejection.config.url + " method: " + rejection.config.method )
+          console.dir rejection 
+        defer.reject rejection
+        defer.promise
+ }
+    return
+]
 
 angular.module('lessons').config ($stateProvider, $urlRouterProvider) ->
 
@@ -152,7 +172,6 @@ angular.module('lessons').service 'USER', ( $http, $rootScope, RESOURCES, $q, $s
        
         resolve result.data
       ).catch( ( err_result ) ->
-        
         console.log err_result
         reject err_result
       )
@@ -176,7 +195,6 @@ angular.module('lessons').service 'AUTH', ( $http, $rootScope, RESOURCES, $q, $a
           resolve resp
         )
         .catch( (resp) ->
-          # handle error response
           console.log resp
           alertify.error resp.data.errors.full_messages
           $rootScope.USER = null
@@ -195,7 +213,6 @@ angular.module('lessons').service 'AUTH', ( $http, $rootScope, RESOURCES, $q, $a
           resolve resp
         )
         .catch( (resp) ->
-          # handle error response
           console.log resp
           alertify.error resp.data.errors.full_messages
           $rootScope.USER = null
@@ -328,5 +345,3 @@ angular.module('lessons').run(['$rootScope', '$state',
     )
 ])
 
-window.onerror = (message, url, line_number) ->
-  jsLogger.debug 'Uncaught error in: ' + url + ':' + line_number + '\nDetails: ' + message
