@@ -224,18 +224,36 @@ angular.module('lessons').controller('TeacherAreaController', [
       resource =
         "colorRgbFormat": true 
           
-        'id': $scope.calendar_id
         'defaultReminders': [ {
           'method': 'email'
           'minutes': 5
         } ]
-        'notificationSettings': 'notifications': [ {
-          'method': 'email'
-          'type': 'eventCreation'
-        } ]
+        'notificationSettings': 'notifications': [
+          {
+            'method': 'email'
+            'type': 'eventCreation'
+          }
+          {
+            'method': 'email'
+            'type': 'eventChange'
+          }
+          {
+            'method': 'email'
+            'type': 'eventCancellation'
+          }
+          {
+            'method': 'email'
+            'type': 'eventResponse'
+          }
+          {
+            'method': 'email'
+            'type': 'agenda'
+          }
+        ]
         'backgroundColor': '#2a602a'
         'foregroundColor': '#ffffff'
         'selected': true
+
           
       gapi.client.calendar.calendarList.insert(
         resource
