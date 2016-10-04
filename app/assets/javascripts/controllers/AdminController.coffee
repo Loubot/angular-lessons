@@ -3,11 +3,13 @@
 angular.module('lessons').controller('AdminController', [
   "$scope"
   "$rootScope"
+  "state"
   "USER"
   "COMMS"
   "alertify"
   "$mdDialog"
-  ( $scope, $rootScope, USER, COMMS, alertify, $mdDialog ) ->
+
+  ( $scope, $rootScope, $state, USER, COMMS, alertify, $mdDialog ) ->
     console.log "AdminController"
 
     USER.get_user().then( ( resp ) ->
@@ -33,7 +35,7 @@ angular.module('lessons').controller('AdminController', [
     $scope.create_category = ->
       console.log "hup"
       COMMS.POST(
-        "/teacher/#{ $rootScope.USER.id }/category"
+        "/category"
         name: $scope.name
       ).then( ( resp ) ->
         console.log resp
