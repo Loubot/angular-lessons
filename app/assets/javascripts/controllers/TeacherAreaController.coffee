@@ -402,12 +402,12 @@ angular.module('lessons').controller('TeacherAreaController', [
       start_date_time = moment( event.start_date )     
       start_date_time.hour( moment( event.start_time ).format( "HH" ) )
       start_date_time.minute( moment( event.start_time ).format( 'mm' ) )
-      console.log start_date_time.toString()
+      # console.log start_date_time.toString()
 
       end_date_time = moment( event.start_date )
       end_date_time.hour( moment( event.end_time ).format( "HH" ) )
       end_date_time.minute( moment( event.end_time).format( "mm" ) )
-      console.log end_date_time.toString()
+      # console.log end_date_time.toString()
       if event.startTime == event.endTime
         alertify.error "Times are equal"
         $scope.event_update_form.start_date.$error.not_the_same = true
@@ -433,7 +433,7 @@ angular.module('lessons').controller('TeacherAreaController', [
           'timeZone': 'GMT'
         }
       }
-      console.log resource
+      # console.log resource
 
       gapi.client.calendar.events.update(
         'calendarId': $scope.calendar_id
