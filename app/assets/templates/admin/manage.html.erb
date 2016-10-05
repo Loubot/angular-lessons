@@ -2,7 +2,7 @@
   <form ng-submit="create_category()" class="form_border">
     <md-input-container>
       <label>Name:</label>
-      <input type="text" ng-model="name">
+      <input type="text" ng-model="name" class="admin_inputs">
     </md-input-container>
 
     <input type="submit" value="Create category">
@@ -13,16 +13,18 @@
 
   <form  class="form_border">
 
-    <md-input-container>
-      <label>Name:</label>
-      <input type="text" ng-model="subject.name">
-    </md-input-container><br>
+    
 
     <md-input-container>
       <label>Category:</label>
       <md-select ng-model="subject.category" placeholder="Select a category" required>
         <md-option class="black_text" ng-value="category.id" ng-repeat="category in categories">{{ category.name }}</md-option>
       </md-select>
+    </md-input-container><br>
+
+    <md-input-container>
+      <label>Name:</label>
+      <input type="text" ng-model="subject.name" class="admin_inputs">
     </md-input-container>
 
     <input type="submit" value="create subject" ng-click="create_subject()">

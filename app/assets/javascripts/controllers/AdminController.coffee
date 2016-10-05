@@ -40,6 +40,7 @@ angular.module('lessons').controller('AdminController', [
       ).then( ( resp ) ->
         console.log resp
         alertify.success "Created category"
+        $('.admin_inputs').val ""
         $scope.categories = resp.data.categories
       ).catch( ( err ) ->
         console.log err
@@ -54,6 +55,7 @@ angular.module('lessons').controller('AdminController', [
       ).then( ( resp ) ->
         console.log resp
         alertify.success "Created subject"
+        $('.admin_inputs').val ""
       ).catch( ( err ) ->
         console.log err
         alertify.error "Failed to create subject"
