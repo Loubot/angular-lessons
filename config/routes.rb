@@ -36,6 +36,7 @@ Rails.application.routes.draw do
     end
     
     resources :category,            only: [ :create, :update, :index, :destroy ]  do
+      get     'category-subjects'     => 'category#category_subjects'
       resources :subject,             only: [ :create, :destroy ]
     end
 

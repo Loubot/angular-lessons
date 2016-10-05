@@ -22,13 +22,28 @@ class CategoryController < ApplicationController
   #   render json: { subjects: Subject.all.as_json }
   # end
 
+  def category_subjects
+    p "Made it here"
+    category = Category.find( category_params[:category_id] )
+    render json: { category_subjects: category.subjects }, status: 200
+
+  end
+
+  def destroy
+    c = Category.destroy( category_params[:id] )
+    p "Deleted #{ c }"
+    pp c
+    render json: { categories: Category.all.as_json }, status: 200
+
+  end
+
   def index
     render json: { categories: Category.all.as_json }
   end
 
   private
     def category_params
-      params.permit( :name, :category_id )
+      params.permit( :name, :category_id, :id )
     end
 
     def check_admin

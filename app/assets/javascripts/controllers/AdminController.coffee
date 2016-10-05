@@ -61,8 +61,17 @@ angular.module('lessons').controller('AdminController', [
         alertify.error "Failed to create subject"
       )
 
-    $scope.delete_category = ->
-
+    $scope.delete_category = ( name, id ) ->
+      COMMS.DELETE(
+        "/category/#{ id }"
+      ).then( ( resp ) ->
+        console.log resp
+        alertify.success "Deleted category ok"
+        $scope.categories = resp.data.categories
+      ).catch( ( err ) ->
+        alertify.error "Failed to delete category"
+        console.log err
+      )
 
     $scope.update_category = ( name, id ) ->
       COMMS.PUT(
@@ -76,6 +85,18 @@ angular.module('lessons').controller('AdminController', [
         console.log err
         alertify.error "Couldn't update category"
 
+      )
+
+    $scope.get_subjects = ( id ) ->
+      COMMS.GET(
+        "/category/#{ id }/category-subjects"
+      ).then( ( resp ) ->
+        console.log resp
+        alertify.success "Got subjects"
+        $scope.category_subjects = resp.data.category_subjects
+      ).catch( ( err ) ->
+        console.log err
+        alertify.error "Failed to get subjects"
       )
 
 

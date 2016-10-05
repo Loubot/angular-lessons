@@ -11,13 +11,14 @@
   <md-divider></md-divider>
 <br><br>
 
-  <form  class="form_border">
+<div layout="row" class="subject_container">
+  <form  class="form_border" flex="50">
 
     
 
-    <md-input-container>
+    <md-input-container flex="100">
       <label>Category:</label>
-      <md-select ng-model="subject.category" placeholder="Select a category" required>
+      <md-select ng-model="subject.category" placeholder="Select a category" ng-change="get_subjects( subject.category )" required>
         <md-option class="black_text" ng-value="category.id" ng-repeat="category in categories">{{ category.name }}</md-option>
       </md-select>
     </md-input-container><br>
@@ -29,6 +30,20 @@
 
     <input type="submit" value="create subject" ng-click="create_subject()">
   </form>
+  <div flex="50">
+    <md-content class="subject_container">
+      <md-list>
+        <md-list-item class="md-2-line" ng-repeat="subject in category_subjects">
+          <div class="md-list-item-text">
+            <p>{{ subject.name }} </p>
+          </div>
+          
+        </md-list-item>
+      </md-list>
+    </md-content>
+  </div>
+</div>
+  
 </md-content>
 <br><br>
 <md-divider></md-divider>
