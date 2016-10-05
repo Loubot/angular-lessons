@@ -24,8 +24,8 @@ class CategoryController < ApplicationController
 
   def category_subjects
     p "Made it here"
-    category = Category.find( category_params[:category_id] )
-    render json: { category_subjects: category.subjects }, status: 200
+    category = Category.includes( :subjects).find( category_params[:category_id] )
+    render json: { category_subjects: category.subjects.order('name ASC').as_json }, status: 200
 
   end
 
