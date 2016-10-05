@@ -7,7 +7,7 @@ class SubjectController < ApplicationController
   def create
     subject = Subject.new( create_subject_params )
     if subject.save
-      render json: { subjects: Subject.all }, status: 201
+      render json: { subjects: Subject.all.order('name ASC').as_json }, status: 201
     else
       render json: { errors: subject.errors }, status: 422
     end
@@ -16,7 +16,7 @@ class SubjectController < ApplicationController
   def update
     subject = Subject.find( params[:id] )
     if subject.update_attributes( create_subject_params )
-      render json: { subjects: Subject.all }, status: 200
+      render json: { subjects: Subject.all.order('name ASC').as_json }, status: 200
     else
       render json: { errors: subject.errors.as_json }, status: 422
     end
