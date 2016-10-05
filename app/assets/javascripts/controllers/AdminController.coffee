@@ -55,6 +55,7 @@ angular.module('lessons').controller('AdminController', [
       ).then( ( resp ) ->
         console.log resp
         alertify.success "Created subject"
+        $scope.category_subjects = resp.data.subjects
         $('.admin_inputs').val ""
       ).catch( ( err ) ->
         console.log err
