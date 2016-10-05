@@ -397,22 +397,22 @@ angular.module('lessons').controller('TeacherAreaController', [
         $mdDialog.hide()
       )
 
-    $scope.update_event_details = ->
-      console.log $scope.event
-      start_date_time = moment( $scope.event.start_date )     
-      start_date_time.hour( moment( $scope.event.start_time ).format( "HH" ) )
-      start_date_time.minute( moment( $scope.event.start_time ).format( 'mm' ) )
+    $scope.update_event_details = ( event ) ->
+      console.log event
+      start_date_time = moment( event.start_date )     
+      start_date_time.hour( moment( event.start_time ).format( "HH" ) )
+      start_date_time.minute( moment( event.start_time ).format( 'mm' ) )
       console.log start_date_time.toString()
 
-      end_date_time = moment( $scope.event.start_date )
-      end_date_time.hour( moment( $scope.event.end_time ).format( "HH" ) )
-      end_date_time.minute( moment( $scope.event.end_time).format( "mm" ) )
+      end_date_time = moment( event.start_date )
+      end_date_time.hour( moment( event.end_time ).format( "HH" ) )
+      end_date_time.minute( moment( event.end_time).format( "mm" ) )
       console.log end_date_time.toString()
-      if start_date_time == end_date_time
+      if event.startTime == event.endTime
         alertify.error "Times are equal"
         $scope.event_update_form.start_date.$error.not_the_same = true
         return false
-      else if !$scope.event.start_date? or !$scope.event.start_time? or !$scope.event.end_time?
+      else if !event.start_date? or !event.startTime? or !event.endTime?
 
         alertify.error "Something not defined"
         $scope.event_update_form.start_date.$error.not_the_same = true
@@ -420,26 +420,27 @@ angular.module('lessons').controller('TeacherAreaController', [
       else
         $scope.event_update_form.start_date.$error.not_the_same = false
       resource = {
-        'summary': $scope.event.title
+        'summary': event.title
         # location: $rootScope.USER.location.address if $rootScope.USER.location?
 
-        'description': $scope.event.description
+        'description': event.description
         'start': {
-          'dateTime': start_date_time.toISOString()
+          'dateTime': event.startTime
           'timeZone': 'GMT'
         }
         'end':{
-          'dateTime': end_date_time.toISOString()
+          'dateTime': event.endTime
           'timeZone': 'GMT'
         }
       }
       console.log resource
-      gapi.client.calendar.events.patch(
+
+      gapi.client.calendar.events.update(
         'calendarId': $scope.calendar_id
-        'eventId': $scope.event.id
+        'eventId': event.id
         'resource': resource
-      ).execute( ( event ) ->
-        console.log event
+      ).execute( ( resp ) ->
+        console.log resp
         fetch_events()
         $mdDialog.hide()
       )
