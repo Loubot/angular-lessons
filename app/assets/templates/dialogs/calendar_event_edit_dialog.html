@@ -22,14 +22,14 @@
 
       <div layout="row">
         <div flex>
-          <mdp-date-picker mdp-placeholder="Date" ng-model="event.startTime" name="start_time" aria-label="Event start date" required>
+          <mdp-date-picker md-placeholder="Date" ng-model="event.start_date" name="start_date" aria-label="Event start date" required>
             <div ng-messages="event_creation_form.start_date.$error">
               <div ng-message="required">This is required</div> 
             </div>
           </mdp-date-picker >
         </div>
 
-        
+        {{ event.start_date }}
 
       </div> <!-- end of row -->
 

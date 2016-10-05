@@ -311,6 +311,9 @@ angular.module('lessons').controller('TeacherAreaController', [
     $scope.onEventSelected = (event) ->
       console.log event
       $scope.event = event
+      $scope.event.start_date = new Date( ( event.startTime ) )
+      console.log $scope.event.start_date
+      console.log new Date()
       $mdDialog.show(
         scope: $scope
         preserveScope: true
@@ -395,17 +398,38 @@ angular.module('lessons').controller('TeacherAreaController', [
       )
 
     $scope.update_event_details = ->
+      console.log $scope.event
+      start_date_time = moment( $scope.event.start_date )     
+      start_date_time.hour( moment( $scope.event.start_time ).format( "HH" ) )
+      start_date_time.minute( moment( $scope.event.start_time ).format( 'mm' ) )
+      console.log start_date_time.toString()
+
+      end_date_time = moment( $scope.event.start_date )
+      end_date_time.hour( moment( $scope.event.end_time ).format( "HH" ) )
+      end_date_time.minute( moment( $scope.event.end_time).format( "mm" ) )
+      console.log end_date_time.toString()
+      if start_date_time == end_date_time
+        alertify.error "Times are equal"
+        $scope.event_update_form.start_date.$error.not_the_same = true
+        return false
+      else if !$scope.event.start_date? or !$scope.event.start_time? or !$scope.event.end_time?
+
+        alertify.error "Something not defined"
+        $scope.event_update_form.start_date.$error.not_the_same = true
+        return false
+      else
+        $scope.event_update_form.start_date.$error.not_the_same = false
       resource = {
         'summary': $scope.event.title
         # location: $rootScope.USER.location.address if $rootScope.USER.location?
 
         'description': $scope.event.description
         'start': {
-          'dateTime': $scope.event.startTime
+          'dateTime': start_date_time.toISOString()
           'timeZone': 'GMT'
         }
         'end':{
-          'dateTime': $scope.event.endTime
+          'dateTime': end_date_time.toISOString()
           'timeZone': 'GMT'
         }
       }
