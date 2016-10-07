@@ -1,6 +1,14 @@
 class TeacherController < ApplicationController
   before_action :authenticate_teacher!, except: [ :show_teacher]
+  before_action :must_be_admin
   require 'pp'
+
+  def index
+    teachers = Teacher.includes( :subjects, :experience, :qualifications, :location ).where( is_teacher: true )
+    pp teachers
+    render json: { teachers: teachers.as_json( include: [ :subjects, :experience, :qualifications, :location ] ) }
+  end
+
   def show
     
     @teacher = Teacher.includes( :photos, :subjects, :experience, :qualifications, :location ).find( current_teacher.id )
@@ -47,6 +55,14 @@ class TeacherController < ApplicationController
 
   private
     
+    def must_be_admin
+      if current_teacher.admin != true
+        render json: { errors: [ "You are not an admin" ] }, status: 403
+        return false
+      else
+        return true
+      end
+    end
 
     def teacher_params
       params.permit( :profile, :id, :teacher_id, :overview, :experience, :calendar_id, :first_name, :last_name, :is_teacher )

@@ -54,3 +54,27 @@
     <div flex><md-button ng-click="edit_subjects()">Edit Subjects</div>
   </div>
 </md-content>
+
+
+<md-content class="margin_t_10 white_background">
+  <md-toolbar>
+    <div class="md-toolbar-tools">
+      <span layout-margin ng-click="fetch_teachers()">List of teachers <i class="material-icons">touch_app</i></span>
+      
+    </div>
+    
+  </md-toolbar>
+  <md-list>
+    <md-list-item ng-if="teachers" class="md-2-line" ng-repeat="teacher in teachers">
+      <!-- <md-checkbox ng-model="item.done"></md-checkbox> -->
+      <div class="md-list-item-text">
+        <h3>{{teacher.email}}</h3>
+        <span>Subjects {{ teacher.subjects.length }}</span> ||
+        <span>Location {{ (teacher.location.length > 0) }}</span> ||
+        <span>Experience {{ (teacher.experience.length > 0) }}</span> ||
+        <span>Quals {{ (teacher.qualifications.length ) }}</span> ||
+        <md-divider md-inset></md-divider>
+      </div>
+    </md-list-item>
+  </md-list>
+</md-conent>

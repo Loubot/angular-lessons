@@ -12,6 +12,8 @@ angular.module('lessons').controller('AdminController', [
   ( $scope, $rootScope, $state, USER, COMMS, alertify, $mdDialog ) ->
     console.log "AdminController"
 
+    $scope.show_teachers = false
+
     USER.get_user().then( ( resp ) ->
       if $rootScope.USER.admin == false
         alertify.error "You must be an admin to view this"
@@ -30,6 +32,20 @@ angular.module('lessons').controller('AdminController', [
         )
     )
 
+    $scope.fetch_teachers = ->
+      console.log $scope.show_teachers
+      if !$scope.teachers?
+        COMMS.GET(
+          "/teacher"
+        ).then( ( resp ) ->
+          console.log resp
+          $scope.teachers = resp.data.teachers
+          $scope.$digest
+          alertify.success "Got teachers list"
+        ).catch( ( err ) ->
+          console.log err
+          alertify.error "Failed to get teachers list"
+        )
     
 
     $scope.create_category = ->
