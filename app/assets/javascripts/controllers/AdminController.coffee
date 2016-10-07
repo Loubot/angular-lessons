@@ -46,7 +46,18 @@ angular.module('lessons').controller('AdminController', [
           console.log err
           alertify.error "Failed to get teachers list"
         )
-    
+
+    $scope.view_teacher = ( i ) ->
+      console.log $(window).width() 
+      $scope.teacher = $scope.teachers[i]
+
+      $mdDialog.show(
+        templateUrl: "dialogs/view_teacher_details.html"
+        scope: $scope
+        preserveScope: true
+        clickOutsideToClose: true
+        fullscreen: $(window).width() < 600
+      )
 
     $scope.create_category = ->
       console.log "hup"

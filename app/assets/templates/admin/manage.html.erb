@@ -11,8 +11,8 @@
   <md-divider></md-divider>
 <br><br>
 
-<div layout="row" class="subject_container">
-  <form  class="form_border" flex="50">
+<div layout="row" class="subject_container" flex="50" flex-xs="100">
+  <form  class="form_border" >
 
     
 
@@ -28,9 +28,11 @@
       <input type="text" ng-model="subject.name" class="admin_inputs">
     </md-input-container>
 
-    <input type="submit" value="Create subject" ng-click="create_subject()">
+    <md-input-container>
+      <input type="submit" value="Create subject" class="md-button md-raised md-primary" ng-click="create_subject()">
+    </md-input-container>
   </form>
-  <div flex="50">
+  <div flex="50" flex-xs="100">
     <md-content class="subject_container">
       <md-list>
         <md-list-item class="md-2-line" ng-repeat="subject in category_subjects">
@@ -65,14 +67,15 @@
     
   </md-toolbar>
   <md-list>
-    <md-list-item ng-if="teachers" class="md-2-line" ng-repeat="teacher in teachers">
+    <md-list-item ng-if="teachers" class="md-2-line" ng-repeat="( i, teacher) in teachers">
       <!-- <md-checkbox ng-model="item.done"></md-checkbox> -->
-      <div class="md-list-item-text">
+      <div class="md-list-item-text" ng-click="view_teacher( i )">
         <h3>{{teacher.email}}</h3>
         <span>Subjects {{ teacher.subjects.length }}</span> ||
         <span>Location {{ (teacher.location.length > 0) }}</span> ||
         <span>Experience {{ (teacher.experience.length > 0) }}</span> ||
-        <span>Quals {{ (teacher.qualifications.length ) }}</span> ||
+        <span>Quals {{ (teacher.qualifications.length ) }}</span> 
+
         <md-divider md-inset></md-divider>
       </div>
     </md-list-item>
