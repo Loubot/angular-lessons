@@ -448,7 +448,6 @@ md-sidenav.md-closed.md-locked-open-add-active.user_menu {
 
 .location_results{
   max-height: 200px;
-  overflow-y: scroll;
 
 }
 
@@ -502,10 +501,9 @@ md-sidenav.md-closed.md-locked-open-add-active.user_menu {
 //  end of search box for map
 
 .map_results{
-  height: 100%;
+  max-height: 100px !important;
   overflow-y: visible !important;
 }
-
 
 .how_it_works{
   overflow: hidden !important;
@@ -657,9 +655,7 @@ ul.share-buttons .sr-only {
     margin-right: auto !important;
   }
 
-  #pac-input{
-    width: 85%;
-  }
+  
 
   .county_search{
     margin-top: 10px;
@@ -668,7 +664,16 @@ ul.share-buttons .sr-only {
   .qualification_sheet{
     margin: 0px;
   }
-}
+
+  #pac-input{
+    width: 60%;
+  }
+
+  .map_results_height{
+    max-height:175px!important;
+  }
+
+} /* 250px */
 
 @media ( min-width: 600px ){
   .county_search{
@@ -679,7 +684,15 @@ ul.share-buttons .sr-only {
     margin: 0 100px !important;
   }
 
-}
+  #pac-input{
+    width: 85%;
+  }
+
+  .map_results_height{
+
+  }
+
+} /* 600px */
 
 @media ( min-width: 768px ){
   .main_page_search_container{
