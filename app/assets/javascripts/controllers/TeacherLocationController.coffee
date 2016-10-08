@@ -50,6 +50,8 @@ angular.module('lessons').controller( "TeacherLocationController" , [
           zoom: 8
           mapTypeId: google.maps.MapTypeId.ROADMAP
         })
+        alertify.log "Use the search box to find your location"
+        alertify.log "Just enter your county if you don't want to enter your address"
 
     
 
@@ -183,14 +185,25 @@ angular.module('lessons').controller( "TeacherLocationController" , [
         scope: $scope
         preserveScope: true
         templateUrl: "sheets/location_sheet.html"
-        clickOutsideToClose: false
       ).then( ( clicked ) ->
         console.log clicked
-        $mdToast.simple()
+        $mdToast.simple ""
       )
 
 
     ######### end of open location_sheet#################
+
+    # ######### no_map_sheet() ############################
+    # $scope.no_map = ->
+    #   $mdBottomSheet.show(
+    #     scope: $scope
+    #     preserveScope: true
+    #     templateUrl: "sheets/no_map_sheet.html"
+    #   ).then( ( clicked ) ->
+    #     console.log clicked
+    #   )
+
+    # ######### end of no_map_sheet() #####################
 
     ###############################end of address update ########################################################
        

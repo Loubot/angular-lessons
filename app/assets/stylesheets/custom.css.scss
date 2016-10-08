@@ -28,6 +28,16 @@ html, body{
    color:    #FFF !important;
 }
 
+.white_placeholder option:checked{
+  color: #FFF !important;
+}
+
+::-webkit-input-placeholder { color: #FFF; }
+:-moz-placeholder { color: #FFF; }
+
+:focus::-webkit-input-placeholder { color: #FFF; }
+:focus:-moz-placeholder { color: #FFF; }​
+
 .green_text{
   color: #548235;
 }
@@ -452,6 +462,16 @@ md-sidenav.md-closed.md-locked-open-add-active.user_menu {
 }
 
 // search box for map
+
+.no_map{
+  position: fixed;
+  width: 300px;
+  // height: 200px;
+  margin: 5% auto; /* Will not center vertically and won't work in IE6/7. */
+  bottom: 5px;
+  left: 0;
+  right: 0;
+}
 
 .controls {
   margin-top: 10px;

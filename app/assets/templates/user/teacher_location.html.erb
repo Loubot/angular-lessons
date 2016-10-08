@@ -21,8 +21,9 @@
     <div ng-if="addresses" layout-margin style="background-color:#fff;">
       <md-button type="submit" class="md-raised md-primary white_text" ng-click="update_address()">Update address</md-button>
       <md-button class="md-raised md-warn white_text" ng-click="open_location_sheet()">Or enter manually</md-button>
-    </div>
-  </div>
+    </div> <!-- end of ng-if addresses -->
+  </div> <!-- end of flex 100 -->
+  
 </div>
 
 
@@ -37,5 +38,10 @@
                         ng-if="USER.location"
                         >Delete this location?</md-button>
     </div>
+
   </md-content>
+</div>
+
+<div ng-if="!USER.location" class="no_map center_block">
+  <md-button class="md-raised md-warn" ng-click="open_location_sheet()">I don't want to use the map</md-button>
 </div>
