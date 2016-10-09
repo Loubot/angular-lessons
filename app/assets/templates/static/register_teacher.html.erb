@@ -103,21 +103,23 @@
             </div>
           </md-input-container>
 
-          <md-input-container flex="100" required>
-            <select  flex="100" name="county" ng-model="teacher.county" required>
-              <option value="" disabled selected>Select your county (required*)</option>
-              <option ng-repeat="county in county_list" value="{{ county }}" required>{{ county }}</option>
-            </select>
+          <md-input-container>
 
-            <div ng-messages="register_teacher_form.county.$error">
+            <div class="errors" ng-messages="register_teacher_form.county.$error">
               <div ng-message="required">This is required.</div>
             </div>
+            <select name="county" ng-model="teacher.county" required>
+              <option value="" disabled selected>Select your county (required*)</option>
+              <option ng-repeat="county in county_list" value="{{ county }}">{{ county }}</option>
+            </select>
+
+            
           </md-input-container>
 
        
         </div> <!-- end of flex 60 -->
         <div flex="40">
-          <md-input-container>
+          <md-input-container class="margin_t_50">
             <input type="submit" value="Register" name="Register teacher" aria-label="register teacher" class="md-button md-primary md-raised white_text">
           </md-input-container> 
           <p class=" padding_s_20"><big>or</big></p>

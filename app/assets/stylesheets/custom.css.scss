@@ -32,12 +32,6 @@ html, body{
   color: #FFF !important;
 }
 
-::-webkit-input-placeholder { color: #FFF; }
-:-moz-placeholder { color: #FFF; }
-
-:focus::-webkit-input-placeholder { color: #FFF; }
-:focus:-moz-placeholder { color: #FFF; }​
-
 .green_text{
   color: #548235;
 }
@@ -308,6 +302,10 @@ md-sidenav.md-closed.md-locked-open-add-active.user_menu {
   margin-top: 10px !important;
 }
 
+.margin_t_50{
+  margin-top: 50px !important;
+}
+
 .margin_b_10{
   margin-bottom: 3rem;
 }
@@ -389,7 +387,7 @@ md-sidenav.md-closed.md-locked-open-add-active.user_menu {
 }
 
 .register_page_main_div{
-  min-height: 400px;
+  min-height: 560px;
   background-image: asset_url('tree.jpg');
   -moz-background-size: 100% 100%;
   -webkit-background-size: 100% 100%;

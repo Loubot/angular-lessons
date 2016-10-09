@@ -38,23 +38,31 @@ angular.module('lessons').controller("RegisterController", [
 
       $scope.teacher.is_teacher = true
 
-      $auth.submitRegistration( $scope.teacher )
-        .then( (resp) ->
-          # handle success response
-          # console.log resp.data.data
-          $rootScope.USER = resp.data.data
-          console.log $rootScope.USER
-          $state.go 'welcome'
-          alertify.success "Welcome #{ resp.data.data.email }"
-          alertify.success "Registered as teacher" if $rootScope.USER.is_teacher
-          alertify.success "Registered as student" if !$rootScope.USER.is_teacher
-        )
-        .catch( (resp) ->
-          # handle error response
-          console.log resp
-          alertify.error "Failed to register"
-          
-        )
+      if !$scope.teacher.county?
+        $scope.register_teacher_form.county.$error.required = true
+        alertify.error "You must select your county"
+
+      else
+
+        $auth.submitRegistration( $scope.teacher )
+          .then( (resp) ->
+            # handle success response
+            # console.log resp.data.data
+            $rootScope.USER = resp.data.data
+            console.log $rootScope.USER
+            
+            alertify.success "Welcome #{ resp.data.data.email }"
+            alertify.success "Registered as teacher" if $rootScope.USER.is_teacher
+            alertify.success "Registered as student" if !$rootScope.USER.is_teacher
+
+            $state.go 'welcome'
+          )
+          .catch( (resp) ->
+            # handle error response
+            console.log resp
+            alertify.error "Failed to register"
+            
+          )
     $scope.county_list = ['Antrim','Armagh','Carlow','Cavan','Clare','Cork','Derry','Donegal','Down','Dublin',
           'Fermanagh','Galway','Kerry','Kildare','Kilkenny','Laois','Leitrim','Limerick','Longford',
           'Louth','Mayo','Meath','Monaghan','Offaly','Roscommon','Sligo','Tipperary','Tyrone',
