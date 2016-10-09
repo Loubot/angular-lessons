@@ -29,6 +29,10 @@ class LocationController < ApplicationController
 
   private
 
+    def geocode_county( params )
+      location = Geokit::Geocoders::GoogleGeocoder.geocode( "Co. #{ params[:county] }, Ireland" )
+    end
+
     def location_params
       params.permit( :address, :latitude, :longitude, :teacher_id, :name )
     end
