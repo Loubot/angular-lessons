@@ -118,25 +118,33 @@
             <div class="errors" ng-messages="register_teacher_form.county.$error">
               <div ng-message="required">This is required.</div>
             </div>
-            <select name="county" ng-model="teacher.county" required>
-              <option value="" disabled selected>County (required*)</option>
-              <option ng-repeat="county in county_list" value="{{ county }}">{{ county }}</option>
-            </select>  
+
+
+          <md-input-container class="width_100">
+            <md-select ng-model="teacher.county" class="county_placeholder" placeholder="County">
+              <md-option ng-value="county" ng-repeat="county in county_list">{{ county }}</md-option>
+            </md-select>
           </md-input-container><br>
 
-          <md-input-container class="margin_t_30 width_50">
+
+
+          <md-input-container class="margin_t_30 " flex-gt-xs="50" flex-xs="100">
             <input type="submit" value="Register" name="Register teacher" aria-label="register teacher" class="md-button md-primary md-raised white_text">
           </md-input-container> <br>
 
 
-          <p class="padding_s_20 margin_t_30"><big>or</big></p>
-          <div ng-click="register_with_facebook()" hide-xs>
-            <%= image_tag('facebook_login.jpg', class: 'width_50') %>
-          </div>   
+          <p class="padding_s_20 "><big>or</big></p>
+          <md-input-container>
+            <div ng-click="register_with_facebook()" hide-xs>
+              <%= image_tag('facebook_login.jpg', class: 'width_50') %>
+            </div>  
+          </md-input-container> 
 
-          <div ng-click="register_with_facebook()" hide-gt-xs>
-            <%= image_tag('facebook_login.jpg', class: 'width_100') %>
-          </div>  
+          <md-input-container>
+            <div ng-click="register_with_facebook()" hide-gt-xs>
+              <%= image_tag('facebook_login.jpg', class: 'width_100') %>
+            </div>  
+          </md-input-container>
         </div> <!-- end of flex-gt-xs="50" flex-xs="40"-->
       </div> <!-- end of row -->
 
