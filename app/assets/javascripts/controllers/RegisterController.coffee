@@ -7,8 +7,9 @@ angular.module('lessons').controller("RegisterController", [
   "$state"
   "$auth"
   "alertify"
+  "COMMS"
 
-  ( $scope, $rootScope, USER, $state, $auth, alertify) ->
+  ( $scope, $rootScope, USER, $state, $auth, alertify, COMMS ) ->
     console.log "RegisterController"
 
     USER.get_user()
@@ -55,7 +56,18 @@ angular.module('lessons').controller("RegisterController", [
             alertify.success "Registered as teacher" if $rootScope.USER.is_teacher
             alertify.success "Registered as student" if !$rootScope.USER.is_teacher
 
-            $state.go 'welcome'
+            COMMS.POST(
+              "/teacher/#{ $rootScope.USER.id }/location"
+              county: $scope.teacher.county
+            ).then( ( resp ) ->
+              console.log resp
+              alertify.success "Created location"
+            ).catch( ( err ) ->
+              console.log err
+              alertify.error "Failed to create loctation"
+            )
+
+            # $state.go 'welcome'
           )
           .catch( (resp) ->
             # handle error response

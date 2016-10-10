@@ -4,7 +4,17 @@ class LocationController < ApplicationController
   def create
     teacher = Teacher.includes(:location).find( current_teacher.id )
     if teacher.location.nil?
+
+      if location_params.has_key?( :county )
+        
+        location = Location.geocode_county( location_params, location_params[ :teacher_id ] )
+      else
+
+
       location = Location.create( location_params )
+
+    end
+
       if location.save
         teacher.location = location
         p "Location created"
@@ -29,11 +39,7 @@ class LocationController < ApplicationController
 
   private
 
-    def geocode_county( params )
-      location = Geokit::Geocoders::GoogleGeocoder.geocode( "Co. #{ params[:county] }, Ireland" )
-    end
-
     def location_params
-      params.permit( :address, :latitude, :longitude, :teacher_id, :name )
+      params.permit( :address, :latitude, :longitude, :teacher_id, :name, :county )
     end
 end

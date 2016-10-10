@@ -78,6 +78,7 @@ angular.module('lessons').controller('NavController', [
           
           $mdSidenav('left').toggle()
           alertify.success "Welcome back #{ $rootScope.USER.first_name }"
+          $state.go "teacher/#{ $rootScope.USER.id }"
         )
         .catch( (resp) ->
           console.log "Login error"
