@@ -1,6 +1,6 @@
 class TeacherController < ApplicationController
   before_action :authenticate_teacher!, except: [ :show_teacher]
-  before_action :must_be_admin
+  before_action :must_be_admin, only: [ :profile ]
   require 'pp'
 
   def index
