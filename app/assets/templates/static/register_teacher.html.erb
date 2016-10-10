@@ -3,7 +3,7 @@
     
     <form name="register_teacher_form"  ng-submit="register_teacher()" novalidate>
       <div layout="row">
-        <div flex="50">
+        <div flex-xs="60" flex-gt-xs="50">
           <div flex-gt-xs="60" flex-xs="100">
             <md-input-container class="md-icon-float md-block margin_t_30">
               <label>First Name</label>
@@ -108,30 +108,28 @@
 
           
           </div> <!-- end of flex 60 -->
-          <div flex="40">
-
-            <md-input-container>
-
-              <div class="errors" ng-messages="register_teacher_form.county.$error">
-                <div ng-message="required">This is required.</div>
-              </div>
-              <select name="county" ng-model="teacher.county" required>
-                <option value="" disabled selected>County (required*)</option>
-                <option ng-repeat="county in county_list" value="{{ county }}">{{ county }}</option>
-              </select>  
-            </md-input-container><br>
-
-           
-          </div> <!-- end of flex=40 -->
+          
 
         </div> <!-- end of flex=50 -->
-        <div flex="50">
-          <md-input-container class="margin_t_10">
+        <div flex-gt-xs="50" flex-xs="40">
+
+          <md-input-container>
+
+            <div class="errors" ng-messages="register_teacher_form.county.$error">
+              <div ng-message="required">This is required.</div>
+            </div>
+            <select name="county" ng-model="teacher.county" required>
+              <option value="" disabled selected>County (required*)</option>
+              <option ng-repeat="county in county_list" value="{{ county }}">{{ county }}</option>
+            </select>  
+          </md-input-container><br>
+
+          <md-input-container class="margin_t_30">
             <input type="submit" value="Register" name="Register teacher" aria-label="register teacher" class="md-button md-primary md-raised white_text">
           </md-input-container> <br>
 
 
-          <p class="padding_s_20"><big>or</big></p>
+          <p class="padding_s_20 margin_t_30"><big>or</big></p>
           <div ng-click="register_with_facebook()" hide-xs>
             <%= image_tag('facebook_login.jpg', class: 'width_50') %>
           </div>   
@@ -139,7 +137,7 @@
           <div ng-click="register_with_facebook()" hide-gt-xs>
             <%= image_tag('facebook_login.jpg', class: 'width_100') %>
           </div>  
-        </div> <!-- end of flex=50 -->
+        </div> <!-- end of flex-gt-xs="50" flex-xs="40"-->
       </div> <!-- end of row -->
 
     </form> 
