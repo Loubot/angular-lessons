@@ -62,6 +62,7 @@ angular.module('lessons').controller("RegisterController", [
             ).then( ( resp ) ->
               console.log resp
               alertify.success "Created location"
+              $state.go "teacher/#{ $rootScope.USER.id }"
             ).catch( ( err ) ->
               console.log err
               alertify.error "Failed to create loctation"
