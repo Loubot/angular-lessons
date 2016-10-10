@@ -40,7 +40,6 @@ angular.module('lessons').controller("RegisterController", [
       $scope.teacher.is_teacher = true
 
       if !$scope.teacher.county?
-        $scope.register_teacher_form.county.$error.required = true
         alertify.error "You must select your county"
 
       else
