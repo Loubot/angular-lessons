@@ -1,9 +1,39 @@
+<div ng-show="!i_want_map" class="big_gutter center_text">
 
-<input id="pac-input" class="controls" type="text" placeholder="Search Box">
-<div id="map"></div>
+  <md-content  class="fancy">
+    <h4>Enter your address <small>County is minimum</small></h4>
+    <form ng-submit="address_form_submit()">
+
+      <md-input-container>
+        <md-select ng-model="address.county" placeholder="County">
+          <md-option ng-value="county" ng-repeat="county in county_list">{{ county }}</md-option>
+        </md-select>
+
+      </md-input-container><br>
+
+      <md-input-container class="width_75">
+        <label>Address(optional)</label>
+        <input ng-model="address.address" type="text">
+      </md-input-container><br>
+
+      <md-input-container>
+        <input type="submit" value="Submit" class="md-button md-raised md-primary" >
+      </md-input-container>
+      <div ng-show="!i_want_map" class=" center_block fancy">
+        <md-button class="md-raised md-warn" ng-click="i_want_map_toggle()">Use the map to instead</md-button>
+      </div>
+    </form>
+  </md-content>
+</div>
 
 
-<div layout="row" layout-xs="column" ng-show="addresses" layout="row" layout-margin flex="100" class="map_results">
+<div ng-show="i_want_map" >
+  <input id="pac-input" class="controls" type="text" placeholder="Search Box">
+  <div id="map"></div>
+</div>
+
+
+<div layout="row" layout-xs="column" ng-show="addresses" layout="row" layout-margin flex="100" class="map_results ">
   <div flex="100" >
     <md-content class="fancy map_results_height" >
       <md-list ng-cloak>
@@ -28,9 +58,9 @@
 
 
 
-<div ng-hide="addresses">
+<div ng-hide="addresses" class="big_gutter margin_t_10">
   <md-content>
-    <div flex="50" flex-xs="100">
+    <div class="center_text" flex="100">
       <%= image_tag 'location_search.png', class: 'percent_10_w' %>
       <h4>{{ USER.location.address || "Awaiting your address" }}</h4>
       <md-button class="md-raised md-warn" 
@@ -42,6 +72,3 @@
   </md-content>
 </div>
 
-<div ng-if="!USER.location" class="no_map center_block">
-  <md-button class="md-raised md-warn" ng-click="open_location_sheet()">I don't want to use the map</md-button>
-</div>

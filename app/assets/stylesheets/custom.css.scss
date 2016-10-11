@@ -656,6 +656,11 @@ ul.share-buttons .sr-only {
 }
 
 @media (min-width: 250px){
+  .big_gutter{
+    width: 100% !important;
+    height: 100% !important;
+  }
+
   .main_page_search_container{
     min-height: 30em;
     background-image: asset_url('portrait_piano.jpg');
@@ -694,6 +699,13 @@ ul.share-buttons .sr-only {
 } /* 250px */
 
 @media ( min-width: 600px ){
+  .big_gutter{
+    min-width: 75% !important;
+    max-width: 75% !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+
   .county_search{
     margin-top: 0px;
   }

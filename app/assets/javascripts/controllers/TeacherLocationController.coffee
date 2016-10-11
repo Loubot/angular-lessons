@@ -14,22 +14,21 @@ angular.module('lessons').controller( "TeacherLocationController" , [
   ( $scope, $rootScope, $state, $stateParams, COMMS, USER, alertify, $mdBottomSheet, $mdToast, $q ) ->
     console.log "TeacherLocationController"
     $scope.addresses = null
+    $scope.address = {}
+    $scope.i_want_map = false
+    only_once = false
 
-    set_marker = ( location ) ->
-      $scope.marker.setMap null if $scope.marker?
+    $scope.scrollevent = ( $e ) ->      
+      return
 
-      $scope.marker = new google.maps.Marker
-        position: 
-          lat:    location.latitude
-          lng:    location.longitude
-        title:    location.name
-        map:      $scope.map
+    $scope.i_want_map_toggle = ->     
 
-      $('#pac-input').val ''
-    
-    
-    USER.get_user().then( ( user ) ->
-      USER.check_user()
+      if !$scope.i_want_map && !only_once
+        $scope.i_want_map = !$scope.i_want_map
+        init_map() 
+        only_once = true
+
+    init_map = ->
       if $rootScope.USER? && $rootScope.USER.location
 
         $scope.map = new google.maps.Map(document.getElementById('map'), {
@@ -53,7 +52,7 @@ angular.module('lessons').controller( "TeacherLocationController" , [
         alertify.log "Use the search box to find your location"
         alertify.log "Just enter your county if you don't want to enter your address"
 
-    
+      
 
       $scope.map.addListener( 'click', ( position ) ->
         console.log position.latLng.lat()
@@ -89,6 +88,24 @@ angular.module('lessons').controller( "TeacherLocationController" , [
         $mdToast.showSimple "Click on the map to locate your address"
         # alertify.log("Click on the map to locate your address")
       )
+
+    set_marker = ( location ) ->
+      $scope.marker.setMap null if $scope.marker?
+
+      $scope.marker = new google.maps.Marker
+        position: 
+          lat:    location.latitude
+          lng:    location.longitude
+        title:    location.name
+        map:      $scope.map
+
+      $('#pac-input').val ''
+    
+    
+    USER.get_user().then( ( user ) ->
+      $scope.address.county = $rootScope.USER.location.name
+      USER.check_user()
+      init_map() if $scope.i_want_map
     ).catch( ( err ) ->
       console.log err
       alertify.error "You are not authorised to view this"
@@ -129,6 +146,9 @@ angular.module('lessons').controller( "TeacherLocationController" , [
         console.log err
         alertify.error err.data.error[0]
       )
+
+    $scope.address_form_submit = ->
+      console.log $scope.address
 
     format_address = ( google_address ) ->
 
@@ -191,20 +211,9 @@ angular.module('lessons').controller( "TeacherLocationController" , [
       )
 
 
-    ######### end of open location_sheet#################
-
-    # ######### no_map_sheet() ############################
-    # $scope.no_map = ->
-    #   $mdBottomSheet.show(
-    #     scope: $scope
-    #     preserveScope: true
-    #     templateUrl: "sheets/no_map_sheet.html"
-    #   ).then( ( clicked ) ->
-    #     console.log clicked
-    #   )
-
-    # ######### end of no_map_sheet() #####################
-
-    ###############################end of address update ########################################################
+    $scope.county_list = ['Antrim','Armagh','Carlow','Cavan','Clare','Cork','Derry','Donegal','Down','Dublin',
+        'Fermanagh','Galway','Kerry','Kildare','Kilkenny','Laois','Leitrim','Limerick','Longford',
+        'Louth','Mayo','Meath','Monaghan','Offaly','Roscommon','Sligo','Tipperary','Tyrone',
+        'Waterford','Westmeath','Wexford','Wicklow']
        
 ])
