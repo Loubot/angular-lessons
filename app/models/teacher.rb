@@ -52,6 +52,9 @@ class Teacher < ActiveRecord::Base
   validates_confirmation_of :password, message: "should match verification"
 
 
+  after_create :send_new_message
+
+
   def add_identity(auth)
     p "add identity"
     pp auth['uid']
@@ -100,5 +103,12 @@ class Teacher < ActiveRecord::Base
     end
     user
   end
+
+  private
+    def send_new_message
+      p "I am sending a new message"
+      logger.debug "I am sending a new message"
+      TeacherMailer.user_registered( self ).deliver_now
+    end
 
 end
