@@ -5,7 +5,7 @@
     <form ng-submit="address_form_submit()">
 
       <md-input-container>
-        <md-select ng-model="address.county" placeholder="County">
+        <md-select ng-model="address.county" placeholder="County" required>
           <md-option ng-value="county" ng-repeat="county in county_list">{{ county }}</md-option>
         </md-select>
 
