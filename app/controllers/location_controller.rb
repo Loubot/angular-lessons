@@ -31,6 +31,23 @@ class LocationController < ApplicationController
     end
   end
 
+  def manual_address
+    teacher = Teacher.includes( :location ).find( current_teacher.id )
+    if teacher.location.nil?
+      location = Location.manual_address( location_params, current_teacher.id )
+      if location.save
+        teacher.location = location
+        pp location
+        render json: { location: location }
+      else
+        render json: { errors: location.errors.full_messages }, status: 500
+      end
+    else
+      render json: { message: ' no good '}, status: 403
+    end
+
+  end
+
   def destroy
     Location.find( params[:id] ).destroy
     render json: { message: "Location deleted" }, status: 200

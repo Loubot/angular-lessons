@@ -18,16 +18,17 @@ Rails.application.routes.draw do
     get      'search'                     => "search#search"
     get      'search-subjects'            => "search#search_subjects"
     resources :teacher, only: [ :index, :show, :update ] do
-      get     'show-teacher'              => 'teacher#show_teacher'
-      post    'add-subject'               => 'subject#add_subject'
+      get       'show-teacher'            => 'teacher#show_teacher'
+      post      'add-subject'             => 'subject#add_subject'
 
       # post    'pic'                       => "photos#create"
       # delete  'delete-pic'                => "photos#destroy"
-      delete  'remove-subject'            => 'subject#remove_subject'
+      delete    'remove-subject'          => 'subject#remove_subject'
 
       resources :experience,          only: [ :create, :destroy ]
       resources :qualification,       only: [ :create, :destroy ]
       resources :location,            only: [ :create, :destroy ] 
+      post    'manual-address'            => 'location#manual_address'
       resources :photos,              only: [ :create, :destroy ]
       
 

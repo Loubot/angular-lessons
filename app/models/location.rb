@@ -37,5 +37,19 @@ class Location < ActiveRecord::Base
     )
   end
 
+  def self.manual_address( params, teacher_id )
+    pp "#{ params[ :address ] }, #{ params[ :county ] } "
+    location_details = Geokit::Geocoders::GoogleGeocoder.geocode( "#{ params[ :address ] }, #{ params[ :county ] } " )
+    pp location_details
+    self.create(
+      latitude: location_details.lat, 
+      longitude: location_details.lng,
+      name: location_details.formatted_address,
+      teacher_id: teacher_id,
+      address: location_details.formatted_address
+    )
+
+  end
+
   
 end

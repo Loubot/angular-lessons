@@ -103,7 +103,7 @@ angular.module('lessons').controller( "TeacherLocationController" , [
     
     
     USER.get_user().then( ( user ) ->
-      $scope.address.county = $rootScope.USER.location.name
+      $scope.address.county = $rootScope.USER.location.name if $rootScope.USER.location?
       USER.check_user()
       init_map() if $scope.i_want_map
     ).catch( ( err ) ->
@@ -148,7 +148,17 @@ angular.module('lessons').controller( "TeacherLocationController" , [
       )
 
     $scope.address_form_submit = ->
-      console.log $scope.address
+      COMMS.POST(
+        "/teacher/#{ $rootScope.USER.id }/manual-address"
+        $scope.address
+      ).then( ( resp) ->
+        alertify.success "Updated location"
+        console.log resp
+        $rootScope.USER.location = resp.data.location
+      ).catch( ( err) ->
+        console.log err
+        alertify.error "Failed to update location"
+      )
 
     format_address = ( google_address ) ->
 
