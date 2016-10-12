@@ -1,6 +1,10 @@
-<div ng-show="!i_want_map" class="big_gutter center_text">
-
+<div ng-show="!i_want_map" class="big_gutter center_text" style="position:relative;">
+  
   <md-content  class="fancy">
+    <md-subheader class="md-primary left_header">Option 1</md-subheader>
+
+    <span class="margin_b_10 give_height"></span>  
+
     <h4>Enter your address <small>County is minimum</small></h4>
     <form ng-submit="address_form_submit()">
 
@@ -19,10 +23,18 @@
       <md-input-container>
         <input type="submit" value="Submit" class="md-button md-raised md-primary" >
       </md-input-container>
-      <div ng-show="!i_want_map" class=" center_block fancy">
-        <md-button class="md-raised md-warn" ng-click="i_want_map_toggle()">Use the map to instead</md-button>
-      </div>
+      
     </form>
+  </md-content>
+</div>
+
+<div class="big_gutter center_text margin_t_30">
+  <md-content>
+    <md-subheader class="md-primary left_header">Option 2</md-subheader>
+    <span class="margin_b_10 give_height"></span>  
+    <div ng-show="!i_want_map" class=" center_block fancy">
+      <md-button class="md-raised md-warn margin_b_30" ng-click="i_want_map_toggle()">Use the map instead?</md-button>
+    </div>
   </md-content>
 </div>
 
@@ -63,10 +75,12 @@
     <div class="center_text" flex="100">
       <%= image_tag 'location_search.png', class: 'percent_10_w' %>
       <h4>{{ USER.location.address || "Awaiting your address" }}</h4>
-      <md-button class="md-raised md-warn" 
-                        ng-click="delete_location()"
-                        ng-if="USER.location"
-                        >Delete this location?</md-button>
+      <md-input-container>
+        <md-button class="md-raised md-warn" 
+                          ng-click="delete_location()"
+                          ng-if="USER.location"
+                          >Delete this location?</md-button>
+      </md-input-container>
     </div>
 
   </md-content>
