@@ -15,7 +15,7 @@
 
         <md-fab-actions ng-if="!USER" >
           <md-button class="md-button md-default-theme green_blue_text" ng-click="openLeftMenu(0)">Login</md-button>
-          <md-button class="md-button md-default-theme green_blue_text" ng-click="openLeftMenu(1)">Student Register</md-button>
+          <md-button class="md-button md-default-theme green_blue_text" ng-click="openLeftMenu(2)">Student Register</md-button>
           <md-button class="md-button md-default-theme green_blue_text" ui-sref="register_teacher">Teacher Register</md-button>
         </md-fab-actions> <!-- end of if !USER -->
 
@@ -61,7 +61,7 @@
       </md-toolbar>
       <md-content>
         <md-button class="md-button md-default-theme " ng-click="openLeftMenu(0); user_menu()">Login</md-button>
-        <md-button class="md-button md-default-theme " ng-click="openLeftMenu(1); user_menu()">Student Register</md-button>
+        <md-button class="md-button md-default-theme " ng-click="openLeftMenu(2); user_menu()">Student Register</md-button>
         <md-button class="md-button md-default-theme " ui-sref="register_teacher" ng-click="user_menu()">Teacher Register</md-button>
       </md-content>
     </md-sidenav>
