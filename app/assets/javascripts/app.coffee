@@ -45,7 +45,6 @@ angular.module('lessons').factory '$exceptionHandler', ->
 angular.module('lessons').config [
   '$httpProvider'
   ($httpProvider) ->
-    console.log 'hey'
     $httpProvider.interceptors.push ($q) ->
       { 'responseError': (rejection) ->
         defer = $q.defer()
