@@ -11,7 +11,13 @@ module SearchHelper
       teachers.as_json( include: [ :photos, :location, :subjects ] )
     else
       p "Search helper params #{ params }"
-      subject = Subject.includes(:teachers).where('name ILIKE ?', "%#{ params[:subject_name] }%").select( [ :name, :id ] ).first
+
+      if Rails.env.development?
+        subject = Subject.includes(:teachers).where('name LIKE ?', "%#{ params[:subject_name] }%").select( [ :name, :id ] ).first
+        
+      else
+        subject = Subject.includes(:teachers).where('name ILIKE ?', "%#{ params[:subject_name] }%").select( [ :name, :id ] ).first
+      end
       teachers = subject.teachers.where( is_teacher: true ).select( "email, id, first_name, last_name" )
       teachers.as_json(include: [ :photos, :location, :subjects ])
     end

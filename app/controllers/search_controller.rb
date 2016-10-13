@@ -20,8 +20,14 @@ class SearchController < ApplicationController
 
   def search_subjects
     p search_params
-    p "search subjects controller"  
-    subjects = Subject.where( "name ILIKE ?", "%#{ search_params[:name] }%" ).select([ :name, :id ])
+    p "search subjects controller"
+
+    if Rails.env.development?
+      subjects = Subject.where( "name LIKE ?", "%#{ search_params[:name] }%" ).select([ :name, :id ])
+    else
+      subjects = Subject.where( "name ILIKE ?", "%#{ search_params[:name] }%" ).select([ :name, :id ])
+    end
+    
     pp subjects
     render json: { subjects: subjects }
   end
