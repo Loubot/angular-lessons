@@ -90,3 +90,5 @@ gem 'rack-cors'
 gem 'rails-client-logger'
 
 gem 'delayed_job_active_record'
+
+gem 'workless'

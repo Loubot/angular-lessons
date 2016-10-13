@@ -118,6 +118,9 @@ GEM
     globalid (0.3.7)
       activesupport (>= 4.1.0)
     hashie (3.4.4)
+    heroku-api (0.4.2)
+      excon (~> 0.45)
+      multi_json (~> 1.8)
     hike (1.2.3)
     i18n (0.7.0)
     ipaddress (0.8.3)
@@ -208,6 +211,8 @@ GEM
       json (~> 1.4)
     responders (2.3.0)
       railties (>= 4.2.0, < 5.1)
+    rush (0.6.8)
+      session
     sass (3.4.22)
     sass-rails (5.0.6)
       railties (>= 4.0.0, < 6)
@@ -218,6 +223,7 @@ GEM
     sdoc (0.4.1)
       json (~> 1.7, >= 1.7.7)
       rdoc (~> 4.0)
+    session (3.2.0)
     sprockets (2.12.3)
       hike (~> 1.2)
       multi_json (~> 1.0)
@@ -250,6 +256,11 @@ GEM
       binding_of_caller (>= 0.7.2)
       railties (>= 4.0)
       sprockets-rails (>= 2.0, < 4.0)
+    workless (1.2.3)
+      delayed_job (>= 2.0.7)
+      heroku-api
+      rails
+      rush
 
 PLATFORMS
   ruby
@@ -288,6 +299,7 @@ DEPENDENCIES
   unicorn
   validates_overlap (~> 0)
   web-console (~> 2.0)
+  workless
 
 BUNDLED WITH
    1.13.3
