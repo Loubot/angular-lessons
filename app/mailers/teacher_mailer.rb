@@ -60,11 +60,12 @@ class TeacherMailer < Devise::Mailer
           {
             email: 'louisangelini@gmail.com',
             name: 'Admin'
-          },
-          {
-            email: 'alan.rowell28@googlemail.com',
-            name: 'Admin'
           }
+          # ,
+          # {
+          #   email: 'alan.rowell28@googlemail.com',
+          #   name: 'Admin'
+          # }
        ],  
        
       }  

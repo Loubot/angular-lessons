@@ -108,7 +108,7 @@ class Teacher < ActiveRecord::Base
     def send_new_message
       p "I am sending a new message"
       logger.debug "I am sending a new message"
-      TeacherMailer.user_registered( self ).deliver_now
+      TeacherMailer.delay.user_registered( self )
     end
 
 end
