@@ -29,16 +29,16 @@ class ConversationController < ApplicationController
                     conversation_params[:conversation][:student_email] : conversation_params[:conversation][:teacher_email]
 
     p "sender email #{ sender_email }"
-    delivered = ConversationMailer.send_message( 
+    delivered = ConversationMailer.delay.send_message( 
       conversation_params, 
       sender_email,
       format_url( conversation.random, conversation.id ) 
-    ).deliver_now
+    )
 
-    ConversationMailer.send_message_copy(
+    ConversationMailer.delay.send_message_copy(
       conversation_params,
       current_teacher.email
-    ).deliver_now
+    )
 
     p "Deliverd #{ delivered }"
 
