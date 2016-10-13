@@ -437,12 +437,6 @@ md-sidenav.md-closed.md-locked-open-add-active.user_menu {
   border-radius: 50%;
 }
 
-.margin_s_100.md-grid{
-  margin: 0 100px !important;
-}
-
-
-
 
 #loading-bar {
   pointer-events: all;
@@ -670,6 +664,10 @@ ul.share-buttons .sr-only {
 }
 
 @media (min-width: 250px){
+
+  .margin_s_100.md-grid{
+    margin: 0 0 !important;
+  }
   .big_gutter{
     width: 100% !important;
     // height: 100% !important;
@@ -713,6 +711,9 @@ ul.share-buttons .sr-only {
 } /* 250px */
 
 @media ( min-width: 600px ){
+  .margin_s_100.md-grid{
+    margin: 0 100px !important;
+  }
   .big_gutter{
     min-width: 75% !important;
     max-width: 75% !important;
