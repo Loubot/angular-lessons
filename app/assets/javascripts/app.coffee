@@ -38,8 +38,10 @@ angular.module('lessons').directive 'scroll', ($window) ->
 
 angular.module('lessons').factory '$exceptionHandler', ->
   (exception, cause) ->
-    alert exception.message
-    jsLogger.fatal exception.message
+    # alert exception.message
+    # jsLogger.fatal exception.message
+    jsLogger.fatal exception
+    jsLogger.fatal cause
     return
 
 angular.module('lessons').config [
@@ -50,6 +52,7 @@ angular.module('lessons').config [
         defer = $q.defer()
         if rejection?
           jsLogger.fatal( "Statustext: " + rejection.statusText + " status: " + rejection.status + " url: " +  rejection.config.url + " method: " + rejection.config.method )
+          jsLogger.fatal rejection
           console.dir rejection 
         defer.reject rejection
         defer.promise
