@@ -16,6 +16,7 @@ angular.module('lessons').controller('TeacherController', [
   ( $scope, $rootScope, $state, RESOURCES, USER, alertify, COMMS, $stateParams, $auth, Upload, $mdBottomSheet, $mdDialog ) ->
     console.log "TeacherController"
     $scope.photos = null
+    $scope.change_user_type = false
     # alertify.success "Got subjects"
 
     $scope.scrollevent = ( $e ) ->

@@ -1,6 +1,6 @@
 class ConversationController < ApplicationController
   include ConversationHelper
-
+  require 'pp'
   before_action :authenticate_teacher!
 
   def create
@@ -29,16 +29,30 @@ class ConversationController < ApplicationController
                     conversation_params[:conversation][:student_email] : conversation_params[:conversation][:teacher_email]
 
     p "sender email #{ sender_email }"
-    delivered = ConversationMailer.delay.send_message( 
-      conversation_params, 
-      sender_email,
-      format_url( conversation.random, conversation.id ) 
-    )
+    
+    if Rails.env.production?
+      delivered = ConversationMailer.delay.send_message( 
+        conversation_params, 
+        sender_email,
+        format_url( conversation.random, conversation.id ) 
+      )
 
-    ConversationMailer.delay.send_message_copy(
-      conversation_params,
-      current_teacher.email
-    )
+      ConversationMailer.delay.send_message_copy(
+        conversation_params,
+        current_teacher.email
+      )
+    else
+      delivered = ConversationMailer.send_message( 
+        conversation_params, 
+        sender_email,
+        format_url( conversation.random, conversation.id ) 
+      ).deliver_now
+
+      ConversationMailer.send_message_copy(
+        conversation_params,
+        current_teacher.email
+      ).deliver_now
+    end
 
     p "Deliverd #{ delivered }"
 
