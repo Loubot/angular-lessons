@@ -78,7 +78,7 @@ angular.module('lessons').controller('NavController', [
           
           $mdSidenav('left').toggle()
           alertify.success "Welcome back #{ $rootScope.USER.first_name }"
-          $state.go("teacher", id: $rootScope.USER.id ) 
+          # $state.go("teacher", id: $rootScope.USER.id ) 
           if $rootScope.USER.is_teacher then $state.go( "teacher", id: $rootScope.USER.id ) else $state.go( "welcome" )
         )
         .catch( (resp) ->
