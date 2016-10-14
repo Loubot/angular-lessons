@@ -51,8 +51,8 @@ angular.module('lessons').config [
       { 'responseError': (rejection) ->
         defer = $q.defer()
         if rejection?
-          jsLogger.fatal( "Statustext: " + rejection.statusText + " status: " + rejection.status + " url: " +  rejection.config.url + " method: " + rejection.config.method )
-          jsLogger.fatal rejection
+          # console.log( "Statustext: " + rejection.statusText + " status: " + rejection.status + " url: " +  rejection.config.url + " method: " + rejection.config.method + ". Full error: " + JSON.stringify rejection )
+          jsLogger.fatal JSON.stringify rejection
           console.dir rejection 
         defer.reject rejection
         defer.promise
