@@ -2,8 +2,8 @@ class LoggerController < RailsClientLogger::RailsClientLoggersController
   
 
   def log
-    logger.info "alrigt bout %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%"
-    logger.info  params
+    logger.debug "alrigt bout %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%"
+    logger.debug  params
     render nothing: true
   end
 end
