@@ -205,7 +205,7 @@ angular.module('lessons').controller('TeacherController', [
         console.log resp
         alertify.success "Updated your profile"
         $rootScope.USER = resp.data.teacher
-        $state.go( 'student_profile', id: $rootScope.USER.id )
+        $state.go( 'student_profile', id: $rootScope.USER.id ) if $scope.change_user_type
         $mdBottomSheet.hide()
       ).catch( ( err ) ->
         console.log err

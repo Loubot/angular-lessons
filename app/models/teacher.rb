@@ -108,7 +108,11 @@ class Teacher < ActiveRecord::Base
     def send_new_message
       p "I am sending a new message"
       logger.debug "I am sending a new message"
-      TeacherMailer.delay.user_registered( self )
+      if Rails.env.production?
+        TeacherMailer.delay.user_registered( self )
+      else
+        # TeacherMailer.user_registered( self ).deliver_now
+      end
     end
 
 end
