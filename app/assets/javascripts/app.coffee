@@ -50,14 +50,17 @@ angular.module('lessons').config [
     $httpProvider.interceptors.push ($q) ->
       { 'responseError': (rejection) ->
         defer = $q.defer()
-        if rejection?
-          if rejection.data.errors[0] != "Authorized users only."
+        try
+          if rejection? && rejection.data?
+            if rejection.data.errors[0] != "Authorized users only."
 
-          # console.log( "Statustext: " + rejection.statusText + " status: " + rejection.status + " url: " +  rejection.config.url + " method: " + rejection.config.method + ". Full error: " + JSON.stringify rejection )
-            jsLogger.fatal JSON.stringify rejection
-            console.dir rejection 
-        defer.reject rejection
-        defer.promise
+            # console.log( "Statustext: " + rejection.statusText + " status: " + rejection.status + " url: " +  rejection.config.url + " method: " + rejection.config.method + ". Full error: " + JSON.stringify rejection )
+              jsLogger.fatal JSON.stringify rejection
+              console.dir rejection 
+          defer.reject rejection
+          defer.promise
+        catch error
+          jsLogger.fatal error
  }
     return
 ]
