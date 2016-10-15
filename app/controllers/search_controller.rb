@@ -28,7 +28,7 @@ class SearchController < ApplicationController
       subjects = Subject.where( "name ILIKE ?", "%#{ search_params[:name] }%" ).select([ :name, :id ])
     end
     
-    pp subjects
+    # pp subjects
     render json: { subjects: subjects }
   end
 
