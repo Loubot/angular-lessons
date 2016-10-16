@@ -42,6 +42,8 @@ angular.module('lessons').factory '$exceptionHandler', ->
     # jsLogger.fatal exception.message
     # jsLogger.fatal exception
     # jsLogger.fatal cause
+    console.log exception
+    console.log cause
     return
 
 angular.module('lessons').config [
@@ -51,22 +53,22 @@ angular.module('lessons').config [
       { 'responseError': (rejection) ->
         defer = $q.defer()
         # console.log JSON.stringify rejection.data.errors
-        try
-          if rejection? && rejection.data? && rejection.data.errors?
-            if rejection.data.errors[0] != "Authorized users only." && rejection.data.errors != ""
+        # try
+        #   if rejection? && rejection.data? && rejection.data.errors?
+        #     if rejection.data.errors[0] != "Authorized users only." && rejection.data.errors != ""
 
-            # console.log( "Statustext: " + rejection.statusText + " status: " + rejection.status + " url: " +  rejection.config.url + " method: " + rejection.config.method + ". Full error: " + JSON.stringify rejection )
-              jsLogger.fatal JSON.stringify rejection
-              console.dir rejection 
-          defer.reject rejection
-          defer.promise
-        catch error
-          jsLogger.fatal error
+        #     # console.log( "Statustext: " + rejection.statusText + " status: " + rejection.status + " url: " +  rejection.config.url + " method: " + rejection.config.method + ". Full error: " + JSON.stringify rejection )
+        #       jsLogger.fatal JSON.stringify rejection
+        #       console.dir rejection 
+        #   defer.reject rejection
+        #   defer.promise
+        # catch error
+        #   jsLogger.fatal error
 
     
-        # jsLogger.fatal JSON.stringify rejection
-        # defer.reject rejection
-        # defer.promise
+        jsLogger.fatal JSON.stringify rejection
+        defer.reject rejection
+        defer.promise
  }
     return
 ]
