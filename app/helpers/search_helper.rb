@@ -18,7 +18,7 @@ module SearchHelper
       else
         subject = Subject.includes(:teachers).where('name ILIKE ?', "%#{ params[:subject_name] }%").select( [ :name, :id ] ).first
       end
-      teachers = subject.teachers.where( is_teacher: true ).select( "email, id, first_name, last_name" )
+      teachers = subject.teachers.where( is_teacher: true ).select( "email, id, first_name, last_name" ).uniq
       teachers.as_json(include: [ :photos, :location, :subjects ])
     end
 
