@@ -2,7 +2,11 @@
 <html ng-app="lessons">
 <head>
   <title>LYL</title>
-  
+  <meta property="og:url"                content="https://www.learnyourlesson.ie" />
+  <meta property="og:type"               content="website" />
+  <meta property="og:title"              content="Learn Your Lesson" />
+  <meta property="og:description"        content="Learn Your Lesson is your place to connect with local teachers" />
+  <meta property="og:image"              content="https://s3-eu-west-1.amazonaws.com/angular-lessons/static_assets/facebook_logo.jpg" />
   <%= stylesheet_link_tag    'application', media: 'all' %>
   <%= javascript_include_tag 'application' %>
   <%= favicon_link_tag 'favicon3.ico' %>
@@ -12,7 +16,7 @@
   <%= csrf_meta_tags %>
   <!-- <meta name="viewport" content="width=device-width"> -->
   <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimal-ui" />
-  <%= yield :head %>
+  <%= yield :meta_og %>
 </head>
 <body layout="column">
     

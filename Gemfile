@@ -94,5 +94,3 @@ gem 'delayed_job_active_record'
 gem 'workless'
 
 gem "daemons"
-
-gem 'meta-tags'
