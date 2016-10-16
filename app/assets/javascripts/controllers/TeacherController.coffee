@@ -61,6 +61,7 @@ angular.module('lessons').controller('TeacherController', [
 
       $scope.subjects = $rootScope.USER.subjects
       alertify.error "Your profile is not visible until you select a subject" if $scope.subjects.length == 0
+      alertify.error "Your profile might not be visible if you don't enter a location" if !$rootScope.USER.location?
 
       $scope.experience = $rootScope.USER.experience
       $scope.quals = $rootScope.USER.qualifications
