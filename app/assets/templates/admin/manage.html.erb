@@ -1,83 +1,85 @@
 <md-content>
-  <form ng-submit="create_category()" class="form_border">
-    <md-input-container>
-      <label>Name:</label>
-      <input type="text" ng-model="name" class="admin_inputs">
-    </md-input-container>
+  <md-content>
+    <form ng-submit="create_category()" class="form_border">
+      <md-input-container>
+        <label>Name:</label>
+        <input type="text" ng-model="name" class="admin_inputs">
+      </md-input-container>
 
-    <input type="submit" value="Create category">
-  </form>
+      <input type="submit" value="Create category">
+    </form>
 
-  <md-divider></md-divider>
-<br><br>
+    <md-divider></md-divider>
+  <br><br>
 
-<div layout="row" class="subject_container" flex="50" flex-xs="100">
-  <form  class="form_border" >
+  <div layout="row" class="subject_container" flex="50" flex-xs="100">
+    <form  class="form_border" >
 
-    
-
-    <md-input-container flex="100">
-      <label>Category:</label>
-      <md-select ng-model="subject.category" placeholder="Select a category" ng-change="get_subjects( subject.category )" required>
-        <md-option class="black_text" ng-value="category.id" ng-repeat="category in categories">{{ category.name }}</md-option>
-      </md-select>
-    </md-input-container><br>
-
-    <md-input-container>
-      <label>Name:</label>
-      <input type="text" ng-model="subject.name" class="admin_inputs">
-    </md-input-container>
-
-    <md-input-container>
-      <input type="submit" value="Create subject" class="md-button md-raised md-primary" ng-click="create_subject()">
-    </md-input-container>
-  </form>
-  <div flex="50" flex-xs="100">
-    <md-content class="subject_container">
-      <md-list>
-        <md-list-item class="md-2-line" ng-repeat="subject in category_subjects">
-          <div class="md-list-item-text">
-            <p>{{ subject.name }} </p>
-          </div>
-          
-        </md-list-item>
-      </md-list>
-    </md-content>
-  </div>
-</div>
-  
-</md-content>
-<br><br>
-<md-divider></md-divider>
-
-<md-content>
-  <div layout="row">
-    <div flex><md-button ng-click="edit_categories()">Edit Categories</md-button></div>
-    <div flex><md-button ng-click="edit_subjects()">Edit Subjects</div>
-  </div>
-</md-content>
-
-
-<md-content class="margin_t_10 white_background">
-  <md-toolbar>
-    <div class="md-toolbar-tools">
-      <span layout-margin ng-click="fetch_teachers()">List of teachers <i class="material-icons">touch_app</i></span>
       
-    </div>
-    
-  </md-toolbar>
-  <md-list>
-    <md-list-item ng-if="teachers" class="md-2-line" ng-repeat="( i, teacher) in teachers">
-      <!-- <md-checkbox ng-model="item.done"></md-checkbox> -->
-      <div class="md-list-item-text" ng-click="view_teacher( i )">
-        <h3>{{teacher.email}}</h3>
-        <span>Subjects {{ teacher.subjects.length }}</span> ||
-        <span>Location {{ (teacher.location.length > 0) }}</span> ||
-        <span>Experience {{ (teacher.experience.length > 0) }}</span> ||
-        <span>Quals {{ (teacher.qualifications.length ) }}</span> 
 
-        <md-divider md-inset></md-divider>
+      <md-input-container flex="100">
+        <label>Category:</label>
+        <md-select ng-model="subject.category" placeholder="Select a category" ng-change="get_subjects( subject.category )" required>
+          <md-option class="black_text" ng-value="category.id" ng-repeat="category in categories">{{ category.name }}</md-option>
+        </md-select>
+      </md-input-container><br>
+
+      <md-input-container>
+        <label>Name:</label>
+        <input type="text" ng-model="subject.name" class="admin_inputs">
+      </md-input-container>
+
+      <md-input-container>
+        <input type="submit" value="Create subject" class="md-button md-raised md-primary" aria-label="Create subject" ng-click="create_subject()">
+      </md-input-container>
+    </form>
+    <div flex="50" flex-xs="100">
+      <md-content class="subject_container">
+        <md-list>
+          <md-list-item class="md-2-line" ng-repeat="subject in category_subjects">
+            <div class="md-list-item-text">
+              <p>{{ subject.name }} </p>
+            </div>
+            
+          </md-list-item>
+        </md-list>
+      </md-content>
+    </div>
+  </div>
+    
+  </md-content>
+  <br><br>
+  <md-divider></md-divider>
+
+  <md-content>
+    <div layout="row">
+      <div flex><md-button ng-click="edit_categories()">Edit Categories</md-button></div>
+      <div flex><md-button ng-click="edit_subjects()">Edit Subjects</div>
+    </div>
+  </md-content>
+
+
+  <md-content class="margin_t_10 white_background">
+    <md-toolbar>
+      <div class="md-toolbar-tools">
+        <span layout-margin ng-click="fetch_teachers()">List of teachers <i class="material-icons">touch_app</i></span>
+        
       </div>
-    </md-list-item>
-  </md-list>
-</md-conent>
+      
+    </md-toolbar>
+    <md-list>
+      <md-list-item ng-if="teachers" class="md-2-line" ng-repeat="( i, teacher) in teachers">
+        <!-- <md-checkbox ng-model="item.done"></md-checkbox> -->
+        <div class="md-list-item-text" ng-click="view_teacher( i )">
+          <h3>{{teacher.email}}</h3>
+          <span>Subjects {{ teacher.subjects.length }}</span> ||
+          <span>Location {{ (teacher.location.length > 0) }}</span> ||
+          <span>Experience {{ (teacher.experience.length > 0) }}</span> ||
+          <span>Quals {{ (teacher.qualifications.length ) }}</span> 
+
+          <md-divider md-inset></md-divider>
+        </div>
+      </md-list-item>
+    </md-list>
+  </md-content>
+</md-content>
