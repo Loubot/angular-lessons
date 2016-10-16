@@ -40,8 +40,8 @@ angular.module('lessons').factory '$exceptionHandler', ->
   (exception, cause) ->
     # alert exception.message
     # jsLogger.fatal exception.message
-    jsLogger.fatal exception
-    jsLogger.fatal cause
+    # jsLogger.fatal exception
+    # jsLogger.fatal cause
     return
 
 angular.module('lessons').config [
