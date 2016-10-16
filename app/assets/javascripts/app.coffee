@@ -53,7 +53,7 @@ angular.module('lessons').config [
         # console.log JSON.stringify rejection.data.errors
         try
           if rejection? && rejection.data? && rejection.data.errors?
-            if rejection.data.errors[0] != "Authorized users only." 
+            if rejection.data.errors[0] != "Authorized users only." && rejection.data.errors != ""
 
             # console.log( "Statustext: " + rejection.statusText + " status: " + rejection.status + " url: " +  rejection.config.url + " method: " + rejection.config.method + ". Full error: " + JSON.stringify rejection )
               jsLogger.fatal JSON.stringify rejection
