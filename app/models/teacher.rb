@@ -18,15 +18,17 @@
 #  confirmed_at           :datetime
 #  confirmation_sent_at   :datetime
 #  unconfirmed_email      :string
+#  profile                :integer
 #  email                  :string
 #  first_name             :string
 #  last_name              :string
-#  calendar_id            :string
 #  overview               :text
 #  is_teacher             :boolean          default(FALSE)
 #  tokens                 :text
 #  created_at             :datetime
 #  updated_at             :datetime
+#  admin                  :boolean          default(FALSE)
+#  view_count             :integer          default(0)
 #
 
 class Teacher < ActiveRecord::Base

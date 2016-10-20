@@ -13,8 +13,11 @@ angular.module('lessons').controller('WelcomeController', [
   '$auth'
   'COMMS'
   '$window'
-  ( $scope, $rootScope, $state, $filter, $stateParams, $location, USER, $mdSidenav, alertify, $auth, COMMS, $window ) ->
+  'OG'
+  ( $scope, $rootScope, $state, $filter, $stateParams, $location, USER, $mdSidenav, alertify, $auth, COMMS, $window, OG ) ->
     console.log "WelcomeController"
+
+    OG.set_tags()
 
     window.onerror = (errorMsg, url, lineNumber, column, errorObj) ->
       alert 'Error: ' + errorMsg + ' Script: ' + url + ' Line: ' + lineNumber + ' Column: ' + column + ' StackTrace: ' + errorObj

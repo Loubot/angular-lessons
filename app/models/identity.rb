@@ -1,3 +1,15 @@
+# == Schema Information
+#
+# Table name: identities
+#
+#  id         :integer          not null, primary key
+#  teacher_id :integer
+#  provider   :string
+#  uid        :string
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#
+
 class Identity < ActiveRecord::Base
   belongs_to :teacher
 

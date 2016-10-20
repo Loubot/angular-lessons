@@ -30,18 +30,26 @@ angular.module('lessons').directive 'scroll', ($window) ->
       return
 
   }
-# angular.module('lessons').config (uiGmapGoogleMapApiProvider) ->
-#   uiGmapGoogleMapApiProvider.configure
-#     key: 'AIzaSyBpOd04XM28WtAk1LcJyhlQzNW6P6OT2Q0'
-#     v: '3.23'
-#     libraries: 'places'
+
+
+angular.module('lessons').service 'OG', ->
+  set_tags: ->
+    $('.added_og').remove()
+    $('head').append """ <meta property="og:title" content="Learn Your Lesson." class="added_og"/>"""
+    # $('head').append """ <meta property="" content="" />"""
+    # $('head').append """ <meta property="" content="" />"""
+    # $('head').append """ <meta property="" content="" />"""
+    # $('head').append """ <meta property="" content="" />"""
+
 
 angular.module('lessons').factory '$exceptionHandler', ->
   (exception, cause) ->
     # alert exception.message
     # jsLogger.fatal exception.message
-    jsLogger.fatal exception
-    jsLogger.fatal cause
+    # jsLogger.fatal exception
+    # jsLogger.fatal cause
+    console.log exception
+    console.log cause
     return
 
 angular.module('lessons').config [
@@ -50,6 +58,7 @@ angular.module('lessons').config [
     $httpProvider.interceptors.push ($q) ->
       { 'responseError': (rejection) ->
         defer = $q.defer()
+
         try
           if rejection? && rejection.data?
             if rejection.data.errors[0] != "Authorized users only."
@@ -61,6 +70,7 @@ angular.module('lessons').config [
           defer.promise
         catch error
           jsLogger.fatal error
+
  }
     return
 ]

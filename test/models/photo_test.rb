@@ -9,6 +9,7 @@
 #  avatar         :string
 #  created_at     :datetime         not null
 #  updated_at     :datetime         not null
+#  avatar_tmp     :string
 #
 
 require 'test_helper'

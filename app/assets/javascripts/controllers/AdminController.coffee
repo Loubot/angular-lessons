@@ -12,9 +12,15 @@ angular.module('lessons').controller('AdminController', [
   ( $scope, $rootScope, $state, USER, COMMS, alertify, $mdDialog ) ->
     console.log "AdminController"
 
+    $scope.scrollevent = ( $e ) ->      
+      return
+
     $scope.show_teachers = false
 
     USER.get_user().then( ( resp ) ->
+      if !$rootScope.USER?
+        alertify.error "You must be authorised"
+        $state.go 'welcome'
       if $rootScope.USER.admin == false
         alertify.error "You must be an admin to view this"
         $state.go "welcome"
@@ -30,6 +36,10 @@ angular.module('lessons').controller('AdminController', [
           console.log err
           alertify.error "Failed to get categories"
         )
+    ).catch( ( err ) ->
+      console.log err
+      alertify.error "You must log in"
+      $state.go 'welcome'
     )
 
     $scope.fetch_teachers = ->
