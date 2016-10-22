@@ -98,4 +98,4 @@ gem "daemons"
 
 gem 'sitemap_generator'
 
-gem 'fog-aws'
+gem "fog-aws"

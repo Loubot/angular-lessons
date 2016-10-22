@@ -75,8 +75,10 @@ angular.module('lessons').config [
     return
 ]
 
-angular.module('lessons').config ($stateProvider, $urlRouterProvider) ->
 
+angular.module('lessons').config ($stateProvider, $urlRouterProvider, $locationProvider) ->
+  $locationProvider.html5Mode(true)
+  
   $stateProvider.state 'home',
     url: '/'
     templateUrl: "static/welcome.html"

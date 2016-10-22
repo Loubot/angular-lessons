@@ -56,4 +56,5 @@ Rails.application.routes.draw do
   end
   
   root to: 'static#index'
+  get '*path'           => 'static#index'
 end
