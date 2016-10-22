@@ -35,9 +35,10 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 # gem 'capistrano-rails', group: :development
 
 group :production do
-  gem "fog-aws"
+  # gem "fog-aws"
   gem 'unicorn'
   gem 'pg'
+  gem 'render_static'
 end
 
 group :development, :test do
@@ -94,3 +95,7 @@ gem 'delayed_job_active_record'
 gem 'workless'
 
 gem "daemons"
+
+gem 'sitemap_generator'
+
+gem 'fog-aws'

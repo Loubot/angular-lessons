@@ -1,0 +1,1 @@
+RenderStatic::Middleware.base_path = "/" if Rails.env.production?
