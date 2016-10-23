@@ -33,7 +33,7 @@ SitemapGenerator::Sitemap.create do
   #   end
 
   Teacher.where( is_teacher: true ).each do |t|
-    p t.id
+
     add "/view-teacher/#{ t.id }"
   end
 
@@ -43,3 +43,5 @@ SitemapGenerator::Sitemap.create do
 
   add '/welcome'
 end
+
+SitemapGenerator::Sitemap.ping_search_engines('https://www.learnyourlesson.ie/sitemap.xml.gz')

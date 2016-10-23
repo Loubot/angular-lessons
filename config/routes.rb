@@ -56,5 +56,6 @@ Rails.application.routes.draw do
   end
   
   root to: 'static#index'
+  get '/sitemap.xml.gz', to: redirect("https://#{ENV['FOG_DIRECTORY']}.s3.amazonaws.com/sitemap.xml.gz"), as: :sitemap
   get '*path'           => 'static#index'
 end
