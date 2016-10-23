@@ -33,6 +33,7 @@ SitemapGenerator::Sitemap.create do
   #   end
 
   Teacher.where( is_teacher: true ).each do |t|
+    p t.id
     add "/view-teacher/#{ t.id }"
   end
 
