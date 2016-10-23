@@ -32,5 +32,13 @@ SitemapGenerator::Sitemap.create do
   #     add article_path(article), :lastmod => article.updated_at
   #   end
 
+  Teacher.where( is_teacher: true ).each do |t|
+    add "/view-teacher/#{ t.id }"
+  end
+
+  add '/how-it-works'
+
+  add 'register-teacher'
+
   add '/welcome'
 end
