@@ -7,7 +7,8 @@ class SubjectController < ApplicationController
   def create
     subject = Subject.new( create_subject_params )
     if subject.save
-      render json: { subjects: Subject.all.order('name ASC').as_json }, status: 201
+      subjects = Category.find( subject.category_id ).subjects.order('name ASC')
+      render json: { subjects: subjects.as_json }, status: 201
     else
       render json: { errors: subject.errors }, status: 422
     end
