@@ -77,6 +77,7 @@ angular.module('lessons').config [
 
 
 angular.module('lessons').config ($stateProvider, $urlRouterProvider, $locationProvider) ->
+  $locationProvider.html5Mode(true)
   
   $stateProvider.state 'home',
     url: '/'
