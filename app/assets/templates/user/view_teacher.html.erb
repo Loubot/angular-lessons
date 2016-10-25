@@ -57,7 +57,7 @@
 
       <!-- end of map div -->
 
-      <md-content>
+      <md-content ng-if="teacher.overview">
         <md-card>
           <md-card-title>
             <md-card-title-text>
@@ -72,7 +72,7 @@
         </md-card>
       </md-content>
 
-      <md-content>
+      <md-content ng-if="teacher.experience">
         <md-card>
           <md-card-title>
             <md-card-title-text>
@@ -87,7 +87,7 @@
         </md-card>
       </md-content>
 
-      <md-content ng-if"teacher.qualifications">
+      <md-content ng-if="teacher.qualifications.length>0">
         <md-toolbar>
           <div class="md-toolbar-tools">
             <span layout-margin>Qualifications</span>

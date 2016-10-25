@@ -53,6 +53,15 @@ angular.module('lessons').controller( 'ViewTeacherController', [
           title: "#{ $scope.teacher.first_name } location"
         )
 
+
+        google.maps.event.addDomListener window, 'resize', ->
+
+          
+          $scope.map.setCenter(
+            lat: $scope.teacher.location.latitude
+            lng: $scope.teacher.location.longitude
+          )
+
     
     
     COMMS.GET(

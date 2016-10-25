@@ -19,10 +19,6 @@ angular.module('lessons').controller('WelcomeController', [
 
     OG.set_tags()
 
-    window.onerror = (errorMsg, url, lineNumber, column, errorObj) ->
-      alert 'Error: ' + errorMsg + ' Script: ' + url + ' Line: ' + lineNumber + ' Column: ' + column + ' StackTrace: ' + errorObj
-      return
-
     $elems = $('.animateblock')
     $scope.selected = {}
     $scope.selected.subject_name = $stateParams.name
