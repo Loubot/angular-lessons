@@ -303,6 +303,10 @@ md-sidenav.md-closed.md-locked-open-add-active.user_menu {
   margin: 10px !important;
 }
 
+.margin_t_8{
+  margin-top: 8px !important;
+}
+
 .margin_t_10{
   margin-top: 10px !important;
 }
@@ -782,3 +786,10 @@ md-fab-speed-dial.md-fab-top-left{
 .county_placeholder span:first-child{
   color: #FFF !important;
 }
+
+
+// Hack to stop Firefox no margin on grid-tile
+
+// .firefox_hack{
+//   margin: 8px !important;
+// }
