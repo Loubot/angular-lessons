@@ -5,7 +5,7 @@ class LoggerController < RailsClientLogger::RailsClientLoggersController
     # logger.debug params
     
     # error = JSON.parse( params[:message] )
-
+    logger.info "There hereby follows an error message. Please take note"
     logger.info params
     
     # if error[ 'data' ]['errors'].present?
