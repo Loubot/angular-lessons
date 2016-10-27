@@ -58,7 +58,8 @@ angular.module('lessons').config [
     $httpProvider.interceptors.push ($q) ->
       { 'responseError': (rejection) ->
         defer = $q.defer()
-
+        jsLogger.fatal JSON.stringify rejection
+        console.dir rejection 
         try
           if rejection? && rejection.data?
             if rejection.data.errors[0] != "Authorized users only."
