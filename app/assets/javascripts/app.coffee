@@ -82,7 +82,7 @@ angular.module('lessons').config [
  }
     return
 ]
-
+#s
 
 angular.module('lessons').config ($stateProvider, $urlRouterProvider, $locationProvider) ->
   $locationProvider.html5Mode(true)
