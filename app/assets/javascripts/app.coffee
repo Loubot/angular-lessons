@@ -52,6 +52,12 @@ angular.module('lessons').factory '$exceptionHandler', ->
     console.log cause
     return
 
+switch_check = ( err ) ->
+  switch err
+    when "Authorized users only." then return false
+    when "Invalid login credentials. Please try again." then return false
+    else return true
+
 angular.module('lessons').config [
   '$httpProvider'
   ($httpProvider) ->
@@ -61,7 +67,7 @@ angular.module('lessons').config [
          
         try
           if rejection? && rejection.data?
-            if rejection.data.errors[0] != "Authorized users only." or rejection.data.errors[0] != "Invalid login credentials. Please try again."
+            if switch_check( rejection.data.errors[0] )
               console.log "Sending the error"
             # console.log( "Statustext: " + rejection.statusText + " status: " + rejection.status + " url: " +  rejection.config.url + " method: " + rejection.config.method + ". Full error: " + JSON.stringify rejection )
               jsLogger.fatal JSON.stringify rejection
