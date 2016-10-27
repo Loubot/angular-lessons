@@ -2,7 +2,7 @@ class LoggerController < RailsClientLogger::RailsClientLoggersController
   
   require 'json'
   def log
-    logger.info params
+    logger.debug params
     # pp error['data']
     # error = JSON.parse( params[:message] )
     
