@@ -374,6 +374,8 @@ angular.module('lessons').config [
           defer.promise
         catch error
           jsLogger.fatal error
+          defer.reject rejection
+          defer.promise
 
  }
     return
