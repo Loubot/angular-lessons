@@ -364,7 +364,7 @@ angular.module('lessons').config [
         defer = $q.defer()
          
         try
-          if rejection? && rejection.data? && rejection.data.errors.lenght > 0
+          if rejection? && rejection.data? && rejection.data.errors.length > 0
             if switch_check( rejection.data.errors[0] )
               console.log "Sending the error"
             # console.log( "Statustext: " + rejection.statusText + " status: " + rejection.status + " url: " +  rejection.config.url + " method: " + rejection.config.method + ". Full error: " + JSON.stringify rejection )
