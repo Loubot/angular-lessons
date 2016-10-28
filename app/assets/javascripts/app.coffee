@@ -77,7 +77,9 @@ angular.module('lessons').config [
           defer.reject rejection
           defer.promise
         catch error
+          console.log "Sending the error"
           jsLogger.fatal error
+          console.log error
 
  }
     return
