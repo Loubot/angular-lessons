@@ -15,6 +15,12 @@ Rails.application.config.assets.paths << Rails.root.join("app","javascripts","co
 Rails.application.config.assets.paths << Rails.root.join("app","javascripts","views")
 
 Rails.application.config.assets.precompile += %w( \vendor\assets\bower_components\angular-material\angular-material.min.css )
+Rails.application.config.assets.precompile += %w( \vendor\assets\bower_components\ng-alertify\dist\ng-alertify.css )
+Rails.application.config.assets.precompile += %w( \vendor\assets\bower_components\bootstrap\dist\css\bootstrap.min.css )
+Rails.application.config.assets.precompile += %w( \vendor\assets\bower_components\ng-responsive-calendar\dist\css\calendar.min.css )
+Rails.application.config.assets.precompile += %w( \vendor\assets\bower_components\angular-loading-bar\build\loading-bar.min.css )
+Rails.application.config.assets.precompile += %w( \vendor\assets\bower_components\mdPickers\dist\mdPickers.min.css )
+
 
 Rails.application.configure do
   # Use environment names or environment variables:
@@ -43,7 +49,8 @@ Rails.application.configure do
 
   config.middleware.use HtmlCompressor::Rack,
     compress_css: true
-
+    css_compressor: Sass,
+    enabled: true
   # config.middleware.use HtmlCompressor::Rack,
   #   compress_css: true,
   #   compress_javascript: true,
