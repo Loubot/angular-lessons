@@ -14,22 +14,30 @@
 //= require rails_client_logger
 //= require jquery_ujs
 //= require lodash/dist/lodash
-//= require angular
+
+//= require ng-file-upload/ng-file-upload-all.min
 //= require alertify.js/dist/js/ngAlertify
 //= require angular-ui-router/release/angular-ui-router.min 
-//= require angular-animate/angular-animate.min
-//= require angular-aria/angular-aria.min
-//= require angular-material/angular-material.min
-//= require angular-cookie/angular-cookie.min
+
+//= require angular
+//= require angular-animate
+//= require angular-aria
+//= require angular-cookie
+//= require angular-messages
+//= require angular-sanitize
+//= require angular-simple-logger
+//= require angular-loading-bar
+//= require angular-validation-match
+
 //= require ng-token-auth/dist/ng-token-auth.min
-//= require angular-messages/angular-messages.min
-//= require ng-file-upload/ng-file-upload-all.min
-//= require angular-sanitize/angular-sanitize.min
+
+
+
+
+//= require angular-material/angular-material.min
 //= require bootstrap/dist/js/bootstrap.min
 //= require ng-responsive-calendar/dist/js/calendar-tpls.min
-//= require angular-simple-logger/dist/angular-simple-logger.min
-//= require angular-loading-bar/build/loading-bar.min
-//= require angular-validation-match/dist/angular-validation-match.min
+
 //= require moment/min/moment.min
 //= require mdPickers/dist/mdPickers
 //= require app
