@@ -1,7 +1,7 @@
 # Be sure to restart your server when you modify this file.
 
 # Version of your assets, change this if you want to expire all your assets.
-Rails.application.config.assets.version = '1.3'
+Rails.application.config.assets.version = '1.5'
 # Add additional assets to the asset load path
 # Rails.application.config.assets.paths << Emoji.images_path
 
@@ -14,12 +14,12 @@ Rails.application.config.assets.paths << Rails.root.join("vendor","assets","angu
 Rails.application.config.assets.paths << Rails.root.join("app","javascripts","controllers")
 Rails.application.config.assets.paths << Rails.root.join("app","javascripts","views")
 
-Rails.application.config.assets.precompile += %w( \vendor\assets\bower_components\angular-material\angular-material.min.css )
-Rails.application.config.assets.precompile += %w( \vendor\assets\bower_components\ng-alertify\dist\ng-alertify.css )
-Rails.application.config.assets.precompile += %w( \vendor\assets\bower_components\bootstrap\dist\css\bootstrap.min.css )
-Rails.application.config.assets.precompile += %w( \vendor\assets\bower_components\ng-responsive-calendar\dist\css\calendar.min.css )
-Rails.application.config.assets.precompile += %w( \vendor\assets\bower_components\angular-loading-bar\build\loading-bar.min.css )
-Rails.application.config.assets.precompile += %w( \vendor\assets\bower_components\mdPickers\dist\mdPickers.min.css )
+Rails.application.config.assets.precompile += %w( angular-material.min.css )
+Rails.application.config.assets.precompile += %w( vendor\assets\bower_components\ng-alertify\dist\ng-alertify.css )
+Rails.application.config.assets.precompile += %w( vendor\assets\bower_components\bootstrap\dist\css\bootstrap.min.css )
+Rails.application.config.assets.precompile += %w( vendor\assets\bower_components\ng-responsive-calendar\dist\css\calendar.min.css )
+Rails.application.config.assets.precompile += %w( vendor\assets\bower_components\angular-loading-bar\build\loading-bar.min.css )
+Rails.application.config.assets.precompile += %w( vendor\assets\bower_components\mdPickers\dist\mdPickers.min.css )
 
 
 Rails.application.configure do
