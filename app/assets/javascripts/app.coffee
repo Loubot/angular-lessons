@@ -43,17 +43,16 @@ angular.module('lessons').service 'OG', [
     # $('head').append """ <meta property="" content="" />"""
 ]
 
-
 angular.module('lessons').factory '$exceptionHandler', [
-  
-  (exception, cause) ->
-    # alert exception.message
-    # jsLogger.fatal exception.message
-    # jsLogger.fatal exception
-    # jsLogger.fatal cause
-    console.log exception
-    console.log cause
-    return
+  () ->
+    (exception, cause) ->
+      # alert exception.message
+      # jsLogger.fatal exception.message
+      # jsLogger.fatal exception
+      # jsLogger.fatal cause
+      console.log exception
+      console.log cause
+      return
 ]
 
 switch_check = ( err ) ->
