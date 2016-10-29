@@ -30,15 +30,17 @@ Rails.application.configure do
   # uglifier = Uglifier.new output: { comments: :all }
   # uglifier = Uglifier.new output: { comments: :copyright }
 
+   # config.serve_static_files = true
+
   config.assets.compile = true
   config.assets.debug = true if Rails.env.development?
 
-  config.assets.js_compressor = uglifier
+  config.assets.js_compressor = :uglifier
   config.assets.css_compressor = :sass
 
   # config.middleware.use Rack::Deflater
   # config.middleware.insert_before ActionDispatch::Static, Rack::Deflater
-  
+
   # config.middleware.use HtmlCompressor::Rack,
   #   compress_css: true,
   #   compress_javascript: true,
