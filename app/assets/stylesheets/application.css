@@ -11,14 +11,19 @@
  * file per style scope.
  *
  *= require bootstrap/dist/css/bootstrap.min.css
+ *= require ng-alertify/dist/ng-alertify.css
+ *= require ng-responsive-calendar/dist/css/calendar.min.css
+ *= require angular-material/angular-material.min.css
+ *= require angular-loading-bar/build/loading-bar.min.css
+ *= require mdPickers/dist/mdPickers.min.css
  *= require_tree .
  *= require_self
  */
 
 
-@import "ng-alertify/dist/ng-alertify.css";
+/*@import "ng-alertify/dist/ng-alertify.css";*/
 /*@import "bootstrap/dist/css/bootstrap.min.css";*/
-@import "angular-material/angular-material.min.css";
+/*@import "angular-material/angular-material.min.css";
 @import "ng-responsive-calendar/dist/css/calendar.min.css";
 @import "angular-loading-bar/build/loading-bar.min.css";
-@import "mdPickers/dist/mdPickers.min.css"
+@import "mdPickers/dist/mdPickers.min.css"*/
