@@ -38,6 +38,8 @@ Rails.application.configure do
 
    # config.serve_static_files = true
 
+  config.assets.compress = true
+
   config.assets.compile = true
   config.assets.debug = true if Rails.env.development?
 
