@@ -44,7 +44,7 @@ angular.module('lessons').service 'OG', [
 ]
 
 angular.module('lessons').factory '$exceptionHandler', [
-  ->
+  () ->
     (exception, cause) ->
       # alert exception.message
       # jsLogger.fatal exception.message
