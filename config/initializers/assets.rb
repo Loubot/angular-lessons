@@ -51,7 +51,8 @@ Rails.application.configure do
     compress_css: true,
     css_compressor: Sass,
     enabled: true,
-    compress_javascript: true
+    compress_javascript: true,
+    javascript_compressor: uglifier
   # config.middleware.use HtmlCompressor::Rack,
   #   compress_css: true,
   #   compress_javascript: true,
