@@ -49,7 +49,7 @@ if Rails.env.production?
     config.assets.css_compressor = :sass
     config.assets.compile = true
     config.assets.digest = true
-    config.assets.version = '2.4'
+    config.assets.version = '2.5'
     config.log_level = :info
     config.i18n.fallbacks = true
     config.active_support.deprecation = :notify
