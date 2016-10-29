@@ -37,7 +37,7 @@ Rails.application.configure do
   config.assets.css_compressor = :sass
 
   config.middleware.use Rack::Deflater
-  config.middleware.insert_before ActionDispatch::Static, Rack::Deflater
+  # config.middleware.insert_before ActionDispatch::Static, Rack::Deflater
   
   # config.middleware.use HtmlCompressor::Rack,
   #   compress_css: true,
