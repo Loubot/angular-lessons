@@ -41,7 +41,7 @@ Rails.application.configure do
   config.assets.compress = true
 
   config.assets.compile = true
-  config.assets.debug = true if Rails.env.development?
+  # config.assets.debug = true if Rails.env.development?
 
   # config.assets.js_compressor = :uglifier
   config.assets.css_compressor = :sass
