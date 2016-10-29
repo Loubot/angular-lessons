@@ -39,7 +39,7 @@ Rails.application.configure do
    # config.serve_static_files = true
 
   config.cache_classes = true
-  # config.eager_load = true if Rails.env.production?
+  config.eager_load = true if Rails.env.production?
   config.consider_all_requests_local       = false
   config.action_controller.perform_caching = true
   config.serve_static_files = true
