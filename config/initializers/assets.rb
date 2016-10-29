@@ -11,8 +11,8 @@ Rails.application.config.assets.version = '1.5'
 
 Rails.application.config.assets.paths << Rails.root.join("vendor","assets","bower_components")
 Rails.application.config.assets.paths << Rails.root.join("vendor","assets","angular_app")
-Rails.application.config.assets.paths << Rails.root.join("app","javascripts","controllers")
-Rails.application.config.assets.paths << Rails.root.join("app","javascripts","views")
+Rails.application.config.assets.paths << Rails.root.join("app", "assets", "javascripts","controllers")
+Rails.application.config.assets.paths << Rails.root.join("app", "assets", "javascripts","templates")
 
 Rails.application.config.assets.precompile += %w( angular-material.min.css )
 Rails.application.config.assets.precompile += %w( vendor\assets\bower_components\ng-alertify\dist\ng-alertify.css )
