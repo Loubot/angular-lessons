@@ -32,7 +32,8 @@ angular.module('lessons').directive 'scroll', ($window) ->
   }
 
 
-angular.module('lessons').service 'OG', ->
+angular.module('lessons').service 'OG', [
+  ->
   set_tags: ->
     $('.added_og').remove()
     $('head').append """ <meta property="og:title" content="Learn Your Lesson." class="added_og"/>"""
@@ -40,18 +41,19 @@ angular.module('lessons').service 'OG', ->
     # $('head').append """ <meta property="" content="" />"""
     # $('head').append """ <meta property="" content="" />"""
     # $('head').append """ <meta property="" content="" />"""
+]
 
 
 angular.module('lessons').factory '$exceptionHandler', [
-  () ->
-    (exception, cause) ->
-      # alert exception.message
-      # jsLogger.fatal exception.message
-      # jsLogger.fatal exception
-      # jsLogger.fatal cause
-      console.log exception
-      console.log cause
-      return
+  
+  (exception, cause) ->
+    # alert exception.message
+    # jsLogger.fatal exception.message
+    # jsLogger.fatal exception
+    # jsLogger.fatal cause
+    console.log exception
+    console.log cause
+    return
 ]
 
 switch_check = ( err ) ->
