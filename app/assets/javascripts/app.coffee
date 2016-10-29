@@ -43,6 +43,49 @@ angular.module('lessons').service 'OG', [
     # $('head').append """ <meta property="" content="" />"""
 ]
 
+angular.module('lessons').factory '$exceptionHandler', [
+  ->
+    (exception, cause) ->
+      # alert exception.message
+      # jsLogger.fatal exception.message
+      # jsLogger.fatal exception
+      # jsLogger.fatal cause
+      console.log exception
+      console.log cause
+      return
+]
+
+switch_check = ( err ) ->
+  switch err
+    when "Authorized users only." then return false
+    when "Invalid login credentials. Please try again." then return false
+    else return true
+
+angular.module('lessons').config [
+  '$httpProvider'
+  ($httpProvider) ->
+    $httpProvider.interceptors.push ($q) ->
+      { 'responseError': (rejection) ->
+        defer = $q.defer()
+         
+        try
+          if rejection? && rejection.data? && rejection.data.errors? && rejection.data.errors.length > 0
+            if switch_check( rejection.data.errors[0] )
+              console.log "Sending the error"
+            # console.log( "Statustext: " + rejection.statusText + " status: " + rejection.status + " url: " +  rejection.config.url + " method: " + rejection.config.method + ". Full error: " + JSON.stringify rejection )
+              jsLogger.fatal JSON.stringify rejection
+              console.dir rejection 
+          defer.reject rejection
+          defer.promise
+        catch error
+          console.log "Sending the error"
+          jsLogger.fatal error
+          console.log error
+
+ }
+    return
+]
+#s
 
 angular.module('lessons').config [ 
   '$stateProvider'
