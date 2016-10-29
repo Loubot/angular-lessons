@@ -50,7 +50,8 @@ Rails.application.configure do
   config.middleware.use HtmlCompressor::Rack,
     compress_css: true
     css_compressor: Sass,
-    enabled: true
+    enabled: true,
+    compress_javascript: true
   # config.middleware.use HtmlCompressor::Rack,
   #   compress_css: true,
   #   compress_javascript: true,
