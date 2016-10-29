@@ -38,23 +38,30 @@ Rails.application.configure do
 
    # config.serve_static_files = true
 
-  config.assets.compress = true
-
+  config.cache_classes = true
+  config.eager_load = true if Rails.env.production?
+  config.consider_all_requests_local       = false
+  config.action_controller.perform_caching = true
+  config.serve_static_files = true
+  config.assets.js_compressor = :uglifier
+  config.assets.css_compressor = :sass
   config.assets.compile = true
-  # config.assets.debug = true if Rails.env.development?
-
-  # config.assets.js_compressor = :uglifier
+  config.assets.digest = true
+  config.assets.version = '1.0'
+  config.log_level = :info
+  config.i18n.fallbacks = true
+  config.active_support.deprecation = :notify
   config.assets.css_compressor = :sass
 
   # config.middleware.use Rack::Deflater
   # config.middleware.insert_before ActionDispatch::Static, Rack::Deflater
 
-  config.middleware.use HtmlCompressor::Rack,
-    compress_css: true,
-    css_compressor: Sass,
-    enabled: true,
-    compress_javascript: true,
-    javascript_compressor: uglifier
+  # config.middleware.use HtmlCompressor::Rack,
+  #   compress_css: true,
+  #   css_compressor: Sass,
+  #   enabled: true,
+  #   compress_javascript: true,
+  #   javascript_compressor: uglifier
   # config.middleware.use HtmlCompressor::Rack,
   #   compress_css: true,
   #   compress_javascript: true,

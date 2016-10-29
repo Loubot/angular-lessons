@@ -101,5 +101,3 @@ gem 'sitemap_generator'
 gem "fog-aws"
 
 gem 'htmlcompressor'
-
-gem 'rack-zippy'

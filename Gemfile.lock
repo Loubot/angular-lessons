@@ -183,8 +183,6 @@ GEM
     rack-cors (0.4.0)
     rack-test (0.6.3)
       rack (>= 1.0)
-    rack-zippy (4.0.0)
-      actionpack (~> 4.2.4)
     rails (4.2.6)
       actionmailer (= 4.2.6)
       actionpack (= 4.2.6)
@@ -307,7 +305,6 @@ DEPENDENCIES
   omniauth-facebook
   pg
   rack-cors
-  rack-zippy
   rails (= 4.2.6)
   rails-client-logger
   render_static
