@@ -36,7 +36,7 @@ Rails.application.configure do
   config.assets.debug = true if Rails.env.development?
 
   # config.assets.js_compressor = :uglifier
-  # config.assets.css_compressor = :sass
+  config.assets.css_compressor = :sass
 
   # config.middleware.use Rack::Deflater
   # config.middleware.insert_before ActionDispatch::Static, Rack::Deflater
