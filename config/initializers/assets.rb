@@ -41,6 +41,9 @@ Rails.application.configure do
   # config.middleware.use Rack::Deflater
   # config.middleware.insert_before ActionDispatch::Static, Rack::Deflater
 
+  config.middleware.use HtmlCompressor::Rack,
+    compress_css: true
+
   # config.middleware.use HtmlCompressor::Rack,
   #   compress_css: true,
   #   compress_javascript: true,
