@@ -43,11 +43,11 @@ Rails.application.configure do
   config.consider_all_requests_local       = false
   config.action_controller.perform_caching = true
   config.serve_static_files = true
-  # config.assets.js_compressor = :uglifier
+  config.assets.js_compressor = :uglifier
   config.assets.css_compressor = :sass
   config.assets.compile = true
   config.assets.digest = true
-  config.assets.version = '2.2'
+  config.assets.version = '2.4'
   config.log_level = :info
   config.i18n.fallbacks = true
   config.active_support.deprecation = :notify
