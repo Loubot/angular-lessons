@@ -30,7 +30,7 @@ Rails.application.configure do
   # Strip all comments from JavaScript files, even copyright notices.
   # By doing so, you are legally required to acknowledge
   # the use of the software somewhere in your Web site or app:
-  uglifier = Uglifier.new output: { comments: :none }
+  uglifier = Uglifier.new(mangle: false)
 
   # To keep all comments instead or only keep copyright notices (the default):
   # uglifier = Uglifier.new output: { comments: :all }
@@ -43,7 +43,7 @@ Rails.application.configure do
   config.consider_all_requests_local       = false
   config.action_controller.perform_caching = true
   config.serve_static_files = true
-  config.assets.js_compressor = :uglifier
+  config.assets.js_compressor = uglifier
   config.assets.css_compressor = :sass
   config.assets.compile = true
   config.assets.digest = true
