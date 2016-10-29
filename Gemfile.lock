@@ -128,7 +128,7 @@ GEM
       excon (~> 0.45)
       multi_json (~> 1.8)
     hike (1.2.3)
-    htmlcompressor (0.3.1)
+    htmlcompressor (0.2.0)
     i18n (0.7.0)
     ipaddress (0.8.3)
     jbuilder (2.6.0)
