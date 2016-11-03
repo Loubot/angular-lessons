@@ -11,7 +11,6 @@
 // about supported directives.
 
 //= require jquery.min
-//= require jquery_ujs
 //= require rails_client_logger
 //= require lodash/dist/lodash
 //= require angular
