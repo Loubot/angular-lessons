@@ -276,6 +276,7 @@ angular.module('lessons').controller('TeacherController', [
       $mdDialog.hide()
 
     $scope.change_password = ->
+      $scope.announce_password_once = false
       $auth.updatePassword($scope.update_password).then((resp) ->
         console.log resp
         return
@@ -284,7 +285,9 @@ angular.module('lessons').controller('TeacherController', [
         return
 
     $scope.$on 'auth:password-change-success', (ev) ->
-      alertify.success 'Your password has been successfully updated!'
+
+      alertify.success 'Your password has been successfully updated!' if !$scope.announce_password_once
+      $scope.announce_password_once = true
       $scope.closeDialog()
       $scope.update_password = null
       return

@@ -68,31 +68,33 @@
 
     <div flex="50" flex-xs="100" >
       
-      <md-grid-list md-cols="3" md-row-height="6:2">
-        <md-grid-tile class="gray min_height_128"
-            md-rowspan="3" md-colspan="1" md-colspan-sm="1" md-colspan-xs="1" ng-repeat="photo in photos">
-          <img class="profile_thumbs" ng-src="{{ photo.avatar.url }}" >
-          <md-grid-tile-footer>
-            <md-menu>
-         <!-- Trigger element is a md-button with an icon -->
-             <md-button ng-click="$mdOpenMenu($event)" class="md-icon-button" aria-label="Open sample menu">
-               <i class="material-icons">info</i>
-             </md-button>
-             <md-menu-content width="4">
-                <md-menu-item>
-                  <md-button ng-click="make_profile( photo.id )">Make profile?</md-button>
-                </md-menu-item>
+      <md-card>
+        <md-grid-list md-cols="3" md-row-height="6:2" class="no_padding">
+          <md-grid-tile class="gray min_height_128"
+              md-rowspan="3" md-colspan="1" md-colspan-sm="1" md-colspan-xs="1" ng-repeat="photo in photos">
+            <img class="profile_thumbs" ng-src="{{ photo.avatar.url }}" >
+            <md-grid-tile-footer>
+              <md-menu>
+           <!-- Trigger element is a md-button with an icon -->
+               <md-button ng-click="$mdOpenMenu($event)" class="md-icon-button" aria-label="Open sample menu">
+                 <i class="material-icons">info</i>
+               </md-button>
+               <md-menu-content width="4">
+                  <md-menu-item>
+                    <md-button ng-click="make_profile( photo.id )">Make profile?</md-button>
+                  </md-menu-item>
 
-                <md-menu-item>
-                  <md-button ng-click="destroy_pic( photo.id )" class="width_100">Delete</md-button>
-                  
-                </md-menu-item>
-             </md-menu-content>
-            </md-menu>
-          </md-grid-tile-footer>
-        </md-grid-tile>
-        
-      </md-grid-list>
+                  <md-menu-item>
+                    <md-button ng-click="destroy_pic( photo.id )" class="width_100">Delete</md-button>
+                    
+                  </md-menu-item>
+               </md-menu-content>
+              </md-menu>
+            </md-grid-tile-footer>
+          </md-grid-tile>
+          
+        </md-grid-list>
+      </md-card>
         
        
 

@@ -48,6 +48,7 @@ GEM
       tilt
     angular_rails_csrf (2.0.0)
       railties (>= 3, < 5.1)
+    angularjs-rails (1.5.8)
     annotate (2.7.1)
       activerecord (>= 3.2, < 6.0)
       rake (>= 10.4, < 12.0)
@@ -128,6 +129,7 @@ GEM
       excon (~> 0.45)
       multi_json (~> 1.8)
     hike (1.2.3)
+    htmlcompressor (0.2.0)
     i18n (0.7.0)
     ipaddress (0.8.3)
     jbuilder (2.6.0)
@@ -284,6 +286,7 @@ DEPENDENCIES
   activerecord-session_store
   angular-rails-templates
   angular_rails_csrf
+  angularjs-rails
   annotate
   bower-rails
   byebug
@@ -295,6 +298,7 @@ DEPENDENCIES
   devise_token_auth
   fog-aws
   geokit-rails
+  htmlcompressor
   jbuilder (~> 2.0)
   jquery-rails
   mandrill-api (~> 1)

@@ -77,7 +77,9 @@ angular.module('lessons').config [
           defer.reject rejection
           defer.promise
         catch error
+          console.log "Sending the error"
           jsLogger.fatal error
+          console.log error
 
  }
     return
@@ -85,7 +87,7 @@ angular.module('lessons').config [
 #s
 
 angular.module('lessons').config ($stateProvider, $urlRouterProvider, $locationProvider) ->
-  $locationProvider.html5Mode(true)
+  # $locationProvider.html5Mode(true)
   
   $stateProvider.state 'home',
     url: '/'
