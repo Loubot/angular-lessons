@@ -12,7 +12,7 @@
 
 //= require jquery.min
 //= require rails_client_logger
-//= require lodash/dist/lodash
+//= require lodash/dist/lodash.min
 //= require angular
 //= require alertify.js/dist/js/ngAlertify
 //= require angular-ui-router/release/angular-ui-router.min 
