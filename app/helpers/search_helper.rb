@@ -4,7 +4,7 @@ module SearchHelper
     if params.has_key?( :county_name ) && params.has_key?( :subject_name ) \
       && params[ :county_name ] != "" && params[ :subject_name ] != ""
       p "county_name and subject_name"
-      ids = Location.within( 50, origin: params[:county_name] ).select( [ 'teacher_id' ] ).map( &:teacher_id )
+      
       teachers =  geo_return_teachers
       teachers.as_json( include: [ :photos, :location, :subjects ] )
     else
@@ -16,37 +16,39 @@ module SearchHelper
 
   end
 
+  private
+
 
   def return_teachers
     teachers = []
-    if Rails.env.development?
-      # subject = Subject.includes(:teachers).where('name LIKE ?', "%#{ params[:subject_name] }%").select( [ :name, :id ] ).first
-      subjects = Subject.includes( :teachers ).where( "NAME LIKE ?", "%#{ params[ :subject_name ] }%").select( [ :name, :id ] )
+    subjects = Subject.includes( :teachers ).where( "NAME #{ ilike } ?", "%#{ params[ :subject_name ] }%").select( [ :name, :id ] )
       subjects.all.each do |s| 
         s.teachers.where( is_teacher: true ).includes( :photos, :location, :subjects ).all.each do |t|
           teachers << t
         end
       end
-    else
-      subjects = Subject.includes( :teachers ).where( "NAME ILIKE ?", "%#{ params[ :subject_name ] }%").select( [ :name, :id ] )
-      subjects.all.each do |s| 
-        s.teachers.where( is_teacher: true ).includes( :photos, :location, :subjects ).all.each do |t|
-          teachers << t
-        end
-      end
-    end
     
     teachers 
   end
 
 
   def geo_return_teachers
-    if Rails.env.development?
+    teachers = []
+    ids = Location.within( 50, origin: params[:county_name] ).select( [ 'teacher_id' ] ).map( &:teacher_id )
+     subjects = Subject.where( "NAME #{ ilike } ?", "%#{ params[ :subject_name ] }%" ).select( [ :name, :id ] )
+      subjects.all.each do |s| 
+        s.teachers.where( is_teacher: true).includes( :photos, :location, :subjects ).where( id: ids ).all.each do |t|
+          teachers << t
+        end
+      end
+    teachers
+  end
 
+  def ilike
+    if Rails.env.development?
+      "LIKE"
     else
-      Subject.where( "NAME LIKE ?", "%#{ params[ :subject_name ] }%" )\
-                  .teachers.where( is_teacher: true).includes( :photos, :location, :subjects )\
-                  .where( id: ids )
+      "ILIKE"
     end
   end
 
