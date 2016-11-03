@@ -787,6 +787,9 @@ md-fab-speed-dial.md-fab-top-left{
   color: #FFF !important;
 }
 
+.increase_z{
+  z-index: 1000000;
+}
 
 // Hack to stop Firefox no margin on grid-tile
 

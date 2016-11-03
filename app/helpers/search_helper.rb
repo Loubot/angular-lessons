@@ -11,15 +11,25 @@ module SearchHelper
       teachers.as_json( include: [ :photos, :location, :subjects ] )
     else
       p "Search helper params #{ params }"
-
+      teachers = []
       if Rails.env.development?
-        subject = Subject.includes(:teachers).where('name LIKE ?', "%#{ params[:subject_name] }%").select( [ :name, :id ] ).first
-        
+        # subject = Subject.includes(:teachers).where('name LIKE ?', "%#{ params[:subject_name] }%").select( [ :name, :id ] ).first
+        subjects = Subject.includes( :teachers ).where( "NAME LIKE ?", "%#{ params[ :subject_name ] }%").select( [ :name, :id ] )
+        subjects.all.each do |s| 
+          s.teachers.all.each do |t|
+            teachers << t
+          end
+        end
       else
-        subject = Subject.includes(:teachers).where('name ILIKE ?', "%#{ params[:subject_name] }%").select( [ :name, :id ] ).first
+        subjects = Subject.includes( :teachers ).where( "NAME ILIKE ?", "%#{ params[ :subject_name ] }%").select( [ :name, :id ] )
+        subjects.all.each do |s| 
+          s.teachers.all.each do |t|
+            teachers << t
+          end
+        end
       end
-      teachers = subject.teachers.where( is_teacher: true ).select( "email, id, first_name, last_name" ).uniq
-      teachers.as_json(include: [ :photos, :location, :subjects ])
+      # teachers = subject.teachers.where( is_teacher: true ).select( "email, id, first_name, last_name" ).uniq
+      teachers.as_json(include: [ :photos, :location, :subjects ]).uniq
     end
 
   end

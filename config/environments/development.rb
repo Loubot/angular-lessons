@@ -42,18 +42,18 @@ Rails.application.configure do
   config.assets.compile = true
 
   # config.assets.js_compressor = :uglifier
-  # config.assets.css_compressor = :sass
+  config.assets.css_compressor = :sass
 
   config.middleware.use Rack::Deflater
   config.middleware.insert_before ActionDispatch::Static, Rack::Deflater
 
-  config.middleware.use HtmlCompressor::Rack,
-    compress_css: true,
-    css_compressor: Sass,
-    enabled: true,
-    compress_javascript: true,
-    javascript_compressor: uglifier,
-    preserve_line_breaks: false
+  # config.middleware.use HtmlCompressor::Rack,
+  #   compress_css: true,
+  #   css_compressor: Sass,
+  #   enabled: true,
+  #   compress_javascript: true,
+  #   javascript_compressor: uglifier,
+  #   preserve_line_breaks: false
   # Asset digests allow you to set far-future HTTP expiration dates on all assets,
   # yet still be able to expire them through the digest params.
   # config.assets.digest = true
