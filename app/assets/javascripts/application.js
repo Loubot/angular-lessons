@@ -30,7 +30,7 @@
 //= require angular-loading-bar/build/loading-bar.min
 //= require angular-validation-match/dist/angular-validation-match.min
 //= require moment/min/moment.min
-//= require mdPickers/dist/mdPickers
+//= require mdPickers/dist/mdPickers.min
 //= require app
 //= require controllers/WelcomeController
 //= require controllers/UserController
