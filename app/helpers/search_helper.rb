@@ -6,7 +6,7 @@ module SearchHelper
       p "county_name and subject_name"
       
       teachers =  geo_return_teachers
-      teachers.as_json( include: [ :photos, :location, :subjects ] )
+      teachers.as_json( include: [ :photos, :location, :subjects ] ).uniq
     else
       p "Search helper params #{ params }"
       teachers = return_teachers
