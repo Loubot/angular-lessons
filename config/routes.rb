@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  mount JasmineRails::Engine => '/specs' if defined?(JasmineRails)
   match 'logger/rails_client_logger/log' => 'logger#log', via: :post
   mount RailsClientLogger::Engine, :at => "logger"
   scope '/api' do
