@@ -85,5 +85,17 @@ angular.module('lessons').controller("RegisterController", [
           'Fermanagh','Galway','Kerry','Kildare','Kilkenny','Laois','Leitrim','Limerick','Longford',
           'Louth','Mayo','Meath','Monaghan','Offaly','Roscommon','Sligo','Tipperary','Tyrone',
           'Waterford','Westmeath','Wexford','Wicklow']
+
+    $scope.county_lists = [ 
+          'Antrim': { lat: 54.719508, lon: -6.207256 }, 'Armagh': { lat: 54.350277, lon: -6.652822},
+          'Carlow': { lat: 52.836497, lon: -6.934238}, 'Cavan': { lat: 53.989637, lon: -7.363272 },
+          'Clare': { lat: 52.847097, lon: -8.989040 }, 'Cork': { lat: 51.897887, lon: -8.475431},
+          'Derry': { lat: 54.996669, lon: -7.308567 }, 'Donegal': { lat: 54.832874, lon: -7.485811},
+          'Down': { lat: 54.328787, lon: -5.715719 }, 'Dublin': { lat: 53.346591, lon: -6.265231 },
+          'Fermanagh': { lat: 54.343928, lon: -7.631644 }, 'Galway': { lat: 53.270672, lon: -9.056779 },
+          'Kerry': { lat: 52.059816, lon: -9.504487 }, 'Kildare': { lat: 53.220438, lon: -6.659570 },
+          'Kilkenny': { lat: 52.653411, lon: -7.248446 }, 'Laois': { lat: 53.032791, lon: -7.300100 },
+
+     ]
         
 ])
