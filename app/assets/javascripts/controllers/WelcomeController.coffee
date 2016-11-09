@@ -19,16 +19,11 @@ angular.module('lessons').controller('WelcomeController', [
 
     OG.set_tags()
 
-    $elems = $('.animateblock')
     $scope.selected = {}
     $scope.selected.subject_name = $stateParams.name
     $scope.selected.county_name = $stateParams.location
     $scope.selected_subject = $stateParams.name
-    winheight = $(window).height()
-    fullheight = $(document).height()
 
-    targetOffset = $(".anchor2").offset().top
-    console.log targetOffset
 
     isElementInView = (element, fullyInView) ->
       pageTop = $(window).scrollTop()
@@ -48,12 +43,7 @@ angular.module('lessons').controller('WelcomeController', [
     )
 
 
-    $scope.scrollevent = ( $e ) ->
-      console.log 'hup'
-      animate_elems()
-      # @scrollPos = document.body.scrollTop or document.documentElement.scrollTop or 0
-      # $scope.$digest()
-      return
+    
     
       
 
