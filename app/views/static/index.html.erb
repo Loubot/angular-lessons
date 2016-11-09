@@ -1,4 +1,4 @@
-<div class="main_page" layout="column" layout-fill ng-controller="NavController" >
+<div class="main_page invisible" layout="column" layout-fill ng-controller="NavController" >
   <md-toolbar>
     <div class="md-toolbar-tools" layout="row" layout-align="space-around center">
 
@@ -202,10 +202,11 @@
 
     <!--#################### Content ############################-->
     <md-content   class="main main_page" layout="column" flex>
-      <div class="main_page" ui-view>
+      <div class="main_page" ui-view> </div> <!-- angular view rendered here -->
 
+
+      <div class="sitemap " ng-include="'static/sitemap.html'" hide-xs> <!-- sitemap imported here from /static -->
       </div>
-      <div class="sitemap"></div>
     </md-content>
     <!--#################### End of content ############################-->
 

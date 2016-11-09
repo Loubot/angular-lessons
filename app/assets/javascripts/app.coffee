@@ -20,6 +20,11 @@ angular.module('lessons').constant "RESOURCES", do ->
   # console.log "Domain #{ url + '/api' }"
   DOMAIN: url + '/api'
 
+
+angular.element(document).ready ->
+  $('.main_page').removeClass( 'invisible' )
+  return
+
 angular.module('lessons').service 'OG', ->
   set_tags: ->
     $('.added_og').remove()
@@ -131,6 +136,11 @@ angular.module('lessons').config ($stateProvider, $urlRouterProvider, $locationP
     url: '/how-it-works'
     templateUrl: 'static/how_it_works.html'
     controller: "UserController"
+
+  $stateProvider.state 'contact',
+    url: '/contact'
+    templateUrl: 'static/contact.html'
+    controller: "ContactController"
 
   $stateProvider.state "pl",
     url: "api/auth/password/edit"

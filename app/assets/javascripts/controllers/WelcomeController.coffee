@@ -27,8 +27,8 @@ angular.module('lessons').controller('WelcomeController', [
     winheight = $(window).height()
     fullheight = $(document).height()
 
-    targetOffset = $(".anchor2").offset().top
-    console.log targetOffset
+   
+    
 
     isElementInView = (element, fullyInView) ->
       pageTop = $(window).scrollTop()
