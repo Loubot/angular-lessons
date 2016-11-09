@@ -679,11 +679,19 @@ ul.share-buttons .sr-only {
 .sitemap{
   @extend .margin_t_8;
   background-color: #373737;
-  min-height: 10% !important;
+  // min-height: 10% !important;
 }
 
 .invisible{
   visibility: hidden;
+}
+
+.too_short
+{
+    min-height: 90%;
+    min-height: -webkit-calc(100% - 50);
+    min-height: -moz-calc(100% - 50);
+    min-height: calc(100% - 50);
 }
 
 .cork_photo{
