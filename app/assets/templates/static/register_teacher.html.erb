@@ -1,158 +1,158 @@
 <div class="register_page_main_div">
   
     
-    <form name="register_teacher_form"  ng-submit="register_teacher()" novalidate>
-      <div layout="row">
-        <div flex-xs="60" flex-gt-xs="50">
-          <div flex-gt-xs="60" flex-xs="100">
-            <md-input-container class="md-icon-float md-block margin_t_30">
-              <label>First Name</label>
-              <md-icon><i class="material-icons">person</i></md-icon>
-              <input  type="text" 
-                      ng-model="teacher.first_name"
-                      name="name"
-                      id="name"
-                      placeholder="First Name" 
-                      class="white_text white_placeholder"
-                      required>
-            </md-input-container>
+  <form name="register_teacher_form"  ng-submit="register_teacher()" novalidate>
+    <div layout="row">
+      <div flex-xs="60" flex-gt-xs="50">
+        <div flex-gt-xs="60" flex-xs="100">
+          <md-input-container class="md-icon-float md-block margin_t_30">
+            <label>First Name</label>
+            <md-icon><i class="material-icons">person</i></md-icon>
+            <input  type="text" 
+                    ng-model="teacher.first_name"
+                    name="name"
+                    id="name"
+                    placeholder="First Name" 
+                    class="white_text white_placeholder"
+                    required>
+          </md-input-container>
 
-            <md-input-container class="md-icon-float md-block">
-              <label>Last Name</label>
-              <md-icon><i class="material-icons">person</i></md-icon>
-              <input  type="text" 
-                      ng-model="teacher.last_name"
-                      name="last_name"
-                      id="last_name"
-                      placeholder="Last Name" 
-                      class="white_text white_placeholder"
-                      required>
-              <div ng-messages="register_teacher_form.last_name.$error">
-                <div ng-message="required">This is required.</div>
-                
-              </div>
-            </md-input-container>
+          <md-input-container class="md-icon-float md-block">
+            <label>Last Name</label>
+            <md-icon><i class="material-icons">person</i></md-icon>
+            <input  type="text" 
+                    ng-model="teacher.last_name"
+                    name="last_name"
+                    id="last_name"
+                    placeholder="Last Name" 
+                    class="white_text white_placeholder"
+                    required>
+            <div ng-messages="register_teacher_form.last_name.$error">
+              <div ng-message="required">This is required.</div>
+              
+            </div>
+          </md-input-container>
 
-            <md-input-container class="md-icon-float md-block">
-              <label>Email</label>
-              <md-icon><i class="material-icons ">email</i></md-icon>
-              <input  type="email" 
-                      ng-model="teacher.email"
-                      ng-pattern="/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/" 
-                      name="email1"
-                      id="email1"
-                      class="white_text white_placeholder"
-                      class=" white_placeholder"
-                      required>
-              <div ng-messages="register_teacher_form.email.$error">
-                <div ng-message="required">This is required.</div>
-                <div ng-message="pattern">Must be a valid email</div>
+          <md-input-container class="md-icon-float md-block">
+            <label>Email</label>
+            <md-icon><i class="material-icons ">email</i></md-icon>
+            <input  type="email" 
+                    ng-model="teacher.email"
+                    ng-pattern="/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/" 
+                    name="email1"
+                    id="email1"
+                    class="white_text white_placeholder"
+                    class=" white_placeholder"
+                    required>
+            <div ng-messages="register_teacher_form.email.$error">
+              <div ng-message="required">This is required.</div>
+              <div ng-message="pattern">Must be a valid email</div>
+            </div>
+          </md-input-container>
+          
+
+          <md-input-container class="md-icon-float md-block " md-no-float>
+            <label>Confirm Email</label>
+            <md-icon><i class="material-icons ">email</i></md-icon>
+            <input  type="email" 
+                    ng-model="teacher.confirm_email" 
+                    ng-pattern="/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/" 
+                    placeholder="Confirm Email" 
+                    name="email2"
+                    id="email2"
+                    class="white_text white_placeholder"
+                    required>
+
+            <div ng-messages="register_teacher_form.email2.$error" role="alert">
+              <div ng-message-exp="['matching_email', 'pattern']">
+                <p>Must be a valid email</p>
+                <p>Emails must match</p>
               </div>
-            </md-input-container>
+            </div>
             
+          </md-input-container>
 
-            <md-input-container class="md-icon-float md-block " md-no-float>
-              <label>Confirm Email</label>
-              <md-icon><i class="material-icons ">email</i></md-icon>
-              <input  type="email" 
-                      ng-model="teacher.confirm_email" 
-                      ng-pattern="/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/" 
-                      placeholder="Confirm Email" 
-                      name="email2"
-                      id="email2"
-                      class="white_text white_placeholder"
-                      required>
+          <md-input-container class="md-icon-float md-block white_text" md-no-float>
+            <label>Password</label>
+            <input  type="password" 
+                    ng-model="teacher.password" 
+                    placeholder="Password" 
+                    name="password"
+                    id="password"
+                    class="white_text white_placeholder"
+                    required>
 
-              <div ng-messages="register_teacher_form.email2.$error" role="alert">
-                <div ng-message-exp="['matching_email', 'pattern']">
-                  <p>Must be a valid email</p>
-                  <p>Emails must match</p>
-                </div>
-              </div>
-              
-            </md-input-container>
-
-            <md-input-container class="md-icon-float md-block white_text" md-no-float>
-              <label>Password</label>
-              <input  type="password" 
-                      ng-model="teacher.password" 
-                      placeholder="Password" 
-                      name="password"
-                      id="password"
-                      class="white_text white_placeholder"
-                      required>
-
-              <div ng-messages="register_teacher_form.password.$error">
-                <div ng-message="required">This is required.</div>
-              </div>
-              
-            </md-input-container>
-
-
-            <md-input-container class="md-icon-float md-block white_text" md-no-float >
-              <label>Confirm Password</label>
-              <input  type="password" 
-                      ng-model="teacher.confirm_password" 
-                      placeholder="Confirm Password" 
-                      name="confirm_password"
-                      id="confirm_password"
-                      class="white_text white_placeholder"
-                      required>
-
-              <div ng-messages="register_teacher_form.confirm_password.$error">
-                <div ng-message="required">This is required.</div>
-              </div>
-            </md-input-container>
-
-           
-
-          
-          </div> <!-- end of flex 60 -->
-          
-
-        </div> <!-- end of flex=50 -->
-        <div flex-gt-xs="50" flex-xs="40" flex-offset="30" flex-offset-xs="0">
-
-          <md-input-container>
-
-            <div class="errors" ng-messages="register_teacher_form.county.$error">
+            <div ng-messages="register_teacher_form.password.$error">
               <div ng-message="required">This is required.</div>
             </div>
-
-
-          <md-input-container class="width_100">
-            <md-select ng-model="teacher.county" class="county_placeholder" placeholder="County" required>
-              <md-option ng-value="county" ng-repeat="county in county_list">{{ county }}</md-option>
-            </md-select>
-            <div class="errors" ng-messages="register_teacher_form.county.$error">
-              <div ng-message="required">Required</div>
-            </div>
-
-          </md-input-container><br>
-
-
-
-          <md-input-container class="margin_t_30 " flex-gt-xs="50" flex-xs="100">
-            <input type="submit" value="Register" name="Register teacher" aria-label="register teacher" class="md-button md-primary md-raised white_text">
-          </md-input-container> <br>
-
-
-          <p class="padding_s_20 "><big>or</big></p>
-          <md-input-container hide-xs>
-            <div ng-click="register_with_facebook()" >
-              <%= image_tag('facebook_login.jpg', class: 'width_50') %>
-            </div>  
-          </md-input-container> 
-
-          <md-input-container hide-gt-xs>
-            <div ng-click="register_with_facebook()" >
-              <%= image_tag('facebook_login.jpg', class: 'width_100') %>
-            </div>  
+            
           </md-input-container>
-        </div> <!-- end of flex-gt-xs="50" flex-xs="40"-->
-      </div> <!-- end of row -->
 
-    </form> 
+
+          <md-input-container class="md-icon-float md-block white_text" md-no-float >
+            <label>Confirm Password</label>
+            <input  type="password" 
+                    ng-model="teacher.confirm_password" 
+                    placeholder="Confirm Password" 
+                    name="confirm_password"
+                    id="confirm_password"
+                    class="white_text white_placeholder"
+                    required>
+
+            <div ng-messages="register_teacher_form.confirm_password.$error">
+              <div ng-message="required">This is required.</div>
+            </div>
+          </md-input-container>
+
+         
+
+        
+        </div> <!-- end of flex 60 -->
+        
+
+      </div> <!-- end of flex=50 -->
+      <div flex-gt-xs="50" flex-xs="40" flex-offset="30" flex-offset-xs="0">
+
+        <md-input-container>
+
+          <div class="errors" ng-messages="register_teacher_form.county.$error">
+            <div ng-message="required">This is required.</div>
+          </div>
+
+
+        <md-input-container class="width_100">
+          <md-select ng-model="teacher.county" class="county_placeholder" placeholder="County" required>
+            <md-option ng-value="county" ng-repeat="county in county_list">{{ county }}</md-option>
+          </md-select>
+          <div class="errors" ng-messages="register_teacher_form.county.$error">
+            <div ng-message="required">Required</div>
+          </div>
+
+        </md-input-container><br>
+
+
+
+        <md-input-container class="margin_t_30 " flex-gt-xs="50" flex-xs="100">
+          <input type="submit" value="Register" name="Register teacher" aria-label="register teacher" class="md-button md-primary md-raised white_text">
+        </md-input-container> <br>
+
+
+        <p class="padding_s_20 "><big>or</big></p>
+        <md-input-container hide-xs>
+          <div ng-click="register_with_facebook()" >
+            <%= image_tag('facebook_login.jpg', class: 'width_50') %>
+          </div>  
+        </md-input-container> 
+
+        <md-input-container hide-gt-xs>
+          <div ng-click="register_with_facebook()" >
+            <%= image_tag('facebook_login.jpg', class: 'width_100') %>
+          </div>  
+        </md-input-container>
+      </div> <!-- end of flex-gt-xs="50" flex-xs="40"-->
+    </div> <!-- end of row -->
+
+  </form> 
     
     
   

@@ -201,8 +201,11 @@
     <!--#################### End of Left sidenav ############################-->
 
     <!--#################### Content ############################-->
-    <md-content class="main_page" ui-view class="main" layout="column" flex id="meballs" scroll scroll-event="scrollevent">
-      
+    <md-content   class="main main_page" layout="column" flex>
+      <div class="main_page" ui-view>
+
+      </div>
+      <div class="sitemap"></div>
     </md-content>
     <!--#################### End of content ############################-->
 
@@ -221,5 +224,5 @@
         </md-button>
       </md-content>
     </md-sidenav> <!-- end of md-sidenav right -->
-  </div>  <!-- end of container -->
+  </div>  <!-- end of main_page -->
 </div>

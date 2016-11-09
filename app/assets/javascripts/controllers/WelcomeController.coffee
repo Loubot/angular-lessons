@@ -27,30 +27,29 @@ angular.module('lessons').controller('WelcomeController', [
     winheight = $(window).height()
     fullheight = $(document).height()
 
-    # if $stateParams.message?
-    #   alertify.delay(0).closeLogOnClick(true).log($stateParams.message + " Click to dismiss")
-   
+    targetOffset = $(".anchor2").offset().top
+    console.log targetOffset
 
-    animate_elems = ->
-      wintop = $(window).scrollTop()
-      # calculate distance from top of window
-      # loop through each item to check when it animates
-      $elems.each ->
-        $elm = $(this)
-        if $elm.hasClass('animated')
-          return true
-        # if already animated skip to the next item
-        topcoords = $elm.offset().top
-        # element's distance from top of page in pixels
-        if wintop > topcoords - (winheight * .75)
-          # animate when top of the window is 3/4 above the element
-          $elm.addClass 'animated'
-        return
-      return
-    
+    isElementInView = (element, fullyInView) ->
+      pageTop = $(window).scrollTop()
+      pageBottom = pageTop + $(window).height()
+      elementTop = $(element).offset().top
+      elementBottom = elementTop + $(element).height()
+      if fullyInView == true
+        pageTop < elementTop and pageBottom > elementBottom
+      else
+        elementTop <= pageBottom and elementBottom >= pageTop
+
+    $w = $('.main_page').scroll(->
+      $('.anchor1').addClass 'animated' if isElementInView('.anchor1')
+      
+      $('.anchor2').addClass 'animated' if isElementInView('.anchor2')
+
+    )
+
 
     $scope.scrollevent = ( $e ) ->
-      
+      console.log 'hup'
       animate_elems()
       # @scrollPos = document.body.scrollTop or document.documentElement.scrollTop or 0
       # $scope.$digest()

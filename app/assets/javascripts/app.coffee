@@ -20,18 +20,6 @@ angular.module('lessons').constant "RESOURCES", do ->
   # console.log "Domain #{ url + '/api' }"
   DOMAIN: url + '/api'
 
-angular.module('lessons').directive 'scroll', ($window) ->
-  {
-    scope: scrollEvent: '&'
-    link: (scope, element, attrs) ->
-      $('#' + attrs.id).scroll ($e) ->
-        if scope.scrollEvent != null then scope.scrollEvent()($e) else null
-        return
-      return
-
-  }
-
-
 angular.module('lessons').service 'OG', ->
   set_tags: ->
     $('.added_og').remove()

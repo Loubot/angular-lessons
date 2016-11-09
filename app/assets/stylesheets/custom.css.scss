@@ -667,6 +667,15 @@ ul.share-buttons .sr-only {
   overflow: hidden;
 }
 
+// sitemap
+.sitemap{
+  @extend .margin_t_8;
+  background-color: #111;
+  min-height: 200px !important;
+}
+
+// end of sitemap
+
 @media (min-width: 250px){
 
   .margin_s_100.md-grid{
