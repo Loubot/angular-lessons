@@ -10,7 +10,7 @@
  * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
  * file per style scope.
  *
- *= require bootstrap/dist/css/bootstrap.min.css
+ *= require bootstrap/dist/css/bootstrap.css
  *= require ng-alertify/dist/ng-alertify.css
  *= require ng-responsive-calendar/dist/css/calendar.min.css
  *= require angular-material/angular-material.min.css

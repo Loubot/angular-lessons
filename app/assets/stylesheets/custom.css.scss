@@ -53,6 +53,10 @@ html, body{
 
 }
 
+.font_2{
+  font-size: 2rem;
+}
+
 md-sidenav.user_menu, 
 md-sidenav.md-locked-open.user_menu, 
 md-sidenav.md-closed.md-locked-open-add-active.user_menu {
@@ -363,13 +367,17 @@ md-sidenav.md-closed.md-locked-open-add-active.user_menu {
   width: 10%;
 }
 
+.font_20{
+  font-size: large;
+}
+
 .sidenav{
   background-color: #2a602a;
 }
 
 .main_page{
   background-color: #e0ebf4;
-
+  
 }
 
 .match_background{
@@ -631,9 +639,10 @@ md-sidenav.md-closed.md-locked-open-add-active.user_menu {
 // Teacher area
 .calendar_container{
   height: 100% !important;
+  // min-height: 800px;
 }
 #calendar{
-  max-height: 12em !important;
+  // max-height: 12em !important;
 }
 
 .calendar_buttons{
@@ -667,11 +676,27 @@ ul.share-buttons .sr-only {
   overflow: hidden;
 }
 
-// sitemap
-.sitemap{
-  @extend .margin_t_8;
-  background-color: #111;
-  min-height: 200px !important;
+
+
+.invisible{
+  visibility: hidden;
+}
+
+.too_short
+{
+    min-height: 90%;
+    min-height: -webkit-calc(100% - 50);
+    min-height: -moz-calc(100% - 50);
+    min-height: calc(100% - 50);
+}
+
+.cork_photo{
+  min-height: 30em;
+  background-image: asset_url('aerial_cork.jpg');
+  -moz-background-size: 100% 100%;
+  -webkit-background-size: 100% 100%;
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
 }
 
 // end of sitemap
