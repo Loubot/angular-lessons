@@ -23,29 +23,7 @@ angular.module('lessons').controller('WelcomeController', [
     $scope.selected.subject_name = $stateParams.name
     $scope.selected.county_name = $stateParams.location
     $scope.selected_subject = $stateParams.name
-
-
-    isElementInView = (element, fullyInView) ->
-      pageTop = $(window).scrollTop()
-      pageBottom = pageTop + $(window).height()
-      elementTop = $(element).offset().top
-      elementBottom = elementTop + $(element).height()
-      if fullyInView == true
-        pageTop < elementTop and pageBottom > elementBottom
-      else
-        elementTop <= pageBottom and elementBottom >= pageTop
-
-    $w = $('.main_page').scroll(->
-      $('.anchor1').addClass 'animated' if isElementInView('.anchor1')
-      
-      $('.anchor2').addClass 'animated' if isElementInView('.anchor2')
-
-    )
-
-
     
-    
-      
 
     USER.get_user().then( ( resp ) ->
       console.log "it workds"
@@ -132,5 +110,29 @@ angular.module('lessons').controller('WelcomeController', [
     ).catch( ( err ) ->
       console.log err
     )
+
+
+    ############## Animate explanation blocks when in view #############################
+
+    isElementInView = (element, fullyInView) ->
+      if $state.current.url == "/welcome"
+        pageTop = $(window).scrollTop()
+        pageBottom = pageTop + $(window).height()
+        elementTop = $(element).offset().top 
+        elementBottom = elementTop + $(element).height()
+        if fullyInView == true
+          pageTop < elementTop and pageBottom > elementBottom
+        else
+          elementTop <= pageBottom and elementBottom >= pageTop
+
+    if $state.current.url == "/welcome"
+      $('.main_page').scroll(->
+        $('.anchor1').addClass 'animated' if isElementInView('.anchor1')
+        
+        $('.anchor2').addClass 'animated' if isElementInView('.anchor2')
+
+      )    
+
+    ############## End of animation ###############################################
 
 ])
