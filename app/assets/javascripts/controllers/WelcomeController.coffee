@@ -115,6 +115,7 @@ angular.module('lessons').controller('WelcomeController', [
     ############## Animate explanation blocks when in view #############################
 
     isElementInView = (element, fullyInView) ->
+      
       if $state.current.url == "/welcome"
         pageTop = $(window).scrollTop()
         pageBottom = pageTop + $(window).height()

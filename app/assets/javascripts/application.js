@@ -46,6 +46,7 @@
 //= require controllers/RegisterController
 //= require controllers/PasswordController
 //= require controllers/AdminController
+//= require controllers/ContactController
 //= require angular-rails-templates
 // Templates in app/assets/templates (but see step 5)
 //= require_tree ../templates

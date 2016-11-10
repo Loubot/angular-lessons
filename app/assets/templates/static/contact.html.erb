@@ -1,0 +1,49 @@
+<div layout="column" ng-cloak class="md-inline-form gutter_75">
+
+  <md-content >
+    <h4>Contact Us</h4>
+    <form ng-submit="contact_us()" name="contact_us_form" novalidate>
+
+      <div layout="row">
+        <div flex>
+          <md-input-container>
+            <label>Email</label>
+            <input ng-model="message.email" name="email" ng-pattern="/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/" required>
+            <div ng-messages="contact_us_form.email.$error">
+              <div ng-message="required">Email is required</div>
+              <div ng-message="pattern">Must be valid email</div>
+            </div>
+          </md-input-container><br>
+
+          <md-input-container>
+            <label>Name</label>
+            <input ng-model="message.name" name="name" required>
+            <div ng-messages="contact_us_form.name.$error">
+              <div ng-message="required">Your name is required</div>
+            </div>
+          </md-input-container>
+        </div>
+
+        <div flex>
+          <md-input-container class="width_100">
+            <textarea md-maxlength="300" name="text" ng-model="message.text" max-rows="5" required aria-label="message"></textarea>
+            <div ng-messages="contact_us_form.text.$error">
+              <div ng-message="required">Don't forget your message!</div>
+            </div>
+          </md-input-container>
+
+          
+        
+        </div>
+      </div>
+      <md-input-container>
+        <md-button class="md-primary md-raised" type="submit">Send</md-button>
+      </md-input-container>
+
+      
+    </form>
+  </md-content>
+
+</div>
+
+{{ contact_us }}

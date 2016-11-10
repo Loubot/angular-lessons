@@ -19,11 +19,6 @@ angular.module('lessons').constant "RESOURCES", do ->
   url = window.location.origin
   # console.log "Domain #{ url + '/api' }"
   DOMAIN: url + '/api'
-
-angular.module('lessons').run ( $rootScope ) ->
-
-  angular.element(document).ready ->
-    $('.main_page').removeClass( 'invisible' )
     
 
 angular.module('lessons').service 'OG', ->

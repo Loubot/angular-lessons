@@ -78,6 +78,39 @@ class TeacherMailer < Devise::Mailer
     end
   end
 
+  def feedback( params )
+    begin
+      require 'mandrill'
+      m = mandrill = Mandrill::API.new ENV['MANDRILL_APIKEY']
+      message = {  
+       :subject=> "Feedback",  
+       :from_name=> params[ :name ],
+       :from_email => 'do-not-reply@learnyourlesson.ie',
+       :text=> "#{ params[ :text ] },  #{ params[ :email ] }",  
+       :to=>[  
+          
+          {
+            email: 'louisangelini@gmail.com',
+            name: 'Admin'
+          }
+          # ,
+          # {
+          #   email: 'alan.rowell28@googlemail.com',
+          #   name: 'Admin'
+          # }
+       ],  
+       
+      }  
+      sending = m.messages.send message  
+      puts sending
+    rescue Mandrill::Error => e
+        # Mandrill errors are thrown as exceptions
+        logger.info "A mandrill error occurred: #{e.class} - #{e.message}"
+        # A mandrill error occurred: Mandrill::UnknownSubaccountError - No subaccount exists with the id 'customer-123'    
+    raise
+    end
+  end
+
 end
 
 
