@@ -102,11 +102,12 @@ class TeacherMailer < Devise::Mailer
        
       }  
       sending = m.messages.send message  
-      puts sending
+      return sending
     rescue Mandrill::Error => e
         # Mandrill errors are thrown as exceptions
         logger.info "A mandrill error occurred: #{e.class} - #{e.message}"
         # A mandrill error occurred: Mandrill::UnknownSubaccountError - No subaccount exists with the id 'customer-123'    
+        return false
     raise
     end
   end
