@@ -17,7 +17,6 @@ angular.module('lessons').controller('WelcomeController', [
   ( $scope, $rootScope, $state, $filter, $stateParams, $location, USER, $mdSidenav, alertify, $auth, COMMS, $window, OG ) ->
     console.log "WelcomeController"
 
-    console.log $state.current.url
     OG.set_tags()
 
     $scope.selected = {}
