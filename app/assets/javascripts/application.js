@@ -10,10 +10,10 @@
 // Read Sprockets README (https://github.com/rails/sprockets#sprockets-directives) for details
 // about supported directives.
 
-//= require jquery
+//= require jquery.min
 //= require rails_client_logger
 //= require jquery_ujs
-//= require lodash/dist/lodash
+//= require lodash/dist/lodash.min
 //= require angular/angular.min
 //= require alertify.js/dist/js/ngAlertify
 //= require angular-ui-router/release/angular-ui-router.min 
