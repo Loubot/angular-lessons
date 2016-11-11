@@ -17,6 +17,7 @@ angular.module('lessons').controller('WelcomeController', [
   ( $scope, $rootScope, $state, $filter, $stateParams, $location, USER, $mdSidenav, alertify, $auth, COMMS, $window, OG ) ->
     console.log "WelcomeController"
 
+    console.log $state.current.url
     OG.set_tags()
 
     $scope.selected = {}
@@ -116,8 +117,8 @@ angular.module('lessons').controller('WelcomeController', [
 
     isElementInView = (element, fullyInView) ->
       
-      if $state.current.url == "/welcome"
-        console.log 'hup'
+      if $state.current.url == "/welcome" or $state.current.url == '/'
+        
         pageTop = $(window).scrollTop()
         pageBottom = pageTop + $(window).height()
         elementTop = $(element).offset().top 
@@ -127,8 +128,8 @@ angular.module('lessons').controller('WelcomeController', [
         else
           elementTop <= pageBottom and elementBottom >= pageTop
 
-    if $state.current.url == "/welcome"
-      console.log 'hup2'
+    if $state.current.url == "/welcome" or $state.current.url == '/'
+      
       $('.main_page').scroll(->
         $('.anchor1').addClass 'animated' if isElementInView('.anchor1')
         
