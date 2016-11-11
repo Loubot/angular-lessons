@@ -86,7 +86,7 @@ class TeacherMailer < Devise::Mailer
        :subject=> "Feedback",  
        :from_name=> params[ :name ],
        :from_email => 'do-not-reply@learnyourlesson.ie',
-       :text=> "#{ params[ :text ] },  #{ params[ :email ] }",  
+       :text=> "#{ params[ :text ] }, #{ params[:name] }, #{ params[ :email ] }",  
        :to=>[  
           
           {
