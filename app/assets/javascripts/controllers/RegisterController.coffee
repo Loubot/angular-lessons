@@ -28,14 +28,17 @@ angular.module('lessons').controller("RegisterController", [
       if $scope.teacher.email != $scope.teacher.confirm_email
         console.log "Error"
         $scope.register_teacher_form.email2.$error.matching_email = true
+        return false
       else if $scope.teacher.password != $scope.teacher.confirm_password
 
         console.log "no dice"
         $scope.register_teacher_form.confirm_password.$error.matching_password = true
+        return false
       else
         console.log "No error"
         $scope.register_teacher_form.email2.$error.matching_email = false
         $scope.register_teacher_form.confirm_password.$error.matching_password = false
+        
         # delete $scope.register_teacher_form.email2.$error.matching_email
         for att of $scope.register_teacher_form.email2.$error
           if $scope.register_teacher_form.email2.$error.hasOwnProperty(att)
@@ -49,7 +52,7 @@ angular.module('lessons').controller("RegisterController", [
 
       else
         console.log "made it"
-        
+        return false
         $auth.submitRegistration( $scope.teacher )
           .then( (resp) ->
             # handle success response

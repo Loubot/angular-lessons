@@ -63,11 +63,11 @@
                     class="white_text white_placeholder"
                     required>
 
-            <div ng-messages="register_teacher_form.email2.$error" role="alert">
-              <div ng-message-exp="['matching_email', 'pattern']">
-                <p>Must be a valid email</p>
-                <p>Emails must match</p>
+            <div ng-messages="register_teacher_form.email2.$error" role="alert" md-auto-hide="false">
+              <div ng-message="pattern">
+               Must be a valid email
               </div>
+              <div ng-message="matching_email">Emails must match</div>
             </div>
             
           </md-input-container>
@@ -82,7 +82,7 @@
                     class="white_text white_placeholder"
                     required>
 
-            <div ng-messages="register_teacher_form.password.$error">
+            <div ng-messages="register_teacher_form.password.$error" md-auto-hide="false">
               <div ng-message="required">This is required.</div>
             </div>
             
@@ -99,8 +99,11 @@
                     class="white_text white_placeholder"
                     required>
 
-            <div ng-messages="register_teacher_form.confirm_password.$error">
-              <div ng-message="required">This is required.</div>
+            <div ng-messages="register_teacher_form.confirm_password.$error" md-auto-hide="false">
+              <div ng-message="required">This is required</div>
+              <div ng-message="matching_password">
+                <p >Passwords must match</p>
+              </div>
             </div>
           </md-input-container>
 
@@ -157,3 +160,5 @@
     
   
 </div> <!-- end of register_main_page_div -->
+
+{{ register_teacher_form.email2.$error.matching_email }}
