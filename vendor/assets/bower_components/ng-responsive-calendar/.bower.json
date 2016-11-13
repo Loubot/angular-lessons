@@ -1,6 +1,6 @@
 {
   "name": "ng-responsive-calendar",
-  "version": "0.1.14",
+  "version": "0.1.16",
   "homepage": "https://github.com/twinssbc/AngularJS-ResponsiveCalendar",
   "authors": [
     "twinssbc <bocong@hotmail.com>"
@@ -30,14 +30,13 @@
     "gruntfile.js",
     "package.json"
   ],
-  "_release": "0.1.14",
+  "_release": "0.1.16",
   "_resolution": {
     "type": "version",
-    "tag": "0.1.14",
-    "commit": "13b1d13b2f15dc8b604e110d53057165eb231ee5"
+    "tag": "0.1.16",
+    "commit": "9a73af552d8d0e95a13af0925e96e1d61a15a559"
   },
   "_source": "https://github.com/twinssbc/AngularJS-ResponsiveCalendar.git",
   "_target": "^0.1.14",
-  "_originalSource": "ng-responsive-calendar",
-  "_direct": true
+  "_originalSource": "ng-responsive-calendar"
 }
