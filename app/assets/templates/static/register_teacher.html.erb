@@ -17,41 +17,18 @@
                     required>
           </md-input-container>
 
-
-            <md-input-container class="md-icon-float md-block " md-no-float>
-              <label>Confirm Email</label>
-              <md-icon><i class="material-icons ">email</i></md-icon>
-              <input  type="email" 
-                      ng-model="teacher.confirm_email" 
-                      ng-pattern="/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/" 
-                      placeholder="Confirm Email" 
-                      name="email2"
-                      id="email2"
-                      class="white_text white_placeholder"
-                      required>
-
-              <div ng-messages="register_teacher_form.email2.$error" role="alert">
-                <div ng-message-exp="['matching_email', 'pattern']">
-                  <p>Must be a valid email</p>
-                  <p>Emails must match</p>
-                </div>
-              </div>
-              
-            </md-input-container>
-
-            <md-input-container class="md-icon-float md-block white_text" md-no-float>
-              <label>Password</label>
-              <input  type="password" 
-                      ng-model="teacher.password" 
-                      placeholder="Password" 
-                      name="password"
-                      id="password"
-                      class="white_text white_placeholder"
-                      required>
-
-              <div ng-messages="register_teacher_form.password.$error" md-auto-hide="false">
-                <div ng-message="required">This is required.</div>
-              </div>
+          <md-input-container class="md-icon-float md-block">
+            <label>Last Name</label>
+            <md-icon><i class="material-icons">person</i></md-icon>
+            <input  type="text" 
+                    ng-model="teacher.last_name"
+                    name="last_name"
+                    id="last_name"
+                    placeholder="Last Name" 
+                    class="white_text white_placeholder"
+                    required>
+            <div ng-messages="register_teacher_form.last_name.$error">
+              <div ng-message="required">This is required.</div>
               
             </div>
           </md-input-container>
@@ -74,7 +51,6 @@
           </md-input-container>
           
 
-<<<<<<< HEAD
           <md-input-container class="md-icon-float md-block " md-no-float>
             <label>Confirm Email</label>
             <md-icon><i class="material-icons ">email</i></md-icon>
@@ -91,13 +67,6 @@
               <div ng-message-exp="['matching_email', 'pattern']">
                 <p>Must be a valid email</p>
                 <p>Emails must match</p>
-=======
-              <div ng-messages="register_teacher_form.confirm_password.$error" md-auto-hide="false">
-                <div ng-message="required">This is required</div>
-                <div ng-message="matching_password">
-                  <p >Passwords must match</p>
-                </div>
->>>>>>> di
               </div>
             </div>
             
@@ -188,5 +157,3 @@
     
   
 </div> <!-- end of register_main_page_div -->
-
-{{ register_teacher_form.confirm_password.$error.matching_password }}
