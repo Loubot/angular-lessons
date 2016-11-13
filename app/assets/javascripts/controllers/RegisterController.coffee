@@ -24,7 +24,8 @@ angular.module('lessons').controller("RegisterController", [
     
 
     $scope.register_teacher = ->
-      console.log $scope.teacher
+      $scope.register_teacher_form.email2.$error.matching_email = false
+      $scope.register_teacher_form.confirm_password.$error.matching_password = false
       if $scope.teacher.email != $scope.teacher.confirm_email
         console.log "Error"
         $scope.register_teacher_form.email2.$error.matching_email = true
