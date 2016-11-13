@@ -52,7 +52,7 @@ angular.module('lessons').controller("RegisterController", [
 
       else
         console.log "made it"
-        return false
+        
         $auth.submitRegistration( $scope.teacher )
           .then( (resp) ->
             # handle success response
