@@ -641,7 +641,7 @@ md-sidenav.md-closed.md-locked-open-add-active.user_menu {
   height: 100% !important;
 }
 #calendar{
-  max-height: 12em !important;
+  // max-height: 12em !important;
 }
 
 .calendar_buttons{
@@ -675,35 +675,6 @@ ul.share-buttons .sr-only {
   overflow: hidden;
 }
 
-// sitemap
-.sitemap{
-  @extend .margin_t_8;
-  background-color: #373737;
-  // min-height: 10% !important;
-}
-
-.invisible{
-  visibility: hidden;
-}
-
-.too_short
-{
-    min-height: 90%;
-    min-height: -webkit-calc(100% - 50);
-    min-height: -moz-calc(100% - 50);
-    min-height: calc(100% - 50);
-}
-
-.cork_photo{
-  min-height: 30em;
-  background-image: asset_url('aerial_cork.jpg');
-  -moz-background-size: 100% 100%;
-  -webkit-background-size: 100% 100%;
-  background-size: 100% 100%;
-  background-repeat: no-repeat;
-}
-
-// end of sitemap
 
 @media (min-width: 250px){
 
@@ -825,6 +796,9 @@ md-fab-speed-dial.md-fab-top-left{
   color: #FFF !important;
 }
 
+.increase_z{
+  z-index: 1000000;
+}
 
 // Hack to stop Firefox no margin on grid-tile
 

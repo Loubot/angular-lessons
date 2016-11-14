@@ -10,7 +10,7 @@ Rails.application.config.assets.version = '2.0'
 # Rails.application.config.assets.precompile += %w( search.js )
 
 Rails.application.config.assets.paths << Rails.root.join("vendor","assets","bower_components")
-Rails.application.config.assets.paths << Rails.root.join("vendor","assets","angular_app")
+Rails.application.config.assets.paths << Rails.root.join("vendor","assets","bower_components", "bootstrap", "dist", "fonts")
 Rails.application.config.assets.paths << Rails.root.join("app", "assets", "javascripts","controllers")
 Rails.application.config.assets.paths << Rails.root.join("app", "assets", "javascripts","templates")
 

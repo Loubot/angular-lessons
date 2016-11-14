@@ -1,4 +1,6 @@
-<div class="main_page invisible" layout="column" layout-fill ng-controller="NavController" >
+
+<div class="main_page" ng-cloak layout="column" layout-fill ng-controller="NavController" >
+
   <md-toolbar>
     <div class="md-toolbar-tools" layout="row" layout-align="space-around center">
 
@@ -53,6 +55,10 @@
       <img ui-sref="welcome" src="<%= asset_path('lylLogo.png') %>" class="md-48 lyl_logo">
       <span flex="20"></span>
      
+      <button  class="md-button md-default-theme white_text" ui-sref="contact">
+        <md-icon hide-xs><i class="material-icons">contact_mail</i></md-icon> Contact Us
+      </button>
+
       <button ng-if="false" class="md-button md-default-theme white_text" ng-click="openRightMenu()"><i class="material-icons">menu</i></button>
       
     </div> <!-- dnf of md-toolbar-tools -->
@@ -107,7 +113,7 @@
 
     
     <!--#################### Left sidenav ############################-->
-    <md-sidenav class="sidenav white_text md-whiteframe=12" md-component-id="left" flex>
+    <md-sidenav class="sidenav white_text increase_z md-whiteframe=12" md-component-id="left" flex>
        <div  ng-cloak ng-if="!USER">
          <br/>
          <md-content class="md-no-momentum">
@@ -207,11 +213,10 @@
     <!--#################### End of Left sidenav ############################-->
 
     <!--#################### Content ############################-->
+
     <md-content   class="main main_page" layout="column" flex>
       <div class="main_page" id="main_page" ui-view> </div> <!-- angular view rendered here -->
 
-
-      <div class="sitemap " ng-include="'static/sitemap.html'" hide-xs> <!-- sitemap imported here from /static -->
       </div>
     </md-content>
     <!--#################### End of content ############################-->

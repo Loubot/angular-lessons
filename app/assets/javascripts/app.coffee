@@ -19,6 +19,7 @@ angular.module('lessons').constant "RESOURCES", do ->
   url = window.location.origin
   # console.log "Domain #{ url + '/api' }"
   DOMAIN: url + '/api'
+    
 
 angular.module('lessons').run ( $rootScope ) ->
 
@@ -41,17 +42,19 @@ angular.module('lessons').service 'OG', ->
     # $('head').append """ <meta property="" content="" />"""
 
 
-angular.module('lessons').factory '$exceptionHandler', [
-  () ->
-    (exception, cause) ->
-      # alert exception.message
-      # jsLogger.fatal exception.message
-      # jsLogger.fatal exception
-      # jsLogger.fatal cause
-      console.log exception
-      console.log cause
-      return
-]
+
+# angular.module('lessons').factory '$exceptionHandler', [
+#   () ->
+#     (exception, cause) ->
+#       # alert exception.message
+#       # jsLogger.fatal exception.message
+#       # jsLogger.fatal exception
+#       # jsLogger.fatal cause
+#       console.log exception
+#       console.log cause
+#       return
+# ]
+
 
 switch_check = ( err ) ->
   switch err

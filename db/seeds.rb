@@ -24,6 +24,9 @@ Teacher.all.each do |t|
   t.subjects << Subject.first
 end
 
+Teacher.last.subjects << Subject.last
+Teacher.first.subjects << Subject.last
+
 conversation = Conversation.create( teacher_email: "lllouis@yahoo.com", student_email: "louisangelini@gmail.com", teacher_name: "Louis", student_name: "Aidan" )
 conversationb = Conversation.create( teacher_email: "lllouis@yahoo.com", student_email: "louisangelini2@gmail.com", teacher_name: "Louis", student_name: "Paul" )
 

@@ -27,6 +27,7 @@ angular.module('lessons').controller( 'SearchController', [
       return
 
     $scope.search_teachers = ->
+      console.log $scope.selected
       COMMS.GET(
         "/search"
         $scope.selected
@@ -39,21 +40,23 @@ angular.module('lessons').controller( 'SearchController', [
         alertify.error "Failed to find teachers"
       )
 
-    if $stateParams.name? or $stateParams.location
+    if $stateParams.name? or $stateParams.location?
       $scope.search_teachers()
 
 
     $scope.subject_picked = ( subject )->
+      console.log "picked subject"
       
-      if $scope.selected.subject_name?
-        console.log subject
-        $scope.selected.subject_name = subject
-        set_params()
+      console.log subject
+      $scope.selected.subject_name = subject
+      set_params()
 
     $scope.county_picked = ( county )->
-      if $scope.selected.county_name?
-        $scope.selected.county_name = county
-        set_params()
+      console.log "Picked county"
+     
+      console.log "hup"
+      $scope.selected.county_name = county
+      set_params()
 
     define_subjects = ( subjects ) ->
       $scope.master_subjects_list = []
@@ -91,19 +94,14 @@ angular.module('lessons').controller( 'SearchController', [
     )
 
     set_params = ->
-      console.log $scope.selected.county_name
-      if $scope.selected.subject_name? and $scope.selected.subject_name != ""
-        $state.transitionTo(
-          'search',
-          { name: $scope.selected.subject_name }
-          { notify: false }
-        )
-      else if $scope.selected.county_name? and $scope.selected.county_name != ""
-        $state.transitionTo(
-          'search',
-          { location: $scope.selected.county_name }
-          { notify: false }
-        )
+
+      
+      $state.transitionTo(
+        'search',
+        { name: $scope.selected.subject_name, location: $scope.selected.county_name  }
+        { notify: false }
+      )
+      
 
     $scope.search_nav = ->
       $mdSidenav('search_nav').toggle()

@@ -26,7 +26,7 @@
       </md-chips>
       <div layout-gt-sm="column" flex>
         <md-autocomplete 
-
+            md-select-on-match="true"
             md-selected-item="selected.subject_name" 
             md-input-name="subject"
             md-search-text="searchText.subject_name"
@@ -89,6 +89,7 @@
 
   <div layout="column" class="boxWithHeight" flex-xs="100">
     <md-content layout-xs="column" layout="row" layout-wrap>
+
       <md-card 
             ng-repeat="teacher in teachers" 
             md-theme-watch 
@@ -99,23 +100,41 @@
           <md-card-title-text>
             <span class="md-headline">{{ teacher.first_name }} {{ teacher.last_name }}  </span>
             <span ng-if="teacher.location" class="md-subhead">{{ teacher.location.address }}</span>
+            <span ng-repeat="subject in teacher.subjects">{{ subject.name }}</span>
+          </md-card-title-text>
+          <md-card-title-media>
+            <div  class="md-media-lg card-media">
+              <img  ng-src="{{ teacher.photos[0].avatar.url }}">
+            </div>
+          </md-card-title-media>
+        </md-card-title>
+        <md-card-actions layout="row" layout-align="end center">
+          <!-- <md-button>Action 1</md-button>
+          <md-button>Action 2</md-button> -->
+        </md-card-actions>
+      </md-card>
+
+
+      <!-- <md-card 
+            ng-repeat="teacher in teachers" 
+            md-theme-watch 
+            ng-click="view_teacher( teacher )"
+            ng-if="teachers.length>0"
+            >
+        <md-card-title>
+          <md-card-title-text>
+            <span class="md-headline">{{ teacher.first_name }} {{ teacher.last_name }}  </span>
+            <span ng-if="teacher.location" class="md-subhead">{{ teacher.location.address }}</span>
+            <span ng-repeat="subject in teacher.subjects">{{ subject.name }}</span>
           </md-card-title-text>
         </md-card-title>
         <md-card-content layout="row" layout-align="space-between">
-          <img ng-src="{{ teacher.photos[0].avatar.url }}" class="md-media-xl">
+          <img ng-if="teacher.photos.length>0" ng-src="{{ teacher.photos[0].avatar.url }}" class="md-media-xl">
           <md-card-actions layout="column">
-            <!-- <md-button class="md-icon-button" aria-label="Favorite">
-              <i class="material-icons">person</i>
-            </md-button>
-            <md-button class="md-icon-button" aria-label="Settings">
-              <i class="material-icons">menu</i>
-            </md-button>
-            <md-button class="md-icon-button" aria-label="Share">
-              <i class="material-icons">share</i>
-            </md-button> -->
+            
           </md-card-actions>
         </md-card-content>
-      </md-card>
+      </md-card> -->
 
       <div ng-if="teachers.length==0" layout-fill flex="100">
         No results found

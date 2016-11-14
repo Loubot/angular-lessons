@@ -11,12 +11,15 @@
       </h1>
     </div> <!-- end of white_text -->
 
-    <form  layout="row" layout-align="center center" flex>          
+    <form  layout="row" layout-align="center center" name="search_form" flex>          
           
         
       <div layout="row" layout-xs="column">
         <div flex>
             <md-autocomplete 
+              md-select-on-match
+              md-autoselect
+              id="select_subject"
               class="black_text subject_search"
               md-selected-item="selected.subject_name" 
               md-input-name="subject"
@@ -31,6 +34,10 @@
             <md-item-template>
               <span md-highlight-text="searchText">{{subject}}</span>
             </md-item-template>
+            <div ng-messages="search_form.subject.$error">
+              <div ng-message="required">This is required</div>
+              <div ng-message="no_select">Please click one of the provied options</div>
+            </div>
             <md-not-found>
               No matches found.
             </md-not-found>
@@ -101,7 +108,7 @@
    
   </div> <!-- end of flex -->
 
-  <div flex class="x_large_font animateblock centerleft anchor1" style="max-width:100vw !important;">
+  <div flex class="x_large_font animateblock btm anchor1" style="max-width:100vw !important;">
     <div layout="row" flex="100">
       <md-content layout-margin class="center_text pale_orange_background">
         <h1><strong>Are you a teacher?</strong></h1>
