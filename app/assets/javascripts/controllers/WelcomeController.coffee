@@ -66,14 +66,16 @@ angular.module('lessons').controller('WelcomeController', [
 
 
     $scope.search = ->
-      console.log $scope.selected? && !$scope.selected.subject_name?
+      console.log $("[name='county']").val()
+      console.log $("[name='subject']").val()
+      if $scope.selected? && !$scope.selected.county_name?
+        $scope.selected.county_name = $("[name='county']").val()
       if $scope.selected && !$scope.selected.subject_name?
-        console.log $("[name='subject']").val()
+        $scope.selected.subject_name = $("[name='subject']").val()
       # if $scope.selected.subject_name.length > 0
       
-        $state.go("search", { name: $("[name='subject']").val(), location: $scope.selected.county_name })
-      else 
-        $state.go( "search", { name: $scope.selected.subject_name, location: $scope.selected.county_name } )
+       
+      $state.go( "search", { name: $scope.selected.subject_name, location: $scope.selected.county_name } )
 
     $scope.subject_picked = ( subject )->
       

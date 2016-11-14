@@ -28,10 +28,11 @@ angular.module('lessons').controller( 'SearchController', [
 
     $scope.search_teachers = ->
       console.log $scope.selected
-      console.log $("[name='subject']").val()
-      if $scope.selected && !$scope.selected.subject_name?
+      console.log $("[name='county']").val()
+      if $scope.selected? && !$scope.selected.subject_name?
         $scope.selected.subject_name = $("[name='subject']").val()
-      
+      if $scope.selected? && !$scope.selected.county_name?
+        $scope.selected.county_name = $("[name='county']").val()
         
       
       COMMS.GET(
