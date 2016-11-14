@@ -64,7 +64,7 @@ angular.module('lessons').controller("RegisterController", [
             alertify.success "Welcome #{ resp.data.data.email }"
             alertify.success "Registered as teacher" if $rootScope.USER.is_teacher
             alertify.success "Registered as student" if !$rootScope.USER.is_teacher
-
+            get_county_coords( $scope.teacher.country )
             COMMS.POST(
               "/teacher/#{ $rootScope.USER.id }/location"
               county: $scope.teacher.county
@@ -91,7 +91,7 @@ angular.module('lessons').controller("RegisterController", [
           'Waterford','Westmeath','Wexford','Wicklow']
 
     $scope.county_lists =
-          'Antrim': { lat: 54.719508, lon: -6.207256 }, 'Armagh': { lat: 54.350277, lon: -6.652822},
+          { 'Antrim': { lat: 54.719508, lon: -6.207256 }, 'Armagh': { lat: 54.350277, lon: -6.652822},
           'Carlow': { lat: 52.836497, lon: -6.934238}, 'Cavan': { lat: 53.989637, lon: -7.363272 },
           'Clare': { lat: 52.847097, lon: -8.989040 }, 'Cork': { lat: 51.897887, lon: -8.475431},
           'Derry': { lat: 54.996669, lon: -7.308567 }, 'Donegal': { lat: 54.832874, lon: -7.485811},
@@ -106,8 +106,12 @@ angular.module('lessons').controller("RegisterController", [
           'Roscommon': { lat: 53.627545, lon: -8.189194 }, 'Sligo': { lat: 54.273910, lon: -8.473718 }, 
           'Tipperary': { lat: 52.356254, lon: -7.695380 }, 'Tyrone': { lat: 54.597003, lon: -7.310752 },
           'Waterford': { lat: 52.257693, lon: -7.110284 }, 'Westmeath': { lat: 53.524646, lon: -7.339487 },
-          'Wexford': { lat: 52.333583, lon: -6.474672 }, 'Wicklow': { lat: 52.980215, lon: -6.060273 }
+          'Wexford': { lat: 52.333583, lon: -6.474672 }, 'Wicklow': { lat: 52.980215, lon: -6.060273 } }
 
-    for c in $scope.county_list
-      console.log c
+    get_county_coords = ( county ) ->
+      
+
+    console.log $scope.county_lists['Antrim']
+
+    
 ])
