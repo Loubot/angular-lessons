@@ -19,7 +19,7 @@ angular.module('lessons').controller("RegisterController", [
       return
 
     $scope.register_with_facebook = ->
-      $auth.authenticate('facebook', {params: {resource_class: 'Teacher'}})
+      $auth.authenticate( 'facebook', { params: { resource_class: 'Teacher' } } )
 
     
 
@@ -108,5 +108,6 @@ angular.module('lessons').controller("RegisterController", [
           'Waterford': { lat: 52.257693, lon: -7.110284 }, 'Westmeath': { lat: 53.524646, lon: -7.339487 },
           'Wexford': { lat: 52.333583, lon: -6.474672 }, 'Wicklow': { lat: 52.980215, lon: -6.060273 }
 
-    
+    for c in $scope.county_list
+      console.log c
 ])
