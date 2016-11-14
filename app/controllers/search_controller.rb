@@ -4,7 +4,7 @@ class SearchController < ApplicationController
 
   def search
     p "search controller"
-
+    
     begin
       teachers = search_query( search_params )
       render json: { teachers: teachers }
