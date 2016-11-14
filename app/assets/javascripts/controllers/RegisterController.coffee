@@ -90,7 +90,7 @@ angular.module('lessons').controller("RegisterController", [
           'Louth','Mayo','Meath','Monaghan','Offaly','Roscommon','Sligo','Tipperary','Tyrone',
           'Waterford','Westmeath','Wexford','Wicklow']
 
-    $scope.county_lists = [ 
+    $scope.county_lists =
           'Antrim': { lat: 54.719508, lon: -6.207256 }, 'Armagh': { lat: 54.350277, lon: -6.652822},
           'Carlow': { lat: 52.836497, lon: -6.934238}, 'Cavan': { lat: 53.989637, lon: -7.363272 },
           'Clare': { lat: 52.847097, lon: -8.989040 }, 'Cork': { lat: 51.897887, lon: -8.475431},
@@ -108,6 +108,5 @@ angular.module('lessons').controller("RegisterController", [
           'Waterford': { lat: 52.257693, lon: -7.110284 }, 'Westmeath': { lat: 53.524646, lon: -7.339487 },
           'Wexford': { lat: 52.333583, lon: -6.474672 }, 'Wicklow': { lat: 52.980215, lon: -6.060273 }
 
-     ]
-        
+    
 ])

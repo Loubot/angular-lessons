@@ -72,6 +72,8 @@ angular.module('lessons').controller('WelcomeController', [
       # if $scope.selected.subject_name.length > 0
       
         $state.go("search", { name: $("[name='subject']").val(), location: $scope.selected.county_name })
+      else 
+        $state.go( "search", { name: $scope.selected.subject_name, location: $scope.selected.county_name } )
 
     $scope.subject_picked = ( subject )->
       
