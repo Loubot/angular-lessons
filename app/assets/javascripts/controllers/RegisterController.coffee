@@ -114,6 +114,4 @@ angular.module('lessons').controller("RegisterController", [
       console.log $scope.county_lists["#{ county }"]
       return $scope.county_lists["#{ county }"]
 
-    for c in $scope.county_list
-      console.log c
 ])
