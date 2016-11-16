@@ -103,6 +103,7 @@ angular.module('lessons').controller( "TeacherLocationController" , [
     USER.get_user().then( ( user ) ->
       if $rootScope.USER.location?
         $scope.address = $rootScope.USER.location
+        $scope.address.county = $rootScope.USER.location.name if !$rootScope.USER.location.county?
       else
         $mdToast.showSimple "Your profile might not be visible if you don't enter a location. Your county will do fine" 
         
