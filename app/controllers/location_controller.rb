@@ -52,7 +52,12 @@ class LocationController < ApplicationController
         render json: { errors: location.errors.full_messages }, status: 500
       end
     else
-      render json: { message: ' no good '}, status: 403
+      if teacher.location.update_attributes( location_params )
+        pp "updated #{ teacher.location }"
+        render json: { location: teacher.location.as_json }
+      else
+        render json: { message: ' no good '}, status: 403
+      end
     end
 
   end

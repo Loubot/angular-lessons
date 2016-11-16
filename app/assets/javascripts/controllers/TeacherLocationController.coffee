@@ -18,8 +18,6 @@ angular.module('lessons').controller( "TeacherLocationController" , [
     $scope.i_want_map = false
     only_once = false
 
-    $scope.scrollevent = ( $e ) ->      
-      return
 
     $scope.i_want_map_toggle = ->     
 
@@ -104,7 +102,7 @@ angular.module('lessons').controller( "TeacherLocationController" , [
     
     USER.get_user().then( ( user ) ->
       if $rootScope.USER.location?
-        $scope.address.county = $rootScope.USER.location.name  
+        $scope.address = $rootScope.USER.location
       else
         $mdToast.showSimple "Your profile might not be visible if you don't enter a location. Your county will do fine" 
         
