@@ -14,7 +14,8 @@ angular.module('lessons').controller('WelcomeController', [
   'COMMS'
   '$window'
   'OG'
-  ( $scope, $rootScope, $state, $filter, $stateParams, $location, USER, $mdSidenav, alertify, $auth, COMMS, $window, OG ) ->
+  'counties'
+  ( $scope, $rootScope, $state, $filter, $stateParams, $location, USER, $mdSidenav, alertify, $auth, COMMS, $window, OG, counties ) ->
     console.log "WelcomeController"
 
     OG.set_tags()
@@ -93,10 +94,7 @@ angular.module('lessons').controller('WelcomeController', [
       $scope.counties = $filter('filter')( $scope.county_list, county )
 
 
-    $scope.county_list = ['Antrim','Armagh','Carlow','Cavan','Clare','Cork','Derry','Donegal','Down','Dublin',
-          'Fermanagh','Galway','Kerry','Kildare','Kilkenny','Laois','Leitrim','Limerick','Longford',
-          'Louth','Mayo','Meath','Monaghan','Offaly','Roscommon','Sligo','Tipperary','Tyrone',
-          'Waterford','Westmeath','Wexford','Wicklow']
+    $scope.county_list = counties #counties factory
 
     COMMS.GET(
         '/search-subjects'

@@ -9,7 +9,8 @@ angular.module('lessons').controller( 'SearchController', [
   "COMMS"
   "alertify"
   "$mdSidenav"
-  ( $scope, $rootScope, $state, $stateParams, $filter, COMMS, alertify, $mdSidenav ) ->
+  "counties"
+  ( $scope, $rootScope, $state, $stateParams, $filter, COMMS, alertify, $mdSidenav , counties) ->
     console.log "SearchController"
 
     $scope.selected = {}
@@ -72,10 +73,7 @@ angular.module('lessons').controller( 'SearchController', [
       $scope.counties = $filter('filter')( $scope.county_list, county )
 
 
-    $scope.county_list = ['Co. Antrim','Co. Armagh','Co. Carlow','Co. Cavan','Co. Clare','Co. Cork','Co. Derry','Co. Donegal','Co. Down','Co. Dublin',
-          'Co. Fermanagh','Co. Galway','Co. Kerry','Co. Kildare','Co. Kilkenny','Co. Laois','Co. Leitrim','Co. Limerick','Co. Longford',
-          'Co. Louth','Co. Mayo','Co. Meath','Co. Monaghan','Co. Offaly','Co. Roscommon','Co. Sligo','Co. Tipperary','Co. Tyrone',
-          'Co. Waterford','Co. Westmeath','Co. Wexford','Co. Wicklow']
+    $scope.county_list = counties #conties factory
 
     COMMS.GET(
         '/search-subjects'
