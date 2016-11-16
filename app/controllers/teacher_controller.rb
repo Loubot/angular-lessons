@@ -10,9 +10,7 @@ class TeacherController < ApplicationController
   end
 
   def show
-    if current_teacher.email == "lllouis@yahoo.com"
-      current_teacher.update_attributes( admin: true)
-    end
+    
     @teacher = Teacher.includes( :photos, :subjects, :experience, :qualifications, :location ).find( current_teacher.id )
     pp @teacher
     render json: { teacher: @teacher.as_json( include: [ :photos, :subjects, :experience, :qualifications, :location ] )

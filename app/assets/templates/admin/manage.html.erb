@@ -74,7 +74,7 @@
         <div class="md-list-item-text" ng-click="view_teacher( i )">
           <h3>{{teacher.email}}</h3>
           <span>Subjects {{ teacher.subjects.length }}</span> ||
-          <span>Location {{ (teacher.location.length > 0) }}</span> ||
+          <span>Location {{ ( teacher.location != null ) }}</span> ||
           <span>Experience {{ (teacher.experience.length > 0) }}</span> ||
           <span>Quals {{ (teacher.qualifications.length ) }}</span> 
 
