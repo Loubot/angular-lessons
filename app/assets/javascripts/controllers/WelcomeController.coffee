@@ -24,20 +24,10 @@ angular.module('lessons').controller('WelcomeController', [
     $scope.selected.county_name = $stateParams.location
     $scope.selected_subject = $stateParams.name
 
-
-    $scope.scrollevent = ( $e ) ->
-      console.log 'hup'
-      animate_elems()
-      # @scrollPos = document.body.scrollTop or document.documentElement.scrollTop or 0
-      # $scope.$digest()
-      return
-
     
 
     USER.get_user().then( ( resp ) ->
-      console.log "it workds"
-      # console.log $location.host()
-      # console.log $location.absUrl().split('?')[0]
+      
 
       setTimeout (->
         $location.search('')
@@ -66,8 +56,6 @@ angular.module('lessons').controller('WelcomeController', [
 
 
     $scope.search = ->
-      console.log $("[name='county']").val()
-      console.log $("[name='subject']").val()
       if $scope.selected? && !$scope.selected.county_name?
         $scope.selected.county_name = $("[name='county']").val()
       if $scope.selected && !$scope.selected.subject_name?
@@ -80,7 +68,6 @@ angular.module('lessons').controller('WelcomeController', [
     $scope.subject_picked = ( subject )->
       
       if $scope.selected.subject_name?
-        console.log subject
         $scope.selected.subject_name = subject
         
 
@@ -98,16 +85,11 @@ angular.module('lessons').controller('WelcomeController', [
 
     $scope.search_subjects = ( subject ) ->
       $scope.subjects_list = $scope.master_subjects_list
-      console.log subject
-      # console.log $filter('filter')( $scope.subjects_list, subject.name )
       $scope.subjects_list = $filter('filter')( $scope.subjects_list, subject )
-      # $filter('filter')( $scope.subjects_list, subject )
 
      
 
     $scope.search_counties = ( county ) ->
-      console.log county
-      console.log $filter('filter')( $scope.county_list, county )
       $scope.counties = $filter('filter')( $scope.county_list, county )
 
 

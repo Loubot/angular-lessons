@@ -36,7 +36,7 @@ class SubjectController < ApplicationController
       subjects = Subject.where('name ILIKE ?', "%#{ params[:search] }%")
     end
 
-    subjects = Subject.all if subjects.length == 0
+    # subjects = Subject.all if subjects.length == 0
     pp subjects
     render json: { subjects: subjects.order('name ASC').as_json }, status: 200
   end

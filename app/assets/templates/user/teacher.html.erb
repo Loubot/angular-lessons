@@ -140,10 +140,10 @@
                 <i class="material-icons icon_red">delete</i>
               </md-button>
             </div> <!-- end of flex=10 -->
-            
+
           </div> <!-- end of md-list-item-text -->
         </md-list-item>
-        <md-list-item ng-if="!returned_subjects">
+        <md-list-item ng-if="returned_subjects" ng-init="returned_subjects=false">
           <md-button  class="md-raised md-warn white_text center_block"
                       ng-click="no_subject()">
                     Didn't find what you wanted?
@@ -255,3 +255,5 @@
 
 </div> <!-- end of row -->
 
+{{ returned_subjects }}
+            hello

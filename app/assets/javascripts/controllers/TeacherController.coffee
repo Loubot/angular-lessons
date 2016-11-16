@@ -129,6 +129,7 @@ angular.module('lessons').controller('TeacherController', [
         console.log resp
         # alertify.success "Got subjects"
         $scope.search_subjects = resp.data
+        $scope.returned_subjects = true
         return resp.data.subjects
       ).catch( ( err ) ->
         console.log err

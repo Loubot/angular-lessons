@@ -11,8 +11,7 @@ angular.module('lessons').controller( 'SearchController', [
   "$mdSidenav"
   ( $scope, $rootScope, $state, $stateParams, $filter, COMMS, alertify, $mdSidenav ) ->
     console.log "SearchController"
-    
-    console.log $stateParams
+
     $scope.selected = {}
     $scope.selected.subject_name = $stateParams.name
     $scope.selected.county_name = $stateParams.location
@@ -27,8 +26,6 @@ angular.module('lessons').controller( 'SearchController', [
       return
 
     $scope.search_teachers = ->
-      console.log $scope.selected
-      console.log $("[name='county']").val()
       if $scope.selected? && !$scope.selected.subject_name?
         $scope.selected.subject_name = $("[name='subject']").val()
       if $scope.selected? && !$scope.selected.county_name?
@@ -52,16 +49,10 @@ angular.module('lessons').controller( 'SearchController', [
 
 
     $scope.subject_picked = ( subject )->
-      console.log "picked subject"
-      
-      console.log subject
       $scope.selected.subject_name = subject
       set_params()
 
     $scope.county_picked = ( county )->
-      console.log "Picked county"
-     
-      console.log "hup"
       $scope.selected.county_name = county
       set_params()
 
@@ -74,21 +65,17 @@ angular.module('lessons').controller( 'SearchController', [
 
     $scope.search_subjects = ( subject ) ->
       $scope.subjects_list = $scope.master_subjects_list
-      console.log subject
-      # console.log $filter('filter')( $scope.subjects_list, subject.name )
       $scope.subjects_list = $filter('filter')( $scope.subjects_list, subject )
      
 
     $scope.search_counties = ( county ) ->
-      console.log county
-      console.log $filter('filter')( $scope.county_list, county )
       $scope.counties = $filter('filter')( $scope.county_list, county )
 
 
-    $scope.county_list = ['Antrim','Armagh','Carlow','Cavan','Clare','Cork','Derry','Donegal','Down','Dublin',
-          'Fermanagh','Galway','Kerry','Kildare','Kilkenny','Laois','Leitrim','Limerick','Longford',
-          'Louth','Mayo','Meath','Monaghan','Offaly','Roscommon','Sligo','Tipperary','Tyrone',
-          'Waterford','Westmeath','Wexford','Wicklow']
+    $scope.county_list = ['Co. Antrim','Co. Armagh','Co. Carlow','Co. Cavan','Co. Clare','Co. Cork','Co. Derry','Co. Donegal','Co. Down','Co. Dublin',
+          'Co. Fermanagh','Co. Galway','Co. Kerry','Co. Kildare','Co. Kilkenny','Co. Laois','Co. Leitrim','Co. Limerick','Co. Longford',
+          'Co. Louth','Co. Mayo','Co. Meath','Co. Monaghan','Co. Offaly','Co. Roscommon','Co. Sligo','Co. Tipperary','Co. Tyrone',
+          'Co. Waterford','Co. Westmeath','Co. Wexford','Co. Wicklow']
 
     COMMS.GET(
         '/search-subjects'
