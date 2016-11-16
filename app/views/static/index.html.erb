@@ -19,7 +19,6 @@
           <md-button class="md-button md-default-theme green_blue_text" ng-click="openLeftMenu(0)">Login</md-button>
           <md-button class="md-button md-default-theme green_blue_text" ng-click="openLeftMenu(2)">Student Register</md-button>
           <md-button class="md-button md-default-theme green_blue_text" ui-sref="register_teacher">Teacher Register</md-button>
-          <md-button class="md-button md-default-theme green_blue_text" ui-sref="contact">Contact Us</md-button>
         </md-fab-actions> <!-- end of if !USER -->
 
         <md-fab-actions ng-if="USER && USER.is_teacher" class="green_blue_text">
@@ -30,14 +29,12 @@
           <md-button class="md-button md-default-theme gree_blue_text" ui-sref="admin" ng-if="USER.admin">Admin</md-button>
 
           <md-button class="md-button md-default-theme green_blue_text" ng-click="logout()">Logout</md-button>
-          <md-button class="md-button md-default-theme green_blue_text" ui-sref="contact">Contact Us</md-button>
         </md-fab-actions>
 
         <md-fab-actions ng-if="USER && !USER.is_teacher" class="green_blue_text">
           <md-button ui-sref="student_profile({id:USER.id})" class="md-button md-default-theme green_text">Profile</md-button>
           <md-button ui-sref="conversation({id:USER.id})" class="md-button md-default-theme green_text">Messages</md-button>
           <md-button class="md-button md-default-theme green_blue_text" ng-click="logout()">Logout</md-button>
-          <md-button class="md-button md-default-theme green_blue_text" ui-sref="contact">Contact Us</md-button>
         </md-fab-actions>
 
       </md-fab-speed-dial>
@@ -74,7 +71,6 @@
         <md-button class="md-button md-default-theme " ng-click="openLeftMenu(0); user_menu()">Login</md-button>
         <md-button class="md-button md-default-theme " ng-click="openLeftMenu(2); user_menu()">Student Register</md-button>
         <md-button class="md-button md-default-theme " ui-sref="register_teacher" ng-click="user_menu()">Teacher Register</md-button>
-        <md-button class="md-button md-default-theme " ui-sref="contact">Contact Us</md-button>
       </md-content>
     </md-sidenav>
 
@@ -90,7 +86,6 @@
 
         <md-button ng-if="USER.admin" ui-sref="admin" class="md-button md-default-theme green_text">Admin</md-button>
         <md-button class="md-button md-default-theme green_blue_text" ng-click="logout();user_menu()">Logout</md-button>
-        <md-button class="md-button md-default-theme green_text" ui-sref="contact">Contact Us</md-button>
         <md-divider md-inset ></md-divider>
         <md-icon ng-click="user_menu()"><i class="material-icons">arrow_back</i><md-icon>
       </div>
@@ -104,7 +99,6 @@
         <md-button ui-sref="student_profile({id:USER.id})" ng-click="user_menu()" class="md-button md-default-theme green_text">Profile</md-button>
         <md-button ui-sref="conversation({id:USER.id})" ng-click="user_menu()" class="md-button md-default-theme green_text">Messages</md-button>
         <md-button class="md-button md-default-theme green_blue_text" ng-click="logout()">Logout</md-button>
-        <md-button class="md-button md-default-theme green_text" ui-sref="contact">Contact Us</md-button>
       </md-content>
     </md-sidenav>
     <!-- ################# End of user left menu ######################### -->

@@ -25,7 +25,6 @@ class Location < ActiveRecord::Base
                    :lat_column_name => :latitude,
                    :lng_column_name => :longitude
 
-
   def self.geocode_county( params, teacher_id )
     location_details = Geokit::Geocoders::GoogleGeocoder.geocode( "Co. #{ params[:county] }, Ireland" )
     self.create(
