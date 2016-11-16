@@ -10,7 +10,7 @@ angular.module('lessons').controller( 'SearchController', [
   "alertify"
   "$mdSidenav"
   "counties"
-  ( $scope, $rootScope, $state, $stateParams, $filter, COMMS, alertify, $mdSidenav , counties) ->
+  ( $scope, $rootScope, $state, $stateParams, $filter, COMMS, alertify, $mdSidenav , counties ) ->
     console.log "SearchController"
 
     $scope.selected = {}

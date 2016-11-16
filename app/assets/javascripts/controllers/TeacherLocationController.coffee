@@ -11,12 +11,15 @@ angular.module('lessons').controller( "TeacherLocationController" , [
   '$mdBottomSheet' 
   '$mdToast'
   '$q'
-  ( $scope, $rootScope, $state, $stateParams, COMMS, USER, alertify, $mdBottomSheet, $mdToast, $q ) ->
+  'counties'
+  ( $scope, $rootScope, $state, $stateParams, COMMS, USER, alertify, $mdBottomSheet, $mdToast, $q, counties ) ->
     console.log "TeacherLocationController"
     $scope.addresses = null
     $scope.address = {}
     $scope.i_want_map = false
     only_once = false
+
+    $scope.county_list = counties
 
 
     $scope.i_want_map_toggle = ->     
@@ -226,10 +229,5 @@ angular.module('lessons').controller( "TeacherLocationController" , [
         $mdToast.simple ""
       )
 
-
-    $scope.county_list = ['Antrim','Armagh','Carlow','Cavan','Clare','Cork','Derry','Donegal','Down','Dublin',
-        'Fermanagh','Galway','Kerry','Kildare','Kilkenny','Laois','Leitrim','Limerick','Longford',
-        'Louth','Mayo','Meath','Monaghan','Offaly','Roscommon','Sligo','Tipperary','Tyrone',
-        'Waterford','Westmeath','Wexford','Wicklow']
        
 ])
