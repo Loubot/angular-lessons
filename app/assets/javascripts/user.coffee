@@ -1,12 +1,26 @@
 angular.module('lessons').run [
   '$rootScope'
-  ($rootScope) ->
+  "$http"
+  ($rootScope, $http ) ->
 
 
     User = ( user ) ->
       @.first_name = user.first_name
       @.last_name = user.last_name
       @.email = user.email
+
+    (User::get_associations = ->
+      $http(
+        method: 'GET'
+        url: "/api/teacher/#{ @.id }"
+      ).then( ( resp ) ->
+        console.log 'did it'
+        console.log resp
+      ).catch( ( err ) ->
+        console.log 'failed to do it'
+        console.log err
+      )
+    )()
 
     User::get_full_name = ->
       @.first_name + ' ' + @.last_name
