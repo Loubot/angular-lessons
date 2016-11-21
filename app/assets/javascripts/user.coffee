@@ -3,33 +3,43 @@ angular.module('lessons').run [
   "$http"
   ($rootScope, $http ) ->
 
+    class User
+      constructor: () ->
+        @first_name = ''
+        @last_name = ''
+        @email = ''
+        @id = null
+        @location = null
+        @qualifications = null
+        @subjects = null
 
-    User = ( user ) ->
-      @.first_name = user.first_name
-      @.last_name = user.last_name
-      @.email = user.email
+      set_user: ( user ) ->
+        @.first_name = user.first_name
+        @.last_name = user.last_name
+        @.email = user.email
+        @.id = user.id
+        @location = user.location
+        @qualifications = user.qualifications
+        @subjects = user.subjects
 
-    (User::get_associations = ->
-      $http(
-        method: 'GET'
-        url: "/api/teacher/#{ @.id }"
-      ).then( ( resp ) ->
-        console.log 'did it'
-        console.log resp
-      ).catch( ( err ) ->
-        console.log 'failed to do it'
-        console.log err
-      )
-    )()
-
-    User::get_full_name = ->
-      @.first_name + ' ' + @.last_name
 
     $rootScope.$on 'auth:validation-success', ( e ) ->
       console.log 'validation success'
       console.log $rootScope.user
-      u =  new User( $rootScope.user )
-      console.log u.get_full_name()
+      u = new User()
+      console.log u
+      $http(
+        method: "GET"
+        url: "/api/teacher/#{ $rootScope.user.id }"
+      ).then( ( resp ) ->
+        console.log resp
+        u.set_user( $rootScope.user )
+        console.log u
+      ).catch( ( err ) ->
+        console.log err
+      )
+
+      
 
     $rootScope.$on 'auth:validation-error', ( e ) ->
       console.log 'validation error '

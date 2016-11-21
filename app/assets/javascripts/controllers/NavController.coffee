@@ -74,7 +74,7 @@ angular.module('lessons').controller('NavController', [
           $rootScope.USER = resp
           # console.log resp
 
-          console.log $rootScope.USER
+          # console.log $rootScope.USER
           
           $mdSidenav('left').toggle()
           alertify.success "Welcome back #{ $rootScope.USER.first_name }"

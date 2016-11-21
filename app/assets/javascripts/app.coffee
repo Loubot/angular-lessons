@@ -236,10 +236,8 @@ angular.module('lessons').service 'AUTH', ( $http, $rootScope, RESOURCES, $q, $a
       $auth.submitLogin( auth_hash )
         .then( (resp) ->
           # handle success response
-          console.log resp
-          alertify.success "Registered successfully"
-          window.localStorage.setItem 'user_email', resp.data.email
-          $rootScope.USER = resp.data
+          # console.log resp
+          alertify.success "Logged in successfully"
           resolve resp
         )
         .catch( (resp) ->

@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   match 'logger/rails_client_logger/log' => 'logger#log', via: :post
   mount RailsClientLogger::Engine, :at => "logger"
   scope '/api' do
-    mount_devise_token_auth_for 'Teacher', at: 'auth', controllers: { passwords: 'devise/passwords', omniauth_callbacks: 'omniauth_callbacks', sessions: 'sessions' }
+    mount_devise_token_auth_for 'Teacher', at: 'auth', controllers: { passwords: 'devise/passwords', omniauth_callbacks: 'omniauth_callbacks' }
     # resources :groups, except: [:new, :edit]
 
     get     'teacher/profile-pic'         => 'teacher#chunks'
