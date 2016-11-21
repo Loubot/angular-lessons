@@ -27,8 +27,10 @@ class SessionsController < DeviseTokenAuth::ApplicationController
       if ActiveRecord::Base.connection.adapter_name.downcase.starts_with? 'mysql'
         q = "BINARY " + q
       end
-
-      @resource = resource_class.where(q, q_value).first
+      p "qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq"
+      p q
+      p q_value
+      @resource = resource_class.includes( :photos ).where(q, q_value).first
     end
 
     if @resource and valid_params?(field, q_value) and @resource.valid_password?(resource_params[:password]) and (!@resource.respond_to?(:active_for_authentication?) or @resource.active_for_authentication?)
@@ -109,9 +111,15 @@ class SessionsController < DeviseTokenAuth::ApplicationController
   end
 
   def render_create_success
+    p "yes it does this"
     render json: {
-      data: resource_data(resource_json: @resource.token_validation_response)
+      success: true,
+      data: @resource.as_json( include: [ :photos ] )
     }
+    # render json: {
+    #   success: true
+    #   data: resource_data(resource_json: @resource.token_validation_response)
+    # }
   end
 
   def render_create_error_not_confirmed

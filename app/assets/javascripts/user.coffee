@@ -28,16 +28,16 @@ angular.module('lessons').run [
       console.log $rootScope.user
       u = new User()
       console.log u
-      $http(
-        method: "GET"
-        url: "/api/teacher/#{ $rootScope.user.id }"
-      ).then( ( resp ) ->
-        console.log resp
-        u.set_user( $rootScope.user )
-        console.log u
-      ).catch( ( err ) ->
-        console.log err
-      )
+      # $http(
+      #   method: "GET"
+      #   url: "/api/teacher/#{ $rootScope.user.id }"
+      # ).then( ( resp ) ->
+      #   console.log resp
+      #   u.set_user( $rootScope.user )
+      #   console.log u
+      # ).catch( ( err ) ->
+      #   console.log err
+      # )
 
       
 
