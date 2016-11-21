@@ -195,6 +195,12 @@ angular.module('lessons').config ( $authProvider ) ->
       
   })
 
+angular.module('lessons').run ( $auth ) ->
+  $auth.validateUser().then( ( resp ) ->
+    console.log resp 
+  )
+
+
 ############## Theme #######################################
 angular.module('lessons').config ( $mdThemingProvider ) ->
   $mdThemingProvider.theme('default')
@@ -329,9 +335,12 @@ angular.module('lessons').service 'COMMS', ( $http, $state, RESOURCES, $rootScop
       )
 
       
-# angular.module('lessons').run [
-#   '$rootScope'
-#   ($rootScope) ->
+angular.module('lessons').run [
+  '$rootScope'
+  ($rootScope) ->
+    $rootScope.$on 'auth:validation-success', ( e ) ->
+      console.log 'bl'
+      console.log e
 #     # see what's going on when the route tries to change
 #     $rootScope.$on '$stateChangeStart', (event, toState, toParams, fromState, fromParams) ->
 #       console.log toState
@@ -357,7 +366,8 @@ angular.module('lessons').service 'COMMS', ( $http, $state, RESOURCES, $rootScop
 #       console.log unfoundState, fromState, fromParams
 #       return
 
-# ]
+
+]
 
 angular.module('lessons').run(['$rootScope', '$state',
   ($rootScope, $state)->
