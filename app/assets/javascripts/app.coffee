@@ -195,11 +195,6 @@ angular.module('lessons').config ( $authProvider ) ->
       
   })
 
-angular.module('lessons').run ( $auth ) ->
-  $auth.validateUser().then( ( resp ) ->
-    console.log resp 
-  )
-
 
 ############## Theme #######################################
 angular.module('lessons').config ( $mdThemingProvider ) ->
@@ -335,12 +330,12 @@ angular.module('lessons').service 'COMMS', ( $http, $state, RESOURCES, $rootScop
       )
 
       
-angular.module('lessons').run [
-  '$rootScope'
-  ($rootScope) ->
-    $rootScope.$on 'auth:validation-success', ( e ) ->
-      console.log 'bl'
-      console.log e
+# angular.module('lessons').run [
+#   '$rootScope'
+#   ($rootScope) ->
+#     $rootScope.$on 'auth:validation-success', ( e ) ->
+#       console.log 'bl'
+#       console.log e
 #     # see what's going on when the route tries to change
 #     $rootScope.$on '$stateChangeStart', (event, toState, toParams, fromState, fromParams) ->
 #       console.log toState
@@ -367,37 +362,37 @@ angular.module('lessons').run [
 #       return
 
 
-]
+# ]
 
-angular.module('lessons').run(['$rootScope', '$state',
-  ($rootScope, $state)->
-    $rootScope.isAuthenticated = false
+# angular.module('lessons').run(['$rootScope', '$state',
+#   ($rootScope, $state)->
+#     $rootScope.isAuthenticated = false
 
-    $rootScope.$on('auth:validation-success', (e)->
-      $rootScope.isAuthenticated = true
+#     $rootScope.$on('auth:validation-success', (e)->
+#       $rootScope.isAuthenticated = true
       
-    )
-    $rootScope.$on('auth:login-success', (e)->
-      $rootScope.isAuthenticated = true
-      # $state.go 'welcome'
-    )
+#     )
+#     $rootScope.$on('auth:login-success', (e)->
+#       $rootScope.isAuthenticated = true
+#       # $state.go 'welcome'
+#     )
 
-    $rootScope.$on('auth:validation-error', (e)->
-      $rootScope.isAuthenticated = false
-    )
-    $rootScope.$on('auth:invalid', (e)->
-      $rootScope.isAuthenticated = false
-    )
-    $rootScope.$on('auth:login-error', (e)->
-      $rootScope.isAuthenticated = false
-    )
-    $rootScope.$on('auth:logout-success', (e)->
-      $rootScope.isAuthenticated = false
-    )
-    $rootScope.$on('auth:account-destroy-success', (e)->
-      $rootScope.isAuthenticated = false
-    )
-    $rootScope.$on('auth:session-expired', (e)->
-      $rootScope.isAuthenticated = false
-    )
-])
+#     $rootScope.$on('auth:validation-error', (e)->
+#       $rootScope.isAuthenticated = false
+#     )
+#     $rootScope.$on('auth:invalid', (e)->
+#       $rootScope.isAuthenticated = false
+#     )
+#     $rootScope.$on('auth:login-error', (e)->
+#       $rootScope.isAuthenticated = false
+#     )
+#     $rootScope.$on('auth:logout-success', (e)->
+#       $rootScope.isAuthenticated = false
+#     )
+#     $rootScope.$on('auth:account-destroy-success', (e)->
+#       $rootScope.isAuthenticated = false
+#     )
+#     $rootScope.$on('auth:session-expired', (e)->
+#       $rootScope.isAuthenticated = false
+#     )
+# ])

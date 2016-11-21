@@ -27,15 +27,15 @@ angular.module('lessons').controller('WelcomeController', [
 
     
 
-    USER.get_user().then( ( resp ) ->
+    # USER.get_user().then( ( resp ) ->
       
 
-      setTimeout (->
-        $location.search('')
-      ), 2000
+    #   setTimeout (->
+    #     $location.search('')
+    #   ), 2000
       
       
-    )
+    # )
 
 
     $scope.search_teachers = ->
