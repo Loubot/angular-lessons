@@ -5,11 +5,11 @@ angular.module('lessons').controller('NavController', [
   '$rootScope'
   '$state'
   '$window'
-  'USER'
+  'User'
   '$mdSidenav'
   'alertify'
   '$auth'
-  ( $scope, $rootScope, $state, $window, USER, $mdSidenav, alertify, $auth ) ->
+  ( $scope, $rootScope, $state, $window, User, $mdSidenav, alertify, $auth ) ->
     console.log "NavController"
     $scope.teacher = {}
     $scope.auth_type = null

@@ -45,11 +45,13 @@ angular.module('lessons').value 'Users',
 angular.module('lessons').factory 'User', ($http, $rootScope, Users) ->
   # instantiate our initial object
 
-  User = () ->
-    @first_name =  ''
-    @last_name = ''
-    @email = ''
-    @id = 0
+  User = ( cb ) ->
+    self = this
+    $http.get("/api/teacher/#{ $rootScope.user.id }").then (response) ->
+      
+      self.update_all( response.data.teacher )
+      cb( null, response )
+      response
 
   # define the getProfile method which will fetch data
   # from GH API and *returns* a promise
@@ -68,7 +70,8 @@ angular.module('lessons').factory 'User', ($http, $rootScope, Users) ->
     @photos = teacher.photos || null
     @qualifications = teacher.qualifications || null
     @subjects = teacher.subjects || null
-    # console.log @.get_full_name()
+    $rootScope.USER = @
+    @
     return
 
   User::get_full_name = ->
@@ -120,33 +123,27 @@ angular.module('lessons').run [
   "$rootScope"
   "USER"
   "User"
-  ( $rootScope, USER, User ) ->
+  "$state"
+  "alertify"
+  ( $rootScope, USER, User, $state, alertify ) ->
 
     $rootScope.$on 'auth:validation-success', ( e ) ->
       console.log 'validation success'
       # console.log $rootScope.user
 
-      $rootScope.USER = new User()
-      console.log $rootScope.USER
-      $rootScope.USER.get_all( ( err, resp ) ->
-        console.log $rootScope.USER.get_full_name()
+      $rootScope.USER = new User( ( err, resp ) ->
         if err?
           console.log err
+
         else
-          console.log resp
-
+          console.log $rootScope.USER.get_full_name()
       )
-      
-      
-   
-      
-      
-      
-
       
 
     $rootScope.$on 'auth:validation-error', ( e ) ->
-      console.log 'validation error '
+      $rootScope.USER = null
+      $state.go 'welcome'
+      alertify.error "There was an error"
       console.log e
 
     $rootScope.$on 'auth-login-success', ( e, user ) ->
