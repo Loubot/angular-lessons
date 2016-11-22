@@ -34,30 +34,27 @@ angular.module('lessons').service 'USER', [
   
 ]
 
-angular.module('lessons').value 'Users',
-  first_name: ''
-  last_name: ''
-  email: ''
-  get_all: ->
 
 
-
-angular.module('lessons').factory 'User', ($http, $rootScope, Users) ->
+angular.module('lessons').factory 'User', ( $http, $rootScope, Users, $q ) ->
   # instantiate our initial object
 
   User = ( cb ) ->
     self = this
-    $http.get("/api/teacher/#{ $rootScope.user.id }").then (response) ->
-      
-      self.update_all( response.data.teacher )
-      cb( null, response )
-      response
+    $q ( resolve, reject ) ->
+      $http.get("/api/teacher/#{ $rootScope.user.id }").then (response) ->
+        
+        user = self.update_all( response.data.teacher )
+        console.log "returned user #{ user }"
+        resolve user
+        
+        # response
 
   # define the getProfile method which will fetch data
   # from GH API and *returns* a promise
 
   User::update_all = ( teacher ) ->
-    # console.log teacher
+
     @first_name = teacher.first_name || null
     @last_name = teacher.last_name || null
     @email = teacher.email || null
@@ -70,9 +67,9 @@ angular.module('lessons').factory 'User', ($http, $rootScope, Users) ->
     @photos = teacher.photos || null
     @qualifications = teacher.qualifications || null
     @subjects = teacher.subjects || null
-    $rootScope.USER = @
-    @
-    return
+    $rootScope.user = @
+    return $rootScope.user
+    
 
   User::get_full_name = ->
     console.log @
@@ -126,22 +123,19 @@ angular.module('lessons').run [
   "$state"
   "alertify"
   ( $rootScope, USER, User, $state, alertify ) ->
-
+    
     $rootScope.$on 'auth:validation-success', ( e ) ->
       console.log 'validation success'
       # console.log $rootScope.user
 
-      $rootScope.USER = new User( ( err, resp ) ->
-        if err?
-          console.log err
-
-        else
-          console.log $rootScope.USER.get_full_name()
+      $rootScope.user = new User().then( ( resp ) ->
+        console.log $rootScope.user
+        console.log $rootScope.user.get_full_name()
       )
       
 
     $rootScope.$on 'auth:validation-error', ( e ) ->
-      $rootScope.USER = null
+      $rootScope.user = null
       $state.go 'welcome'
       alertify.error "There was an error"
       console.log e
