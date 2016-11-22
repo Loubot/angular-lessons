@@ -8,6 +8,7 @@ angular.module('lessons').controller('WelcomeController', [
   '$stateParams'
   '$location'
   'USER'
+  'User'
   '$mdSidenav'
   'alertify'
   '$auth'
@@ -15,8 +16,9 @@ angular.module('lessons').controller('WelcomeController', [
   '$window'
   'OG'
   'counties'
-  ( $scope, $rootScope, $state, $filter, $stateParams, $location, USER, $mdSidenav, alertify, $auth, COMMS, $window, OG, counties ) ->
+  ( $scope, $rootScope, $state, $filter, $stateParams, $location, USER, User, $mdSidenav, alertify, $auth, COMMS, $window, OG, counties ) ->
     console.log "WelcomeController"
+    console.log User
 
     OG.set_tags()
 

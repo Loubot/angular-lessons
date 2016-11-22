@@ -6,6 +6,7 @@ angular.module('lessons').controller('TeacherController', [
   '$state'
   'RESOURCES'
   'USER'
+  'User'
   'alertify'
   'COMMS'  
   '$stateParams'
@@ -13,11 +14,13 @@ angular.module('lessons').controller('TeacherController', [
   'Upload'
   '$mdBottomSheet'
   '$mdDialog'
-  ( $scope, $rootScope, $state, RESOURCES, USER, alertify, COMMS, $stateParams, $auth, Upload, $mdBottomSheet, $mdDialog ) ->
+  ( $scope, $rootScope, $state, RESOURCES, USER, User, alertify, COMMS, $stateParams, $auth, Upload, $mdBottomSheet, $mdDialog ) ->
     console.log "TeacherController"
     $scope.photos = null
     $scope.change_user_type = false
     # alertify.success "Got subjects"
+
+    console.log User
 
     $scope.scrollevent = ( $e ) ->
       
@@ -34,7 +37,7 @@ angular.module('lessons').controller('TeacherController', [
         data:
           avatar: $scope.file
       ).then( ( resp ) -> 
-        console.log resp
+        # console.log resp
         $scope.photos = resp.data.photos if resp.data != ""
         alertify.success("Photo uploaded ok")
         if resp.data.status == "updated"
@@ -100,7 +103,7 @@ angular.module('lessons').controller('TeacherController', [
         # console.log photo.avatar.url
         if parseInt( photo.id ) == parseInt( $rootScope.USER.profile )
           $scope.profile = photo
-          console.log $scope.profile
+          # console.log $scope.profile
           $scope.profile
 
     $scope.destroy_pic = ( id ) ->

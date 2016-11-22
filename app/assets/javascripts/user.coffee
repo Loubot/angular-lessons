@@ -17,9 +17,9 @@ angular.module('lessons').service 'USER', [
         # params: 
         #   email: 
       ).then( ( result ) ->
-        console.log "get user"
-        console.log result.data
-        $rootScope.USER = result.data.teacher
+        # console.log "get user"
+        # console.log result.data
+        # $rootScope.USER = result.data.teacher
         
         resolve result.data
       ).catch( ( err_result ) ->
@@ -34,20 +34,28 @@ angular.module('lessons').service 'USER', [
   
 ]
 
+angular.module('lessons').value 'Users',
+  first_name: ''
+  last_name: ''
+  email: ''
+  get_all: ->
 
-angular.module('lessons').factory 'User', ($http, $rootScope) ->
+
+
+angular.module('lessons').factory 'User', ($http, $rootScope, Users) ->
   # instantiate our initial object
 
-  User = (teacher) ->
-    @first_name = teacher.first_name || null
-    @last_name = teacher.last_name || null
-    @email = teacher.email || null
-    @id = teacher.id || null
+  User = () ->
+    @first_name =  ''
+    @last_name = ''
+    @email = ''
+    @id = 0
 
   # define the getProfile method which will fetch data
   # from GH API and *returns* a promise
 
   User::update_all = ( teacher ) ->
+    # console.log teacher
     @first_name = teacher.first_name || null
     @last_name = teacher.last_name || null
     @email = teacher.email || null
@@ -60,28 +68,40 @@ angular.module('lessons').factory 'User', ($http, $rootScope) ->
     @photos = teacher.photos || null
     @qualifications = teacher.qualifications || null
     @subjects = teacher.subjects || null
-    console.log @
+    # console.log @.get_full_name()
     return
 
+  User::get_full_name = ->
+    console.log @
+    return @.first_name + ' ' + @.last_name
+
   User::get_location = ->
-    return @.location
+    self = this
+    return self.location
 
   User::set_location = ( location ) ->
-    return @.location = location
+    self = this
+    return self.location = location
 
   User::get_photos = ->
+    console.log @
     return @.photos
 
   User::set_photos = ( photos ) ->
-    return @.photos = photos
+    self = this
+    self.photos = photos
+    return self
 
   User::get_subjects = ->
-    return @.subjects
+    self = this
+    return self.subjects
 
   User::set_subjects = ( subjects ) ->
-    return @.subjects = subjects
+    self = this
+    return self.subjects = subjects
 
-  User::get_all = ->
+
+  User::get_all = ( cb )->
     # Generally, javascript callbacks, like here the $http.get callback,
     # change the value of the "this" variable inside it
     # so we need to keep a reference to the current instance "this" :
@@ -89,6 +109,7 @@ angular.module('lessons').factory 'User', ($http, $rootScope) ->
     $http.get("/api/teacher/#{ $rootScope.user.id }").then (response) ->
       
       self.update_all( response.data.teacher )
+      cb( null, response )
       response
 
   User
@@ -103,10 +124,23 @@ angular.module('lessons').run [
 
     $rootScope.$on 'auth:validation-success', ( e ) ->
       console.log 'validation success'
-      console.log $rootScope.user
-      u = new User( $rootScope.user )
-      console.log u
-      u.get_all()
+      # console.log $rootScope.user
+
+      $rootScope.USER = new User()
+      console.log $rootScope.USER
+      $rootScope.USER.get_all( ( err, resp ) ->
+        console.log $rootScope.USER.get_full_name()
+        if err?
+          console.log err
+        else
+          console.log resp
+
+      )
+      
+      
+   
+      
+      
       
 
       

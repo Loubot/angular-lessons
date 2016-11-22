@@ -27,7 +27,7 @@ Rails.application.configure do
   # Debug mode disables concatenation and preprocessing of assets.
   # This option may cause significant delays in view rendering with a large
   # number of complex assets.
-  # config.assets.debug = true
+  config.assets.debug = true
 
   uglifier = Uglifier.new output: { comments: :none }
 
@@ -37,9 +37,9 @@ Rails.application.configure do
 
    # config.serve_static_files = true
 
-  config.assets.compress = true
+  # config.assets.compress = true
 
-  config.assets.compile = true
+  # config.assets.compile = true
 
   # config.assets.js_compressor = :uglifier
   config.assets.css_compressor = :sass
