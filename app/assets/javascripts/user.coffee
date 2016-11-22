@@ -36,7 +36,8 @@ angular.module('lessons').service 'USER', [
 
 
 
-angular.module('lessons').factory 'User', ( $http, $rootScope, Users, $q ) ->
+
+angular.module('lessons').factory 'User', ( $http, $rootScope, $q ) ->
   # instantiate our initial object
 
   User = ( cb ) ->
@@ -100,17 +101,6 @@ angular.module('lessons').factory 'User', ( $http, $rootScope, Users, $q ) ->
     self = this
     return self.subjects = subjects
 
-
-  User::get_all = ( cb )->
-    # Generally, javascript callbacks, like here the $http.get callback,
-    # change the value of the "this" variable inside it
-    # so we need to keep a reference to the current instance "this" :
-    self = this
-    $http.get("/api/teacher/#{ $rootScope.user.id }").then (response) ->
-      
-      self.update_all( response.data.teacher )
-      cb( null, response )
-      response
 
   User
 
