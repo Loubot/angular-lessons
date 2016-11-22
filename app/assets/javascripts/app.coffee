@@ -202,31 +202,7 @@ angular.module('lessons').config ( $mdThemingProvider ) ->
     .accentPalette('blue-grey')
 
 
-angular.module('lessons').service 'USER', ( $http, $rootScope, RESOURCES, $q, $state, alertify ) ->
-  
-  get_user: -> # get user and all associations
-    $q ( resolve, reject ) ->
-      $http(
-        method: 'GET'
-        url: "#{ RESOURCES.DOMAIN }/teacher/get"
-        headers: { "Content-Type": "application/json" }
-        # params: 
-        #   email: 
-      ).then( ( result ) ->
-        console.log "get user"
-        console.log result.data
-        $rootScope.USER = result.data.teacher
-       
-        resolve result.data
-      ).catch( ( err_result ) ->
-        console.log err_result
-        reject err_result
-      )
 
-  check_user: ->
-    if !$rootScope.USER.is_teacher
-      alertify.error "You must be a teacher to view this"
-      $state.go "welcome"
 
 angular.module('lessons').service 'AUTH', ( $http, $rootScope, RESOURCES, $q, $auth, alertify ) ->
 
