@@ -225,7 +225,7 @@ angular.module('lessons').controller('TeacherController', [
 
     $scope.change_to_student = ->      
 
-      $rootScope.User.is_teacher = false
+      
       $rootScope.User.change_user_type()
 
     ####################### End of update teacher ##############################

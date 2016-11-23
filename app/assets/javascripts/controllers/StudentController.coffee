@@ -118,7 +118,7 @@ angular.module('lessons').controller( 'StudentController', [
 
     $scope.change_to_teacher = ->
       
-      $rootScope.User.is_teacher = true
+      
       $rootScope.User.change_user_type()
 
     $scope.open_change_password = ->

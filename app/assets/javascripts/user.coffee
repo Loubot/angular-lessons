@@ -97,13 +97,16 @@ angular.module('lessons').factory 'User', [
     )
 
   User::change_user_type = ->
+    self = this
+    if self.is_teacher == true then self.is_teacher = false else self.is_teacher = true
     COMMS.POST(
       "/teacher"
-      @
+      self
     ).then( ( resp ) ->
       console.log "User class updated "
-      
-      if $rootScope.User.is_teacher then $state.go( "teacher", id: $rootScope.User.id ) else $state.go( "welcome" )
+      console.log resp
+      $rootScope.User = self
+      if $rootScope.User.is_teacher then $state.go( "teacher", id: $rootScope.User.id ) else $state.go( 'student_profile', id: $rootScope.USER.id )
     ).catch( ( err ) ->
       console.log "Failed to update user class"
     )
