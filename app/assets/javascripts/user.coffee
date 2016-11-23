@@ -43,7 +43,8 @@ angular.module('lessons').factory 'User', [
   "$rootScope"
   "$q"
   "$state"
- ( COMMS, $http, $rootScope, $q, $state ) ->
+  "alertify"
+ ( COMMS, $http, $rootScope, $q, $state, alertify ) ->
   # instantiate our initial object
 
   
@@ -97,11 +98,12 @@ angular.module('lessons').factory 'User', [
       console.log "Failed to update user class"
     )
 
+###################### pics ###################################################
   User::update_profile = ( pic_id ) ->
     self = @
     console.log pic_id
     self.profile = pic_id
-    return COMMS.PUT(
+    COMMS.PUT(
       "/teacher/#{ self.id }"
       profile: pic_id, id: $rootScope.USER.id
     ).then( ( resp ) ->
@@ -110,6 +112,30 @@ angular.module('lessons').factory 'User', [
     ).catch( ( err ) ->
       console.log err 
     )
+
+  User::delete_pic = ( id ) ->
+    self = @
+    COMMS.DELETE(
+      "/teacher/#{ $rootScope.USER.id }/photos/#{ id }"
+    ).then( ( resp ) ->
+      console.log 'deleted photo'
+      console.log resp
+      self.photos = resp.data.teacher.photos
+      alertify.success "Deleted photo ok"
+      self.get_profile()
+    ).catch( ( err ) ->
+      console.log err
+      alertify.error "Failed to delete photo"
+    )
+
+  User::get_profile = ->
+    for photo in @.photos
+      # console.log photo.avatar.url
+      if parseInt( photo.id ) == parseInt( @.profile )
+        @.profile_url = photo.avatar.url
+        console.log @.profile_url
+    @.profile_url
+#################### end of pics ###############################################
 
   User::change_user_type = ( type ) ->
     self = this
@@ -152,13 +178,7 @@ angular.module('lessons').factory 'User', [
     return self.subjects = subjects
 
 
-  User::get_profile = ->
-    for photo in @.photos
-      # console.log photo.avatar.url
-      if parseInt( photo.id ) == parseInt( @.profile )
-        @.profile_url = photo.avatar.url
-        console.log @.profile_url
-    @.profile_url
+  
         
 
 

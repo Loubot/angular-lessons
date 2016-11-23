@@ -17,7 +17,7 @@
             </span>
           </md-card-header-text>
         </md-card-header>
-        <img ng-if="profile" ng-src="{{ User.profile_url }}" 
+        <img ng-if="User.profile" ng-src="{{ User.profile_url }}" 
             class="md-card-image" 
             alt="{{ User.first_name }} profile pic">
 
@@ -71,7 +71,7 @@
       <md-card>
         <md-grid-list md-cols="3" md-row-height="6:2" class="no_padding">
           <md-grid-tile class="gray min_height_128"
-              md-rowspan="3" md-colspan="1" md-colspan-sm="1" md-colspan-xs="1" ng-repeat="photo in photos">
+              md-rowspan="3" md-colspan="1" md-colspan-sm="1" md-colspan-xs="1" ng-repeat="photo in User.photos">
             <img class="profile_thumbs" ng-src="{{ photo.avatar.url }}" >
             <md-grid-tile-footer>
               <md-menu>

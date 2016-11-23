@@ -52,7 +52,7 @@ angular.module('lessons').controller('TeacherController', [
         $state.go 'welcome'
         alertify.error "You are not allowed to view this"
         return false
-      $scope.photos = $rootScope.USER.photos
+      
 
       $scope.subjects = $rootScope.USER.subjects
       alertify.error "Your profile is not visible until you select a subject" if $scope.subjects.length == 0
@@ -60,7 +60,6 @@ angular.module('lessons').controller('TeacherController', [
 
       $scope.experience = $rootScope.USER.experience
       $scope.quals = $rootScope.USER.qualifications
-      profile_pic()
 
 
     ).catch( ( err ) ->
@@ -75,31 +74,8 @@ angular.module('lessons').controller('TeacherController', [
       $rootScope.User.update_profile( id )
       
 
-    profile_pic = ->
-      if !$rootScope.USER.profile?
-        console.log "No profile"
-        $scope.profile = null
-        return false
-      for photo in $scope.photos
-        # console.log photo.avatar.url
-        if parseInt( photo.id ) == parseInt( $rootScope.USER.profile )
-          $scope.profile = photo
-          # console.log $scope.profile
-          $scope.profile
-
     $scope.destroy_pic = ( id ) ->
-      COMMS.DELETE(
-        "/teacher/#{ $rootScope.USER.id }/photos/#{ id }"
-      ).then( ( resp ) ->
-        console.log resp
-        alertify.success "Deleted photo ok"
-        $scope.photos = resp.data.teacher.photos
-        $rootScope.USER.profile = resp.data.teacher.profile
-        profile_pic()
-      ).catch( ( err ) ->
-        console.log err
-        alertify.error "Failed to delete photo"
-      )
+      $rootScope.User.delete_pic( id )
 
 
     ####################### Subjects ###############################
