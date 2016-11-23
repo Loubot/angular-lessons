@@ -17,19 +17,9 @@ angular.module('lessons').controller('TeacherController', [
   ( $scope, $rootScope, $state, RESOURCES, USER, User, alertify, COMMS, $stateParams, $auth, Upload, $mdBottomSheet, $mdDialog ) ->
     console.log "TeacherController"
     $scope.photos = null
-    # $scope.change_user_type = false
-    # alertify.success "Got subjects"
-
     console.log $rootScope.User
 
-    
 
-    $scope.scrollevent = ( $e ) ->
-      
-      # animate_elems()
-      # @scrollPos = document.body.scrollTop or document.documentElement.scrollTop or 0
-      # $scope.$digest()
-      return
     
     $scope.upload = ( file ) ->
       Upload.upload(
@@ -82,19 +72,8 @@ angular.module('lessons').controller('TeacherController', [
     
 
     $scope.make_profile = ( id ) ->
-      COMMS.POST(
-        '/teacher'
-        profile: id, id: $rootScope.USER.id
-      ).then( ( resp ) ->
-        console.log resp
-        alertify.success "Updated profile pic"
-        if resp.data.status == "updated"
-          $rootScope.USER = resp.data.teacher
-          profile_pic()
-      ).catch( ( err ) ->
-        console.log err
-        alertify.error "Failed to update profile"
-      )
+      $rootScope.User.update_profile( id )
+      
 
     profile_pic = ->
       if !$rootScope.USER.profile?
@@ -226,7 +205,7 @@ angular.module('lessons').controller('TeacherController', [
     $scope.change_to_student = ->      
 
       
-      $rootScope.User.change_user_type()
+      $rootScope.User.change_user_type( false )
 
     ####################### End of update teacher ##############################
 

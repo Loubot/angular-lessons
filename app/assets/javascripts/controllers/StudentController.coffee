@@ -119,7 +119,7 @@ angular.module('lessons').controller( 'StudentController', [
     $scope.change_to_teacher = ->
       
       
-      $rootScope.User.change_user_type()
+      $rootScope.User.change_user_type( true )
 
     $scope.open_change_password = ->
       console.log "Hup"

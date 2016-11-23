@@ -78,6 +78,7 @@ angular.module('lessons').factory 'User', [
     @photos = teacher.photos
     @qualifications = teacher.qualifications
     @subjects = teacher.subjects
+    @profile_url = @.get_profile()
     $rootScope.User = @
     
 
@@ -96,9 +97,23 @@ angular.module('lessons').factory 'User', [
       console.log "Failed to update user class"
     )
 
-  User::change_user_type = ->
+  User::update_profile = ( pic_id ) ->
+    self = @
+    console.log pic_id
+    self.profile = pic_id
+    return COMMS.PUT(
+      "/teacher/#{ self.id }"
+      profile: pic_id, id: $rootScope.USER.id
+    ).then( ( resp ) ->
+      console.log resp
+      self.get_profile()
+    ).catch( ( err ) ->
+      console.log err 
+    )
+
+  User::change_user_type = ( type ) ->
     self = this
-    if self.is_teacher == true then self.is_teacher = false else self.is_teacher = true
+    self.is_teacher == type
     COMMS.POST(
       "/teacher"
       self
@@ -137,6 +152,14 @@ angular.module('lessons').factory 'User', [
     return self.subjects = subjects
 
 
+  User::get_profile = ->
+    for photo in @.photos
+      # console.log photo.avatar.url
+      if parseInt( photo.id ) == parseInt( @.profile )
+        @.profile_url = photo.avatar.url
+        console.log @.profile_url
+    @.profile_url
+        
 
 
 
