@@ -17,8 +17,10 @@ angular.module('lessons').controller('TeacherController', [
   ( $scope, $rootScope, $state, RESOURCES, USER, User, alertify, COMMS, $stateParams, $auth, Upload, $mdBottomSheet, $mdDialog ) ->
     console.log "TeacherController"
     $scope.photos = null
-    $scope.change_user_type = false
+    # $scope.change_user_type = false
     # alertify.success "Got subjects"
+
+    console.log $rootScope.User
 
     
 
@@ -221,10 +223,10 @@ angular.module('lessons').controller('TeacherController', [
 
       # )
 
-    $scope.change_to_student = ->
-      $scope.change_user_type = true
-      $scope.USER.is_teacher = false
-      $scope.update_teacher()
+    $scope.change_to_student = ->      
+
+      $rootScope.User.is_teacher = false
+      $rootScope.User.change_user_type()
 
     ####################### End of update teacher ##############################
 

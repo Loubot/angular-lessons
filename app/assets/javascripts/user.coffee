@@ -42,7 +42,8 @@ angular.module('lessons').factory 'User', [
   "$http"
   "$rootScope"
   "$q"
- ( COMMS, $http, $rootScope, $q ) ->
+  "$state"
+ ( COMMS, $http, $rootScope, $q, $state ) ->
   # instantiate our initial object
 
   
@@ -65,21 +66,19 @@ angular.module('lessons').factory 'User', [
   # from GH API and *returns* a promise
 
   User::update_all = ( teacher ) ->
-    @first_name = teacher.first_name || null
-    @last_name = teacher.last_name || null
-    @email = teacher.email || null
-    @id = teacher.id || null
-    @is_teacher = teacher.is_teacher || null
-    @overview = teacher.overview || null
-    @profile = teacher.profile || null
-    @view_count = teacher.view_count || null
-    @location = teacher.location || null
-    @photos = teacher.photos || null
-    @qualifications = teacher.qualifications || null
-    @subjects = teacher.subjects || null
+    @first_name = teacher.first_name
+    @last_name = teacher.last_name
+    @email = teacher.email
+    @id = teacher.id
+    @is_teacher = teacher.is_teacher
+    @overview = teacher.overview
+    @profile = teacher.profile
+    @view_count = teacher.view_count
+    @location = teacher.location
+    @photos = teacher.photos
+    @qualifications = teacher.qualifications
+    @subjects = teacher.subjects
     $rootScope.User = @
-    console.log "Instantiated"
-    return $rootScope.User
     
 
   User::get_full_name = ->
@@ -92,6 +91,19 @@ angular.module('lessons').factory 'User', [
       @
     ).then( ( resp ) ->
       console.log "User class updated "
+      console.log resp
+    ).catch( ( err ) ->
+      console.log "Failed to update user class"
+    )
+
+  User::change_user_type = ->
+    COMMS.POST(
+      "/teacher"
+      @
+    ).then( ( resp ) ->
+      console.log "User class updated "
+      
+      if $rootScope.User.is_teacher then $state.go( "teacher", id: $rootScope.User.id ) else $state.go( "welcome" )
     ).catch( ( err ) ->
       console.log "Failed to update user class"
     )
