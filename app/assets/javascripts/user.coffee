@@ -19,7 +19,7 @@ angular.module('lessons').service 'USER', [
       ).then( ( result ) ->
         # console.log "get user"
         # console.log result.data
-        # $rootScope.USER = result.data.teacher
+        $rootScope.USER = result.data.teacher
         
         resolve result.data
       ).catch( ( err_result ) ->
@@ -39,6 +39,10 @@ angular.module('lessons').service 'USER', [
 
 angular.module('lessons').factory 'User', ( $http, $rootScope, $q ) ->
   # instantiate our initial object
+
+  do ->
+    console.log $rootScope.user
+    return
 
   User = ( cb ) ->
     self = this
@@ -68,8 +72,8 @@ angular.module('lessons').factory 'User', ( $http, $rootScope, $q ) ->
     @photos = teacher.photos || null
     @qualifications = teacher.qualifications || null
     @subjects = teacher.subjects || null
-    $rootScope.user = @
-    return $rootScope.user
+    $rootScope.User = @
+    return $rootScope.User
     
 
   User::get_full_name = ->
@@ -119,13 +123,13 @@ angular.module('lessons').run [
       # console.log $rootScope.user
 
       $rootScope.user = new User().then( ( resp ) ->
-        console.log $rootScope.user
-        console.log $rootScope.user.get_full_name()
+        console.log $rootScope.User
+        console.log $rootScope.User.get_full_name()
       )
       
 
     $rootScope.$on 'auth:validation-error', ( e ) ->
-      $rootScope.user = null
+      $rootScope.User = null
       $state.go 'welcome'
       alertify.error "There was an error"
       console.log e
