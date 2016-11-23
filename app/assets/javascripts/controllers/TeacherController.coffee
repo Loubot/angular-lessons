@@ -22,25 +22,7 @@ angular.module('lessons').controller('TeacherController', [
 
     
     $scope.upload = ( file ) ->
-      Upload.upload(
-        url: "#{ RESOURCES.DOMAIN }/teacher/#{ $rootScope.USER.id }/photos"
-        file: $scope.file
-        avatar: $scope.file
-        data:
-          avatar: $scope.file
-      ).then( ( resp ) -> 
-        # console.log resp
-        $scope.photos = resp.data.photos if resp.data != ""
-        alertify.success("Photo uploaded ok")
-        if resp.data.status == "updated"
-          $rootScope.USER = resp.data.teacher
-          profile_pic()
-          alertify.success "Profile pic set"
-
-        $scope.file = null
-      ).catch( ( err ) ->
-        console.log err
-      )
+      $rootScope.User.upload_pic( $scope.file )
 
 
     

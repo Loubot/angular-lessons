@@ -39,12 +39,14 @@ angular.module('lessons').service 'USER', [
 
 angular.module('lessons').factory 'User', [
   "COMMS"
+  "RESOURCES"
   "$http"
   "$rootScope"
   "$q"
   "$state"
   "alertify"
- ( COMMS, $http, $rootScope, $q, $state, alertify ) ->
+  "Upload"
+ ( COMMS, RESOURCES, $http, $rootScope, $q, $state, alertify, Upload ) ->
   # instantiate our initial object
 
   
@@ -99,6 +101,28 @@ angular.module('lessons').factory 'User', [
     )
 
 ###################### pics ###################################################
+  User::upload_pic = ( pic ) ->
+    self= @
+    Upload.upload(
+      url: "#{ RESOURCES.DOMAIN }/teacher/#{ $rootScope.USER.id }/photos"
+      file: pic
+      avatar: pic
+      data:
+        avatar: pic
+    ).then( ( resp ) -> 
+      console.log resp
+      self.photos = resp.data.photos
+      alertify.success("Photo uploaded ok")
+      
+      
+      self.get_profile()
+      alertify.success "Profile pic set"
+
+      pic = null
+    ).catch( ( err ) ->
+      console.log err
+    )
+
   User::update_profile = ( pic_id ) ->
     self = @
     console.log pic_id
