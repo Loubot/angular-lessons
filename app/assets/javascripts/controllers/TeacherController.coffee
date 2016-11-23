@@ -20,7 +20,7 @@ angular.module('lessons').controller('TeacherController', [
     $scope.change_user_type = false
     # alertify.success "Got subjects"
 
-    console.log $rootScope.User.get_full_name()
+    
 
     $scope.scrollevent = ( $e ) ->
       

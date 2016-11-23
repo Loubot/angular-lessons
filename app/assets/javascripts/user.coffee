@@ -40,18 +40,19 @@ angular.module('lessons').service 'USER', [
 angular.module('lessons').factory 'User', ( $http, $rootScope, $q ) ->
   # instantiate our initial object
 
-  do ->
-    console.log $rootScope.user
-    return
+  
 
   User = ( cb ) ->
     self = this
     $q ( resolve, reject ) ->
-      $http.get("/api/teacher/#{ $rootScope.user.id }").then (response) ->
+      $http.get("/api/teacher/#{ $rootScope.user.id }").then( (response) ->
         
         user = self.update_all( response.data.teacher )
-        console.log "returned user #{ user }"
         resolve user
+      ).catch( ( err ) ->
+        console.log "failed to get teacher"
+        console.log err
+      )
         
         # response
 
@@ -59,7 +60,6 @@ angular.module('lessons').factory 'User', ( $http, $rootScope, $q ) ->
   # from GH API and *returns* a promise
 
   User::update_all = ( teacher ) ->
-
     @first_name = teacher.first_name || null
     @last_name = teacher.last_name || null
     @email = teacher.email || null
@@ -73,11 +73,12 @@ angular.module('lessons').factory 'User', ( $http, $rootScope, $q ) ->
     @qualifications = teacher.qualifications || null
     @subjects = teacher.subjects || null
     $rootScope.User = @
+    console.log "Instantiated"
     return $rootScope.User
     
 
   User::get_full_name = ->
-    console.log @
+    
     return @.first_name + ' ' + @.last_name
 
   User::get_location = ->
@@ -89,7 +90,7 @@ angular.module('lessons').factory 'User', ( $http, $rootScope, $q ) ->
     return self.location = location
 
   User::get_photos = ->
-    console.log @
+    
     return @.photos
 
   User::set_photos = ( photos ) ->
@@ -106,7 +107,20 @@ angular.module('lessons').factory 'User', ( $http, $rootScope, $q ) ->
     return self.subjects = subjects
 
 
+
+
+
   User
+
+
+  do ->
+    console.log 'do'
+    console.log $rootScope.User?
+    if !$rootScope.User?
+      new User().then( ( res ) ->
+        console.log 'end of do'
+        console.log $rootScope.User
+      )
 
 
 
@@ -122,10 +136,10 @@ angular.module('lessons').run [
       console.log 'validation success'
       # console.log $rootScope.user
 
-      $rootScope.user = new User().then( ( resp ) ->
-        console.log $rootScope.User
-        console.log $rootScope.User.get_full_name()
-      )
+      # $rootScope.user = new User().then( ( resp ) ->
+      #   console.log $rootScope.User
+      #   console.log $rootScope.User.get_full_name()
+      # )
       
 
     $rootScope.$on 'auth:validation-error', ( e ) ->
