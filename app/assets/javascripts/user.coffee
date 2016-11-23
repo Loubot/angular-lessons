@@ -37,7 +37,12 @@ angular.module('lessons').service 'USER', [
 
 
 
-angular.module('lessons').factory 'User', ( $http, $rootScope, $q ) ->
+angular.module('lessons').factory 'User', [
+  "COMMS"
+  "$http"
+  "$rootScope"
+  "$q"
+ ( COMMS, $http, $rootScope, $q ) ->
   # instantiate our initial object
 
   
@@ -81,6 +86,16 @@ angular.module('lessons').factory 'User', ( $http, $rootScope, $q ) ->
     
     return @.first_name + ' ' + @.last_name
 
+  User::update = ->
+    COMMS.POST(
+      "/teacher"
+      @
+    ).then( ( resp ) ->
+      console.log "User class updated "
+    ).catch( ( err ) ->
+      console.log "Failed to update user class"
+    )
+
   User::get_location = ->
     self = this
     return self.location
@@ -122,7 +137,7 @@ angular.module('lessons').factory 'User', ( $http, $rootScope, $q ) ->
         console.log $rootScope.User
       )
 
-
+]
 
 angular.module('lessons').run [
   "$rootScope"

@@ -19,7 +19,7 @@
         </md-card-header>
         <img ng-if="profile" ng-src="{{ profile.avatar.url }}" 
             class="md-card-image" 
-            alt="{{ USER.first_name }} profile pic">
+            alt="{{ User.first_name }} profile pic">
 
         <div class="margin_t_10 padding_10">
           <form ng-submit="update_teahcer()">
@@ -28,7 +28,7 @@
               <input  type="text"
                       ng-change="update_teacher()"
                       ng-model-options="{ debounce:750 }"
-                      ng-model="USER.first_name">
+                      ng-model="User.first_name">
             </md-input-container>
 
             <md-input-container md-no-float>
@@ -36,7 +36,7 @@
               <input  type="text"
                       ng-change="update_teacher()" 
                       ng-model-options="{ debounce:750 }"
-                      ng-model="USER.last_name">
+                      ng-model="User.last_name">
             </md-input-container>
             
           </form>

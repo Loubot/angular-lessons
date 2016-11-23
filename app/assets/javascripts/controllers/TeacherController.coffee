@@ -203,21 +203,23 @@ angular.module('lessons').controller('TeacherController', [
 
     ####################### Update teacher #####################################
     $scope.update_teacher = ->
-      
-      COMMS.POST(
-        '/teacher'
-        $scope.USER
-      ).then( ( resp) ->
-        console.log resp
-        alertify.success "Updated your profile"
-        $rootScope.USER = resp.data.teacher
-        $state.go( 'student_profile', id: $rootScope.USER.id ) if $scope.change_user_type
-        $mdBottomSheet.hide()
-      ).catch( ( err ) ->
-        console.log err
-        alertify.error "Failed to update teacher"
 
-      )
+      $rootScope.User.update()
+      
+      # COMMS.POST(
+      #   '/teacher'
+      #   $scope.USER
+      # ).then( ( resp) ->
+      #   console.log resp
+      #   alertify.success "Updated your profile"
+      #   $rootScope.USER = resp.data.teacher
+      #   $state.go( 'student_profile', id: $rootScope.USER.id ) if $scope.change_user_type
+      #   $mdBottomSheet.hide()
+      # ).catch( ( err ) ->
+      #   console.log err
+      #   alertify.error "Failed to update teacher"
+
+      # )
 
     $scope.change_to_student = ->
       $scope.change_user_type = true
