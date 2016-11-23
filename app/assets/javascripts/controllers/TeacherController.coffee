@@ -79,32 +79,10 @@ angular.module('lessons').controller('TeacherController', [
       )
 
     $scope.select_subject = ( subject )->
-      COMMS.POST(
-        "/teacher/#{ $rootScope.USER.id }/add-subject"
-        subject: subject, teacher: $rootScope.USER
-      ).then( ( resp ) ->
-        console.log resp
-        alertify.success "Successfully added subject"
-        $scope.subjects = resp.data.subjects
-        alertify.success "Your profile is now visible to students" if resp.data.subjects.length > 0
-      ).catch( ( err ) ->
-        console.log err
-        alertify.error err.data.error if err.data.error?
-        $scope.subjects = err.data.subjects
-      )
+      $rootScope.User.pick_subject( subject )
 
     $scope.remove_subject = ( subject ) ->
-      COMMS.DELETE(
-        "/teacher/#{ $rootScope.USER.id }/remove-subject"
-        subject: subject
-      ).then( ( resp ) ->
-        console.log resp
-        alertify.success "Successfully removed subject"
-        $scope.subjects = resp.data.subjects
-      ).catch( ( err ) ->
-        console.log err
-        alertify.error err.data.error
-      )
+     $rootScope.User.delete_subject( subject )
     ####################### end of Subjects ###############################
 
     ####################### Experience ###################################

@@ -161,6 +161,41 @@ angular.module('lessons').factory 'User', [
     @.profile_url
 #################### end of pics ###############################################
 
+
+
+####################Subjects ###################################################
+
+  User::pick_subject = ( subject ) ->
+    self = @
+    COMMS.POST(
+      "/teacher/#{ self.id }/add-subject"
+      subject: subject
+    ).then( ( resp ) ->
+      console.log resp
+      alertify.success "Successfully added subject"
+      self.subjects = resp.data.subjects
+      alertify.success "Your profile is now visible to students" if $rootScope.User.subjects.length > 0
+    ).catch( ( err ) ->
+      console.log err
+      alertify.error err.data.error if err.data.error?
+      $scope.subjects = err.data.subjects
+    )
+
+  User::delete_subject = ( subject ) ->
+    self = @
+    COMMS.DELETE(
+      "/teacher/#{ self.id }/remove-subject"
+      subject: subject
+    ).then( ( resp ) ->
+      console.log resp
+      alertify.success "Successfully removed subject"
+      self.subjects = resp.data.subjects
+    ).catch( ( err ) ->
+      console.log err
+      alertify.error err.data.error
+    )
+####################End of subjects ############################################
+
   User::change_user_type = ( type ) ->
     self = this
     self.is_teacher == type
