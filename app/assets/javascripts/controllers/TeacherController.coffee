@@ -147,19 +147,7 @@ angular.module('lessons').controller('TeacherController', [
 
     ####################### Qualification ######################################
     $scope.create_qualification = ->
-      COMMS.POST(
-        "/teacher/#{ $rootScope.USER.id }/qualification"
-        $scope.qualification
-      ).then( ( resp ) ->
-        console.log resp
-        $scope.quals = resp.data.qualifications
-        alertify.success "Created qualification"
-        console.log $scope.quals
-        $mdBottomSheet.hide()
-      ).catch( ( err ) ->
-        console.log err
-        alertify.error err.errors.full_messages
-      )
+      $rootScope.User.create_qualification( $scope.qualification )
     ####################### End of qualification ###############################
 
     ####################### Sheets #######################################

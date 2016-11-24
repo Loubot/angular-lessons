@@ -66,7 +66,7 @@
       </md-card> 
     </div> <!-- end of flex -->
 
-    <div flex="50" flex-xs="100" >
+    <div flex="50" flex-xs="100" class="min_height_128" >
       
       <md-card>
         <md-grid-list md-cols="3" md-row-height="6:2" class="no_padding">
@@ -188,9 +188,9 @@
     <md-content layout-padding  class="gutter_75 margin_t_10" >
       <h3>Overview</h3>
       <md-divider></md-divider>
-      <p ng-if="USER.overview!=null">{{ USER.overview }}</p>
-      <p ng-if="USER.overview==null">No overview set yet.</p>
-      <p ng-if="USER.overview==null">It's important to write a strong overview. Let people know about yourself</p>
+      <p ng-if="User.overview!=null">{{ User.overview }}</p>
+      <p ng-if="User.overview==null">No overview set yet.</p>
+      <p ng-if="User.overview==null">It's important to write a strong overview. Let people know about yourself</p>
 
       <md-divider></md-divider>
       <md-button  class="strong_blue white_text md-raised" ng-click="show_overview_sheet()">Update your overview</md-button>
@@ -204,16 +204,32 @@
       <h3>Qualifications</h3>
       <md-divider></md-divider>
       
-      <md-list ng-if="quals.length>0">
-        <md-list-item ng-repeat="qual in quals" >
-        
-          <p>{{ qual.title }}</p>
+      <md-list ng-if="User.qualifications.length>0">
+
+
+        <md-list-item ng-repeat="qual in User.qualifications" layout="row">
+
+          <div flex="90">
+            <p>{{ qual.title }}</p>
          
-          <p>{{ qual.school }}</p>
-        </md-list-item>
+            <p>{{ qual.school }}</p>
+          </div> <!-- end of flex=90 -->
+
+          <div flex="10">
+            <md-button class="md-icon-button" ng-click="remove_subject( subject )">
+              <md-tooltip md-direction="left">
+                Remove qual
+              </md-tooltip>
+              <i class="material-icons icon_red">delete</i>
+            </md-button>
+          </div> <!-- end of flex=10 -->
+
+        </div> <!-- end of md-list-item-text -->
+
+        
       </md-list>
 
-      <p ng-if="quals.length==0">You can add qualifications here. e.g. Degrees, Diplomas</p>
+      <p ng-if="User.qualifications.length==0">You can add qualifications here. e.g. Degrees, Diplomas</p>
 
       
       <div layout="row" layout-align="end start" flex="100">

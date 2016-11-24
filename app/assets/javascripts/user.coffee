@@ -46,7 +46,8 @@ angular.module('lessons').factory 'User', [
   "$state"
   "alertify"
   "Upload"
- ( COMMS, RESOURCES, $http, $rootScope, $q, $state, alertify, Upload ) ->
+  '$mdBottomSheet'
+ ( COMMS, RESOURCES, $http, $rootScope, $q, $state, alertify, Upload, $mdBottomSheet ) ->
   # instantiate our initial object
 
   
@@ -96,6 +97,7 @@ angular.module('lessons').factory 'User', [
     ).then( ( resp ) ->
       console.log "User class updated "
       console.log resp
+      $mdBottomSheet.hide()
     ).catch( ( err ) ->
       console.log "Failed to update user class"
     )
@@ -195,6 +197,25 @@ angular.module('lessons').factory 'User', [
       alertify.error err.data.error
     )
 ####################End of subjects ############################################
+
+####################Qualifications #############################################
+
+  User::create_qualification = ( qualification ) ->
+    self = @
+    COMMS.POST(
+      "/teacher/#{ self.id }/qualification"
+      qualification
+    ).then( ( resp ) ->
+      console.log resp
+      self.qualifications = resp.data.qualifications
+      alertify.success "Created qualification"
+      $mdBottomSheet.hide()
+    ).catch( ( err ) ->
+      console.log err
+      alertify.error err.errors.full_messages
+    )
+  
+###################End of qualfications ########################################
 
   User::change_user_type = ( type ) ->
     self = this
