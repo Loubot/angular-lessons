@@ -12,11 +12,11 @@
 
       <md-input-container class="width_75">
         <label>Address(optional)</label>
-        <input ng-model="address.address" type="text">
+        <input ng-model="User.location.address" type="text">
       </md-input-container><br>
 
       <md-input-container>
-        <md-select ng-model="address.county" placeholder="County" required>
+        <md-select ng-model="User.location.county" placeholder="County" required>
           <md-option ng-value="county" ng-repeat="county in county_list">{{ county }}</md-option>
         </md-select>
 

@@ -136,18 +136,15 @@ angular.module('lessons').controller( "TeacherLocationController" , [
           address.checked = false
 
     $scope.update_address = ->
+      $scope.selected_address.county = $rootScope.User.location.county
+      
 
-      console.log "Update address"
-      COMMS.POST(
-        "/teacher/#{ $rootScope.USER.id }/location"
-        format_address( $scope.selected_address )
+      $rootScope.User.manual_address( ( $scope.selected_address )
       ).then( ( resp ) ->
-        console.log resp
-        alertify.success "Location updated"
-        $rootScope.USER.location = resp.data.location
+        
         $scope.marker.setMap null if $scope.marker?
 
-        set_marker( resp.data.location )
+        set_marker( $rootScope.User.location )
 
         $('#pac-input').val ''
         $scope.addresses = null
@@ -159,14 +156,7 @@ angular.module('lessons').controller( "TeacherLocationController" , [
     $scope.address_form_submit = ->
       $rootScope.User.update_address( $scope.address )
 
-    format_address = ( google_address ) ->
-
-      address =
-        teacher_id: "#{$rootScope.USER.id}"
-        longitude:  google_address.geometry.location.lng()
-        latitude:   google_address.geometry.location.lat()
-        name:       "#{ $rootScope.USER.first_name } address"
-        address:    google_address.formatted_address
+    
 
     $scope.manual_address = ->
       console.log $scope.addresses
@@ -176,34 +166,13 @@ angular.module('lessons').controller( "TeacherLocationController" , [
         latitude:   $scope.addresses[0].geometry.location.lat()
         name:       "#{ $rootScope.USER.first_name } address"
         address:    $scope.address
+        county:     $rootScope.User.location.county
 
-      COMMS.POST(
-        "/teacher/#{ $rootScope.USER.id }/location"
-        merged_address
-      ).then( ( resp ) ->
-        console.log resp
-        alertify.success "Location updated ok"
-        $rootScope.USER.location = resp.data.location
-        $mdBottomSheet.hide()
-        set_marker( resp.data.location )
-        $scope.addresses = null
-      ).catch( ( err ) ->
-        console.log err
-        alertify.error err.errors.full_messages
-      )
+      $rootScope.User.update_address( merged_address, $scope.i_want_map )
 
     ################## Delete location ########################
     $scope.delete_location = ->
-      COMMS.DELETE(
-        "/teacher/#{ $rootScope.USER.id }/location/#{ $rootScope.USER.location.id }"
-      ).then( ( resp ) ->
-        console.log resp
-        alertify.success "Deleted location successfully"
-        $rootScope.USER.location = null
-      ).catch( ( err ) ->
-        console.log err
-        alertify.error "Failed to delete location"
-      )
+      $rootScope.User.delete_location()
 
     ################## End of delete location ################
 

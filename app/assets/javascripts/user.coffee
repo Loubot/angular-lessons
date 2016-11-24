@@ -166,6 +166,7 @@ angular.module('lessons').factory 'User', [
 #################### Address ##################################################
 
   User::update_address = ( address ) ->
+    console.log "Update address"
     self = this
     COMMS.POST(
       "/teacher/#{ self.id }/manual-address"
@@ -173,10 +174,42 @@ angular.module('lessons').factory 'User', [
     ).then( ( resp) ->
       alertify.success "Updated location"
       console.log resp
+      $mdBottomSheet.hide()
+
       self.location = resp.data.location
     ).catch( ( err) ->
       console.log err
       alertify.error "Failed to update location"
+    )
+
+  User::manual_address = ( address ) ->
+    self = @
+    return COMMS.POST(
+      "/teacher/#{ self.id }/location"
+      self.format_address( address )
+    )
+
+  User::format_address = ( google_address ) ->
+
+    return address =
+      teacher_id: "#{$rootScope.USER.id}"
+      longitude:  google_address.geometry.location.lng()
+      latitude:   google_address.geometry.location.lat()
+      name:       "#{ $rootScope.USER.first_name } address"
+      address:    google_address.formatted_address
+      county:     google_address.county
+
+  User::delete_location = ->
+    self = @
+    COMMS.DELETE(
+      "/teacher/#{ self.id }/location/#{ self.location.id }"
+    ).then( ( resp ) ->
+      console.log resp
+      alertify.success "Deleted location successfully"
+      self.location = resp.data.location
+    ).catch( ( err ) ->
+      console.log err
+      alertify.error "Failed to delete location"
     )
 
 #################### ENd of address ###########################################

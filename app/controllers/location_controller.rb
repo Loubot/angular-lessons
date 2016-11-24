@@ -63,8 +63,13 @@ class LocationController < ApplicationController
   end
 
   def destroy
-    Location.find( params[:id] ).destroy
-    render json: { message: "Location deleted" }, status: 200
+    location = Location.find( params[:id] )
+    if location.update_attributes( address: nil )
+
+      render json: { location: location }, status: 200
+    else
+      render json: { message: 'Failed to delete' }, status: 500
+    end
   end
 
 
