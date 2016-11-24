@@ -270,7 +270,7 @@ angular.module('lessons').controller('TeacherAreaController', [
       alertify.success "Trying to create a new calendar"
       # console.log "user:#{ $scope.google_id_email }"
       gapi.client.calendar.calendars.insert(
-        'description': "LYL calendar for #{ $rootScope.USER.first_name } #{ $rootScope.USER.last_name }"
+        'description': "LYL calendar for #{ $rootScope.User.get_full_name() }"
         'summary': "LYL Calendar"
         # 'id': "user:#{ $scope.google_id_email }"
         'timeZone': "GMT+01:00 Dublin"

@@ -8,16 +8,18 @@
     <h4>Enter your address <small>County is minimum</small></h4>
     <form ng-submit="address_form_submit()">
 
+      
+
+      <md-input-container class="width_75">
+        <label>Address(optional)</label>
+        <input ng-model="address.address" type="text">
+      </md-input-container><br>
+
       <md-input-container>
         <md-select ng-model="address.county" placeholder="County" required>
           <md-option ng-value="county" ng-repeat="county in county_list">{{ county }}</md-option>
         </md-select>
 
-      </md-input-container><br>
-
-      <md-input-container class="width_75">
-        <label>Address(optional)</label>
-        <input ng-model="address.address" type="text">
       </md-input-container><br>
 
       <md-input-container>
@@ -74,11 +76,11 @@
   <md-content>
     <div class="center_text" flex="100">
       <%= image_tag 'location_search.png', class: 'percent_10_w' %>
-      <h4>{{ USER.location.address || "Awaiting your address" }}</h4>
+      <h4>{{ User.location.address || "Awaiting your address" }}</h4>
       <md-input-container>
         <md-button class="md-raised md-warn" 
                           ng-click="delete_location()"
-                          ng-if="USER.location"
+                          ng-if="User.location"
                           >Delete this location?</md-button>
       </md-input-container>
     </div>

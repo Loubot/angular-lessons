@@ -30,18 +30,18 @@ angular.module('lessons').controller( "TeacherLocationController" , [
         only_once = true
 
     init_map = ->
-      if $rootScope.USER? && $rootScope.USER.location
+      if $rootScope.User? && $rootScope.User.location
 
         $scope.map = new google.maps.Map(document.getElementById('map'), {
           center: 
-            lat: $rootScope.USER.location.latitude
-            lng: $rootScope.USER.location.longitude
+            lat: $rootScope.User.location.latitude
+            lng: $rootScope.User.location.longitude
           zoom: 15
           mapTypeId: google.maps.MapTypeId.ROADMAP
         })
 
         console.log 'yep'
-        set_marker( $rootScope.USER.location )
+        set_marker( $rootScope.User.location )
       else
         $scope.map = new google.maps.Map(document.getElementById('map'), {
           center: 
@@ -157,17 +157,7 @@ angular.module('lessons').controller( "TeacherLocationController" , [
       )
 
     $scope.address_form_submit = ->
-      COMMS.POST(
-        "/teacher/#{ $rootScope.USER.id }/manual-address"
-        $scope.address
-      ).then( ( resp) ->
-        alertify.success "Updated location"
-        console.log resp
-        $rootScope.USER.location = resp.data.location
-      ).catch( ( err) ->
-        console.log err
-        alertify.error "Failed to update location"
-      )
+      $rootScope.User.update_address( $scope.address )
 
     format_address = ( google_address ) ->
 

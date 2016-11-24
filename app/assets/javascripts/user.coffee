@@ -163,7 +163,23 @@ angular.module('lessons').factory 'User', [
     @.profile_url
 #################### end of pics ###############################################
 
+#################### Address ##################################################
 
+  User::update_address = ( address ) ->
+    self = this
+    COMMS.POST(
+      "/teacher/#{ self.id }/manual-address"
+      address
+    ).then( ( resp) ->
+      alertify.success "Updated location"
+      console.log resp
+      self.location = resp.data.location
+    ).catch( ( err) ->
+      console.log err
+      alertify.error "Failed to update location"
+    )
+
+#################### ENd of address ###########################################
 
 ####################Subjects ###################################################
 
