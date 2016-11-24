@@ -6,6 +6,7 @@ angular.module('lessons').controller('TeacherController', [
   '$state'
   'RESOURCES'
   'USER'
+  'User'
   'alertify'
   'COMMS'  
   '$stateParams'
@@ -13,39 +14,15 @@ angular.module('lessons').controller('TeacherController', [
   'Upload'
   '$mdBottomSheet'
   '$mdDialog'
-  ( $scope, $rootScope, $state, RESOURCES, USER, alertify, COMMS, $stateParams, $auth, Upload, $mdBottomSheet, $mdDialog ) ->
+  ( $scope, $rootScope, $state, RESOURCES, USER, User, alertify, COMMS, $stateParams, $auth, Upload, $mdBottomSheet, $mdDialog ) ->
     console.log "TeacherController"
     $scope.photos = null
-    $scope.change_user_type = false
-    # alertify.success "Got subjects"
+    console.log $rootScope.User
 
-    $scope.scrollevent = ( $e ) ->
-      
-      # animate_elems()
-      # @scrollPos = document.body.scrollTop or document.documentElement.scrollTop or 0
-      # $scope.$digest()
-      return
+
     
     $scope.upload = ( file ) ->
-      Upload.upload(
-        url: "#{ RESOURCES.DOMAIN }/teacher/#{ $rootScope.USER.id }/photos"
-        file: $scope.file
-        avatar: $scope.file
-        data:
-          avatar: $scope.file
-      ).then( ( resp ) -> 
-        console.log resp
-        $scope.photos = resp.data.photos if resp.data != ""
-        alertify.success("Photo uploaded ok")
-        if resp.data.status == "updated"
-          $rootScope.USER = resp.data.teacher
-          profile_pic()
-          alertify.success "Profile pic set"
-
-        $scope.file = null
-      ).catch( ( err ) ->
-        console.log err
-      )
+      $rootScope.User.upload_pic( $scope.file )
 
 
     
@@ -57,7 +34,7 @@ angular.module('lessons').controller('TeacherController', [
         $state.go 'welcome'
         alertify.error "You are not allowed to view this"
         return false
-      $scope.photos = $rootScope.USER.photos
+      
 
       $scope.subjects = $rootScope.USER.subjects
       alertify.error "Your profile is not visible until you select a subject" if $scope.subjects.length == 0
@@ -65,7 +42,6 @@ angular.module('lessons').controller('TeacherController', [
 
       $scope.experience = $rootScope.USER.experience
       $scope.quals = $rootScope.USER.qualifications
-      profile_pic()
 
 
     ).catch( ( err ) ->
@@ -77,45 +53,11 @@ angular.module('lessons').controller('TeacherController', [
     
 
     $scope.make_profile = ( id ) ->
-      COMMS.POST(
-        '/teacher'
-        profile: id, id: $rootScope.USER.id
-      ).then( ( resp ) ->
-        console.log resp
-        alertify.success "Updated profile pic"
-        if resp.data.status == "updated"
-          $rootScope.USER = resp.data.teacher
-          profile_pic()
-      ).catch( ( err ) ->
-        console.log err
-        alertify.error "Failed to update profile"
-      )
-
-    profile_pic = ->
-      if !$rootScope.USER.profile?
-        console.log "No profile"
-        $scope.profile = null
-        return false
-      for photo in $scope.photos
-        # console.log photo.avatar.url
-        if parseInt( photo.id ) == parseInt( $rootScope.USER.profile )
-          $scope.profile = photo
-          console.log $scope.profile
-          $scope.profile
+      $rootScope.User.update_profile( id )
+      
 
     $scope.destroy_pic = ( id ) ->
-      COMMS.DELETE(
-        "/teacher/#{ $rootScope.USER.id }/photos/#{ id }"
-      ).then( ( resp ) ->
-        console.log resp
-        alertify.success "Deleted photo ok"
-        $scope.photos = resp.data.teacher.photos
-        $rootScope.USER.profile = resp.data.teacher.profile
-        profile_pic()
-      ).catch( ( err ) ->
-        console.log err
-        alertify.error "Failed to delete photo"
-      )
+      $rootScope.User.delete_pic( id )
 
 
     ####################### Subjects ###############################
@@ -137,32 +79,10 @@ angular.module('lessons').controller('TeacherController', [
       )
 
     $scope.select_subject = ( subject )->
-      COMMS.POST(
-        "/teacher/#{ $rootScope.USER.id }/add-subject"
-        subject: subject, teacher: $rootScope.USER
-      ).then( ( resp ) ->
-        console.log resp
-        alertify.success "Successfully added subject"
-        $scope.subjects = resp.data.subjects
-        alertify.success "Your profile is now visible to students" if resp.data.subjects.length > 0
-      ).catch( ( err ) ->
-        console.log err
-        alertify.error err.data.error if err.data.error?
-        $scope.subjects = err.data.subjects
-      )
+      $rootScope.User.pick_subject( subject )
 
     $scope.remove_subject = ( subject ) ->
-      COMMS.DELETE(
-        "/teacher/#{ $rootScope.USER.id }/remove-subject"
-        subject: subject
-      ).then( ( resp ) ->
-        console.log resp
-        alertify.success "Successfully removed subject"
-        $scope.subjects = resp.data.subjects
-      ).catch( ( err ) ->
-        console.log err
-        alertify.error err.data.error
-      )
+     $rootScope.User.delete_subject( subject )
     ####################### end of Subjects ###############################
 
     ####################### Experience ###################################
@@ -200,26 +120,28 @@ angular.module('lessons').controller('TeacherController', [
 
     ####################### Update teacher #####################################
     $scope.update_teacher = ->
+
+      $rootScope.User.update()
       
-      COMMS.POST(
-        '/teacher'
-        $scope.USER
-      ).then( ( resp) ->
-        console.log resp
-        alertify.success "Updated your profile"
-        $rootScope.USER = resp.data.teacher
-        $state.go( 'student_profile', id: $rootScope.USER.id ) if $scope.change_user_type
-        $mdBottomSheet.hide()
-      ).catch( ( err ) ->
-        console.log err
-        alertify.error "Failed to update teacher"
+      # COMMS.POST(
+      #   '/teacher'
+      #   $scope.USER
+      # ).then( ( resp) ->
+      #   console.log resp
+      #   alertify.success "Updated your profile"
+      #   $rootScope.USER = resp.data.teacher
+      #   $state.go( 'student_profile', id: $rootScope.USER.id ) if $scope.change_user_type
+      #   $mdBottomSheet.hide()
+      # ).catch( ( err ) ->
+      #   console.log err
+      #   alertify.error "Failed to update teacher"
 
-      )
+      # )
 
-    $scope.change_to_student = ->
-      $scope.change_user_type = true
-      $scope.USER.is_teacher = false
-      $scope.update_teacher()
+    $scope.change_to_student = ->      
+
+      
+      $rootScope.User.change_user_type( false )
 
     ####################### End of update teacher ##############################
 

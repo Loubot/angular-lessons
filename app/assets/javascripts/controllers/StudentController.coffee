@@ -6,6 +6,7 @@ angular.module('lessons').controller( 'StudentController', [
   '$stateParams'
   '$state'
   'USER'
+  'User'
   'alertify'
   'COMMS'
   '$mdDialog'
@@ -13,8 +14,10 @@ angular.module('lessons').controller( 'StudentController', [
   'Upload'
   'RESOURCES'
 
-  ( $scope, $rootScope, $stateParams, $state, USER, alertify, COMMS, $mdDialog, $auth, Upload, RESOURCES ) ->
+  ( $scope, $rootScope, $stateParams, $state, USER, User, alertify, COMMS, $mdDialog, $auth, Upload, RESOURCES ) ->
     console.log "StudentController"
+
+    console.log $rootScope.User
 
     $scope.scrollevent = ( $e ) ->
       
@@ -98,25 +101,25 @@ angular.module('lessons').controller( 'StudentController', [
 
     $scope.update_student = ->
       
-      COMMS.POST(
-        '/teacher'
-        $rootScope.USER
-      ).then( ( resp) ->
-        console.log resp
-        alertify.success "Updated your profile"
-        $rootScope.USER = resp.data.teacher
-        $state.go( 'teacher', id: $rootScope.USER.id ) if $scope.change_user_type
-        # $mdBottomSheet.hide()
-      ).catch( ( err ) ->
-        console.log err
-        alertify.error "Failed to update teacher"
+      # COMMS.POST(
+      #   '/teacher'
+      #   $rootScope.USER
+      # ).then( ( resp) ->
+      #   console.log resp
+      #   alertify.success "Updated your profile"
+      #   $rootScope.USER = resp.data.teacher
+      #   $state.go( 'teacher', id: $rootScope.USER.id ) if $scope.change_user_type
+      #   # $mdBottomSheet.hide()
+      # ).catch( ( err ) ->
+      #   console.log err
+      #   alertify.error "Failed to update teacher"
 
-      )
+      # )
 
     $scope.change_to_teacher = ->
-      $scope.change_user_type = true
-      $scope.USER.is_teacher = true
-      $scope.update_student()
+      
+      
+      $rootScope.User.change_user_type( true )
 
     $scope.open_change_password = ->
       console.log "Hup"
