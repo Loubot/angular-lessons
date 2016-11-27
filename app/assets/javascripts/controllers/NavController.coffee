@@ -49,23 +49,11 @@ angular.module('lessons').controller('NavController', [
     $scope.register_teacher = ->
       console.log $scope.teacher
       $scope.teacher.is_teacher = true if $scope.auth_type == 1
-
-      $auth.submitRegistration( $scope.teacher )
-        .then( (resp) ->
-          # handle success response
-          # console.log resp.data.data
-          $mdSidenav('left').toggle()
-          $rootScope.USER = resp.data.data
-          console.log $rootScope.USER
-          
-          alertify.success "Welcome #{ resp.data.data.email }"
-        )
-        .catch( (resp) ->
-          # handle error response
-          console.log resp
-          alertify.error "Failed to register"
-          
-        )
+      auth.register( $scope.teacher ).then( ( resp ) ->
+        $mdSidenav('left').toggle()
+        
+        alertify.success "Welcome #{ resp.data.data.email }"
+      )
 
     $scope.login = ->
       auth.login( $scope.teacher ).then( ( resp ) ->

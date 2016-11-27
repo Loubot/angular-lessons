@@ -3,16 +3,13 @@
 angular.module('lessons').controller("RegisterController", [
   "$scope"
   "$rootScope"
-  "USER"
   "$state"
-  "$auth"
+  "auth"
   "alertify"
   "COMMS"
 
-  ( $scope, $rootScope, USER, $state, $auth, alertify, COMMS ) ->
+  ( $scope, $rootScope, $state, auth, alertify, COMMS ) ->
     console.log "RegisterController"
-
-    USER.get_user()
 
     $scope.scrollevent = ( $e ) ->
       
@@ -54,38 +51,25 @@ angular.module('lessons').controller("RegisterController", [
       else
         console.log "made it"
         console.log $scope.county_lists["#{ $scope.teacher.county }"]
-        
-        $auth.submitRegistration( $scope.teacher )
-          .then( (resp) ->
-            # handle success response
-            # console.log resp.data.data
-            $rootScope.USER = resp.data.data
-            console.log $rootScope.USER
-            
-            alertify.success "Welcome #{ resp.data.data.email }"
-            alertify.success "Registered as teacher" if $rootScope.USER.is_teacher
-            alertify.success "Registered as student" if !$rootScope.USER.is_teacher
-            
-            COMMS.POST(
-              "/teacher/#{ $rootScope.USER.id }/location"
-              get_county( $scope.teacher.county )
-            ).then( ( resp ) ->
-              console.log resp
-              alertify.success "Created location"
-              $state.go('teacher', id: $rootScope.USER.id )
-            ).catch( ( err ) ->
-              console.log err
-              alertify.error "Failed to create loctation"
-            )
 
-            # $state.go 'welcome'
-          )
-          .catch( (resp) ->
-            # handle error response
+        auth.register( $scope.teacher ).then( ( resp ) ->
+          alertify.success "Welcome #{ $rootScope.User.get_full_name() }"
+          alertify.success "Registered as teacher" if $rootScope.User.is_teacher
+          alertify.success "Registered as student" if !$rootScope.User.is_teacher
+          
+          COMMS.POST(
+            "/teacher/#{ $rootScope.User.id }/location"
+            get_county( $scope.teacher.county )
+          ).then( ( resp ) ->
             console.log resp
-            alertify.error "Failed to register"
-            
+            alertify.success "Created location"
+            $state.go('teacher', id: $rootScope.User.id )
+          ).catch( ( err ) ->
+            console.log err
+            alertify.error "Failed to create loctation"
           )
+        )
+        
     $scope.county_list = ['Antrim','Armagh','Carlow','Cavan','Clare','Cork','Derry','Donegal','Down','Dublin',
           'Fermanagh','Galway','Kerry','Kildare','Kilkenny','Laois','Leitrim','Limerick','Longford',
           'Louth','Mayo','Meath','Monaghan','Offaly','Roscommon','Sligo','Tipperary','Tyrone',

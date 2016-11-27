@@ -38,7 +38,16 @@ angular.module('lessons').service 'USER', [
 angular.module('lessons').service 'auth', [
   "$auth"
   "User"
-  ( $auth, User ) ->
+  "alertify"
+  ( $auth, User, alertify ) ->
+
+    auth_errors = ( resp ) ->
+      console.log resp
+      if resp.data.errors.full_messages? and resp.data.errors.full_messages.length > 0
+        for mess in resp.data.errors.full_messages
+          alertify.error mess
+
+        throw 'There was an error'
 
     login: ( teacher ) ->
       $auth.submitLogin( teacher )
@@ -51,11 +60,24 @@ angular.module('lessons').service 'auth', [
           ) #end of new User
         )
         .catch( (resp) ->
-          console.log "Login error"
-          console.log resp
-          $rootScope.User = null
-          alertify.error "Invalid credentials"
+          auth_errors( resp )
+
         )   
+
+    register: ( teacher ) ->
+
+
+      $auth.submitRegistration( teacher )
+        .then( (resp) ->
+          new User().then( ( resp ) ->
+            console.log resp
+          )
+          
+        )
+        .catch( ( resp ) ->
+          auth_errors( resp )
+          
+        )
 
 ]
 
@@ -333,8 +355,10 @@ angular.module('lessons').factory 'User', [
 
 
   do ->
-    $rootScope.$on 'auth:validation-success', ( e ) ->
+    $rootScope.$on 'auth:validation-success', ( e, v ) ->
       console.log 'validation success'
+      # console.log e
+      # console.log v
     
       if !$rootScope.User? && $rootScope.user.first_name?
         console.log "Doing it"
@@ -354,14 +378,6 @@ angular.module('lessons').run [
   "$state"
   "alertify"
   ( $rootScope, USER, User, $state, alertify ) ->
-    
-    
-      # console.log $rootScope.user
-
-      # $rootScope.user = new User().then( ( resp ) ->
-      #   console.log $rootScope.User
-      #   console.log $rootScope.User.get_full_name()
-      # )
       
 
     $rootScope.$on 'auth:validation-error', ( e ) ->
