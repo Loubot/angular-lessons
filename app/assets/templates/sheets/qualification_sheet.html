@@ -4,16 +4,24 @@
    <!-- <md-subheader class="md-primary">Give a detailed account of yourself</md-subheader> -->
   </div>
   <div>
-    <form ng-submit="qualification_form.$valid && User.create_qualification( qualification )" name="qualification_form">
+    <form ng-submit="qualification_form.$valid && User.create_qualification( qualification )" name="qualification_form" novalidate>
 
       <md-input-container class="width_75">
         <label >Qualificaion title</label>
-        <input ng-model="qualification.title" required>
+        <input ng-model="qualification.title" name="title" required>
+
+        <div ng-messages="qualification_form.title.$error">
+          <div ng-message="required">Please enter a title</div>
+        </div>
       </md-input-container>
 
       <md-input-container class="width_75">
         <label >Qualificaion school</label>
-        <input ng-model="qualification.school" required>
+        <input ng-model="qualification.school" name="school" required>
+
+        <div ng-messages="qualification_form.school.$error">
+          <div ng-message="required">Please enter the school</div>
+        </div>
       </md-input-container>
 
       <!-- <md-input-container class="width_75">
