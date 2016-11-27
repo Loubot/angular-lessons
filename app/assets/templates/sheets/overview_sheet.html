@@ -1,13 +1,24 @@
-<md-bottom-sheet class="md-grid margin_s_100" layout="column" ng-cloak>
+<md-bottom-sheet class="md-grid margin_s_100" layout="column" >
   <div layout="row" layout-align="center center">
    <h3 >Enter your overview</h3>
    <md-subheader class="md-primary">Give a detailed account of yourself</md-subheader>
   </div>
   <div>
-    <form ng-submit="update_teacher()">
+    <form name="overview_form" ng-submit="overview_form.$valid && User.update()" novalidate>
       <md-input-container class="width_75">
         <label >Overview</label>
-        <textarea ng-model="User.overview" aria-label="User overview" class="black_text" md-maxlength="300"  md-select-on-focus></textarea>
+        <textarea ng-model="User.overview" 
+                  aria-label="User overview" 
+                  class="black_text" 
+                  md-maxlength="300" 
+                  name="overview"  
+                  md-select-on-focus required></textarea>
+
+        <div ng-messages="overview_form.overview.$error">
+          <div ng-message="required">
+            Please enter your overview
+          </div>
+        </div>
       </md-input-container>
 
       <div flex="40" >
@@ -17,3 +28,4 @@
   </div>
 
 </md-bottom-sheet>
+

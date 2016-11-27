@@ -171,7 +171,7 @@ angular.module('lessons').factory 'User', [
       "/teacher"
       @
     ).then( ( resp ) ->
-      alertify "User updated "
+      alertify.success "User updated "
       console.log resp
       $mdBottomSheet.hide()
     ).catch( ( err ) ->
@@ -365,6 +365,19 @@ angular.module('lessons').factory 'User', [
     ).catch( ( err ) ->
       console.log err
       alertify.error err.errors.full_messages
+    )
+
+  User::delete_qualification = ( qualification ) ->
+    self = @
+    COMMS.DELETE(
+      "/teacher/#{ self.id }/qualification/#{ qualification.id }"
+    ).then( ( resp ) ->
+      console.log resp
+      self.qualifications = resp.data.qualifications
+      alertify.success "Deleted qualification"
+    ).catch( ( err ) ->
+      console.log err
+      alertify.error "Failed to delete qualification"
     )
   
 ###################End of qualfications ########################################

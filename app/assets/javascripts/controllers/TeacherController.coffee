@@ -123,6 +123,8 @@ angular.module('lessons').controller('TeacherController', [
     ####################### Qualification ######################################
     $scope.create_qualification = ->
       $rootScope.User.create_qualification( $scope.qualification )
+
+      
     ####################### End of qualification ###############################
 
     ####################### Sheets #######################################

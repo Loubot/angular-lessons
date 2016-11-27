@@ -1,10 +1,10 @@
-<md-bottom-sheet class="md-grid qualification_sheet" layout="column" ng-cloak>
+<md-bottom-sheet class="md-grid qualification_sheet" layout="column">
   <div layout="row" layout-align="center center">
    <h3 >List your qualification</h3>
    <!-- <md-subheader class="md-primary">Give a detailed account of yourself</md-subheader> -->
   </div>
   <div>
-    <form ng-submit="create_qualification()">
+    <form ng-submit="qualification_form.$valid && User.create_qualification( qualification )" name="qualification_form">
 
       <md-input-container class="width_75">
         <label >Qualificaion title</label>

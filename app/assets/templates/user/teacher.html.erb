@@ -210,21 +210,19 @@
         <md-list-item ng-repeat="qual in User.qualifications" >
 
           <div flex="90">
-            <p>{{ qual.title }}</p>
+            <p><strong>{{ qual.title }}</strong></p>
          
-            <p>{{ qual.school }}</p>
+            <p>School: {{ qual.school }}</p>
           </div> <!-- end of flex=90 -->
 
           <div flex="10">
-            <md-button class="md-icon-button" ng-click="remove_subject( subject )">
+            <md-button class="md-icon-button" ng-click="User.delete_qualification( qual )">
               <md-tooltip md-direction="left">
                 Remove qual
               </md-tooltip>
               <i class="material-icons icon_red">delete</i>
             </md-button>
           </div> <!-- end of flex=10 -->
-
-        
 
         </md-list-item>
       </md-list>
