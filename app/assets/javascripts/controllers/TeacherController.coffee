@@ -52,14 +52,6 @@ angular.module('lessons').controller('TeacherController', [
     )
     
 
-    $scope.make_profile = ( id ) ->
-      $rootScope.User.update_profile( id )
-      
-
-    $scope.destroy_pic = ( id ) ->
-      $rootScope.User.delete_pic( id )
-
-
     ####################### Subjects ###############################
 
     $scope.get_subjects = ->
