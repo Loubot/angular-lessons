@@ -19,7 +19,7 @@ angular.module('lessons').controller( "TeacherLocationController" , [
     $scope.i_want_map = false
     only_once = false
 
-    $scope.county_list = counties
+    $scope.county_list = counties.county_list()
 
 
     $scope.i_want_map_toggle = ->     

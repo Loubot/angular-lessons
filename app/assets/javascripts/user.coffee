@@ -89,12 +89,12 @@ angular.module('lessons').service 'auth', [
 
     register: ( teacher ) ->
 
-
+      console.log teacher.county
       $auth.submitRegistration( teacher )
         .then( (resp) ->
           new User().then( ( resp ) ->
 
-            $rootScope.User.registration_address( get_county( teacher.county ) )
+            $rootScope.User.registration_address( teacher.county )
             
           )
           

@@ -123,7 +123,7 @@
 
         <md-input-container class="width_100">
           <md-select ng-model="teacher.county" class="county_placeholder" placeholder="County" required>
-            <md-option ng-value="county" ng-repeat="county in county_list">{{ county }}</md-option>
+            <md-option ng-value="county" ng-repeat="county in county_lists">{{ county.county }}</md-option>
           </md-select>
           <div class="errors" ng-messages="register_teacher_form.county.$error">
             <div ng-message="required">Required</div>
