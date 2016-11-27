@@ -56,18 +56,8 @@ angular.module('lessons').controller("RegisterController", [
           alertify.success "Welcome #{ $rootScope.User.get_full_name() }"
           alertify.success "Registered as teacher" if $rootScope.User.is_teacher
           alertify.success "Registered as student" if !$rootScope.User.is_teacher
-          
-          COMMS.POST(
-            "/teacher/#{ $rootScope.User.id }/location"
-            get_county( $scope.teacher.county )
-          ).then( ( resp ) ->
-            console.log resp
-            alertify.success "Created location"
-            $state.go('teacher', id: $rootScope.User.id )
-          ).catch( ( err ) ->
-            console.log err
-            alertify.error "Failed to create loctation"
-          )
+          $state.go('teacher', id: $rootScope.User.id )
+         
         )
         
     $scope.county_list = ['Antrim','Armagh','Carlow','Cavan','Clare','Cork','Derry','Donegal','Down','Dublin',
