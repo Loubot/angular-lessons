@@ -74,20 +74,9 @@ angular.module('lessons').controller('TeacherController', [
     ####################### Experience ###################################
 
     $scope.add_experience = ->
-      $scope.experience.teacher_id = $rootScope.USER.id
-      COMMS.POST(
-        "/teacher/#{ $rootScope.USER.id }/experience"
-        $scope.experience
-      ).then( ( resp ) ->
-        console.log resp
-        $scope.experience = resp.data.experience
-        alertify.success "Experience added"
-        # $scope.experience.description = null
-
-      ).catch( ( err ) ->
-        console.log err
-        alertify.error "Failed to add experience"
-      )
+      $scope.experience.teacher_id = $rootScope.User.id
+      $rootScope.User.add_experience ( $scope.experience )
+      
 
     $scope.remove_experience = ( experience ) ->
       COMMS.DELETE(

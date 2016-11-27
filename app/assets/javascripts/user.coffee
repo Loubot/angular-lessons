@@ -369,6 +369,26 @@ angular.module('lessons').factory 'User', [
   
 ###################End of qualfications ########################################
 
+
+###################Experiences##################################################
+
+  User::add_experience = ( experience ) ->
+    self = @
+    COMMS.POST(
+      "/teacher/#{ self.id }/experience"
+      $scope.experience
+    ).then( ( resp ) ->
+      console.log resp
+      self.experience = resp.data.experience
+      alertify.success "Experience added"
+
+    ).catch( ( err ) ->
+      console.log err
+      alertify.error "Failed to add experience"
+    )
+
+###################End of experiences###########################################
+
   User::change_user_type = ( type ) ->
     self = this
     self.is_teacher == type

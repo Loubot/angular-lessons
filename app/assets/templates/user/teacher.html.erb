@@ -164,7 +164,7 @@
           </div>
         </md-toolbar>
         <md-content>
-          <form ng-submit="add_experience()" name="experience_form">
+          <form ng-submit="User.add_experience()" name="experience_form">
 
             <md-input-container md-no-float class="md-block">
               <textarea ng-model="experience.description" 
@@ -202,12 +202,12 @@
     <!-- QUALIFICATIONS -->
     <md-content class="gutter_75 margin_t_10" >
       <h3>Qualifications</h3>
-      <md-divider></md-divider>
-      
+      <md-divider></md-divider>     
+
+      <p ng-if="User.qualifications.length==0">You can add qualifications here. e.g. Degrees, Diplomas</p>
+
       <md-list ng-if="User.qualifications.length>0">
-
-
-        <md-list-item ng-repeat="qual in User.qualifications" layout="row">
+        <md-list-item ng-repeat="qual in User.qualifications" >
 
           <div flex="90">
             <p>{{ qual.title }}</p>
@@ -224,12 +224,10 @@
             </md-button>
           </div> <!-- end of flex=10 -->
 
-        </div> <!-- end of md-list-item-text -->
-
         
-      </md-list>
 
-      <p ng-if="User.qualifications.length==0">You can add qualifications here. e.g. Degrees, Diplomas</p>
+        </md-list-item>
+      </md-list>
 
       
       <div layout="row" layout-align="end start" flex="100">
