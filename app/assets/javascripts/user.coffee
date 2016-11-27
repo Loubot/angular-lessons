@@ -223,6 +223,7 @@ angular.module('lessons').factory 'User', [
       console.log 'deleted photo'
       console.log resp
       self.photos = resp.data.teacher.photos
+      self.profile = resp.data.teacher.profile
       alertify.success "Deleted photo ok"
       self.get_profile()
     ).catch( ( err ) ->
