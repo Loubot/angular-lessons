@@ -69,12 +69,6 @@ angular.module('lessons').controller('TeacherController', [
         console.log err
         alertify.error "Failed to get subjects"
       )
-
-    $scope.select_subject = ( subject )->
-      $rootScope.User.pick_subject( subject )
-
-    $scope.remove_subject = ( subject ) ->
-     $rootScope.User.delete_subject( subject )
     ####################### end of Subjects ###############################
 
     ####################### Experience ###################################

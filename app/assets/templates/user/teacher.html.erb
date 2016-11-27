@@ -113,7 +113,7 @@
             md-search-text="searchText" 
             md-items="subject in get_subjects()" 
             md-item-text="subject.name"
-            md-selected-item-change="select_subject( subject )"
+            md-selected-item-change="User.pick_subject( subject )"
             md-delay="500"
             class="black_text no_padding" placeholder="Choose your subjects">
         <md-item-template>
@@ -133,7 +133,7 @@
             </div> <!-- end of flex=90 -->
 
             <div flex="10">
-              <md-button class="md-icon-button" ng-click="remove_subject( subject )">
+              <md-button class="md-icon-button" ng-click="User.remove_subject( subject )">
                 <md-tooltip md-direction="left">
                   Remove subject
                 </md-tooltip>

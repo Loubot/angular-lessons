@@ -335,7 +335,7 @@ angular.module('lessons').factory 'User', [
       $scope.subjects = err.data.subjects
     )
 
-  User::delete_subject = ( subject ) ->
+  User::remove_subject = ( subject ) ->
     self = @
     COMMS.DELETE(
       "/teacher/#{ self.id }/remove-subject"
