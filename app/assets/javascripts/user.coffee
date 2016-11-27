@@ -270,6 +270,12 @@ angular.module('lessons').factory 'User', [
     COMMS.POST(
       "/teacher/#{ self.id }/location"
       address 
+    ).then( ( resp ) ->
+      console.log "create location"
+      self.location = resp.data.location
+    ).catch( ( err ) ->
+      console.log err
+      alertify.error "Failed to create location"
     )
 
   User::format_address = ( google_address ) ->
