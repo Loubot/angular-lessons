@@ -171,7 +171,7 @@ angular.module('lessons').factory 'User', [
       "/teacher"
       @
     ).then( ( resp ) ->
-      console.log "User class updated "
+      alertify "User updated "
       console.log resp
       $mdBottomSheet.hide()
     ).catch( ( err ) ->

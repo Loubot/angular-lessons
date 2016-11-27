@@ -22,11 +22,11 @@
             alt="{{ User.first_name }} profile pic">
 
         <div class="margin_t_10 padding_10">
-          <form ng-submit="update_teahcer()">
+          <form ng-submit="update_teacher()">
             <md-input-container md-no-float>
               <label>First name:</label>
               <input  type="text"
-                      ng-change="update_teacher()"
+                      ng-change="User.update()"
                       ng-model-options="{ debounce:750 }"
                       ng-model="User.first_name">
             </md-input-container>
@@ -34,7 +34,7 @@
             <md-input-container md-no-float>
               <label>Last name:</label>
               <input  type="text"
-                      ng-change="update_teacher()" 
+                      ng-change="User.update()" 
                       ng-model-options="{ debounce:750 }"
                       ng-model="User.last_name">
             </md-input-container>
@@ -51,7 +51,7 @@
         <md-card-actions layout="row" layout-align="start center">
           <md-button  
             ng-model="file" 
-            ngf-select="upload()">
+            ngf-select="User.upload_pic(file)">
               <i class="material-icons ">add_a_photo</i>
           </md-button>
           <md-card-icon-actions>
