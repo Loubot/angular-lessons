@@ -1,7 +1,7 @@
 <div class="register_page_main_div">
   
     
-  <form name="register_teacher_form"  ng-submit="register_teacher()" novalidate>
+  <form name="register_teacher_form"  ng-submit="register_teacher() && register_teacher_form.$valid" novalidate>
     <div layout="row">
       <div flex-xs="60" flex-gt-xs="50">
         <div flex-gt-xs="60" flex-xs="100">
@@ -114,18 +114,14 @@
       </div> <!-- end of flex=50 -->
       <div flex-gt-xs="50" flex-xs="40" flex-offset="30" flex-offset-xs="0">
 
-        <md-input-container>
-
-          <div class="errors" ng-messages="register_teacher_form.county.$error">
-            <div ng-message="required">This is required.</div>
-          </div>
+        
 
 
         <md-input-container class="width_100">
           <md-select ng-model="teacher.county" class="county_placeholder" placeholder="County" required>
             <md-option ng-value="county" ng-repeat="county in county_lists">{{ county.county }}</md-option>
           </md-select>
-          <div class="errors" ng-messages="register_teacher_form.county.$error">
+          <div ng-messages="register_teacher_form.county.$error" >
             <div ng-message="required">Required</div>
           </div>
 
