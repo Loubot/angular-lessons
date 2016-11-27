@@ -35,6 +35,31 @@ angular.module('lessons').service 'USER', [
 ]
 
 
+angular.module('lessons').service 'auth', [
+  "$auth"
+  "User"
+  ( $auth, User ) ->
+
+    login: ( teacher ) ->
+      $auth.submitLogin( teacher )
+        .then( (resp) ->
+          
+          new User().then( ( resp) ->
+            console.log resp        
+            
+            
+          ) #end of new User
+        )
+        .catch( (resp) ->
+          console.log "Login error"
+          console.log resp
+          $rootScope.User = null
+          alertify.error "Invalid credentials"
+        )   
+
+]
+
+
 
 
 angular.module('lessons').factory 'User', [
@@ -307,22 +332,18 @@ angular.module('lessons').factory 'User', [
     return self.subjects = subjects
 
 
-  
-        
-
-
+  do ->
+    $rootScope.$on 'auth:validation-success', ( e ) ->
+      console.log 'validation success'
+    
+      if !$rootScope.User? && $rootScope.user.first_name?
+        console.log "Doing it"
+        new User().then( ( res ) ->
+          console.log 'end of do'
+          console.log $rootScope.User
+        )
 
   User
-
-
-  do ->
-    console.log 'do'
-    console.log $rootScope.User?
-    if !$rootScope.User?
-      new User().then( ( res ) ->
-        console.log 'end of do'
-        console.log $rootScope.User
-      )
 
 ]
 
@@ -334,8 +355,7 @@ angular.module('lessons').run [
   "alertify"
   ( $rootScope, USER, User, $state, alertify ) ->
     
-    $rootScope.$on 'auth:validation-success', ( e ) ->
-      console.log 'validation success'
+    
       # console.log $rootScope.user
 
       # $rootScope.user = new User().then( ( resp ) ->

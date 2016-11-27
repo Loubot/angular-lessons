@@ -18,7 +18,6 @@ angular.module('lessons').controller('WelcomeController', [
   'counties'
   ( $scope, $rootScope, $state, $filter, $stateParams, $location, USER, User, $mdSidenav, alertify, $auth, COMMS, $window, OG, counties ) ->
     console.log "WelcomeController"
-    console.log User
 
     OG.set_tags()
 
@@ -27,17 +26,6 @@ angular.module('lessons').controller('WelcomeController', [
     $scope.selected.county_name = $stateParams.location
     $scope.selected_subject = $stateParams.name
 
-    
-
-    # USER.get_user().then( ( resp ) ->
-      
-
-    #   setTimeout (->
-    #     $location.search('')
-    #   ), 2000
-      
-      
-    # )
 
 
     $scope.search_teachers = ->
@@ -45,7 +33,7 @@ angular.module('lessons').controller('WelcomeController', [
         "/search"
         $scope.selected
       ).then( ( resp ) ->
-        console.log resp
+        # console.log resp
         alertify.success "Found #{ resp.data.teachers.length } teacher(s)"
         $scope.teachers = resp.data.teachers
       ).catch( ( err ) ->
@@ -101,7 +89,7 @@ angular.module('lessons').controller('WelcomeController', [
     COMMS.GET(
         '/search-subjects'
     ).then( ( resp ) ->
-      console.log resp
+      # console.log resp
       $scope.subjects_list = resp.data.subjects
       define_subjects( resp.data.subjects )
     ).catch( ( err ) ->

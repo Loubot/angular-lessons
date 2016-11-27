@@ -4,12 +4,12 @@ angular.module('lessons').controller('NavController', [
   '$scope'
   '$rootScope'
   '$state'
-  '$window'
-  'User'
+  '$window'  
   '$mdSidenav'
   'alertify'
+  'auth'
   '$auth'
-  ( $scope, $rootScope, $state, $window, User, $mdSidenav, alertify, $auth ) ->
+  ( $scope, $rootScope, $state, $window,  $mdSidenav, alertify, auth, $auth ) ->
     console.log "NavController"
     $scope.teacher = {}
     $scope.auth_type = null
@@ -68,24 +68,12 @@ angular.module('lessons').controller('NavController', [
         )
 
     $scope.login = ->
-      $auth.submitLogin( $scope.teacher )
-        .then( (resp) ->
-          # handle success response
-          $rootScope.USER = resp
-          # console.log resp
-
-          # console.log $rootScope.USER
-          
-          $mdSidenav('left').toggle()
-          alertify.success "Welcome back #{ $rootScope.USER.first_name }"
-          # $state.go("teacher", id: $rootScope.USER.id ) 
-          if $rootScope.USER.is_teacher then $state.go( "teacher", id: $rootScope.USER.id ) else $state.go( "welcome" )
-        )
-        .catch( (resp) ->
-          console.log "Login error"
-          console.log resp
-          alertify.error "Invalid credentials"
-        )
+      auth.login( $scope.teacher ).then( ( resp ) ->
+        console.log "logged in"
+        $mdSidenav('left').toggle()
+        if $rootScope.User.is_teacher then $state.go( "teacher", id: $rootScope.User.id ) else $state.go( "welcome" )
+        alertify.success "Welcome back #{ $rootScope.User.first_name }"
+      )
 
     $scope.logout = ->
       $auth.signOut()
