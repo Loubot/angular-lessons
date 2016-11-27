@@ -241,12 +241,25 @@ angular.module('lessons').factory 'User', [
 
 #################### Address ##################################################
 
+  User::as_is = ->
+    self = @
+    COMMS.POST(
+      "/teacher/#{ self.id }/location"
+      self.location
+    ).then( ( resp ) ->
+      console.log resp
+      self.location = resp.data.location
+      alertify.success "Updated location"
+    ).catch( ( err ) ->
+      alertify.error "Failed to update location"
+    )
+
   User::update_address = ( address ) ->
     console.log "Update address"
     self = this
     COMMS.POST(
       "/teacher/#{ self.id }/manual-address"
-      address
+      self.address
     ).then( ( resp) ->
       alertify.success "Updated location"
       console.log resp

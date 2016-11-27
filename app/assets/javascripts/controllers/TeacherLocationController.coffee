@@ -139,7 +139,7 @@ angular.module('lessons').controller( "TeacherLocationController" , [
       $scope.selected_address.county = $rootScope.User.location.county
       
 
-      $rootScope.User.manual_address( ( $scope.selected_address )
+      $rootScope.User.update_address( ( $scope.selected_address )
       ).then( ( resp ) ->
         
         $scope.marker.setMap null if $scope.marker?
@@ -154,7 +154,8 @@ angular.module('lessons').controller( "TeacherLocationController" , [
       )
 
     $scope.address_form_submit = ->
-      $rootScope.User.update_address( $scope.address )
+      console.log $scope.address
+      $rootScope.User.as_is()
 
     
 

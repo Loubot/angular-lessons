@@ -13,7 +13,7 @@ class LocationController < ApplicationController
     end
     p "ah dose"
     if teacher.location.nil?
-
+      p "No location!!"
       if location_params.has_key?( :county )
         
         location = Location.geocode_county( location_params, location_params[ :teacher_id ] )
@@ -33,6 +33,7 @@ class LocationController < ApplicationController
         render json: { error: location.errors.full_messages }, status: 500
       end
     else #teacher.location != nil
+      p "Yes location !!"
       location = teacher.location.update_attributes( location_params )
       p "Location updated"
       pp location
