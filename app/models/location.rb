@@ -40,7 +40,7 @@ class Location < ActiveRecord::Base
       longitude: location_details.lng,
       name: params[ :county ],
       teacher_id: teacher_id,
-      address: "Co. #{ params[:county] }, Ireland",
+      address: "#{ params[:county] }, Ireland",
       county: params[ :county ]
     )
   end

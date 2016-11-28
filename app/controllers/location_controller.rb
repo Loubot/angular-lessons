@@ -3,22 +3,15 @@ class LocationController < ApplicationController
 
   def create
     teacher = Teacher.includes(:location).find( location_params[ :teacher_id ] )
-    p "location params #{ location_params[ :teacher_id ] }"
-    if params[:location].present?
-      p "yes boi"
-      
-      location = Location.create!( location_params )
-      teacher.location = location
-      render json: { location: location.as_json } and return
-    end
-    p "ah dose"
+    p "location params #{ location_params }"
+    
     if teacher.location.nil?
       p "No location!!"
       if location_params.has_key?( :county )
-        
+        p "has key county"
         location = Location.geocode_county( location_params, location_params[ :teacher_id ] )
       else
-
+        p "Doesn't have key county"
 
         location = Location.create( location_params )
 

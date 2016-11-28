@@ -22,8 +22,9 @@ angular.module('lessons').controller( "TeacherLocationController" , [
 
     $rootScope.$on 'user_ready', ( event, mass ) ->
       console.log 'user_ready'
-      console.log event
-      console.log mass
+
+      if !$rootScope.User.location?
+        $mdToast.showSimple "Your profile might not be visible if you don't enter a location. Your county will do fine" 
 
 
     $scope.i_want_map_toggle = ->     
@@ -106,6 +107,8 @@ angular.module('lessons').controller( "TeacherLocationController" , [
 
       $('#pac-input').val ''
     
+
+
     
     # USER.get_user().then( ( user ) ->
     #   if $rootScope.USER.location?
@@ -156,10 +159,6 @@ angular.module('lessons').controller( "TeacherLocationController" , [
         console.log err
         alertify.error err.data.error[0]
       )
-
-    $scope.address_form_submit = ->
-      console.log $scope.address
-      $rootScope.User.as_is()
 
     
 
