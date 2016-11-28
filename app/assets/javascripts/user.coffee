@@ -153,6 +153,7 @@ angular.module('lessons').factory 'User', [
     @is_teacher = teacher.is_teacher
     @overview = teacher.overview
     @profile = teacher.profile
+    @experience = teacher.experience
     @view_count = teacher.view_count
     @location = teacher.location
     @photos = teacher.photos
@@ -389,7 +390,7 @@ angular.module('lessons').factory 'User', [
     self = @
     COMMS.POST(
       "/teacher/#{ self.id }/experience"
-      $scope.experience
+      self.experience
     ).then( ( resp ) ->
       console.log resp
       self.experience = resp.data.experience
@@ -404,7 +405,7 @@ angular.module('lessons').factory 'User', [
 
   User::change_user_type = ( type ) ->
     self = this
-    self.is_teacher == type
+    self.is_teacher = type
     COMMS.POST(
       "/teacher"
       self

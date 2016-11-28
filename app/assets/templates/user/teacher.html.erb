@@ -51,7 +51,7 @@
         <md-card-actions layout="row" layout-align="start center">
           <md-button  
             ng-model="file" 
-            ngf-select="User.upload_pic(file)">
+            ngf-select="User.upload_pic( file )">
               <i class="material-icons ">add_a_photo</i>
           </md-button>
           <md-card-icon-actions>
@@ -164,10 +164,10 @@
           </div>
         </md-toolbar>
         <md-content>
-          <form ng-submit="User.add_experience()" name="experience_form">
+          <form ng-submit="User.add_experience( experience )" name="experience_form">
 
             <md-input-container md-no-float class="md-block">
-              <textarea ng-model="experience.description" 
+              <textarea ng-model="User.experience.description" 
                         aria-label="Experience description" 
                         md-maxlength="200"  
                         md-select-on-focus
@@ -258,7 +258,7 @@
           </p>
         </md-card-content>
         <md-card-actions layout="column" layout-align="start">
-          <md-button class="md-raised md-warn" ng-click="change_to_student()">I'm a student</md-button>
+          <md-button class="md-raised md-warn" ng-click="User.change_user_type( false )">I'm a student</md-button>
         </md-card-actions>
       </md-card>
     </md-content>
