@@ -80,10 +80,15 @@ angular.module('lessons').service 'auth', [
     login: ( teacher ) ->
       $auth.submitLogin( teacher )
         .then( (resp) ->
+
+          new User().then( ( resp ) ->
+            console.log resp
+            $rootScope.$emit 'auth:logged-in-user', [
+              resp
+            ]
+          )
           
-          $rootScope.$emit 'auth:validation-success', [
-            resp
-          ]
+          
         )
         .catch( (resp) ->
           auth_errors( resp )
@@ -95,13 +100,13 @@ angular.module('lessons').service 'auth', [
       console.log teacher.county
       $auth.submitRegistration( teacher )
         .then( (resp) ->
-          $rootScope.user = resp.data.data
-          console.log $rootScope.user
-          $rootScope.$emit 'auth:validation-success', [
-            resp
-          ]
-
-
+          
+          new User().then( ( resp ) ->
+            console.log resp
+            $rootScope.$emit 'auth:registered_user', [
+              resp
+            ]
+          )
           
         )
         .catch( ( resp ) ->
@@ -476,9 +481,9 @@ angular.module('lessons').factory 'User', [
         new User().then( ( res ) ->
           console.log 'end of do'
           console.log $rootScope.User
-          $rootScope.$broadcast 'user_ready', [
-            User
-          ]
+          # $rootScope.$broadcast 'user_ready', [
+          #   User
+          # ]
         )
 
   
@@ -497,13 +502,8 @@ angular.module('lessons').run [
 
     $rootScope.$on 'auth:validation-error', ( e ) ->
       $rootScope.User = null
-      $state.go 'welcome'
+      # $state.go 'welcome'
       alertify.error "There was an error"
       console.log e
-
-    $rootScope.$on 'auth-login-success', ( e, user ) ->
-      console.log 'login'
-      console.log e
-      console.log user
 
 ]

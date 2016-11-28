@@ -57,12 +57,17 @@ angular.module('lessons').controller('NavController', [
         alertify.success "Welcome #{ resp.data.data.email }"
       )
 
+    # Successful registration will trigger auth:registration-success. user.js
+    $rootScope.$on 'auth:registered_user', ( ( user ) ->
+      console.log 'auth:auth:registered_user:NavController'
+      if $rootScope.User.is_teacher then $state.go( "teacher", id: $rootScope.User.id ) else $state.go( "welcome" )
+    )
 
-    # Successful login will trigger user_ready event. user.js
-    $rootScope.$on 'user_ready', ( ( user) ->
-      console.log 'User event'
+    # Successful login will trigger auth:login-success event. user.js
+    $rootScope.$on 'auth:logged-in-user', ( ( user) ->
+      console.log 'auth:logged-in-user:NavController'
       $mdSidenav('left').close()
-      # if $rootScope.User.is_teacher then $state.go( "teacher", id: $rootScope.User.id ) else $state.go( "welcome" )
+      
       alertify.success "Welcome back #{ $rootScope.User.first_name }"      
     )
 
