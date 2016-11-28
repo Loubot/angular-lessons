@@ -28,13 +28,13 @@
           <md-button ui-sref="conversation({id:User.id})" class="md-button md-default-theme green_text">Messages</md-button>
           <md-button class="md-button md-default-theme gree_blue_text" ui-sref="admin" ng-if="User.admin">Admin</md-button>
 
-          <md-button class="md-button md-default-theme green_blue_text" ng-click="logout()">Logout</md-button>
+          <md-button class="md-button md-default-theme green_blue_text" ng-click="auth.logout()">Logout</md-button>
         </md-fab-actions>
 
         <md-fab-actions ng-if="User && !User.is_teacher" class="green_blue_text">
           <md-button ui-sref="student_profile({id:User.id})" class="md-button md-default-theme green_text">Profile</md-button>
           <md-button ui-sref="conversation({id:User.id})" class="md-button md-default-theme green_text">Messages</md-button>
-          <md-button class="md-button md-default-theme green_blue_text" ng-click="logout()">Logout</md-button>
+          <md-button class="md-button md-default-theme green_blue_text" ng-click="auth.logout()">Logout</md-button>
         </md-fab-actions>
 
       </md-fab-speed-dial>
@@ -85,7 +85,7 @@
         <md-button ui-sref="conversation({id:User.id})" ng-click="user_menu()" class="md-button md-default-theme green_text">Messages</md-button>
 
         <md-button ng-if="User.admin" ui-sref="admin" class="md-button md-default-theme green_text">Admin</md-button>
-        <md-button class="md-button md-default-theme green_blue_text" ng-click="logout();user_menu()">Logout</md-button>
+        <md-button class="md-button md-default-theme green_blue_text" ng-click="auth.logout();user_menu()">Logout</md-button>
         <md-divider md-inset ></md-divider>
         <md-icon ng-click="user_menu()"><i class="material-icons">arrow_back</i><md-icon>
       </div>
@@ -98,7 +98,7 @@
       <md-content>
         <md-button ui-sref="student_profile({id:User.id})" ng-click="user_menu()" class="md-button md-default-theme green_text">Profile</md-button>
         <md-button ui-sref="conversation({id:User.id})" ng-click="user_menu()" class="md-button md-default-theme green_text">Messages</md-button>
-        <md-button class="md-button md-default-theme green_blue_text" ng-click="logout()">Logout</md-button>
+        <md-button class="md-button md-default-theme green_blue_text" ng-click="auth.logout()">Logout</md-button>
       </md-content>
     </md-sidenav>
     <!-- ################# End of user left menu ######################### -->
@@ -161,7 +161,7 @@
 
            <md-input-container ng-if="auth_type==0">
              <md-subheader>Login</md-subheader>
-             <form ng-submit="login()" >
+             <form ng-submit="auth.login()" >
 
                <!-- <md-input-container class="md-block">
                  <md-icon class="lastName"></md-icon>

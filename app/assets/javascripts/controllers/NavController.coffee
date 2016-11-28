@@ -9,10 +9,12 @@ angular.module('lessons').controller('NavController', [
   'alertify'
   'auth'
   '$auth'
-  ( $scope, $rootScope, $state, $window,  $mdSidenav, alertify, auth, $auth ) ->
+  ( $scope, $rootScope, $state, $window, $mdSidenav, alertify, auth, $auth ) ->
     console.log "NavController"
     $scope.teacher = {}
     $scope.auth_type = null
+
+    $scope.auth = auth
 
     $scope.facebook = ->
       console.log 'facebook'
@@ -56,24 +58,16 @@ angular.module('lessons').controller('NavController', [
       )
 
     $scope.login = ->
-      auth.login( $scope.teacher ).then( ( resp ) ->
-        console.log "logged in"
-        $mdSidenav('left').toggle()
-        if $rootScope.User.is_teacher then $state.go( "teacher", id: $rootScope.User.id ) else $state.go( "welcome" )
-        alertify.success "Welcome back #{ $rootScope.User.first_name }"
-      )
+      auth.login( $scope.teacher )
+
+    # Successful login will trigger user_ready event. user.js
+    $rootScope.$on 'user_ready', ( ( user) ->
+      console.log 'User event'
+      $mdSidenav('left').close()
+      if $rootScope.User.is_teacher then $state.go( "teacher", id: $rootScope.User.id ) else $state.go( "welcome" )
+      alertify.success "Welcome back #{ $rootScope.User.first_name }"      
+    )
 
     $scope.logout = ->
-      $auth.signOut()
-        .then( ( resp ) ->
-          console.log resp
-          alertify.success "Logged out successfully"
-          $rootScope.USER = null
-          $state.go 'welcome'
-          $window.location.reload()
-        ).catch( ( err ) ->
-          console.log err
-          $rootScope.USER = null
-          alertify.error "Failed to log out"
-        )
+      auth.logout()
 ])

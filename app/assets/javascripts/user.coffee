@@ -40,7 +40,9 @@ angular.module('lessons').service 'auth', [
   "$auth"
   "User"
   "alertify"
-  ( $rootScope, $auth, User, alertify ) ->
+  "$state"
+  "$window"
+  ( $rootScope, $auth, User, alertify, $state, $window ) ->
 
     county_lists =
           { 'Antrim': { county: 'Co. Antrim', latitude: 54.719508, longitude: -6.207256 }, 'Armagh': { county: 'Co. Armagh', latitude: 54.350277, longitude: -6.652822},
@@ -66,21 +68,22 @@ angular.module('lessons').service 'auth', [
 
     auth_errors = ( resp ) ->
       console.log resp
-      if resp.data.errors.full_messages? and resp.data.errors.full_messages.length > 0
-        for mess in resp.data.errors.full_messages
-          alertify.error mess
+      for mess in resp.errors
+        console.log mess
+        alertify.error mess
+      # if resp.data.errors.full_messages? and resp.data.errors.full_messages.length > 0
+      #   for mess in resp.data.errors.full_messages
+      #     alertify.error mess
 
-        throw 'There was an error'
+      #   throw 'There was an error'
 
     login: ( teacher ) ->
       $auth.submitLogin( teacher )
         .then( (resp) ->
           
-          new User().then( ( resp) ->
-            console.log resp        
-            
-            
-          ) #end of new User
+          $rootScope.$emit 'auth:validation-success', [
+            resp
+          ]
         )
         .catch( (resp) ->
           auth_errors( resp )
@@ -102,6 +105,20 @@ angular.module('lessons').service 'auth', [
         .catch( ( resp ) ->
           auth_errors( resp )
           
+        )
+    logout: ->
+      $auth.signOut()
+        .then( ( resp ) ->
+          console.log resp
+          alertify.success "Logged out successfully"
+          $rootScope.User = null
+          $state.go 'welcome'
+          $window.location.reload()
+        ).catch( ( err ) ->
+          console.log err
+          $rootScope.User = null
+          alertify.error "Failed to log out"
+          $state.go 'welcome'
         )
 
 ]
@@ -138,6 +155,7 @@ angular.module('lessons').factory 'User', [
       ).catch( ( err ) ->
         console.log "failed to get teacher"
         console.log err
+        $rootScope.User = null
       )
         
         # response
@@ -455,7 +473,7 @@ angular.module('lessons').factory 'User', [
         new User().then( ( res ) ->
           console.log 'end of do'
           console.log $rootScope.User
-          $rootScope.$emit 'user_ready', [
+          $rootScope.$broadcast 'user_ready', [
             User
           ]
         )
