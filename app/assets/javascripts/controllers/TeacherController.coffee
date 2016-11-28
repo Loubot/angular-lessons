@@ -80,7 +80,7 @@ angular.module('lessons').controller('TeacherController', [
 
     $scope.change_password = ->
       $scope.announce_password_once = false
-      $auth.updatePassword($scope.update_password).then((resp) ->
+      $auth.updatePassword( $scope.update_password ).then((resp) ->
         console.log resp
         return
       ).catch (resp) ->

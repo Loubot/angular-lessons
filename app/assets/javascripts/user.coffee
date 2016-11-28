@@ -455,7 +455,12 @@ angular.module('lessons').factory 'User', [
         new User().then( ( res ) ->
           console.log 'end of do'
           console.log $rootScope.User
+          $rootScope.$emit 'user_ready', [
+            User
+          ]
         )
+
+  
 
   User
 

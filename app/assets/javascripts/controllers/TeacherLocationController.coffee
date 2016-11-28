@@ -6,13 +6,12 @@ angular.module('lessons').controller( "TeacherLocationController" , [
   '$state'
   '$stateParams'
   "COMMS"
-  "USER"
   'alertify'
   '$mdBottomSheet' 
   '$mdToast'
   '$q'
   'counties'
-  ( $scope, $rootScope, $state, $stateParams, COMMS, USER, alertify, $mdBottomSheet, $mdToast, $q, counties ) ->
+  ( $scope, $rootScope, $state, $stateParams, COMMS, alertify, $mdBottomSheet, $mdToast, $q, counties ) ->
     console.log "TeacherLocationController"
     $scope.addresses = null
     $scope.address = {}
@@ -20,6 +19,11 @@ angular.module('lessons').controller( "TeacherLocationController" , [
     only_once = false
 
     $scope.county_list = counties.county_list()
+
+    $rootScope.$on 'user_ready', ( event, mass ) ->
+      console.log 'user_ready'
+      console.log event
+      console.log mass
 
 
     $scope.i_want_map_toggle = ->     
@@ -103,23 +107,23 @@ angular.module('lessons').controller( "TeacherLocationController" , [
       $('#pac-input').val ''
     
     
-    USER.get_user().then( ( user ) ->
-      if $rootScope.USER.location?
-        $scope.address = $rootScope.USER.location
-        $scope.address.county = $rootScope.USER.location.name if !$rootScope.USER.location.county?
-      else
-        $mdToast.showSimple "Your profile might not be visible if you don't enter a location. Your county will do fine" 
+    # USER.get_user().then( ( user ) ->
+    #   if $rootScope.USER.location?
+    #     $scope.address = $rootScope.USER.location
+    #     $scope.address.county = $rootScope.USER.location.name if !$rootScope.USER.location.county?
+    #   else
+    #     $mdToast.showSimple "Your profile might not be visible if you don't enter a location. Your county will do fine" 
         
-      USER.check_user()
-      init_map() if $scope.i_want_map
+    #   USER.check_user()
+    #   init_map() if $scope.i_want_map
 
       
 
-    ).catch( ( err ) ->
-      console.log err
-      alertify.error "You are not authorised to view this"
-      $state.go 'welcome'
-    )
+    # ).catch( ( err ) ->
+    #   console.log err
+    #   alertify.error "You are not authorised to view this"
+    #   $state.go 'welcome'
+    # )
 
        
 
