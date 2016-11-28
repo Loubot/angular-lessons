@@ -15,15 +15,7 @@ angular.module('lessons').controller( 'ViewTeacherController', [
 
     $scope.message = {}
 
-    USER.get_user()
 
-
-    $scope.scrollevent = ( $e ) ->
-      
-      # animate_elems()
-      # @scrollPos = document.body.scrollTop or document.documentElement.scrollTop or 0
-      # $scope.$digest()
-      return
 
     create_map = ->
       if $scope.teacher.location?
@@ -67,6 +59,7 @@ angular.module('lessons').controller( 'ViewTeacherController', [
     COMMS.GET(
       "/teacher/#{ $stateParams.id }/show-teacher"
     ).then( ( resp ) ->
+      console.log "got teacher info"
       console.log resp
       alertify.success "Got teacher info"
       $scope.teacher = resp.data.teacher

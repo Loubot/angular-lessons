@@ -62,7 +62,7 @@ angular.module('lessons').controller('NavController', [
     $rootScope.$on 'user_ready', ( ( user) ->
       console.log 'User event'
       $mdSidenav('left').close()
-      if $rootScope.User.is_teacher then $state.go( "teacher", id: $rootScope.User.id ) else $state.go( "welcome" )
+      # if $rootScope.User.is_teacher then $state.go( "teacher", id: $rootScope.User.id ) else $state.go( "welcome" )
       alertify.success "Welcome back #{ $rootScope.User.first_name }"      
     )
 

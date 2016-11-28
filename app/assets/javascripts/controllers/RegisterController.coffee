@@ -56,7 +56,7 @@ angular.module('lessons').controller("RegisterController", [
       alertify.success "Welcome #{ $rootScope.User.get_full_name() }"
       alertify.success "Registered as teacher" if $rootScope.User.is_teacher
       alertify.success "Registered as student" if !$rootScope.User.is_teacher
-      $state.go('teacher', id: $rootScope.User.id )
+      # $state.go('teacher', id: $rootScope.User.id )
       $rootScope.User.registration_address( $scope.teacher.county )
         
     # $scope.county_list = counties.county_list()
