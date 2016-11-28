@@ -57,8 +57,6 @@ angular.module('lessons').controller('NavController', [
         alertify.success "Welcome #{ resp.data.data.email }"
       )
 
-    $scope.login = ->
-      auth.login( $scope.teacher )
 
     # Successful login will trigger user_ready event. user.js
     $rootScope.$on 'user_ready', ( ( user) ->

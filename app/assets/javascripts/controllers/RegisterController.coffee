@@ -10,9 +10,6 @@ angular.module('lessons').controller("RegisterController", [
   "counties"
   ( $scope, $rootScope, $state, auth, alertify, COMMS, counties ) ->
     console.log "RegisterController"
-    $scope.scrollevent = ( $e ) ->
-      
-      return
 
     $scope.register_with_facebook = ->
       $auth.authenticate( 'facebook', { params: { resource_class: 'Teacher' } } )
@@ -51,13 +48,16 @@ angular.module('lessons').controller("RegisterController", [
       else
         console.log "made it"
 
-        auth.register( $scope.teacher ).then( ( resp ) ->
-          alertify.success "Welcome #{ $rootScope.User.get_full_name() }"
-          alertify.success "Registered as teacher" if $rootScope.User.is_teacher
-          alertify.success "Registered as student" if !$rootScope.User.is_teacher
-          $state.go('teacher', id: $rootScope.User.id )
-         
-        )
+        auth.register( $scope.teacher )
+
+    # On successful registration create user location after user_ready is broadcast
+
+    $rootScope.$on 'user_ready', ( user ) ->
+      alertify.success "Welcome #{ $rootScope.User.get_full_name() }"
+      alertify.success "Registered as teacher" if $rootScope.User.is_teacher
+      alertify.success "Registered as student" if !$rootScope.User.is_teacher
+      $state.go('teacher', id: $rootScope.User.id )
+      $rootScope.User.registration_address( $scope.teacher.county )
         
     # $scope.county_list = counties.county_list()
 

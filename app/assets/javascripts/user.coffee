@@ -95,11 +95,13 @@ angular.module('lessons').service 'auth', [
       console.log teacher.county
       $auth.submitRegistration( teacher )
         .then( (resp) ->
-          new User().then( ( resp ) ->
+          $rootScope.user = resp.data.data
+          console.log $rootScope.user
+          $rootScope.$emit 'auth:validation-success', [
+            resp
+          ]
 
-            $rootScope.User.registration_address( teacher.county )
-            
-          )
+
           
         )
         .catch( ( resp ) ->
@@ -467,7 +469,8 @@ angular.module('lessons').factory 'User', [
       console.log 'validation success'
       # console.log e
       # console.log v
-    
+      console.log $rootScope.User
+      console.log $rootScope.user
       if !$rootScope.User? && $rootScope.user.first_name?
         console.log "Doing it"
         new User().then( ( res ) ->

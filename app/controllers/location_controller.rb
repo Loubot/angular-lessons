@@ -17,7 +17,7 @@ class LocationController < ApplicationController
 
       end
 
-      if location.save
+      if location.save!
         teacher.location = location
         p "Location created"
         pp location
