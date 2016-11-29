@@ -1,40 +1,3 @@
-angular.module('lessons').service 'USER', [
-  "$http"
-  "$rootScope"
-  "RESOURCES"
-  "$q"
-  "$state"
-  "alertify"
- ( $http, $rootScope, RESOURCES, $q, $state, alertify ) ->
-
-  get_user: -> # get user and all associations
-
-    $q ( resolve, reject ) ->
-      $http(
-        method: 'GET'
-        url: "#{ RESOURCES.DOMAIN }/teacher/get"
-        headers: { "Content-Type": "application/json" }
-        # params: 
-        #   email: 
-      ).then( ( result ) ->
-        # console.log "get user"
-        # console.log result.data
-        $rootScope.USER = result.data.teacher
-        
-        resolve result.data
-      ).catch( ( err_result ) ->
-        console.log err_result
-        reject err_result
-      )
-
-  check_user: ->
-    if !$rootScope.USER.is_teacher
-      alertify.error "You must be a teacher to view this"
-      $state.go "welcome"
-  
-]
-
-
 angular.module('lessons').service 'auth', [
   "$rootScope"
   "$auth"
@@ -470,6 +433,9 @@ angular.module('lessons').factory 'User', [
 
 
   do ->
+
+    
+        
     $rootScope.$on 'auth:validation-success', ( e, v ) ->
       console.log 'validation success'
       # console.log e
@@ -486,24 +452,33 @@ angular.module('lessons').factory 'User', [
           # ]
         )
 
+    $rootScope.$on 'auth:validation-error', ( e ) ->
+      $rootScope.User = null
+      # $state.go 'welcome'
+      alertify.error "There was an error"
+      console.log e
+
   
 
   User
 
 ]
 
+
+# auth:validation-error not emitting so catch the validateUser error and emit it manually.
 angular.module('lessons').run [
   "$rootScope"
+  "$auth"
   "User"
   "$state"
   "alertify"
-  ( $rootScope, User, $state, alertify ) ->
-      
+  ( $rootScope, $auth, User, $state, alertify ) ->
+    $auth.validateUser().catch (err) ->
+      $rootScope.$emit 'auth:validation-error', [
+        err
+      ]
 
-    $rootScope.$on 'auth:validation-error', ( e ) ->
-      $rootScope.User = null
-      # $state.go 'welcome'
-      alertify.error "There was an error"
-      console.log e
+    
+
 
 ]

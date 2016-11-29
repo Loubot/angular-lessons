@@ -16,7 +16,9 @@ angular.module('lessons').controller('TeacherController', [
   ( $scope, $rootScope, $state, RESOURCES, User, alertify, COMMS, $stateParams, $auth, Upload, $mdBottomSheet, $mdDialog ) ->
     console.log "TeacherController"
     
-  
+    $rootScope.$on 'not_logged_in', ( e ) ->
+      alertify.error 'Not logged in'
+      $state.go 'welcome'
 
     ####################### Subjects ###############################
 
