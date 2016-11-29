@@ -440,8 +440,6 @@ angular.module('lessons').factory 'User', [
       console.log 'validation success'
       # console.log e
       # console.log v
-      console.log $rootScope.User
-      console.log $rootScope.user
       if !$rootScope.User? && $rootScope.user.first_name?
         console.log "Doing it"
         new User().then( ( res ) ->

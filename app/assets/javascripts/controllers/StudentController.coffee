@@ -5,7 +5,6 @@ angular.module('lessons').controller( 'StudentController', [
   '$rootScope'
   '$stateParams'
   '$state'
-  'USER'
   'User'
   'alertify'
   'COMMS'
@@ -14,7 +13,7 @@ angular.module('lessons').controller( 'StudentController', [
   'Upload'
   'RESOURCES'
 
-  ( $scope, $rootScope, $stateParams, $state, USER, User, alertify, COMMS, $mdDialog, $auth, Upload, RESOURCES ) ->
+  ( $scope, $rootScope, $stateParams, $state, User, alertify, COMMS, $mdDialog, $auth, Upload, RESOURCES ) ->
     console.log "StudentController"
 
     console.log $rootScope.User
