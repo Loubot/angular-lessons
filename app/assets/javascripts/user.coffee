@@ -5,7 +5,8 @@ angular.module('lessons').service 'auth', [
   "alertify"
   "$state"
   "$window"
-  ( $rootScope, $auth, User, alertify, $state, $window ) ->
+  "$mdSidenav"
+  ( $rootScope, $auth, User, alertify, $state, $window, $mdSidenav ) ->
     valid = false
     auth = {}
     auth.county_lists =
@@ -50,6 +51,7 @@ angular.module('lessons').service 'auth', [
             # $rootScope.$emit 'auth:logged-in-user', [
             #   resp
             # ]
+            $mdSidenav.close()
             auth.set_is_valid( true )
           )
 
@@ -112,7 +114,7 @@ angular.module('lessons').service 'auth', [
       # set listener for validation error
       $rootScope.$on "auth:validation-error" , ( e, v ) ->
         console.log "validation error"
-        auth.set_is_valid( false )
+        alertify.error 'auth:validation-error'
 
       # set listener for validation success
       $rootScope.$on 'auth:validation-success', ( e, v ) ->
@@ -129,13 +131,18 @@ angular.module('lessons').service 'auth', [
 
 
       # Run validateUser and catch any errors. 
-      $auth.validateUser().catch (err) ->
-        $rootScope.$broadcast 'auth:validation-error', [
-          err
-          
-        ]
+      $auth.validateUser().then( ( resp ) ->
+          console.log resp
+          auth.set_is_valid( true )
+        ).catch (err) ->
+          $rootScope.$broadcast 'auth:validation-error', [
+            err
+            
+          ]
         console.log "Validation failed"
+        auth.set_is_valid( false )
         
+      
 
     auth
 ]

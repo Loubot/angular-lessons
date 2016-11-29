@@ -3,12 +3,11 @@
 angular.module('lessons').controller("RegisterController", [
   "$scope"
   "$rootScope"
-  "$state"
   "auth"
   "alertify"
   "COMMS"
   "counties"
-  ( $scope, $rootScope, $state, auth, alertify, COMMS, counties ) ->
+  ( $scope, $rootScope, auth, alertify, COMMS, counties ) ->
     console.log "RegisterController"
 
     $scope.register_with_facebook = ->

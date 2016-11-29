@@ -330,17 +330,18 @@ angular.module('lessons').service 'COMMS', ( $http, $state, RESOURCES, $rootScop
       )
 
       
-# angular.module('lessons').run [
-#   '$rootScope'
-#   ($rootScope) ->
-#     $rootScope.$on 'auth:validation-success', ( e ) ->
-#       console.log 'bl'
-#       console.log e
-#     # see what's going on when the route tries to change
-#     $rootScope.$on '$stateChangeStart', (event, toState, toParams, fromState, fromParams) ->
-#       console.log toState
-#       console.log '$stateChangeStart to ' +  toState + '- fired when the transition begins. toState,toParams : \n' + toState + toParams
-#       return
+angular.module('lessons').run [
+  '$rootScope'
+  'auth'
+  ($rootScope, auth) ->
+    # $rootScope.$on 'auth:validation-success', ( e ) ->
+    #   console.log 'bl'
+    #   console.log e
+    # see what's going on when the route tries to change
+    # $rootScope.$on '$viewContentLoading', (event, toState, toParams, fromState, fromParams) ->
+    #   console.log '23'
+    #   auth.check_is_valid()
+    #   return
 #     $rootScope.$on '$stateChangeError', (event, toState, toParams, fromState, fromParams, error) ->
 #       console.log '$stateChangeError - fired when an error occurs during transition.'
 #       console.log arguments
@@ -362,7 +363,7 @@ angular.module('lessons').service 'COMMS', ( $http, $state, RESOURCES, $rootScop
 #       return
 
 
-# ]
+]
 
 # angular.module('lessons').run(['$rootScope', '$state',
 #   ($rootScope, $state)->

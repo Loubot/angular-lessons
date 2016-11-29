@@ -15,7 +15,7 @@ angular.module('lessons').controller('TeacherController', [
   ( $scope, $rootScope, $state, User, alertify, COMMS, $auth, Upload, $mdBottomSheet, $mdDialog, auth ) ->
     console.log "TeacherController"
 
-    auth.check_is_valid()
+    
     
     
 
