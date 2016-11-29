@@ -18,10 +18,6 @@ angular.module('lessons').controller('WelcomeController', [
   ( $scope, $rootScope, $state, $filter, $stateParams, $location, User, $mdSidenav, alertify, $auth, COMMS, $window, OG, counties ) ->
     console.log "WelcomeController"
 
-    $rootScope.$on 'not_logged_in', ( e ) ->
-      alertify.error 'Not logged in'
-      $state.go 'welcome'
-
     OG.set_tags()
 
     $scope.selected = {}

@@ -47,10 +47,13 @@ angular.module('lessons').service 'auth', [
 
           new User().then( ( resp ) ->
             console.log resp
-            $rootScope.$emit 'auth:logged-in-user', [
-              resp
-            ]
+            # $rootScope.$emit 'auth:logged-in-user', [
+            #   resp
+            # ]
+            auth.set_is_valid( true )
           )
+
+
           
           
         )
@@ -67,9 +70,10 @@ angular.module('lessons').service 'auth', [
           
           new User().then( ( resp ) ->
             console.log resp
-            $rootScope.$emit 'auth:registered_user', [
-              resp
-            ]
+            # $rootScope.$emit 'auth:registered_user', [
+            #   resp
+            # ]
+            auth.set_is_valid( true )
           )
           
         )
@@ -105,9 +109,11 @@ angular.module('lessons').service 'auth', [
      do -> 
 
       
-
+      # set listener for validation error
       $rootScope.$on "auth:validation-error" , ( e, v ) ->
         console.log "validation error"
+        auth.set_is_valid( false )
+
       # set listener for validation success
       $rootScope.$on 'auth:validation-success', ( e, v ) ->
         console.log 'validation success'
@@ -121,13 +127,15 @@ angular.module('lessons').service 'auth', [
             auth.set_is_valid( true)
           )
 
+
+      # Run validateUser and catch any errors. 
       $auth.validateUser().catch (err) ->
         $rootScope.$broadcast 'auth:validation-error', [
           err
           
         ]
         console.log "Validation failed"
-        auth.set_is_valid( false )
+        
 
     auth
 ]
