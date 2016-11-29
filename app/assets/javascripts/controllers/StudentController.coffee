@@ -18,10 +18,6 @@ angular.module('lessons').controller( 'StudentController', [
 
     console.log $rootScope.User
 
-    $scope.scrollevent = ( $e ) ->
-      
-      return
-
     $scope.upload = ( file ) ->
       Upload.upload(
         url: "#{ RESOURCES.DOMAIN }/teacher/#{ $rootScope.USER.id }/photos"
@@ -31,12 +27,12 @@ angular.module('lessons').controller( 'StudentController', [
           avatar: $scope.file
       ).then( ( resp ) -> 
         console.log resp
-        $rootScope.USER.photos = resp.data.photos if resp.data != ""
-        console.log $rootScope.USER.photos
+        $rootScope.User.photos = resp.data.photos if resp.data != ""
+        console.log $rootScope.User.photos
         alertify.success("Photo uploaded ok")
         if resp.data.status == "updated"
-          $rootScope.USER = resp.data.teacher
-          $rootScope.USER.photos = resp.data.photos if resp.data != ""
+          $rootScope.User = resp.data.teacher
+          $rootScope.User.photos = resp.data.photos if resp.data != ""
           profile_pic()
           alertify.success "Profile pic set"
 
@@ -46,25 +42,15 @@ angular.module('lessons').controller( 'StudentController', [
       )
 
 
-    USER.get_user().then( ( user ) ->
-      if $rootScope.USER.is_teacher
-        alertify.error "You are not allowed to view this"
-        $state.go "welcome"
-        return
-      profile_pic()
-    ).catch( ( err ) ->
-      alertify.error err
-    )
-
     $scope.make_profile = ( id ) ->
       COMMS.POST(
         '/teacher'
-        profile: id, id: $rootScope.USER.id
+        profile: id, id: $rootScope.User.id
       ).then( ( resp ) ->
         console.log resp
         alertify.success "Updated profile pic"
         if resp.data.status == "updated"
-          $rootScope.USER = resp.data.teacher
+          $rootScope.User = resp.data.teacher
           profile_pic()
       ).catch( ( err ) ->
         console.log err
@@ -72,26 +58,26 @@ angular.module('lessons').controller( 'StudentController', [
       )
 
     profile_pic = ->
-      console.log $rootScope.USER.photos
-      if !$rootScope.USER.profile?
+      console.log $rootScope.User.photos
+      if !$rootScope.User.profile?
         console.log "No profile"
         $scope.profile = null
         return false
-      for photo in $rootScope.USER.photos
+      for photo in $rootScope.User.photos
         # console.log photo.avatar.url
-        if parseInt( photo.id ) == parseInt( $rootScope.USER.profile )
+        if parseInt( photo.id ) == parseInt( $rootScope.User.profile )
           $scope.profile = photo
           console.log $scope.profile
           $scope.profile
 
     $scope.destroy_pic = ( id ) ->
       COMMS.DELETE(
-        "/teacher/#{ $rootScope.USER.id }/photos/#{ id }"
+        "/teacher/#{ $rootScope.User.id }/photos/#{ id }"
       ).then( ( resp ) ->
         console.log resp
         alertify.success "Deleted photo ok"
-        $rootScope.USER.photos = resp.data.teacher.photos
-        $rootScope.USER.profile = resp.data.teacher.profile
+        $rootScope.User.photos = resp.data.teacher.photos
+        $rootScope.User.profile = resp.data.teacher.profile
         profile_pic()
       ).catch( ( err ) ->
         console.log err
