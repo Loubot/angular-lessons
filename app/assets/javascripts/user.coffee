@@ -102,10 +102,13 @@ angular.module('lessons').service 'auth', [
       return valid
 
 
-     do ->
+     do -> 
 
-    
-        
+      
+
+      $rootScope.$on "auth:validation-error" , ( e, v ) ->
+        console.log "validation error"
+      # set listener for validation success
       $rootScope.$on 'auth:validation-success', ( e, v ) ->
         console.log 'validation success'
         # console.log e
@@ -117,6 +120,14 @@ angular.module('lessons').service 'auth', [
             console.log $rootScope.User
             auth.set_is_valid( true)
           )
+
+      $auth.validateUser().catch (err) ->
+        $rootScope.$broadcast 'auth:validation-error', [
+          err
+          
+        ]
+        console.log "Validation failed"
+        auth.set_is_valid( false )
 
     auth
 ]
@@ -464,25 +475,5 @@ angular.module('lessons').factory 'User', [
   
 
   User
-
-]
-
-
-# auth:validation-error not emitting so catch the validateUser error and emit it manually.
-angular.module('lessons').run [
-  "$rootScope"
-  "$auth"
-  "User"
-  "$state"
-  "alertify"
-  'auth'
-  ( $rootScope, $auth, User, $state, alertify, auth ) ->
-    $auth.validateUser().catch (err) ->
-      $rootScope.$broadcast 'auth:validation-error', [
-        err
-        
-      ]
-      console.log auth
-      authenticated.set_is_valid( false )
 
 ]
