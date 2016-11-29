@@ -6,8 +6,9 @@ angular.module('lessons').service 'auth', [
   "$state"
   "$window"
   ( $rootScope, $auth, User, alertify, $state, $window ) ->
-
-    county_lists =
+    valid = false
+    auth = {}
+    auth.county_lists =
           { 'Antrim': { county: 'Co. Antrim', latitude: 54.719508, longitude: -6.207256 }, 'Armagh': { county: 'Co. Armagh', latitude: 54.350277, longitude: -6.652822},
           'Carlow': { county: 'Co. Carlow', latitude: 52.836497, longitude: -6.934238}, 'Cavan': { county: 'Co. Cavan', latitude: 53.989637, longitude: -7.363272 },
           'Clare': { county: 'Co. Clare', latitude: 52.847097, longitude: -8.989040 }, 'Cork': { county: 'Co. Cork', latitude: 51.897887, longitude: -8.475431},
@@ -25,11 +26,11 @@ angular.module('lessons').service 'auth', [
           'Waterford': { county: 'Co. Waterford', latitude: 52.257693, longitude: -7.110284 }, 'Westmeath': { county: 'Co. Westmeath', latitude: 53.524646, longitude: -7.339487 },
           'Wexford': { county: 'Co. Wexford', latitude: 52.333583, longitude: -6.474672 }, 'Wicklow': { county: 'Co. Wicklow', latitude: 52.980215, longitude: -6.060273 } }
 
-    get_county = ( county ) ->
+    auth.get_county = ( county ) ->
       console.log county
       return county_lists["#{ county }"]
 
-    auth_errors = ( resp ) ->
+    auth.auth_errors = ( resp ) ->
       console.log resp
       for mess in resp.errors
         console.log mess
@@ -40,7 +41,7 @@ angular.module('lessons').service 'auth', [
 
       #   throw 'There was an error'
 
-    login: ( teacher ) ->
+    auth.login = ( teacher ) ->
       $auth.submitLogin( teacher )
         .then( (resp) ->
 
@@ -54,11 +55,11 @@ angular.module('lessons').service 'auth', [
           
         )
         .catch( (resp) ->
-          auth_errors( resp )
+          auth.auth_errors( resp )
 
         )   
 
-    register: ( teacher ) ->
+    auth.register = ( teacher ) ->
 
       console.log teacher.county
       $auth.submitRegistration( teacher )
@@ -76,7 +77,7 @@ angular.module('lessons').service 'auth', [
           auth_errors( resp )
           
         )
-    logout: ->
+    auth.logout = ->
       $auth.signOut()
         .then( ( resp ) ->
           console.log resp
@@ -91,6 +92,33 @@ angular.module('lessons').service 'auth', [
           $state.go 'welcome'
         )
 
+    auth.set_is_valid = ( story ) ->
+      valid = story
+
+    auth.check_is_valid = ->
+      if !valid 
+        $state.go 'welcome'
+        alertify.error "You are not authorised!"
+      return valid
+
+
+     do ->
+
+    
+        
+      $rootScope.$on 'auth:validation-success', ( e, v ) ->
+        console.log 'validation success'
+        # console.log e
+        # console.log v
+        if !$rootScope.User? && $rootScope.user.first_name?
+          console.log "Doing it"
+          new User().then( ( res ) ->
+            console.log 'end of do'
+            console.log $rootScope.User
+            auth.set_is_valid( true)
+          )
+
+    auth
 ]
 
 
@@ -431,30 +459,7 @@ angular.module('lessons').factory 'User', [
     self = this
     return self.subjects = subjects
 
-
-  do ->
-
     
-        
-    $rootScope.$on 'auth:validation-success', ( e, v ) ->
-      console.log 'validation success'
-      # console.log e
-      # console.log v
-      if !$rootScope.User? && $rootScope.user.first_name?
-        console.log "Doing it"
-        new User().then( ( res ) ->
-          console.log 'end of do'
-          console.log $rootScope.User
-          # $rootScope.$broadcast 'user_ready', [
-          #   User
-          # ]
-        )
-
-    $rootScope.$on 'auth:validation-error', ( e ) ->
-      $rootScope.User = null
-      # $state.go 'welcome'
-      alertify.error "There was an error"
-      console.log e
 
   
 
@@ -470,13 +475,14 @@ angular.module('lessons').run [
   "User"
   "$state"
   "alertify"
-  ( $rootScope, $auth, User, $state, alertify ) ->
+  'auth'
+  ( $rootScope, $auth, User, $state, alertify, auth ) ->
     $auth.validateUser().catch (err) ->
-      $rootScope.$emit 'auth:validation-error', [
+      $rootScope.$broadcast 'auth:validation-error', [
         err
+        
       ]
-
-    
-
+      console.log auth
+      authenticated.set_is_valid( false )
 
 ]

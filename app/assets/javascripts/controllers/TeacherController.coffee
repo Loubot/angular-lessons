@@ -4,21 +4,20 @@ angular.module('lessons').controller('TeacherController', [
   '$scope'
   '$rootScope'
   '$state'
-  'RESOURCES'
   'User'
   'alertify'
-  'COMMS'  
-  '$stateParams'
+  'COMMS'
   '$auth'
   'Upload'
   '$mdBottomSheet'
   '$mdDialog'
-  ( $scope, $rootScope, $state, RESOURCES, User, alertify, COMMS, $stateParams, $auth, Upload, $mdBottomSheet, $mdDialog ) ->
+  "auth"
+  ( $scope, $rootScope, $state, User, alertify, COMMS, $auth, Upload, $mdBottomSheet, $mdDialog, auth ) ->
     console.log "TeacherController"
+
+    auth.check_is_valid()
     
-    $rootScope.$on 'not_logged_in', ( e ) ->
-      alertify.error 'Not logged in'
-      $state.go 'welcome'
+    
 
     ####################### Subjects ###############################
 

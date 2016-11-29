@@ -120,7 +120,11 @@ angular.module('lessons').config [
 ]
 #s
 
-angular.module('lessons').config ($stateProvider, $urlRouterProvider, $locationProvider) ->
+angular.module('lessons').config [
+  "$stateProvider"
+  "$urlRouterProvider"
+  "$locationProvider"
+ ($stateProvider, $urlRouterProvider, $locationProvider) ->
   # $locationProvider.html5Mode(true)
   
   $stateProvider.state 'home',
@@ -205,7 +209,7 @@ angular.module('lessons').config ($stateProvider, $urlRouterProvider, $locationP
 
   $urlRouterProvider.otherwise "/"
   
-  
+]  
 
 angular.module('lessons').config ( $authProvider ) ->
   $authProvider.configure({
