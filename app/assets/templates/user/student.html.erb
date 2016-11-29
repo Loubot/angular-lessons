@@ -9,7 +9,7 @@
         <md-card-header-text>
           <span class="md-title">
 
-            {{ USER.first_name }} {{ USER.last_name }}
+            {{ User.get_full_name() }}
 
           </span>
           <span class="md-subhead">
@@ -19,7 +19,7 @@
       </md-card-header>
       <img ng-if="profile" ng-src="{{ profile.avatar.url }}" 
           class="md-card-image" 
-          alt="{{ USER.first_name }} profile pic">
+          alt="{{ User.first_name }} profile pic">
 
       <div class="margin_t_10 padding_10">
         <form ng-submit="update_teahcer()">
@@ -28,7 +28,7 @@
             <input  type="text"
                     ng-change="update_teacher()"
                     ng-model-options="{ debounce:750 }"
-                    ng-model="USER.first_name">
+                    ng-model="User.first_name">
           </md-input-container>
 
           <md-input-container md-no-float>
@@ -36,7 +36,7 @@
             <input  type="text"
                     ng-change="update_teacher()" 
                     ng-model-options="{ debounce:750 }"
-                    ng-model="USER.last_name">
+                    ng-model="User.last_name">
           </md-input-container>
           
         </form>
@@ -65,10 +65,10 @@
       </md-card-content>
     </md-card> 
 
-    <md-card ng-if="USER.photos.length>0" class="min_height_128">
+    <md-card ng-if="User.photos.length>0" class="min_height_128">
       <md-grid-list md-cols="3" md-row-height="6:2">
         <md-grid-tile class="gray"
-            md-rowspan="3" md-colspan="1" md-colspan-sm="1" md-colspan-xs="1" ng-repeat="photo in USER.photos">
+            md-rowspan="3" md-colspan="1" md-colspan-sm="1" md-colspan-xs="1" ng-repeat="photo in User.photos">
           <img class="profile_thumbs" ng-src="{{ photo.avatar.url }}" >
           <md-grid-tile-footer>
             <md-menu>
