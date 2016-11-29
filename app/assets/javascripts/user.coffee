@@ -51,7 +51,7 @@ angular.module('lessons').service 'auth', [
             # $rootScope.$emit 'auth:logged-in-user', [
             #   resp
             # ]
-            $mdSidenav.close()
+            $mdSidenav('left').close()
             auth.set_is_valid( true )
           )
 
@@ -130,19 +130,20 @@ angular.module('lessons').service 'auth', [
           )
 
 
-      # Run validateUser and catch any errors. 
-      $auth.validateUser().then( ( resp ) ->
-          console.log resp
-          auth.set_is_valid( true )
-        ).catch (err) ->
-          $rootScope.$broadcast 'auth:validation-error', [
-            err
-            
-          ]
-        console.log "Validation failed"
-        auth.set_is_valid( false )
-        
       
+        
+      $rootScope.$on '$stateChangeSuccess', (event, toState, toParams, fromState, fromParams) ->
+        console.log '23'
+        $auth.validateUser().then( ( resp ) ->
+            console.log resp
+            auth.set_is_valid( true )
+          ).catch( (err) ->
+            $rootScope.$broadcast 'auth:validation-error', [
+              err
+              auth.set_is_valid( false )
+            ]
+          )
+        
 
     auth
 ]
