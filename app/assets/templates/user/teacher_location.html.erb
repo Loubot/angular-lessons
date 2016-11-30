@@ -10,10 +10,7 @@
 
       
 
-      <md-input-container class="width_75">
-        <label>Address(optional)</label>
-        <input ng-model="User.location.address" name="address_text" type="text">
-      </md-input-container><br>
+      
 
       <md-input-container>
         <md-select ng-model="User.location.county" placeholder="County" name="county" required>
@@ -22,6 +19,14 @@
         <div ng-messages="address_form.county.$error">
           <div ng-message="required">You must enter your county!!</div>
         </div>
+        <div ng-messages="address_form.county.$error">
+          <div ng-message="required">You must enter your county</div>
+        </div>
+      </md-input-container><br>
+
+      <md-input-container class="width_75">
+        <label>Address(optional)</label>
+        <input ng-model="User.location.address" name="address_text" type="text">
       </md-input-container><br>
 
       <md-input-container>

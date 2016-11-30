@@ -2,35 +2,11 @@ class LocationController < ApplicationController
   before_action :authenticate_teacher!
 
   def create
-    teacher = Teacher.includes(:location).find( location_params[ :teacher_id ] )
-    p "location params #{ location_params }"
-    
-    if teacher.location.nil?
-      p "No location!!"
-      if location_params.has_key?( :county )
-        p "has key county"
-        location = Location.geocode_county( location_params, location_params[ :teacher_id ] )
-      else
-        p "Doesn't have key county"
-
-        location = Location.create( location_params )
-
-      end
-
-      if location.save!
-        teacher.location = location
-        p "Location created"
-        pp location
-        render json: { location: location.as_json }
-      else
-        render json: { error: location.errors.full_messages }, status: 500
-      end
-    else #teacher.location != nil
-      p "Yes location !!"
-      location = teacher.location.update_attributes( location_params )
-      p "Location updated"
-      pp location
-      render json: { location: teacher.location }
+    location = Location.new( location_params )
+    if location.save
+      render json: { location: location.as_json }, status: 201
+    else
+      render json: { errors: location.errors }, status: 422
     end
   end
 
@@ -54,6 +30,10 @@ class LocationController < ApplicationController
       end
     end
 
+  end
+
+  def update
+    # todo
   end
 
   def destroy
