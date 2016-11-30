@@ -27,12 +27,15 @@ angular.module('lessons').controller( "TeacherLocationController" , [
         $mdToast.showSimple "Your profile might not be visible if you don't enter a location. Your county will do fine" 
 
 
-    $scope.i_want_map_toggle = ->     
-
-      if !$scope.i_want_map && !only_once
-        $scope.i_want_map = !$scope.i_want_map
-        init_map() 
-        only_once = true
+    $scope.i_want_map_toggle = ->
+      $scope.i_want_map = !$scope.i_want_map  
+      if !only_once
+        init_map()
+        only_once = true 
+      # if !$scope.i_want_map && !only_once
+      #   $scope.i_want_map = !$scope.i_want_map
+      #   init_map() 
+      #   only_once = true
 
     init_map = ->
       if $rootScope.User? && $rootScope.User.location
@@ -121,7 +124,7 @@ angular.module('lessons').controller( "TeacherLocationController" , [
 
     $scope.update_address = ->
       $scope.selected_address.county = $rootScope.User.location.county
-
+      $scope.selected_address.id = $rootScope.User.location.id
       #tell server this is a google formatted address
       $scope.selected_address.google = true
 
@@ -131,7 +134,7 @@ angular.module('lessons').controller( "TeacherLocationController" , [
         $scope.marker.setMap null if $scope.marker?
 
         set_marker( $rootScope.User.location )
-        # $scope.i_want_map = false
+        $scope.i_want_map = false
 
         $('#pac-input').val ''
         $scope.addresses = null
