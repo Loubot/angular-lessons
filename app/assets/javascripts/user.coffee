@@ -51,6 +51,7 @@ angular.module('lessons').service 'auth', [
             # $rootScope.$emit 'auth:logged-in-user', [
             #   resp
             # ]
+            alertify.success "Welcome back #{ $rootScope.User.first_name }"
             $mdSidenav('left').close()
             auth.set_is_valid( true )
           )
