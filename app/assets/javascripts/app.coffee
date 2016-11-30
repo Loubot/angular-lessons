@@ -330,10 +330,10 @@ angular.module('lessons').service 'COMMS', ( $http, $state, RESOURCES, $rootScop
       )
 
       
-angular.module('lessons').run [
-  '$rootScope'
-  'auth'
-  ($rootScope, auth) ->
+# angular.module('lessons').run [
+#   '$rootScope'
+#   'auth'
+#   ($rootScope, auth) ->
     # $rootScope.$on 'auth:validation-success', ( e ) ->
     #   console.log 'bl'
     #   console.log e
@@ -363,7 +363,7 @@ angular.module('lessons').run [
 #       return
 
 
-]
+# ]
 
 # angular.module('lessons').run(['$rootScope', '$state',
 #   ($rootScope, $state)->
