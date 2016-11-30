@@ -29,7 +29,7 @@ class Location < ActiveRecord::Base
 
 
   def add_name
-    self.name = "#{ self.teacher.first_name } #{ self.teacher.last_name } address"
+    self.name = "#{ self.teacher.get_full_name } address"
   end
 
 

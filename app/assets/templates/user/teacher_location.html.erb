@@ -6,7 +6,7 @@
     <span class="margin_b_10 give_height"></span>  
 
     <h4>Enter your address <small>County is minimum</small></h4>
-    <form name="address_form" novalidate ng-submit="address_form.$valid && User.as_is()">
+    <form name="address_form" novalidate ng-submit="address_form.$valid && User.update_address( User.location )">
 
       
 

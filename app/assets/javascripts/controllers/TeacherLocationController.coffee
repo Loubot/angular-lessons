@@ -107,29 +107,6 @@ angular.module('lessons').controller( "TeacherLocationController" , [
 
       $('#pac-input').val ''
     
-
-
-    
-    # USER.get_user().then( ( user ) ->
-    #   if $rootScope.USER.location?
-    #     $scope.address = $rootScope.USER.location
-    #     $scope.address.county = $rootScope.USER.location.name if !$rootScope.USER.location.county?
-    #   else
-    #     $mdToast.showSimple "Your profile might not be visible if you don't enter a location. Your county will do fine" 
-        
-    #   USER.check_user()
-    #   init_map() if $scope.i_want_map
-
-      
-
-    # ).catch( ( err ) ->
-    #   console.log err
-    #   alertify.error "You are not authorised to view this"
-    #   $state.go 'welcome'
-    # )
-
-       
-
       
 
     ################################# Address update ############################################################

@@ -301,9 +301,10 @@ angular.module('lessons').factory 'User', [
     )
 
   User::update_address = ( location ) ->
+    console.log location
     self = @
     COMMS.PATCH(
-      "teacher/#{ self.id }/location/#{ location.id }"
+      "/teacher/#{ self.id }/location/#{ location.id }"
       location
     ).then( ( resp ) ->
       console.log resp

@@ -58,6 +58,11 @@ class Teacher < ActiveRecord::Base
   before_validation :make_louis_admin
 
 
+  def get_full_name
+    "#{ self.first_name } #{ self.last_name }"
+  end
+
+
   def add_identity(auth)
     p "add identity"
     pp auth['uid']
