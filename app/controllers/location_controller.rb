@@ -33,14 +33,26 @@ class LocationController < ApplicationController
   end
 
   def update
+    pp params
     teacher = Teacher.includes( :location ).find( current_teacher.id )
-    if teacher.location.update_attributes( location_params )
-      pp teacher.location
-      render json: { location: teacher.location.as_json }, status: 200
+
+    if params.has_key?( :google )
+      if teacher.location.google_address( params )
+        render json: { location: teacher.location.as_json }, status: 200
+      else
+        render json: { errors: teacher.location.errors }, status: 422
+      end
     else
-      render json: { errors: teacher.location.errors }, status: 422
-    end
+      if teacher.location.update_attributes( location_params )
+        pp teacher.location
+        render json: { location: teacher.location.as_json }, status: 200
+      else
+        render json: { errors: teacher.location.errors }, status: 422
+      end
+    end    
   end
+
+
 
   def destroy
     location = Location.find( params[:id] )

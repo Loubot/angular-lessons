@@ -33,6 +33,20 @@ class Location < ActiveRecord::Base
   end
 
 
+  def google_address( params )
+    
+    self.update_attributes(
+      teacher_id: self.teacher.id,
+      longitude:  params[ 'geometry' ][ 'location' ][ 'lng' ],
+      latitude:   params[ 'geometry' ][ 'location' ][ 'lat' ],
+      name:       "#{ self.teacher.get_full_name() } address",
+      address:    params[ 'formatted_address' ],
+      county:     params[ 'county' ]
+    )
+    
+  end
+
+
   def self.geocode_county( params, teacher_id )
     location_details = Geokit::Geocoders::GoogleGeocoder.geocode( "#{ params[:county] }, Ireland" )
     p location_details

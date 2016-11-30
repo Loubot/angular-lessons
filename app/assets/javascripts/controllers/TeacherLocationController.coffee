@@ -121,7 +121,9 @@ angular.module('lessons').controller( "TeacherLocationController" , [
 
     $scope.update_address = ->
       $scope.selected_address.county = $rootScope.User.location.county
-      
+
+      #tell server this is a google formatted address
+      $scope.selected_address.google = true
 
       $rootScope.User.update_address( ( $scope.selected_address )
       ).then( ( resp ) ->
@@ -129,6 +131,7 @@ angular.module('lessons').controller( "TeacherLocationController" , [
         $scope.marker.setMap null if $scope.marker?
 
         set_marker( $rootScope.User.location )
+        # $scope.i_want_map = false
 
         $('#pac-input').val ''
         $scope.addresses = null
