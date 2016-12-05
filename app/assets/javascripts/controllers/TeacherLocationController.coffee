@@ -13,10 +13,13 @@ angular.module('lessons').controller( "TeacherLocationController" , [
   'counties'
   ( $scope, $rootScope, $state, $stateParams, COMMS, alertify, $mdBottomSheet, $mdToast, $q, counties ) ->
     console.log "TeacherLocationController"
-    $scope.addresses = null
-    $scope.address = {}
+    # $scope.addresses = null
+    # $scope.address = {}
     $scope.i_want_map = false
     only_once = false
+
+    
+    
 
     $scope.county_list = counties.county_list()
 
@@ -122,12 +125,13 @@ angular.module('lessons').controller( "TeacherLocationController" , [
         if position != index
           address.checked = false
 
-    $scope.update_address = ->
+    $scope.update_address = ( a ) ->
       $scope.selected_address.county = $rootScope.User.location.county
       $scope.selected_address.id = $rootScope.User.location.id
       #tell server this is a google formatted address
       $scope.selected_address.google = true
 
+      console.log $scope.selected_address
       $rootScope.User.update_address( ( $scope.selected_address )
       ).then( ( resp ) ->
         

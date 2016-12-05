@@ -77,6 +77,7 @@ angular.module('lessons').service 'auth', [
               resp
             ]
             auth.set_is_valid( true )
+            if $rootScope.User.is_teacher then $state.go( "teacher", id: $rootScope.User.id ) else $state.go( 'student_profile', id: $rootScope.User.id )
           )
           
         )
@@ -116,6 +117,7 @@ angular.module('lessons').service 'auth', [
       $rootScope.$on "auth:validation-error" , ( e, v ) ->
         console.log "validation error"
         alertify.error 'auth:validation-error'
+        console.log $state.current.name
 
       # set listener for validation success
       $rootScope.$on 'auth:validation-success', ( e, v ) ->
@@ -134,7 +136,7 @@ angular.module('lessons').service 'auth', [
       
         
       $rootScope.$on '$stateChangeSuccess', (event, toState, toParams, fromState, fromParams) ->
-        console.log '23'
+        
         $auth.validateUser().then( ( resp ) ->
             console.log resp
             auth.set_is_valid( true )

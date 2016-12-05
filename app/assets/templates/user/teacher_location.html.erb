@@ -19,9 +19,6 @@
         <div ng-messages="address_form.county.$error">
           <div ng-message="required">You must enter your county!!</div>
         </div>
-        <div ng-messages="address_form.county.$error">
-          <div ng-message="required">You must enter your county</div>
-        </div>
       </md-input-container><br>
 
       <md-input-container class="width_75">
@@ -37,7 +34,7 @@
   </md-content>
 </div>
 
-<div ng-show="!i_want_map" class="big_gutter center_text">
+<div ng-show="!i_want_map" ng-if="User.location.county" class="big_gutter center_text">
   <md-content>
     <md-subheader class="md-primary left_header">Option 2</md-subheader>
     <span class="margin_b_10 give_height"></span>  

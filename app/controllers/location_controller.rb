@@ -2,6 +2,8 @@ class LocationController < ApplicationController
   before_action :authenticate_teacher!
 
   def create
+    p "This is create"
+    pp location_params
     location = Location.new( location_params )
     if location.save
       render json: { location: location.as_json }, status: 201
@@ -35,6 +37,13 @@ class LocationController < ApplicationController
   def update
     pp params
     teacher = Teacher.includes( :location ).find( current_teacher.id )
+    
+    if !teacher.location
+      p "we are here #{ location_params[ :county ] }"
+      location = Location.create!( location_params )
+      render json: { errors: location.errors } and return
+      
+    end
 
     if params.has_key?( :google )
       if teacher.location.google_address( params )
@@ -68,6 +77,6 @@ class LocationController < ApplicationController
   private
 
     def location_params
-      params.permit( :address, :latitude, :longitude, :teacher_id, :name, :county )
+      params.permit( :address, :latitude, :longitude, :teacher_id, :name, :county  )
     end
 end
