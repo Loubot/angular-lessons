@@ -3,44 +3,25 @@
 angular.module('lessons').controller('AdminController', [
   "$scope"
   "$rootScope"
+  "auth"
   "$state"
-  "USER"
   "COMMS"
   "alertify"
   "$mdDialog"
 
-  ( $scope, $rootScope, $state, USER, COMMS, alertify, $mdDialog ) ->
+  ( $scope, $rootScope, auth, $state, COMMS, alertify, $mdDialog ) ->
     console.log "AdminController"
 
-    $scope.scrollevent = ( $e ) ->      
-      return
+    $rootScope.$on 'admin', ( e, admin ) ->
+      console.log 'hup'
+      if admin == false or admin == 'false'
+        $state.go 'welcome'
+        alertify.error 'Tut tut'
+      
 
     $scope.show_teachers = false
 
-    USER.get_user().then( ( resp ) ->
-      if !$rootScope.USER?
-        alertify.error "You must be authorised"
-        $state.go 'welcome'
-      if $rootScope.USER.admin == false
-        alertify.error "You must be an admin to view this"
-        $state.go "welcome"
-        return
-      USER.check_user()
-      COMMS.GET(
-          "/category"
-        ).then( ( resp ) ->
-          console.log resp
-          alertify.success "Got categories"
-          $scope.categories = resp.data.categories
-        ).catch( ( err ) ->
-          console.log err
-          alertify.error "Failed to get categories"
-        )
-    ).catch( ( err ) ->
-      console.log err
-      alertify.error "You must log in"
-      $state.go 'welcome'
-    )
+    
 
     $scope.fetch_teachers = ->
       console.log $scope.show_teachers

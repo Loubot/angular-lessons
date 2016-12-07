@@ -108,7 +108,14 @@ angular.module('lessons').service 'auth', [
       return valid
 
 
-     do -> 
+    auth.admin_check = ->
+      if $rootScope.User?
+        $rootScope.$emit 'admin', 
+          $rootScope.User.admin
+        
+
+
+    do -> 
 
       
       # set listener for validation error
@@ -119,24 +126,25 @@ angular.module('lessons').service 'auth', [
       # set listener for validation success
       $rootScope.$on 'auth:validation-success', ( e, v ) ->
         console.log 'validation success'
-        # console.log e
-        # console.log v
+
         if !$rootScope.User? && $rootScope.user.first_name?
           console.log "Doing it"
           new User().then( ( res ) ->
             console.log 'end of do'
             console.log $rootScope.User
             auth.set_is_valid( true)
+            auth.admin_check()
           )
 
 
       
         
       $rootScope.$on '$stateChangeSuccess', (event, toState, toParams, fromState, fromParams) ->
-        console.log '23'
+        
         $auth.validateUser().then( ( resp ) ->
             console.log resp
             auth.set_is_valid( true )
+            auth.admin_check()
           ).catch( (err) ->
             $rootScope.$broadcast 'auth:validation-error', [
               err
@@ -194,6 +202,7 @@ angular.module('lessons').factory 'User', [
     @email = teacher.email
     @id = teacher.id
     @is_teacher = teacher.is_teacher
+    @admin = teacher.admin
     @overview = teacher.overview
     @profile = teacher.profile
     @experience = teacher.experience

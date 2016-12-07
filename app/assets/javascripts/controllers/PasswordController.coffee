@@ -63,5 +63,3 @@ angular.module('lessons').controller( "PasswordController", [
       return
       
 ])
-
-# http://localhost:3000/#/reset-password/5qzNUaA__3Qlx9zrMEIygA/default/expiry/true/aa574794553b09ce0becc3a394e97b194b6401796131f7590c5e8052c4513c7a/lllouis@yahoo.com/

@@ -55,7 +55,6 @@ class Teacher < ActiveRecord::Base
 
 
   after_create :send_new_message
-  before_validation :make_louis_admin
 
 
   def add_identity(auth)
@@ -114,12 +113,6 @@ class Teacher < ActiveRecord::Base
         TeacherMailer.delay.user_registered( self )
       else
         # TeacherMailer.user_registered( self ).deliver_now
-      end
-    end
-
-    def make_louis_admin
-      if self.email == "lllouis@yahoo.com"
-        self.admin = true
       end
     end
 
