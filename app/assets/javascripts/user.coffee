@@ -6,7 +6,8 @@ angular.module('lessons').service 'auth', [
   "$state"
   "$window"
   "$mdSidenav"
-  ( $rootScope, $auth, User, alertify, $state, $window, $mdSidenav ) ->
+  "$q"
+  ( $rootScope, $auth, User, alertify, $state, $window, $mdSidenav, $q ) ->
     valid = false
     auth = {}
     auth.county_lists =
@@ -108,6 +109,9 @@ angular.module('lessons').service 'auth', [
         $state.go 'welcome'
         alertify.error "You are not authorised!"
       return valid
+
+    auth.check_if_logged_in = ->
+      return $auth.validateUser()
 
 
      do -> 

@@ -206,6 +206,8 @@ angular.module('lessons').config [
     url: "/admin"
     templateUrl: "admin/manage.html"
     controller: "AdminController"
+    resolve:
+      authenticated: ( "auth" )
 
   $urlRouterProvider.otherwise "/"
   
