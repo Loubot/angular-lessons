@@ -638,15 +638,15 @@ md-sidenav.md-closed.md-locked-open-add-active.user_menu {
 
 // Teacher area
 .calendar_container{
-  height: 100% !important;
+  // height: calc( 100% - 200px ) !important;
 }
 #calendar{
   // max-height: 12em !important;
 }
 
 .calendar_buttons{
-  position: absolute;
-  bottom: 20px;
+  // position: absolute;
+  bottom: 20px !important;
 }
 
 // End of Teacher area
@@ -677,6 +677,10 @@ ul.share-buttons .sr-only {
 
 
 @media (min-width: 250px){
+  .scrollable{
+    height: 150px !important;
+    overflow: scroll;
+  }
 
   .margin_s_100.md-grid{
     margin: 0 0 !important;
@@ -724,6 +728,7 @@ ul.share-buttons .sr-only {
 } /* 250px */
 
 @media ( min-width: 600px ){
+
   .margin_s_100.md-grid{
     margin: 0 100px !important;
   }
@@ -753,6 +758,12 @@ ul.share-buttons .sr-only {
 } /* 600px */
 
 @media ( min-width: 768px ){
+
+  .scrollable{
+    height: 200px !important;
+    overflow: initial;
+  }
+  
   .main_page_search_container{
     min-height: 400px;
     background-image: asset_url('piano.jpg');
