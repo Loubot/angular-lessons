@@ -5,12 +5,11 @@ angular.module('lessons').controller( 'ViewTeacherController', [
   "$rootScope"
   "$state"
   "$stateParams"
-  "USER"
   "$filter"
   "COMMS"
   "alertify"
   "$mdDialog"
-  ( $scope, $rootScope, $state, $stateParams, USER, $filter, COMMS, alertify, $mdDialog ) ->
+  ( $scope, $rootScope, $state, $stateParams, $filter, COMMS, alertify, $mdDialog ) ->
     console.log "ViewTeacherController"
 
     $scope.message = {}

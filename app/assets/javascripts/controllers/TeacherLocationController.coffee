@@ -17,6 +17,7 @@ angular.module('lessons').controller( "TeacherLocationController" , [
     # $scope.address = {}
     $scope.i_want_map = false
     only_once = false
+    
 
     
     
@@ -41,6 +42,9 @@ angular.module('lessons').controller( "TeacherLocationController" , [
       #   only_once = true
 
     init_map = ->
+      $scope.map = {}
+      $scope.searchBox = {}
+      console.log $rootScope.User.location
       if $rootScope.User? && $rootScope.User.location
 
         $scope.map = new google.maps.Map(document.getElementById('map'), {
@@ -100,6 +104,12 @@ angular.module('lessons').controller( "TeacherLocationController" , [
         $mdToast.showSimple "Click on the map to locate your address"
         # alertify.log("Click on the map to locate your address")
       )
+
+      google.maps.event.addListenerOnce $scope.map, 'idle', -> 
+        console.log 'heyyyy'
+        google.maps.event.trigger($scope.map, 'resize')
+      
+
 
     set_marker = ( location ) ->
       $scope.marker.setMap null if $scope.marker?
