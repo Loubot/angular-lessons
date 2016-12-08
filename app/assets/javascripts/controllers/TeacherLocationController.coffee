@@ -105,8 +105,7 @@ angular.module('lessons').controller( "TeacherLocationController" , [
         # alertify.log("Click on the map to locate your address")
       )
 
-      google.maps.event.addListenerOnce $scope.map, 'idle', -> 
-        console.log 'heyyyy'
+      google.maps.event.addListenerOnce $scope.map, 'idle', ->
         google.maps.event.trigger($scope.map, 'resize')
       
 
