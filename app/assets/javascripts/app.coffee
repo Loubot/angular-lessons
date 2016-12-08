@@ -15,6 +15,52 @@ angular.module('lessons', [
   'mdPickers'
 ])
 
+angular.module('lessons').run [
+  '$rootScope'
+  "$state"
+  "alertify"
+  ( $rootScope, $state, alertify ) ->
+    $rootScope.$on '$stateChangeError', (event, toState, toParams, fromState, fromParams, error) ->
+      console.log error
+      if error.status = 401 and error.error = 'non_admin'
+        $state.go "welcome"
+        alertify.error "Tut tut"
+      else if error.status ==  401 and  error.error == "non_teacher"
+        $state.go "welcome"
+        alertify.error "You are not Authorised"
+
+      return 
+    # $rootScope.$on 'auth:validation-success', ( e ) ->
+    #   console.log 'bl'
+    #   console.log e
+    # see what's going on when the route tries to change
+    # $rootScope.$on '$viewContentLoading', (event, toState, toParams, fromState, fromParams) ->
+    #   console.log '23'
+    #   auth.check_is_valid()
+    #   return
+#     $rootScope.$on '$stateChangeError', (event, toState, toParams, fromState, fromParams, error) ->
+#       console.log '$stateChangeError - fired when an error occurs during transition.'
+#       console.log arguments
+#       return
+#     $rootScope.$on '$stateChangeSuccess', (event, toState, toParams, fromState, fromParams) ->
+#       console.log '$stateChangeSuccess to ' + toState.name + '- fired once the state transition is complete.'
+#       return
+#     $rootScope.$on '$viewContentLoading', (event, viewConfig) ->
+#       console.log '$viewContentLoading - view begins loading - dom not rendered', viewConfig
+#       console.log viewConfig
+#       console.log event
+#       return
+#     # $rootScope.$on('$viewContentLoaded',function(event){
+#     #   // runs on individual scopes, so putting it in "run" doesn't work.
+#     #   console.log('$viewContentLoaded - fired after dom rendered',event);
+#     $rootScope.$on '$stateNotFound', (event, unfoundState, fromState, fromParams) ->
+#       console.log '$stateNotFound ' + unfoundState.to + '  - fired when a state cannot be found by its name.'
+#       console.log unfoundState, fromState, fromParams
+#       return
+
+
+]
+
 angular.module('lessons').constant "RESOURCES", do ->
   url = window.location.origin
   # console.log "Domain #{ url + '/api' }"
@@ -142,10 +188,7 @@ angular.module('lessons').config [
     templateUrl: "static/search.html"
     controller: "SearchController"
 
-  $stateProvider.state 'teacher',
-    url: '/teacher/:id'
-    templateUrl: "user/teacher.html"
-    controller: "TeacherController"
+  
 
   $stateProvider.state 'student_profile',
     url: '/student/:id'
@@ -161,21 +204,7 @@ angular.module('lessons').config [
     url: "/register-teacher"
     templateUrl: "static/register_teacher.html"
     controller: "RegisterController"
-
-  $stateProvider.state 'teacher_area',
-    url: "/teacher-area/:id/:student_email"
-    templateUrl: "user/teacher_area.html"
-    controller: "TeacherAreaController"
-
-  $stateProvider.state 'teacher_location',
-    url: '/teacher-location/:id'
-    templateUrl: "user/teacher_location.html"
-    controller: "TeacherLocationController"
-
-  $stateProvider.state 'conversation',
-    url: "/conversation/:random/:id"
-    templateUrl: "conversation/messages.html"
-    controller: "ConversationController"
+  
 
   $stateProvider.state 'how_it_works',
     url: '/how-it-works'
@@ -202,12 +231,62 @@ angular.module('lessons').config [
     templateUrl: 'password/reset_password.html'
     controller: "PasswordController"
 
+
+
+  $stateProvider.state 'teacher',
+    url: '/teacher/:id'
+    templateUrl: "user/teacher.html"
+    controller: "TeacherController"
+    resolve:
+      authenticate: [
+        "auth"
+        ( auth ) ->
+          auth.check_if_logged_in_and_teacher()
+      ]
+
+  $stateProvider.state 'teacher_area',
+    url: "/teacher-area/:id/:student_email"
+    templateUrl: "user/teacher_area.html"
+    controller: "TeacherAreaController"
+    resolve:
+      authenticate: [
+        "auth"
+        ( auth ) ->
+          auth.check_if_logged_in_and_teacher()
+      ]
+
+  $stateProvider.state 'teacher_location',
+    url: '/teacher-location/:id'
+    templateUrl: "user/teacher_location.html"
+    controller: "TeacherLocationController"
+    resolve:
+      authenticate: [
+        "auth"
+        ( auth ) ->
+          auth.check_if_logged_in_and_teacher()
+      ]
+
+  $stateProvider.state 'conversation',
+    url: "/conversation/:random/:id"
+    templateUrl: "conversation/messages.html"
+    controller: "ConversationController"
+    resolve:
+      authenticate: [
+        "auth"
+        ( auth ) ->
+          auth.check_if_logged_in_and_teacher()
+      ]
+
   $stateProvider.state 'admin',
     url: "/admin"
     templateUrl: "admin/manage.html"
     controller: "AdminController"
     resolve:
-      authenticated: ( "auth" )
+      admin: [
+        "auth"
+        ( auth ) ->
+          auth.check_if_logged_in_and_admin()
+      ]
 
   $urlRouterProvider.otherwise "/"
   

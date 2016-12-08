@@ -11,8 +11,6 @@ angular.module('lessons').controller('TeacherAreaController', [
   '$mdpTimePicker'
   ( $scope, auth, $stateParams, alertify, $mdDialog, $mdBottomSheet, $mdpDatePicker, $mdpTimePicker ) ->
     console.log "TeacherAreaController"
-    
-    auth.check_is_valid()
 
     $scope.create_event_button_bool = false
     $scope.api_loaded = false # disable acknowledge calendar button will api is loaded

@@ -101,23 +101,32 @@ angular.module('lessons').service 'auth', [
           $state.go 'welcome'
         )
 
-    auth.set_is_valid = ( story ) ->
-      valid = story
-
-    auth.check_is_valid = ->
-      if !valid 
-        $state.go 'welcome'
-        alertify.error "You are not authorised!"
-      return valid
-
     auth.check_if_logged_in = ->
-      return $auth.validateUser()
+      $auth.validateUser()
 
+    auth.check_if_logged_in_and_teacher = ->
+      $q ( resolve, reject ) ->
+        $auth.validateUser().then( ( user ) ->
+          console.log "validate teacher"
+          console.log user
+          if !user.is_teacher
+            reject status: 401, error: "non_teacher"
+          else
+            resolve user
+        ).catch( ( err ) ->
+          reject err
+        )
 
-    auth.admin_check = ->
-      if $rootScope.User?
-        $rootScope.$emit 'admin', 
-          $rootScope.User.admin
+    auth.check_if_logged_in_and_admin = ->
+      $q ( resolve, reject ) ->
+        $auth.validateUser().then( ( user ) ->
+          if !user.admin
+            reject status: 401, error: 'non_admin'
+          else
+            resolve user
+        ).catch( ( err ) ->
+          reject err
+        )
         
 
 
@@ -139,24 +148,6 @@ angular.module('lessons').service 'auth', [
           new User().then( ( res ) ->
             console.log 'end of do'
             console.log $rootScope.User
-            auth.set_is_valid( true)
-            auth.admin_check()
-          )
-
-
-      
-        
-      $rootScope.$on '$stateChangeSuccess', (event, toState, toParams, fromState, fromParams) ->
-        
-        $auth.validateUser().then( ( resp ) ->
-            console.log resp
-            auth.set_is_valid( true )
-            auth.admin_check()
-          ).catch( (err) ->
-            $rootScope.$broadcast 'auth:validation-error', [
-              err
-              auth.set_is_valid( false )
-            ]
           )
         
 
