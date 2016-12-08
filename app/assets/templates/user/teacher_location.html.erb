@@ -6,14 +6,11 @@
     <span class="margin_b_10 give_height"></span>  
 
     <h4>Enter your address <small>County is minimum</small></h4>
-    <form name="address_form" novalidate ng-submit="address_form.$valid && User.as_is()">
+    <form name="address_form" novalidate ng-submit="address_form.$valid && User.update_address( User.location )">
 
       
 
-      <md-input-container class="width_75">
-        <label>Address(optional)</label>
-        <input ng-model="User.location.address" name="address_text" type="text">
-      </md-input-container><br>
+      
 
       <md-input-container>
         <md-select ng-model="User.location.county" placeholder="County" name="county" required>
@@ -24,6 +21,11 @@
         </div>
       </md-input-container><br>
 
+      <md-input-container class="width_75">
+        <label>Address(optional)</label>
+        <input ng-model="User.location.address" name="address_text" type="text">
+      </md-input-container><br>
+
       <md-input-container>
         <input type="submit" value="Submit" aria-label="submit address" class="md-button md-raised md-primary" >
       </md-input-container>
@@ -32,7 +34,7 @@
   </md-content>
 </div>
 
-<div ng-show="!i_want_map" class="big_gutter center_text">
+<div ng-show="!i_want_map" ng-if="User.location.county" class="big_gutter center_text">
   <md-content>
     <md-subheader class="md-primary left_header">Option 2</md-subheader>
     <span class="margin_b_10 give_height"></span>  
@@ -89,4 +91,3 @@
 
   </md-content>
 </div>
-

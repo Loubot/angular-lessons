@@ -13,10 +13,13 @@ angular.module('lessons').controller( "TeacherLocationController" , [
   'counties'
   ( $scope, $rootScope, $state, $stateParams, COMMS, alertify, $mdBottomSheet, $mdToast, $q, counties ) ->
     console.log "TeacherLocationController"
-    $scope.addresses = null
-    $scope.address = {}
+    # $scope.addresses = null
+    # $scope.address = {}
     $scope.i_want_map = false
     only_once = false
+
+    
+    
 
     $scope.county_list = counties.county_list()
 
@@ -27,12 +30,15 @@ angular.module('lessons').controller( "TeacherLocationController" , [
         $mdToast.showSimple "Your profile might not be visible if you don't enter a location. Your county will do fine" 
 
 
-    $scope.i_want_map_toggle = ->     
-
-      if !$scope.i_want_map && !only_once
-        $scope.i_want_map = !$scope.i_want_map
-        init_map() 
-        only_once = true
+    $scope.i_want_map_toggle = ->
+      $scope.i_want_map = !$scope.i_want_map  
+      if !only_once
+        init_map()
+        only_once = true 
+      # if !$scope.i_want_map && !only_once
+      #   $scope.i_want_map = !$scope.i_want_map
+      #   init_map() 
+      #   only_once = true
 
     init_map = ->
       if $rootScope.User? && $rootScope.User.location
@@ -107,29 +113,6 @@ angular.module('lessons').controller( "TeacherLocationController" , [
 
       $('#pac-input').val ''
     
-
-
-    
-    # USER.get_user().then( ( user ) ->
-    #   if $rootScope.USER.location?
-    #     $scope.address = $rootScope.USER.location
-    #     $scope.address.county = $rootScope.USER.location.name if !$rootScope.USER.location.county?
-    #   else
-    #     $mdToast.showSimple "Your profile might not be visible if you don't enter a location. Your county will do fine" 
-        
-    #   USER.check_user()
-    #   init_map() if $scope.i_want_map
-
-      
-
-    # ).catch( ( err ) ->
-    #   console.log err
-    #   alertify.error "You are not authorised to view this"
-    #   $state.go 'welcome'
-    # )
-
-       
-
       
 
     ################################# Address update ############################################################
@@ -142,16 +125,20 @@ angular.module('lessons').controller( "TeacherLocationController" , [
         if position != index
           address.checked = false
 
-    $scope.update_address = ->
+    $scope.update_address = ( a ) ->
       $scope.selected_address.county = $rootScope.User.location.county
-      
+      $scope.selected_address.id = $rootScope.User.location.id
+      #tell server this is a google formatted address
+      $scope.selected_address.google = true
 
+      console.log $scope.selected_address
       $rootScope.User.update_address( ( $scope.selected_address )
       ).then( ( resp ) ->
         
         $scope.marker.setMap null if $scope.marker?
 
         set_marker( $rootScope.User.location )
+        $scope.i_want_map = false
 
         $('#pac-input').val ''
         $scope.addresses = null

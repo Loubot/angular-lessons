@@ -22,6 +22,7 @@
 #  email                  :string
 #  first_name             :string
 #  last_name              :string
+#  calendar_id            :string
 #  overview               :text
 #  is_teacher             :boolean          default(FALSE)
 #  tokens                 :text
@@ -55,6 +56,11 @@ class Teacher < ActiveRecord::Base
 
 
   after_create :send_new_message
+
+
+  def get_full_name
+    "#{ self.first_name } #{ self.last_name }"
+  end
 
 
   def add_identity(auth)

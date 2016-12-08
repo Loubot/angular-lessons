@@ -46,17 +46,18 @@ angular.module('lessons').controller("RegisterController", [
 
       else
         console.log "made it"
-
+        console.log $scope.teacher
         auth.register( $scope.teacher )
 
     # On successful registration create user location after user_ready is broadcast
 
-    $rootScope.$on 'user_ready', ( user ) ->
+    $rootScope.$on 'auth:registered_user', ( user ) ->
+      
       alertify.success "Welcome #{ $rootScope.User.get_full_name() }"
       alertify.success "Registered as teacher" if $rootScope.User.is_teacher
       alertify.success "Registered as student" if !$rootScope.User.is_teacher
       # $state.go('teacher', id: $rootScope.User.id )
-      $rootScope.User.registration_address( $scope.teacher.county )
+      $rootScope.User.create_location( $scope.teacher.county )
         
     # $scope.county_list = counties.county_list()
 

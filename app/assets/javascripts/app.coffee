@@ -206,6 +206,8 @@ angular.module('lessons').config [
     url: "/admin"
     templateUrl: "admin/manage.html"
     controller: "AdminController"
+    resolve:
+      authenticated: ( "auth" )
 
   $urlRouterProvider.otherwise "/"
   
@@ -279,8 +281,6 @@ angular.module('lessons').service 'COMMS', ( $http, $state, RESOURCES, $rootScop
         headers: { "Content-Type": "application/json" }
         data: data
       ).then( ( result ) ->
-        if result.user != undefined
-          $rootScope.USER = result.user
         resolve result
       ).catch( ( err_result ) ->
         reject err_result
@@ -294,8 +294,19 @@ angular.module('lessons').service 'COMMS', ( $http, $state, RESOURCES, $rootScop
           headers: { "Content-Type": "application/json" }
           data: data
         ).then( ( result ) ->
-          if result.user != undefined
-            $rootScope.USER = result.user
+          resolve result
+        ).catch( ( err_result ) ->
+          reject err_result
+        )
+
+    PATCH: ( url, data ) ->
+      $q ( resolve, reject ) ->
+        $http(
+          method: 'PATCH'
+          url: "#{ RESOURCES.DOMAIN }#{ url }"
+          headers: { "Content-Type": "application/json" }
+          data: data
+        ).then( ( result ) ->
           resolve result
         ).catch( ( err_result ) ->
           reject err_result

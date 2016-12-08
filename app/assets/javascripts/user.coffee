@@ -6,7 +6,8 @@ angular.module('lessons').service 'auth', [
   "$state"
   "$window"
   "$mdSidenav"
-  ( $rootScope, $auth, User, alertify, $state, $window, $mdSidenav ) ->
+  "$q"
+  ( $rootScope, $auth, User, alertify, $state, $window, $mdSidenav, $q ) ->
     valid = false
     auth = {}
     auth.county_lists =
@@ -51,6 +52,7 @@ angular.module('lessons').service 'auth', [
             # $rootScope.$emit 'auth:logged-in-user', [
             #   resp
             # ]
+            alertify.success "Welcome back #{ $rootScope.User.first_name }"
             $mdSidenav('left').close()
             auth.set_is_valid( true )
           )
@@ -72,10 +74,11 @@ angular.module('lessons').service 'auth', [
           
           new User().then( ( resp ) ->
             console.log resp
-            # $rootScope.$emit 'auth:registered_user', [
-            #   resp
-            # ]
+            $rootScope.$emit 'auth:registered_user', [
+              resp
+            ]
             auth.set_is_valid( true )
+            if $rootScope.User.is_teacher then $state.go( "teacher", id: $rootScope.User.id ) else $state.go( 'student_profile', id: $rootScope.User.id )
           )
           
         )
@@ -107,6 +110,9 @@ angular.module('lessons').service 'auth', [
         alertify.error "You are not authorised!"
       return valid
 
+    auth.check_if_logged_in = ->
+      return $auth.validateUser()
+
 
     auth.admin_check = ->
       if $rootScope.User?
@@ -122,6 +128,7 @@ angular.module('lessons').service 'auth', [
       $rootScope.$on "auth:validation-error" , ( e, v ) ->
         console.log "validation error"
         alertify.error 'auth:validation-error'
+        console.log $state.current.name
 
       # set listener for validation success
       $rootScope.$on 'auth:validation-success', ( e, v ) ->
@@ -293,56 +300,34 @@ angular.module('lessons').factory 'User', [
     @.profile_url
 #################### end of pics ###############################################
 
-#################### Address ##################################################
+#################### Location ##################################################
 
-  User::as_is = ->
+  User::create_location = ( location ) ->
     self = @
     COMMS.POST(
       "/teacher/#{ self.id }/location"
-      self.location
+      location
     ).then( ( resp ) ->
       console.log resp
       self.location = resp.data.location
-      alertify.success "Updated location"
+      if $rootScope.User.is_teacher then $state.go( "teacher", id: $rootScope.User.id ) else $state.go( 'student_profile', id: $rootScope.User.id )
     ).catch( ( err ) ->
-      alertify.error "Failed to update location"
-    )
-
-  User::update_address = ( address ) ->
-    console.log "Update address"
-    self = this
-    COMMS.POST(
-      "/teacher/#{ self.id }/manual-address"
-      self.address
-    ).then( ( resp) ->
-      alertify.success "Updated location"
-      console.log resp
-      $mdBottomSheet.hide()
-
-      self.location = resp.data.location
-    ).catch( ( err) ->
       console.log err
-      alertify.error "Failed to update location"
+      alertify.success "Failed to create location"
     )
 
-  User::manual_address = ( address ) ->
+  User::update_address = ( location ) ->
+    console.log location
     self = @
-    COMMS.POST(
-      "/teacher/#{ self.id }/location"
-      self.format_address( address )
-    )
-
-  User::registration_address = ( address ) ->
-    self = @
-    COMMS.POST(
-      "/teacher/#{ self.id }/location"
-      address 
+    COMMS.PATCH(
+      "/teacher/#{ self.id }/location/#{ location.id }"
+      location
     ).then( ( resp ) ->
-      console.log "create location"
+      console.log resp
       self.location = resp.data.location
     ).catch( ( err ) ->
       console.log err
-      alertify.error "Failed to create location"
+      alertify.error "Failed to update location"
     )
 
   User::format_address = ( google_address ) ->
