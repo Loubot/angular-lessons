@@ -53,6 +53,9 @@ angular.module('lessons').controller( 'ViewTeacherController', [
             lng: $scope.teacher.location.longitude
           )
 
+      google.maps.event.addListenerOnce $scope.map, 'idle', ->
+        google.maps.event.trigger($scope.map, 'resize')
+
     
     
     COMMS.GET(
