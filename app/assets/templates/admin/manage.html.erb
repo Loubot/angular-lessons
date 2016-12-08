@@ -63,7 +63,7 @@
   <md-content class="margin_t_10 white_background">
     <md-toolbar>
       <div class="md-toolbar-tools">
-        <span layout-margin ng-click="fetch_teachers()">List of teachers <i class="material-icons">touch_app</i></span>
+        <span layout-margin ng-click="fetch_teachers()">List of teachers <span ng-if="teachers">{{ teachers.length }}</span><i class="material-icons">touch_app</i></span>
         
       </div>
       
@@ -75,7 +75,7 @@
           <h3>{{teacher.email}}</h3>
           <span>Subjects {{ teacher.subjects.length }}</span> ||
           <span>Location {{ ( teacher.location != null ) }}</span> ||
-          <span>Experience {{ (teacher.experience != null) }}</span> ||
+          <span>Experience {{ (teacher.experience.length > 0) }}</span> ||
           <span>Quals {{ (teacher.qualifications.length ) }}</span> 
 
           <md-divider md-inset></md-divider>
