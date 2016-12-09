@@ -14,6 +14,7 @@ angular.module('lessons').controller('ConversationController', [
     console.log "ConversationController"
     console.log $stateParams
     $scope.show_form = false
+    console.log authenticate
 
     $scope.search_conversations = ->
       $mdSidenav('conversation_search').toggle()
@@ -22,40 +23,40 @@ angular.module('lessons').controller('ConversationController', [
       for convo in $scope.conversations
         $scope.conversation = convo if convo.random == $stateParams.random
         console.log "found it #{ convo }"
+    console.log $rootScope.User? && $rootScope.User.is_teacher
+    console.log $rootScope.User? && !$rootScope.User.is_teacher
+    COMMS.GET(
+      "/conversation"
+      {
+        random: $stateParams.random if $stateParams.random? && $stateParams.random != ""
+        # conversation_id: $stateParams.id
+        teacher_email: $rootScope.User.email if $rootScope.User? && $rootScope.User.is_teacher
+        student_email: $rootScope.User.email if $rootScope.User? && !$rootScope.User.is_teacher
+      }
+    ).then( ( resp ) ->
+      console.log resp
 
-    $rootScope.$on 'user_ready', ( e, v ) ->
-      COMMS.GET(
-        "/conversation"
-        {
-          random: $stateParams.random if $stateParams.random? && $stateParams.random != ""
-          # conversation_id: $stateParams.id
-          teacher_email: $rootScope.User.email if $rootScope.User? && $rootScope.User.is_teacher
-          student_email: $rootScope.User.email if $rootScope.User? && !$rootScope.User.is_teacher
-        }
-      ).then( ( resp ) ->
-        console.log resp
+      if !$stateParams.random? or $stateParams.random == ""
+        $scope.conversation = resp.data.conversation if resp.data.conversation?
 
-        if !$stateParams.random? or $stateParams.random == ""
-          $scope.conversation = resp.data.conversation if resp.data.conversation?
-
-          $scope.conversation =   resp.data.conversations[0] if ( resp.data.conversations? && resp.data.conversations.length > 0 )
-          $scope.conversations =  resp.data.conversations if resp.data.conversations?
+        $scope.conversation =   resp.data.conversations[0] if ( resp.data.conversations? && resp.data.conversations.length > 0 )
+        $scope.conversations =  resp.data.conversations if resp.data.conversations?
+      
+      else if $stateParams.random? and $stateParams.random != ""
+        $scope.conversations = resp.data.conversations
+        find_conversation_by_random()
+      
         
-        else if $stateParams.random? and $stateParams.random != ""
-          $scope.conversations = resp.data.conversations
-          find_conversation_by_random()
-        
-          
 
-        if $scope.conversation?
-          alertify.success "Got conversations"
-        else
-          alertify.error "Failed to find conversations"
-        scroll_to_bottom()
-      ).catch( ( err ) ->
-        console.log err
-        alertify.error "Failed to get conversation"
-      )
+      if $scope.conversation?
+        alertify.success "Got conversations"
+      else
+        alertify.error "Failed to find conversations"
+      scroll_to_bottom()
+    ).catch( ( err ) ->
+      console.log err
+      alertify.error "Failed to get conversation"
+    )
 
     
     $scope.select_conversation = ( id ) ->

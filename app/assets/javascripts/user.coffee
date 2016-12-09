@@ -54,7 +54,6 @@ angular.module('lessons').service 'auth', [
             # ]
             alertify.success "Welcome back #{ $rootScope.User.first_name }"
             $mdSidenav('left').close()
-            auth.set_is_valid( true )
           )
 
 
@@ -77,8 +76,8 @@ angular.module('lessons').service 'auth', [
             $rootScope.$emit 'auth:registered_user', [
               resp
             ]
-            auth.set_is_valid( true )
-            if $rootScope.User.is_teacher then $state.go( "teacher", id: $rootScope.User.id ) else $state.go( 'student_profile', id: $rootScope.User.id )
+            
+            if $rootScope.User.is_teacher then $state.go( "teacher.teacher", id: $rootScope.User.id ) else $state.go( 'student_profile', id: $rootScope.User.id )
           )
           
         )
@@ -301,7 +300,7 @@ angular.module('lessons').factory 'User', [
     ).then( ( resp ) ->
       console.log resp
       self.location = resp.data.location
-      if $rootScope.User.is_teacher then $state.go( "teacher", id: $rootScope.User.id ) else $state.go( 'student_profile', id: $rootScope.User.id )
+      # if $rootScope.User.is_teacher then $state.go( "teacher", id: $rootScope.User.id ) else $state.go( 'student_profile', id: $rootScope.User.id )
     ).catch( ( err ) ->
       console.log err
       alertify.success "Failed to create location"

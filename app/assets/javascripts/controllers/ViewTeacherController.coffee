@@ -116,11 +116,11 @@ angular.module('lessons').controller( 'ViewTeacherController', [
     
     ####################### Message dialog #############################
 
-    user_listener = $rootScope.$watch "USER", ->
+    user_listener = $rootScope.$watch "User", ->
       console.log "User changed"
-      if $rootScope.USER?
+      if $rootScope.User?
         
-        $scope.message.name = "#{ $rootScope.USER.first_name } #{ $rootScope.USER.last_name }"
+        $scope.message.name = "#{ $rootScope.User.first_name } #{ $rootScope.User.last_name }"
 
     $scope.open_message_dialog = ->
       $mdDialog.show(
@@ -137,7 +137,7 @@ angular.module('lessons').controller( 'ViewTeacherController', [
       console.log $scope.message
       $scope.message.teacher_id = $scope.teacher.id
       $scope.message.teacher_email = $scope.teacher.email
-      $scope.message.student_email = $rootScope.USER.email
+      $scope.message.student_email = $rootScope.User.email
       COMMS.POST(
         "/conversation"
         conversation: $scope.message

@@ -15,51 +15,7 @@ angular.module('lessons', [
   'mdPickers'
 ])
 
-angular.module('lessons').run [
-  '$rootScope'
-  "$state"
-  "alertify"
-  ( $rootScope, $state, alertify ) ->
-    $rootScope.$on '$stateChangeError', (event, toState, toParams, fromState, fromParams, error) ->
-      console.log error
-      if error.status = 401 and error.error = 'non_admin'
-        $state.go "welcome"
-        alertify.error "Tut tut"
-      else if error.status ==  401 and  error.error == "non_teacher"
-        $state.go "welcome"
-        alertify.error "You are not Authorised"
 
-      return 
-    # $rootScope.$on 'auth:validation-success', ( e ) ->
-    #   console.log 'bl'
-    #   console.log e
-    # see what's going on when the route tries to change
-    # $rootScope.$on '$viewContentLoading', (event, toState, toParams, fromState, fromParams) ->
-    #   console.log '23'
-    #   auth.check_is_valid()
-    #   return
-#     $rootScope.$on '$stateChangeError', (event, toState, toParams, fromState, fromParams, error) ->
-#       console.log '$stateChangeError - fired when an error occurs during transition.'
-#       console.log arguments
-#       return
-#     $rootScope.$on '$stateChangeSuccess', (event, toState, toParams, fromState, fromParams) ->
-#       console.log '$stateChangeSuccess to ' + toState.name + '- fired once the state transition is complete.'
-#       return
-#     $rootScope.$on '$viewContentLoading', (event, viewConfig) ->
-#       console.log '$viewContentLoading - view begins loading - dom not rendered', viewConfig
-#       console.log viewConfig
-#       console.log event
-#       return
-#     # $rootScope.$on('$viewContentLoaded',function(event){
-#     #   // runs on individual scopes, so putting it in "run" doesn't work.
-#     #   console.log('$viewContentLoaded - fired after dom rendered',event);
-#     $rootScope.$on '$stateNotFound', (event, unfoundState, fromState, fromParams) ->
-#       console.log '$stateNotFound ' + unfoundState.to + '  - fired when a state cannot be found by its name.'
-#       console.log unfoundState, fromState, fromParams
-#       return
-
-
-]
 
 angular.module('lessons').constant "RESOURCES", do ->
   url = window.location.origin
@@ -164,7 +120,25 @@ angular.module('lessons').config [
  }
     return
 ]
-#s
+
+angular.module('lessons').run [
+  '$rootScope'
+  "$state"
+  "alertify"
+  ( $rootScope, $state, alertify ) ->
+    $rootScope.$on '$stateChangeError', (event, toState, toParams, fromState, fromParams, error) ->
+      console.log error
+      if error.status = 401 and error.error = 'non_admin'
+        $state.go "welcome"
+        alertify.error "Tut tut"
+      else if error.status ==  401 and  error.error == "non_teacher"
+        $state.go "welcome"
+        alertify.error "You are not Authorised"
+
+      return 
+
+
+]
 
 angular.module('lessons').config [
   "$stateProvider"
