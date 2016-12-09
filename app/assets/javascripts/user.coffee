@@ -106,12 +106,17 @@ angular.module('lessons').service 'auth', [
     auth.check_if_logged_in_and_teacher = ->
       $q ( resolve, reject ) ->
         $auth.validateUser().then( ( user ) ->
-          console.log "validate teacher"
-          console.log user
-          if !user.is_teacher
+          if !$rootScope.User?
+            new User().then( ( resp ) ->
+              if !user.is_teacher
+                reject status: 401, error: "non_teacher"
+              else
+                resolve user
+            ) 
+          else if !$rootScope.User.is_teacher
             reject status: 401, error: "non_teacher"
           else
-            resolve user
+            resolve $rootScope.User         
         ).catch( ( err ) ->
           reject err
         )
@@ -119,10 +124,19 @@ angular.module('lessons').service 'auth', [
     auth.check_if_logged_in_and_admin = ->
       $q ( resolve, reject ) ->
         $auth.validateUser().then( ( user ) ->
-          if !user.admin
+          if !$rootScope.User?
+            new User().then( ( resp ) ->
+              if !user.admin
+                reject status: 401, error: 'non_admin'
+              else
+                console.log 'resolve'
+                resolve user
+            )
+          else if !$rootScope.User.admin
             reject status: 401, error: 'non_admin'
           else
-            resolve user
+            resolve $rootScope.User
+          
         ).catch( ( err ) ->
           reject err
         )

@@ -14,7 +14,6 @@ angular.module('lessons').controller('ConversationController', [
     console.log "ConversationController"
     console.log $stateParams
     $scope.show_form = false
-    console.log authenticate
 
     $scope.search_conversations = ->
       $mdSidenav('conversation_search').toggle()
@@ -23,8 +22,7 @@ angular.module('lessons').controller('ConversationController', [
       for convo in $scope.conversations
         $scope.conversation = convo if convo.random == $stateParams.random
         console.log "found it #{ convo }"
-    console.log $rootScope.User? && $rootScope.User.is_teacher
-    console.log $rootScope.User? && !$rootScope.User.is_teacher
+    
     COMMS.GET(
       "/conversation"
       {
