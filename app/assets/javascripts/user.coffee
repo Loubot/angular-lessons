@@ -77,7 +77,7 @@ angular.module('lessons').service 'auth', [
               resp
             ]
             
-            if $rootScope.User.is_teacher then $state.go( "teacher.teacher", id: $rootScope.User.id ) else $state.go( 'student_profile', id: $rootScope.User.id )
+            if $rootScope.User.is_teacher then $state.go( "teacher", id: $rootScope.User.id ) else $state.go( 'student_profile', id: $rootScope.User.id )
           )
           
         )
@@ -101,7 +101,19 @@ angular.module('lessons').service 'auth', [
         )
 
     auth.check_if_logged_in = ->
-      $auth.validateUser()
+      $q ( resolve, reject ) ->
+        $auth.validateUser().then( ( user ) ->
+          if !$rootScope.User?
+            new User().then( ( resp ) ->
+              resolve $rootScope.User
+            ).catch( ( err ) ->
+              reject status: 401, error: 'non_user'
+            )
+          else
+            resolve $rootScope.User
+        ).catch( ( validate_err ) ->
+          reject validate_err
+        )
 
     auth.check_if_logged_in_and_teacher = ->
       $q ( resolve, reject ) ->
@@ -111,14 +123,14 @@ angular.module('lessons').service 'auth', [
               if !user.is_teacher
                 reject status: 401, error: "non_teacher"
               else
-                resolve user
+                resolve $rootScope.User
             ) 
           else if !$rootScope.User.is_teacher
             reject status: 401, error: "non_teacher"
           else
             resolve $rootScope.User         
-        ).catch( ( err ) ->
-          reject err
+        ).catch( ( validate_err ) ->
+          reject validate_err
         )
 
     auth.check_if_logged_in_and_admin = ->
@@ -137,8 +149,8 @@ angular.module('lessons').service 'auth', [
           else
             resolve $rootScope.User
           
-        ).catch( ( err ) ->
-          reject err
+        ).catch( ( validate_err ) ->
+          reject validate_err
         )
         
 

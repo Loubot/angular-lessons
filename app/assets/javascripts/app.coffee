@@ -205,6 +205,17 @@ angular.module('lessons').config [
     templateUrl: 'password/reset_password.html'
     controller: "PasswordController"
 
+  $stateProvider.state 'conversation',
+    url: "/conversation/:random/:id"
+    templateUrl: "conversation/messages.html"
+    controller: "ConversationController"
+    resolve:
+      authenticate: [
+        "auth"
+        ( auth ) ->
+          auth.check_if_logged_in()
+      ]
+
 
 
   $stateProvider.state 'teacher',
@@ -233,17 +244,6 @@ angular.module('lessons').config [
     url: '/teacher-location/:id'
     templateUrl: "user/teacher_location.html"
     controller: "TeacherLocationController"
-    resolve:
-      authenticate: [
-        "auth"
-        ( auth ) ->
-          auth.check_if_logged_in_and_teacher()
-      ]
-
-  $stateProvider.state 'conversation',
-    url: "/conversation/:random/:id"
-    templateUrl: "conversation/messages.html"
-    controller: "ConversationController"
     resolve:
       authenticate: [
         "auth"
