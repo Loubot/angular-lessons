@@ -12,7 +12,7 @@
 
   <md-sidenav  
           md-component-id="search_nav" 
-          class="md-sidenav-left" 
+          class="md-sidenav-left min_width_190" 
           md-is-locked-open="$mdMedia('gt-xs')"
           md-is-open="search_nav_opened">
     
@@ -25,7 +25,8 @@
         
       </md-chips>
       <div layout-gt-sm="column" flex>
-        <md-autocomplete 
+        <md-autocomplete
+            class="no_overflow" 
             md-select-on-match="true"
             md-selected-item="selected.subject_name" 
             md-input-name="subject"
@@ -49,6 +50,7 @@
 
         
         <md-autocomplete 
+            class="no_overflow" 
             md-selected-item="selected.county_name" 
             md-input-name="county"
             md-search-text="searchText.county_name" 
@@ -97,9 +99,9 @@
             ng-if="teachers.length>0"
             >
         <md-card-title>
-          <md-card-title-text>
+          <md-card-title-text class="margin_r_5">
             <span class="md-headline">{{ teacher.first_name }} {{ teacher.last_name }}  </span>
-            <span ng-if="teacher.location" class="md-subhead">{{ teacher.location.address }}</span>
+            <span ng-if="teacher.location" class="md-subhead address">{{ teacher.location.address }}</span>
             <span ng-repeat="subject in teacher.subjects">{{ subject.name }}</span>
           </md-card-title-text>
           <md-card-title-media>

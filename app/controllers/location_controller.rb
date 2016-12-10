@@ -2,41 +2,13 @@ class LocationController < ApplicationController
   before_action :authenticate_teacher!
 
   def create
-    teacher = Teacher.includes(:location).find( location_params[ :teacher_id ] )
-    p "location params #{ location_params[ :teacher_id ] }"
-    if params[:location].present?
-      p "yes boi"
-      
-      location = Location.create!( location_params )
-      teacher.location = location
-      render json: { location: location.as_json } and return
-    end
-    p "ah dose"
-    if teacher.location.nil?
-
-      if location_params.has_key?( :county )
-        
-        location = Location.geocode_county( location_params, location_params[ :teacher_id ] )
-      else
-
-
-        location = Location.create( location_params )
-
-      end
-
-      if location.save
-        teacher.location = location
-        p "Location created"
-        pp location
-        render json: { location: location.as_json }
-      else
-        render json: { error: location.errors.full_messages }, status: 500
-      end
-    else #teacher.location != nil
-      location = teacher.location.update_attributes( location_params )
-      p "Location updated"
-      pp location
-      render json: { location: teacher.location }
+    p "This is create"
+    pp location_params
+    location = Location.new( location_params )
+    if location.save
+      render json: { location: location.as_json }, status: 201
+    else
+      render json: { errors: location.errors }, status: 422
     end
   end
 
@@ -62,15 +34,49 @@ class LocationController < ApplicationController
 
   end
 
+  def update
+    pp params
+    teacher = Teacher.includes( :location ).find( current_teacher.id )
+    
+    if !teacher.location
+      p "we are here #{ location_params[ :county ] }"
+      location = Location.create!( location_params )
+      render json: { errors: location.errors } and return
+      
+    end
+
+    if params.has_key?( :google )
+      if teacher.location.google_address( params )
+        render json: { location: teacher.location.as_json }, status: 200
+      else
+        render json: { errors: teacher.location.errors }, status: 422
+      end
+    else
+      if teacher.location.update_attributes( location_params )
+        pp teacher.location
+        render json: { location: teacher.location.as_json }, status: 200
+      else
+        render json: { errors: teacher.location.errors }, status: 422
+      end
+    end    
+  end
+
+
+
   def destroy
-    Location.find( params[:id] ).destroy
-    render json: { message: "Location deleted" }, status: 200
+    location = Location.find( params[:id] )
+    if location.update_attributes( address: nil )
+
+      render json: { location: location }, status: 200
+    else
+      render json: { message: 'Failed to delete' }, status: 500
+    end
   end
 
 
   private
 
     def location_params
-      params.permit( :address, :latitude, :longitude, :teacher_id, :name, :county )
+      params.permit( :address, :latitude, :longitude, :teacher_id, :name, :county  )
     end
 end

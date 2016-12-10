@@ -2,20 +2,16 @@
 
 angular.module('lessons').controller('TeacherAreaController', [
   '$scope'
-  '$rootScope'
-  '$state'
+  'auth'
   '$stateParams'
-  'RESOURCES'
-  'USER'
   'alertify'
-  'COMMS'
   '$mdDialog'
-  '$mdToast'
   "$mdBottomSheet"
   '$mdpDatePicker'
   '$mdpTimePicker'
-  ( $scope, $rootScope, $state, $stateParams, RESOURCES, USER, alertify, COMMS, $mdDialog, $mdToast, $mdBottomSheet, $mdpDatePicker, $mdpTimePicker ) ->
+  ( $scope, auth, $stateParams, alertify, $mdDialog, $mdBottomSheet, $mdpDatePicker, $mdpTimePicker ) ->
     console.log "TeacherAreaController"
+
     $scope.create_event_button_bool = false
     $scope.api_loaded = false # disable acknowledge calendar button will api is loaded
 
@@ -65,22 +61,7 @@ angular.module('lessons').controller('TeacherAreaController', [
               ]
     
 
-    USER.get_user().then( ( user ) ->
-      USER.check_user()
-      console.log "got user"
-      # console.log $rootScope.USER.id != parseInt( $stateParams.id )
-      if $rootScope.USER.id != parseInt( $stateParams.id )
-        $state.go 'welcome'
-        alertify.error "You are not allowed to view this"
-        return false
-    ).catch( ( err ) ->
-      alertify.error "Not authorised"
-      $rootScope.USER = null
-      $state.go 'welcome'
-      return false
-    )
-
-
+    
 
     format_events = ( events ) ->
       console.log events
@@ -270,7 +251,7 @@ angular.module('lessons').controller('TeacherAreaController', [
       alertify.success "Trying to create a new calendar"
       # console.log "user:#{ $scope.google_id_email }"
       gapi.client.calendar.calendars.insert(
-        'description': "LYL calendar for #{ $rootScope.USER.first_name } #{ $rootScope.USER.last_name }"
+        'description': "LYL calendar for #{ $rootScope.User.get_full_name() }"
         'summary': "LYL Calendar"
         # 'id': "user:#{ $scope.google_id_email }"
         'timeZone': "GMT+01:00 Dublin"

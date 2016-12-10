@@ -287,6 +287,10 @@ md-sidenav.md-closed.md-locked-open-add-active.user_menu {
   min-width: 400px !important;
 }
 
+.min_width_190{
+  min-width: 190px !important;
+}
+
 .md-chips > .min_height_32.ng-hide{
   visibility: hidden !important;
 }
@@ -339,6 +343,10 @@ md-sidenav.md-closed.md-locked-open-add-active.user_menu {
   margin-top: 0px !important;
 }
 
+.margin_r_5{
+  margin-right: 5px !important;
+}
+
 .padding_5{
   padding: 5px !important;
 }
@@ -349,6 +357,10 @@ md-sidenav.md-closed.md-locked-open-add-active.user_menu {
 
 .padding_s_20{
   padding: 0px 20px;
+}
+
+.no_overflow{
+  overflow: hidden !important;
 }
 
 .gutter_85{
@@ -377,7 +389,7 @@ md-sidenav.md-closed.md-locked-open-add-active.user_menu {
 
 .main_page{
   background-color: #e0ebf4;
-  
+  @extend .height_100;
 }
 
 .match_background{
@@ -573,6 +585,12 @@ md-sidenav.md-closed.md-locked-open-add-active.user_menu {
 
   // Messages
 
+.height_100_min_56{
+  height: calc( 100% - ( 56px ));
+  height: calc( 100% - ( 56px ));
+  height: calc( 100% - ( 56px ));
+  height: calc( 100% - ( 56px ));
+}
 .name_header{
   position: fixed;
   top: 10%;
@@ -636,6 +654,14 @@ md-sidenav.md-closed.md-locked-open-add-active.user_menu {
 
 // End of messages
 
+// search page
+.address{
+  max-width: 200px;
+  word-wrap: break-word;
+}
+  
+// end of search page
+
 // Teacher area
 .calendar_container{
   // height: calc( 100% - 200px ) !important;
@@ -677,6 +703,10 @@ ul.share-buttons .sr-only {
 
 
 @media (min-width: 250px){
+  
+  #message_container{
+    height: 70%;
+
   .scrollable{
     height: 150px !important;
     overflow: scroll;
@@ -728,6 +758,9 @@ ul.share-buttons .sr-only {
 } /* 250px */
 
 @media ( min-width: 600px ){
+  #message_container{
+    height: 75%;
+  }
 
   .margin_s_100.md-grid{
     margin: 0 100px !important;

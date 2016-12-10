@@ -32,6 +32,7 @@
 //= require moment/min/moment.min
 //= require mdPickers/dist/mdPickers.min
 //= require app
+//= require user
 //= require controllers/WelcomeController
 //= require controllers/UserController
 //= require controllers/NavController

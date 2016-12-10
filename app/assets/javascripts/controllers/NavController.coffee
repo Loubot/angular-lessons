@@ -4,15 +4,17 @@ angular.module('lessons').controller('NavController', [
   '$scope'
   '$rootScope'
   '$state'
-  '$window'
-  'USER'
+  '$window'  
   '$mdSidenav'
   'alertify'
+  'auth'
   '$auth'
-  ( $scope, $rootScope, $state, $window, USER, $mdSidenav, alertify, $auth ) ->
+  ( $scope, $rootScope, $state, $window, $mdSidenav, alertify, auth, $auth ) ->
     console.log "NavController"
     $scope.teacher = {}
     $scope.auth_type = null
+
+    $scope.auth = auth
 
     $scope.facebook = ->
       console.log 'facebook'
@@ -49,55 +51,14 @@ angular.module('lessons').controller('NavController', [
     $scope.register_teacher = ->
       console.log $scope.teacher
       $scope.teacher.is_teacher = true if $scope.auth_type == 1
+      auth.register( $scope.teacher ).then( ( resp ) ->
+        $mdSidenav('left').toggle()
+        
+        alertify.success "Welcome #{ $rootScope.User.email }"
+      )
 
-      $auth.submitRegistration( $scope.teacher )
-        .then( (resp) ->
-          # handle success response
-          # console.log resp.data.data
-          $mdSidenav('left').toggle()
-          $rootScope.USER = resp.data.data
-          console.log $rootScope.USER
-          
-          alertify.success "Welcome #{ resp.data.data.email }"
-        )
-        .catch( (resp) ->
-          # handle error response
-          console.log resp
-          alertify.error "Failed to register"
-          
-        )
-
-    $scope.login = ->
-      $auth.submitLogin( $scope.teacher )
-        .then( (resp) ->
-          # handle success response
-          $rootScope.USER = resp
-          # console.log resp
-
-          console.log $rootScope.USER
-          
-          $mdSidenav('left').toggle()
-          alertify.success "Welcome back #{ $rootScope.USER.first_name }"
-          # $state.go("teacher", id: $rootScope.USER.id ) 
-          if $rootScope.USER.is_teacher then $state.go( "teacher", id: $rootScope.USER.id ) else $state.go( "welcome" )
-        )
-        .catch( (resp) ->
-          console.log "Login error"
-          console.log resp
-          alertify.error "Invalid credentials"
-        )
+  
 
     $scope.logout = ->
-      $auth.signOut()
-        .then( ( resp ) ->
-          console.log resp
-          alertify.success "Logged out successfully"
-          $rootScope.USER = null
-          $state.go 'welcome'
-          $window.location.reload()
-        ).catch( ( err ) ->
-          console.log err
-          $rootScope.USER = null
-          alertify.error "Failed to log out"
-        )
+      auth.logout()
 ])

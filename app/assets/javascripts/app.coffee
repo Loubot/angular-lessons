@@ -15,18 +15,42 @@ angular.module('lessons', [
   'mdPickers'
 ])
 
+
+
 angular.module('lessons').constant "RESOURCES", do ->
   url = window.location.origin
   # console.log "Domain #{ url + '/api' }"
   DOMAIN: url + '/api'
 
-angular.module('lessons').factory 'counties', [ ->
-  [
-    'Co. Antrim','Co. Armagh','Co. Carlow','Co. Cavan','Co. Clare','Co. Cork','Co. Derry','Co. Donegal','Co. Down','Co. Dublin',
-    'Co. Fermanagh','Co. Galway','Co. Kerry','Co. Kildare','Co. Kilkenny','Co. Laois','Co. Leitrim','Co. Limerick','Co. Longford',
-    'Co. Louth','Co. Mayo','Co. Meath','Co. Monaghan','Co. Offaly','Co. Roscommon','Co. Sligo','Co. Tipperary','Co. Tyrone',
-    'Co. Waterford','Co. Westmeath','Co. Wexford','Co. Wicklow'
-  ]
+angular.module('lessons').service 'counties', [ ->
+  county_list:  ->
+    return [
+      'Co. Antrim','Co. Armagh','Co. Carlow','Co. Cavan','Co. Clare','Co. Cork','Co. Derry','Co. Donegal','Co. Down','Co. Dublin',
+      'Co. Fermanagh','Co. Galway','Co. Kerry','Co. Kildare','Co. Kilkenny','Co. Laois','Co. Leitrim','Co. Limerick','Co. Longford',
+      'Co. Louth','Co. Mayo','Co. Meath','Co. Monaghan','Co. Offaly','Co. Roscommon','Co. Sligo','Co. Tipperary','Co. Tyrone',
+      'Co. Waterford','Co. Westmeath','Co. Wexford','Co. Wicklow'
+    ]
+
+  counties_with_coords: ->
+    { 
+      'Antrim': { county: 'Co. Antrim', latitude: 54.719508, longitude: -6.207256 }, 'Armagh': { county: 'Co. Armagh', latitude: 54.350277, longitude: -6.652822},
+      'Carlow': { county: 'Co. Carlow', latitude: 52.836497, longitude: -6.934238}, 'Cavan': { county: 'Co. Cavan', latitude: 53.989637, longitude: -7.363272 },
+      'Clare': { county: 'Co. Clare', latitude: 52.847097, longitude: -8.989040 }, 'Cork': { county: 'Co. Cork', latitude: 51.897887, longitude: -8.475431},
+      'Derry': { county: 'Co. Derry', latitude: 54.996669, longitude: -7.308567 }, 'Donegal': { county: 'Co. Donegal', latitude: 54.832874, longitude: -7.485811},
+      'Down': { county: 'Co. Down', latitude: 54.328787, longitude: -5.715719 }, 'Dublin': { county: 'Co. Dublin', latitude: 53.346591, longitude: -6.265231 },
+      'Fermanagh': { county: 'Co. Fermanagh', latitude: 54.343928, longitude: -7.631644 }, 'Galway': { county: 'Co. Galway', latitude: 53.270672, longitude: -9.056779 },
+      'Kerry': { county: 'Co. Kerry', latitude: 52.059816, longitude: -9.504487 }, 'Kildare': { county: 'Co. Kildare', latitude: 53.220438, longitude: -6.659570 },
+      'Kilkenny': { county: 'Co. Kilkenny', latitude: 52.653411, longitude: -7.248446 }, 'Laois': { county: 'Co. Laois', latitude: 53.032791, longitude: -7.300100 },
+      'Leitrim': { county: 'Co. Leitrim', latitude: 53.945234, longitude: -8.086559 }, 'Limerick': { county: 'Co. Limerick', latitude: 52.664942, longitude: -8.628080 },
+      'Longford': { county: 'Co. Longford', latitude: 53.727371, longitude: -7.793887}, 'Louth': { county: 'Co. Louth', latitude: 53.999672, longitude: -6.406295 },
+      'Mayo': { county: 'Co. Mayo', latitude: 53.854566, longitude: -9.288492 }, 'Meath': { county: 'Co. Meath', latitude: 53.647000, longitude: -6.697336 },
+      'Monaghan': { county: 'Co. Monaghan', latitude: 54.248650, longitude: -6.969560 }, 'Offaly': { county: 'Co. Offaly', latitude: 53.275140, longitude: -7.493240 },
+      'Roscommon': { county: 'Co. Roscommon', latitude: 53.627545, longitude: -8.189194 }, 'Sligo': { county: 'Co. Sligo', latitude: 54.273910, longitude: -8.473718 }, 
+      'Tipperary': { county: 'Co. Tipperary', latitude: 52.356254, longitude: -7.695380 }, 'Tyrone': { county: 'Co. Tyrone', latitude: 54.597003, longitude: -7.310752 },
+      'Waterford': { county: 'Co. Waterford', latitude: 52.257693, longitude: -7.110284 }, 'Westmeath': { county: 'Co. Westmeath', latitude: 53.524646, longitude: -7.339487 },
+      'Wexford': { county: 'Co. Wexford', latitude: 52.333583, longitude: -6.474672 }, 'Wicklow': { county: 'Co. Wicklow', latitude: 52.980215, longitude: -6.060273 } 
+    }
+
 ]
 
     
@@ -96,9 +120,31 @@ angular.module('lessons').config [
  }
     return
 ]
-#s
 
-angular.module('lessons').config ($stateProvider, $urlRouterProvider, $locationProvider) ->
+angular.module('lessons').run [
+  '$rootScope'
+  "$state"
+  "alertify"
+  ( $rootScope, $state, alertify ) ->
+    $rootScope.$on '$stateChangeError', (event, toState, toParams, fromState, fromParams, error) ->
+      console.log error
+      if error.status = 401 and error.error = 'non_admin'
+        $state.go "welcome"
+        alertify.error "Tut tut"
+      else if error.status ==  401 and  error.error == "non_teacher"
+        $state.go "welcome"
+        alertify.error "You are not Authorised"
+
+      return 
+
+
+]
+
+angular.module('lessons').config [
+  "$stateProvider"
+  "$urlRouterProvider"
+  "$locationProvider"
+ ($stateProvider, $urlRouterProvider, $locationProvider) ->
   # $locationProvider.html5Mode(true)
   
   $stateProvider.state 'home',
@@ -114,17 +160,7 @@ angular.module('lessons').config ($stateProvider, $urlRouterProvider, $locationP
   $stateProvider.state 'search',
     url: '/search/:name/:location'
     templateUrl: "static/search.html"
-    controller: "SearchController"
-
-  $stateProvider.state 'teacher',
-    url: '/teacher/:id'
-    templateUrl: "user/teacher.html"
-    controller: "TeacherController"
-
-  $stateProvider.state 'student_profile',
-    url: '/student/:id'
-    templateUrl: "user/student.html"
-    controller: "StudentController"
+    controller: "SearchController"  
 
   $stateProvider.state 'view_teacher',
     url: '/view-teacher/:id'
@@ -135,21 +171,7 @@ angular.module('lessons').config ($stateProvider, $urlRouterProvider, $locationP
     url: "/register-teacher"
     templateUrl: "static/register_teacher.html"
     controller: "RegisterController"
-
-  $stateProvider.state 'teacher_area',
-    url: "/teacher-area/:id/:student_email"
-    templateUrl: "user/teacher_area.html"
-    controller: "TeacherAreaController"
-
-  $stateProvider.state 'teacher_location',
-    url: '/teacher-location/:id'
-    templateUrl: "user/teacher_location.html"
-    controller: "TeacherLocationController"
-
-  $stateProvider.state 'conversation',
-    url: "/conversation/:random/:id"
-    templateUrl: "conversation/messages.html"
-    controller: "ConversationController"
+  
 
   $stateProvider.state 'how_it_works',
     url: '/how-it-works'
@@ -176,14 +198,77 @@ angular.module('lessons').config ($stateProvider, $urlRouterProvider, $locationP
     templateUrl: 'password/reset_password.html'
     controller: "PasswordController"
 
+  $stateProvider.state 'conversation',
+    url: "/conversation/:random/:id"
+    templateUrl: "conversation/messages.html"
+    controller: "ConversationController"
+    resolve:
+      authenticate: [
+        "auth"
+        ( auth ) ->
+          auth.check_if_logged_in()
+      ]
+
+
+
+  $stateProvider.state 'teacher',
+    url: '/teacher/:id'
+    templateUrl: "user/teacher.html"
+    controller: "TeacherController"
+    resolve:
+      authenticate: [
+        "auth"
+        ( auth ) ->
+          auth.check_if_logged_in_and_teacher()
+      ]
+
+  $stateProvider.state 'teacher_area',
+    url: "/teacher-area/:id/:student_email"
+    templateUrl: "user/teacher_area.html"
+    controller: "TeacherAreaController"
+    resolve:
+      authenticate: [
+        "auth"
+        ( auth ) ->
+          auth.check_if_logged_in_and_teacher()
+      ]
+
+  $stateProvider.state 'teacher_location',
+    url: '/teacher-location/:id'
+    templateUrl: "user/teacher_location.html"
+    controller: "TeacherLocationController"
+    resolve:
+      authenticate: [
+        "auth"
+        ( auth ) ->
+          auth.check_if_logged_in_and_teacher()
+      ]
+
   $stateProvider.state 'admin',
     url: "/admin"
     templateUrl: "admin/manage.html"
     controller: "AdminController"
+    resolve:
+      admin: [
+        "auth"
+        ( auth ) ->
+          auth.check_if_logged_in_and_admin()
+      ]
+
+  $stateProvider.state 'student_profile',
+    url: '/student/:id'
+    templateUrl: "user/student.html"
+    controller: "StudentController"
+    resolve:
+      authenticate: [
+        "auth"
+        ( auth ) ->
+          auth.check_if_logged_in()
+      ]
 
   $urlRouterProvider.otherwise "/"
   
-  
+]  
 
 angular.module('lessons').config ( $authProvider ) ->
   $authProvider.configure({
@@ -195,6 +280,7 @@ angular.module('lessons').config ( $authProvider ) ->
       
   })
 
+
 ############## Theme #######################################
 angular.module('lessons').config ( $mdThemingProvider ) ->
   $mdThemingProvider.theme('default')
@@ -202,31 +288,7 @@ angular.module('lessons').config ( $mdThemingProvider ) ->
     .accentPalette('blue-grey')
 
 
-angular.module('lessons').service 'USER', ( $http, $rootScope, RESOURCES, $q, $state, alertify ) ->
-  
-  get_user: -> # get user and all associations
-    $q ( resolve, reject ) ->
-      $http(
-        method: 'GET'
-        url: "#{ RESOURCES.DOMAIN }/teacher/get"
-        headers: { "Content-Type": "application/json" }
-        # params: 
-        #   email: 
-      ).then( ( result ) ->
-        console.log "get user"
-        console.log result.data
-        $rootScope.USER = result.data.teacher
-       
-        resolve result.data
-      ).catch( ( err_result ) ->
-        console.log err_result
-        reject err_result
-      )
 
-  check_user: ->
-    if !$rootScope.USER.is_teacher
-      alertify.error "You must be a teacher to view this"
-      $state.go "welcome"
 
 angular.module('lessons').service 'AUTH', ( $http, $rootScope, RESOURCES, $q, $auth, alertify ) ->
 
@@ -235,10 +297,8 @@ angular.module('lessons').service 'AUTH', ( $http, $rootScope, RESOURCES, $q, $a
       $auth.submitLogin( auth_hash )
         .then( (resp) ->
           # handle success response
-          console.log resp
-          alertify.success "Registered successfully"
-          window.localStorage.setItem 'user_email', resp.data.email
-          $rootScope.USER = resp.data
+          # console.log resp
+          alertify.success "Logged in successfully"
           resolve resp
         )
         .catch( (resp) ->
@@ -278,8 +338,6 @@ angular.module('lessons').service 'COMMS', ( $http, $state, RESOURCES, $rootScop
         headers: { "Content-Type": "application/json" }
         data: data
       ).then( ( result ) ->
-        if result.user != undefined
-          $rootScope.USER = result.user
         resolve result
       ).catch( ( err_result ) ->
         reject err_result
@@ -293,8 +351,19 @@ angular.module('lessons').service 'COMMS', ( $http, $state, RESOURCES, $rootScop
           headers: { "Content-Type": "application/json" }
           data: data
         ).then( ( result ) ->
-          if result.user != undefined
-            $rootScope.USER = result.user
+          resolve result
+        ).catch( ( err_result ) ->
+          reject err_result
+        )
+
+    PATCH: ( url, data ) ->
+      $q ( resolve, reject ) ->
+        $http(
+          method: 'PATCH'
+          url: "#{ RESOURCES.DOMAIN }#{ url }"
+          headers: { "Content-Type": "application/json" }
+          data: data
+        ).then( ( result ) ->
           resolve result
         ).catch( ( err_result ) ->
           reject err_result
@@ -331,12 +400,16 @@ angular.module('lessons').service 'COMMS', ( $http, $state, RESOURCES, $rootScop
       
 # angular.module('lessons').run [
 #   '$rootScope'
-#   ($rootScope) ->
-#     # see what's going on when the route tries to change
-#     $rootScope.$on '$stateChangeStart', (event, toState, toParams, fromState, fromParams) ->
-#       console.log toState
-#       console.log '$stateChangeStart to ' +  toState + '- fired when the transition begins. toState,toParams : \n' + toState + toParams
-#       return
+#   'auth'
+#   ($rootScope, auth) ->
+    # $rootScope.$on 'auth:validation-success', ( e ) ->
+    #   console.log 'bl'
+    #   console.log e
+    # see what's going on when the route tries to change
+    # $rootScope.$on '$viewContentLoading', (event, toState, toParams, fromState, fromParams) ->
+    #   console.log '23'
+    #   auth.check_is_valid()
+    #   return
 #     $rootScope.$on '$stateChangeError', (event, toState, toParams, fromState, fromParams, error) ->
 #       console.log '$stateChangeError - fired when an error occurs during transition.'
 #       console.log arguments
@@ -357,37 +430,38 @@ angular.module('lessons').service 'COMMS', ( $http, $state, RESOURCES, $rootScop
 #       console.log unfoundState, fromState, fromParams
 #       return
 
+
 # ]
 
-angular.module('lessons').run(['$rootScope', '$state',
-  ($rootScope, $state)->
-    $rootScope.isAuthenticated = false
+# angular.module('lessons').run(['$rootScope', '$state',
+#   ($rootScope, $state)->
+#     $rootScope.isAuthenticated = false
 
-    $rootScope.$on('auth:validation-success', (e)->
-      $rootScope.isAuthenticated = true
+#     $rootScope.$on('auth:validation-success', (e)->
+#       $rootScope.isAuthenticated = true
       
-    )
-    $rootScope.$on('auth:login-success', (e)->
-      $rootScope.isAuthenticated = true
-      # $state.go 'welcome'
-    )
+#     )
+#     $rootScope.$on('auth:login-success', (e)->
+#       $rootScope.isAuthenticated = true
+#       # $state.go 'welcome'
+#     )
 
-    $rootScope.$on('auth:validation-error', (e)->
-      $rootScope.isAuthenticated = false
-    )
-    $rootScope.$on('auth:invalid', (e)->
-      $rootScope.isAuthenticated = false
-    )
-    $rootScope.$on('auth:login-error', (e)->
-      $rootScope.isAuthenticated = false
-    )
-    $rootScope.$on('auth:logout-success', (e)->
-      $rootScope.isAuthenticated = false
-    )
-    $rootScope.$on('auth:account-destroy-success', (e)->
-      $rootScope.isAuthenticated = false
-    )
-    $rootScope.$on('auth:session-expired', (e)->
-      $rootScope.isAuthenticated = false
-    )
-])
+#     $rootScope.$on('auth:validation-error', (e)->
+#       $rootScope.isAuthenticated = false
+#     )
+#     $rootScope.$on('auth:invalid', (e)->
+#       $rootScope.isAuthenticated = false
+#     )
+#     $rootScope.$on('auth:login-error', (e)->
+#       $rootScope.isAuthenticated = false
+#     )
+#     $rootScope.$on('auth:logout-success', (e)->
+#       $rootScope.isAuthenticated = false
+#     )
+#     $rootScope.$on('auth:account-destroy-success', (e)->
+#       $rootScope.isAuthenticated = false
+#     )
+#     $rootScope.$on('auth:session-expired', (e)->
+#       $rootScope.isAuthenticated = false
+#     )
+# ])

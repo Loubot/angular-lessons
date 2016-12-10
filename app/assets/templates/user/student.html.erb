@@ -9,7 +9,7 @@
         <md-card-header-text>
           <span class="md-title">
 
-            {{ USER.first_name }} {{ USER.last_name }}
+            {{ User.get_full_name() }}
 
           </span>
           <span class="md-subhead">
@@ -19,24 +19,24 @@
       </md-card-header>
       <img ng-if="profile" ng-src="{{ profile.avatar.url }}" 
           class="md-card-image" 
-          alt="{{ USER.first_name }} profile pic">
+          alt="{{ User.first_name }} profile pic">
 
       <div class="margin_t_10 padding_10">
         <form ng-submit="update_teahcer()">
           <md-input-container md-no-float>
             <label>First name:</label>
             <input  type="text"
-                    ng-change="update_teacher()"
+                    ng-change="User.update()"
                     ng-model-options="{ debounce:750 }"
-                    ng-model="USER.first_name">
+                    ng-model="User.first_name">
           </md-input-container>
 
           <md-input-container md-no-float>
             <label>Last name:</label>
             <input  type="text"
-                    ng-change="update_teacher()" 
+                    ng-change="User.update()" 
                     ng-model-options="{ debounce:750 }"
-                    ng-model="USER.last_name">
+                    ng-model="User.last_name">
           </md-input-container>
           
         </form>
@@ -51,7 +51,7 @@
       <md-card-actions layout="row" layout-align="start center">
         <md-button  
           ng-model="file" 
-          ngf-select="upload()">
+          ngf-select="User.upload_pic( file )">
             <i class="material-icons ">add_a_photo</i>
         </md-button>
         <md-card-icon-actions>
@@ -65,10 +65,10 @@
       </md-card-content>
     </md-card> 
 
-    <md-card ng-if="USER.photos.length>0" class="min_height_128">
+    <md-card ng-if="User.photos.length>0" class="min_height_128">
       <md-grid-list md-cols="3" md-row-height="6:2">
         <md-grid-tile class="gray"
-            md-rowspan="3" md-colspan="1" md-colspan-sm="1" md-colspan-xs="1" ng-repeat="photo in USER.photos">
+            md-rowspan="3" md-colspan="1" md-colspan-sm="1" md-colspan-xs="1" ng-repeat="photo in User.photos">
           <img class="profile_thumbs" ng-src="{{ photo.avatar.url }}" >
           <md-grid-tile-footer>
             <md-menu>
@@ -78,11 +78,11 @@
              </md-button>
              <md-menu-content width="4">
                 <md-menu-item>
-                  <md-button ng-click="make_profile( photo.id )">Make profile?</md-button>
+                  <md-button ng-click="User.update_profile( photo.id )">Make profile?</md-button>
                 </md-menu-item>
 
                 <md-menu-item>
-                  <md-button ng-click="destroy_pic( photo.id )" class="width_100">Delete</md-button>
+                  <md-button ng-click="User.delete_pic( photo.id )" class="width_100">Delete</md-button>
                   
                 </md-menu-item>
              </md-menu-content>
@@ -117,7 +117,7 @@
           </p>
         </md-card-content>
         <md-card-actions layout="column" layout-align="start">
-          <md-button class="md-raised md-warn" ng-click="change_to_teacher()">I'm a teacher</md-button>
+          <md-button class="md-raised md-warn" ng-click="User.change_user_type( true )">I'm a teacher</md-button>
         </md-card-actions>
       </md-card>
     </md-content>

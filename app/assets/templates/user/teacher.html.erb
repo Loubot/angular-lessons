@@ -9,7 +9,7 @@
           <md-card-header-text>
             <span class="md-title">
 
-              {{ USER.first_name }} {{ USER.last_name }}
+              {{ User.get_full_name() }}
 
             </span>
             <span class="md-subhead">
@@ -17,26 +17,26 @@
             </span>
           </md-card-header-text>
         </md-card-header>
-        <img ng-if="profile" ng-src="{{ profile.avatar.url }}" 
+        <img ng-if="User.profile" ng-src="{{ User.profile_url }}" 
             class="md-card-image" 
-            alt="{{ USER.first_name }} profile pic">
+            alt="{{ User.first_name }} profile pic">
 
         <div class="margin_t_10 padding_10">
-          <form ng-submit="update_teahcer()">
+          <form ng-submit="update_teacher()">
             <md-input-container md-no-float>
               <label>First name:</label>
               <input  type="text"
-                      ng-change="update_teacher()"
+                      ng-change="User.update()"
                       ng-model-options="{ debounce:750 }"
-                      ng-model="USER.first_name">
+                      ng-model="User.first_name">
             </md-input-container>
 
             <md-input-container md-no-float>
               <label>Last name:</label>
               <input  type="text"
-                      ng-change="update_teacher()" 
+                      ng-change="User.update()" 
                       ng-model-options="{ debounce:750 }"
-                      ng-model="USER.last_name">
+                      ng-model="User.last_name">
             </md-input-container>
             
           </form>
@@ -51,7 +51,7 @@
         <md-card-actions layout="row" layout-align="start center">
           <md-button  
             ng-model="file" 
-            ngf-select="upload()">
+            ngf-select="User.upload_pic( file )">
               <i class="material-icons ">add_a_photo</i>
           </md-button>
           <md-card-icon-actions>
@@ -71,7 +71,7 @@
       <md-card>
         <md-grid-list md-cols="3" md-row-height="6:2" class="no_padding">
           <md-grid-tile class="gray min_height_128"
-              md-rowspan="3" md-colspan="1" md-colspan-sm="1" md-colspan-xs="1" ng-repeat="photo in photos">
+              md-rowspan="3" md-colspan="1" md-colspan-sm="1" md-colspan-xs="1" ng-repeat="photo in User.photos">
             <img class="profile_thumbs" ng-src="{{ photo.avatar.url }}" >
             <md-grid-tile-footer>
               <md-menu>
@@ -81,11 +81,11 @@
                </md-button>
                <md-menu-content width="4">
                   <md-menu-item>
-                    <md-button ng-click="make_profile( photo.id )">Make profile?</md-button>
+                    <md-button ng-click="User.update_profile( photo.id )">Make profile?</md-button>
                   </md-menu-item>
 
                   <md-menu-item>
-                    <md-button ng-click="destroy_pic( photo.id )" class="width_100">Delete</md-button>
+                    <md-button ng-click="User.delete_pic( photo.id )" class="width_100">Delete</md-button>
                     
                   </md-menu-item>
                </md-menu-content>
@@ -113,7 +113,7 @@
             md-search-text="searchText" 
             md-items="subject in get_subjects()" 
             md-item-text="subject.name"
-            md-selected-item-change="select_subject( subject )"
+            md-selected-item-change="User.pick_subject( subject )"
             md-delay="500"
             class="black_text no_padding" placeholder="Choose your subjects">
         <md-item-template>
@@ -124,7 +124,7 @@
         </md-not-found>
       </md-autocomplete>
       <md-list>
-        <md-list-item class="md-2-line" ng-repeat="subject in subjects">            
+        <md-list-item class="md-2-line" ng-repeat="subject in User.subjects">            
           <div class="md-list-item-text" layout="row">
 
             <div flex="90">
@@ -133,7 +133,7 @@
             </div> <!-- end of flex=90 -->
 
             <div flex="10">
-              <md-button class="md-icon-button" ng-click="remove_subject( subject )">
+              <md-button class="md-icon-button" ng-click="User.remove_subject( subject )">
                 <md-tooltip md-direction="left">
                   Remove subject
                 </md-tooltip>
@@ -164,10 +164,10 @@
           </div>
         </md-toolbar>
         <md-content>
-          <form ng-submit="add_experience()" name="experience_form">
+          <form ng-submit="User.add_experience( experience )" name="experience_form">
 
             <md-input-container md-no-float class="md-block">
-              <textarea ng-model="experience.description" 
+              <textarea ng-model="User.experience.description" 
                         aria-label="Experience description" 
                         md-maxlength="200"  
                         md-select-on-focus
@@ -188,9 +188,9 @@
     <md-content layout-padding  class="gutter_75 margin_t_10" >
       <h3>Overview</h3>
       <md-divider></md-divider>
-      <p ng-if="USER.overview!=null">{{ USER.overview }}</p>
-      <p ng-if="USER.overview==null">No overview set yet.</p>
-      <p ng-if="USER.overview==null">It's important to write a strong overview. Let people know about yourself</p>
+      <p ng-if="User.overview!=null">{{ User.overview }}</p>
+      <p ng-if="User.overview==null">No overview set yet.</p>
+      <p ng-if="User.overview==null">It's important to write a strong overview. Let people know about yourself</p>
 
       <md-divider></md-divider>
       <md-button  class="strong_blue white_text md-raised" ng-click="show_overview_sheet()">Update your overview</md-button>
@@ -202,18 +202,30 @@
     <!-- QUALIFICATIONS -->
     <md-content class="gutter_75 margin_t_10" >
       <h3>Qualifications</h3>
-      <md-divider></md-divider>
-      
-      <md-list ng-if="quals.length>0">
-        <md-list-item ng-repeat="qual in quals" >
-        
-          <p>{{ qual.title }}</p>
+      <md-divider></md-divider>     
+
+      <p ng-if="User.qualifications.length==0">You can add qualifications here. e.g. Degrees, Diplomas</p>
+
+      <md-list ng-if="User.qualifications.length>0">
+        <md-list-item ng-repeat="qual in User.qualifications" >
+
+          <div flex="90">
+            <p><strong>{{ qual.title }}</strong></p>
          
-          <p>{{ qual.school }}</p>
+            <p>School: {{ qual.school }}</p>
+          </div> <!-- end of flex=90 -->
+
+          <div flex="10">
+            <md-button class="md-icon-button" ng-click="User.delete_qualification( qual )">
+              <md-tooltip md-direction="left">
+                Remove qual
+              </md-tooltip>
+              <i class="material-icons icon_red">delete</i>
+            </md-button>
+          </div> <!-- end of flex=10 -->
+
         </md-list-item>
       </md-list>
-
-      <p ng-if="quals.length==0">You can add qualifications here. e.g. Degrees, Diplomas</p>
 
       
       <div layout="row" layout-align="end start" flex="100">
@@ -246,7 +258,7 @@
           </p>
         </md-card-content>
         <md-card-actions layout="column" layout-align="start">
-          <md-button class="md-raised md-warn" ng-click="change_to_student()">I'm a student</md-button>
+          <md-button class="md-raised md-warn" ng-click="User.change_user_type( false )">I'm a student</md-button>
         </md-card-actions>
       </md-card>
     </md-content>

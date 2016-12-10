@@ -1,5 +1,9 @@
-<div ng-if="USER.is_teacher" class="name_header">{{ conversation.student_name }}</div>
-<div ng-if="!USER.is_teacher" class="name_header">{{ conversation.teacher_name }}</div>
+<div ng-if="User.is_teacher" class="name_header">
+  {{ conversation.student_name }} <md-icon ng-if="conversation" ng-click="select_conversation( conversation.id )"><i class="material-icons">refresh</i></md-icon>
+</div>
+<div ng-if="!User.is_teacher" class="name_header">
+  {{ conversation.teacher_name }} <md-icon ng-if="conversation" ng-click="select_conversation( conversation.id )"><i class="material-icons">refresh</i></md-icon>
+</div>
 
 <div hide-gt-xs>
   <md-toolbar>
@@ -14,7 +18,7 @@
   </md-toolbar>
 </div>
 
-<div layout="row" class="height_100 ">
+<div layout="row" class="height_100_min_56">
   <md-sidenav  
           md-component-id="conversation_search" 
           class="md-sidenav-left height_50" 
@@ -27,8 +31,8 @@
             ng-click="select_conversation( conversation.id )" 
             class="margin_t_10"
             flex="100">
-        <div ng-if="USER.is_teacher" class="message_box">{{ conversation.student_name }}</div>
-        <div ng-if="!USER.is_teacher" class="message_box">{{ conversation.teacher_name }}</div>
+        <div ng-if="User.is_teacher" class="message_box">{{ conversation.student_name }}</div>
+        <div ng-if="!User.is_teacher" class="message_box">{{ conversation.teacher_name }}</div>
         <md-divider></md-divider>
       </div> <!-- end of conversations -->
     </md-content>
@@ -39,14 +43,14 @@
 
 
 
-  <div flex="100" class="height_100" style="overflow-y:hidden;">
+  <div flex="100"  style="overflow-y:hidden;">
 
-    <md-content class="height_70 padding_5" id="message_container">
+    <md-content class=" padding_5" id="message_container">
       <div layout="column" layout-fill flex>
         <div        class="margin_t_10"
-                    ng-class="{ 'flex-offset-45': message.sender_email==USER.email }"
+                    ng-class="{ 'flex-offset-45': message.sender_email==User.email }"
                     ng-repeat="message in conversation.messages">
-          <div ng-class="{ 'sender': message.sender_email==USER.email, 'receiver': message.sender_email!=USER.email }">
+          <div ng-class="{ 'sender': message.sender_email==User.email, 'receiver': message.sender_email!=User.email }">
             
             {{ message.message }}
           </div> <!-- end of sender/receiver -->
@@ -76,9 +80,9 @@
                 <input ng-click="send_message( message )"  value="Submit message" class="md-button no_margin md-primary md-raised white_text" aria-label="Send message">
               </md-input-container>
             </div>
-            <div flex flex-offset="25" flex-offset-xs="0" ng-if="USER.is_teacher">
+            <div flex flex-offset="25" flex-offset-xs="0" ng-if="User.is_teacher">
               <md-input-container>
-                <input ng-click="create_event()" ng-if="USER.is_teacher" value="Create event" class="md-button no_margin blue_button" aria-label="Create event">
+                <input ng-click="create_event()" ng-if="User.is_teacher" value="Create event" class="md-button no_margin blue_button" aria-label="Create event">
               </md-input-container>
             </div>
           </div>
@@ -88,6 +92,3 @@
   
   </div> <!-- end of flex=70 -->
 </div> <!-- end of row -->
-
-
-<!-- ng-class="{ 'flex-offset-45': message.sender_email==USER.email, 'flex-50': message.sender_email!=USER.email }" -->

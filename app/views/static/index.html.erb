@@ -15,33 +15,33 @@
           </md-button>
         </md-fab-trigger>
 
-        <md-fab-actions ng-if="!USER" >
+        <md-fab-actions ng-if="!User" >
           <md-button class="md-button md-default-theme green_blue_text" ng-click="openLeftMenu(0)">Login</md-button>
           <md-button class="md-button md-default-theme green_blue_text" ng-click="openLeftMenu(2)">Student Register</md-button>
           <md-button class="md-button md-default-theme green_blue_text" ui-sref="register_teacher">Teacher Register</md-button>
-        </md-fab-actions> <!-- end of if !USER -->
+        </md-fab-actions> <!-- end of if !User -->
 
-        <md-fab-actions ng-if="USER && USER.is_teacher" class="green_blue_text">
-          <md-button ui-sref="teacher({id:USER.id})" class="md-button md-default-theme green_text">Profile</md-button>
-          <md-button ui-sref="teacher_area({id:USER.id})" class="md-button md-default-theme green_text">Calendar</md-button>
-          <md-button ui-sref="teacher_location({id:USER.id})" class="md-button md-default-theme green_text">Location</md-button>
-          <md-button ui-sref="conversation({id:USER.id})" class="md-button md-default-theme green_text">Messages</md-button>
-          <md-button class="md-button md-default-theme gree_blue_text" ui-sref="admin" ng-if="USER.admin">Admin</md-button>
+        <md-fab-actions ng-if="User && User.is_teacher" class="green_blue_text">
+          <md-button ui-sref="teacher({id:User.id})" class="md-button md-default-theme green_text">Profile</md-button>
+          <md-button ui-sref="teacher_area({id:User.id})" class="md-button md-default-theme green_text">Calendar</md-button>
+          <md-button ui-sref="teacher_location({id:User.id})" class="md-button md-default-theme green_text">Location</md-button>
+          <md-button ui-sref="conversation({id:User.id})" class="md-button md-default-theme green_text">Messages</md-button>
+          <md-button class="md-button md-default-theme gree_blue_text" ui-sref="admin" ng-if="User.admin">Admin</md-button>
 
-          <md-button class="md-button md-default-theme green_blue_text" ng-click="logout()">Logout</md-button>
+          <md-button class="md-button md-default-theme green_blue_text" ng-click="auth.logout()">Logout</md-button>
         </md-fab-actions>
 
-        <md-fab-actions ng-if="USER && !USER.is_teacher" class="green_blue_text">
-          <md-button ui-sref="student_profile({id:USER.id})" class="md-button md-default-theme green_text">Profile</md-button>
-          <md-button ui-sref="conversation({id:USER.id})" class="md-button md-default-theme green_text">Messages</md-button>
-          <md-button class="md-button md-default-theme green_blue_text" ng-click="logout()">Logout</md-button>
+        <md-fab-actions ng-if="User && !User.is_teacher" class="green_blue_text">
+          <md-button ui-sref="student_profile({id:User.id})" class="md-button md-default-theme green_text">Profile</md-button>
+          <md-button ui-sref="conversation({id:User.id})" class="md-button md-default-theme green_text">Messages</md-button>
+          <md-button class="md-button md-default-theme green_blue_text" ng-click="auth.logout()">Logout</md-button>
         </md-fab-actions>
 
       </md-fab-speed-dial>
 
 
-      <md-icon ng-show="!USER" hide-gt-xs ng-click="user_menu()" class="white_text"><i class="material-icons">face</i></md-icon>
-      <md-icon ng-show="USER" hide-gt-xs ng-click="user_menu()" class="white_text"><i class="material-icons">face</i></md-icon>
+      <md-icon ng-show="!User" hide-gt-xs ng-click="user_menu()" class="white_text"><i class="material-icons">face</i></md-icon>
+      <md-icon ng-show="User" hide-gt-xs ng-click="user_menu()" class="white_text"><i class="material-icons">face</i></md-icon>
 
 
 
@@ -63,7 +63,7 @@
 
   <div class="main_page" layout="column" flex>
     <!-- ################## User left menu ############################# -->
-    <md-sidenav ng-if="!USER" hide-gt-xs md-component-id="user_menu" class="md-sidenavleft user_menu height_50">
+    <md-sidenav ng-if="!User" hide-gt-xs md-component-id="user_menu" class="md-sidenavleft user_menu height_50">
       <md-toolbar class="md-theme-indigo">
         <h1 class="md-toolbar-tools">Choices</h1>
       </md-toolbar>
@@ -74,31 +74,31 @@
       </md-content>
     </md-sidenav>
 
-    <md-sidenav ng-if="USER && USER.is_teacher" hide-gt-xs md-component-id="user_menu" class="md-sidenav-left user_menu">
+    <md-sidenav ng-if="User && User.is_teacher" hide-gt-xs md-component-id="user_menu" class="md-sidenav-left user_menu">
       <div layout="column"  layout-align="center end">
         <md-toolbar class="dark_moderate_cyan_background white_text">
           <h1 class="md-toolbar-tools">Choices</h1>
         </md-toolbar>
-        <md-button ui-sref="teacher({id:USER.id})" ng-click="user_menu()" class="md-button md-default-theme green_text">Profile</md-button>
-        <md-button ui-sref="teacher_area({id:USER.id})" ng-click="user_menu()" class="md-button md-default-theme green_text">Calendar</md-button>
-        <md-button ui-sref="teacher_location({id:USER.id})" ng-click="user_menu()" class="md-button md-default-theme green_text">Location</md-button>
-        <md-button ui-sref="conversation({id:USER.id})" ng-click="user_menu()" class="md-button md-default-theme green_text">Messages</md-button>
+        <md-button ui-sref="teacher({id:User.id})" ng-click="user_menu()" class="md-button md-default-theme green_text">Profile</md-button>
+        <md-button ui-sref="teacher_area({id:User.id})" ng-click="user_menu()" class="md-button md-default-theme green_text">Calendar</md-button>
+        <md-button ui-sref="teacher_location({id:User.id})" ng-click="user_menu()" class="md-button md-default-theme green_text">Location</md-button>
+        <md-button ui-sref="conversation({id:User.id})" ng-click="user_menu()" class="md-button md-default-theme green_text">Messages</md-button>
 
-        <md-button ng-if="USER.admin" ui-sref="admin" class="md-button md-default-theme green_text">Admin</md-button>
-        <md-button class="md-button md-default-theme green_blue_text" ng-click="logout();user_menu()">Logout</md-button>
+        <md-button ng-if="User.admin" ui-sref="admin" class="md-button md-default-theme green_text">Admin</md-button>
+        <md-button class="md-button md-default-theme green_blue_text" ng-click="auth.logout();user_menu()">Logout</md-button>
         <md-divider md-inset ></md-divider>
         <md-icon ng-click="user_menu()"><i class="material-icons">arrow_back</i><md-icon>
       </div>
     </md-sidenav>
 
-    <md-sidenav ng-if="USER && !USER.is_teacher" hide-gt-xs md-component-id="user_menu" class="md-sidenav-left user_menu height_30">
+    <md-sidenav ng-if="User && !User.is_teacher" hide-gt-xs md-component-id="user_menu" class="md-sidenav-left user_menu height_30">
       <md-toolbar class="md-theme-indigo">
         <h1 class="md-toolbar-tools">Choices</h1>
       </md-toolbar>
       <md-content>
-        <md-button ui-sref="student_profile({id:USER.id})" ng-click="user_menu()" class="md-button md-default-theme green_text">Profile</md-button>
-        <md-button ui-sref="conversation({id:USER.id})" ng-click="user_menu()" class="md-button md-default-theme green_text">Messages</md-button>
-        <md-button class="md-button md-default-theme green_blue_text" ng-click="logout()">Logout</md-button>
+        <md-button ui-sref="student_profile({id:User.id})" ng-click="user_menu()" class="md-button md-default-theme green_text">Profile</md-button>
+        <md-button ui-sref="conversation({id:User.id})" ng-click="user_menu()" class="md-button md-default-theme green_text">Messages</md-button>
+        <md-button class="md-button md-default-theme green_blue_text" ng-click="auth.logout()">Logout</md-button>
       </md-content>
     </md-sidenav>
     <!-- ################# End of user left menu ######################### -->
@@ -108,7 +108,7 @@
     
     <!--#################### Left sidenav ############################-->
     <md-sidenav class="sidenav white_text increase_z md-whiteframe=12" md-component-id="left" flex>
-       <div  ng-cloak ng-if="!USER">
+       <div  ng-cloak ng-if="!User">
          <br/>
          <md-content class="md-no-momentum">
            <md-input-container ng-if="auth_type!=0">
@@ -128,11 +128,7 @@
                  <input ng-model="teacher.last_name" type="text" name="last name" class="black_text" required>
                </md-input-container>
 
-               <!-- <md-input-container class="md-block">
-                 <md-icon class="lastName"></md-icon>
-                 <input ng-model="teacher.lastName" type="text" placeholder="Last Name" required>
-               </md-input-container>
-      -->
+              
                <md-input-container class="md-block">
                  <!-- Use floating placeholder instead of label -->
                  <md-icon  class="email"></md-icon>
@@ -161,7 +157,7 @@
 
            <md-input-container ng-if="auth_type==0">
              <md-subheader>Login</md-subheader>
-             <form ng-submit="login()" >
+             <form ng-submit="auth.login( teacher)" >
 
                <!-- <md-input-container class="md-block">
                  <md-icon class="lastName"></md-icon>

@@ -6,42 +6,53 @@ angular.module('lessons').controller( "TeacherLocationController" , [
   '$state'
   '$stateParams'
   "COMMS"
-  "USER"
   'alertify'
   '$mdBottomSheet' 
   '$mdToast'
   '$q'
   'counties'
-  ( $scope, $rootScope, $state, $stateParams, COMMS, USER, alertify, $mdBottomSheet, $mdToast, $q, counties ) ->
+  ( $scope, $rootScope, $state, $stateParams, COMMS, alertify, $mdBottomSheet, $mdToast, $q, counties ) ->
     console.log "TeacherLocationController"
-    $scope.addresses = null
-    $scope.address = {}
+    # $scope.addresses = null
+    # $scope.address = {}
     $scope.i_want_map = false
     only_once = false
 
-    $scope.county_list = counties
+    $scope.county_list = counties.county_list()
+
+    $rootScope.$on 'user_ready', ( event, mass ) ->
+      console.log 'user_ready'
+
+      if !$rootScope.User.location?
+        $mdToast.showSimple "Your profile might not be visible if you don't enter a location. Your county will do fine" 
 
 
-    $scope.i_want_map_toggle = ->     
-
-      if !$scope.i_want_map && !only_once
-        $scope.i_want_map = !$scope.i_want_map
-        init_map() 
-        only_once = true
+    $scope.i_want_map_toggle = ->
+      $scope.i_want_map = !$scope.i_want_map  
+      if !only_once
+        init_map()
+        only_once = true 
+      # if !$scope.i_want_map && !only_once
+      #   $scope.i_want_map = !$scope.i_want_map
+      #   init_map() 
+      #   only_once = true
 
     init_map = ->
-      if $rootScope.USER? && $rootScope.USER.location
+      $scope.map = {}
+      $scope.searchBox = {}
+      console.log $rootScope.User.location
+      if $rootScope.User? && $rootScope.User.location
 
         $scope.map = new google.maps.Map(document.getElementById('map'), {
           center: 
-            lat: $rootScope.USER.location.latitude
-            lng: $rootScope.USER.location.longitude
+            lat: $rootScope.User.location.latitude
+            lng: $rootScope.User.location.longitude
           zoom: 15
           mapTypeId: google.maps.MapTypeId.ROADMAP
         })
 
         console.log 'yep'
-        set_marker( $rootScope.USER.location )
+        set_marker( $rootScope.User.location )
       else
         $scope.map = new google.maps.Map(document.getElementById('map'), {
           center: 
@@ -105,27 +116,6 @@ angular.module('lessons').controller( "TeacherLocationController" , [
 
       $('#pac-input').val ''
     
-    
-    USER.get_user().then( ( user ) ->
-      if $rootScope.USER.location?
-        $scope.address = $rootScope.USER.location
-        $scope.address.county = $rootScope.USER.location.name if !$rootScope.USER.location.county?
-      else
-        $mdToast.showSimple "Your profile might not be visible if you don't enter a location. Your county will do fine" 
-        
-      USER.check_user()
-      init_map() if $scope.i_want_map
-
-      
-
-    ).catch( ( err ) ->
-      console.log err
-      alertify.error "You are not authorised to view this"
-      $state.go 'welcome'
-    )
-
-       
-
       
 
     ################################# Address update ############################################################
@@ -138,19 +128,20 @@ angular.module('lessons').controller( "TeacherLocationController" , [
         if position != index
           address.checked = false
 
-    $scope.update_address = ->
+    $scope.update_address = ( a ) ->
+      $scope.selected_address.county = $rootScope.User.location.county
+      $scope.selected_address.id = $rootScope.User.location.id
+      #tell server this is a google formatted address
+      $scope.selected_address.google = true
 
-      console.log "Update address"
-      COMMS.POST(
-        "/teacher/#{ $rootScope.USER.id }/location"
-        format_address( $scope.selected_address )
+      console.log $scope.selected_address
+      $rootScope.User.update_address( ( $scope.selected_address )
       ).then( ( resp ) ->
-        console.log resp
-        alertify.success "Location updated"
-        $rootScope.USER.location = resp.data.location
+        
         $scope.marker.setMap null if $scope.marker?
 
-        set_marker( resp.data.location )
+        set_marker( $rootScope.User.location )
+        $scope.i_want_map = false
 
         $('#pac-input').val ''
         $scope.addresses = null
@@ -159,27 +150,7 @@ angular.module('lessons').controller( "TeacherLocationController" , [
         alertify.error err.data.error[0]
       )
 
-    $scope.address_form_submit = ->
-      COMMS.POST(
-        "/teacher/#{ $rootScope.USER.id }/manual-address"
-        $scope.address
-      ).then( ( resp) ->
-        alertify.success "Updated location"
-        console.log resp
-        $rootScope.USER.location = resp.data.location
-      ).catch( ( err) ->
-        console.log err
-        alertify.error "Failed to update location"
-      )
-
-    format_address = ( google_address ) ->
-
-      address =
-        teacher_id: "#{$rootScope.USER.id}"
-        longitude:  google_address.geometry.location.lng()
-        latitude:   google_address.geometry.location.lat()
-        name:       "#{ $rootScope.USER.first_name } address"
-        address:    google_address.formatted_address
+    
 
     $scope.manual_address = ->
       console.log $scope.addresses
@@ -189,34 +160,13 @@ angular.module('lessons').controller( "TeacherLocationController" , [
         latitude:   $scope.addresses[0].geometry.location.lat()
         name:       "#{ $rootScope.USER.first_name } address"
         address:    $scope.address
+        county:     $rootScope.User.location.county
 
-      COMMS.POST(
-        "/teacher/#{ $rootScope.USER.id }/location"
-        merged_address
-      ).then( ( resp ) ->
-        console.log resp
-        alertify.success "Location updated ok"
-        $rootScope.USER.location = resp.data.location
-        $mdBottomSheet.hide()
-        set_marker( resp.data.location )
-        $scope.addresses = null
-      ).catch( ( err ) ->
-        console.log err
-        alertify.error err.errors.full_messages
-      )
+      $rootScope.User.update_address( merged_address, $scope.i_want_map )
 
     ################## Delete location ########################
     $scope.delete_location = ->
-      COMMS.DELETE(
-        "/teacher/#{ $rootScope.USER.id }/location/#{ $rootScope.USER.location.id }"
-      ).then( ( resp ) ->
-        console.log resp
-        alertify.success "Deleted location successfully"
-        $rootScope.USER.location = null
-      ).catch( ( err ) ->
-        console.log err
-        alertify.error "Failed to delete location"
-      )
+      $rootScope.User.delete_location()
 
     ################## End of delete location ################
 

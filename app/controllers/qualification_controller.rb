@@ -13,6 +13,17 @@ class QualificationController < ApplicationController
     end
   end
 
+  def destroy
+    teacher = Teacher.includes( :qualifications ).find( current_teacher.id )
+    pp teacher.qualifications
+    if teacher.qualifications.exists?
+      teacher.qualifications.delete( params[ :id ] )
+      render json: { qualifications: teacher.qualifications.as_json }, status: 200
+    else
+      render json: { errors: "No qualification to delete "  }, status: 404
+    end
+  end
+
   private
 
     def qualification_params

@@ -4,119 +4,20 @@ angular.module('lessons').controller('TeacherController', [
   '$scope'
   '$rootScope'
   '$state'
-  'RESOURCES'
-  'USER'
+  'User'
   'alertify'
-  'COMMS'  
-  '$stateParams'
+  'COMMS'
   '$auth'
   'Upload'
   '$mdBottomSheet'
   '$mdDialog'
-  ( $scope, $rootScope, $state, RESOURCES, USER, alertify, COMMS, $stateParams, $auth, Upload, $mdBottomSheet, $mdDialog ) ->
+  "auth"
+  ( $scope, $rootScope, $state, User, alertify, COMMS, $auth, Upload, $mdBottomSheet, $mdDialog, auth ) ->
     console.log "TeacherController"
-    $scope.photos = null
-    $scope.change_user_type = false
-    # alertify.success "Got subjects"
-
-    $scope.scrollevent = ( $e ) ->
-      
-      # animate_elems()
-      # @scrollPos = document.body.scrollTop or document.documentElement.scrollTop or 0
-      # $scope.$digest()
-      return
-    
-    $scope.upload = ( file ) ->
-      Upload.upload(
-        url: "#{ RESOURCES.DOMAIN }/teacher/#{ $rootScope.USER.id }/photos"
-        file: $scope.file
-        avatar: $scope.file
-        data:
-          avatar: $scope.file
-      ).then( ( resp ) -> 
-        console.log resp
-        $scope.photos = resp.data.photos if resp.data != ""
-        alertify.success("Photo uploaded ok")
-        if resp.data.status == "updated"
-          $rootScope.USER = resp.data.teacher
-          profile_pic()
-          alertify.success "Profile pic set"
-
-        $scope.file = null
-      ).catch( ( err ) ->
-        console.log err
-      )
-
 
     
-    USER.get_user().then( ( user ) ->
-      USER.check_user()
-      alertify.success "Got user"
-      console.log $rootScope.USER.overview == null
-      if $rootScope.USER.id != parseInt( $stateParams.id )
-        $state.go 'welcome'
-        alertify.error "You are not allowed to view this"
-        return false
-      $scope.photos = $rootScope.USER.photos
-
-      $scope.subjects = $rootScope.USER.subjects
-      alertify.error "Your profile is not visible until you select a subject" if $scope.subjects.length == 0
-      alertify.error "Your profile might not be visible if you don't enter a location" if !$rootScope.USER.location?
-
-      $scope.experience = $rootScope.USER.experience
-      $scope.quals = $rootScope.USER.qualifications
-      profile_pic()
-
-
-    ).catch( ( err ) ->
-      alertify.error "No user"
-      $rootScope.USER = null
-      $state.go 'welcome'
-      return false
-    )
     
-
-    $scope.make_profile = ( id ) ->
-      COMMS.POST(
-        '/teacher'
-        profile: id, id: $rootScope.USER.id
-      ).then( ( resp ) ->
-        console.log resp
-        alertify.success "Updated profile pic"
-        if resp.data.status == "updated"
-          $rootScope.USER = resp.data.teacher
-          profile_pic()
-      ).catch( ( err ) ->
-        console.log err
-        alertify.error "Failed to update profile"
-      )
-
-    profile_pic = ->
-      if !$rootScope.USER.profile?
-        console.log "No profile"
-        $scope.profile = null
-        return false
-      for photo in $scope.photos
-        # console.log photo.avatar.url
-        if parseInt( photo.id ) == parseInt( $rootScope.USER.profile )
-          $scope.profile = photo
-          console.log $scope.profile
-          $scope.profile
-
-    $scope.destroy_pic = ( id ) ->
-      COMMS.DELETE(
-        "/teacher/#{ $rootScope.USER.id }/photos/#{ id }"
-      ).then( ( resp ) ->
-        console.log resp
-        alertify.success "Deleted photo ok"
-        $scope.photos = resp.data.teacher.photos
-        $rootScope.USER.profile = resp.data.teacher.profile
-        profile_pic()
-      ).catch( ( err ) ->
-        console.log err
-        alertify.error "Failed to delete photo"
-      )
-
+    
 
     ####################### Subjects ###############################
 
@@ -135,110 +36,10 @@ angular.module('lessons').controller('TeacherController', [
         console.log err
         alertify.error "Failed to get subjects"
       )
-
-    $scope.select_subject = ( subject )->
-      COMMS.POST(
-        "/teacher/#{ $rootScope.USER.id }/add-subject"
-        subject: subject, teacher: $rootScope.USER
-      ).then( ( resp ) ->
-        console.log resp
-        alertify.success "Successfully added subject"
-        $scope.subjects = resp.data.subjects
-        alertify.success "Your profile is now visible to students" if resp.data.subjects.length > 0
-      ).catch( ( err ) ->
-        console.log err
-        alertify.error err.data.error if err.data.error?
-        $scope.subjects = err.data.subjects
-      )
-
-    $scope.remove_subject = ( subject ) ->
-      COMMS.DELETE(
-        "/teacher/#{ $rootScope.USER.id }/remove-subject"
-        subject: subject
-      ).then( ( resp ) ->
-        console.log resp
-        alertify.success "Successfully removed subject"
-        $scope.subjects = resp.data.subjects
-      ).catch( ( err ) ->
-        console.log err
-        alertify.error err.data.error
-      )
     ####################### end of Subjects ###############################
 
-    ####################### Experience ###################################
 
-    $scope.add_experience = ->
-      $scope.experience.teacher_id = $rootScope.USER.id
-      COMMS.POST(
-        "/teacher/#{ $rootScope.USER.id }/experience"
-        $scope.experience
-      ).then( ( resp ) ->
-        console.log resp
-        $scope.experience = resp.data.experience
-        alertify.success "Experience added"
-        # $scope.experience.description = null
-
-      ).catch( ( err ) ->
-        console.log err
-        alertify.error "Failed to add experience"
-      )
-
-    $scope.remove_experience = ( experience ) ->
-      COMMS.DELETE(
-        "/experience/#{ experience.id }"
-        experience
-      ).then( ( resp ) ->
-        console.log resp
-        $scope.experience = resp.data.experience
-        alertify.success "Removed experience"
-      ).catch( ( err ) ->
-        console.log err
-        alertify.error "Failed to delete subject"
-      )
-
-    ####################### end of experience ############################
-
-    ####################### Update teacher #####################################
-    $scope.update_teacher = ->
-      
-      COMMS.POST(
-        '/teacher'
-        $scope.USER
-      ).then( ( resp) ->
-        console.log resp
-        alertify.success "Updated your profile"
-        $rootScope.USER = resp.data.teacher
-        $state.go( 'student_profile', id: $rootScope.USER.id ) if $scope.change_user_type
-        $mdBottomSheet.hide()
-      ).catch( ( err ) ->
-        console.log err
-        alertify.error "Failed to update teacher"
-
-      )
-
-    $scope.change_to_student = ->
-      $scope.change_user_type = true
-      $scope.USER.is_teacher = false
-      $scope.update_teacher()
-
-    ####################### End of update teacher ##############################
-
-    ####################### Qualification ######################################
-    $scope.create_qualification = ->
-      COMMS.POST(
-        "/teacher/#{ $rootScope.USER.id }/qualification"
-        $scope.qualification
-      ).then( ( resp ) ->
-        console.log resp
-        $scope.quals = resp.data.qualifications
-        alertify.success "Created qualification"
-        console.log $scope.quals
-        $mdBottomSheet.hide()
-      ).catch( ( err ) ->
-        console.log err
-        alertify.error err.errors.full_messages
-      )
-    ####################### End of qualification ###############################
+   
 
     ####################### Sheets #######################################
     $scope.show_overview_sheet = ->
@@ -278,7 +79,7 @@ angular.module('lessons').controller('TeacherController', [
 
     $scope.change_password = ->
       $scope.announce_password_once = false
-      $auth.updatePassword($scope.update_password).then((resp) ->
+      $auth.updatePassword( $scope.update_password ).then((resp) ->
         console.log resp
         return
       ).catch (resp) ->

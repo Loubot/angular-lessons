@@ -20,16 +20,17 @@
               <md-chip ng-repeat="subject in teacher.subjects">{{ subject.name }}</md-chip>           
             </md-chips>
             <span class="md-headline">Address</span>
-            {{ teacher.location.address }}
+            {{ teacher.location.address }}<br>
+            {{ teacher.location.county }}
           </md-card-title-text>
         </md-card-title>
         <md-card-actions layout="row" layout-align="start center">
-          <md-button ng-if="USER" class="md-raised md-primary white_text icon_button" ng-click="open_message_dialog()">
-            Book <i class="material-icons">thumb_up</i>
+          <md-button ng-if="User" class="md-raised md-primary white_text icon_button " style="white-space: normal;" ng-click="open_message_dialog()">
+            Contact {{ teacher.first_name }} <i class="material-icons">contact_mail</i>
           </md-button>
 
-          <md-button ng-if="!USER" class="md-raised md-primary white_text icon_button" ng-click="open_login_or_register()">
-            Book <i class="material-icons">thumb_up</i>
+          <md-button ng-if="!User" class="md-raised md-primary white_text icon_button" style="white-space: normal;" ng-click="open_login_or_register()">
+            Contact {{ teacher.first_name }} <i class="material-icons">contact_mail</i>
           </md-button>
 
 
@@ -53,7 +54,7 @@
 
 
       <!--  map div -->
-      <div flex="100" id="map" class="margin_t_10"  ng-show="teacher.location"></div>
+      <div flex="100" id="map" class="margin_t_10 margin_b_10"  ng-show="teacher.location"></div>
 
       <!-- end of map div -->
 

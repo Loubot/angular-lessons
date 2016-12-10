@@ -5,25 +5,16 @@ angular.module('lessons').controller( 'ViewTeacherController', [
   "$rootScope"
   "$state"
   "$stateParams"
-  "USER"
   "$filter"
   "COMMS"
   "alertify"
   "$mdDialog"
-  ( $scope, $rootScope, $state, $stateParams, USER, $filter, COMMS, alertify, $mdDialog ) ->
+  ( $scope, $rootScope, $state, $stateParams, $filter, COMMS, alertify, $mdDialog ) ->
     console.log "ViewTeacherController"
 
     $scope.message = {}
 
-    USER.get_user()
 
-
-    $scope.scrollevent = ( $e ) ->
-      
-      # animate_elems()
-      # @scrollPos = document.body.scrollTop or document.documentElement.scrollTop or 0
-      # $scope.$digest()
-      return
 
     create_map = ->
       if $scope.teacher.location?
@@ -70,6 +61,7 @@ angular.module('lessons').controller( 'ViewTeacherController', [
     COMMS.GET(
       "/teacher/#{ $stateParams.id }/show-teacher"
     ).then( ( resp ) ->
+      console.log "got teacher info"
       console.log resp
       alertify.success "Got teacher info"
       $scope.teacher = resp.data.teacher
@@ -124,11 +116,11 @@ angular.module('lessons').controller( 'ViewTeacherController', [
     
     ####################### Message dialog #############################
 
-    user_listener = $rootScope.$watch "USER", ->
+    user_listener = $rootScope.$watch "User", ->
       console.log "User changed"
-      if $rootScope.USER?
+      if $rootScope.User?
         
-        $scope.message.name = "#{ $rootScope.USER.first_name } #{ $rootScope.USER.last_name }"
+        $scope.message.name = "#{ $rootScope.User.first_name } #{ $rootScope.User.last_name }"
 
     $scope.open_message_dialog = ->
       $mdDialog.show(
@@ -145,7 +137,7 @@ angular.module('lessons').controller( 'ViewTeacherController', [
       console.log $scope.message
       $scope.message.teacher_id = $scope.teacher.id
       $scope.message.teacher_email = $scope.teacher.email
-      $scope.message.student_email = $rootScope.USER.email
+      $scope.message.student_email = $rootScope.User.email
       COMMS.POST(
         "/conversation"
         conversation: $scope.message
