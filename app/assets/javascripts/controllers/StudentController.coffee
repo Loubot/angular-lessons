@@ -42,21 +42,6 @@ angular.module('lessons').controller( 'StudentController', [
       )
 
 
-    $scope.make_profile = ( id ) ->
-      COMMS.POST(
-        '/teacher'
-        profile: id, id: $rootScope.User.id
-      ).then( ( resp ) ->
-        console.log resp
-        alertify.success "Updated profile pic"
-        if resp.data.status == "updated"
-          $rootScope.User = resp.data.teacher
-          profile_pic()
-      ).catch( ( err ) ->
-        console.log err
-        alertify.error "Failed to update profile"
-      )
-
     profile_pic = ->
       console.log $rootScope.User.photos
       if !$rootScope.User.profile?
@@ -69,37 +54,6 @@ angular.module('lessons').controller( 'StudentController', [
           $scope.profile = photo
           console.log $scope.profile
           $scope.profile
-
-    $scope.destroy_pic = ( id ) ->
-      COMMS.DELETE(
-        "/teacher/#{ $rootScope.User.id }/photos/#{ id }"
-      ).then( ( resp ) ->
-        console.log resp
-        alertify.success "Deleted photo ok"
-        $rootScope.User.photos = resp.data.teacher.photos
-        $rootScope.User.profile = resp.data.teacher.profile
-        profile_pic()
-      ).catch( ( err ) ->
-        console.log err
-        alertify.error "Failed to delete photo"
-      )
-
-    $scope.update_student = ->
-      
-      # COMMS.POST(
-      #   '/teacher'
-      #   $rootScope.USER
-      # ).then( ( resp) ->
-      #   console.log resp
-      #   alertify.success "Updated your profile"
-      #   $rootScope.USER = resp.data.teacher
-      #   $state.go( 'teacher', id: $rootScope.USER.id ) if $scope.change_user_type
-      #   # $mdBottomSheet.hide()
-      # ).catch( ( err ) ->
-      #   console.log err
-      #   alertify.error "Failed to update teacher"
-
-      # )
 
     $scope.change_to_teacher = ->
       

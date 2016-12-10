@@ -26,7 +26,7 @@
           <md-input-container md-no-float>
             <label>First name:</label>
             <input  type="text"
-                    ng-change="update_teacher()"
+                    ng-change="User.update()"
                     ng-model-options="{ debounce:750 }"
                     ng-model="User.first_name">
           </md-input-container>
@@ -34,7 +34,7 @@
           <md-input-container md-no-float>
             <label>Last name:</label>
             <input  type="text"
-                    ng-change="update_teacher()" 
+                    ng-change="User.update()" 
                     ng-model-options="{ debounce:750 }"
                     ng-model="User.last_name">
           </md-input-container>
@@ -51,7 +51,7 @@
       <md-card-actions layout="row" layout-align="start center">
         <md-button  
           ng-model="file" 
-          ngf-select="upload()">
+          ngf-select="User.upload_pic( file )">
             <i class="material-icons ">add_a_photo</i>
         </md-button>
         <md-card-icon-actions>
@@ -78,11 +78,11 @@
              </md-button>
              <md-menu-content width="4">
                 <md-menu-item>
-                  <md-button ng-click="make_profile( photo.id )">Make profile?</md-button>
+                  <md-button ng-click="User.update_profile( photo.id )">Make profile?</md-button>
                 </md-menu-item>
 
                 <md-menu-item>
-                  <md-button ng-click="destroy_pic( photo.id )" class="width_100">Delete</md-button>
+                  <md-button ng-click="User.delete_pic( photo.id )" class="width_100">Delete</md-button>
                   
                 </md-menu-item>
              </md-menu-content>
@@ -117,7 +117,7 @@
           </p>
         </md-card-content>
         <md-card-actions layout="column" layout-align="start">
-          <md-button class="md-raised md-warn" ng-click="change_to_teacher()">I'm a teacher</md-button>
+          <md-button class="md-raised md-warn" ng-click="User.change_user_type( true )">I'm a teacher</md-button>
         </md-card-actions>
       </md-card>
     </md-content>

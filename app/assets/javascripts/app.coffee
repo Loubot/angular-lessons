@@ -263,7 +263,7 @@ angular.module('lessons').config [
       authenticate: [
         "auth"
         ( auth ) ->
-          aut.check_if_logged_in()
+          auth.check_if_logged_in()
       ]
 
   $urlRouterProvider.otherwise "/"
