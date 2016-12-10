@@ -22,6 +22,8 @@ angular.module('lessons').controller('ConversationController', [
       for convo in $scope.conversations
         $scope.conversation = convo if convo.random == $stateParams.random
         console.log "found it #{ convo }"
+
+
     
     COMMS.GET(
       "/conversation"
@@ -58,7 +60,6 @@ angular.module('lessons').controller('ConversationController', [
 
     
     $scope.select_conversation = ( id ) ->
-      
       COMMS.GET(
         "/conversation"
         conversation_id: id

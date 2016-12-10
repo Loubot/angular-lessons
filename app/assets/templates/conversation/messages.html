@@ -1,5 +1,9 @@
-<div ng-if="User.is_teacher" class="name_header">{{ conversation.student_name }}</div>
-<div ng-if="!User.is_teacher" class="name_header">{{ conversation.teacher_name }}</div>
+<div ng-if="User.is_teacher" class="name_header">
+  {{ conversation.student_name }} <md-icon ng-if="conversation" ng-click="select_conversation( conversation.id )"><i class="material-icons">refresh</i></md-icon>
+</div>
+<div ng-if="!User.is_teacher" class="name_header">
+  {{ conversation.teacher_name }} <md-icon ng-if="conversation" ng-click="select_conversation( conversation.id )"><i class="material-icons">refresh</i></md-icon>
+</div>
 
 <div hide-gt-xs>
   <md-toolbar>
