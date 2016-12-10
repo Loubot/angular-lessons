@@ -160,14 +160,7 @@ angular.module('lessons').config [
   $stateProvider.state 'search',
     url: '/search/:name/:location'
     templateUrl: "static/search.html"
-    controller: "SearchController"
-
-  
-
-  $stateProvider.state 'student_profile',
-    url: '/student/:id'
-    templateUrl: "user/student.html"
-    controller: "StudentController"
+    controller: "SearchController"  
 
   $stateProvider.state 'view_teacher',
     url: '/view-teacher/:id'
@@ -260,6 +253,17 @@ angular.module('lessons').config [
         "auth"
         ( auth ) ->
           auth.check_if_logged_in_and_admin()
+      ]
+
+  $stateProvider.state 'student_profile',
+    url: '/student/:id'
+    templateUrl: "user/student.html"
+    controller: "StudentController"
+    resolve:
+      authenticate: [
+        "auth"
+        ( auth ) ->
+          aut.check_if_logged_in()
       ]
 
   $urlRouterProvider.otherwise "/"

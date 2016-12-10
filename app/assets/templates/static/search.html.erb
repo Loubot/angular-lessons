@@ -99,7 +99,7 @@
             ng-if="teachers.length>0"
             >
         <md-card-title>
-          <md-card-title-text>
+          <md-card-title-text class="margin_r_5">
             <span class="md-headline">{{ teacher.first_name }} {{ teacher.last_name }}  </span>
             <span ng-if="teacher.location" class="md-subhead address">{{ teacher.location.address }}</span>
             <span ng-repeat="subject in teacher.subjects">{{ subject.name }}</span>

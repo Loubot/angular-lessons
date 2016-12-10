@@ -54,7 +54,7 @@ angular.module('lessons').controller('NavController', [
       auth.register( $scope.teacher ).then( ( resp ) ->
         $mdSidenav('left').toggle()
         
-        alertify.success "Welcome #{ resp.data.data.email }"
+        alertify.success "Welcome #{ $rootScope.User.email }"
       )
 
   

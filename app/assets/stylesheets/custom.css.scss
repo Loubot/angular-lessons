@@ -343,6 +343,10 @@ md-sidenav.md-closed.md-locked-open-add-active.user_menu {
   margin-top: 0px !important;
 }
 
+.margin_r_5{
+  margin-right: 5px !important;
+}
+
 .padding_5{
   padding: 5px !important;
 }
@@ -645,10 +649,10 @@ md-sidenav.md-closed.md-locked-open-add-active.user_menu {
 // End of messages
 
 // search page
-  .address{
-    max-width: 300px;
-    word-wrap: break-word;
-  }
+.address{
+  max-width: 200px;
+  word-wrap: break-word;
+}
   
 // end of search page
 
