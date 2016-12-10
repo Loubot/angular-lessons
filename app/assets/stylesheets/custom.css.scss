@@ -287,6 +287,10 @@ md-sidenav.md-closed.md-locked-open-add-active.user_menu {
   min-width: 400px !important;
 }
 
+.min_width_190{
+  min-width: 190px !important;
+}
+
 .md-chips > .min_height_32.ng-hide{
   visibility: hidden !important;
 }
@@ -349,6 +353,10 @@ md-sidenav.md-closed.md-locked-open-add-active.user_menu {
 
 .padding_s_20{
   padding: 0px 20px;
+}
+
+.no_overflow{
+  overflow: hidden !important;
 }
 
 .gutter_85{
@@ -635,6 +643,14 @@ md-sidenav.md-closed.md-locked-open-add-active.user_menu {
 
 
 // End of messages
+
+// search page
+  .address{
+    max-width: 300px;
+    word-wrap: break-word;
+  }
+  
+// end of search page
 
 // Teacher area
 .calendar_container{
