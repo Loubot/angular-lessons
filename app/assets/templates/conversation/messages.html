@@ -14,7 +14,7 @@
   </md-toolbar>
 </div>
 
-<div layout="row" class="height_100 ">
+<div layout="row" class="height_100_min_56">
   <md-sidenav  
           md-component-id="conversation_search" 
           class="md-sidenav-left height_50" 
@@ -39,9 +39,9 @@
 
 
 
-  <div flex="100" class="height_100" style="overflow-y:hidden;">
+  <div flex="100"  style="overflow-y:hidden;">
 
-    <md-content class="height_70 padding_5" id="message_container">
+    <md-content class=" padding_5" id="message_container">
       <div layout="column" layout-fill flex>
         <div        class="margin_t_10"
                     ng-class="{ 'flex-offset-45': message.sender_email==User.email }"
