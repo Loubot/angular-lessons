@@ -163,6 +163,7 @@ angular.module('lessons').service 'auth', [
         console.log "validation error"
         alertify.error 'auth:validation-error'
         console.log $state.current.name
+        $rootScope.User = null
 
       # set listener for validation success
       $rootScope.$on 'auth:validation-success', ( e, v ) ->
