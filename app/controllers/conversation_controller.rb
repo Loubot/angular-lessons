@@ -5,10 +5,19 @@ class ConversationController < ApplicationController
 
   def create
     p "!!!!!!!!!!!!!!!!!!!!!!!!!"
-    pp conversation_params
-    convesation = Conversation.create!( conversation_params[ :conversation ] )
-
-    render status: 200, nothing: true and return
+    pp conversation_params[:conversation][:user_id1]
+    conversation = Conversation.where( user_id1: conversation_params[:conversation][:user_id1], user_id2: conversation_params[:conversation][:user_id2] ).or\
+                  ( Conversation.where( user_id1: conversation_params[:conversation][:user_id2], user_id2: conversation_params[:conversation][:user_id1] ) )
+    if conversation.blank?
+      conversation = Conversation.new( conversation_params[ :conversation ] )
+      if conversation.save
+        render json: { conversation: conversation.as_json }
+      else
+        render json: { errors: conversation.errors }
+      end
+    else
+      render status: 200, nothing: true and return
+    end
     # if Rails.env.production?
     #   delivered = ConversationMailer.delay.send_message( 
     #     conversation_params, 
