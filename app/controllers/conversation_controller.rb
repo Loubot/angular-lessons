@@ -4,43 +4,39 @@ class ConversationController < ApplicationController
   before_action :authenticate_teacher!
 
   def create
-    p "!!!!!!!!!!!!!!!!!!!!!!!!!"
-    pp conversation_params[:conversation][:user_id1]
+    # Person sending email will always be user_email1
     conversation = Conversation.where( user_id1: conversation_params[:conversation][:user_id1], user_id2: conversation_params[:conversation][:user_id2] ).or\
                   ( Conversation.where( user_id1: conversation_params[:conversation][:user_id2], user_id2: conversation_params[:conversation][:user_id1] ) )
     if conversation.blank?
       conversation = Conversation.new( conversation_params[ :conversation ] )
-      if conversation.save
-        render json: { conversation: conversation.as_json }
-      else
-        render json: { errors: conversation.errors }
-      end
-    else
-      render status: 200, nothing: true and return
     end
-    # if Rails.env.production?
-    #   delivered = ConversationMailer.delay.send_message( 
-    #     conversation_params, 
-    #     sender_email,
-    #     format_url( conversation.random, conversation.id ) 
-    #   )
 
-    #   ConversationMailer.delay.send_message_copy(
-    #     conversation_params,
-    #     current_teacher.email
-    #   )
-    # else
-    #   delivered = ConversationMailer.send_message( 
-    #     conversation_params, 
-    #     sender_email,
-    #     format_url( conversation.random, conversation.id ) 
-    #   ).deliver_now
+    message = Message.new( conversation_id: conversation.id, text: conversation_params[:message][:text])
 
-    #   ConversationMailer.send_message_copy(
-    #     conversation_params,
-    #     current_teacher.email
-    #   ).deliver_now
-    # end
+    if Rails.env.production?
+      delivered = ConversationMailer.delay.send_message( 
+        conversation_params
+        format_url( conversation.ie ) 
+      )
+
+      ConversationMailer.delay.send_message_copy(
+        conversation_params,
+        current_teacher.email
+      )
+    else
+      delivered = ConversationMailer.send_message( 
+        conversation_params
+        format_url( conversation.ie ) 
+      ).deliver_now
+
+      ConversationMailer.send_message_copy(
+        conversation_params,
+        current_teacher.email
+      ).deliver_now
+    end
+
+    message.save!
+
 
     # p "Deliverd #{ delivered }"
 
