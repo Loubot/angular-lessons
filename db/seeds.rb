@@ -27,26 +27,26 @@ end
 Teacher.last.subjects << Subject.last
 Teacher.first.subjects << Subject.last
 
-conversation = Conversation.create( teacher_email: "lllouis@yahoo.com", student_email: "louisangelini@gmail.com", teacher_name: "Louis", student_name: "Aidan" )
-conversationb = Conversation.create( teacher_email: "lllouis@yahoo.com", student_email: "louisangelini2@gmail.com", teacher_name: "Louis", student_name: "Paul" )
+# conversation = Conversation.create( user_email1: "lllouis@yahoo.com", user_email2: "louisangelini@gmail.com", user_name1: "Louis", user_name2: "Aidan" )
+# conversationb = Conversation.create( user_email1: "lllouis@yahoo.com", user_email2: "louisangelini2@gmail.com", user_name1: "Louis", user_name2: "Paul" )
 
-(0..5).each do |i|
-  Message.create( message: "hello there", conversation_id: conversation.id, sender_email: "louisangelini@gmail.com" )
-  Message.create( message: "I am ze teacher", conversation_id: conversation.id, sender_email: "lllouis@yahoo.com" )
-  Message.create( message: "Alright boi", conversation_id: conversationb.id, sender_email: "louisangelini2@gmail.com")
-  Message.create( message: "hahahaha", conversation_id: conversationb.id, sender_email: "lllouis@yahoo.com")
-end
+# (0..5).each do |i|
+#   Message.create( text: "hello there", conversation_id: conversation.id )
+#   Message.create( text: "I am ze teacher", conversation_id: conversation.id )
+#   Message.create( text: "Alright boi", conversation_id: conversationb.id )
+#   Message.create( text: "hahahaha", conversation_id: conversationb.id )
+# end
 
 
 for i in 0..5
   Teacher.create( first_name: "student#{ i }", last_name: "McStudent", password: "Football1", email: "louisangelini#{ i }@gmail.com", is_teacher: false )
 end
 
-conversation = Conversation.create( teacher_email: 'lllouis@yahoo.com', student_email: 'louisangelini1@gmail.com', teacher_name: 'Louis', student_name: 'Jimbo')
+conversation = Conversation.create( user_id1: Teacher.first.id, user_id2: Teacher.last.id, user_email1: Teacher.first.email, user_email2: Teacher.last.email, user_name1: Teacher.first.first_name, user_name2: Teacher.last.first_name )
 
 (0..5).each do |i|
-  Message.create( message: "hello there", conversation_id: conversation.id, sender_email: "louisangelini1@gmail.com" )
-  Message.create( message: "I am ze teacher", conversation_id: conversation.id, sender_email: "lllouis@yahoo.com" )
-  Message.create( message: "Alright boi", conversation_id: conversation.id, sender_email: "louisangelini1@gmail.com")
-  Message.create( message: "hahahaha", conversation_id: conversation.id, sender_email: "lllouis@yahoo.com")
+  Message.create( message: "hello there", conversation_id: conversation.id )
+  Message.create( message: "I am ze teacher", conversation_id: conversation.id )
+  Message.create( message: "Alright boi", conversation_id: conversation.id )
+  Message.create( message: "hahahaha", conversation_id: conversation.id )
 end

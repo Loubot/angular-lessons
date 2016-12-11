@@ -27,26 +27,11 @@ angular.module('lessons').controller('ConversationController', [
     
     COMMS.GET(
       "/conversation"
-      {
-        random: $stateParams.random if $stateParams.random? && $stateParams.random != ""
-        # conversation_id: $stateParams.id
-        teacher_email: $rootScope.User.email if $rootScope.User? && $rootScope.User.is_teacher
-        student_email: $rootScope.User.email if $rootScope.User? && !$rootScope.User.is_teacher
-      }
     ).then( ( resp ) ->
       console.log resp
-
-      if !$stateParams.random? or $stateParams.random == ""
-        $scope.conversation = resp.data.conversation if resp.data.conversation?
-
-        $scope.conversation =   resp.data.conversations[0] if ( resp.data.conversations? && resp.data.conversations.length > 0 )
-        $scope.conversations =  resp.data.conversations if resp.data.conversations?
       
-      else if $stateParams.random? and $stateParams.random != ""
-        $scope.conversations = resp.data.conversations
-        find_conversation_by_random()
-      
-        
+      $scope.conversations = resp.data.conversations
+      $scope.conversation = resp.data.conversations[0] if $scope.conversations?
 
       if $scope.conversation?
         alertify.success "Got conversations"

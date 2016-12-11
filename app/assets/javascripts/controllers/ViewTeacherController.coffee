@@ -135,12 +135,18 @@ angular.module('lessons').controller( 'ViewTeacherController', [
 
     $scope.send_message = ->
       console.log $scope.message
-      $scope.message.teacher_id = $scope.teacher.id
-      $scope.message.teacher_email = $scope.teacher.email
-      $scope.message.student_email = $rootScope.User.email
+      $scope.conversation = {}
+      $scope.conversation.user_id1 = $rootScope.User.id
+      $scope.conversation.user_id2 = $scope.teacher.id
+      $scope.conversation.user_email1 = $rootScope.User.email
+      $scope.conversation.user_email2 = $scope.teacher.email
+      $scope.conversation.user_name1 = $rootScope.User.get_full_name()
+      $scope.conversation.user_name2 = "#{ $scope.teacher.first_name } #{ $scope.teacher.last_name }"
+
       COMMS.POST(
         "/conversation"
-        conversation: $scope.message
+        conversation: $scope.conversation
+        message: $scope.message
       ).then( ( resp ) ->
         console.log resp
         alertify.success "Message sent!"

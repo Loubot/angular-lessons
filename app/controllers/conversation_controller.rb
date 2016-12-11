@@ -4,120 +4,72 @@ class ConversationController < ApplicationController
   before_action :authenticate_teacher!
 
   def create
-    p "con params #{ conversation_params }"
-    if conversation_params.has_key?( :teacher_id ) && conversation_params[ :teacher_id ] != ""
-      teacher = Teacher.find( conversation_params[ :teacher_id ])
-    else
-      teacher = Teacher.find_by( email: conversation_params[:conversation][:teacher_email] )
-    end
+    p "!!!!!!!!!!!!!!!!!!!!!!!!!"
+    pp conversation_params
+    convesation = Conversation.create!( conversation_params[ :conversation ] )
 
-    if conversation_params[:conversation][:conversation_id].present?
-      conversation = Conversation.find( conversation_params[:conversation][:conversation_id])
-    else
-      conversation = Conversation.find_or_create_by( 
-        teacher_email: teacher.email,
-        teacher_name: current_teacher.first_name,
-        student_email: conversation_params[:conversation][:student_email],
-        student_name: conversation_params[:conversation][:name]
+    render status: 200, nothing: true and return
+    # if Rails.env.production?
+    #   delivered = ConversationMailer.delay.send_message( 
+    #     conversation_params, 
+    #     sender_email,
+    #     format_url( conversation.random, conversation.id ) 
+    #   )
 
-      )
-    end
+    #   ConversationMailer.delay.send_message_copy(
+    #     conversation_params,
+    #     current_teacher.email
+    #   )
+    # else
+    #   delivered = ConversationMailer.send_message( 
+    #     conversation_params, 
+    #     sender_email,
+    #     format_url( conversation.random, conversation.id ) 
+    #   ).deliver_now
 
-    p "got conversation"
-    pp conversation.id
-    sender_email =  conversation_params[:conversation][:teacher_email] == current_teacher.email ? \
-                    conversation_params[:conversation][:student_email] : conversation_params[:conversation][:teacher_email]
+    #   ConversationMailer.send_message_copy(
+    #     conversation_params,
+    #     current_teacher.email
+    #   ).deliver_now
+    # end
 
-    p "sender email #{ sender_email }"
-    
-    if Rails.env.production?
-      delivered = ConversationMailer.delay.send_message( 
-        conversation_params, 
-        sender_email,
-        format_url( conversation.random, conversation.id ) 
-      )
-
-      ConversationMailer.delay.send_message_copy(
-        conversation_params,
-        current_teacher.email
-      )
-    else
-      delivered = ConversationMailer.send_message( 
-        conversation_params, 
-        sender_email,
-        format_url( conversation.random, conversation.id ) 
-      ).deliver_now
-
-      ConversationMailer.send_message_copy(
-        conversation_params,
-        current_teacher.email
-      ).deliver_now
-    end
-
-    p "Deliverd #{ delivered }"
+    # p "Deliverd #{ delivered }"
 
 
-    message = conversation.messages.create(
-      message:          params[:conversation][:message],
-      sender_email:     sender_email,
-      conversation_id:  conversation.id
-    )
-    message.save!
-    pp message
+    # message = conversation.messages.create(
+    #   message:          params[:conversation][:message],
+    #   conversation_id:  conversation.id
+    # )
+    # message.save!
+    # pp message
 
-    conversation = Conversation.where( id: conversation.id ).includes( :messages ).first
+    # conversation = Conversation.where( id: conversation.id ).includes( :messages ).first
 
-    render json: { conversation: conversation.as_json( include: [ :messages ] ) }
+    # render json: { conversation: conversation.as_json( include: [ :messages ] ) }
   end
 
   def index
-    p params
-    # if index_params.has_key?( :random ) && index_params[ :random ] != ""
+    conversations = Conversation.where( user_id1: current_teacher.id, user_id2: current_teacher.id )
+    render json: { conversations: conversations.as_json }
+  end
 
-    #   conversation = Conversation.where( random: index_params[ :random ] ).includes( :messages ).first
-    #   p "random convo"
-    #   pp conversation
-    #   conversations = Conversation.where(
-    #                                       teacher_email: conversation.teacher_email,
-    #                                       student_email: conversation.student_email
-    #                                       ).includes( :messages )
-    #   render json: { conversations: conversation.as_json( include: [ :messages ] ) } 
-
+  def show
+    if current_teacher
+      conversation = Conversation.includes( :messages ).find( conversation_params[ :id ] )
       
-
-    if index_params.has_key?( :conversation_id ) && index_params[ :conversation_id ] != ""
-      conversation = Conversation.where( id: index_params[ :conversation_id ] ).includes( :messages ).first
-
       render json: { conversation: conversation.as_json( include: [ :messages ] ) }
-
-    elsif ( index_params.has_key?( :teacher_email ) && index_params[ :teacher_email ] != "" )\
-      && ( index_params.has_key?( :student_email ) && index_params[:student_email ] != "" )
-      conversation = Conversation.where( teacher_email: index_params[ :teacher_email ], student_email: index_params[ :student_email ] ).includes( :messages ).first
-
-      render json: { conversation: conversation.as_json( include: [ :messages ] ) }
-
-    elsif index_params.has_key?( :teacher_email ) && index_params[ :teacher_email ] != ""
-      conversations = Conversation.where( teacher_email: index_params[ :teacher_email ] ).includes( :messages )
-      p "Found conversations"
-      pp conversations
-      render json: { conversations: conversations.as_json( include: [ :messages ] ) }
-
-    elsif index_params.has_key?( :student_email ) && index_params[ :student_email ] != ""
-      conversations = Conversation.where( student_email: index_params[ :student_email ] ).includes( :messages )
-      p "Student conversations"
-      pp conversations
-      render json: { conversations: conversations.as_json( include: [ :messages ] ) }
     else
-      render json: { error: "Not found"}, status: 404
+      render json: { errors: [ 'tut tut' ] }, status: 401
     end
     
-
   end
 
 
   private
     def conversation_params
-      params.permit( { conversation: [ :name, :phone, :sender_email, :teacher_email, :teacher_id, :message, :student_email, :conversation_id ] }, :teacher_id )
+      params.permit(  { conversation: [ :user_id1, :user_id2, :user_email1, :user_email2, :user_name1, :user_name2 ] },
+                      { message: [ :text ] }
+                   )
       # params.permit( :name, :phone, :email, :teacher_id )
 
     end
