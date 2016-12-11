@@ -79,10 +79,10 @@ ActiveRecord::Schema.define(version: 20161211134621) do
   end
 
   create_table "messages", force: :cascade do |t|
-    t.text     "message"
     t.integer  "conversation_id"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
+    t.text     "text"
   end
 
   create_table "photos", force: :cascade do |t|
