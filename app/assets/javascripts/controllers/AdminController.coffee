@@ -21,6 +21,16 @@ angular.module('lessons').controller('AdminController', [
 
     $scope.show_teachers = false
 
+    COMMS.GET(
+      "/category"
+    ).then( ( resp ) ->
+      console.log resp
+      $scope.categories = resp.data.categories
+      alertify.success "Got categories"
+    ).catch( ( err ) ->
+      console.log err
+      alertify.error "Failed to fetch categories"
+    )
     
 
     $scope.fetch_teachers = ->
