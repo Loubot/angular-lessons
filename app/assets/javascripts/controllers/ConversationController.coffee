@@ -18,12 +18,6 @@ angular.module('lessons').controller('ConversationController', [
     $scope.search_conversations = ->
       $mdSidenav('conversation_search').toggle()
 
-    find_conversation_by_random = ->
-      for convo in $scope.conversations
-        $scope.conversation = convo if convo.random == $stateParams.random
-        console.log "found it #{ convo }"
-
-
     
     COMMS.GET(
       "/conversation"

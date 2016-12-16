@@ -15,8 +15,8 @@ class ConversationController < ApplicationController
 
     if Rails.env.production?
       delivered = ConversationMailer.delay.send_message( 
-        conversation_params
-        format_url( conversation.ie ) 
+        conversation_params,
+        format_url( conversation.id ) 
       )
 
       ConversationMailer.delay.send_message_copy(
@@ -25,8 +25,8 @@ class ConversationController < ApplicationController
       )
     else
       delivered = ConversationMailer.send_message( 
-        conversation_params
-        format_url( conversation.ie ) 
+        conversation_params,
+        format_url( conversation.id ) 
       ).deliver_now
 
       ConversationMailer.send_message_copy(
@@ -34,6 +34,9 @@ class ConversationController < ApplicationController
         current_teacher.email
       ).deliver_now
     end
+
+    p "iausdofiuaosidfu"
+    pp message
 
     message.save!
 
