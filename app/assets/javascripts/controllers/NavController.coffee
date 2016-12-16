@@ -34,7 +34,7 @@ angular.module('lessons').controller('NavController', [
         $scope.auth_type == 2
       else
         console.log 'register teacher'
-        $scope.auth_type = 1
+        $scope.auth_type = 2
       $mdSidenav('left').toggle()
 
     # $scope.$watch('demo.isOpen', ( isOpen ) ->
@@ -49,8 +49,10 @@ angular.module('lessons').controller('NavController', [
       $mdSidenav('right').toggle()
 
     $scope.register_teacher = ->
-      console.log $scope.teacher
+      
       $scope.teacher.is_teacher = true if $scope.auth_type == 1
+      console.log $scope.teacher
+      console.log $scope.auth_type
       auth.register( $scope.teacher ).then( ( resp ) ->
         $mdSidenav('left').toggle()
         
