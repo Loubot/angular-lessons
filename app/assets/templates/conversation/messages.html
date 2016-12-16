@@ -1,9 +1,7 @@
-<div ng-if="User.is_teacher" class="name_header">
-  {{ conversation.student_name }} <md-icon ng-if="conversation" ng-click="select_conversation( conversation.id )"><i class="material-icons">refresh</i></md-icon>
+<div class="name_header">
+  {{ conversation.user_id1 == User.id ? conversation.user_name2 : conversation.user_name1 }} <md-icon ng-if="conversation" ng-click="select_conversation( conversation.id )"><i class="material-icons">refresh</i></md-icon>
 </div>
-<div ng-if="!User.is_teacher" class="name_header">
-  {{ conversation.teacher_name }} <md-icon ng-if="conversation" ng-click="select_conversation( conversation.id )"><i class="material-icons">refresh</i></md-icon>
-</div>
+
 
 <div hide-gt-xs>
   <md-toolbar>
@@ -31,8 +29,7 @@
             ng-click="select_conversation( conversation.id )" 
             class="margin_t_10"
             flex="100">
-        <div ng-if="User.is_teacher" class="message_box">{{ conversation.student_name }}</div>
-        <div ng-if="!User.is_teacher" class="message_box">{{ conversation.teacher_name }}</div>
+        <div  class="message_box">{{ conversation.user_id1 == User.id ? conversation.user_name2 : conversation.user_name1 }}</div>
         <md-divider></md-divider>
       </div> <!-- end of conversations -->
     </md-content>
@@ -48,11 +45,11 @@
     <md-content class=" padding_5" id="message_container">
       <div layout="column" layout-fill flex>
         <div        class="margin_t_10"
-                    ng-class="{ 'flex-offset-45': message.sender_email==User.email }"
+                    ng-class="{ 'flex-offset-45': conversation.user_id1!=User.id }"
                     ng-repeat="message in conversation.messages">
-          <div ng-class="{ 'sender': message.sender_email==User.email, 'receiver': message.sender_email!=User.email }">
+          <div ng-class="{ 'sender': conversation.user_id1 != User.id, 'receiver': conversation.user_id1 == User.id }">
             
-            {{ message.message }}
+            {{ message.text }}
           </div> <!-- end of sender/receiver -->
 
 

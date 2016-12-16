@@ -10,7 +10,7 @@
 #
 
 class Message < ActiveRecord::Base
-  validates :message, :conversation_id, :sender_email, presence: true
+  validates :text, :conversation_id, presence: true
   belongs_to :conversation
 
   

@@ -12,7 +12,6 @@ angular.module('lessons').controller('ConversationController', [
   "$mdDialog"
   ( $scope, $state, $rootScope, $stateParams, $mdSidenav, alertify, COMMS, $timeout , $mdDialog) ->
     console.log "ConversationController"
-    console.log $stateParams
     $scope.show_form = false
 
     $scope.search_conversations = ->
@@ -40,8 +39,7 @@ angular.module('lessons').controller('ConversationController', [
     
     $scope.select_conversation = ( id ) ->
       COMMS.GET(
-        "/conversation"
-        conversation_id: id
+        "/conversation/#{ id }"
       ).then( ( resp ) ->
         console.log resp
         alertify.success "Got conversation"
