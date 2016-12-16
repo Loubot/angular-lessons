@@ -11,13 +11,13 @@ class ConversationMailer < ActionMailer::Base
                       
                   :to=>[  
                    {  
-                     :email=> email
+                     :email=> params[ :conversation ][ :user_email2 ]
                      # :name=> "#{student_name}"  
                    }  
                  ],
                 :from_email=> "LYL@learnyourlesson.ie",
                 "merge_vars"=>[
-                              { "rcpt"   =>  email,
+                              { "rcpt"   =>  params[ :conversation ][ :user_email2 ],
                                 "vars" =>  [
                                           { "name"=>"MESSAGE",          "content"=>params[ :message ][ :text ]  },
                                           { "name"=>"PHONE",            "content"=>phone  },                                        
@@ -38,7 +38,7 @@ class ConversationMailer < ActionMailer::Base
     raise
     end
 
-    logger.info "Mail sent to #{ email }"
+    logger.info "Mail sent to #{ params[ :conversation ][ :user_email2 ] }"
 
   end
 

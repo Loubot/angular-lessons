@@ -7,16 +7,46 @@ class ConversationController < ApplicationController
     # Person sending email will always be user_email1
     conversation = Conversation.where( user_id1: conversation_params[:conversation][:user_id1], user_id2: conversation_params[:conversation][:user_id2] ).or\
                   ( Conversation.where( user_id1: conversation_params[:conversation][:user_id2], user_id2: conversation_params[:conversation][:user_id1] ) )
+
+
+
     if conversation.blank?
+      # new conversation. New and save for error response
       conversation = Conversation.new( conversation_params[ :conversation ] )
+      
+      if !conversation.save
+        render json: { errors: conversation.errors }, status: 422 and return
+      end
+    else
+      # conversation is a result of where statement so must call .first
+      conversation = conversation.first
     end
 
-    message = Message.new( conversation_id: conversation.id, text: conversation_params[:message][:text])
+    pp "Conversation is this"
+    pp conversation
+
+    
+
+    
+
+    
+    message = Message.new( conversation_id: conversation.id, text: conversation_params[:message][:text] )
+    p "message *************"
+    pp message
+
+    message.save!
+
+    
+
+    render json: { conversation: conversation.as_json( include: [ :messages ] ) }
+    
+
+
 
     if Rails.env.production?
       delivered = ConversationMailer.delay.send_message( 
-        conversation_params
-        format_url( conversation.ie ) 
+        conversation_params,
+        format_url( conversation.id ) 
       )
 
       ConversationMailer.delay.send_message_copy(
@@ -25,8 +55,8 @@ class ConversationController < ApplicationController
       )
     else
       delivered = ConversationMailer.send_message( 
-        conversation_params
-        format_url( conversation.ie ) 
+        conversation_params,
+        format_url( conversation.id ) 
       ).deliver_now
 
       ConversationMailer.send_message_copy(
@@ -35,7 +65,7 @@ class ConversationController < ApplicationController
       ).deliver_now
     end
 
-    message.save!
+   
 
 
     # p "Deliverd #{ delivered }"
@@ -54,13 +84,13 @@ class ConversationController < ApplicationController
   end
 
   def index
-    conversations = Conversation.where( user_id1: current_teacher.id, user_id2: current_teacher.id )
+    conversations = Conversation.where( user_id1: current_teacher.id ).or( Conversation.where( user_id2: current_teacher.id ) )
     render json: { conversations: conversations.as_json }
   end
 
   def show
     if current_teacher
-      conversation = Conversation.includes( :messages ).find( conversation_params[ :id ] )
+      conversation = Conversation.includes( :messages ).find( params[ :id ] )
       
       render json: { conversation: conversation.as_json( include: [ :messages ] ) }
     else

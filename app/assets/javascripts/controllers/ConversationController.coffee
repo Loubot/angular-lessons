@@ -46,8 +46,7 @@ angular.module('lessons').controller('ConversationController', [
     
     $scope.select_conversation = ( id ) ->
       COMMS.GET(
-        "/conversation"
-        conversation_id: id
+        "/conversation/#{ id }"
       ).then( ( resp ) ->
         console.log resp
         alertify.success "Got conversation"
