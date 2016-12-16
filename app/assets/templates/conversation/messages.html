@@ -29,7 +29,7 @@
             ng-click="select_conversation( conversation.id )" 
             class="margin_t_10"
             flex="100">
-        <div ng-if="User.is_teacher" class="message_box">{{ conversation.user_id1 == User.id ? conversation.user_name2 : conversation.user_name1 }}</div>
+        <div  class="message_box">{{ conversation.user_id1 == User.id ? conversation.user_name2 : conversation.user_name1 }}</div>
         <md-divider></md-divider>
       </div> <!-- end of conversations -->
     </md-content>
