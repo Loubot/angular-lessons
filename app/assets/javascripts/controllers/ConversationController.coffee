@@ -12,7 +12,6 @@ angular.module('lessons').controller('ConversationController', [
   "$mdDialog"
   ( $scope, $state, $rootScope, $stateParams, $mdSidenav, alertify, COMMS, $timeout , $mdDialog) ->
     console.log "ConversationController"
-    console.log $stateParams
     $scope.show_form = false
 
     $scope.search_conversations = ->
