@@ -119,7 +119,7 @@ class ConversationController < ApplicationController
     end
 
     def check_correct_user
-      render status: 403 and return if !( conversation_params[:conversation][:user_id1] == current_teacher.id or conversation_params[:conversation][:user_id2] != current_teacher.id )
+      render json: { errors: "tut tut "}, status: 403 and return if !( conversation_params[:conversation][:user_id1] == current_teacher.id or conversation_params[:conversation][:user_id2] != current_teacher.id )
     end
 
     def only_show_to_correct( conversation )
