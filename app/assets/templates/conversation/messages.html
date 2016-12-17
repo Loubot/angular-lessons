@@ -45,9 +45,9 @@
     <md-content class=" padding_5" id="message_container">
       <div layout="column" layout-fill flex>
         <div        class="margin_t_10"
-                    ng-class="{ 'flex-offset-45': conversation.user_id1!=User.id }"
+                    ng-class="{ 'flex-offset-45': message.sender_id != User.id }"
                     ng-repeat="message in conversation.messages">
-          <div ng-class="{ 'sender': conversation.user_id1 != User.id, 'receiver': conversation.user_id1 == User.id }">
+          <div ng-class="{ 'sender': message.sender_id != User.id, 'receiver': message.sender_id == User.id }">
             
             {{ message.text }}
           </div> <!-- end of sender/receiver -->
@@ -63,7 +63,7 @@
     <div class="message_response_container height_25" ng-if="conversation">
       <form name="message_form"  class="message_form">
           
-            <textarea ng-model="message.message" 
+            <textarea ng-model="message.text" 
                       aria-label="Experience description" 
                       class="message_text_area"
                       rows="3"

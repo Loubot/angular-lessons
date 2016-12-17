@@ -10,6 +10,7 @@ class AddUserId1UserId2ToConversation < ActiveRecord::Migration
     remove_column :messages, :message, :text
 
     add_column :messages, :text, :text
+    add_column :messages, :sender_id, :integer
 
 
     add_column :conversations, :user_id1, :integer

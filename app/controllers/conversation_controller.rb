@@ -12,6 +12,7 @@ class ConversationController < ApplicationController
 
     if conversation.blank?
       # new conversation. New and save for error response
+      p "New Conversation "
       conversation = Conversation.new( conversation_params[ :conversation ] )
       
       if !conversation.save
@@ -30,7 +31,7 @@ class ConversationController < ApplicationController
     
 
     
-    message = Message.new( conversation_id: conversation.id, text: conversation_params[:message][:text] )
+    message = Message.new( conversation_id: conversation.id, text: conversation_params[:message][:text], sender_id: conversation_params[ :message ][ :sender_id ] )
     p "message *************"
     pp message
 
@@ -102,7 +103,7 @@ class ConversationController < ApplicationController
   private
     def conversation_params
       params.permit(  { conversation: [ :user_id1, :user_id2, :user_email1, :user_email2, :user_name1, :user_name2 ] },
-                      { message: [ :text ] }
+                      { message: [ :text, :sender_id ] }
                    )
       # params.permit( :name, :phone, :email, :teacher_id )
 

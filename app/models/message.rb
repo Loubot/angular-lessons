@@ -7,6 +7,7 @@
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
 #  text            :text
+#  sender_id       :integer
 #
 
 class Message < ActiveRecord::Base
