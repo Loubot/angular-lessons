@@ -2,6 +2,7 @@ class ConversationController < ApplicationController
   include ConversationHelper
   require 'pp'
   before_action :authenticate_teacher!
+  before_action :check_correct_user, only: [ :create ]
 
   def create
     # Person sending email will always be user_email1
@@ -24,6 +25,8 @@ class ConversationController < ApplicationController
     end
 
     pp "Conversation is this"
+
+
     pp conversation
 
     
@@ -91,8 +94,10 @@ class ConversationController < ApplicationController
   def show
     if current_teacher
       conversation = Conversation.includes( :messages ).find( params[ :id ] )
+
+      only_show_to_correct( conversation )
       
-      render json: { conversation: conversation.as_json( include: [ :messages ] ) }
+      
     else
       render json: { errors: [ 'tut tut' ] }, status: 401
     end
@@ -111,6 +116,18 @@ class ConversationController < ApplicationController
 
     def index_params
       params.permit( :teacher_email, :student_email, :conversation_id, :random )
+    end
+
+    def check_correct_user
+      render status: 403 and return if !( conversation_params[:conversation][:user_id1] == current_teacher.id or conversation_params[:conversation][:user_id2] != current_teacher.id )
+    end
+
+    def only_show_to_correct( conversation )
+      if conversation.user_id1 == current_teacher.id or conversation.user_id2 == current_teacher.id 
+        render json: { conversation: conversation.as_json( include: [ :messages ] ) }
+      else
+        render json: { errors: [ 'tut tut' ] }, status: 403
+      end
     end
 
 end
