@@ -125,7 +125,7 @@ class ConversationController < ApplicationController
       p Integer( conversation_params[:conversation][:user_id1] ) == Integer( current_teacher.id )
       p Integer( conversation_params[:conversation][:user_id2] ) != Integer( current_teacher.id )
       render json: { errors: "tut tut "}, status: 403 and return if !( Integer( conversation_params[:conversation][:user_id1] ) == Integer( current_teacher.id )\
-                   or Integer( conversation_params[:conversation][:user_id2] ) != Integer( current_teacher.id ) )
+                   or Integer( conversation_params[:conversation][:user_id2] ) == Integer( current_teacher.id ) )
     end
 
     def only_show_to_correct( conversation )
