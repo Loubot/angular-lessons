@@ -24,9 +24,7 @@ angular.module('lessons').controller('ConversationController', [
       console.log resp
       
       $scope.conversations = resp.data.conversations
-      $scope.conversation = resp.data.conversations[0] if $scope.conversations?
-
-      if $scope.conversation?
+      if $scope.conversations?
         alertify.success "Got conversations"
       else
         alertify.error "Failed to find conversations"
