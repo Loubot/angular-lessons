@@ -150,6 +150,7 @@ ActiveRecord::Schema.define(version: 20161211134621) do
     t.string   "email"
     t.string   "first_name"
     t.string   "last_name"
+    t.string   "calendar_id"
     t.text     "overview"
     t.boolean  "is_teacher",             default: false
     t.text     "tokens"

@@ -22,6 +22,7 @@
 #  email                  :string
 #  first_name             :string
 #  last_name              :string
+#  calendar_id            :string
 #  overview               :text
 #  is_teacher             :boolean          default(FALSE)
 #  tokens                 :text
