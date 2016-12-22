@@ -2,14 +2,15 @@
 #
 # Table name: conversations
 #
-#  id            :integer          not null, primary key
-#  teacher_email :string
-#  student_email :string
-#  teacher_name  :string
-#  student_name  :string
-#  random        :text
-#  created_at    :datetime         not null
-#  updated_at    :datetime         not null
+#  id          :integer          not null, primary key
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
+#  user_id1    :integer
+#  user_id2    :integer
+#  user_email1 :string
+#  user_email2 :string
+#  user_name1  :string
+#  user_name2  :string
 #
 
 require 'test_helper'

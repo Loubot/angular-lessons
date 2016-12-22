@@ -243,6 +243,12 @@ md-sidenav.md-closed.md-locked-open-add-active.user_menu {
   height: 100% !important;
 }
 
+.height_152{
+  max-width:114px;
+  // width: auto;
+  height: auto;
+}
+
 .height_80{
   height: 80% !important;
 }
@@ -390,6 +396,18 @@ md-sidenav.md-closed.md-locked-open-add-active.user_menu {
 .main_page{
   background-color: #e0ebf4;
   @extend .height_100;
+}
+
+.top_bit{
+  min-height: 84vh !important;
+}
+
+.bottom_bit{
+   height: 5vh !important;
+   background-color: #111;
+   padding: 0 150px;
+   color: #fff;
+   width: 100%;
 }
 
 .match_background{
@@ -595,7 +613,7 @@ md-sidenav.md-closed.md-locked-open-add-active.user_menu {
   position: fixed;
   top: 10%;
   left: 50%;
-  opacity: .5;
+  opacity: .3;
   color: #111;
   z-index: 10;
 }
@@ -704,7 +722,7 @@ ul.share-buttons .sr-only {
 
 @media (min-width: 250px){
   #message_container{
-    height: 70%;
+    height: 60%;
   }
 
   .scrollable{
@@ -759,7 +777,7 @@ ul.share-buttons .sr-only {
 
 @media ( min-width: 600px ){
   #message_container{
-    height: 75%;
+    height: 70% !important;
   }
 
   .margin_s_100.md-grid{

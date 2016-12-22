@@ -3,11 +3,11 @@
 # Table name: messages
 #
 #  id              :integer          not null, primary key
-#  message         :text
-#  sender_email    :string
 #  conversation_id :integer
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
+#  text            :text
+#  sender_id       :integer
 #
 
 require 'test_helper'

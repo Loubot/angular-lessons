@@ -2,26 +2,22 @@
 #
 # Table name: conversations
 #
-#  id            :integer          not null, primary key
-#  teacher_email :string
-#  student_email :string
-#  teacher_name  :string
-#  student_name  :string
-#  random        :text
-#  created_at    :datetime         not null
-#  updated_at    :datetime         not null
+#  id          :integer          not null, primary key
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
+#  user_id1    :integer
+#  user_id2    :integer
+#  user_email1 :string
+#  user_email2 :string
+#  user_name1  :string
+#  user_name2  :string
 #
 
 class Conversation < ActiveRecord::Base
 
   has_many :messages, dependent: :destroy
 
-  validates :student_email, :teacher_email, :teacher_name, :student_name, presence: true
+  validates :user_id1, :user_id2, :user_email1, :user_email2, :user_name1, :user_name2, presence: true
 
-  before_validation :add_random
-
-
-  def add_random
-    self.random =  Digest::SHA1.hexdigest( [ Time.now, rand ].join )
-  end
+ 
 end

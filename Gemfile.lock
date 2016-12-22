@@ -271,6 +271,7 @@ GEM
       railties (>= 4.0)
       sprockets-rails (>= 2.0, < 4.0)
     websocket (1.2.3)
+    where-or (0.1.5)
     workless (1.2.3)
       delayed_job (>= 2.0.7)
       heroku-api
@@ -318,6 +319,7 @@ DEPENDENCIES
   unicorn
   validates_overlap (~> 0)
   web-console (~> 2.0)
+  where-or
   workless
 
 BUNDLED WITH

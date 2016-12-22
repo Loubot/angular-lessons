@@ -43,7 +43,7 @@ Rails.application.routes.draw do
       resources :subject,             only: [ :create, :destroy ]
     end
 
-    resources :conversation,        only: [ :create, :index ]
+    resources :conversation,        only: [ :create, :index, :show ]
     resources :subject,             only: [ :index, :update ]
   end
 

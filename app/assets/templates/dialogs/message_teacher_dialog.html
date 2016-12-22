@@ -7,11 +7,12 @@
           <!-- Use floating label instead of placeholder -->
           
           <i class="material-icons">person_outline</i>
-          <input  ng-model="message.name"
+          <input  ng-value="User.get_full_name()"
                   class="black_text" 
                   type="text"
                   placeholder="Your full name (required)"
                   aria-label="Name"
+                  disabled
                   required>
         </md-input-container>
 
@@ -26,7 +27,7 @@
         
         <md-input-container class="width_75">
           <label >Message</label>
-          <textarea ng-model="message.message" aria-label="Message" class="black_text" md-maxlength="300"  md-select-on-focus></textarea>
+          <textarea ng-model="message.text" aria-label="Message" class="black_text" md-maxlength="300"  md-select-on-focus></textarea>
         </md-input-container>
 
 

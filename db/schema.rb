@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161116115429) do
+ActiveRecord::Schema.define(version: 20161211134621) do
 
   create_table "categories", force: :cascade do |t|
     t.string   "name"
@@ -20,13 +20,14 @@ ActiveRecord::Schema.define(version: 20161116115429) do
   end
 
   create_table "conversations", force: :cascade do |t|
-    t.string   "teacher_email"
-    t.string   "student_email"
-    t.string   "teacher_name"
-    t.string   "student_name"
-    t.text     "random"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.integer  "user_id1"
+    t.integer  "user_id2"
+    t.string   "user_email1"
+    t.string   "user_email2"
+    t.string   "user_name1"
+    t.string   "user_name2"
   end
 
   create_table "delayed_jobs", force: :cascade do |t|
@@ -78,11 +79,11 @@ ActiveRecord::Schema.define(version: 20161116115429) do
   end
 
   create_table "messages", force: :cascade do |t|
-    t.text     "message"
-    t.string   "sender_email"
     t.integer  "conversation_id"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
+    t.text     "text"
+    t.integer  "sender_id"
   end
 
   create_table "photos", force: :cascade do |t|
