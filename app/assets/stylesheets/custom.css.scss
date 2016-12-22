@@ -353,6 +353,10 @@ md-sidenav.md-closed.md-locked-open-add-active.user_menu {
   margin-right: 5px !important;
 }
 
+.margin_r_10{
+  margin-right: 10px !important;
+}
+
 .padding_5{
   padding: 5px !important;
 }
@@ -399,15 +403,18 @@ md-sidenav.md-closed.md-locked-open-add-active.user_menu {
 }
 
 .top_bit{
-  min-height: 84vh !important;
+  min-height: 87vh !important;
 }
 
+
 .bottom_bit{
-   height: 5vh !important;
-   background-color: #111;
-   padding: 0 150px;
-   color: #fff;
-   width: 100%;
+  // @extend .big_gutter;
+  white-space: nowrap;
+  height: 5vh !important;
+  background-color: #111;
+  padding: 0 150px;
+  color: #fff;
+  width: 100%;
 }
 
 .match_background{

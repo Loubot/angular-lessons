@@ -183,6 +183,11 @@ angular.module('lessons').config [
     templateUrl: 'static/contact.html'
     controller: "ContactController"
 
+  $stateProvider.state 'about',
+    url: '/about'
+    templateUrl: 'static/about.html'
+    controller: "ContactController"
+
   $stateProvider.state "pl",
     url: "api/auth/password/edit"
     templateUrl: "password/reset_password.html"
