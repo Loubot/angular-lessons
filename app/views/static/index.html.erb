@@ -204,11 +204,19 @@
 
     <!--#################### Content ############################-->
 
-    <md-content   class="main main_page" layout="column" flex>
-      <div class="main_page" id="main_page" ui-view> </div> <!-- angular view rendered here -->
+    <div class="main main_page" layout="column" flex>
+      <md-content class="tuff">
+        <div class="main_page top_bit" id="main_page" ui-view ng-cloak> 
 
-      
-    </md-content>
+        </div> <!-- angular view rendered here -->
+
+        <div class="bottom_bit" layout="row" layout-align="space-around none">
+          <div ><a class="white_text" ui-sref="contact">Contact Us</a></div>
+          <div ><a class="white_text" ui-sref="about">About Us</a></div>
+        </div>
+      </md-content>
+    </div>
+
     <!--#################### End of content ############################-->
 
     <md-sidenav class="md-sidenav-right md-whiteframe-12dp" md-component-id="right" >

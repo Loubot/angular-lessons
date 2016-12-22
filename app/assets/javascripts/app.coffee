@@ -398,10 +398,10 @@ angular.module('lessons').service 'COMMS', ( $http, $state, RESOURCES, $rootScop
       )
 
       
-# angular.module('lessons').run [
-#   '$rootScope'
-#   'auth'
-#   ($rootScope, auth) ->
+angular.module('lessons').run [
+  '$rootScope'
+  'auth'
+  ($rootScope, auth) ->
     # $rootScope.$on 'auth:validation-success', ( e ) ->
     #   console.log 'bl'
     #   console.log e
@@ -414,24 +414,29 @@ angular.module('lessons').service 'COMMS', ( $http, $state, RESOURCES, $rootScop
 #       console.log '$stateChangeError - fired when an error occurs during transition.'
 #       console.log arguments
 #       return
-#     $rootScope.$on '$stateChangeSuccess', (event, toState, toParams, fromState, fromParams) ->
-#       console.log '$stateChangeSuccess to ' + toState.name + '- fired once the state transition is complete.'
-#       return
+    # $rootScope.$on '$stateChangeSuccess', (event, toState, toParams, fromState, fromParams) ->
+    #   console.log '$stateChangeSuccess to ' + toState.name + '- fired once the state transition is complete.'
+    #   alert $('.main_page').height()
+    #   return
 #     $rootScope.$on '$viewContentLoading', (event, viewConfig) ->
 #       console.log '$viewContentLoading - view begins loading - dom not rendered', viewConfig
 #       console.log viewConfig
 #       console.log event
 #       return
-#     # $rootScope.$on('$viewContentLoaded',function(event){
-#     #   // runs on individual scopes, so putting it in "run" doesn't work.
-#     #   console.log('$viewContentLoaded - fired after dom rendered',event);
+
+    # $(document).ready ->
+      
+    # $rootScope.$on '$viewContentLoaded', ->
+     # // runs on individual scopes, so putting it in "run" doesn't work.
+     
+     # console.log('$viewContentLoaded - fired after dom rendered', event)
 #     $rootScope.$on '$stateNotFound', (event, unfoundState, fromState, fromParams) ->
 #       console.log '$stateNotFound ' + unfoundState.to + '  - fired when a state cannot be found by its name.'
 #       console.log unfoundState, fromState, fromParams
 #       return
 
 
-# ]
+]
 
 # angular.module('lessons').run(['$rootScope', '$state',
 #   ($rootScope, $state)->

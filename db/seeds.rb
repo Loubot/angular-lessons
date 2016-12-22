@@ -45,8 +45,8 @@ end
 conversation = Conversation.create( user_id1: Teacher.first.id, user_id2: Teacher.last.id, user_email1: Teacher.first.email, user_email2: Teacher.last.email, user_name1: Teacher.first.first_name, user_name2: Teacher.last.first_name )
 
 (0..5).each do |i|
-  Message.create( message: "hello there", conversation_id: conversation.id )
-  Message.create( message: "I am ze teacher", conversation_id: conversation.id )
-  Message.create( message: "Alright boi", conversation_id: conversation.id )
-  Message.create( message: "hahahaha", conversation_id: conversation.id )
+  Message.create( text: "hello there", conversation_id: conversation.id )
+  Message.create( text: "I am ze teacher", conversation_id: conversation.id )
+  Message.create( text: "Alright boi", conversation_id: conversation.id )
+  Message.create( text: "hahahaha", conversation_id: conversation.id )
 end
