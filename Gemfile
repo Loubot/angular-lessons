@@ -100,6 +100,8 @@ gem "daemons"
 
 gem 'sitemap_generator'
 
+gem 'fog'
+
 gem "fog-aws"
 
 gem 'htmlcompressor'
