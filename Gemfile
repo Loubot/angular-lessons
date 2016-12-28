@@ -78,8 +78,6 @@ gem 'omniauth-facebook'
 
 gem 'validates_overlap', '~> 0'
 
-gem 'fog', require: 'fog/aws'
-
 gem 'carrierwave'
 
 gem "mini_magick"
@@ -102,6 +100,6 @@ gem "daemons"
 
 gem 'sitemap_generator'
 
-
+gem "fog-aws"
 
 gem 'htmlcompressor'
