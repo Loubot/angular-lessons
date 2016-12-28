@@ -78,9 +78,7 @@ gem 'omniauth-facebook'
 
 gem 'validates_overlap', '~> 0'
 
-gem 'fog'
-
-gem "fog-aws"
+gem 'fog', require: 'fog/aws'
 
 gem 'carrierwave'
 
