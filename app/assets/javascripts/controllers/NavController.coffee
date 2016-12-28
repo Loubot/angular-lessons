@@ -25,7 +25,7 @@ angular.module('lessons').controller('NavController', [
       $mdSidenav('user_menu').toggle()
       
     $scope.openLeftMenu = ( auth_type ) -> # 0=login; 1= register
-      
+      $scope.auth_type = auth_type
       if auth_type == 0
         console.log 'Login'
         $scope.auth_type = 0
@@ -57,6 +57,9 @@ angular.module('lessons').controller('NavController', [
         $mdSidenav('left').toggle()
         
         alertify.success "Welcome #{ $rootScope.User.email }"
+      ).catch( ( err ) ->
+        console.log err
+        alertify.error "Failed to register"
       )
 
   

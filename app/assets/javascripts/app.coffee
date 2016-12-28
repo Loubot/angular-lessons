@@ -204,7 +204,7 @@ angular.module('lessons').config [
     controller: "PasswordController"
 
   $stateProvider.state 'conversation',
-    url: "/conversation/:random/:id"
+    url: "/conversation/:id"
     templateUrl: "conversation/messages.html"
     controller: "ConversationController"
     resolve:

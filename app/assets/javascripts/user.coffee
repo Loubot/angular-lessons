@@ -34,7 +34,8 @@ angular.module('lessons').service 'auth', [
 
     auth.auth_errors = ( resp ) ->
       console.log resp
-      for mess in resp.errors
+      console.log resp.data.errors
+      for mess in resp.data.errors.full_messages
         console.log mess
         alertify.error mess
       # if resp.data.errors.full_messages? and resp.data.errors.full_messages.length > 0
@@ -55,9 +56,6 @@ angular.module('lessons').service 'auth', [
             alertify.success "Welcome back #{ $rootScope.User.first_name }"
             $mdSidenav('left').close()
           )
-
-
-          
           
         )
         .catch( (resp) ->
@@ -83,7 +81,7 @@ angular.module('lessons').service 'auth', [
         )
         .catch( ( resp ) ->
           auth.auth_errors( resp )
-          
+          throw resp
         )
     auth.logout = ->
       $auth.signOut()
