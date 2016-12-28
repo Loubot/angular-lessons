@@ -5,6 +5,7 @@ class ConversationController < ApplicationController
   before_action :check_correct_user, only: [ :create ]
 
   def create
+    pp conversation_params
     # Person sending email will always be user_email1
     conversation = Conversation.where( user_id1: conversation_params[:conversation][:user_id1], user_id2: conversation_params[:conversation][:user_id2] ).or\
                   ( Conversation.where( user_id1: conversation_params[:conversation][:user_id2], user_id2: conversation_params[:conversation][:user_id1] ) )
@@ -47,27 +48,7 @@ class ConversationController < ApplicationController
 
 
 
-    if Rails.env.production?
-      delivered = ConversationMailer.delay.send_message( 
-        conversation_params,
-        format_url( conversation.id ) 
-      )
-
-      ConversationMailer.delay.send_message_copy(
-        conversation_params,
-        current_teacher.email
-      )
-    else
-      delivered = ConversationMailer.send_message( 
-        conversation_params,
-        format_url( conversation.id ) 
-      ).deliver_now
-
-      ConversationMailer.send_message_copy(
-        conversation_params,
-        current_teacher.email
-      ).deliver_now
-    end
+    send_to_correct_users( conversation_params, conversation ) #make sure email is sent to correct emails
 
 
 

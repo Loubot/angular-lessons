@@ -1,6 +1,6 @@
 class ConversationMailer < ActionMailer::Base
 
-  def send_message( params ,url )
+  def send_message( to, from, params, url )
     phone = params[ :conversation ][ :phone ] ? params[ :conversation ][ :phone ] : "Not provided by student"
     begin
       require 'mandrill'
@@ -11,18 +11,18 @@ class ConversationMailer < ActionMailer::Base
                       
                   :to=>[  
                    {  
-                     :email=> params[ :conversation ][ :user_email2 ]
+                     :email=> to[ :email ]
                      # :name=> "#{student_name}"  
                    }  
                  ],
                 :from_email=> "LYL@learnyourlesson.ie",
                 "merge_vars"=>[
-                              { "rcpt"   =>  params[ :conversation ][ :user_email2 ],
+                              { "rcpt"   =>  to[ :email ],
                                 "vars" =>  [
-                                          { "name"=>"MESSAGE",          "content"=>params[:conversation][:message]  },
-                                          { "name"=>"PHONE",            "content"=>phone  },                                        
-                                          { "name"=>"NAME",             "content"=>params[:conversation][:name] },
-                                          { "name"=>"URL",              "content"=>url}                                      
+                                          { "name"=>"MESSAGE",          "content"=>params[ :message ][ :text ] },
+                                          { "name"=>"PHONE",            "content"=>phone },                                        
+                                          { "name"=>"NAME",             "content"=>from[ :name ] },
+                                          { "name"=>"URL",              "content"=>url }                                      
                                         ]
                           }],
                   
@@ -42,7 +42,7 @@ class ConversationMailer < ActionMailer::Base
 
   end
 
-  def send_message_copy( params, email )
+  def send_message_copy( to, from, params, email )
     phone = params[ :conversation ][ :phone ] ? params[ :conversation ][ :phone ] : "Not provided by student"
     begin
       require 'mandrill'
@@ -53,7 +53,7 @@ class ConversationMailer < ActionMailer::Base
                       
                   :to=>[  
                    {  
-                     :email=> email
+                     :email=> from[ :email ]
                      # :name=> "#{student_name}"  
                    }  
                  ],
@@ -63,7 +63,7 @@ class ConversationMailer < ActionMailer::Base
                                 "vars" =>  [
                                           { "name"=>"MESSAGE",          "content"=>params[ :message ][ :text ]  },
                                           { "name"=>"PHONE",            "content"=>phone  },                                      
-                                          { "name"=>"NAME",             "content"=>params[ :conversation ][ :user_name1 ]  }                                 
+                                          { "name"=>"NAME",             "content"=>from[ :name ] }                                 
                                         ]
                           }],
                   

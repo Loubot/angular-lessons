@@ -737,7 +737,7 @@ ul.share-buttons .sr-only {
 
 @media (min-width: 250px){
   #message_container{
-    height: 60vh;
+    height: 58vh;
   }
 
   .scrollable{
@@ -792,12 +792,13 @@ ul.share-buttons .sr-only {
 
 @media ( min-width: 600px ){
   #message_container{
-    height: 67vh !important;
+    height: 65vh !important;
   }
 
   .margin_s_100.md-grid{
     margin: 0 100px !important;
   }
+  
   .big_gutter{
     min-width: 75% !important;
     max-width: 75% !important;
