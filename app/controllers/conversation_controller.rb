@@ -31,40 +31,19 @@ class ConversationController < ApplicationController
     pp conversation
 
     
-
-    
-
-    
     message = Message.new( conversation_id: conversation.id, text: conversation_params[:message][:text], sender_id: conversation_params[ :message ][ :sender_id ] )
     p "message *************"
     pp message
 
     message.save!
 
-    
 
     render json: { conversation: conversation.as_json( include: [ :messages ] ) }
     
 
-
-
     send_to_correct_users( conversation_params, conversation ) #make sure email is sent to correct emails
 
 
-
-    # p "Deliverd #{ delivered }"
-
-
-    # message = conversation.messages.create(
-    #   message:          params[:conversation][:message],
-    #   conversation_id:  conversation.id
-    # )
-    # message.save!
-    # pp message
-
-    # conversation = Conversation.where( id: conversation.id ).includes( :messages ).first
-
-    # render json: { conversation: conversation.as_json( include: [ :messages ] ) }
   end
 
   def index

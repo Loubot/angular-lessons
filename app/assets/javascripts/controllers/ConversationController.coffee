@@ -52,7 +52,7 @@ angular.module('lessons').controller('ConversationController', [
         $scope.search_conversations()
       )
 
-    $scope.select_conversation( $stateParams.id ) if $stateParams.id
+    $scope.select_conversation( $stateParams.id ) if $stateParams.id #fetch specific conversation if id is present. i.e. from email link
 
 
     $scope.send_message = ( message )  ->

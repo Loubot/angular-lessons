@@ -43,7 +43,7 @@ module ConversationHelper
       ).deliver_now
     end
 
-  end
+  end #end of send_to_correct_users
 
   def format_url( id )
     p "urlssssssssss #{ request.base_url }/#/conversation/#{ id }"

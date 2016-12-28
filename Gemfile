@@ -37,7 +37,7 @@ gem 'where-or'
 # gem 'capistrano-rails', group: :development
 
 group :production do
-  # gem "fog-aws"
+  gem "fog"
   gem 'unicorn'
   gem 'pg'
   gem 'render_static'
@@ -99,8 +99,6 @@ gem 'workless'
 gem "daemons"
 
 gem 'sitemap_generator'
-
-gem 'fog'
 
 gem "fog-aws"
 
