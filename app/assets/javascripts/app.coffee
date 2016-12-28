@@ -129,8 +129,9 @@ angular.module('lessons').run [
     $rootScope.$on '$stateChangeError', (event, toState, toParams, fromState, fromParams, error) ->
       console.log error
       if error.status = 401 and error.error = 'non_admin'
+        $rootScope.User = null
         $state.go "welcome"
-        alertify.error "Tut tut"
+        alertify.error "Please login again."
       else if error.status ==  401 and  error.error == "non_teacher"
         $state.go "welcome"
         alertify.error "You are not Authorised"

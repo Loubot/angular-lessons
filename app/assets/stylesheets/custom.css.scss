@@ -614,6 +614,13 @@ md-sidenav.md-closed.md-locked-open-add-active.user_menu {
 
   // Messages
 
+.selected_conversation{
+  background-color: #f6f6f6;
+  opacity: .8;
+  padding: 0 5px;
+  border-radius: 5px;
+}
+
 .height_100_min_56{
   height: calc( 100% - ( 56px ));
   height: calc( 100% - ( 56px ));
@@ -640,8 +647,6 @@ md-sidenav.md-closed.md-locked-open-add-active.user_menu {
   vertical-align: top;
 }
 
-
-
 .receiver{
   background: #7FB3D8;
   @extend .bubble;
@@ -655,9 +660,8 @@ md-sidenav.md-closed.md-locked-open-add-active.user_menu {
 
 .message_response_container{
   @extend .padding_10;
-  @extend .height_25;
   bottom: 0px;
-  height: 25%;
+  height: 15vh !important;
   min-height: 180px;
   width: 100%;
 }
@@ -733,7 +737,7 @@ ul.share-buttons .sr-only {
 
 @media (min-width: 250px){
   #message_container{
-    height: 60%;
+    height: 60vh;
   }
 
   .scrollable{
@@ -788,7 +792,7 @@ ul.share-buttons .sr-only {
 
 @media ( min-width: 600px ){
   #message_container{
-    height: 70% !important;
+    height: 67vh !important;
   }
 
   .margin_s_100.md-grid{

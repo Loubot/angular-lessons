@@ -21,15 +21,19 @@
           md-component-id="conversation_search" 
           class="md-sidenav-left height_50" 
           md-is-locked-open="$mdMedia('gt-xs')"
-          md-is-open="search_nav_opened">
+          >
 
     <md-content class="md-padding">
       <input placeholder="Search by name" class="margin_b_10" ng-model="search_text">
-      <div  ng-repeat="conversation in conversations | filter:search_text" 
-            ng-click="select_conversation( conversation.id )" 
+      <div  ng-repeat="convo in conversations | filter:search_text" 
+            ng-click="select_conversation( convo.id )" 
             class="margin_t_10"
             flex="100">
-        <div  class="message_box">{{ conversation.user_id1 == User.id ? conversation.user_name2 : conversation.user_name1 }}</div>
+
+        <div class="message_box" ng-class="{selected_conversation : convo.id==conversation.id}">
+          {{ convo.user_id1 == User.id ? convo.user_name2 : convo.user_name1 }}
+        </div>
+
         <md-divider></md-divider>
       </div> <!-- end of conversations -->
     </md-content>

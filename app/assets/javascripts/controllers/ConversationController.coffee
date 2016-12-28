@@ -13,6 +13,8 @@ angular.module('lessons').controller('ConversationController', [
   ( $scope, $state, $rootScope, $stateParams, $mdSidenav, alertify, COMMS, $timeout , $mdDialog) ->
     console.log "ConversationController"
     $scope.show_form = false
+    console.log $stateParams.id
+    
 
     $scope.search_conversations = ->
       $mdSidenav('conversation_search').toggle()
@@ -50,6 +52,7 @@ angular.module('lessons').controller('ConversationController', [
         $scope.search_conversations()
       )
 
+    $scope.select_conversation( $stateParams.id ) if $stateParams.id
 
 
     $scope.send_message = ( message )  ->
