@@ -45,11 +45,11 @@ angular.module('lessons').controller('ConversationController', [
         alertify.success "Got conversation"
         $scope.conversation = resp.data.conversation
         scroll_to_bottom()
-        $scope.search_conversations()
+        $mdSidenav('conversation_search').close()
       ).catch( ( err ) ->
         console.log err
         alertify.error "Failed to get conversation"
-        $scope.search_conversations()
+        $mdSidenav('conversation_search').close()
       )
 
     $scope.select_conversation( $stateParams.id ) if $stateParams.id #fetch specific conversation if id is present. i.e. from email link
