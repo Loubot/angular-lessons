@@ -29,7 +29,7 @@ Rails.application.routes.draw do
 
       resources :experience,          only: [ :create, :destroy ], defaults: {format: :json}
       resources :qualification,       only: [ :create, :destroy ], defaults: {format: :json}
-      resources :location,            only: [ :create, :update, :destroy ], defaults: {format: :json} 
+      resources :location,            only: [ :create, :update, :destroy, :show ], defaults: {format: :json} 
       post    'manual-address'            => 'location#manual_address'
       resources :photos,              only: [ :create, :destroy ], defaults: {format: :json}
       
