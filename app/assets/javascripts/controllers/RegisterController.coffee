@@ -61,7 +61,7 @@ angular.module('lessons').controller("RegisterController", [
         
     # $scope.county_list = counties.county_list()
 
-    $scope.county_lists = counties.counties_with_coords()
+    $scope.county_lists = counties.county_list()
 
     # get_county = ( county ) ->
     #   console.log county

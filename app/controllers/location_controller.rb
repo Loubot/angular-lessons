@@ -1,10 +1,6 @@
 class LocationController < ApplicationController
-  before_action :authenticate_teacher!, except: [ :show ]
+  before_action :authenticate_teacher!
   include LocationHelper
-  def show
-    counties = counties_with_coords()
-    render json: { location: counties[ :Cork ] }
-  end
 
   def create
     p "This is create"

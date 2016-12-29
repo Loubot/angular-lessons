@@ -1,4 +1,5 @@
 module LocationHelper
+  
   def counties_with_coords
     { 
       Antrim: { county: 'Co. Antrim', latitude: 54.719508, longitude: -6.207256 }, Armagh: { county: 'Co. Armagh', latitude: 54.350277, longitude: -6.652822},
