@@ -28,10 +28,27 @@ class Location < ActiveRecord::Base
 
   after_save :add_name
 
+  before_validation :check_if_only_county
+
+  include LocationHelper
+
 
   def add_name
     self.name = "#{ self.teacher.get_full_name } address"
   end
+
+  def check_if_only_county # if only county is present, need to add lat and long from LocationHelper
+    if !( self.latitude.present? and self.longitude.present? and self.address.present? )
+      counties = counties_with_coords()
+      p counties.length
+      pp ' got it '
+      pp counties[ :"#{ self.county }" ]
+    else
+
+    end
+  end
+
+
 
 
   def google_address( params )
