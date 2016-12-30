@@ -40,9 +40,15 @@ class Location < ActiveRecord::Base
   def check_if_only_county # if only county is present, need to add lat and long from LocationHelper
     if !( self.latitude.present? and self.longitude.present? and self.address.present? )
       counties = counties_with_coords()
-      p counties.length
-      pp ' got it '
-      pp counties[ :"#{ self.county }" ]
+      
+      county = counties[ :"#{ self.county }"]
+      p "This county here"
+      pp county
+      p county['latitude']
+      self.latitude = county[:'latitude']
+      self.longitude = county[:'longitude']
+      self.address = self.county
+      self.save!
     else
 
     end
