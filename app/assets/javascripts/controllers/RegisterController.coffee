@@ -52,7 +52,6 @@ angular.module('lessons').controller("RegisterController", [
     # On successful registration create user location after user_ready is broadcast
 
     $rootScope.$on 'auth:registered_user', ( user ) ->
-      console.log "hup"
       alertify.success "Welcome #{ $rootScope.User.get_full_name() }"
       alertify.success "Registered as teacher" if $rootScope.User.is_teacher
       alertify.success "Registered as student" if !$rootScope.User.is_teacher

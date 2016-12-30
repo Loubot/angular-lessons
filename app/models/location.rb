@@ -42,15 +42,15 @@ class Location < ActiveRecord::Base
       counties = counties_with_coords()
       
       county = counties[ :"#{ self.county }"]
-      p "This county here"
-      pp county
-      p county['latitude']
+      # p "This county here"
+      # pp county
+      # p county['latitude']
       self.latitude = county[:'latitude']
       self.longitude = county[:'longitude']
       self.address = self.county
       self.save!
     else
-
+      return true
     end
   end
 
