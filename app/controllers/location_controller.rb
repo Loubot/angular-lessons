@@ -36,14 +36,19 @@ class LocationController < ApplicationController
   end
 
   def update
-    pp params
+    # pp params
     teacher = Teacher.includes( :location ).find( current_teacher.id )
-    
-    if !teacher.location
+  
+    if !teacher.location.present?
+      p "Update discovered location not present. Creating"
       p "we are here #{ location_params[ :county ] }"
       location = Location.create!( location_params )
-      render json: { errors: location.errors } and return
-      
+      if location.save
+        render json: { location: location.as_json }, status: 200
+      else
+        render json: { errors: location.errors }, status: 422
+      end
+      return
     end
 
     if params.has_key?( :google )
