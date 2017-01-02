@@ -4,8 +4,9 @@ class LocationController < ApplicationController
 
   def create
     p "This is create"
-    pp location_params
+    # pp location_params
     location = Location.new( location_params )
+    p "Location create/ trying to save"
     if location.save
       render json: { location: location.as_json }, status: 201
     else
@@ -41,7 +42,6 @@ class LocationController < ApplicationController
   
     if !teacher.location.present?
       p "Update discovered location not present. Creating"
-      p "we are here #{ location_params[ :county ] }"
       location = Location.create!( location_params )
       if location.save
         render json: { location: location.as_json }, status: 200
