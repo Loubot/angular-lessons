@@ -102,13 +102,14 @@ angular.module('lessons').controller( 'ViewTeacherController', [
 
       console.log $scope.slides
       $scope.index = 1
-
+      
       id = setInterval((->
         if $state.$current.name != "view_teacher"
           clearInterval( id )
           return false
         $scope.index = ++$scope.index 
         $scope.index = 1 if $scope.index == $scope.teacher.photos.length + 1
+        
         $scope.$apply()
         return
       ), 3000 )

@@ -41,12 +41,7 @@ angular.module('lessons').run ( $rootScope ) ->
 
   angular.element(document).ready ->
     $('.main_page').removeClass( 'invisible' )
-    if $('#main_page').height() < $(document).outerHeight()
-      $('#main_page').addClass 'too_short'
-    $rootScope.$on '$stateChangeSuccess', (event, toState, toParams, fromState, fromParams) ->
-      if $('#main_page').height() < $(document).outerHeight()
-        $('#main_page').addClass 'too_short'
-    return
+    
 
 angular.module('lessons').service 'OG', ->
   set_tags: ->
