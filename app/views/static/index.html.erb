@@ -25,7 +25,7 @@
           <md-button ui-sref="teacher({id:User.id})" class="md-button md-default-theme green_text">Profile</md-button>
           <md-button ui-sref="teacher_area({id:User.id})" class="md-button md-default-theme green_text">Calendar</md-button>
           <md-button ui-sref="teacher_location({id:User.id})" class="md-button md-default-theme green_text">Location</md-button>
-          <md-button ui-sref="conversation({id:User.id})" class="md-button md-default-theme green_text">Messages</md-button>
+          <md-button ui-sref="conversation" class="md-button md-default-theme green_text">Messages</md-button>
           <md-button class="md-button md-default-theme gree_blue_text" ui-sref="admin" ng-if="User.admin">Admin</md-button>
 
           <md-button class="md-button md-default-theme green_blue_text" ng-click="auth.logout()">Logout</md-button>
@@ -33,7 +33,7 @@
 
         <md-fab-actions ng-if="User && !User.is_teacher" class="green_blue_text">
           <md-button ui-sref="student_profile({id:User.id})" class="md-button md-default-theme green_text">Profile</md-button>
-          <md-button ui-sref="conversation({id:User.id})" class="md-button md-default-theme green_text">Messages</md-button>
+          <md-button ui-sref="conversation" class="md-button md-default-theme green_text">Messages</md-button>
           <md-button class="md-button md-default-theme green_blue_text" ng-click="auth.logout()">Logout</md-button>
         </md-fab-actions>
 
@@ -82,7 +82,7 @@
         <md-button ui-sref="teacher({id:User.id})" ng-click="user_menu()" class="md-button md-default-theme green_text">Profile</md-button>
         <md-button ui-sref="teacher_area({id:User.id})" ng-click="user_menu()" class="md-button md-default-theme green_text">Calendar</md-button>
         <md-button ui-sref="teacher_location({id:User.id})" ng-click="user_menu()" class="md-button md-default-theme green_text">Location</md-button>
-        <md-button ui-sref="conversation({id:User.id})" ng-click="user_menu()" class="md-button md-default-theme green_text">Messages</md-button>
+        <md-button ui-sref="conversation" ng-click="user_menu()" class="md-button md-default-theme green_text">Messages</md-button>
 
         <md-button ng-if="User.admin" ui-sref="admin" class="md-button md-default-theme green_text">Admin</md-button>
         <md-button class="md-button md-default-theme green_blue_text" ng-click="auth.logout();user_menu()">Logout</md-button>
@@ -97,7 +97,7 @@
       </md-toolbar>
       <md-content>
         <md-button ui-sref="student_profile({id:User.id})" ng-click="user_menu()" class="md-button md-default-theme green_text">Profile</md-button>
-        <md-button ui-sref="conversation({id:User.id})" ng-click="user_menu()" class="md-button md-default-theme green_text">Messages</md-button>
+        <md-button ui-sref="conversation" ng-click="user_menu()" class="md-button md-default-theme green_text">Messages</md-button>
         <md-button class="md-button md-default-theme green_blue_text" ng-click="auth.logout()">Logout</md-button>
       </md-content>
     </md-sidenav>
