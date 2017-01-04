@@ -28,6 +28,8 @@ class Location < ActiveRecord::Base
 
   after_save :add_name
 
+  # after_update :geocode_address
+
   before_validation :check_if_only_county
 
   include LocationHelper
@@ -54,6 +56,20 @@ class Location < ActiveRecord::Base
     end
   end
 
+
+  # after_update
+
+  def geocode_address
+    pp self
+    location_details = Geokit::Geocoders::GoogleGeocoder.geocode( self.address )
+    if location_details.success
+       p "after geocode"
+      logger.info "This"
+      logger.info location_details
+
+    end
+   
+  end 
 
 
 

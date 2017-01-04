@@ -1,7 +1,7 @@
 <div >
   <div layout="row" layout-xs="column">
     <div flex="50" flex-xs="100">
-      <md-card >
+      <md-card class="no_margin_on_small" >
         <md-card-header>
           <md-card-avatar ng-if="profile">
             <img ng-src="{{ profile.avatar.thumb.url }}" class="md-user-avatar ">
@@ -66,35 +66,35 @@
       </md-card> 
     </div> <!-- end of flex -->
 
-    <div flex="50" flex-xs="100" class="min_height_128">
+    <div flex="50" flex-xs="100">
       
-      <md-card>
-        <md-grid-list md-cols="3" md-row-height="6:2" class="no_padding">
-          <md-grid-tile class="gray min_height_128"
-              md-rowspan="3" md-colspan="1" md-colspan-sm="1" md-colspan-xs="1" ng-repeat="photo in User.photos">
-            <img class="profile_thumbs" ng-src="{{ photo.avatar.url }}" >
-            <md-grid-tile-footer>
-              <md-menu>
-           <!-- Trigger element is a md-button with an icon -->
-               <md-button ng-click="$mdOpenMenu($event)" class="md-icon-button" aria-label="Open sample menu">
-                 <i class="material-icons">info</i>
-               </md-button>
-               <md-menu-content width="4">
-                  <md-menu-item>
-                    <md-button ng-click="User.update_profile( photo.id )">Make profile?</md-button>
-                  </md-menu-item>
+      
+      <md-grid-list md-cols="3" md-row-height="6:2" >
+        <md-grid-tile class="gray"
+            md-rowspan="3" md-colspan="1" md-colspan-sm="1" md-colspan-xs="1" ng-repeat="photo in User.photos">
+          <img class="profile_thumbs" ng-src="{{ photo.avatar.url }}" >
+          <md-grid-tile-footer>
+            <md-menu>
+         <!-- Trigger element is a md-button with an icon -->
+             <md-button ng-click="$mdOpenMenu($event)" class="md-icon-button" aria-label="Open sample menu">
+               <i class="material-icons">info</i>
+             </md-button>
+             <md-menu-content width="4">
+                <md-menu-item>
+                  <md-button ng-click="User.update_profile( photo.id )">Make profile?</md-button>
+                </md-menu-item>
 
-                  <md-menu-item>
-                    <md-button ng-click="User.delete_pic( photo.id )" class="width_100">Delete</md-button>
-                    
-                  </md-menu-item>
-               </md-menu-content>
-              </md-menu>
-            </md-grid-tile-footer>
-          </md-grid-tile>
-          
-        </md-grid-list>
-      </md-card>
+                <md-menu-item>
+                  <md-button ng-click="User.delete_pic( photo.id )" class="width_100">Delete</md-button>
+                  
+                </md-menu-item>
+             </md-menu-content>
+            </md-menu>
+          </md-grid-tile-footer>
+        </md-grid-tile>
+        
+      </md-grid-list>
+      
         
        
 

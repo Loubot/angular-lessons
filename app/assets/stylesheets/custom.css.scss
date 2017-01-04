@@ -286,6 +286,10 @@ md-sidenav.md-closed.md-locked-open-add-active.user_menu {
   min-height: 128px !important;
 }
 
+.min_height_195{
+  min-height: 195px !important;
+}
+
 .min_height_32{
   min-height: 32px !important;
 }
@@ -859,6 +863,12 @@ ul.share-buttons .sr-only {
 
   .county_search{
     margin-top: 0px;
+  }
+}
+
+@media ( max-width: 599px ) {
+  .no_margin_on_small{
+    margin: 0px !important;
   }
 }
 
