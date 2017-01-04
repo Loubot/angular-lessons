@@ -14,7 +14,7 @@ angular.module('lessons').controller( 'ViewTeacherController', [
 
     $scope.message = {}
 
-
+    $scope.map = {}
 
     create_map = ->
       if $scope.teacher.location?
