@@ -17,7 +17,7 @@ gem 'coffee-rails', '~> 4.1.0'
 # gem 'therubyracer', platforms: :ruby
 
 # Use jquery as the JavaScript library
-gem 'jquery-rails'
+gem 'jquery-rails', '~> 4.2.1'
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
 # gem 'turbolinks'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
@@ -25,7 +25,7 @@ gem 'jbuilder', '~> 2.0'
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0', group: :doc
 
-gem 'where-or'
+gem 'where-or', '~> 0.1.5'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
@@ -37,9 +37,9 @@ gem 'where-or'
 # gem 'capistrano-rails', group: :development
 
 group :production do
-  gem "fog"
-  gem 'unicorn'
-  gem 'pg'
+  gem "fog", '~> 1.38'
+  gem 'unicorn', '~> 5.1.0'
+  gem 'pg', '~> 0.19.0'
   gem 'render_static'
 end
 
@@ -56,50 +56,50 @@ group :development do
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
-gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+gem 'tzinfo-data', '~> 1.2016.7', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem 'annotate'
 
-gem 'date_validator'
+gem 'date_validator', '~> 0.9.0'
 
-gem 'angular_rails_csrf'
+gem 'angular_rails_csrf', '~> 2.0.0'
 
-gem 'bower-rails'
+gem 'bower-rails', '~> 0.11.0'
 
-gem 'sprockets', '2.12.3'
+gem 'sprockets', '2.12.3', '~> 2.12.3'
 
-gem 'angular-rails-templates'
+gem 'angular-rails-templates', '~> 0.2.0'
 
-gem 'devise_token_auth'
+gem 'devise_token_auth', '~> 0.1.39'
 
-gem 'omniauth'
+gem 'omniauth', '~> 1.3.1'
 
-gem 'omniauth-facebook'
+gem 'omniauth-facebook', '~> 4.0.0'
 
 gem 'validates_overlap', '~> 0'
 
-gem 'carrierwave'
+gem 'carrierwave', '~> 0.11.2'
 
-gem "mini_magick"
+gem "mini_magick", '~> 4.5.1'
 
-gem 'activerecord-session_store'
+gem 'activerecord-session_store', '~> 1.0.0'
 
-gem 'geokit-rails'
+gem 'geokit-rails', '~> 2.2.0'
 
 gem 'mandrill-api', '~> 1'
 
-gem 'rack-cors'
+gem 'rack-cors', '~> 0.4.0'
 
-gem 'rails-client-logger'
+gem 'rails-client-logger' , '~> 1.1.1'
 
-gem 'delayed_job_active_record'
+gem 'delayed_job_active_record', '~> 4.1.1'
 
-gem 'workless'
+gem 'workless', '~> 1.2.3'
 
-gem "daemons"
+# gem "daemons", '~> 1.2.4'
 
-gem 'sitemap_generator'
+gem 'sitemap_generator', '~> 5.2.0'
 
-gem "fog-aws"
+gem "fog-aws", '~> 0.12.0'
 
-gem 'htmlcompressor'
+gem 'htmlcompressor', '~> 0.2.0'
