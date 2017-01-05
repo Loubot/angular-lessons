@@ -40,8 +40,8 @@
       </md-fab-speed-dial>
 
 
-      <md-icon ng-show="!User" hide-gt-xs ng-click="user_menu()" class="white_text"><i class="material-icons">face</i></md-icon>
-      <md-icon ng-show="User" hide-gt-xs ng-click="user_menu()" class="white_text"><i class="material-icons">face</i></md-icon>
+      <md-icon  ng-show="!User" hide-gt-xs ng-click="user_menu()" class="white_text width_25"><i class="material-icons">face</i></md-icon>
+      <md-icon ng-show="User" hide-gt-xs ng-click="user_menu()" class="white_text width_25"><i class="material-icons">face</i></md-icon>
 
 
 
@@ -108,11 +108,11 @@
     
     <!--#################### Left sidenav ############################-->
     <md-sidenav class="sidenav white_text increase_z md-whiteframe=12" md-component-id="left" flex>
-       <div  ng-cloak ng-if="!User">
+      <div  ng-cloak ng-if="!User">
          <br/>
          <md-content class="md-no-momentum">
-           <md-input-container ng-if="auth_type!=0">
-             <md-subheader>Register</md-subheader>
+          <md-input-container ng-if="auth_type!=0">
+             <md-subheader>Student Register</md-subheader>
              <form ng-submit="register_teacher()" >
                <md-input-container class="md-icon-float md-block black_text" >
                  <!-- Use floating label instead of placeholder -->
@@ -153,51 +153,68 @@
                <br>
                <a ui-sref="reset_password">Forgot your password</a>
              </form>
-           </md-input-container> <!-- end of ng-if="auth_type==1" -->
+          </md-input-container> <!-- end of ng-if="auth_type==1" -->
 
-           <md-input-container ng-if="auth_type==0">
-             <md-subheader>Login</md-subheader>
-             <form ng-submit="auth.login( teacher)" >
+          <md-input-container ng-if="auth_type==0">
+            <md-subheader>Login</md-subheader>
+            <form ng-submit="auth.login( teacher)" >
 
                <!-- <md-input-container class="md-block">
                  <md-icon class="lastName"></md-icon>
                  <input ng-model="teacher.lastName" type="text" placeholder="Last Name" required>
                </md-input-container>
       -->
-               <md-input-container class="md-block">
+              <md-input-container class="md-block">
                  <!-- Use floating placeholder instead of label -->
                  <md-icon  class="email"></md-icon>
                  <input ng-model="teacher.email" class="black_text" type="email" name="email" placeholder="Email (required)" required>
-               </md-input-container>
+              </md-input-container>
 
-               <md-input-container class="md-block">
+              <md-input-container class="md-block">
                  <!-- Use floating placeholder instead of label -->
-                 <md-icon  class="password"></md-icon>
-                 <input ng-model="teacher.password" class="black_text" type="password" name="password" placeholder="Password (required)" required>
-               </md-input-container>
+                <md-icon  class="password"></md-icon>
+                <input ng-model="teacher.password" class="black_text" type="password" name="password" placeholder="Password (required)" required>
+              </md-input-container>
 
                
                
-               <md-button class="md-primary md-raised" type="submit"> 
+              <md-button class="md-primary md-raised" type="submit"> 
                  Submit
-               </md-button>
+              </md-button>
 
-               <p flex-offset="15">or</p>
-               <div ng-click="facebook()">
+              <p flex-offset="15">or</p>
+              <div ng-click="facebook()">
                 <%= image_tag('facebook_login.jpg', class: 'width_75') %>
-               </div>
+              </div>
 
-               <br>
-               <a ui-sref="reset_password">Forgot your password</a>
-             </form>
-           </md-input-container> <!-- end of ng-if="auth_type==1" -->
+              <br>
+              <a ui-sref="reset_password">Forgot your password</a>
+            </form>
+          </md-input-container> <!-- end of ng-if="auth_type==1" -->
 
 
-           <button class="md-button md-default-theme" ng-click="openLeftMenu()"hide-gt-md="">
-             <i class="material-icons">keyboard_arrow_left</i>
-           </button>
-         </md-content>
-       </div>
+          <div layout="column" layout-align="space-between center">
+            
+
+            <div>
+              <md-button class="md-raised blue_background white_text">Student Register</md-button>
+            </div>
+
+            <div>
+              <md-button class="md-raised md-primary">Teacher Register</md-button>
+            </div>
+
+            <div>
+              <button class="md-button md-default-theme icon_button" ng-click="openLeftMenu()"hide-gt-md="">
+                Close<i class="material-icons">close</i>
+              </button>
+
+            </div>
+
+          </div> <!-- end of column -->
+
+        </md-content>
+      </div>
 
     </md-sidenav>
     <!--#################### End of Left sidenav ############################-->
@@ -210,7 +227,7 @@
 
         </div> <!-- angular view rendered here -->
 
-        <div class="bottom_bit" layout="row" layout-align="space-around none">
+        <div ng-if="false" class="bottom_bit" layout="row" layout-align="space-around none">
           <div ><a class="white_text margin_r_10" ui-sref="contact">Contact Us</a></div>
           <div ><a class="white_text" ui-sref="about">About Us</a></div>
         </div>
