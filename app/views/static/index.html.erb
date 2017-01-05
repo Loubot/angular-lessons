@@ -197,11 +197,11 @@
             
 
             <div>
-              <md-button class="md-raised blue_background white_text">Student Register</md-button>
+              <md-button ng-if="false" ng-click="openLeftMenu(2); user_menu()" class="md-raised blue_background white_text">Student Register</md-button>
             </div>
 
             <div>
-              <md-button class="md-raised md-primary">Teacher Register</md-button>
+              <md-button ng-if="false" ui-sref="register_teacher" class="md-raised md-primary">Teacher Register</md-button>
             </div>
 
             <div>
@@ -227,7 +227,7 @@
 
         </div> <!-- angular view rendered here -->
 
-        <div class="bottom_bit" layout="row" layout-align="space-around none">
+        <div ng-if="false" class="bottom_bit" layout="row" layout-align="space-around none">
           <div ><a class="white_text margin_r_10" ui-sref="contact">Contact Us</a></div>
           <div ><a class="white_text" ui-sref="about">About Us</a></div>
         </div>
