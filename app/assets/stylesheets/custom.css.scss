@@ -17,6 +17,7 @@ html, body{
 .toolbar_container{
   background-color: #4caf50;
   color: #FFF;
+  position: relative;
 }
 
 .toolbar_item{
@@ -24,7 +25,7 @@ html, body{
   float: left;
 }
 
-.do_it{
+.align_right{
   text-align: right;
 }
 
@@ -93,6 +94,10 @@ md-sidenav.md-closed.md-locked-open-add-active.user_menu {
 
 .grey_green_background{
   background-color: #d7eacb !important;
+}
+
+.slightly_desaturated_cyan{
+  background-color: #e0ebf4;
 }
 
 .blue_background{
@@ -199,6 +204,14 @@ md-sidenav.md-closed.md-locked-open-add-active.user_menu {
 
 .width_50{
   width: 50% !important;
+}
+
+.width_49{
+  width: auto;
+}
+
+.width_33{
+  width: 33.333333%;
 }
 
 .width_25{
@@ -354,6 +367,10 @@ md-sidenav.md-closed.md-locked-open-add-active.user_menu {
   margin-top: 30px !important;
 }
 
+.margin_s_50{
+  margin: 0 50px !important;
+}
+
 .margin_b_10{
   margin-bottom: 10px !important;
 }
@@ -398,6 +415,10 @@ md-sidenav.md-closed.md-locked-open-add-active.user_menu {
   padding: 0px 20px;
 }
 
+.max_width_400{
+  max-width: 400px !important;
+}
+
 .no_overflow{
   overflow: hidden !important;
 }
@@ -432,7 +453,7 @@ md-sidenav.md-closed.md-locked-open-add-active.user_menu {
 }
 
 .top_bit{
-  min-height: 87vh !important;
+  min-height: 89vh !important;
 }
 
 
@@ -893,6 +914,12 @@ ul.share-buttons .sr-only {
 
   .hide_when_small{
     display: none;
+  }
+}
+
+@media ( max-width: 700px ) {
+  .md-fab-action-item > .green_blue_text{
+    font-size: 11px;
   }
 }
 

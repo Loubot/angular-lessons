@@ -1,42 +1,50 @@
 <md-content>
   <div layout="column" >
-    <h2 class="center_text">Our Beginning</h2>
-    <p class="big_gutter">
-      
-        The inspiration for LearnYourLesson began in Cork when our co-founder Alan became frustrated with deciding on what new skill he was going to learn next. After trawling through Google for local teachers advertising their wares on different web pages and getting absolutely nowhere, he thought about how great it would be to have one website in Ireland that displayed all the possible skills you could learn. 
-      
-    </p >
-    <div layout="row" layout-align="space-around center">
-      <div>
-        <%= image_tag 'al_profile.jpg', class: "vh_25" %>
-        <h5>Alan Rowell</h5>
-      </div>
+    <section class="white_background big_gutter margin_b_30">
+      <h2 class="center_text">Our Beginning</h2>
+      <p class="big_gutter">
+        
+          The inspiration for LearnYourLesson began in Cork when our co-founder Alan became frustrated with deciding on what new skill he was going to learn next. After trawling through Google for local teachers advertising their wares on different web pages and getting absolutely nowhere, he thought about how great it would be to have one website in Ireland that displayed all the possible skills you could learn. 
+        
+      </p >
+    </section>
 
-      <div>
+    <div layout="row" layout-align="space-around center" class="big_gutter white_background" layout-padding>
+
+      <div class="slightly_desaturated_cyan width_50 center_text margin_s_50 max_width_400">
+        <div >
+          <%= image_tag 'al_profile.jpg', class: "vh_25" %>
+          <h5>Alan Rowell</h5>
+        </div>
+      </div>
+      <div style="width:1px;color:#FFF;float:left;height:228px;"></div>
+
+      <div class="slightly_desaturated_cyan width_50 center_text margin_s_50 max_width_400">
         <%= image_tag 'al_profile.jpg', class: "vh_25" %>
         <h5>Louis Angelini</h5>
       </div>
     </div>
 
-    <div class="margin_t_30" layout="row" layout-xs="column" layout-padding layout-align="space-around center">
-      <div >
+    <div class="margin_t_30 big_gutter" layout="row" layout-xs="column" layout-padding layout-align="space-between stretch">
+
+      <div flex class="white_background">
         <h4 class="center_text">For Students...</h4>
-        <div class="big_gutter">
+        <div >
           Tap into our network to find amazing teachers and learn new skills. LearnYourLesson makes developing your skills convenient, practical, affordable, and fun for everyone.
         </div>
       </div>
-
-      <div class="margin_b_30" hide-gt-xs></div>
-
-      <md-divider>
-      <div>
+      <div flex="2" style="height:159px;width:5px;"> </div>
+      <div flex class="white_background">
         <h4 class="center_text">For Teachers...</h4>
-        <div class="big_gutter">
+        <div >
           Our website is free and will help you streamline the management of your business, including managing student bookings and communication. When you need more students, tap into our marketplace and get visibility to potential new students.
 
           We're here to help you focus on what you do best - teaching!
         </div>
-      </div>
+      </div> <!-- end of flex-gt-xs -->
+
     </div>
+
   </div>
+
 </md-content>
