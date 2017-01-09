@@ -14,6 +14,21 @@ html, body{
   color: #FFF !important;
 }
 
+.toolbar_container{
+  background-color: #4caf50;
+  color: #FFF;
+}
+
+.toolbar_item{
+  width: 33.3333%;
+  float: left;
+}
+
+.do_it{
+  text-align: right;
+}
+
+
 .white_placeholder::-webkit-input-placeholder { /* WebKit, Blink, Edge */
     color:    #FFF !important;
 }
@@ -365,6 +380,10 @@ md-sidenav.md-closed.md-locked-open-add-active.user_menu {
 
 .margin_r_10{
   margin-right: 10px !important;
+}
+
+.padding_l_5px{
+  padding-left: 5px !important;
 }
 
 .padding_5{
@@ -870,6 +889,16 @@ ul.share-buttons .sr-only {
 @media ( max-width: 599px ) {
   .no_margin_on_small{
     margin: 0px !important;
+  }
+
+  .hide_when_small{
+    display: none;
+  }
+}
+
+@media ( min-width: 600px ) {
+  .hide_when_small{
+    visibility: hidden;
   }
 }
 
