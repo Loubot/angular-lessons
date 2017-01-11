@@ -103,3 +103,5 @@ gem 'sitemap_generator', '~> 5.2.0'
 gem "fog-aws", '~> 0.12.0'
 
 gem 'htmlcompressor', '~> 0.2.0'
+
+gem 'gibbon', '~> 1.2'

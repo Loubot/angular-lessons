@@ -54,7 +54,7 @@ class Teacher < ActiveRecord::Base
   validates_confirmation_of :password, message: "should match verification"
 
 
-  after_create :send_new_message
+  after_create :send_new_message, :add_to_mailchimp
 
 
   def get_full_name
@@ -113,11 +113,35 @@ class Teacher < ActiveRecord::Base
 
   private
     def send_new_message
-      logger.debug "I am sending a new message"
+      
       if Rails.env.production?
+        logger.debug "I am sending a new message"
         TeacherMailer.delay.user_registered( self )
       else
         # TeacherMailer.user_registered( self ).deliver_now
+      end
+    end
+
+    def add_to_mailchimp
+      gb = Gibbon::API.new(ENV['_mail_chimp_api'], { :timeout => 15 })
+      list_id = self.is_teacher ? ENV['MAILCHIMP_TEACHER_LIST'] : ENV['MAILCHIMP_STUDENT_LIST']
+      
+      begin
+        gb.lists.subscribe({
+                            :id => list_id,
+                             :email => {
+                                        :email => self.email                                       
+                                        },
+                                        :merge_vars => { :FNAME => self.first_name },
+                              :double_optin => false
+                            })
+
+        logger.info "subscribed to mailchimp"
+        # flash[:success] = "Thank you, your sign-up request was successful! Please check your e-mail inbox."
+      rescue Gibbon::MailChimpError, StandardError => e
+        puts "list subscription failed !!!!!!!!!!"
+        logger.info e.to_s
+        # flash[:danger] = e.to_s
       end
     end
 
