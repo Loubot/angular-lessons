@@ -14,6 +14,22 @@ html, body{
   color: #FFF !important;
 }
 
+.toolbar_container{
+  background-color: #4caf50;
+  color: #FFF;
+  position: relative;
+}
+
+.toolbar_item{
+  width: 33.3333%;
+  float: left;
+}
+
+.align_right{
+  text-align: right;
+}
+
+
 .white_placeholder::-webkit-input-placeholder { /* WebKit, Blink, Edge */
     color:    #FFF !important;
 }
@@ -58,6 +74,12 @@ html, body{
   font-size: 2rem;
 }
 
+.circle{
+  border-radius: 50%;
+  height: 140px !important;
+  width: 120px !important;
+}
+
 md-sidenav.user_menu, 
 md-sidenav.md-locked-open.user_menu, 
 md-sidenav.md-closed.md-locked-open-add-active.user_menu {
@@ -78,6 +100,14 @@ md-sidenav.md-closed.md-locked-open-add-active.user_menu {
 
 .grey_green_background{
   background-color: #d7eacb !important;
+}
+
+.slightly_desaturated_cyan{
+  background-color: #e0ebf4;
+}
+
+.very_light_gray{
+  background-color: #f5f5f5;
 }
 
 .blue_background{
@@ -186,12 +216,24 @@ md-sidenav.md-closed.md-locked-open-add-active.user_menu {
   width: 50% !important;
 }
 
+.width_49{
+  width: auto;
+}
+
+.width_33{
+  width: 33.333333%;
+}
+
 .width_25{
   width: 25% !important;
 }
 
 .width_100{
   width: 100% !important;
+}
+
+.tolowercase {
+  text-transform: lowercase;
 }
 
 .header_font{
@@ -367,6 +409,10 @@ md-sidenav.md-closed.md-locked-open-add-active.user_menu {
   margin-right: 10px !important;
 }
 
+.padding_l_5px{
+  padding-left: 5px !important;
+}
+
 .padding_5{
   padding: 5px !important;
 }
@@ -377,6 +423,10 @@ md-sidenav.md-closed.md-locked-open-add-active.user_menu {
 
 .padding_s_20{
   padding: 0px 20px;
+}
+
+.max_width_400{
+  max-width: 400px !important;
 }
 
 .no_overflow{
@@ -413,14 +463,16 @@ md-sidenav.md-closed.md-locked-open-add-active.user_menu {
 }
 
 .top_bit{
-  min-height: 87vh !important;
+  min-height: 95vh !important;
 }
 
 
 .bottom_bit{
   // @extend .big_gutter;
   white-space: nowrap;
-  height: 5vh !important;
+  // height: 5vh !important;
+  max-height: 38px;
+  min-height: 35px;
   background-color: #111;
   padding: 0 150px;
   color: #fff;
@@ -716,6 +768,11 @@ md-sidenav.md-closed.md-locked-open-add-active.user_menu {
 
 // End of Teacher area
 
+.social_icon{
+  // height: 24px;
+  width: 24px;
+}
+
 ul.share-buttons{
   position: fixed;
   top: 70%;
@@ -870,6 +927,25 @@ ul.share-buttons .sr-only {
 @media ( max-width: 599px ) {
   .no_margin_on_small{
     margin: 0px !important;
+  }
+
+  .hide_when_small{
+    display: none;
+  }
+}
+
+@media ( max-width: 700px ) {
+  .md-fab-action-item > .green_blue_text{
+    font-size: 11px;
+  }
+}
+
+@media ( min-width: 600px ) {
+  .hide_when_small{
+    visibility: hidden;
+  }
+  .margin_s_50{
+    margin: 0 50px !important;
   }
 }
 

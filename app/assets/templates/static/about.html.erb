@@ -1,23 +1,85 @@
-<md-content>
+<md-content class="big_gutter">
   <div layout="column" >
-    <h2 class="center_text">LYL</h2>
+    <section class="white_background margin_b_30">
+      <h2 class="center_text">Our Beginning</h2>
+      <p class="padding_s_20">
+        
+          The inspiration for LearnYourLesson began in Cork when our co-founder Alan became frustrated with deciding on what new skill he was going to learn next. After trawling through Google for local teachers advertising their wares on different web pages and getting absolutely nowhere, he thought about how great it would be to have one website in Ireland that displayed all the possible skills you could learn. 
+        
+      </p >
+    </section>
 
-    <div layout="row" layout-align="space-around center">
-      <div>
-        <%= image_tag 'al_profile.jpg', class: "vh_25" %>
-        <h5>Alan Rowell</h5>
+    <div layout="row" layout-align="space-around center" class="white_background" layout-padding>
+
+      <div flex class="very_light_gray center_text" >
+        <div >
+          <%= image_tag 'al_profile.jpg', class: "vh_25 circle" %>
+          <h5>Alan Rowell</h5>
+          
+          <div class="tolowercase" ><strong>alan@learnyourlesson.ie</strong></div>
+
+          <!-- contact info -->
+        <div layout="row" layout-align="space-around center">
+          <div >
+            <md-button ng-click="contact( 'alan@learnyourlesson.ie' )" class="icon_button" aria-label="Contact al"><i class="material-icons">email</i></md-button>
+          </div>
+          <div >
+            <md-button class="icon_button" aria-label="Contact al on twitter"><%= image_tag 'Twitter_Social_Icon_Blue.png', class: 'social_icon ' %></md-button>
+          </div>
+          <div >
+            <md-button class="icon_button" aria-label="Contact al on facebook"><%= image_tag 'facebook_social.png', class: 'social_icon ' %></md-button>
+          </div>
+        </div>
+        <!-- end of contact info -->
+          <strong>Everything except coding </strong> 
+        </div>
       </div>
 
-      <div>
-        <%= image_tag 'al_profile.jpg', class: "vh_25" %>
+      <div  flex-gt-xs="10" flex-xs="5" class="white_background"></div>
+
+      <div flex class="very_light_gray center_text" >
+        <%= image_tag 'al_profile.jpg', class: "vh_25 circle" %>
         <h5>Louis Angelini</h5>
+        
+        <div class="tolowercase" ><strong>loubot@learnyourlesson.ie</strong> </div>
+
+        <!-- contact info -->
+        <div layout="row" layout-align="space-around center">
+          <div >
+            <md-button ng-click="contact( 'loubot@learnyourlesson.ie' )" class="icon_button" aria-label="Contact Louis"><i class="material-icons">email</i></md-button>
+          </div>
+          <div >
+            <md-button class="icon_button" aria-label="Contact Louis on twitter"><%= image_tag 'Twitter_Social_Icon_Blue.png', class: 'social_icon ' %></md-button>
+          </div>
+          <div >
+            <md-button class="icon_button" aria-label="Contact Louis on facebook"><%= image_tag 'facebook_social.png', class: 'social_icon ' %></md-button>
+          </div>
+        </div>
+        <!-- end of contact info -->
+        <strong>Coding</strong> 
       </div>
     </div>
 
-    <div class="margin_t_30" layout="row" layout-align="space-around center">
-      <div>a</div>
-      <div>b</div>
-      <div>c</div>
+    <div class="margin_t_30 " layout="row" layout-xs="column" layout-padding layout-align="space-between stretch">
+
+      <div flex class="white_background">
+        <h4 class="center_text">For Students...</h4>
+        <div >
+          Tap into our network to find amazing teachers and learn new skills. LearnYourLesson makes developing your skills convenient, practical, affordable, and fun for everyone.
+        </div>
+      </div>
+      <div  flex="2" style="height:5px;width:5px;"> </div>
+      <div flex class="white_background">
+        <h4 class="center_text">For Teachers...</h4>
+        <div >
+          Our website is free and will help you streamline the management of your business, including managing student bookings and communication. When you need more students, tap into our marketplace and get visibility to potential new students.
+
+          We're here to help you focus on what you do best - teaching!
+        </div>
+      </div> <!-- end of flex-gt-xs -->
+
     </div>
+
   </div>
+  <md-button ng-click="contact( 'lllouis@yahoo.com' )">hup</md-button>
 </md-content>

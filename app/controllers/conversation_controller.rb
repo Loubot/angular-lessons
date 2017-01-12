@@ -1,7 +1,7 @@
 class ConversationController < ApplicationController
   include ConversationHelper
   require 'pp'
-  before_action :authenticate_teacher!
+  before_action :authenticate_teacher!, except: [ :message_bosses ]
   before_action :check_correct_user, only: [ :create ]
 
   def create
@@ -46,6 +46,12 @@ class ConversationController < ApplicationController
 
   end
 
+  def message_bosses
+    AdminMailer.send_message_to_boss( boss_params ).deliver_now
+
+    render json: { hello: ' bla'}
+  end
+
   def index
     conversations = Conversation.where( user_id1: current_teacher.id ).or( Conversation.where( user_id2: current_teacher.id ) )
     render json: { conversations: conversations.as_json }
@@ -72,6 +78,10 @@ class ConversationController < ApplicationController
                    )
       # params.permit( :name, :phone, :email, :teacher_id )
 
+    end
+
+    def boss_params
+      params.permit( :email, :name, :text, :user_email )
     end
 
     def index_params

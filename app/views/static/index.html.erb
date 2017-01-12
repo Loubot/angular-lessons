@@ -1,10 +1,8 @@
 
 <div class="main_page" ng-cloak layout="column" layout-fill ng-controller="NavController" >
 
-  <md-toolbar>
-    <div class="md-toolbar-tools" layout="row" layout-align="space-around center">
-
-      <!-- Hide fab-speed-dial on mobile -->
+  <div class="toolbar_container">
+    <section class="toolbar_item">
       <md-fab-speed-dial hide-xs md-direction="right" md-open="demo.isOpen"
                        class="md-scale md-fab-top-left" ng-class="{ 'md-hover-full': demo.hover }"
                        >
@@ -40,26 +38,28 @@
       </md-fab-speed-dial>
 
 
-      <md-icon  ng-show="!User" hide-gt-xs ng-click="user_menu()" class="white_text width_25"><i class="material-icons">face</i></md-icon>
-      <md-icon ng-show="User" hide-gt-xs ng-click="user_menu()" class="white_text width_25"><i class="material-icons">face</i></md-icon>
+
+      <md-icon ng-show="!User" hide-gt-xs ng-click="user_menu()" class="white_text width_25 margin_t_10 padding_l_5px"><i class="material-icons">face</i></md-icon>
+      <md-icon ng-show="User" hide-gt-xs ng-click="user_menu()" class="white_text width_25 margin_t_10 padding_l_5px"><i class="material-icons">face</i></md-icon>
+    </section>
 
 
+    <section class="toolbar_item hide_when_small" >a</section>
 
-
-
-      <span flex="30"></span>
-      <!-- <h4 class="white_text">Learn your lesson</h4> -->
+    <section class="toolbar_item center_text">
       <img ui-sref="welcome" src="<%= asset_path('lylLogo.png') %>" class="md-48 lyl_logo">
-      <span flex="20"></span>
-     
-      <md-button class="md-default-theme white_text no_padding" ui-sref="contact">
-        <md-icon hide-xs><i class="material-icons ">contact_mail</i></md-icon> Contact Us
+
+    </section>
+
+    <section class="toolbar_item align_right" style="text-align:right;">
+      <md-button class="md-default-theme white_text no_padding" ui-sref="contact" >
+        <md-icon hide-xs><i class="material-icons white_text">contact_mail</i></md-icon> Contact Us
+
       </md-button>
 
-      <button ng-if="false" class="md-button md-default-theme white_text" ng-click="openRightMenu()"><i class="material-icons">menu</i></button>
-      
-    </div> <!-- dnf of md-toolbar-tools -->
-  </md-toolbar>
+       <button ng-if="false" class="md-button md-default-theme white_text" ng-click="openRightMenu()"><i class="material-icons">menu</i></button>
+    </section>
+  </div>
 
   <div class="main_page" layout="column" flex>
     <!-- ################## User left menu ############################# -->
@@ -187,6 +187,7 @@
                 <%= image_tag('facebook_login.jpg', class: 'width_75') %>
               </div>
 
+
               <br>
               <a ui-sref="reset_password">Forgot your password</a>
             </form>
@@ -205,6 +206,7 @@
             </div>
 
             <div>
+
               <button class="md-button md-default-theme icon_button" ng-click="openLeftMenu()"hide-gt-md="">
                 Close<i class="material-icons">close</i>
               </button>
@@ -227,7 +229,7 @@
 
         </div> <!-- angular view rendered here -->
 
-        <div ng-if="false" class="bottom_bit" layout="row" layout-align="space-around none">
+        <div class="bottom_bit" layout="row" layout-align="space-around none">
           <div ><a class="white_text margin_r_10" ui-sref="contact">Contact Us</a></div>
           <div ><a class="white_text" ui-sref="about">About Us</a></div>
         </div>
