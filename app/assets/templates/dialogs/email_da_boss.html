@@ -20,10 +20,19 @@
           </md-input-container>
           
           <md-input-container class="md-block">
-            <label>Your email:</label>
+            <label>email:</label>
             <input type="text" ng-model="email.email" name="email" disabled required>
             <div ng-messages="contact_boss_form.email.$error">
               <div ng-message="required">Email is required</div>
+            </div>
+          </md-input-container>
+  
+          <md-input-container class="md-block">
+            <label>Your email:</label>
+            <input type="text" ng-model="email.user_email" name="user_email" ng-pattern="/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/" required>
+            <div ng-messages="contact_boss_form.user_email.$error">
+              <div ng-message="required">Email is required</div>
+              <div ng-message="pattern">Must be valid email</div>
             </div>
           </md-input-container>
   

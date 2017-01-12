@@ -19,6 +19,7 @@ angular.module( 'lessons' ).controller( 'ContactController', [
       ).then( ( resp ) ->
         console.log resp
         alertify.success "Message sent"
+        $mdDialog.cancel()
       ).catch( ( err ) ->
         console.log err
         alertify.error "Failed to send message"

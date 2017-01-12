@@ -47,7 +47,7 @@ class ConversationController < ApplicationController
   end
 
   def message_bosses
-    AdminMailer.send_message_to_boss( params ).deliver_now
+    AdminMailer.send_message_to_boss( boss_params ).deliver_now
 
     render json: { hello: ' bla'}
   end
@@ -78,6 +78,10 @@ class ConversationController < ApplicationController
                    )
       # params.permit( :name, :phone, :email, :teacher_id )
 
+    end
+
+    def boss_params
+      params.permit( :email, :name, :text, :user_email )
     end
 
     def index_params
