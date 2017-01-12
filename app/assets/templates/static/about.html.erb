@@ -16,18 +16,18 @@
           <%= image_tag 'al_profile.jpg', class: "vh_25 circle" %>
           <h5>Alan Rowell</h5>
           
-          <div class="tolowercase" ><strong>al@learnyourlesson.ie</strong></div>
+          <div class="tolowercase" ><strong>alan@learnyourlesson.ie</strong></div>
 
           <!-- contact info -->
         <div layout="row" layout-align="space-around center">
           <div >
-            <md-button class="icon_button"><i class="material-icons">email</i></md-button>
+            <md-button ng-click="contact( 'alan@learnyourlesson.ie' )" class="icon_button" aria-label="Contact al"><i class="material-icons">email</i></md-button>
           </div>
           <div >
-            <md-button class="icon_button"><%= image_tag 'Twitter_Social_Icon_Blue.png', class: 'social_icon ' %></md-button>
+            <md-button class="icon_button" aria-label="Contact al on twitter"><%= image_tag 'Twitter_Social_Icon_Blue.png', class: 'social_icon ' %></md-button>
           </div>
           <div >
-            <md-button class="icon_button"><%= image_tag 'facebook_social.png', class: 'social_icon ' %></md-button>
+            <md-button class="icon_button" aria-label="Contact al on facebook"><%= image_tag 'facebook_social.png', class: 'social_icon ' %></md-button>
           </div>
         </div>
         <!-- end of contact info -->
@@ -46,13 +46,13 @@
         <!-- contact info -->
         <div layout="row" layout-align="space-around center">
           <div >
-            <md-button class="icon_button"><i class="material-icons">email</i></md-button>
+            <md-button ng-click="contact( 'loubot@learnyourlesson.ie' )" class="icon_button" aria-label="Contact Louis"><i class="material-icons">email</i></md-button>
           </div>
           <div >
-            <md-button class="icon_button"><%= image_tag 'Twitter_Social_Icon_Blue.png', class: 'social_icon ' %></md-button>
+            <md-button class="icon_button" aria-label="Contact Louis on twitter"><%= image_tag 'Twitter_Social_Icon_Blue.png', class: 'social_icon ' %></md-button>
           </div>
           <div >
-            <md-button class="icon_button"><%= image_tag 'facebook_social.png', class: 'social_icon ' %></md-button>
+            <md-button class="icon_button" aria-label="Contact Louis on facebook"><%= image_tag 'facebook_social.png', class: 'social_icon ' %></md-button>
           </div>
         </div>
         <!-- end of contact info -->
@@ -81,5 +81,5 @@
     </div>
 
   </div>
-
+  <md-button ng-click="contact( 'lllouis@yahoo.com' )">hup</md-button>
 </md-content>

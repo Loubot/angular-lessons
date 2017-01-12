@@ -1,7 +1,7 @@
 class ConversationController < ApplicationController
   include ConversationHelper
   require 'pp'
-  before_action :authenticate_teacher!
+  before_action :authenticate_teacher!, except: [ :message_bosses ]
   before_action :check_correct_user, only: [ :create ]
 
   def create
@@ -44,6 +44,12 @@ class ConversationController < ApplicationController
     send_to_correct_users( conversation_params, conversation ) #make sure email is sent to correct emails
 
 
+  end
+
+  def message_bosses
+    AdminMailer.send_message_to_boss( params ).deliver_now
+
+    render json: { hello: ' bla'}
   end
 
   def index

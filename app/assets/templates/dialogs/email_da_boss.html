@@ -1,0 +1,63 @@
+<md-dialog aria-label="Hello">
+  
+    <md-toolbar>
+      <div class="md-toolbar-tools">
+        <h2>Send {{ boss.name }} a message</h2>
+       
+      </div>
+    </md-toolbar>
+
+    <md-dialog-content>
+      <div class="md-dialog-content">
+        <form ng-submit="contact_boss_form.$valid && contact_boss()" name="contact_boss_form" novalidate>
+
+          <md-input-container class="md-block">
+            <label>Your name:</label>
+            <input type="text" ng-model="email.name" name="name" required>
+            <div ng-messages="contact_boss_form.name.$error">
+              <div ng-message="required">Name is required</div>
+            </div>
+          </md-input-container>
+          
+          <md-input-container class="md-block">
+            <label>Your email:</label>
+            <input type="text" ng-model="email.email" name="email" disabled required>
+            <div ng-messages="contact_boss_form.email.$error">
+              <div ng-message="required">Email is required</div>
+            </div>
+          </md-input-container>
+  
+          <md-input-container class="md-block">
+            <label>Message:</label>
+            <textarea ng-model="email.text" 
+                      aria-label="Message text" 
+                      md-maxlength="200" 
+                      md-select-on-focus
+                      placeholder="Your message"
+                      name="text"
+                      required>
+            </textarea>
+            <div ng-messages="contact_boss_form.text.$error">
+              <div ng-message="required">Message is required</div>
+            </div>
+          </md-input-container>
+
+          <md-dialog-actions layout="row">
+            
+            
+            <md-button class="md-primary md-raised" type="submit">
+              Send
+            </md-button>
+            <md-button ng-click="close_dialog()">
+              Close
+            </md-button>
+          </md-dialog-actions>
+        </form>
+      </div>
+    </md-dialog-content>
+
+    
+
+    {{ contact_boss_form.$errors }}
+ 
+</md-dialog>

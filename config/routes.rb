@@ -43,14 +43,16 @@ Rails.application.routes.draw do
       resources :subject,             only: [ :create, :destroy ]
     end
 
-    resources :conversation,        only: [ :create, :index, :show ]
+    resources :conversation,        only: [ :create, :index, :show ] 
     resources :subject,             only: [ :index, :update ]
+
+    post        'message-bosses'        => 'conversation#message_bosses'
   end
 
 
 
 
-
+ 
   get 'oauth2/callback' => 'static#welcome'
   as :teacher do
     # Define routes for Teacher within this block.
