@@ -11,18 +11,52 @@
 
     <div layout="row" layout-align="space-around center" class="white_background" layout-padding>
 
-      <div flex class="very_light_gray center_text">
+      <div flex class="very_light_gray center_text" >
         <div >
-          <%= image_tag 'al_profile.jpg', class: "vh_25" %>
+          <%= image_tag 'al_profile.jpg', class: "vh_25 circle" %>
           <h5>Alan Rowell</h5>
+          
+          <div class="tolowercase" ><strong>al@learnyourlesson.ie</strong></div>
+
+          <!-- contact info -->
+        <div layout="row" layout-align="space-around center">
+          <div >
+            <md-button class="icon_button"><i class="material-icons">email</i></md-button>
+          </div>
+          <div >
+            <md-button class="icon_button"><%= image_tag 'Twitter_Social_Icon_Blue.png', class: 'social_icon ' %></md-button>
+          </div>
+          <div >
+            <md-button class="icon_button"><%= image_tag 'facebook_social.png', class: 'social_icon ' %></md-button>
+          </div>
+        </div>
+        <!-- end of contact info -->
+          <strong>Everything except coding </strong> 
         </div>
       </div>
 
       <div  flex-gt-xs="10" flex-xs="5" class="white_background"></div>
 
-      <div flex class="very_light_gray center_text">
-        <%= image_tag 'al_profile.jpg', class: "vh_25" %>
+      <div flex class="very_light_gray center_text" >
+        <%= image_tag 'al_profile.jpg', class: "vh_25 circle" %>
         <h5>Louis Angelini</h5>
+        
+        <div class="tolowercase" ><strong>loubot@learnyourlesson.ie</strong> </div>
+
+        <!-- contact info -->
+        <div layout="row" layout-align="space-around center">
+          <div >
+            <md-button class="icon_button"><i class="material-icons">email</i></md-button>
+          </div>
+          <div >
+            <md-button class="icon_button"><%= image_tag 'Twitter_Social_Icon_Blue.png', class: 'social_icon ' %></md-button>
+          </div>
+          <div >
+            <md-button class="icon_button"><%= image_tag 'facebook_social.png', class: 'social_icon ' %></md-button>
+          </div>
+        </div>
+        <!-- end of contact info -->
+        <strong>Coding</strong> 
       </div>
     </div>
 

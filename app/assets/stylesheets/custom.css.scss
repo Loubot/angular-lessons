@@ -74,6 +74,12 @@ html, body{
   font-size: 2rem;
 }
 
+.circle{
+  border-radius: 50%;
+  height: 140px !important;
+  width: 120px !important;
+}
+
 md-sidenav.user_menu, 
 md-sidenav.md-locked-open.user_menu, 
 md-sidenav.md-closed.md-locked-open-add-active.user_menu {
@@ -101,7 +107,7 @@ md-sidenav.md-closed.md-locked-open-add-active.user_menu {
 }
 
 .very_light_gray{
-  background-color: #ededed;
+  background-color: #f5f5f5;
 }
 
 .blue_background{
@@ -224,6 +230,10 @@ md-sidenav.md-closed.md-locked-open-add-active.user_menu {
 
 .width_100{
   width: 100% !important;
+}
+
+.tolowercase {
+  text-transform: lowercase;
 }
 
 .header_font{
@@ -757,6 +767,11 @@ md-sidenav.md-closed.md-locked-open-add-active.user_menu {
 }
 
 // End of Teacher area
+
+.social_icon{
+  // height: 24px;
+  width: 24px;
+}
 
 ul.share-buttons{
   position: fixed;
