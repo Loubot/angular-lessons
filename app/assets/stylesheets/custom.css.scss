@@ -6,7 +6,7 @@ html, body{
   font-family: 'Roboto', sans-serif;
 }
 
-.lyl_logo{
+.cursor_hand{
     cursor: pointer; cursor: hand;
 }
 
@@ -854,6 +854,10 @@ ul.share-buttons .sr-only {
 } /* 250px */
 
 @media ( min-width: 600px ){
+  .margin_s_10{
+    margin: 0 10px;
+  }
+  
   #message_container{
     height: 65vh !important;
   }
