@@ -31,6 +31,8 @@ angular.module( 'lessons' ).controller( 'ContactController', [
     $scope.contact = ( email ) ->
       $scope.email = {}
       $scope.email.name = $rootScope.User.get_full_name() if $rootScope.User?
+      $scope.email.user_email = $rootScope.User.email if $rootScope.User?
+      console.log $scope.email
       $scope.email.email = email
       $mdDialog.show(
         templateUrl: "dialogs/email_da_boss.html"
