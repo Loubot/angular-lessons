@@ -80,13 +80,6 @@ html, body{
   width: 120px !important;
 }
 
-md-sidenav.big_user_menu, 
-md-sidenav.md-locked-open.big_user_menu, 
-md-sidenav.md-closed.md-locked-open-add-active.big_user_menu {
-    min-width: 100px !important;
-    width: auto;
-    max-height: 75vh !important;
-} 
 
 md-sidenav.user_menu, 
 md-sidenav.md-locked-open.user_menu, 
@@ -866,6 +859,14 @@ ul.share-buttons .sr-only {
 } /* 250px */
 
 @media ( min-width: 600px ){
+  md-sidenav.big_user_menu, 
+  md-sidenav.md-locked-open.big_user_menu, 
+  md-sidenav.md-closed.md-locked-open-add-active.big_user_menu {
+      min-width: 100px !important;
+      width: auto;
+      max-height: 75vh !important;
+  } 
+  
   .margin_s_10{
     margin: 0 10px;
   }
