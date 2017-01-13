@@ -107,12 +107,14 @@
 
     
     <!--#################### Left sidenav ############################-->
-    <md-sidenav class="sidenav white_text increase_z md-whiteframe=12 big_user_menu"  md-component-id="left" flex>
+    <md-sidenav class="sidenav white_text increase_z md-whiteframe=12 big_user_menu"  md-component-id="left" >
       <div  ng-cloak ng-if="!User" class="white_background min_height_75vh" >
-         <br/>
+         
          
           <div ng-if="auth_type!=0">
-             <md-subheader>Student Register</md-subheader>
+              <md-toolbar class="md-theme-indigo">
+                <h1 class="md-toolbar-tools">Student Register</h1>
+              </md-toolbar>
              <form ng-submit="register_teacher()" >
                <md-input-container class="md-icon-float md-block black_text" >
                  <!-- Use floating label instead of placeholder -->
@@ -146,7 +148,7 @@
                <md-button class="md-primary md-raised not_transparent" name="submit" type="submit"> 
                  Submit
                </md-button>
-               <p flex-offset="15">or</p>
+               <p flex-offset="15 "><strong class="black_text">or</strong></p>
                <div ng-click="facebook()">
                 <%= image_tag('facebook_login.jpg', class: 'width_75') %>
                </div>
@@ -156,7 +158,9 @@
           </div> <!-- end of ng-if="auth_type==1" -->
 
           <div ng-if="auth_type==0" >
-            <md-subheader>Login</md-subheader>
+            <md-toolbar class="md-theme-indigo">
+              <h1 class="md-toolbar-tools">Login</h1>
+            </md-toolbar>
             <form ng-submit="auth.login( teacher)" >
 
                <!-- <md-input-container class="md-block">
