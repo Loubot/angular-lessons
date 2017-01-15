@@ -87,7 +87,7 @@ angular.module('lessons').service 'auth', [
           
         )
         .catch( ( resp ) ->
-          auth.auth_errors( resp )
+          auth.auth_errors( resp.data )
           Promise.reject resp
         )
     auth.logout = ->
