@@ -191,6 +191,7 @@ angular.module('lessons').controller('TeacherAreaController', [
       return false
       
     window.checkAuth = ->
+      alertify.success "Callback"
       console.log "Checkauth"
       gapi.auth.authorize(
         {
