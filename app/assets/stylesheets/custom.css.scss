@@ -768,6 +768,7 @@ md-sidenav.md-closed.md-locked-open-add-active.user_menu {
 // Teacher area
 .calendar_container{
   // height: calc( 100% - 200px ) !important;
+  overflow: scroll !important;
 }
 #calendar{
   // max-height: 12em !important;
