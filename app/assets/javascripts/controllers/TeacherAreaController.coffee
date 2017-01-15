@@ -127,7 +127,7 @@ angular.module('lessons').controller('TeacherAreaController', [
         
 
     load_calendar_api = ->
-      
+      alertify.success "load_calendar_api"
       # console.log "loaded"
       # console.log gapi
       gapi.client.load('calendar', 'v3', calendar_loaded)
@@ -169,6 +169,7 @@ angular.module('lessons').controller('TeacherAreaController', [
 
     handleAuthResult = ( auth ) ->
       console.log "auth"
+      alertify.success "handle auth result"
       # console.log auth
       if ( auth? and !auth.error? )
         $scope.show_auth_button = false
