@@ -35,7 +35,7 @@ angular.module('lessons').service 'auth', [
     auth.auth_errors = ( resp ) ->
       console.log resp
       console.log resp.errors
-      console.log resp.errors.full_messages?
+      # console.log resp.errors.full_messages?
       if resp.errors? and resp.errors.full_messages?
         for mess in resp.errors.full_messages
           console.log mess
@@ -87,7 +87,7 @@ angular.module('lessons').service 'auth', [
           
         )
         .catch( ( resp ) ->
-          auth.auth_errors( resp )
+          auth.auth_errors( resp.data )
           Promise.reject resp
         )
     auth.logout = ->

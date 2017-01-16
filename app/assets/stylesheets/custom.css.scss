@@ -6,7 +6,7 @@ html, body{
   font-family: 'Roboto', sans-serif;
 }
 
-.lyl_logo{
+.cursor_hand{
     cursor: pointer; cursor: hand;
 }
 
@@ -79,6 +79,14 @@ html, body{
   height: 140px !important;
   width: 120px !important;
 }
+
+md-sidenav.big_user_menu, 
+md-sidenav.md-locked-open.big_user_menu, 
+md-sidenav.md-closed.md-locked-open-add-active.big_user_menu {
+    min-width: 100px !important;
+    width: auto;
+    max-height: 75vh !important;
+} 
 
 md-sidenav.user_menu, 
 md-sidenav.md-locked-open.user_menu, 
@@ -335,6 +343,10 @@ md-sidenav.md-closed.md-locked-open-add-active.user_menu {
 
 .min_height_32{
   min-height: 32px !important;
+}
+
+.min_height_75vh{
+  min-height: 75vh;
 }
 
 .min_height_32.ng-hide{
@@ -756,6 +768,7 @@ md-sidenav.md-closed.md-locked-open-add-active.user_menu {
 // Teacher area
 .calendar_container{
   // height: calc( 100% - 200px ) !important;
+  overflow: scroll !important;
 }
 #calendar{
   // max-height: 12em !important;
@@ -854,6 +867,10 @@ ul.share-buttons .sr-only {
 } /* 250px */
 
 @media ( min-width: 600px ){
+  .margin_s_10{
+    margin: 0 10px;
+  }
+
   #message_container{
     height: 65vh !important;
   }

@@ -4,51 +4,53 @@
     <!-- <pre id="output"></pre> -->
 
 
-<md-content class="md-padding calendar_container" style="overflow: scroll;" layout="column" >
-  <div flex="100" layout="row" layout-xs="column">
-    <div flex="20" flex-xs="15">
-      <span class="md-headline">Your calendar</span><br>
-      <span class="md-subhead">View and manage your lessons</span>
-    </div>
-    <div flex="80" flex-xs="85">
-      <div class="center_text">
-          <md-button type="button" class="btn btn-default" ng-class="{active:mode==='month'}"
-                  ng-click="changeMode('month')">
-              Month
-          </md-button>
-          <md-button type="button" class="btn btn-default" ng-class="{active:mode==='week'}"
-                  ng-click="changeMode('week')">
-              Week
-          </md-button>
-          <md-button type="button" class="btn btn-default" ng-class="{active:mode==='day'}"
-                  ng-click="changeMode('day')">
-              Day
-          </md-button>
-          <md-button type="button" class="btn btn-default" ng-disabled="isToday()"
-                  ng-click="today()">
-              Today
-          </md-button>
+<div style="overflow: scroll;">
+  <md-content class="md-padding calendar_container" layout="column" >
+    <div flex="100" layout="row" layout-xs="column">
+      <div flex="20" flex-xs="15">
+        <span class="md-headline">Your calendar</span><br>
+        <span class="md-subhead">View and manage your lessons</span>
       </div>
-      
-      <calendar id="calendar" 
-                ng-model="currentDate" ui-calendar
-                calendar-mode="mode" event-source="eventSource"
-                range-changed="reloadSource(startTime, endTime)"
-                event-selected="onEventSelected(event)"
-                time-selected="onTimeSelected(selectedTime)"
-                >
-      </calendar>
+      <div flex="80" flex-xs="85">
+        <div class="center_text">
+            <md-button type="button" class="btn btn-default" ng-class="{active:mode==='month'}"
+                    ng-click="changeMode('month')">
+                Month
+            </md-button>
+            <md-button type="button" class="btn btn-default" ng-class="{active:mode==='week'}"
+                    ng-click="changeMode('week')">
+                Week
+            </md-button>
+            <md-button type="button" class="btn btn-default" ng-class="{active:mode==='day'}"
+                    ng-click="changeMode('day')">
+                Day
+            </md-button>
+            <md-button type="button" class="btn btn-default" ng-disabled="isToday()"
+                    ng-click="today()">
+                Today
+            </md-button>
+        </div>
+        
+        <calendar id="calendar" 
+                  ng-model="currentDate" ui-calendar
+                  calendar-mode="mode" event-source="eventSource"
+                  range-changed="reloadSource(startTime, endTime)"
+                  event-selected="onEventSelected(event)"
+                  time-selected="onTimeSelected(selectedTime)"
+                  >
+        </calendar>
+      </div>
     </div>
-  </div>
 
-  
-  <div class="calendar_buttons" flex="100">
-    <md-button  ng-if="show_auth_button" aria-label="google" ng-click="handleAuthClick(event)">
-      <%= image_tag('google_sign_in.png')  %>
-    </md-button>
-    <md-button ng-show="!calendar_id" class="fancy" ng-click="create_calendar()">Create calendar</md-button>
-    <md-button class="blue_button fancy" ng-show="create_event_button_bool" ng-click="create_event()">Create a new event</md-button>
-  </div>
+    
+    <div class="calendar_buttons" flex="100">
+      <md-button  ng-if="show_auth_button" aria-label="google" ng-click="handleAuthClick(event)">
+        <%= image_tag('google_sign_in.png')  %>
+      </md-button>
+      <md-button ng-show="!calendar_id" class="fancy" ng-click="create_calendar()">Create calendar</md-button>
+      <md-button class="blue_button fancy" ng-show="create_event_button_bool" ng-click="create_event()">Create a new event</md-button>
+    </div>
 
-</md-content>
+  </md-content>
 
+</div>

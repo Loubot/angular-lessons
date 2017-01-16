@@ -1,5 +1,5 @@
 <md-content class="big_gutter">
-  <div layout="column" >
+  <div >
     <section class="white_background margin_b_30">
       <h2 class="center_text">Our Beginning</h2>
       <p class="padding_s_20">
@@ -24,9 +24,11 @@
             <md-button ng-click="contact( 'alan@learnyourlesson.ie' )" class="icon_button" aria-label="Contact al"><i class="material-icons">email</i></md-button>
           </div>
           <div >
-            <md-button class="icon_button" aria-label="Contact al on twitter"><%= image_tag 'Twitter_Social_Icon_Blue.png', class: 'social_icon ' %></md-button>
+            <md-button ng-href="https://twitter.com/RowellAlan?lang=en" target="_blank" class="icon_button" aria-label="Contact al on twitter">
+              <%= image_tag 'Twitter_Social_Icon_Blue.png', class: 'social_icon ' %>
+            </md-button>
           </div>
-          <div >
+          <div ng-if="false" >
             <md-button class="icon_button" aria-label="Contact al on facebook"><%= image_tag 'facebook_social.png', class: 'social_icon ' %></md-button>
           </div>
         </div>
@@ -38,7 +40,7 @@
       <div  flex-gt-xs="10" flex-xs="5" class="white_background"></div>
 
       <div flex class="very_light_gray center_text" >
-        <%= image_tag 'al_profile.jpg', class: "vh_25 circle" %>
+        <%= image_tag 'me_head.jpg', class: "vh_25 circle" %>
         <h5>Louis Angelini</h5>
         
         <div class="tolowercase" ><strong>loubot@learnyourlesson.ie</strong> </div>
@@ -49,15 +51,45 @@
             <md-button ng-click="contact( 'loubot@learnyourlesson.ie' )" class="icon_button" aria-label="Contact Louis"><i class="material-icons">email</i></md-button>
           </div>
           <div >
-            <md-button class="icon_button" aria-label="Contact Louis on twitter"><%= image_tag 'Twitter_Social_Icon_Blue.png', class: 'social_icon ' %></md-button>
+            <md-button ng-href="https://twitter.com/LouisAngelini" target="_blank" class="icon_button" aria-label="Contact Louis on twitter">
+              <%= image_tag 'Twitter_Social_Icon_Blue.png', class: 'social_icon ' %>
+            </md-button>
           </div>
-          <div >
+          <div ng-if="false">
             <md-button class="icon_button" aria-label="Contact Louis on facebook"><%= image_tag 'facebook_social.png', class: 'social_icon ' %></md-button>
           </div>
         </div>
+
         <!-- end of contact info -->
         <strong>Coding</strong> 
       </div>
+
+    </div>
+
+    <div class="white_background margin_t_30 margin_s_10" layout="row" layout-padding layout-align="space-between center">
+
+      <div flex="20" class="white_background"></div>
+      <div class="very_light_gray">
+        <div class="center_text"><strong><h4>Contact LYL</h4></strong></div>
+        <div class="center_text"><strong><h5>or share and spread the word</h5></strong></div>
+        <div layout="row" layout-align="space-around center">
+          <div ng-if="false">
+            <md-button ng-click="contact( 'loubot@learnyourlesson.ie' )" class="icon_button" aria-label="Contact Louis"><i class="material-icons">email</i></md-button>
+          </div>
+          <div >
+            <md-button ng-href="https://twitter.com/LearnYLesson" target="_blank" class="icon_button" aria-label="Contact LYL on twitter">
+              <%= image_tag 'Twitter_Social_Icon_Blue.png', class: 'social_icon ' %>
+            </md-button>
+          </div>
+          <div >
+            <md-button ng-href="https://www.facebook.com/Learn-Your-Lesson-534105600060664/?fref=ts" target="_blank" class="icon_button" aria-label="Contact LYL on facebook">
+              <%= image_tag 'facebook_social.png', class: 'social_icon ' %>
+            </md-button>
+          </div>
+        </div>
+      </div>
+      <div flex="20" class="white_background"></div>
+
     </div>
 
     <div class="margin_t_30 " layout="row" layout-xs="column" layout-padding layout-align="space-between stretch">
@@ -81,5 +113,5 @@
     </div>
 
   </div>
-  <md-button ng-click="contact( 'lllouis@yahoo.com' )">hup</md-button>
+  
 </md-content>

@@ -47,7 +47,7 @@
     <section class="toolbar_item hide_when_small" >a</section>
 
     <section class="toolbar_item center_text">
-      <img ui-sref="welcome" src="<%= asset_path('lylLogo.png') %>" class="md-48 lyl_logo">
+      <img ui-sref="welcome" src="<%= asset_path('lylLogo.png') %>" class="md-48 cursor_hand">
 
     </section>
 
@@ -107,37 +107,39 @@
 
     
     <!--#################### Left sidenav ############################-->
-    <md-sidenav class="sidenav white_text increase_z md-whiteframe=12" md-component-id="left" flex>
-      <div  ng-cloak ng-if="!User">
-         <br/>
-         <md-content class="md-no-momentum">
-          <md-input-container ng-if="auth_type!=0">
-             <md-subheader>Student Register</md-subheader>
+    <md-sidenav class="sidenav white_text increase_z md-whiteframe=12 big_user_menu"  md-component-id="left" >
+      <div  ng-cloak ng-if="!User" class="white_background min_height_75vh" >
+         
+         
+          <div ng-if="auth_type!=0">
+              <md-toolbar class="md-theme-indigo">
+                <h1 class="md-toolbar-tools">Student Register</h1>
+              </md-toolbar>
              <form ng-submit="register_teacher()" >
                <md-input-container class="md-icon-float md-block black_text" >
                  <!-- Use floating label instead of placeholder -->
                  <label>First Name</label>
-                 <md-icon class="name"></md-icon>
+                 <md-icon><i class="material-icons">person</i></md-icon>
                  <input ng-model="teacher.first_name" type="text" name="first name" required class="black_text">
                </md-input-container>
 
                <md-input-container class="md-icon-float md-block black_text" >
                  <!-- Use floating label instead of placeholder -->
                  <label>Last Name</label>
-                 <md-icon class="name"></md-icon>
+                 <md-icon><i class="material-icons">person</i></md-icon>
                  <input ng-model="teacher.last_name" type="text" name="last name" class="black_text" required>
                </md-input-container>
 
               
                <md-input-container class="md-block">
                  <!-- Use floating placeholder instead of label -->
-                 <md-icon  class="email"></md-icon>
+                 <md-icon><i class="material-icons ">email</i></md-icon>
                  <input ng-model="teacher.email" type="email" name="email" placeholder="Email (required)"  class="black_text" required>
                </md-input-container>
                
                <md-input-container class="md-block">
                  <!-- Use floating placeholder instead of label -->
-                 <md-icon  class="password"></md-icon>
+                 <md-icon  class="password"><i class="material-icons">lock</i></md-icon>
                  <input ng-model="teacher.password" type="password" name="password" placeholder="Password (required)" class="black_text" required>
                </md-input-container>
 
@@ -146,17 +148,19 @@
                <md-button class="md-primary md-raised not_transparent" name="submit" type="submit"> 
                  Submit
                </md-button>
-               <p flex-offset="15">or</p>
+               <p flex-offset="15 "><strong class="black_text">or</strong></p>
                <div ng-click="facebook()">
                 <%= image_tag('facebook_login.jpg', class: 'width_75') %>
                </div>
                <br>
                <a ui-sref="reset_password">Forgot your password</a>
              </form>
-          </md-input-container> <!-- end of ng-if="auth_type==1" -->
+          </div> <!-- end of ng-if="auth_type==1" -->
 
-          <md-input-container ng-if="auth_type==0">
-            <md-subheader>Login</md-subheader>
+          <div ng-if="auth_type==0" >
+            <md-toolbar class="md-theme-indigo">
+              <h1 class="md-toolbar-tools">Login</h1>
+            </md-toolbar>
             <form ng-submit="auth.login( teacher)" >
 
                <!-- <md-input-container class="md-block">
@@ -166,13 +170,13 @@
       -->
               <md-input-container class="md-block">
                  <!-- Use floating placeholder instead of label -->
-                 <md-icon  class="email"></md-icon>
+                 <md-icon  class="email"><i class="material-icons">email</i></md-icon>
                  <input ng-model="teacher.email" class="black_text" type="email" name="email" placeholder="Email (required)" required>
               </md-input-container>
 
               <md-input-container class="md-block">
                  <!-- Use floating placeholder instead of label -->
-                <md-icon  class="password"></md-icon>
+                <md-icon  class="password"><i class="material-icons">lock</i></md-icon>
                 <input ng-model="teacher.password" class="black_text" type="password" name="password" placeholder="Password (required)" required>
               </md-input-container>
 
@@ -182,16 +186,20 @@
                  Submit
               </md-button>
 
-              <p flex-offset="15">or</p>
-              <div ng-click="facebook()">
-                <%= image_tag('facebook_login.jpg', class: 'width_75') %>
-              </div>
+              <p flex-offset="15 "><strong class="black_text">or</strong></p>
+              <md-input-container>
+                <div ng-click="facebook()">
+                  <%= image_tag('facebook_login.jpg', class: 'width_75') %>
+                </div>
+              </md-input-container>
 
 
-              <br>
-              <a ui-sref="reset_password">Forgot your password</a>
+              
+              <md-input-container>
+                <a ui-sref="reset_password">Forgot your password</a>
+              </md-input-container>
             </form>
-          </md-input-container> <!-- end of ng-if="auth_type==1" -->
+          </div> <!-- end of ng-if="auth_type==1" -->
 
 
           <div layout="column" layout-align="space-between center">
@@ -215,7 +223,7 @@
 
           </div> <!-- end of column -->
 
-        </md-content>
+        
       </div>
 
     </md-sidenav>
@@ -229,7 +237,7 @@
 
         </div> <!-- angular view rendered here -->
 
-        <div ng-if="false" class="bottom_bit" layout="row" layout-align="space-around none">
+        <div class="bottom_bit" layout="row" layout-align="space-around none">
           <div ><a class="white_text margin_r_10" ui-sref="contact">Contact Us</a></div>
           <div ><a class="white_text" ui-sref="about">About Us</a></div>
         </div>
