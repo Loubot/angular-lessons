@@ -41,6 +41,7 @@ group :production do
   gem 'unicorn', '~> 5.1.0'
   gem 'pg', '~> 0.19.0'
   gem 'render_static'
+  gem 'daemons'
 end
 
 group :development, :test do
