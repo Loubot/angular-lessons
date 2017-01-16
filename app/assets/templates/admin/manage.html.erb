@@ -72,7 +72,7 @@
       <md-list-item ng-if="teachers" class="md-2-line" ng-repeat="( i, teacher) in teachers">
         <!-- <md-checkbox ng-model="item.done"></md-checkbox> -->
         <div class="md-list-item-text" ng-click="view_teacher( i )">
-          <h3>{{teacher.email}}</h3>
+          <h3>email:{{teacher.email}}, name: {{ teacher.first_name }} {{ teacher.last_name }}</h3>
           <span>Subjects {{ teacher.subjects.length }}</span> ||
           <span>Location {{ ( teacher.location != null ) }}</span> ||
           <span>Experience {{ (teacher.experience.length > 0) }}</span> ||
