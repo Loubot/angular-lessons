@@ -404,6 +404,7 @@ angular.module('lessons').factory 'User', [
       console.log resp
       alertify.success "Successfully removed subject"
       self.subjects = resp.data.subjects
+      $rootScope.$emit "no_subject_alert", [ 'no subjects' ] if resp.data.subjects.length == 0
     ).catch( ( err ) ->
       console.log err
       alertify.error err.data.error

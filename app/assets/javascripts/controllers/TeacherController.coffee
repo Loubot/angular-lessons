@@ -14,8 +14,13 @@ angular.module('lessons').controller('TeacherController', [
   ( $scope, $rootScope, User, alertify, COMMS, $auth, Upload, $mdBottomSheet, $mdDialog, $mdToast ) ->
     console.log "TeacherController"
 
-    
-    $mdToast.showSimple "Your profile is not visible till you select a subject" if $rootScope.User.subjects.length==0
+    display_subject_warning = ->
+      alertify.error "Your profile is not visible till you select a subject" 
+
+    display_subject_warning() if $rootScope.User.subjects.length==0
+
+    $rootScope.$on 'no_subject_alert', ( a, b ) ->
+      display_subject_warning()
     
 
     ####################### Subjects ###############################
