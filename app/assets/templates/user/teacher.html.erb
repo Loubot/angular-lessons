@@ -114,6 +114,7 @@
   <div layout-padding layout-fill flex >
    
     <md-content layout-padding flex class="gutter_75" ng-class="{no_subjects_warn:User.subjects.length==0}"> <!-- SUBJECT select -->
+      
       <md-autocomplete md-selected-item="selected_subject" 
             md-search-text="searchText" 
             md-items="subject in get_subjects()" 
@@ -129,6 +130,11 @@
           No matches found.
         </md-not-found>
       </md-autocomplete>
+
+      <div ng-messages="{ no_subjects:!User.subjects.length }" role="alert">
+        <div ng-message="no_subjects" style="color:rgb(221,44,0);">You must select a subject for your profile to be active</div>
+      </div>
+      
       <md-list>
         <md-list-item class="md-2-line" ng-repeat="subject in User.subjects">            
           <div class="md-list-item-text" layout="row">
