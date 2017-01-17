@@ -3,7 +3,6 @@
 angular.module('lessons').controller('TeacherController', [
   '$scope'
   '$rootScope'
-  '$state'
   'User'
   'alertify'
   'COMMS'
@@ -11,12 +10,12 @@ angular.module('lessons').controller('TeacherController', [
   'Upload'
   '$mdBottomSheet'
   '$mdDialog'
-  "auth"
-  ( $scope, $rootScope, $state, User, alertify, COMMS, $auth, Upload, $mdBottomSheet, $mdDialog, auth ) ->
+  '$mdToast'
+  ( $scope, $rootScope, User, alertify, COMMS, $auth, Upload, $mdBottomSheet, $mdDialog, $mdToast ) ->
     console.log "TeacherController"
 
     
-    
+    $mdToast.showSimple "Your profile is not visible till you select a subject" if $rootScope.User.subjects.length==0
     
 
     ####################### Subjects ###############################

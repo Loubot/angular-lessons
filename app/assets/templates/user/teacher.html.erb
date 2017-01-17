@@ -1,4 +1,5 @@
 <div >
+  {{ User.subjects.length==0 }}
   <div layout="row" layout-xs="column">
     <div flex="50" flex-xs="100">
       <md-card class="no_margin_on_small" >
@@ -113,13 +114,14 @@
   
   <div layout-padding layout-fill flex >
    
-    <md-card layout-padding flex class="gutter_75"> <!-- SUBJECT select -->
+    <md-content layout-padding flex class="gutter_75" ng-class="{no_subjects_warn:User.subjects.length==0}"> <!-- SUBJECT select -->
       <md-autocomplete md-selected-item="selected_subject" 
             md-search-text="searchText" 
             md-items="subject in get_subjects()" 
             md-item-text="subject.name"
             md-selected-item-change="User.pick_subject( subject )"
             md-delay="500"
+
             class="black_text no_padding" placeholder="Choose your subjects">
         <md-item-template>
           <span md-highlight-text="searchText">{{subject.name}}</span>
@@ -149,13 +151,13 @@
           </div> <!-- end of md-list-item-text -->
         </md-list-item>
         <md-list-item ng-if="returned_subjects" ng-init="returned_subjects=false">
-          <md-button  class="md-raised md-warn white_text center_block"
+          <md-button ng-if="false" class="md-raised md-warn white_text center_block"
                       ng-click="no_subject()">
                     Didn't find what you wanted?
             </md-button>
         </md-list-item>
       </md-list>
-    </md-card> 
+    </md-content> 
     <!-- end of subject select -->
 
     <!-- EXPERIENCE -->
