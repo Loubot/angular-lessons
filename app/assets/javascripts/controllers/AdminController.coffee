@@ -17,6 +17,8 @@ angular.module('lessons').controller('AdminController', [
     #   if admin == false or admin == 'false'
     #     $state.go 'welcome'
     #     alertify.error 'Tut tut'
+
+    $scope.page_size = 5
       
 
     $scope.show_teachers = false
