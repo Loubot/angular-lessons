@@ -29,6 +29,7 @@
 //= require angular-simple-logger/dist/angular-simple-logger.min
 //= require angular-loading-bar/build/loading-bar.min
 //= require angular-validation-match/dist/angular-validation-match.min
+//= require ui-bootstrap/ui-bootstrap-tpls-2.4.0.min
 //= require moment/min/moment.min
 //= require mdPickers/dist/mdPickers.min
 //= require app

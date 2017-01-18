@@ -2,6 +2,7 @@
 
 angular.module('lessons', [
   'ngAlertify'
+  'ui.bootstrap' 
   'ui.router'
   'templates'
   'ngMaterial'
@@ -117,6 +118,12 @@ angular.module('lessons').run [
 
 
 ]
+
+angular.module('lessons').filter 'start_from', ->
+  (data, start) ->
+    return false if !data? or !start? 
+    data.slice start
+
 
 angular.module('lessons').config [
   "$stateProvider"
