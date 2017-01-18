@@ -18,7 +18,7 @@ angular.module('lessons').controller('AdminController', [
     #     $state.go 'welcome'
     #     alertify.error 'Tut tut'
 
-    $scope.page_size = 5
+    $scope.page_size = 8
       
 
     $scope.show_teachers = false
