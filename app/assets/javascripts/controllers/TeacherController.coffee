@@ -15,8 +15,27 @@ angular.module('lessons').controller('TeacherController', [
   ( $scope, $rootScope, $state, User, alertify, COMMS, $auth, Upload, $mdBottomSheet, $mdDialog, auth ) ->
     console.log "TeacherController"
 
+
+    $scope.do_delete = ->
+      COMMS.DELETE(
+        "/auth"
+      ).then( ( resp ) ->
+        console.log resp
+      ).catch( ( err ) ->
+        console.log err
+      )
+
     
-    
+    $scope.open_delete = ->
+      $mdDialog.show(
+        templateUrl: "dialogs/delete_me.html"
+        scope: $scope
+        preserveScope: true
+        
+      )
+
+    $scope.outta_here = ->
+      $mdDialog.hide()
     
 
     ####################### Subjects ###############################
