@@ -14,7 +14,38 @@ Subject.create(name: "Acoustic Guitar", category_id: 1 )
 
 t1 = Teacher.create( first_name: "Bob", last_name: "Builder", password: "Football1", email: "lllouis1@yahoo.com", is_teacher: true)
 t2 = Teacher.create( first_name: "Tim", last_name: "Shanks", password: "Football1", email: "lllouis2@yahoo.com", is_teacher: true)
-t3 = Teacher.create( first_name: "Karl", last_name: "Beans", password: "Football1", email: "lllouis3@yahoo.com", is_teacher: true)
+t3 = Teacher.create( first_name: "Tim", last_name: "Shanks", password: "Football1", email: "lllouis3@yahoo.com", is_teacher: true)
+t4 = Teacher.create( first_name: "Karl", last_name: "Beans", password: "Football1", email: "lllouis4@yahoo.com", is_teacher: true)
+t5 = Teacher.create( first_name: "Karl", last_name: "Beans", password: "Football1", email: "lllouis5@yahoo.com", is_teacher: true)
+t6 = Teacher.create( first_name: "Karl", last_name: "Beans", password: "Football1", email: "lllouis6@yahoo.com", is_teacher: true)
+t7 = Teacher.create( first_name: "Karl", last_name: "Beans", password: "Football1", email: "lllouis7@yahoo.com", is_teacher: true)
+t8 = Teacher.create( first_name: "Karl", last_name: "Beans", password: "Football1", email: "lllouis8@yahoo.com", is_teacher: true)
+t9 = Teacher.create( first_name: "Karl", last_name: "Beans", password: "Football1", email: "lllouis9@yahoo.com", is_teacher: true)
+t10 = Teacher.create( first_name: "Karl", last_name: "Beans", password: "Football1", email: "lllouis10@yahoo.com", is_teacher: true)
+t11 = Teacher.create( first_name: "Karl", last_name: "Beans", password: "Football1", email: "lllouis11@yahoo.com", is_teacher: true)
+t1.created_at = (rand*10).days.ago
+t2.created_at = (rand*10).days.ago
+t3.created_at = (rand*10).days.ago
+t4.created_at = (rand*10).days.ago
+t5.created_at = (rand*10).days.ago
+t6.created_at = (rand*10).days.ago
+t7.created_at = (rand*10).days.ago
+t8.created_at = (rand*10).days.ago
+t9.created_at = (rand*10).days.ago
+t10.created_at = (rand*10).days.ago
+t11.created_at = (rand*10).days.ago
+
+t1.save
+t2.save
+t3.save
+t4.save
+t5.save
+t6.save
+t7.save
+t8.save
+t9.save
+t10.save
+t11.save
 
 Location.create(  address: "Galway", county: 'Co. Galway', teacher_id: t1.id )
 Location.create(  address: "Limerick", county: 'Co. Limerick', teacher_id: t2.id )
