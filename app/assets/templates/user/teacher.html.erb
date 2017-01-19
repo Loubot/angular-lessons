@@ -263,8 +263,8 @@
       </md-card>
     </md-content>
 
-    <md-content class="center_text">
-      <md-button ng-if="User.email=='corkcelloteacher@gmail.com'" ng-click="open_delete()" class="md-raised md-warn">
+    <md-content ng-if="User.email=='corkcelloteacher@gmail.com'" class="center_text">
+      <md-button  ng-click="open_delete()" class="md-raised md-warn">
         Delete my account please
       </md-button>
     </md-content>
