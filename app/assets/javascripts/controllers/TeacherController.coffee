@@ -21,6 +21,8 @@ angular.module('lessons').controller('TeacherController', [
         "/auth"
       ).then( ( resp ) ->
         console.log resp
+        $rootScope.User = null
+        $state.go 'welcome'
       ).catch( ( err ) ->
         console.log err
       )
