@@ -5,6 +5,8 @@ source 'http://rubygems.org'
 # ruby '2.1.8', platforms: [:mingw, :mswin, :x64_mingw]
 # ruby '2.0.0', platforms: [:mingw, :mswin], group: :development
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
+ruby '2.2.4'
+
 gem 'rails', '4.2.6'
 
 # Use SCSS for stylesheets
@@ -27,6 +29,8 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 
 gem 'where-or', '~> 0.1.5'
 
+
+gem 'rails_12facto'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
