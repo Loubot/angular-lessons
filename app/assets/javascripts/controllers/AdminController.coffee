@@ -12,7 +12,7 @@ angular.module('lessons').controller('AdminController', [
   ( $scope, $rootScope, auth, $state, COMMS, alertify, $mdDialog ) ->
     console.log "AdminController"
 
-    $scope.page_size = 2
+    $scope.page_size = 10
     $scope.current_page = 1
       
 
