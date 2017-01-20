@@ -69,6 +69,11 @@ class SubjectController < ApplicationController
     render json: { subjects: teacher.subjects }
   end
 
+  def missing_subject 
+    AdminMailer.delay.request_subject_mail( params )
+    render json: { message: 'p'}
+  end
+
 
   private
     def subject_params
@@ -76,7 +81,7 @@ class SubjectController < ApplicationController
     end
 
     def create_subject_params
-      params.permit( :category_id, :subject, :name )
+      params.permit( :category_id, :subject, :name, :email )
     end
 
 end

@@ -57,6 +57,22 @@ angular.module('lessons').controller('TeacherController', [
         console.log err
         alertify.error "Failed to get subjects"
       )
+
+    $scope.request_subject = ->
+      $scope.no_subject.name = $rootScope.User.get_full_name()
+      $scope.no_subject.email = $rootScope.User.email
+      COMMS.POST(
+        "/request-subject"
+        $scope.no_subject
+      ).then( ( resp ) ->
+        console.log resp
+        alertify.success "Request made. Thank you."
+        hide_sheet()
+      ).catch( ( err ) ->
+        console.log err
+        alertify.error "Failed to send request"
+        alertify.error "Please use the Contact Us button"
+      )
     ####################### end of Subjects ###############################
 
 
@@ -78,6 +94,18 @@ angular.module('lessons').controller('TeacherController', [
         scope: $scope
         preserveScope: true
       )
+
+    $scope.show_subject_request = ->
+
+      $mdBottomSheet.show(
+        templateUrl: "sheets/subject_request_sheet.html"
+        controller: "TeacherController"
+        scope: $scope
+        preserveScope: true
+      )
+
+    hide_sheet = ->
+      $mdBottomSheet.hide()
 
 
     ####################### end of sheets ################################
