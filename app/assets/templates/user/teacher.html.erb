@@ -188,7 +188,7 @@
     <md-content layout-padding  class="gutter_75 margin_t_10" >
       <h3>Overview</h3>
       <md-divider></md-divider>
-      <p ng-if="User.overview!=null">{{ User.overview }}</p>
+      <span ng-if="User.overview!=null" class="break_word">{{ User.overview }}</span>
       <p ng-if="User.overview==null">No overview set yet.</p>
       <p ng-if="User.overview==null">It's important to write a strong overview. Let people know about yourself</p>
 
