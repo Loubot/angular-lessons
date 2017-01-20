@@ -37,9 +37,9 @@
     <div flex="50" flex-xs="100">
       <md-content class="subject_container">
         <md-list>
-          <md-list-item class="md-2-line" ng-repeat="subject in category_subjects">
-            <div class="md-list-item-text">
-              <p>{{ subject.name }} </p>
+          <md-list-item class="no_padding" ng-repeat="subject in category_subjects">
+            <div class="md-list-item-text no_margin ">
+              <span>{{ subject.name }} </span>
             </div>
             
           </md-list-item>
@@ -68,19 +68,35 @@
       </div>
       
     </md-toolbar>
-    <md-list>
-      <md-list-item ng-if="teachers" class="md-2-line" ng-repeat="( i, teacher) in teachers">
-        <!-- <md-checkbox ng-model="item.done"></md-checkbox> -->
-        <div class="md-list-item-text" ng-click="view_teacher( i )">
-          <h3>email:{{teacher.email}}, name: {{ teacher.first_name }} {{ teacher.last_name }}</h3>
-          <span>Subjects {{ teacher.subjects.length }}</span> ||
-          <span>Location {{ ( teacher.location != null ) }}</span> ||
-          <span>Experience {{ (teacher.experience.length > 0) }}</span> ||
-          <span>Quals {{ (teacher.qualifications.length ) }}</span> 
+    <div ng-if="teachers">
+      <md-list>
+        <md-list-item                
+              class="md-2-line"
+              ng-repeat="( i, teacher) in teachers | start_from:(current_page - 1) * page_size | limitTo: page_size"
+          >
+          <!-- <md-checkbox ng-model="item.done"></md-checkbox> -->
+          <div class="md-list-item-text" ng-click="view_teacher( i )">
+            <h3>email:{{teacher.email}}, name: {{ teacher.first_name }} {{ teacher.last_name }}, registered: {{ teacher.created_at | date:'dd-MM-yyyy ' }}</h3>
+            <span>Subjects {{ teacher.subjects.length }}</span> ||
+            <span>Location {{ ( teacher.location != null ) }}</span> ||
+            <span>Experience {{ (teacher.experience.length > 0) }}</span> ||
+            <span>Quals {{ (teacher.qualifications.length ) }}</span> 
 
-          <md-divider md-inset></md-divider>
-        </div>
-      </md-list-item>
-    </md-list>
+            <md-divider md-inset></md-divider>
+          </div>
+        </md-list-item>
+      </md-list>
+
+      <!-- Pagination controls -->
+      <div class="center_text" class="md-inline-form">
+        <ul uib-pagination class="no_margin" total-items="teachers.length" ng-model="current_page" items-per-page="page_size"></ul>
+        <md-input-container  md-no-float class="no_margin">
+          <input type="text" ng-model="page_size" placeholder="Number per page">
+        </md-input-container>
+      </div>
+      <!-- End of pagination controls -->
+
+    </div>
   </md-content>
+  {{ current_page }}
 </md-content>

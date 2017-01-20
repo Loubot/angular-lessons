@@ -12,11 +12,8 @@ angular.module('lessons').controller('AdminController', [
   ( $scope, $rootScope, auth, $state, COMMS, alertify, $mdDialog ) ->
     console.log "AdminController"
 
-    # $rootScope.$on 'admin', ( e, admin ) ->
-    #   console.log 'hup'
-    #   if admin == false or admin == 'false'
-    #     $state.go 'welcome'
-    #     alertify.error 'Tut tut'
+    $scope.page_size = 2
+    $scope.current_page = 1
       
 
     $scope.show_teachers = false
