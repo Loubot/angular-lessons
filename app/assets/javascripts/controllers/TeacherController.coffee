@@ -44,7 +44,6 @@ angular.module('lessons').controller('TeacherController', [
 
     $scope.outta_here = ->
       $mdDialog.hide()
->>>>>>> master
     
 
     ####################### Subjects ###############################
