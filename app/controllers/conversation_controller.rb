@@ -47,7 +47,7 @@ class ConversationController < ApplicationController
   end
 
   def message_bosses
-    AdminMailer.send_message_to_boss( boss_params ).deliver_now
+    AdminMailer.delay.send_message_to_boss( boss_params )
 
     render json: { hello: ' bla'}
   end

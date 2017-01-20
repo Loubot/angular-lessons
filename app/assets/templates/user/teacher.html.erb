@@ -156,8 +156,9 @@
           </div> <!-- end of md-list-item-text -->
         </md-list-item>
         <md-list-item ng-if="returned_subjects" ng-init="returned_subjects=false">
-          <md-button ng-if="false" class="md-raised md-warn white_text center_block"
-                      ng-click="no_subject()">
+
+          <md-button class="md-raised md-warn white_text center_block"
+                      ng-click="show_subject_request()">
                     Didn't find what you wanted?
             </md-button>
         </md-list-item>
@@ -181,13 +182,13 @@
             <md-input-container md-no-float class="md-block">
               <textarea ng-model="User.experience.description" 
                         aria-label="Experience description" 
-                        md-maxlength="200"  
+                        md-maxlength="600"  
                         md-select-on-focus
                         placeholder="Enter your experience here">
               </textarea>
             </md-input-container>
             <div flex="10" >
-              <md-button type="submit" class="tricolor_button_hover "><i class="material-icons green_add_icon">add_box</i></md-button>
+              <md-button type="submit" class="md-primary md-raised ">Update Experience</md-button>
             </div>           
           </form> <!-- end of add_experience() -->
         </md-content>
@@ -200,7 +201,7 @@
     <md-content layout-padding  class="gutter_75 margin_t_10" >
       <h3>Overview</h3>
       <md-divider></md-divider>
-      <p ng-if="User.overview!=null">{{ User.overview }}</p>
+      <span ng-if="User.overview!=null" class="break_word">{{ User.overview }}</span>
       <p ng-if="User.overview==null">No overview set yet.</p>
       <p ng-if="User.overview==null">It's important to write a strong overview. Let people know about yourself</p>
 

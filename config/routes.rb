@@ -14,11 +14,14 @@ Rails.application.routes.draw do
 
     get      'subjects'                   => "subject#index"
 
+    post      'request-subject'          => "subject#missing_subject"
+
 
     get      'search'                     => "search#search"
     get      'search-subjects'            => "search#search_subjects"
 
     post     'contact-us'                 => "static#contact_us"
+    post      'message-bosses'            => 'conversation#message_bosses'
     resources :teacher, only: [ :index, :show, :update ] do
       get       'show-teacher'            => 'teacher#show_teacher'
       post      'add-subject'             => 'subject#add_subject'
@@ -46,7 +49,7 @@ Rails.application.routes.draw do
     resources :conversation,        only: [ :create, :index, :show ] 
     resources :subject,             only: [ :index, :update ]
 
-    post        'message-bosses'        => 'conversation#message_bosses'
+    
   end
 
 
