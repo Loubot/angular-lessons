@@ -1,6 +1,6 @@
 
 
-<div hide-gt-xs>
+<div hide-gt-xs class="margin_b_10">
   <md-toolbar>
     <div class="md-toolbar-tools black_text" style="background-color:rgb(250, 250, 250) !important;" >
       <p ng-click="search_nav()"><i class="material-icons">search</i> Refine</p>
@@ -83,46 +83,57 @@
   </md-sidenav>
 
 
-  <!-- <div flex="30" layout="column" class="boxWithHeight" layout-padding>
+
+  <div layout="column" class="boxWithHeight" layout-align="center stretch"  ng-cloak>
     
-  </div> -->
+    <div>
+      <md-content layout-xs="column" layout="row" layout-wrap>
+
+        <md-card 
+              ng-repeat="teacher in teachers | start_from:(current_page - 1) * page_size | limitTo: page_size" 
+              md-theme-watch 
+              ng-click="view_teacher( teacher )"
+              ng-if="teachers.length>0"
+              >
+          <md-card-title>
+            <md-card-title-text class="margin_r_5">
+              <span class="md-headline">{{ teacher.first_name }} {{ teacher.last_name }}  </span>
+              <span ng-if="teacher.location" class="md-subhead address">{{ teacher.location.address }}</span>
+              <span ng-repeat="subject in teacher.subjects">{{ subject.name }}</span>
+            </md-card-title-text>
+            <md-card-title-media>
+              <div  class="md-media-lg card-media">
+                <img ng-src="{{ teacher.photos[0].avatar.url }}" class="height_152">
+              </div>
+            </md-card-title-media>
+          </md-card-title>
+          <md-card-actions layout="row" layout-align="end center">
+            <!-- <md-button>Action 1</md-button>
+            <md-button>Action 2</md-button> -->
+          </md-card-actions>
+        </md-card>
+
+        <div ng-if="teachers.length==0" layout-fill flex="100">
+          No results found
+        </div>
 
 
-
-  <div layout="column" class="boxWithHeight" flex-xs="100" ng-cloak>
-    <md-content layout-xs="column" layout="row" layout-wrap>
-
-      <md-card 
-            ng-repeat="teacher in teachers | start_from:(current_page - 1) * page_size | limitTo: page_size" 
-            md-theme-watch 
-            ng-click="view_teacher( teacher )"
-            ng-if="teachers.length>0"
-            >
-        <md-card-title>
-          <md-card-title-text class="margin_r_5">
-            <span class="md-headline">{{ teacher.first_name }} {{ teacher.last_name }}  </span>
-            <span ng-if="teacher.location" class="md-subhead address">{{ teacher.location.address }}</span>
-            <span ng-repeat="subject in teacher.subjects">{{ subject.name }}</span>
-          </md-card-title-text>
-          <md-card-title-media>
-            <div  class="md-media-lg card-media">
-              <img ng-src="{{ teacher.photos[0].avatar.url }}" class="height_152">
-            </div>
-          </md-card-title-media>
-        </md-card-title>
-        <md-card-actions layout="row" layout-align="end center">
-          <!-- <md-button>Action 1</md-button>
-          <md-button>Action 2</md-button> -->
-        </md-card-actions>
-      </md-card>
-
-      <div ng-if="teachers.length==0" layout-fill flex="100">
-        No results found
-      </div>
-
-
-    </md-content>
-    <ul uib-pagination total-items="teachers.length" ng-model="current_page" items-per-page="page_size"></ul>
+      </md-content>
+    </div>
+    <!-- Pagination controls -->
+    <div  class=" center_text">
+      <ul uib-pagination 
+          class="no_margin" 
+          total-items="teachers.length" 
+          ng-model="current_page" 
+          items-per-page="page_size"
+          >
+      </ul>
+      <!-- <md-input-container  md-no-float class="no_margin">
+        <input type="text" ng-model="page_size" ng-model-options="{ debounce: 1000 }" placeholder="Number per page">
+      </md-input-container> -->
+    </div>
+    <!-- End of pagination controls -->
     
 
 

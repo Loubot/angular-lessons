@@ -13,13 +13,15 @@ angular.module('lessons').controller( 'SearchController', [
   ( $scope, $rootScope, $state, $stateParams, $filter, COMMS, alertify, $mdSidenav , counties ) ->
     console.log "SearchController"
 
+    $scope.page_size = 4
+    $scope.current_page = 1
+
     $scope.selected = {}
     $scope.selected.subject_name = $stateParams.name
     $scope.selected.county_name = $stateParams.location
     $scope.selected_subject = $stateParams.name
 
-    # pagination
-    $scope.page_size = 2
+    
 
     $scope.view_teacher = ( teacher ) ->
       $state.go('view_teacher', id: teacher.id )

@@ -70,11 +70,10 @@
     </md-toolbar>
     <div ng-if="teachers">
       <md-list>
-        <md-list-item 
-               
+        <md-list-item                
               class="md-2-line"
               ng-repeat="( i, teacher) in teachers | start_from:(current_page - 1) * page_size | limitTo: page_size"
-        >
+          >
           <!-- <md-checkbox ng-model="item.done"></md-checkbox> -->
           <div class="md-list-item-text" ng-click="view_teacher( i )">
             <h3>email:{{teacher.email}}, name: {{ teacher.first_name }} {{ teacher.last_name }}, registered: {{ teacher.created_at | date:'dd-MM-yyyy ' }}</h3>
@@ -87,12 +86,16 @@
           </div>
         </md-list-item>
       </md-list>
+
+      <!-- Pagination controls -->
       <div class="center_text" class="md-inline-form">
         <ul uib-pagination class="no_margin" total-items="teachers.length" ng-model="current_page" items-per-page="page_size"></ul>
         <md-input-container  md-no-float class="no_margin">
           <input type="text" ng-model="page_size" placeholder="Number per page">
         </md-input-container>
       </div>
+      <!-- End of pagination controls -->
+
     </div>
   </md-content>
   {{ current_page }}
