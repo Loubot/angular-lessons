@@ -21,6 +21,30 @@ angular.module('lessons').controller('TeacherController', [
 
     $rootScope.$on 'no_subject_alert', ( a, b ) ->
       display_subject_warning()
+
+    $scope.do_delete = ->
+      COMMS.DELETE(
+        "/auth"
+      ).then( ( resp ) ->
+        console.log resp
+        $rootScope.User = null
+        $state.go 'welcome'
+      ).catch( ( err ) ->
+        console.log err
+      )
+
+    
+    $scope.open_delete = ->
+      $mdDialog.show(
+        templateUrl: "dialogs/delete_me.html"
+        scope: $scope
+        preserveScope: true
+        
+      )
+
+    $scope.outta_here = ->
+      $mdDialog.hide()
+>>>>>>> master
     
 
     ####################### Subjects ###############################
