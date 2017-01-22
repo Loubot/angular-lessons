@@ -441,6 +441,14 @@ md-sidenav.md-closed.md-locked-open-add-active.user_menu {
   max-width: 400px !important;
 }
 
+.max_height_75vh{
+  max-height: 75vh !important;
+}
+
+.max_width_50{
+ max-width: 50px !important;
+}
+
 .no_overflow{
   overflow: hidden !important;
 }
@@ -761,6 +769,16 @@ md-sidenav.md-closed.md-locked-open-add-active.user_menu {
 .address{
   max-width: 200px;
   word-wrap: break-word;
+}
+
+.page_size_input{
+  // float: none !important;
+  @extend .max_width_50;
+ 
+}
+
+.remove_vertical_align{
+  vertical-align: inherit !important;
 }
   
 // end of search page
