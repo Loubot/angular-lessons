@@ -58,7 +58,8 @@ angular.module('lessons').controller( 'SearchController', [
       set_params()
 
     $scope.county_picked = ( county )->
-      $scope.selected.county_name = county
+      console.log county
+      $scope.selected_county_name = county
       set_params()
 
     define_subjects = ( subjects ) ->
@@ -74,10 +75,11 @@ angular.module('lessons').controller( 'SearchController', [
      
 
     $scope.search_counties = ( county ) ->
+      console.log county
       $scope.counties = $filter('filter')( $scope.county_list, county )
 
 
-    $scope.county_list = counties #conties factory
+    $scope.county_list = counties.county_list() #conties factory
 
     COMMS.GET(
         '/search-subjects'
