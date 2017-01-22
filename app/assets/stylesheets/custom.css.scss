@@ -154,6 +154,24 @@ md-sidenav.md-closed.md-locked-open-add-active.user_menu {
   background-color: #FFF;
 }
 
+.slightly_desaturated_cyan_border{
+  border: 5px  solid #6ea9b5;
+  // border-bottom: 5px  solid #6ea9b5;
+}
+
+.slightly_desaturated_pink{
+  border: 5px solid #b56e86;
+  // border-top: 5px solid #b56e86;
+}
+
+.background_color_slightly_desaturated_cyan{
+  background-color: #6ea9b5 !important;
+}
+
+.background_color_slightly_desaturated_pink{
+  background-color: #b56e86 !important;
+}
+
 .blue_button{
   color: #fff !important;
   background-color: #5bc0de !important;
@@ -357,8 +375,8 @@ md-sidenav.md-closed.md-locked-open-add-active.user_menu {
   min-width: 400px !important;
 }
 
-.min_width_190{
-  min-width: 190px !important;
+.min_width_200{
+  min-width: 200px !important;
 }
 
 .md-chips > .min_height_32.ng-hide{
@@ -774,7 +792,8 @@ md-sidenav.md-closed.md-locked-open-add-active.user_menu {
 .page_size_input{
   // float: none !important;
   @extend .max_width_50;
- 
+  border: 1px solid #868686 !important;
+  background-color: #fff !important;
 }
 
 .remove_vertical_align{

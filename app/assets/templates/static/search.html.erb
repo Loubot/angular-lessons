@@ -12,58 +12,67 @@
 
   <md-sidenav  
           md-component-id="search_nav" 
-          class="md-sidenav-left min_width_190 max_height_75vh" 
+          class="md-sidenav-left min_width_200 max_height_75vh" 
           md-is-locked-open="$mdMedia('gt-xs')"
           md-is-open="search_nav_opened">
     
     <form ng-submit="search_teachers()" name="searchForm">
       <p>Change your search</p>
+
       <md-chips >
-        <md-chip class="min_height_32" ng-show="selected.subject_name">{{ selected.subject_name }}</md-chip>
-        <md-chip class="min_height_32" ng-show="selected.county_name">{{ selected.county_name }}</md-chip>
-        
-        
+        <md-chip class="min_height_32 background_color_slightly_desaturated_cyan white_text" ng-show="selected.subject_name">
+          {{ selected.subject_name }}
+        </md-chip>
+        <span ng-if="selected_county_name">/</span>
+        <md-chip class="min_height_32 background_color_slightly_desaturated_pink white_text" ng-show="selected.county_name">
+          {{ selected_county_name }}
+        </md-chip>        
       </md-chips>
+
       <div layout-gt-sm="column" flex>
-        <md-autocomplete
-            class="no_overflow" 
-            md-select-on-match="true"
-            md-selected-item="selected.subject_name" 
-            md-input-name="subject"
-            md-search-text="searchText.subject_name"
-            md-search-text-change="search_subjects( searchText.subject_name )"
-            md-items="subject in subjects_list" 
-            md-item-text="subject" 
-            md-floating-label="Subject"            
-            md-selected-item-change="subject_picked( subject )"
-            ng-model-options="{ debounce: 500 }"
-            md-min-length="2">
-          <md-item-template>
-            <span md-highlight-text="searchText">{{subject}}</span>
-          </md-item-template>
-          <md-not-found>
-            No matches found.
-          </md-not-found>
-        </md-autocomplete>
+        <div class="slightly_desaturated_cyan_border">
+          <md-autocomplete
+              class="no_overflow" 
+              md-select-on-match="true"
+              md-selected-item="selected.subject_name" 
+              md-input-name="subject"
+              md-search-text="searchText.subject_name"
+              md-search-text-change="search_subjects( searchText.subject_name )"
+              md-items="subject in subjects_list" 
+              md-item-text="subject" 
+              md-floating-label="Subject"            
+              md-selected-item-change="subject_picked( subject )"
+              ng-model-options="{ debounce: 500 }"
+              md-min-length="2">
+            <md-item-template>
+              <span md-highlight-text="searchText">{{subject}}</span>
+            </md-item-template>
+            <md-not-found>
+              No matches found.
+            </md-not-found>
+          </md-autocomplete>
+        </div>
         
         
 
         
-        <md-autocomplete 
-            class="no_overflow" 
-            md-selected-item="selected.county_name" 
-            md-input-name="county"
-            md-search-text="searchText.county_name" 
-            md-items="county in counties" 
-            md-item-text="county" 
-            md-floating-label="County"
-            md-search-text-change="search_counties( searchText.county_name )"
-            md-selected-item-change="county_picked( county )">
-          <md-item-template>
-            <span md-highlight-text="county">{{county}}</span>
-          </md-item-template>
-          
-        </md-autocomplete>
+        <div class="slightly_desaturated_pink margin_t_8">
+          <md-autocomplete 
+              class="no_overflow" 
+              md-selected-item="selected.county_name" 
+              md-input-name="county"
+              md-search-text="searchText.county_name" 
+              md-items="county in counties" 
+              md-item-text="county" 
+              md-floating-label="County"
+              md-search-text-change="search_counties( searchText.county_name )"
+              md-selected-item-change="county_picked( county )">
+            <md-item-template>
+              <span md-highlight-text="county">{{county}}</span>
+            </md-item-template>
+            
+          </md-autocomplete>
+        </div>
         
       </div>
 
@@ -123,7 +132,7 @@
     </md-content>
 
     
-  </div> <!-- end of column --><br>
+  </div> <!-- end of column -->
 
   
 </div>
@@ -141,3 +150,5 @@
     <!-- End of pagination controls -->
   </div>
 </div>
+
+{{ counties }}
