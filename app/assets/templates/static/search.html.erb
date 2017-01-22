@@ -20,11 +20,11 @@
       <p>Change your search</p>
 
       <md-chips >
-        <md-chip class="min_height_32 background_color_slightly_desaturated_cyan white_text" ng-show="selected.subject_name">
+        <md-chip class="min_height_32 background_color_slightly_desaturated_cyan white_text" ng-if="selected.subject_name">
           {{ selected.subject_name }}
         </md-chip>
         <span ng-if="selected_county_name">/</span>
-        <md-chip class="min_height_32 background_color_slightly_desaturated_pink white_text" ng-show="selected_county_name">
+        <md-chip class="min_height_32 background_color_slightly_desaturated_pink white_text" ng-if="selected_county_name">
           {{ selected_county_name }}
         </md-chip>        
       </md-chips>
