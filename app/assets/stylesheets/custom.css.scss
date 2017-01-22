@@ -915,8 +915,10 @@ ul.share-buttons .sr-only {
 
 @media ( min-width: 600px ){
 
-  .width_l_500{
-    width: 500px !important;
+  .width_l_30p{
+    min-width: 200px !important;
+    width: 85vw !important;
+    max-width: 300px !important;
   }
   .margin_s_10{
     margin: 0 10px;
