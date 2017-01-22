@@ -20,5 +20,6 @@ class ApplicationController < ActionController::Base
     devise_parameter_sanitizer.permit(:sign_up, keys: [:first_name, :last_name, :password, :session, :is_teacher])
     devise_parameter_sanitizer.permit(:sign_in, keys: [:name, :password, :session, :is_teacher])
   end
-  protect_from_forgery with: :exception
+  # protect_from_forgery with: :exception
+  protect_from_forgery with: :null_session
 end
