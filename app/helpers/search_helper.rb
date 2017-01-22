@@ -69,7 +69,7 @@ module SearchHelper
 
   def run_geo_locate
     p "Running geo locate Distance: 20"
-    Location.within( 20, origin: params[ :county_name ] ).select( [ 'teacher_id' ] ).map( &:teacher_id )
+    Location.within( 80, origin: params[ :county_name ] ).select( [ 'teacher_id' ] ).map( &:teacher_id )
   end
 
 end

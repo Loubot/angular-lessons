@@ -24,7 +24,7 @@
           {{ selected.subject_name }}
         </md-chip>
         <span ng-if="selected_county_name">/</span>
-        <md-chip class="min_height_32 background_color_slightly_desaturated_pink white_text" ng-show="selected.county_name">
+        <md-chip class="min_height_32 background_color_slightly_desaturated_pink white_text" ng-show="selected_county_name">
           {{ selected_county_name }}
         </md-chip>        
       </md-chips>
@@ -59,7 +59,7 @@
         <div class="slightly_desaturated_pink margin_t_8">
           <md-autocomplete 
               class="no_overflow" 
-              md-selected-item="selected.county_name" 
+              md-selected-item="selected_county_name" 
               md-input-name="county"
               md-search-text="searchText.county_name" 
               md-items="county in counties" 
@@ -148,6 +148,7 @@
       </md-input-container>
     </div>
     <!-- End of pagination controls -->
+    {{ selected_county_name }}
   </div>
 </div>
 

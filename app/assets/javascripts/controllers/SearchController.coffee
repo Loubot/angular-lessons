@@ -17,10 +17,20 @@ angular.module('lessons').controller( 'SearchController', [
     $scope.page_size = 5
     $scope.current_page = 1
 
+
     $scope.selected = {}
     $scope.selected.subject_name = $stateParams.name
-    $scope.selected.county_name = $stateParams.location
+    $scope.selected_county_name = $stateParams.location
+    console.log $scope.selected_county_name
     $scope.selected_subject = $stateParams.name
+
+
+    set_params = ->      
+      $state.transitionTo(
+        'search',
+        { name: $scope.selected.subject_name, location: $scope.selected_county_name  }
+        { notify: false }
+      )
 
     $scope.view_teacher = ( teacher ) ->
       $state.go('view_teacher', id: teacher.id )
@@ -31,10 +41,13 @@ angular.module('lessons').controller( 'SearchController', [
       return
 
     $scope.search_teachers = ->
+      $scope.selected = {}
       if $scope.selected? && !$scope.selected.subject_name?
         $scope.selected.subject_name = $("[name='subject']").val()
       if $scope.selected? && !$scope.selected.county_name?
         $scope.selected.county_name = $("[name='county']").val()
+      console.log $("[name='county']").val()
+      set_params()
         
       
       COMMS.GET(
@@ -55,12 +68,12 @@ angular.module('lessons').controller( 'SearchController', [
 
     $scope.subject_picked = ( subject )->
       $scope.selected.subject_name = subject
-      set_params()
+      
 
     $scope.county_picked = ( county )->
       console.log county
       $scope.selected_county_name = county
-      set_params()
+      
 
     define_subjects = ( subjects ) ->
       $scope.master_subjects_list = []
@@ -90,15 +103,6 @@ angular.module('lessons').controller( 'SearchController', [
     ).catch( ( err ) ->
       console.log err
     )
-
-    set_params = ->
-
-      
-      $state.transitionTo(
-        'search',
-        { name: $scope.selected.subject_name, location: $scope.selected.county_name  }
-        { notify: false }
-      )
       
 
     $scope.search_nav = ->
