@@ -85,6 +85,4 @@
 
 s = Subject.find_by(name: "Drums")
 
-s.teachers.all.each do 
-  |t| s.teachers.delete( t.id ) 
-end
+s.teachers.all.each do |t| s.teachers.delete( t.id ) end
