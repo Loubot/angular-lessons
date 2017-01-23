@@ -91,7 +91,7 @@ angular.module('lessons').controller('WelcomeController', [
       $scope.counties = $filter('filter')( $scope.county_list, county )
 
 
-    $scope.county_list = counties #counties factory
+    $scope.county_list = counties.county_list() #counties factory
 
     COMMS.GET(
         '/search-subjects'

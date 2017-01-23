@@ -13,27 +13,23 @@ angular.module('lessons').controller( 'SearchController', [
   ( $scope, $rootScope, $state, $stateParams, $filter, COMMS, alertify, $mdSidenav , counties ) ->
     console.log "SearchController"
 
-    finished = null
-
-    $rootScope.$on '$stateChangeSuccess', (event, toState, toParams, fromState, fromParams) ->
-      finished = true
-
+    
     #pagination
     $scope.page_size = 5
     $scope.current_page = 1
 
 
     $scope.selected = {}
+    
     $scope.selected.subject_name = $stateParams.name
+    console.log $scope.selected.subject_name
     $scope.selected_county_name = $stateParams.location
-    console.log $scope.selected_county_name
-    $scope.selected_subject = $stateParams.name
 
 
     set_params = ->      
       $state.transitionTo(
         'search',
-        { name: $scope.selected.subject_name, location: $scope.selected_county_name  }
+        { name: $("[name='subject']").val(), location: $("[name='county']").val()  }
         { notify: false }
       )
 
@@ -41,23 +37,15 @@ angular.module('lessons').controller( 'SearchController', [
       $state.go('view_teacher', id: teacher.id )
 
 
-    $scope.scrollevent = ( $e ) ->
-      
-      return
-
     $scope.search_teachers = ->
-      if finished
-
-        $scope.selected.subject_name = $("[name='subject']").val()
-      
-        $scope.selected.county_name = $("[name='county']").val()
-        console.log $("[name='county']").val()
-        set_params()
+      console.log "search teachers"
+      # set_params()
         
+      search_params = { subject_name: $scope.selected.subject_name, county_name: $scope.selected_county_name }
       
       COMMS.GET(
         "/search"
-        $scope.selected
+        search_params
       ).then( ( resp ) ->
         console.log resp
         alertify.success "Found #{ resp.data.teachers.length } teacher(s)"
@@ -67,8 +55,9 @@ angular.module('lessons').controller( 'SearchController', [
         alertify.error "Failed to find teachers"
       )
 
-    if $stateParams.name? or $stateParams.location?
-      $scope.search_teachers()
+    $scope.search_teachers()
+
+    
 
 
     $scope.subject_picked = ( subject )->
