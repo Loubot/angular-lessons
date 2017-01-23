@@ -16,7 +16,6 @@
  *= require angular-material/angular-material.min.css
  *= require angular-loading-bar/build/loading-bar.min.css
  *= require mdPickers/dist/mdPickers.min.css
- *= require custom.css.scss
  *= require_tree .
  *= require_self
  */

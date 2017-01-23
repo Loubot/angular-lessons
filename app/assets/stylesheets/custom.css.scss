@@ -80,6 +80,8 @@ html, body{
   width: 120px !important;
 }
 
+.md-sidenav-left{z-index: 19;}
+
 md-sidenav.big_user_menu, 
 md-sidenav.md-locked-open.big_user_menu, 
 md-sidenav.md-closed.md-locked-open-add-active.big_user_menu {
@@ -805,7 +807,6 @@ md-sidenav.md-closed.md-locked-open-add-active.user_menu {
 // Teacher area
 .calendar_container{
   // height: calc( 100% - 200px ) !important;
-  overflow: scroll !important;
 }
 #calendar{
   // max-height: 12em !important;
@@ -914,6 +915,10 @@ ul.share-buttons .sr-only {
 } /* 250px */
 
 @media ( min-width: 600px ){
+
+  .margin_t_l_20{
+    padding-top: 20px;
+  }
 
   .width_l_30p{
     min-width: 200px !important;
