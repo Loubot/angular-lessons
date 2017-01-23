@@ -1,3 +1,3 @@
 web: bundle exec unicorn -p $PORT -c ./config/unicorn.rb
 worker: rake jobs:work
-release: rake deb:seed
+release: rake db:seed
