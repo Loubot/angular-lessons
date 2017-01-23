@@ -29,7 +29,7 @@ angular.module('lessons').controller( 'SearchController', [
     set_params = ->      
       $state.transitionTo(
         'search',
-        { name: $("[name='subject']").val(), location: $("[name='county']").val()  }
+        { name: $scope.selected.subject_name, location: $scope.selected_county_name  }
         { notify: false }
       )
 
@@ -39,7 +39,7 @@ angular.module('lessons').controller( 'SearchController', [
 
     $scope.search_teachers = ->
       console.log "search teachers"
-      # set_params()
+      set_params()
         
       search_params = { subject_name: $scope.selected.subject_name, county_name: $scope.selected_county_name }
       
