@@ -13,6 +13,11 @@ angular.module('lessons').controller( 'SearchController', [
   ( $scope, $rootScope, $state, $stateParams, $filter, COMMS, alertify, $mdSidenav , counties ) ->
     console.log "SearchController"
 
+    finished = null
+
+    $rootScope.$on '$stateChangeSuccess', (event, toState, toParams, fromState, fromParams) ->
+      finished = true
+
     #pagination
     $scope.page_size = 5
     $scope.current_page = 1
@@ -41,12 +46,13 @@ angular.module('lessons').controller( 'SearchController', [
       return
 
     $scope.search_teachers = ->
+      if finished
+
+        $scope.selected.subject_name = $("[name='subject']").val()
       
-      $scope.selected.subject_name = $("[name='subject']").val()
-      
-      $scope.selected.county_name = $("[name='county']").val()
-      console.log $("[name='county']").val()
-      set_params()
+        $scope.selected.county_name = $("[name='county']").val()
+        console.log $("[name='county']").val()
+        set_params()
         
       
       COMMS.GET(
