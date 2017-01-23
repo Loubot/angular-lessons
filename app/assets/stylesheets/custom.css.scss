@@ -80,8 +80,6 @@ html, body{
   width: 120px !important;
 }
 
-.md-sidenav-left{z-index: 19;}
-
 md-sidenav.big_user_menu, 
 md-sidenav.md-locked-open.big_user_menu, 
 md-sidenav.md-closed.md-locked-open-add-active.big_user_menu {
@@ -1030,7 +1028,8 @@ ul.share-buttons .sr-only {
 
 // move fab completely into toolbar
 md-fab-speed-dial.md-fab-top-left{
-  top: 5px !important;  
+  top: 5px !important;
+  z-index: 61;
 }
 
 .county_placeholder span:first-child{
