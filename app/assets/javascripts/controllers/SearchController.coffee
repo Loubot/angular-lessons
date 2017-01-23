@@ -41,11 +41,10 @@ angular.module('lessons').controller( 'SearchController', [
       return
 
     $scope.search_teachers = ->
-      $scope.selected = {}
-      if $scope.selected? && !$scope.selected.subject_name?
-        $scope.selected.subject_name = $("[name='subject']").val()
-      if $scope.selected? && !$scope.selected.county_name?
-        $scope.selected.county_name = $("[name='county']").val()
+      
+      $scope.selected.subject_name = $("[name='subject']").val()
+      
+      $scope.selected.county_name = $("[name='county']").val()
       console.log $("[name='county']").val()
       set_params()
         
