@@ -15,14 +15,20 @@
   <%= javascript_include_tag 'application' %>
   <%= favicon_link_tag 'favicon3.ico' %>
   
-  <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js" async></script>
-  <script>
-    WebFont.load({
-      google: {
-        families: ['Roboto:300,400,500,700,400italic']
+  <script >
+    window.WebFontConfig = {
+      google: { families: ['Roboto:300,400,500,700,400italic'] },
+      listeners: [],
+      active: function() {
+        alert('hello');
+        this.called_ready = true;
+        for(var i = 0; i < this.listeners.length; i++) {
+          this.listeners[i]();
+        }
       }
-    });
   </script>
+  <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js" async></script>
+  
 
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" async defer>
   <script src="https://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyBpOd04XM28WtAk1LcJyhlQzNW6P6OT2Q0" async defer></script>
