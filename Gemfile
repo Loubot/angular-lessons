@@ -30,7 +30,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'where-or', '~> 0.1.5'
 
 
-gem 'rails_12factor'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
@@ -46,6 +46,7 @@ group :production do
   gem 'pg', '~> 0.19.0'
   gem 'render_static'
   gem 'daemons'
+  gem 'rails_12factor'
 end
 
 group :development, :test do
