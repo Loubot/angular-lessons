@@ -114,7 +114,12 @@
   <div layout-padding layout-fill flex >
    
     <md-content layout-padding flex class="gutter_75" ng-class="{no_subjects_warn:User.subjects.length==0}"> <!-- SUBJECT select -->
-      
+      <md-toolbar >
+        <div class="md-toolbar-tools padding_10">
+          <span layout-margin>Your Subjects</span>
+        </div>
+      </md-toolbar>
+      <md-subheader class="md-primary no_padding">Search and select from dropdown</md-subheader>
       <md-autocomplete md-selected-item="selected_subject" 
             md-search-text="searchText" 
             md-items="subject in get_subjects()" 
