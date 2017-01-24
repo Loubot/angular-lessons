@@ -389,6 +389,7 @@ angular.module('lessons').factory 'User', [
       alertify.success "Successfully added subject"
       self.subjects = resp.data.subjects
       alertify.success "Your profile is now visible to students" if $rootScope.User.subjects.length > 0
+      $('#subject_select').val ""
     ).catch( ( err ) ->
       console.log err
       alertify.error err.data.error if err.data.error?
