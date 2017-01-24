@@ -21,7 +21,7 @@
             class="md-card-image" 
             alt="{{ User.first_name }} profile pic">
 
-        <img ng-if="!User.profile" ng-src="<%= asset_path('silhouette.jpg') %>"
+        <img ng-if="!User.profile" ng-src="<%= asset_url('silhouette.jpg') %>"
           class="md-card-image"
           alt="No profile selected"
         >
