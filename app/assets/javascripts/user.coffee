@@ -392,7 +392,6 @@ angular.module('lessons').factory 'User', [
     ).catch( ( err ) ->
       console.log err
       alertify.error err.data.error if err.data.error?
-      $scope.subjects = err.data.subjects
     )
 
   User::remove_subject = ( subject ) ->
