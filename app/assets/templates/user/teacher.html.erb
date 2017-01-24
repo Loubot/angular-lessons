@@ -21,6 +21,11 @@
             class="md-card-image" 
             alt="{{ User.first_name }} profile pic">
 
+        <img ng-if="!User.profile" ng-src="<%= asset_path('silhouette.jpg') %>"
+          class="md-card-image"
+          alt="No profile selected"
+        >
+
         <div class="margin_t_10 padding_10">
           <form ng-submit="update_teacher()">
             <md-input-container md-no-float>
@@ -108,13 +113,15 @@
   
   <div layout-padding layout-fill flex >
    
-    <md-card layout-padding flex class="gutter_75"> <!-- SUBJECT select -->
+    <md-content layout-padding flex class="gutter_75" ng-class="{no_subjects_warn:User.subjects.length==0}"> <!-- SUBJECT select -->
+      
       <md-autocomplete md-selected-item="selected_subject" 
             md-search-text="searchText" 
             md-items="subject in get_subjects()" 
             md-item-text="subject.name"
             md-selected-item-change="User.pick_subject( subject )"
-            md-delay="500"
+            md-delay="300"
+
             class="black_text no_padding" placeholder="Choose your subjects">
         <md-item-template>
           <span md-highlight-text="searchText">{{subject.name}}</span>
@@ -123,6 +130,11 @@
           No matches found.
         </md-not-found>
       </md-autocomplete>
+
+      <div ng-messages="{ no_subjects:!User.subjects.length }" role="alert">
+        <div ng-message="no_subjects" style="color:rgb(221,44,0);">You must select a subject for your profile to be active</div>
+      </div>
+      
       <md-list>
         <md-list-item class="md-2-line" ng-repeat="subject in User.subjects">            
           <div class="md-list-item-text" layout="row">
@@ -144,13 +156,14 @@
           </div> <!-- end of md-list-item-text -->
         </md-list-item>
         <md-list-item ng-if="returned_subjects" ng-init="returned_subjects=false">
+
           <md-button class="md-raised md-warn white_text center_block"
                       ng-click="show_subject_request()">
                     Didn't find what you wanted?
             </md-button>
         </md-list-item>
       </md-list>
-    </md-card> 
+    </md-content> 
     <!-- end of subject select -->
 
     <!-- EXPERIENCE -->
