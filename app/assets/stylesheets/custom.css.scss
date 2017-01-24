@@ -818,6 +818,24 @@ md-sidenav.md-closed.md-locked-open-add-active.user_menu {
 // End of Teacher area
 
 // teacher page
+
+.roundy_buttons{  
+  @extend .white_text;
+  -moz-border-radius: 15px;
+  -webkit-border-radius: 15px;
+  border: 5px ;
+  padding: 5px;
+}
+
+.primary{
+  background-color: #6ea9b5;
+}
+
+.jc{
+  background-color: #6eb57a;
+}
+
+
 .no_subjects_warn{
   border: 2px solid #dadada !important;
   border-radius: 7px !important;
