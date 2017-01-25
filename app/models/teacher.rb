@@ -123,6 +123,7 @@ class Teacher < ActiveRecord::Base
     end
 
     def add_to_mailchimp
+      return if Rails.env.development?
       gb = Gibbon::API.new(ENV['_mail_chimp_api'], { :timeout => 15 })
       list_id = self.is_teacher ? ENV['MAILCHIMP_TEACHER_LIST'] : ENV['MAILCHIMP_STUDENT_LIST']
       
