@@ -262,26 +262,27 @@ angular.module('lessons').factory 'User', [
 
 ###################### pics ###################################################
   User::upload_pic = ( pic ) ->
-    self= @
-    Upload.upload(
-      url: "#{ RESOURCES.DOMAIN }/teacher/#{ $rootScope.User.id }/photos"
-      file: pic
-      avatar: pic
-      data:
+    if pic?
+      self= @
+      Upload.upload(
+        url: "#{ RESOURCES.DOMAIN }/teacher/#{ $rootScope.User.id }/photos"
+        file: pic
         avatar: pic
-    ).then( ( resp ) -> 
-      console.log resp
-      self.photos = resp.data.photos
-      alertify.success("Photo uploaded ok")
-      
-      
-      self.get_profile()
-      alertify.success "Profile pic set"
+        data:
+          avatar: pic
+      ).then( ( resp ) -> 
+        console.log resp
+        self.photos = resp.data.photos
+        alertify.success("Photo uploaded ok")
+        $rootScope.User.profile = resp.data.teacher.profile
+        
+        self.get_profile()
+        alertify.success "Profile pic set"
 
-      pic = null
-    ).catch( ( err ) ->
-      console.log err
-    )
+        pic = null
+      ).catch( ( err ) ->
+        console.log err
+      )
 
   User::update_profile = ( pic_id ) ->
     self = @

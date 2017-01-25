@@ -173,20 +173,28 @@
     <!-- end of subject select -->
 
     <!-- Levels -->
-      <div layout="row" layout-align="space-around center">
+      <div class="gutter_75" layout="row" layout-align="space-around center">
         <div>
           <button class="roundy_buttons primary">Primary</button>
-          <md-checkbox ng-model="isChecked" aria-label="Finished?">
+            <md-checkbox ng-model="isChecked" aria-label="Primary">
           </md-checkbox>
-
         </div>
 
         <div>
           <button class="roundy_buttons jc" >Junior Cert</button>
+          <md-checkbox ng-model="isChecked" aria-label="Junior Cert">
+        </div>
+        
+        <div>
+          <button class="roundy_buttons jc" >Leaving Cert</button>
+          <md-checkbox ng-model="isChecked" aria-label="Leaving Cert">
         </div>
 
-        <div></div>
-        <div></div>
+        <div>
+          <button class="roundy_buttons jc" >Third level</button>
+          <md-checkbox ng-model="isChecked" aria-label="Third level">
+        </div>
+        
       </div>
     <!-- End of levels -->
 
