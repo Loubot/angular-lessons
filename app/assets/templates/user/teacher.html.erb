@@ -111,9 +111,9 @@
   
   
   
-  <div layout-padding layout-fill flex >
+  <div layout-padding-gt-xs layout-fill flex >
    
-    <md-content layout-padding flex class="gutter_75" ng-class="{no_subjects_warn:User.subjects.length==0}"> <!-- SUBJECT select -->
+    <md-content layout-padding-gt-xs flex class="big_gutter" ng-class="{no_subjects_warn:User.subjects.length==0}"> <!-- SUBJECT select -->
       <md-toolbar >
         <div class="md-toolbar-tools padding_10">
           <span layout-margin>Your Subjects</span>
@@ -167,8 +167,9 @@
         </md-list-item>
       </md-list>
 
+      <md-divider class="margin_t_10"></md-divider>
       <!-- Levels -->
-        <div class="gutter_75" layout="row" layout-align="space-around center">
+        <div class="margin_t_10" layout="row" layout-xs="column" layout-align="space-around center">
           <div>
             <button class="roundy_buttons primary">Primary</button>
             <md-checkbox ng-change="User.update()" ng-model="User.levels.primary" aria-label="Primary"></md-checkbox>
@@ -191,7 +192,7 @@
           
         </div>
       <!-- End of levels -->
-      
+
     </md-content> 
     <!-- end of subject select -->
 
