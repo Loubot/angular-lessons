@@ -141,25 +141,22 @@
         <div ng-message="no_subjects" style="color:rgb(221,44,0);">You must select a subject for your profile to be active</div>
       </div>
       
-      <md-list>
-        <md-list-item class="md-2-line" ng-repeat="subject in User.subjects">            
-          <div class="md-list-item-text" layout="row">
+      <md-list class="slightly_desaturated_cyan_border">
+        <md-list-item class="md-2-line " layout="row" ng-repeat="subject in User.subjects">            
+          
 
-            <div flex="90">
-              <md-icon><i class="material-icons icon_yellow">insert_emoticon</i></md-icon>
-              <span>{{subject.name}}</span>
-            </div> <!-- end of flex=90 -->
+          <div flex="80" >
+            
+            <span>{{subject.name}}</span>
+            <md-icon><i class="material-icons icon_green">done</i></md-icon>
+          </div> <!-- end of flex=90 -->
 
-            <div flex="10">
-              <md-button class="md-icon-button" ng-click="User.remove_subject( subject )">
-                <md-tooltip md-direction="left">
-                  Remove subject
-                </md-tooltip>
-                <i class="material-icons icon_red">delete</i>
-              </md-button>
-            </div> <!-- end of flex=10 -->
+          <div flex="20" ng-click="User.remove_subject( subject )">
+            <span >Delete Subject</span>
+            <md-icon><i class="material-icons icon_red">delete</i></md-icon>
+          </div> <!-- end of flex=10 -->
 
-          </div> <!-- end of md-list-item-text -->
+         
         </md-list-item>
         <md-list-item ng-if="returned_subjects" ng-init="returned_subjects=false">
 
@@ -186,12 +183,12 @@
         </div>
         
         <div>
-          <button class="roundy_buttons jc" >Leaving Cert</button>
+          <button class="roundy_buttons lc" >Leaving Cert</button>
           <md-checkbox ng-model="isChecked" aria-label="Leaving Cert">
         </div>
 
         <div>
-          <button class="roundy_buttons jc" >Third level</button>
+          <button class="roundy_buttons third_level" >Third level</button>
           <md-checkbox ng-model="isChecked" aria-label="Third level">
         </div>
         

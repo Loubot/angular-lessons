@@ -576,8 +576,12 @@ md-sidenav.md-closed.md-locked-open-add-active.user_menu {
 
 .icon_red{
   color: rgb(255,87,34);
-  background-color: #FFF;
+  // background-color: #FFF;
   // font-size: 50px !important;
+}
+
+.icon_green{
+  color: #7aaf4c;
 }
 
 .icon_yellow{
@@ -835,13 +839,20 @@ md-sidenav.md-closed.md-locked-open-add-active.user_menu {
   background-color: #6eb57a;
 }
 
+.lc{
+  background-color: #b56ea9;
+}
+
+.third_level{
+  background-color: #b57a6e;
+}
 
 .no_subjects_warn{
   border: 2px solid #dadada !important;
   border-radius: 7px !important;
   outline: none;
-    border-color: #af504c !important;
-    box-shadow: 0 0 10px #9ecaed !important;
+  border-color: #af504c !important;
+  box-shadow: 0 0 10px #9ecaed !important;
 }
 // end of teacher page
 
