@@ -170,27 +170,29 @@
     <!-- end of subject select -->
 
     <!-- Levels -->
-      <div ng-if="false" class="gutter_75" layout="row" layout-align="space-around center">
+      <div class="gutter_75" layout="row" layout-align="space-around center">
         <div>
           <button class="roundy_buttons primary">Primary</button>
-            <md-checkbox ng-model="isChecked" aria-label="Primary">
+            <md-checkbox ng-model="level.primary" aria-label="Primary">
           </md-checkbox>
         </div>
 
         <div>
           <button class="roundy_buttons jc" >Junior Cert</button>
-          <md-checkbox ng-model="isChecked" aria-label="Junior Cert">
+          <md-checkbox ng-model="level.jc" aria-label="Junior Cert">
         </div>
         
         <div>
           <button class="roundy_buttons lc" >Leaving Cert</button>
-          <md-checkbox ng-model="isChecked" aria-label="Leaving Cert">
+          <md-checkbox ng-model="level.lc" aria-label="Leaving Cert">
         </div>
 
         <div>
           <button class="roundy_buttons third_level" >Third level</button>
-          <md-checkbox ng-model="isChecked" aria-label="Third level">
+          <md-checkbox ng-model="level.third_level" aria-label="Third level">
         </div>
+
+        {{ level }}
         
       </div>
     <!-- End of levels -->
