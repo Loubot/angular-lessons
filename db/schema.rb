@@ -156,7 +156,7 @@ ActiveRecord::Schema.define(version: 20170126142705) do
     t.datetime "updated_at"
     t.boolean  "admin",                  default: false
     t.integer  "view_count",             default: 0
-    t.string   "levels"
+    t.text     "levels"
   end
 
   add_index "teachers", ["email"], name: "index_teachers_on_email"

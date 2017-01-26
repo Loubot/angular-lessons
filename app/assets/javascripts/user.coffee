@@ -241,6 +241,7 @@ angular.module('lessons').factory 'User', [
     @qualifications = teacher.qualifications
     @subjects = teacher.subjects
     @profile_url = @.get_profile()
+    @levels = teacher.levels
     $rootScope.User = @
     
 
@@ -249,6 +250,7 @@ angular.module('lessons').factory 'User', [
     return @.first_name + ' ' + @.last_name
 
   User::update = ->
+    console.log @
     COMMS.POST(
       "/teacher"
       @

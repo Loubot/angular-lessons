@@ -80,8 +80,6 @@ angular.module('lessons').controller('TeacherController', [
         alertify.error "Please use the Contact Us button"
       )
     ####################### end of Subjects ###############################
-
-
    
 
     ####################### Sheets #######################################
