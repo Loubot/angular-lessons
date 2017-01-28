@@ -71,8 +71,7 @@
       </md-card> 
     </div> <!-- end of flex -->
 
-    <div flex="50" flex-xs="100">
-      
+    <div flex="50" flex-xs="100">      
       
       <md-grid-list md-cols="3" md-row-height="6:2" >
         <md-grid-tile class="gray"
@@ -99,17 +98,12 @@
         </md-grid-tile>
         
       </md-grid-list>
-      
-        
-       
 
     </div> <!-- end of flex=50 flex-xs=100 -->
   </div> <!-- end of layout = row -->
 </div> 
 
-<div layout="column">
-  
-  
+<div class="margin_t_10" layout="column">
   
   <div layout-padding-gt-xs layout-fill flex >
    
@@ -137,7 +131,7 @@
         </md-not-found>
       </md-autocomplete>
 
-      <div ng-messages="{ no_subjects:!User.subjects.length }" role="alert">
+      <div class="margin_l_5" ng-messages="{ no_subjects:!User.subjects.length }" role="alert">
         <div ng-message="no_subjects" style="color:rgb(221,44,0);">You must select a subject for your profile to be active</div>
       </div>
       
@@ -167,30 +161,35 @@
         </md-list-item>
       </md-list>
 
-      <md-divider class="margin_t_10"></md-divider>
+
       <!-- Levels -->
-        <div class="margin_t_10" layout="row" layout-xs="column" layout-align="space-around center">
-          <div>
-            <button class="roundy_buttons primary">Primary</button>
-            <md-checkbox ng-change="User.update()" ng-model="User.levels.primary" aria-label="Primary"></md-checkbox>
-          </div>
-
-          <div>
-            <button class="roundy_buttons jc" >Junior Cert</button>
-            <md-checkbox ng-change="User.update()" ng-model="User.levels.jc" aria-label="Junior Cert"></md-checkbox>
-          </div>
-          
-          <div>
-            <button class="roundy_buttons lc" >Leaving Cert</button>
-            <md-checkbox ng-change="User.update()" ng-model="User.levels.lc" aria-label="Leaving Cert"></md-checkbox>
-          </div>
-
-          <div>
-            <button class="roundy_buttons third_level" >Third level</button>
-            <md-checkbox ng-change="User.update()" ng-model="User.levels.third_level" aria-label="Third level"></md-checkbox>
-          </div>
-          
+      <md-toolbar class="margin_t_30">
+        <div class="md-toolbar-tools padding_10">
+          <span layout-margin>What level do you teach at?</span>
         </div>
+      </md-toolbar>
+      <div class="margin_t_10" layout="row" layout-xs="column" layout-align="space-around center">
+        <div>
+          <button class="roundy_buttons primary">Primary</button>
+          <md-checkbox ng-change="User.update()" ng-model="User.levels.primary" aria-label="Primary"></md-checkbox>
+        </div>
+
+        <div>
+          <button class="roundy_buttons jc" >Junior Cert</button>
+          <md-checkbox ng-change="User.update()" ng-model="User.levels.jc" aria-label="Junior Cert"></md-checkbox>
+        </div>
+        
+        <div>
+          <button class="roundy_buttons lc" >Leaving Cert</button>
+          <md-checkbox ng-change="User.update()" ng-model="User.levels.lc" aria-label="Leaving Cert"></md-checkbox>
+        </div>
+
+        <div>
+          <button class="roundy_buttons third_level" >Third level</button>
+          <md-checkbox ng-change="User.update()" ng-model="User.levels.third_level" aria-label="Third level"></md-checkbox>
+        </div>
+        
+      </div>
       <!-- End of levels -->
 
     </md-content> 
