@@ -241,7 +241,10 @@ angular.module('lessons').factory 'User', [
     @qualifications = teacher.qualifications
     @subjects = teacher.subjects
     @profile_url = @.get_profile()
-    @levels = teacher.levels
+    @primary = teacher.primary
+    @jc = teacher.jc
+    @lc = teacher.lc
+    @third_level = teacher.third_level
     $rootScope.User = @
     
 

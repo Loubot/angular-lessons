@@ -151,16 +151,23 @@ ActiveRecord::Schema.define(version: 20170126142705) do
     t.string   "last_name"
     t.text     "overview"
     t.boolean  "is_teacher",             default: false
-    t.text     "tokens"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "admin",                  default: false
     t.integer  "view_count",             default: 0
-    t.text     "levels"
+    t.text     "tokens"
+    t.boolean  "primary"
+    t.boolean  "jc"
+    t.boolean  "lc"
+    t.boolean  "third_level"
   end
 
   add_index "teachers", ["email"], name: "index_teachers_on_email"
+  add_index "teachers", ["jc"], name: "index_teachers_on_jc"
+  add_index "teachers", ["lc"], name: "index_teachers_on_lc"
+  add_index "teachers", ["primary"], name: "index_teachers_on_primary"
   add_index "teachers", ["reset_password_token"], name: "index_teachers_on_reset_password_token", unique: true
+  add_index "teachers", ["third_level"], name: "index_teachers_on_third_level"
   add_index "teachers", ["uid", "provider"], name: "index_teachers_on_uid_and_provider", unique: true
 
 end
