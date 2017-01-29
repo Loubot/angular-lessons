@@ -324,7 +324,7 @@ angular.module('lessons').factory 'User', [
       # console.log photo.avatar.url
       if parseInt( photo.id ) == parseInt( @.profile )
         @.profile_url = photo.avatar.url
-        console.log @.profile_url
+        # console.log @.profile_url
     @.profile_url
 #################### end of pics ###############################################
 

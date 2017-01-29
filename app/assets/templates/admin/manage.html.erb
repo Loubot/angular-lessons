@@ -72,10 +72,10 @@
       <md-list>
         <md-list-item                
               class="md-2-line"
-              ng-repeat="( i, teacher) in teachers | start_from:(current_page - 1) * page_size | limitTo: page_size"
+              ng-repeat="teacher in teachers | start_from:(current_page - 1) * page_size | limitTo: page_size"
           >
           <!-- <md-checkbox ng-model="item.done"></md-checkbox> -->
-          <div class="md-list-item-text" ng-click="view_teacher( i )">
+          <div class="md-list-item-text" ng-click="open_teacher_dialog( teacher )">
             <h3>email:{{teacher.email}}, name: {{ teacher.first_name }} {{ teacher.last_name }}, registered: {{ teacher.created_at | date:'dd-MM-yyyy ' }}</h3>
             <span>Subjects {{ teacher.subjects.length }}</span> ||
             <span>Location {{ ( teacher.location != null ) }}</span> ||
