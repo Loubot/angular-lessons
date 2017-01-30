@@ -19,6 +19,8 @@ class TeacherController < ApplicationController
   end
 
   def update
+    p "Teacher params with levels"
+    pp teacher_params
     @teacher = Teacher.find( current_teacher.id )
     @teacher.update_attributes( teacher_params )
     render json: { :status => :updated, teacher: @teacher.as_json }
@@ -65,6 +67,6 @@ class TeacherController < ApplicationController
     end
 
     def teacher_params
-      params.permit( :profile, :id, :teacher_id, :overview, :experience, :calendar_id, :first_name, :last_name, :is_teacher )
+      params.permit( :profile, :id, :teacher_id, :overview, :experience, :calendar_id, :first_name, :last_name, :is_teacher, :third_level, :jc, :lc, :primary )
     end
 end

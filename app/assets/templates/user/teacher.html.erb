@@ -71,8 +71,7 @@
       </md-card> 
     </div> <!-- end of flex -->
 
-    <div flex="50" flex-xs="100">
-      
+    <div flex="50" flex-xs="100">      
       
       <md-grid-list md-cols="3" md-row-height="6:2" >
         <md-grid-tile class="gray"
@@ -99,21 +98,16 @@
         </md-grid-tile>
         
       </md-grid-list>
-      
-        
-       
 
     </div> <!-- end of flex=50 flex-xs=100 -->
   </div> <!-- end of layout = row -->
 </div> 
 
-<div layout="column">
+<div class="margin_t_10" layout="column">
   
-  
-  
-  <div layout-padding layout-fill flex >
+  <div layout-padding-gt-xs layout-fill flex >
    
-    <md-content layout-padding flex class="gutter_75" ng-class="{no_subjects_warn:User.subjects.length==0}"> <!-- SUBJECT select -->
+    <md-content layout-padding-gt-xs flex class="big_gutter" ng-class="{no_subjects_warn:User.subjects.length==0}"> <!-- SUBJECT select -->
       <md-toolbar >
         <div class="md-toolbar-tools padding_10">
           <span layout-margin>Your Subjects</span>
@@ -137,11 +131,11 @@
         </md-not-found>
       </md-autocomplete>
 
-      <div ng-messages="{ no_subjects:!User.subjects.length }" role="alert">
+      <div class="margin_l_5" ng-messages="{ no_subjects:!User.subjects.length }" role="alert">
         <div ng-message="no_subjects" style="color:rgb(221,44,0);">You must select a subject for your profile to be active</div>
       </div>
       
-      <md-list class="slightly_desaturated_cyan_border">
+      <md-list ng-if="User.subjects.length" class="slightly_desaturated_cyan_border">
         <md-list-item class="md-2-line " layout="row" ng-repeat="subject in User.subjects">            
           
 
@@ -166,34 +160,41 @@
             </md-button>
         </md-list-item>
       </md-list>
-    </md-content> 
-    <!-- end of subject select -->
 
-    <!-- Levels -->
-      <div ng-if="false" class="gutter_75" layout="row" layout-align="space-around center">
+
+      <!-- Levels -->
+      <md-toolbar class="margin_t_30">
+        <div class="md-toolbar-tools padding_10">
+          <span layout-margin>What level do you teach at?</span>
+        </div>
+      </md-toolbar>
+      <div class="margin_t_10" layout="row" layout-xs="column" layout-align="space-around center">
         <div>
           <button class="roundy_buttons primary">Primary</button>
-            <md-checkbox ng-model="isChecked" aria-label="Primary">
-          </md-checkbox>
+          <md-checkbox ng-change="User.update()" ng-model="User.primary" aria-label="Primary"></md-checkbox>
         </div>
 
         <div>
           <button class="roundy_buttons jc" >Junior Cert</button>
-          <md-checkbox ng-model="isChecked" aria-label="Junior Cert">
+          <md-checkbox ng-change="User.update()" ng-model="User.jc" aria-label="Junior Cert"></md-checkbox>
         </div>
         
         <div>
           <button class="roundy_buttons lc" >Leaving Cert</button>
-          <md-checkbox ng-model="isChecked" aria-label="Leaving Cert">
+          <md-checkbox ng-change="User.update()" ng-model="User.lc" aria-label="Leaving Cert"></md-checkbox>
         </div>
 
         <div>
           <button class="roundy_buttons third_level" >Third level</button>
-          <md-checkbox ng-model="isChecked" aria-label="Third level">
+          <md-checkbox ng-change="User.update()" ng-model="User.third_level" aria-label="Third level"></md-checkbox>
         </div>
         
       </div>
-    <!-- End of levels -->
+      <!-- End of levels -->
+
+    </md-content> 
+    <!-- end of subject select -->
+
 
     <!-- EXPERIENCE -->
     <md-card layout-padding layout-margin class="gutter_75 margin_t_10"> 

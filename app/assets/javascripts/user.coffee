@@ -241,6 +241,10 @@ angular.module('lessons').factory 'User', [
     @qualifications = teacher.qualifications
     @subjects = teacher.subjects
     @profile_url = @.get_profile()
+    @primary = teacher.primary
+    @jc = teacher.jc
+    @lc = teacher.lc
+    @third_level = teacher.third_level
     $rootScope.User = @
     
 
@@ -249,6 +253,7 @@ angular.module('lessons').factory 'User', [
     return @.first_name + ' ' + @.last_name
 
   User::update = ->
+    console.log @
     COMMS.POST(
       "/teacher"
       @
@@ -319,7 +324,7 @@ angular.module('lessons').factory 'User', [
       # console.log photo.avatar.url
       if parseInt( photo.id ) == parseInt( @.profile )
         @.profile_url = photo.avatar.url
-        console.log @.profile_url
+        # console.log @.profile_url
     @.profile_url
 #################### end of pics ###############################################
 

@@ -56,6 +56,8 @@ class Teacher < ActiveRecord::Base
 
   after_create :send_new_message, :add_to_mailchimp
 
+  serialize :levels
+
 
   def get_full_name
     "#{ self.first_name } #{ self.last_name }"
