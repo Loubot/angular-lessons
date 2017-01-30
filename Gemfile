@@ -5,7 +5,7 @@ source 'http://rubygems.org'
 # ruby '2.1.8', platforms: [:mingw, :mswin, :x64_mingw]
 # ruby '2.0.0', platforms: [:mingw, :mswin], group: :development
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-ruby '2.3.1'
+# ruby '2.3.1'
 
 gem 'rails', '4.2.6'
 
@@ -42,6 +42,7 @@ gem 'rails_12factor'
 
 group :production do
   gem "fog", '~> 1.38'
+  gem "fog-aws", '~> 0.12.0'
   gem 'unicorn', '~> 5.1.0'
   gem 'pg', '~> 0.19.0'
   gem 'render_static'
@@ -104,8 +105,6 @@ gem 'workless', '~> 1.2.3'
 # gem "daemons", '~> 1.2.4'
 
 gem 'sitemap_generator', '~> 5.2.0'
-
-gem "fog-aws", '~> 0.12.0'
 
 gem 'htmlcompressor', '~> 0.2.0'
 
