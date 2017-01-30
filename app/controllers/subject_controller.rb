@@ -37,7 +37,7 @@ class SubjectController < ApplicationController
     end
 
     # subjects = Subject.all if subjects.length == 0
-    pp subjects
+    #pp subjects
     render json: { subjects: subjects.order('name ASC').as_json }, status: 200
   end
 
