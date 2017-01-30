@@ -5,7 +5,7 @@ class TeacherController < ApplicationController
 
   def index
     teachers = Teacher.includes( :subjects, :experience, :qualifications, :location ).where( is_teacher: true ).order( "created_at DESC" )
-    pp teachers
+    #pp teachers
     render json: { teachers: teachers.as_json( include: [ :subjects, :experience, :qualifications, :location ] ) }
   end
 
@@ -20,7 +20,7 @@ class TeacherController < ApplicationController
 
   def update
     p "Teacher params with levels"
-    pp teacher_params
+    #pp teacher_params
     @teacher = Teacher.find( current_teacher.id )
     @teacher.update_attributes( teacher_params )
     render json: { :status => :updated, teacher: @teacher.as_json }
@@ -28,7 +28,7 @@ class TeacherController < ApplicationController
 
   def profile
     @teacher = Teacher.includes( :photos, :subjects, :experience, :qualifications, :location ).find( params[:id] )
-    pp @teacher
+    #pp @teacher
     render json: {  teacher: @teacher.as_json( include: [ :photos, :subjects, :experience, :qualifications, :location ] )
                     
                   }
