@@ -3,7 +3,6 @@
 angular.module('lessons').controller('TeacherController', [
   '$scope'
   '$rootScope'
-  '$state'
   'User'
   'alertify'
   'COMMS'
@@ -11,10 +10,17 @@ angular.module('lessons').controller('TeacherController', [
   'Upload'
   '$mdBottomSheet'
   '$mdDialog'
-  "auth"
-  ( $scope, $rootScope, $state, User, alertify, COMMS, $auth, Upload, $mdBottomSheet, $mdDialog, auth ) ->
+  '$mdToast'
+  ( $scope, $rootScope, User, alertify, COMMS, $auth, Upload, $mdBottomSheet, $mdDialog, $mdToast ) ->
     console.log "TeacherController"
 
+    display_subject_warning = ->
+      alertify.error "Your profile is not visible till you select a subject" 
+
+    display_subject_warning() if $rootScope.User.subjects.length==0
+
+    $rootScope.$on 'no_subject_alert', ( a, b ) ->
+      display_subject_warning()
 
     $scope.do_delete = ->
       COMMS.DELETE(
@@ -74,8 +80,6 @@ angular.module('lessons').controller('TeacherController', [
         alertify.error "Please use the Contact Us button"
       )
     ####################### end of Subjects ###############################
-
-
    
 
     ####################### Sheets #######################################

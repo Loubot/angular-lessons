@@ -24,7 +24,6 @@
 //= require angular-messages/angular-messages.min
 //= require ng-file-upload/ng-file-upload-all.min
 //= require angular-sanitize/angular-sanitize.min
-//= require bootstrap/dist/js/bootstrap.min
 //= require ng-responsive-calendar/dist/js/calendar-tpls.min
 //= require angular-simple-logger/dist/angular-simple-logger.min
 //= require angular-loading-bar/build/loading-bar.min

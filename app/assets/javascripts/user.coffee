@@ -241,6 +241,10 @@ angular.module('lessons').factory 'User', [
     @qualifications = teacher.qualifications
     @subjects = teacher.subjects
     @profile_url = @.get_profile()
+    @primary = teacher.primary
+    @jc = teacher.jc
+    @lc = teacher.lc
+    @third_level = teacher.third_level
     $rootScope.User = @
     
 
@@ -249,6 +253,7 @@ angular.module('lessons').factory 'User', [
     return @.first_name + ' ' + @.last_name
 
   User::update = ->
+    console.log @
     COMMS.POST(
       "/teacher"
       @
@@ -262,26 +267,27 @@ angular.module('lessons').factory 'User', [
 
 ###################### pics ###################################################
   User::upload_pic = ( pic ) ->
-    self= @
-    Upload.upload(
-      url: "#{ RESOURCES.DOMAIN }/teacher/#{ $rootScope.User.id }/photos"
-      file: pic
-      avatar: pic
-      data:
+    if pic?
+      self= @
+      Upload.upload(
+        url: "#{ RESOURCES.DOMAIN }/teacher/#{ $rootScope.User.id }/photos"
+        file: pic
         avatar: pic
-    ).then( ( resp ) -> 
-      console.log resp
-      self.photos = resp.data.photos
-      alertify.success("Photo uploaded ok")
-      
-      
-      self.get_profile()
-      alertify.success "Profile pic set"
+        data:
+          avatar: pic
+      ).then( ( resp ) -> 
+        console.log resp
+        self.photos = resp.data.photos
+        alertify.success("Photo uploaded ok")
+        $rootScope.User.profile = resp.data.teacher.profile
+        
+        self.get_profile()
+        alertify.success "Profile pic set"
 
-      pic = null
-    ).catch( ( err ) ->
-      console.log err
-    )
+        pic = null
+      ).catch( ( err ) ->
+        console.log err
+      )
 
   User::update_profile = ( pic_id ) ->
     self = @
@@ -318,7 +324,7 @@ angular.module('lessons').factory 'User', [
       # console.log photo.avatar.url
       if parseInt( photo.id ) == parseInt( @.profile )
         @.profile_url = photo.avatar.url
-        console.log @.profile_url
+        # console.log @.profile_url
     @.profile_url
 #################### end of pics ###############################################
 
@@ -389,10 +395,10 @@ angular.module('lessons').factory 'User', [
       alertify.success "Successfully added subject"
       self.subjects = resp.data.subjects
       alertify.success "Your profile is now visible to students" if $rootScope.User.subjects.length > 0
+      $('#subject_select').val ""
     ).catch( ( err ) ->
       console.log err
       alertify.error err.data.error if err.data.error?
-      $scope.subjects = err.data.subjects
     )
 
   User::remove_subject = ( subject ) ->
@@ -404,6 +410,7 @@ angular.module('lessons').factory 'User', [
       console.log resp
       alertify.success "Successfully removed subject"
       self.subjects = resp.data.subjects
+      $rootScope.$emit "no_subject_alert", [ 'no subjects' ] if resp.data.subjects.length == 0
     ).catch( ( err ) ->
       console.log err
       alertify.error err.data.error

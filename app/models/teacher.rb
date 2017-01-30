@@ -56,6 +56,8 @@ class Teacher < ActiveRecord::Base
 
   after_create :send_new_message, :add_to_mailchimp
 
+  serialize :levels
+
 
   def get_full_name
     "#{ self.first_name } #{ self.last_name }"
@@ -123,7 +125,7 @@ class Teacher < ActiveRecord::Base
     end
 
     def add_to_mailchimp
-      return if Rails.env.development?
+      return if !Rails.env.production?
       gb = Gibbon::API.new(ENV['_mail_chimp_api'], { :timeout => 15 })
       list_id = self.is_teacher ? ENV['MAILCHIMP_TEACHER_LIST'] : ENV['MAILCHIMP_STUDENT_LIST']
       

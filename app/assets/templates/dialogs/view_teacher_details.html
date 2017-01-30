@@ -1,42 +1,42 @@
 <md-dialog aria-label="teacher dialog" class="min_width_400" layout-padding>
 
   <md-dialog-content>
-   <h3>{{ teacher.email }}</h3>
+   <h3>{{ teaview_teachercher.email }}</h3>
 
    <h4>Overview:</h4>
-   <p ng-if="teacher.overview">{{ teacher.overview }}</p>
-   <p ng-if="!teacher.overview">Not set</p>
+   <p ng-if="view_teacher.overview">{{ view_teacher.overview }}</p>
+   <p ng-if="!view_teacher.overview">Not set</p>
 
    <h4>Subjects:</h4>
-   <md-list ng-if="teacher.subjects">
-     <md-list-item class="md-2-line" ng-repeat="subject in teacher.subjects">
+   <md-list ng-if="view_teacher.subjects">
+     <md-list-item class="md-2-line" ng-repeat="subject in view_teacher.subjects">
        <div class="md-list-item-text">
          <p>{{ subject.name }}</p>
        </div>
      </md-list-item>
    </md-list>
-   <p ng-if="teacher.subjects.length == 0">Not set</p>
+   <p ng-if="view_teacher.subjects.length == 0">Not set</p>
    <md-divider></md-divider>
 
    <h4>Experience</h4>
-   <p ng-if="teacher.experience">{{ teacher.experience.description }}</p>
-   <p ng-if="!teacher.experience">Not set</p>
+   <p ng-if="view_teacher.experience">{{ view_teacher.experience.description }}</p>
+   <p ng-if="!view_teacher.experience">Not set</p>
    <md-divider></md-divider>
 
    <h4>Qualifications</h4>
-   <md-list ng-if="teacher.qualifications">
-     <md-list-item class="md-2-line" ng-repeat="qual in teacher.qualifications">
+   <md-list ng-if="view_teacher.qualifications">
+     <md-list-item class="md-2-line" ng-repeat="qual in view_teacher.qualifications">
        <div class="md-list-item-text">
          <p>{{ qual.title }}</p>
        </div>
      </md-list-item>
    </md-list>
-   <p ng-if="teacher.qualifications.length == 0">Not set</p>
+   <p ng-if="view_teacher.qualifications.length == 0">Not set</p>
    <md-divider></md-divider>
 
    <h4>Location</h4>
-   <p ng-if="teacher.location">{{ teacher.location.address }}</p>
-   <p ng-if="!teacher.location">Not set!</p>
+   <p ng-if="view_teacher.location">{{ view_teacher.location.address }}</p>
+   <p ng-if="!view_teacher.location">Not set!</p>
   </md-dialog-content>
   <md-dialog-actions>
     <md-button ng-click="close_dialog()" class="md-primary">Close Dialog</md-button>

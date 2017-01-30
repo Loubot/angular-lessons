@@ -12,6 +12,7 @@ angular.module('lessons').controller('AdminController', [
   ( $scope, $rootScope, auth, $state, COMMS, alertify, $mdDialog ) ->
     console.log "AdminController"
 
+
     $scope.page_size = 10
     $scope.current_page = 1
       
@@ -45,9 +46,9 @@ angular.module('lessons').controller('AdminController', [
           alertify.error "Failed to get teachers list"
         )
 
-    $scope.view_teacher = ( i ) ->
-      console.log $(window).width() 
-      $scope.teacher = $scope.teachers[i]
+    $scope.open_teacher_dialog = ( teacher ) ->
+      console.log teacher 
+      $scope.view_teacher = teacher
 
       $mdDialog.show(
         templateUrl: "dialogs/view_teacher_details.html"

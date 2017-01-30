@@ -1,9 +1,9 @@
-@import url("https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,400italic");
+
 
 html, body{
   height: 100%;
   max-width: 100% !important;
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Roboto', sans-serif !important;
 }
 
 .cursor_hand{
@@ -154,6 +154,24 @@ md-sidenav.md-closed.md-locked-open-add-active.user_menu {
   background-color: #FFF;
 }
 
+.slightly_desaturated_cyan_border{
+  border: 5px  solid #6ea9b5;
+  // border-bottom: 5px  solid #6ea9b5;
+}
+
+.slightly_desaturated_pink{
+  border: 5px solid #b56e86;
+  // border-top: 5px solid #b56e86;
+}
+
+.background_color_slightly_desaturated_cyan{
+  background-color: #6ea9b5 !important;
+}
+
+.background_color_slightly_desaturated_pink{
+  background-color: #b56e86 !important;
+}
+
 .blue_button{
   color: #fff !important;
   background-color: #5bc0de !important;
@@ -295,7 +313,7 @@ md-sidenav.md-closed.md-locked-open-add-active.user_menu {
   height: 100% !important;
 }
 
-.height_152{
+.max_width_114{
   max-width:114px;
   // width: auto;
   height: auto;
@@ -357,8 +375,8 @@ md-sidenav.md-closed.md-locked-open-add-active.user_menu {
   min-width: 400px !important;
 }
 
-.min_width_190{
-  min-width: 190px !important;
+.min_width_200{
+  min-width: 200px !important;
 }
 
 .md-chips > .min_height_32.ng-hide{
@@ -421,6 +439,10 @@ md-sidenav.md-closed.md-locked-open-add-active.user_menu {
   margin-right: 10px !important;
 }
 
+.margin_l_5{
+  margin-left: 5px !important;
+}
+
 .padding_l_5px{
   padding-left: 5px !important;
 }
@@ -439,6 +461,14 @@ md-sidenav.md-closed.md-locked-open-add-active.user_menu {
 
 .max_width_400{
   max-width: 400px !important;
+}
+
+.max_height_75vh{
+  max-height: 75vh !important;
+}
+
+.max_width_50{
+ max-width: 50px !important;
 }
 
 .no_overflow{
@@ -550,8 +580,12 @@ md-sidenav.md-closed.md-locked-open-add-active.user_menu {
 
 .icon_red{
   color: rgb(255,87,34);
-  background-color: #FFF;
+  // background-color: #FFF;
   // font-size: 50px !important;
+}
+
+.icon_green{
+  color: #7aaf4c;
 }
 
 .icon_yellow{
@@ -762,13 +796,23 @@ md-sidenav.md-closed.md-locked-open-add-active.user_menu {
   max-width: 200px;
   word-wrap: break-word;
 }
+
+.page_size_input{
+  // float: none !important;
+  @extend .max_width_50;
+  border: 1px solid #868686 !important;
+  background-color: #fff !important;
+}
+
+.remove_vertical_align{
+  vertical-align: inherit !important;
+}
   
 // end of search page
 
 // Teacher area
 .calendar_container{
   // height: calc( 100% - 200px ) !important;
-  overflow: scroll !important;
 }
 #calendar{
   // max-height: 12em !important;
@@ -780,6 +824,42 @@ md-sidenav.md-closed.md-locked-open-add-active.user_menu {
 }
 
 // End of Teacher area
+
+// teacher page
+
+.roundy_buttons{  
+  @extend .white_text;
+  -moz-border-radius: 15px;
+  -webkit-border-radius: 15px;
+  border: 5px ;
+  padding: 10px;
+  min-width: 98px;
+}
+
+.primary{
+  background-color: #6ea9b5;
+}
+
+.jc{
+  background-color: #6eb57a;
+}
+
+.lc{
+  background-color: #b56ea9;
+}
+
+.third_level{
+  background-color: #b57a6e;
+}
+
+.no_subjects_warn{
+  border: 2px solid #dadada !important;
+  border-radius: 7px !important;
+  outline: none;
+  border-color: #af504c !important;
+  box-shadow: 0 0 10px #9ecaed !important;
+}
+// end of teacher page
 
 .social_icon{
   // height: 24px;
@@ -867,6 +947,16 @@ ul.share-buttons .sr-only {
 } /* 250px */
 
 @media ( min-width: 600px ){
+
+  .margin_t_l_20{
+    padding-top: 20px;
+  }
+
+  .width_l_30p{
+    min-width: 200px !important;
+    width: 85vw !important;
+    max-width: 300px !important;
+  }
   .margin_s_10{
     margin: 0 10px;
   }
@@ -972,7 +1062,8 @@ ul.share-buttons .sr-only {
 
 // move fab completely into toolbar
 md-fab-speed-dial.md-fab-top-left{
-  top: 5px !important;  
+  top: 5px !important;
+  z-index: 61;
 }
 
 .county_placeholder span:first-child{

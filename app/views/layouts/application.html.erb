@@ -9,13 +9,34 @@
   <meta property="og:type"               content="website" />
   <meta property="og:image"              content="https://s3-eu-west-1.amazonaws.com/angular-lessons/static_assets/facebook_logo.jpg" />
   <meta property="og:description"        content="Learn Your Lesson is your place to connect with local teachers on languages, music lessons, or any other skill you wish to learn" />
-
+  <meta name="description" content="Learn Your Lesson is your place to connect with local teachers on languages, music lessons, or any other skill you wish to learn">
+  <meta name="keywords" content="education,tutorials,lessons,languages,skills,school,grinds,music">
   <%= stylesheet_link_tag    'application', media: 'all' %>
   <%= javascript_include_tag 'application' %>
   <%= favicon_link_tag 'favicon3.ico' %>
   
+  <script >
+    window.WebFontConfig = {
+      google: { families: ['Roboto:300,400,500,700,400italic'] },
+      listeners: [],
+      active: function() {
+        this.called_ready = true;
+        for(var i = 0; i < this.listeners.length; i++) {
+          this.listeners[i]();
+        }
+      }
+    }
+  </script>
+  <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js" async></script>
+  
+
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" async defer>
-  <script src="https://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyBpOd04XM28WtAk1LcJyhlQzNW6P6OT2Q0"></script>
+  <script src="https://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyBpOd04XM28WtAk1LcJyhlQzNW6P6OT2Q0" async defer></script>
+
+  
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous" async></script>
+
+
   <%= csrf_meta_tags %>
   <!-- <meta name="viewport" content="width=device-width"> -->
   <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimal-ui" />

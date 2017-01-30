@@ -21,7 +21,7 @@
             class="md-card-image" 
             alt="{{ User.first_name }} profile pic">
 
-        <img ng-if="!User.profile" ng-src="<%= asset_path('silhouette.jpg') %>"
+        <img ng-if="!User.profile" ng-src="<%= asset_url('silhouette.jpg') %>"
           class="md-card-image"
           alt="No profile selected"
         >
@@ -71,8 +71,7 @@
       </md-card> 
     </div> <!-- end of flex -->
 
-    <div flex="50" flex-xs="100">
-      
+    <div flex="50" flex-xs="100">      
       
       <md-grid-list md-cols="3" md-row-height="6:2" >
         <md-grid-tile class="gray"
@@ -99,21 +98,16 @@
         </md-grid-tile>
         
       </md-grid-list>
-      
-        
-       
 
     </div> <!-- end of flex=50 flex-xs=100 -->
   </div> <!-- end of layout = row -->
 </div> 
 
-<div layout="column">
+<div class="margin_t_10" layout="column">
   
-  
-  
-  <div layout-padding layout-fill flex >
+  <div layout-padding-gt-xs layout-fill flex >
    
-    <md-content layout-padding flex class="gutter_75" ng-class="{no_subjects_warn:User.subjects.length==0}"> <!-- SUBJECT select -->
+    <md-content layout-padding-gt-xs flex class="big_gutter" ng-class="{no_subjects_warn:User.subjects.length==0}"> <!-- SUBJECT select -->
       <md-toolbar >
         <div class="md-toolbar-tools padding_10">
           <span layout-margin>Your Subjects</span>
@@ -126,6 +120,7 @@
             md-item-text="subject.name"
             md-selected-item-change="User.pick_subject( subject )"
             md-delay="300"
+            md-input-id="subject_select"
 
             class="black_text no_padding" placeholder="Choose your subjects">
         <md-item-template>
@@ -136,29 +131,26 @@
         </md-not-found>
       </md-autocomplete>
 
-      <div ng-messages="{ no_subjects:!User.subjects.length }" role="alert">
+      <div class="margin_l_5" ng-messages="{ no_subjects:!User.subjects.length }" role="alert">
         <div ng-message="no_subjects" style="color:rgb(221,44,0);">You must select a subject for your profile to be active</div>
       </div>
       
-      <md-list>
-        <md-list-item class="md-2-line" ng-repeat="subject in User.subjects">            
-          <div class="md-list-item-text" layout="row">
+      <md-list ng-if="User.subjects.length" class="slightly_desaturated_cyan_border">
+        <md-list-item class="md-2-line " layout="row" ng-repeat="subject in User.subjects">            
+          
 
-            <div flex="90">
-              <md-icon><i class="material-icons icon_yellow">insert_emoticon</i></md-icon>
-              <span>{{subject.name}}</span>
-            </div> <!-- end of flex=90 -->
+          <div flex="80" >
+            
+            <span>{{subject.name}}</span>
+            <md-icon><i class="material-icons icon_green">done</i></md-icon>
+          </div> <!-- end of flex=90 -->
 
-            <div flex="10">
-              <md-button class="md-icon-button" ng-click="User.remove_subject( subject )">
-                <md-tooltip md-direction="left">
-                  Remove subject
-                </md-tooltip>
-                <i class="material-icons icon_red">delete</i>
-              </md-button>
-            </div> <!-- end of flex=10 -->
+          <div flex="20" ng-click="User.remove_subject( subject )">
+            <span >Delete Subject</span>
+            <md-icon><i class="material-icons icon_red">delete</i></md-icon>
+          </div> <!-- end of flex=10 -->
 
-          </div> <!-- end of md-list-item-text -->
+         
         </md-list-item>
         <md-list-item ng-if="returned_subjects" ng-init="returned_subjects=false">
 
@@ -168,8 +160,41 @@
             </md-button>
         </md-list-item>
       </md-list>
+
+
+      <!-- Levels -->
+      <md-toolbar class="margin_t_30">
+        <div class="md-toolbar-tools padding_10">
+          <span layout-margin>What level do you teach at?</span>
+        </div>
+      </md-toolbar>
+      <div class="margin_t_10" layout="row" layout-xs="column" layout-align="space-around center">
+        <div>
+          <button class="roundy_buttons primary">Primary</button>
+          <md-checkbox ng-change="User.update()" ng-model="User.primary" aria-label="Primary"></md-checkbox>
+        </div>
+
+        <div>
+          <button class="roundy_buttons jc" >Junior Cert</button>
+          <md-checkbox ng-change="User.update()" ng-model="User.jc" aria-label="Junior Cert"></md-checkbox>
+        </div>
+        
+        <div>
+          <button class="roundy_buttons lc" >Leaving Cert</button>
+          <md-checkbox ng-change="User.update()" ng-model="User.lc" aria-label="Leaving Cert"></md-checkbox>
+        </div>
+
+        <div>
+          <button class="roundy_buttons third_level" >Third level</button>
+          <md-checkbox ng-change="User.update()" ng-model="User.third_level" aria-label="Third level"></md-checkbox>
+        </div>
+        
+      </div>
+      <!-- End of levels -->
+
     </md-content> 
     <!-- end of subject select -->
+
 
     <!-- EXPERIENCE -->
     <md-card layout-padding layout-margin class="gutter_75 margin_t_10"> 

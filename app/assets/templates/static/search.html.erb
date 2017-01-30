@@ -12,58 +12,70 @@
 
   <md-sidenav  
           md-component-id="search_nav" 
-          class="md-sidenav-left min_width_190" 
+          class="md-sidenav-left width_l_30p max_height_75vh margin_t_l_20" 
           md-is-locked-open="$mdMedia('gt-xs')"
           md-is-open="search_nav_opened">
     
     <form ng-submit="search_teachers()" name="searchForm">
       <p>Change your search</p>
+
       <md-chips >
-        <md-chip class="min_height_32" ng-show="selected.subject_name">{{ selected.subject_name }}</md-chip>
-        <md-chip class="min_height_32" ng-show="selected.county_name">{{ selected.county_name }}</md-chip>
-        
-        
+        <md-chip class="min_height_32 background_color_slightly_desaturated_cyan white_text" ng-show="selected.subject_name">
+          {{ selected.subject_name }}
+        </md-chip>
+        <span ng-if="selected_county_name">/</span>
+        <md-chip class="min_height_32 background_color_slightly_desaturated_pink white_text" ng-show="selected_county_name">
+          {{ selected_county_name }}
+        </md-chip>        
       </md-chips>
+
       <div layout-gt-sm="column" flex>
-        <md-autocomplete
-            class="no_overflow" 
-            md-select-on-match="true"
-            md-selected-item="selected.subject_name" 
-            md-input-name="subject"
-            md-search-text="searchText.subject_name"
-            md-search-text-change="search_subjects( searchText.subject_name )"
-            md-items="subject in subjects_list" 
-            md-item-text="subject" 
-            md-floating-label="Subject"            
-            md-selected-item-change="subject_picked( subject )"
-            ng-model-options="{ debounce: 500 }"
-            md-min-length="2">
-          <md-item-template>
-            <span md-highlight-text="searchText">{{subject}}</span>
-          </md-item-template>
-          <md-not-found>
-            No matches found.
-          </md-not-found>
-        </md-autocomplete>
+        <div class="slightly_desaturated_cyan_border">
+          <md-autocomplete
+              md-require-match="true"
+              md-select-on-match="true"
+              md-match-case-insensitive="true"
+              class="no_overflow" 
+              md-select-on-match="true"
+              md-selected-item="selected.subject_name" 
+              md-input-name="subject"
+              md-search-text="searchText.subject_name"
+              md-search-text-change="search_subjects( searchText.subject_name )"
+              md-items="subject in subjects_list" 
+              md-item-text="subject" 
+              md-floating-label="Subject"            
+              md-selected-item-change="subject_picked( subject )"
+              ng-model-options="{ debounce: 500 }"
+              md-min-length="2">
+            <md-item-template>
+              <span md-highlight-text="searchText">{{subject}}</span>
+            </md-item-template>
+            <md-not-found>
+              No matches found.
+            </md-not-found>
+          </md-autocomplete>
+        </div>
         
         
 
         
-        <md-autocomplete 
-            class="no_overflow" 
-            md-selected-item="selected.county_name" 
-            md-input-name="county"
-            md-search-text="searchText.county_name" 
-            md-items="county in counties" 
-            md-item-text="county" 
-            md-floating-label="County"
-            md-search-text-change="search_counties( searchText.county_name )"
-            md-selected-item-change="county_picked( county )">
-          <md-item-template>
-            <span md-highlight-text="county">{{county}}</span>
-          </md-item-template>
-          
-        </md-autocomplete>
+        <div class="slightly_desaturated_pink margin_t_8">
+          <md-autocomplete 
+              class="no_overflow" 
+              md-selected-item="selected_county_name" 
+              md-input-name="county"
+              md-search-text="searchText.county_name" 
+              md-items="county in counties" 
+              md-item-text="county" 
+              md-floating-label="County"
+              md-search-text-change="search_counties( searchText.county_name )"
+              md-selected-item-change="county_picked( county )">
+            <md-item-template>
+              <span md-highlight-text="county">{{county}}</span>
+            </md-item-template>
+            
+          </md-autocomplete>
+        </div>
         
       </div>
 
@@ -89,11 +101,11 @@
 
 
 
-  <div layout="column" class="boxWithHeight" flex-xs="100">
-    <md-content layout-xs="column" layout="row" layout-wrap>
+  <div layout="column" class="boxWithHeight" flex-xs="100" style="min-height:50vh;">
+    <md-content layout-xs="column" layout="row" layout-wrap >
 
       <md-card 
-            ng-repeat="teacher in teachers" 
+            ng-repeat="teacher in teachers | start_from:(current_page - 1) * page_size | limitTo: page_size" 
             md-theme-watch 
             ng-click="view_teacher( teacher )"
             ng-if="teachers.length>0"
@@ -106,7 +118,7 @@
           </md-card-title-text>
           <md-card-title-media>
             <div  class="md-media-lg card-media">
-              <img ng-src="{{ teacher.photos[0].avatar.url }}" class="height_152">
+              <img ng-src="{{ teacher.photos[0].avatar.url }}" class="max_width_114">
             </div>
           </md-card-title-media>
         </md-card-title>
@@ -117,30 +129,29 @@
       </md-card>
 
 
-      <!-- <md-card 
-            ng-repeat="teacher in teachers" 
-            md-theme-watch 
-            ng-click="view_teacher( teacher )"
-            ng-if="teachers.length>0"
-            >
-        <md-card-title>
-          <md-card-title-text>
-            <span class="md-headline">{{ teacher.first_name }} {{ teacher.last_name }}  </span>
-            <span ng-if="teacher.location" class="md-subhead">{{ teacher.location.address }}</span>
-            <span ng-repeat="subject in teacher.subjects">{{ subject.name }}</span>
-          </md-card-title-text>
-        </md-card-title>
-        <md-card-content layout="row" layout-align="space-between">
-          <img ng-if="teacher.photos.length>0" ng-src="{{ teacher.photos[0].avatar.url }}" class="md-media-xl">
-          <md-card-actions layout="column">
-            
-          </md-card-actions>
-        </md-card-content>
-      </md-card> -->
-
       <div ng-if="teachers.length==0" layout-fill flex="100">
         No results found
       </div>
     </md-content>
+
+    
   </div> <!-- end of column -->
+
+  
 </div>
+
+<div ng-show="teachers.length" layout="row" layout-align="center" >
+  <div >
+    <!-- Pagination controls -->
+    <div class="center_text" class="md-inline-form">
+      <ul uib-pagination class="no_margin" total-items="teachers.length" ng-model="current_page" items-per-page="page_size"></ul>
+      <md-input-container  md-no-float class="no_margin remove_vertical_align">
+        <input type="text" ng-model="page_size" ng-model-options="{debounce:1000}" class="page_size_input" placeholder="Number per page">
+        <span class="float_left margin_t_8"> per page</span>
+      </md-input-container>
+    </div>
+    <!-- End of pagination controls -->
+    {{ selected_county_name }}
+  </div>
+</div>
+

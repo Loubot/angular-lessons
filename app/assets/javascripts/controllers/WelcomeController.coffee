@@ -46,14 +46,22 @@ angular.module('lessons').controller('WelcomeController', [
 
 
     $scope.search = ->
+      $scope.selected = {}
       if $scope.selected? && !$scope.selected.county_name?
         $scope.selected.county_name = $("[name='county']").val()
       if $scope.selected && !$scope.selected.subject_name?
         $scope.selected.subject_name = $("[name='subject']").val()
       # if $scope.selected.subject_name.length > 0
-      
+
+      params = { name: $("[name='subject']").val(), location: $("[name='county']").val()  }
+      console.log params
+
+      $state.go(
+        'search',
+        params
+      )
        
-      $state.go( "search", { name: $scope.selected.subject_name, location: $scope.selected.county_name } )
+      # $state.go( "search", { name: $scope.selected.subject_name, location: $scope.selected.county_name } )
 
     $scope.subject_picked = ( subject )->
       
@@ -83,7 +91,7 @@ angular.module('lessons').controller('WelcomeController', [
       $scope.counties = $filter('filter')( $scope.county_list, county )
 
 
-    $scope.county_list = counties #counties factory
+    $scope.county_list = counties.county_list() #counties factory
 
     COMMS.GET(
         '/search-subjects'
