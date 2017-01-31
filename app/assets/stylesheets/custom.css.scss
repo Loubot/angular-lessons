@@ -840,6 +840,12 @@ md-sidenav.md-closed.md-locked-open-add-active.user_menu {
   min-width: 98px;
 }
 
+@media ( max-width: 600px ) {
+  .search_roundy_buttons{
+    min-height: 60px;
+  }
+}
+
 .search_roundy_buttons{
   @extend .white_text;
   -moz-border-radius: 15px;
