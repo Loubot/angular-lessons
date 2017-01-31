@@ -117,7 +117,7 @@
             <span ng-repeat="subject in teacher.subjects">{{ subject.name }}</span>
           </md-card-title-text>
           <md-card-title-media ng-if="teacher.photos.length">
-            <div class="md-media-lg card-media">
+            <div class="md-media-lg card-media height_auto">
               <img ng-src="{{ teacher.photos[0].avatar.url }}" class="max_width_114">
             </div>
           </md-card-title-media>
@@ -174,7 +174,6 @@
       </md-input-container>
     </div>
     <!-- End of pagination controls -->
-    {{ selected_county_name }}
   </div>
 </div>
 
