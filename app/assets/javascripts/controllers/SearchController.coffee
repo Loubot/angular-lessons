@@ -101,4 +101,17 @@ angular.module('lessons').controller( 'SearchController', [
 
     $scope.search_nav = ->
       $mdSidenav('search_nav').toggle()
+
+
+    ################ Show profile pic #####################################
+    $scope.teacher_profile = ( teacher ) ->
+      url = null
+      for pic in teacher.photos
+        if pic.id == teacher.profile
+          url = pic.avatar.url
+
+      url
+      
+
+    ################ End of show profile pic ##############################
 ])
