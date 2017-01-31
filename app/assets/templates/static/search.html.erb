@@ -116,15 +116,38 @@
             <span ng-if="teacher.location" class="md-subhead address">{{ teacher.location.address }}</span>
             <span ng-repeat="subject in teacher.subjects">{{ subject.name }}</span>
           </md-card-title-text>
-          <md-card-title-media>
-            <div  class="md-media-lg card-media">
+          <md-card-title-media ng-if="teacher.photos.length">
+            <div class="md-media-lg card-media">
               <img ng-src="{{ teacher.photos[0].avatar.url }}" class="max_width_114">
             </div>
           </md-card-title-media>
         </md-card-title>
-        <md-card-actions layout="row" layout-align="end center">
-          <!-- <md-button>Action 1</md-button>
-          <md-button>Action 2</md-button> -->
+        <md-card-actions>
+
+          <!-- Display teachers levels -->
+          <div ng-if="teacher.primary || teacher.jc || teacher.lc || teacher.third_level" class="margin_t_10" layout="row" layout-xs="column" layt>
+
+            <div ng-if="teacher.primary">
+              <button  class="search_roundy_buttons primary">Primary</button>
+              
+            </div>
+
+            <div ng-if="teacher.jc">
+              <button  class="search_roundy_buttons jc" >Junior Cert</button>
+              
+            </div>
+            
+            <div ng-if="teacher.lc">
+              <button  class="search_roundy_buttons lc" >Leaving Cert</button>
+            </div>
+
+            <div ng-if="teacher.third_level">
+              <button  class="search_roundy_buttons third_level" >Third level</button>
+            </div>            
+          </div>
+
+          <!-- End of display teachers levels -->
+
         </md-card-actions>
       </md-card>
 

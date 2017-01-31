@@ -836,6 +836,15 @@ md-sidenav.md-closed.md-locked-open-add-active.user_menu {
   min-width: 98px;
 }
 
+.search_roundy_buttons{
+  @extend .white_text;
+  -moz-border-radius: 15px;
+  -webkit-border-radius: 15px;
+  border: 5px ;
+  padding: 10px;
+  margin: 0px 1px;
+}
+
 .primary{
   background-color: #6ea9b5;
 }
