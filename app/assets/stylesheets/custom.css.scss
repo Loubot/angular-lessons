@@ -234,6 +234,10 @@ md-sidenav.md-closed.md-locked-open-add-active.user_menu {
   outline: none;
 }
 
+.width_85px{
+  width: 85px;
+}
+
 .width_75{
   width: 75% !important;
 }
@@ -618,8 +622,8 @@ md-sidenav.md-closed.md-locked-open-add-active.user_menu {
 
 
 #map { 
-  height: 45%;
-  min-height: 200px !important;
+  height: 75%;
+  min-height: 400px !important;
   width: 100%;
 }
 
