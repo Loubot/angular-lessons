@@ -151,11 +151,11 @@ ActiveRecord::Schema.define(version: 20170126142705) do
     t.string   "last_name"
     t.text     "overview"
     t.boolean  "is_teacher",             default: false
+    t.text     "tokens"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "admin",                  default: false
     t.integer  "view_count",             default: 0
-    t.text     "tokens"
     t.boolean  "primary"
     t.boolean  "jc"
     t.boolean  "lc"
