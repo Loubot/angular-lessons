@@ -40,6 +40,7 @@ angular.module('lessons').controller( "TeacherLocationController" , [
     init_map = ->
       $scope.map = {}
       $scope.searchBox = {}
+      input = null
       console.log $rootScope.User.location
       if $rootScope.User? && $rootScope.User.location
 
@@ -64,6 +65,11 @@ angular.module('lessons').controller( "TeacherLocationController" , [
         alertify.log "Use the search box to find your location"
         alertify.log "Just enter your county if you don't want to enter your address"
 
+      # google.maps.event.addListenerOnce $scope.map, 'idle', ->
+      #   $scope.map.setCenter(
+      #     lat: $rootScope.User.location.latitude
+      #     lng: $rootScope.User.location.longitude
+      #   )
       
 
       $scope.map.addListener( 'click', ( position ) ->
@@ -86,6 +92,8 @@ angular.module('lessons').controller( "TeacherLocationController" , [
       )
 
       input = document.getElementById('pac-input')
+      console.log "input "
+      console.log input
       $scope.searchBox = new google.maps.places.SearchBox(input)
       $scope.map.controls[google.maps.ControlPosition.TOP_LEFT].push(input)
       geocoder = new google.maps.Geocoder
@@ -102,7 +110,11 @@ angular.module('lessons').controller( "TeacherLocationController" , [
       )
 
       google.maps.event.addListenerOnce $scope.map, 'idle', ->
-        google.maps.event.trigger($scope.map, 'resize')
+        $scope.map.setCenter(
+          lat: $rootScope.User.location.latitude
+          lng: $rootScope.User.location.longitude
+          google.maps.event.trigger($scope.map, 'resize')
+        )
 
     set_marker = ( location ) ->
       $scope.marker.setMap null if $scope.marker?
