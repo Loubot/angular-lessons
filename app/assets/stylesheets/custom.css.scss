@@ -86,6 +86,7 @@ md-sidenav.md-closed.md-locked-open-add-active.big_user_menu {
     min-width: 100px !important;
     width: auto;
     max-height: 75vh !important;
+    z-index: 10000;
 } 
 
 md-sidenav.user_menu, 
