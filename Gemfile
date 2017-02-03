@@ -48,6 +48,7 @@ group :production do
   gem 'render_static'
   gem 'daemons'
   gem 'rails_12factor'
+  gem 'tunemygc'
 end
 
 group :development, :test do
