@@ -117,13 +117,14 @@
      <span ng-include="'user/_map.html'"></span>
 
       <md-content ng-if="teacher.overview">
+      <md-toolbar>
+        <div class="md-toolbar-tools">
+          <span layout-margin>Overview</span>
+          <!-- fill up the space between left and right area -->            
+        </div>
+      </md-toolbar>
         <md-card>
-          <md-card-title>
-            <md-card-title-text>
-              <span class="md-headline">Overview</span>
-            </md-card-title-text>
-            
-          </md-card-title>
+          
           <md-card-content class="break_word">
             
              {{ teacher.overview }}
@@ -132,13 +133,14 @@
       </md-content>
 
       <md-content ng-if="teacher.experience">
+      <md-toolbar>
+        <div class="md-toolbar-tools">
+          <span layout-margin>Experience</span>
+          <!-- fill up the space between left and right area -->            
+        </div>
+      </md-toolbar>
         <md-card>
-          <md-card-title>
-            <md-card-title-text>
-              <span class="md-headline ">Experience</span>
-            </md-card-title-text>
-            
-          </md-card-title>
+          
           <md-card-content class="break_word">
             
              {{ teacher.experience.description }}
@@ -150,8 +152,7 @@
         <md-toolbar>
           <div class="md-toolbar-tools">
             <span layout-margin>Qualifications</span>
-            <!-- fill up the space between left and right area -->
-            
+            <!-- fill up the space between left and right area -->            
           </div>
         </md-toolbar>
         <md-card ng-repeat="qual in teacher.qualifications">
