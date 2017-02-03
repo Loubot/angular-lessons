@@ -45,6 +45,29 @@
           <p class="icon_button">
            <i class="material-icons">remove_red_eye</i> {{ teacher.view_count }}
           </p>
+          <!-- Display teachers levels -->
+          <div ng-if="teacher.primary || teacher.jc || teacher.lc || teacher.third_level" class="margin_t_10" layout="row">
+
+            <div ng-if="teacher.primary">
+              <button  class="search_roundy_buttons primary">Primary</button>
+              
+            </div>
+
+            <div ng-if="teacher.jc">
+              <button  class="search_roundy_buttons jc" >Junior Cert</button>
+              
+            </div>
+            
+            <div ng-if="teacher.lc">
+              <button  class="search_roundy_buttons lc" >Leaving Cert</button>
+            </div>
+
+            <div ng-if="teacher.third_level">
+              <button  class="search_roundy_buttons third_level" >Third level</button>
+            </div>            
+          </div>
+
+          <!-- End of display teachers levels -->
         </md-card-content>
       </md-card>
     </div> <!-- end of flex=30 -->
@@ -106,6 +129,35 @@
           <p class="icon_button">
            <i class="material-icons">remove_red_eye</i> {{ teacher.view_count }}
           </p>
+          <!-- Display teachers levels -->
+          <div ng-if="teacher.primary || teacher.jc || teacher.lc || teacher.third_level" class="margin_t_10" layout-gt-xs="column" layout-xs="row">
+
+            <div layout="row">
+              <div ng-if="teacher.primary">
+                <button   class="search_roundy_buttons primary ">
+                          Primary
+                </button>
+                
+              </div>
+
+              <div ng-if="teacher.jc">
+                <button  class="search_roundy_buttons jc" >Junior Cert</button>
+                
+              </div>
+            </div>
+            
+            <div layout="row">
+              <div ng-if="teacher.lc">
+                <button  class="search_roundy_buttons lc" >Leaving Cert</button>
+              </div>
+
+              <div ng-if="teacher.third_level">
+                <button  class="search_roundy_buttons third_level" >Third level</button>
+              </div>   
+            </div>         
+          </div>
+
+          <!-- End of display teachers levels -->
         </md-card-content>
       </md-card>
     </div> <!-- end of flex=30 -->
