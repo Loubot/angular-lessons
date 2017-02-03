@@ -108,14 +108,18 @@
             {{ teacher.location.county }}
           </md-card-title-text>
         </md-card-title>
-        <md-card-actions layout="row" layout-align="start center">
-          <md-button ng-if="User" class="md-raised md-primary white_text icon_button " style="white-space: normal;" ng-click="open_message_dialog()">
-            Contact {{ teacher.first_name }} <i class="material-icons">contact_mail</i>
-          </md-button>
+        <md-card-actions layout="row" layout-align="center center">
+          <div ng-if="User">
+            <md-button  class="md-raised md-primary white_text icon_button " style="white-space: normal;" ng-click="open_message_dialog()">
+              Contact {{ teacher.first_name }} <i class="material-icons">contact_mail</i>
+            </md-button>
+          </div>
 
-          <md-button ng-if="!User" class="md-raised md-primary white_text icon_button" style="white-space: normal;" ng-click="open_login_or_register()">
-            Contact {{ teacher.first_name }} <i class="material-icons">contact_mail</i>
-          </md-button>
+          <div ng-if="!User">
+            <md-button  class="md-raised md-primary white_text icon_button" style="white-space: normal;" ng-click="open_login_or_register()">
+              Contact {{ teacher.first_name }} <i class="material-icons">contact_mail</i>
+            </md-button>
+          </div>
 
 
           <!-- <md-button ><i class="material-icons">history</i></md-button> -->
@@ -125,14 +129,19 @@
             </md-button>
           </md-card-icon-actions>
         </md-card-actions>
-        <md-card-content>
+        <md-card-content class="no_padding center_text">
           <p class="icon_button">
            <i class="material-icons">remove_red_eye</i> {{ teacher.view_count }}
           </p>
           <!-- Display teachers levels -->
-          <div ng-if="teacher.primary || teacher.jc || teacher.lc || teacher.third_level" class="margin_t_10" layout-gt-xs="column" layout-xs="row">
-
-            <div layout="row">
+          <div ng-if="teacher.primary || teacher.jc || teacher.lc || teacher.third_level" class="margin_t_10 padding_5" layout-gt-xs="column" layout-xs="row">
+            <md-toolbar>
+              <div class="md-toolbar-tools">
+                <span layout-margin>Levels taught</span>
+                <!-- fill up the space between left and right area -->            
+              </div>
+            </md-toolbar>
+            <div layout="row" class="margin_t_10">
               <div ng-if="teacher.primary">
                 <button   class="search_roundy_buttons primary ">
                           Primary
@@ -146,7 +155,7 @@
               </div>
             </div>
             
-            <div layout="row">
+            <div layout="row" class="margin_t_10">
               <div ng-if="teacher.lc">
                 <button  class="search_roundy_buttons lc" >Leaving Cert</button>
               </div>
