@@ -623,6 +623,7 @@ md-sidenav.md-closed.md-locked-open-add-active.user_menu {
 
 
 #map { 
+
   // height: 75%;
   // min-height: 400px;
   height: 50vh;
@@ -957,6 +958,13 @@ ul.share-buttons .sr-only {
     margin-right: auto !important;
   }
 
+  .gutter_90{
+    min-width: auto;
+    max-width: auto;
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+
   
 
   .county_search{
@@ -1045,6 +1053,13 @@ ul.share-buttons .sr-only {
   .gutter_75{
     min-width: 75% !important;
     max-width: 75%;
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+
+  .gutter_90{
+    min-width: 90% !important;
+    max-width: 90%;
     margin-left: auto !important;
     margin-right: auto !important;
   }
