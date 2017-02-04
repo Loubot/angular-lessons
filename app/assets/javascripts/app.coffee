@@ -460,3 +460,4 @@ angular.module('lessons').run [
 #       $rootScope.isAuthenticated = false
 #     )
 # ])
+# 360 519

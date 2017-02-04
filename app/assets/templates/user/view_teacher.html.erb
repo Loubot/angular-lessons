@@ -1,7 +1,7 @@
 <!-- Only address-->
 <div ng-if="teacher_loaded && !teacher.qualifications.length && !teacher.experience && !teacher.overview">
-  <div layout="row" layout-xs="column" layout-wrap flex class="gutter_90">
-    <div flex="30" flex-xs="100" layout-fill >
+  <div layout-xs="column" layout-sm="column" layout-wrap flex class="gutter_90">
+    <div  flex-xs="100" flex-sm="100" layout-fill >
       <md-card class="no_margin_on_small">
         <md-card-header>
           <md-card-avatar>
@@ -47,29 +47,36 @@
           </p>
           <!-- Display teachers levels -->
           <div  ng-if="teacher.primary || teacher.jc || teacher.lc || teacher.third_level" 
-                class="margin_t_10" 
-                layout-xs="row"
-                layout-sm="column"
+                class="margin_t_10" >
+            <md-toolbar>
+              <div class="md-toolbar-tools">
+                <span layout-margin>Levels taught</span>
+                <!-- fill up the space between left and right area -->            
+              </div>
+            </md-toolbar>
+
+            <div layout-xs="row"
+                layout-sm="row"
                 layout-gt-sm="row"
-                >
+                class="margin_t_10">
+              <div ng-if="teacher.primary">
+                <button  class="search_roundy_buttons primary">Primary</button>
+                
+              </div>
 
-            <div ng-if="teacher.primary">
-              <button  class="search_roundy_buttons primary">Primary</button>
+              <div ng-if="teacher.jc">
+                <button  class="search_roundy_buttons jc" >Junior Cert</button>
+                
+              </div>
               
-            </div>
+              <div ng-if="teacher.lc">
+                <button  class="search_roundy_buttons lc" >Leaving Cert</button>
+              </div>
 
-            <div ng-if="teacher.jc">
-              <button  class="search_roundy_buttons jc" >Junior Cert</button>
-              
+              <div ng-if="teacher.third_level">
+                <button  class="search_roundy_buttons third_level" >Third level</button>
+              </div>            
             </div>
-            
-            <div ng-if="teacher.lc">
-              <button  class="search_roundy_buttons lc" >Leaving Cert</button>
-            </div>
-
-            <div ng-if="teacher.third_level">
-              <button  class="search_roundy_buttons third_level" >Third level</button>
-            </div>            
           </div>
 
           <!-- End of display teachers levels -->
@@ -139,7 +146,7 @@
            <i class="material-icons">remove_red_eye</i> {{ teacher.view_count }}
           </p>
           <!-- Display teachers levels -->
-          <div ng-if="teacher.primary || teacher.jc || teacher.lc || teacher.third_level" class="margin_t_10 padding_5" layout-gt-xs="column" layout-xs="row">
+          <div ng-if="teacher.primary || teacher.jc || teacher.lc || teacher.third_level" class="margin_t_10 padding_5" >
             <md-toolbar>
               <div class="md-toolbar-tools">
                 <span layout-margin>Levels taught</span>

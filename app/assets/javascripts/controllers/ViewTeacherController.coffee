@@ -12,9 +12,6 @@ angular.module('lessons').controller( 'ViewTeacherController', [
   ( $scope, $rootScope, $state, $stateParams, $filter, COMMS, alertify, $mdDialog ) ->
     console.log "ViewTeacherController"
 
-    alert $(window).height()
-    alert $(window).width()
-
     $scope.message = {}
 
     $scope.map = {}
