@@ -20,6 +20,15 @@ Location.create(  address: "Galway", county: 'Co. Galway', teacher_id: t1.id )
 Location.create(  address: "Limerick", county: 'Co. Limerick', teacher_id: t2.id )
 Location.create(  address: "Dublin", county: 'Co. Dublin', teacher_id: t3.id )
 
+Teacher.create( first_name: "Bob", last_name: "Builder", password: "Football1", email: "lllouis4@yahoo.com", is_teacher: true, primary: true)
+Teacher.create( first_name: "Bob", last_name: "Builder", password: "Football1", email: "lllouis5@yahoo.com", is_teacher: true, primary: true)
+Teacher.create( first_name: "Bob", last_name: "Builder", password: "Football1", email: "lllouis6@yahoo.com", is_teacher: true, primary: true)
+Teacher.create( first_name: "Bob", last_name: "Builder", password: "Football1", email: "lllouis7@yahoo.com", is_teacher: true, primary: true)
+Teacher.create( first_name: "Bob", last_name: "Builder", password: "Football1", email: "lllouis8@yahoo.com", is_teacher: true, primary: true)
+Teacher.create( first_name: "Bob", last_name: "Builder", password: "Football1", email: "lllouis9@yahoo.com", is_teacher: true, primary: true)
+Teacher.create( first_name: "Bob", last_name: "Builder", password: "Football1", email: "lllouis10@yahoo.com", is_teacher: true, primary: true)
+Teacher.create( first_name: "Bob", last_name: "Builder", password: "Football1", email: "lllouis11@yahoo.com", is_teacher: true, primary: true)
+
 Teacher.all.each do |t|
   t.subjects << Subject.first
 end

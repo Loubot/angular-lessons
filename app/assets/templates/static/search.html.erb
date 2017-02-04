@@ -101,61 +101,63 @@
 
 
 
-  <div layout="column" class="boxWithHeight" flex-xs="100" style="min-height:50vh;">
-    <md-content layout-xs="column" layout="row" layout-wrap >
+  <div layout="column" class="boxWithHeight margin_l_5 min_height_50vh" flex-xs="100" layout-align="start center" >
+    <div>
+      <md-content layout-xs="column" layout="row" layout-wrap class="search_content">
 
-      <md-card 
-            ng-repeat="teacher in teachers | start_from:(current_page - 1) * page_size | limitTo: page_size" 
-            md-theme-watch 
-            ng-click="view_teacher( teacher )"
-            ng-if="teachers.length>0"
-            >
-        <md-card-title>
-          <md-card-title-text class="margin_r_5">
-            <span class="md-headline">{{ teacher.first_name }} {{ teacher.last_name }}  </span>
-            <span ng-if="teacher.location" class="md-subhead address">{{ teacher.location.address }}</span>
-            <span ng-repeat="subject in teacher.subjects">{{ subject.name }}</span>
-          </md-card-title-text>
-          <md-card-title-media ng-if="teacher.photos.length">
-            <div class="md-media-lg card-media height_auto">
-              <img ng-src="{{ teacher_profile( teacher ) }}" class="max_width_114">
-            </div>
-          </md-card-title-media>
-        </md-card-title>
-        <md-card-actions>
+        <md-card 
+              ng-repeat="teacher in teachers | start_from:(current_page - 1) * page_size | limitTo: page_size" 
+              md-theme-watch 
+              ng-click="view_teacher( teacher )"
+              ng-if="teachers.length>0"
+              >
+          <md-card-title>
+            <md-card-title-text class="margin_r_5">
+              <span class="md-headline">{{ teacher.first_name }} {{ teacher.last_name }}  </span>
+              <span ng-if="teacher.location" class="md-subhead address">{{ teacher.location.address }}</span>
+              <span ng-repeat="subject in teacher.subjects">{{ subject.name }}</span>
+            </md-card-title-text>
+            <md-card-title-media ng-if="teacher.photos.length">
+              <div class="md-media-lg card-media height_auto">
+                <img ng-src="{{ teacher_profile( teacher ) }}" class="max_width_114">
+              </div>
+            </md-card-title-media>
+          </md-card-title>
+          <md-card-actions>
 
-          <!-- Display teachers levels -->
-          <div ng-if="teacher.primary || teacher.jc || teacher.lc || teacher.third_level" class="margin_t_10" layout="row">
+            <!-- Display teachers levels -->
+            <div ng-if="teacher.primary || teacher.jc || teacher.lc || teacher.third_level" class="margin_t_10" layout="row">
 
-            <div ng-if="teacher.primary">
-              <button  class="search_roundy_buttons primary">Primary</button>
+              <div ng-if="teacher.primary">
+                <button  class="search_roundy_buttons primary">Primary</button>
+                
+              </div>
+
+              <div ng-if="teacher.jc">
+                <button  class="search_roundy_buttons jc" >Junior Cert</button>
+                
+              </div>
               
+              <div ng-if="teacher.lc">
+                <button  class="search_roundy_buttons lc" >Leaving Cert</button>
+              </div>
+
+              <div ng-if="teacher.third_level">
+                <button  class="search_roundy_buttons third_level" >Third level</button>
+              </div>            
             </div>
 
-            <div ng-if="teacher.jc">
-              <button  class="search_roundy_buttons jc" >Junior Cert</button>
-              
-            </div>
-            
-            <div ng-if="teacher.lc">
-              <button  class="search_roundy_buttons lc" >Leaving Cert</button>
-            </div>
+            <!-- End of display teachers levels -->
 
-            <div ng-if="teacher.third_level">
-              <button  class="search_roundy_buttons third_level" >Third level</button>
-            </div>            
-          </div>
-
-          <!-- End of display teachers levels -->
-
-        </md-card-actions>
-      </md-card>
+          </md-card-actions>
+        </md-card>
 
 
-      <div ng-if="teachers.length==0" layout-fill flex="100">
-        No results found
-      </div>
-    </md-content>
+        <div ng-if="teachers.length==0" layout-fill flex="100">
+          No results found
+        </div>
+      </md-content>
+    </div>
 
     
   </div> <!-- end of column -->
