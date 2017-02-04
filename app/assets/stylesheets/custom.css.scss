@@ -636,6 +636,12 @@ md-sidenav.md-closed.md-locked-open-add-active.user_menu {
   }
 }
 
+@media( min-width: 960px ) {
+  #map{
+    height: 105vh; 
+  }
+}
+
 .location_results{
   max-height: 200px;
 

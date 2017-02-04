@@ -1,7 +1,7 @@
 <!-- Only address-->
 <div ng-if="teacher_loaded && !teacher.qualifications.length && !teacher.experience && !teacher.overview">
-  <div layout-xs="column" layout-sm="column" layout-wrap flex class="gutter_90">
-    <div  flex-xs="100" flex-sm="100" layout-fill >
+  <div layout-xs="column" layout-sm="column" layout-gt-sm="row" layout-wrap flex class="gutter_90">
+    <div  flex-xs="100" flex-sm="100" flex-gt-sm="40" layout-fill >
       <md-card class="no_margin_on_small">
         <md-card-header>
           <md-card-avatar>
@@ -85,7 +85,7 @@
     </div> <!-- end of flex=30 -->
 
 
-    <div flex="70" flex-xs="100" layout-fill >
+    <div flex-gt-sm="60" layout-fill >
 
 
       <span ng-include="'user/_map.html'"></span>
