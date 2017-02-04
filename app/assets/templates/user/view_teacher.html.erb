@@ -41,12 +41,17 @@
             </md-button>
           </md-card-icon-actions>
         </md-card-actions>
-        <md-card-content>
+        <md-card-content class="padding_5">
           <p class="icon_button">
            <i class="material-icons">remove_red_eye</i> {{ teacher.view_count }}
           </p>
           <!-- Display teachers levels -->
-          <div ng-if="teacher.primary || teacher.jc || teacher.lc || teacher.third_level" class="margin_t_10" layout="row">
+          <div  ng-if="teacher.primary || teacher.jc || teacher.lc || teacher.third_level" 
+                class="margin_t_10" 
+                layout-xs="row"
+                layout-sm="column"
+                layout-gt-sm="row"
+                >
 
             <div ng-if="teacher.primary">
               <button  class="search_roundy_buttons primary">Primary</button>
