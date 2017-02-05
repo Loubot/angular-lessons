@@ -13,6 +13,7 @@ angular.module('lessons').controller( 'ViewTeacherController', [
     console.log "ViewTeacherController"
 
     $scope.message = {}
+    $scope.profile = null
 
     $scope.map = {}
     $scope.teacher_loaded = false
@@ -89,8 +90,10 @@ angular.module('lessons').controller( 'ViewTeacherController', [
         if parseInt( photo.id ) == parseInt( $scope.teacher.profile )
           # console.log photo
           $scope.profile = photo
-          # console.log $scope.profile
-          $scope.profile
+          
+      console.log "profile"
+      console.log $scope.profile
+      $scope.profile
 
 
     #################### fotrama ########################################
