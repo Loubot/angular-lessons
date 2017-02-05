@@ -205,6 +205,9 @@
       </md-toolbar>
       <md-subheader class="md-primary no_padding">Are you willing to travel to the students house?</md-subheader>
 
+        <div layout-padding>
+          <div><md-checkbox ng-model="User.travel" ng-change="User.update()" name="User.travel" aria-label="Travel">I'm willing to travel</md-checkbox></div>
+        </div>
     </md-content> 
     <!-- end of travel option -->
 

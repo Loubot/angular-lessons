@@ -37,7 +37,7 @@ class TeacherController < ApplicationController
 
   def show_teacher
     teacher = Teacher.includes( :photos, :subjects, :location, :experience, :qualifications )\
-              .select( :id, :email, :first_name, :last_name, :profile, :overview, :view_count, :primary, :jc, :lc, :third_level )\
+              .select( :id, :email, :first_name, :last_name, :profile, :overview, :view_count, :primary, :jc, :lc, :third_level, :travel )\
               .find_by_id( params[:teacher_id])
 
     Teacher.increment_counter( :view_count, params[:teacher_id] )
@@ -67,6 +67,6 @@ class TeacherController < ApplicationController
     end
 
     def teacher_params
-      params.permit( :profile, :id, :teacher_id, :overview, :experience, :calendar_id, :first_name, :last_name, :is_teacher, :third_level, :jc, :lc, :primary )
+      params.permit( :profile, :id, :teacher_id, :overview, :experience, :calendar_id, :first_name, :last_name, :is_teacher, :third_level, :jc, :lc, :primary, :travel )
     end
 end

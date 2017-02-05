@@ -17,7 +17,7 @@
           <md-card-title-text>
             <span class="md-headline">Subject(s)</span>
             <md-chips>
-              <md-chip ng-repeat="subject in teacher.subjects">{{ subject.name }}</md-chip>           
+              <md-chip ng-repeat="subject in teacher.subjects">{{ teacher.subjects.length }}</md-chip>           
             </md-chips>
             <span class="md-headline">Address</span>
             {{ teacher.location.address }}<br>
@@ -113,7 +113,7 @@
           <md-card-title-text>
             <span class="md-headline">Subject(s)</span>
             <md-chips>
-              <md-chip ng-repeat="subject in teacher.subjects">{{ subject.name }}</md-chip>           
+              <md-chip ng-repeat="subject in teacher.subjects">{{ teacher.subjects.length }}</md-chip>           
             </md-chips>
             <span class="md-headline">Address</span>
             {{ teacher.location.address }}<br>

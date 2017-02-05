@@ -123,10 +123,16 @@
               </div>
             </md-card-title-media>
           </md-card-title>
-          <md-card-actions>
+          <md-card-actions class="no_margin" >
+
+            <!-- Travel option -->
+              <span ng-if="teacher.travel">
+                <md-icon  class="navy_icon"><i class="material-icons" >subway</i></md-icon> This teacher will travel <md-icon  class="navy_icon"><i class="material-icons" >subway</i></md-icon>
+              </span>
+            <!-- End of travel option -->
 
             <!-- Display teachers levels -->
-            <div ng-if="teacher.primary || teacher.jc || teacher.lc || teacher.third_level" class="margin_t_10" layout="row">
+            <div ng-if="teacher.primary || teacher.jc || teacher.lc || teacher.third_level" class="margin_t_10 padding_5" layout="row">
 
               <div ng-if="teacher.primary">
                 <button  class="search_roundy_buttons primary">Primary</button>
