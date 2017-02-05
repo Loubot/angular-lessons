@@ -160,7 +160,7 @@ ActiveRecord::Schema.define(version: 20170205113731) do
     t.boolean  "jc"
     t.boolean  "lc"
     t.boolean  "third_level"
-    t.boolean  "travel"
+    t.boolean  "travel",                 default: false
   end
 
   add_index "teachers", ["email"], name: "index_teachers_on_email"
