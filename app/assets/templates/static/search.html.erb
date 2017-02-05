@@ -126,9 +126,13 @@
           <md-card-actions class="no_margin" >
 
             <!-- Travel option -->
-              <span ng-if="teacher.travel">
-                <md-icon  class="navy_icon"><i class="material-icons" >subway</i></md-icon> This teacher will travel <md-icon  class="navy_icon"><i class="material-icons" >subway</i></md-icon>
-              </span>
+            <div ng-if="teacher.travel" class="margin_t_8 center_text raisedbox" layout-align="space-between" layout="row">
+              <div><md-icon  class="navy_icon"><i class="material-icons" >subway</i></md-icon> </div>
+
+              <div>This teacher will travel </div>
+
+              <div><md-icon  class="navy_icon"><i class="material-icons" >subway</i></md-icon></div>
+            </div>
             <!-- End of travel option -->
 
             <!-- Display teachers levels -->

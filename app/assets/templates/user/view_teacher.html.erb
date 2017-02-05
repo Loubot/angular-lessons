@@ -22,6 +22,17 @@
             <span class="md-headline">Address</span>
             {{ teacher.location.address }}<br>
             {{ teacher.location.county }}
+
+            <!-- Travel option -->
+            <div ng-if="teacher.travel" class="margin_t_8 center_text raisedbox" layout-align="space-between" layout="row">
+              <div><md-icon  class="navy_icon"><i class="material-icons" >subway</i></md-icon> </div>
+
+              <div>This teacher will travel </div>
+
+              <div><md-icon  class="navy_icon"><i class="material-icons" >subway</i></md-icon></div>
+            </div>
+            <!-- End of travel option -->
+            
           </md-card-title-text>
         </md-card-title>
         <md-card-actions layout="row" layout-align="start center">
@@ -118,6 +129,17 @@
             <span class="md-headline">Address</span>
             {{ teacher.location.address }}<br>
             {{ teacher.location.county }}
+
+            <!-- Travel option -->
+            <div ng-if="teacher.travel" class="margin_t_8 center_text raisedbox" layout-align="space-between" layout="row">
+              <div><md-icon  class="navy_icon"><i class="material-icons" >subway</i></md-icon> </div>
+
+              <div>This teacher will travel </div>
+
+              <div><md-icon  class="navy_icon"><i class="material-icons" >subway</i></md-icon></div>
+            </div>
+            <!-- End of travel option -->
+
           </md-card-title-text>
         </md-card-title>
         <md-card-actions layout="row" layout-align="center center">
