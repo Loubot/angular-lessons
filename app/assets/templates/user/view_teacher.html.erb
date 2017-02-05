@@ -1,5 +1,5 @@
 <!-- Only address-->
-<div ng-if="teacher_loaded && !teacher.qualifications.length && !teacher.experience && !teacher.overview">
+<div ng-if="teacher_loaded && !teacher.qualifications.length && !teacher.experience && !teacher.overview && !teacher.photos.length">
   <div layout-xs="column" layout-sm="column" layout-gt-sm="row" layout-wrap flex class="gutter_90">
     <div  flex-xs="100" flex-sm="100" flex-gt-sm="40" layout-fill >
       <md-card class="no_margin_on_small">
@@ -95,7 +95,9 @@
 <!-- End of Only address -->
 
 <!-- Only Address and map -->
-<div ng-if="teacher_loaded && ( teacher.overview || teacher.qualifications.length > 0 || teacher.experience )" >
+
+{{ teacher.subjects }}
+<div ng-if="teacher_loaded && ( teacher.overview || teacher.qualifications.length > 0 || teacher.experience || teacher.photos.length )" >
   <div layout-xs="column" layout-sm="column" layout-gt-sm="row" layout-wrap flex class="gutter_90">
     <div  flex-xs="100" flex-sm="100" flex-gt-sm="40" layout-fill >
       <md-card class="no_margin_on_small">
@@ -104,7 +106,7 @@
             <img class="md-user-avatar" ng-src="{{ profile.avatar.url }}">
           </md-card-avatar>
           <md-card-header-text>
-            <span class="md-title">{{ teacher.first_name }} {{ teacher.last_name }}</span>
+            <span class="md-title">s{{ teacher.first_name }} {{ teacher.last_name }}</span>
             <!-- <span class="md-subhead">Sub header</span> -->
           </md-card-header-text>
         </md-card-header>
@@ -112,9 +114,9 @@
         <md-card-title>
           <md-card-title-text>
             <span class="md-headline">Subject(s)</span>
-            <md-chips>
-              <md-chip ng-repeat="subject in teacher.subjects">{{ subject.name }}</md-chip>           
-            </md-chips>
+            <div class="manual_chip_container">
+              <span class="manual_chip" ng-repeat="subject in teacher.subjects">{{ subject.name }}</span>
+            </div>
             <span class="md-headline">Address</span>
             {{ teacher.location.address }}<br>
             {{ teacher.location.county }}

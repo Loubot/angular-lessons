@@ -396,6 +396,29 @@ md-sidenav.md-closed.md-locked-open-add-active.user_menu {
   visibility: hidden !important;
 }
 
+.manual_chip_container{
+  display: block;
+  font-family: Roboto,Helvetica Neue,sans-serif;
+  font-size: 16px;
+  padding: 0 0 8px 3px;
+  vertical-align: middle;
+}
+
+.manual_chip{
+  background-color: rgb(224, 224, 224);
+  cursor: default;
+  border-radius: 16px;
+  display: block;
+  height: 32px;
+  line-height: 32px;
+  margin: 8px 8px 0 0;
+  padding: 0 12px;
+  float: left;
+  box-sizing: border-box;
+  max-width: 100%;
+  position: relative;
+}
+
 .no_padding{
   padding: 0px !important;
 }
