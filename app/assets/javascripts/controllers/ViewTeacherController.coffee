@@ -13,7 +13,7 @@ angular.module('lessons').controller( 'ViewTeacherController', [
     console.log "ViewTeacherController"
 
     $scope.message = {}
-    $scope.profile = null
+    $scope.profile = null #Teacher profile pic
 
     $scope.map = {}
     $scope.teacher_loaded = false

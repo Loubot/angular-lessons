@@ -195,15 +195,26 @@
     </md-content> 
     <!-- end of subject select -->
 
+    <!-- Travel option -->
+
+    <md-content layout-padding-gt-xs flex class="big_gutter margin_t_10" ng-class="{no_subjects_warn:User.subjects.length==0}"> <!-- SUBJECT select -->
+      <md-toolbar >
+        <div class="md-toolbar-tools padding_10">
+          <span layout-margin>Will you travel?</span>
+        </div>
+      </md-toolbar>
+      <md-subheader class="md-primary no_padding">Are you willing to travel to the students house?</md-subheader>
+
+    </md-content> 
+    <!-- end of travel option -->
+
 
     <!-- EXPERIENCE -->
-    <md-card layout-padding layout-margin class="gutter_75 margin_t_10"> 
-      <div layout="column" layout-fill>
-        <md-toolbar>
-          <div class="md-toolbar-tools">
+    <md-card layout-padding layout-margin class="gutter_75 margin_t_10 no_padding"> 
+      <div class="no_padding" layout="column" layout-fill>
+        <md-toolbar >
+          <div class="md-toolbar-tools padding_10">
             <span layout-margin>Your Experience</span>
-            <!-- fill up the space between left and right area -->
-            
           </div>
         </md-toolbar>
         <md-content>
