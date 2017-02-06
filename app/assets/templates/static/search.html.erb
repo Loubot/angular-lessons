@@ -103,7 +103,7 @@
 
   <div layout="column" class="boxWithHeight margin_l_5 min_height_50vh" flex-xs="100" layout-align="start center" >
     <div>
-      <md-content layout-xs="column" layout="row" layout-wrap class="search_content">
+      <md-content layout="row" layout-wrap class="search_content">
 
         <md-card 
               ng-repeat="teacher in teachers | start_from:(current_page - 1) * page_size | limitTo: page_size" 
@@ -182,7 +182,7 @@
       <ul uib-pagination class="no_margin" total-items="teachers.length" ng-model="current_page" items-per-page="page_size"></ul>
       <md-input-container  md-no-float class="no_margin remove_vertical_align">
         <input type="text" ng-model="page_size" ng-model-options="{debounce:1000}" class="page_size_input" placeholder="Number per page">
-        <span class="float_left margin_t_8"> per page</span>
+        <span class="float_left margin_l_2 margin_t_8">  per page</span>
       </md-input-container>
     </div>
     <!-- End of pagination controls -->
