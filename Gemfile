@@ -30,7 +30,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'where-or', '~> 0.1.5'
 
 
-
+gem 'hashie', '3.4.4'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '3.1.7'
 
