@@ -132,10 +132,10 @@
       </md-autocomplete>
 
       <div class="margin_l_5" ng-messages="{ no_subjects:!User.subjects.length }" role="alert">
-        <div ng-message="no_subjects" style="color:rgb(221,44,0);">You must select a subject for your profile to be active</div>
+        <div ng-message="no_subjects" class="no_subjects_message">You must select a subject for your profile to be active</div>
       </div>
       
-      <md-list ng-if="User.subjects.length" class="slightly_desaturated_cyan_border margin_t_10">
+      <md-list ng-if="User.subjects.length" class="margin_t_10">
         <md-list-item class="md-2-line " layout="row" ng-repeat="subject in User.subjects">            
           
 
@@ -163,7 +163,7 @@
 
 
       <!-- Levels -->
-      <md-toolbar class="margin_t_30">
+      <md-toolbar >
         <div class="md-toolbar-tools padding_10">
           <span layout-margin>What level do you teach at? <small>(optional)</small></span>
         </div>
@@ -208,9 +208,35 @@
         <div layout-padding>
           <div><md-checkbox ng-model="User.travel" ng-change="User.update()" name="User.travel" aria-label="Travel">I'm willing to travel</md-checkbox></div>
         </div>
-        <img ng-src="<%= asset_url('trans_vetting.jpg')  %>" class="square_50">
     </md-content> 
     <!-- end of travel option -->
+
+
+    <!-- Vetting and tci option -->
+
+    <md-content layout-padding-gt-xs flex class="big_gutter margin_t_10" ng-class="{no_subjects_warn:User.subjects.length==0}"> <!-- SUBJECT select -->
+      <md-toolbar >
+        <div class="md-toolbar-tools padding_10">
+          <span layout-margin>Garda vetting, TCI</span>
+        </div>
+      </md-toolbar>
+      <md-subheader class="md-primary no_padding">Are you Garda vetted and TCI registered</md-subheader>
+        <div layout="row" layout-align="space-around center">
+          <div layout="column" class="center_text" ng-click="open_email_proof_dialog()">
+            <div>Click here to upload your Garda vetting proof. </div>
+            <div><img ng-src="<%= asset_url('trans_vetting.png')  %>" class="proof_image cursor_hand"></div>
+          </div>
+
+          <div layout="column" class="center_text" ng-click="open_email_proof_dialog()">
+            <div>Click here to upload your TCI registration. </div>
+            <div><img ng-src="<%= asset_url('tci.png')  %>" class="proof_image cursor_hand" alt="Teachers council Ireland"></div>
+          </div>
+
+        </div>
+        
+        
+    </md-content> 
+    <!-- end of Vetting and tci option -->
 
 
     <!-- EXPERIENCE -->

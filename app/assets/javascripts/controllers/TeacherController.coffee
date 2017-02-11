@@ -4,6 +4,7 @@ angular.module('lessons').controller('TeacherController', [
   '$scope'
   '$rootScope'
   'User'
+  'RESOURCES'
   'alertify'
   'COMMS'
   '$auth'
@@ -11,7 +12,7 @@ angular.module('lessons').controller('TeacherController', [
   '$mdBottomSheet'
   '$mdDialog'
   '$mdToast'
-  ( $scope, $rootScope, User, alertify, COMMS, $auth, Upload, $mdBottomSheet, $mdDialog, $mdToast ) ->
+  ( $scope, $rootScope, User, RESOURCES, alertify, COMMS, $auth, Upload, $mdBottomSheet, $mdDialog, $mdToast ) ->
     console.log "TeacherController"
 
     display_subject_warning = ->
@@ -153,4 +154,44 @@ angular.module('lessons').controller('TeacherController', [
       alertify.error 'Registration failed: ' + reason.errors[0]
       return
     ####################### End of password ##############################
+
+    ####################### Upload proof #################################
+
+    $scope.upload_proof = ( proof ) ->
+      Upload.upload(
+        url: "#{ RESOURCES.DOMAIN }/teacher/#{ $rootScope.User.id }/garda-vetting"
+        file: proof
+        # avatar: pic
+        # data:
+        #   avatar: pic
+      ).then( ( resp ) ->
+        console.log resp
+        alertify.success "Uploaded successfully"
+        $mdDialog.cancel()
+        $scope.proof = null
+      ).catch( ( err ) ->
+        console.log err
+        alertify.error "Failed to upload"
+      )
+
+    $scope.open_email_proof_dialog = ->
+      $mdDialog.show(
+        templateUrl: "dialogs/email_proof.html"
+        scope: $scope
+        preserveScope: true
+        
+      )
+
+    $mdDialog.show(
+      templateUrl: "dialogs/email_proof.html"
+      scope: $scope
+      preserveScope: true
+      
+    )
+
+    $scope.close_dialog = ->
+      $mdDialog.cancel()
+
+
+    ####################### End of upload proof ##########################
 ])

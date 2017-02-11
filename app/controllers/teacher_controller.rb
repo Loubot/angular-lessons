@@ -45,8 +45,15 @@ class TeacherController < ApplicationController
       render json: { teacher: teacher.as_json( include: [ :photos, :subjects, :location, :experience, :qualifications ] ) }
     else
       render json: { errors: { full_messages: "Can't find teacher with that id" } }, status: 404
-    end
-    
+    end    
+  end
+
+  def garda_vetting
+    # pp params[:file].original_filename
+    AdminMailer.garda_vetting( params, current_teacher.email ).deliver_now
+
+
+    render json: { message: 'a ok ' } and return
   end
 
   def chunks

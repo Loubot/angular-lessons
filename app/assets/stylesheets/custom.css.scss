@@ -263,9 +263,14 @@ md-sidenav.md-closed.md-locked-open-add-active.user_menu {
   width: 100% !important;
 }
 
-.square_50{
-  height: 50px;
-  width: 50px;
+.proof_image{
+  height: 110px;
+  width: 110px;
+}
+
+.proof_image:hover {
+    opacity: 0.5;
+    filter: alpha(opacity=50); /* For IE8 and earlier */
 }
 
 .tolowercase {
@@ -950,6 +955,10 @@ md-sidenav.md-closed.md-locked-open-add-active.user_menu {
   outline: none;
   border-color: #af504c !important;
   box-shadow: 0 0 10px #9ecaed !important;
+}
+
+.no_subjects_message{
+  color:rgb(221,44,0);
 }
 // end of teacher page
 
