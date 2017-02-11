@@ -49,7 +49,6 @@ group :production do
   gem 'daemons'
   gem 'rails_12factor'
   gem 'tunemygc'
-  gem 'hahsie', '~> 3.4.4'
 end
 
 group :development, :test do
