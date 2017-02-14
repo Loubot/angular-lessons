@@ -182,13 +182,6 @@ angular.module('lessons').controller('TeacherController', [
         
       )
 
-    $mdDialog.show(
-      templateUrl: "dialogs/email_proof.html"
-      scope: $scope
-      preserveScope: true
-      
-    )
-
     $scope.close_dialog = ->
       $mdDialog.cancel()
 
