@@ -226,15 +226,15 @@
     <!-- END OF EXPERIENCE -->
 
     <!-- OVERVIEW -->
-    <md-content layout-padding  class="gutter_75 margin_t_10" >
+    <md-content layout-padding  class="gutter_75 margin_t_10 no_padding" >
       <md-toolbar >
-        <div class="md-toolbar-tools padding_10">
+        <div class="md-toolbar-tools">
           <span layout-margin>Overview</span>
         </div>
       </md-toolbar>
       <md-divider></md-divider>
       <span ng-if="User.overview!=null" class="break_word">{{ User.overview }}</span>
-      <p ng-if="User.overview==null">No overview set yet.</p>
+      <p ng-if="User.overview==null" class="no_subjects_message">No overview set yet.</p>
       <p ng-if="User.overview==null">It's important to write a strong overview. Let people know about yourself</p>
 
       <md-divider></md-divider>
