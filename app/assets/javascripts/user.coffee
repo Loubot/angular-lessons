@@ -232,6 +232,8 @@ angular.module('lessons').factory 'User', [
     @id = teacher.id
     @is_teacher = teacher.is_teacher
     @travel = teacher.travel
+    @garda = teacher.garda
+    @tci = teacher.tci
     @admin = teacher.admin
     @overview = teacher.overview
     @profile = teacher.profile

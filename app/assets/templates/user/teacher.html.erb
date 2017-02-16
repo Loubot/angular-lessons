@@ -307,14 +307,26 @@
       </md-toolbar>
       <md-subheader class="md-primary no_padding">Are you Garda vetted and TCI registered</md-subheader>
       <div layout="row" layout-align="space-around center" class="margin_b_10">
-        <div layout="column" class="center_text" ng-click="open_email_proof_dialog()">
+        <div layout="column" class="center_text" > <!-- ng-click="open_email_proof_dialog()" -->
           <div>Click here to upload your Garda vetting proof. </div>
           <div><img ng-src="<%= asset_url('trans_vetting.png')  %>" class="proof_image cursor_hand"></div>
+          <br>
+          <div>
+            <md-checkbox ng-change="User.update()" ng-model="User.garda" aria-label="Finished?">
+              Are you garda vetted?
+            </md-checkbox>
+          </div>
         </div>
 
-        <div layout="column" class="center_text" ng-click="open_email_proof_dialog()">
+        <div layout="column" class="center_text" > <!-- ng-click="open_email_proof_dialog()" -->
           <div>Click here to upload your TCI registration. </div>
           <div><img ng-src="<%= asset_url('tci.png')  %>" class="proof_image cursor_hand" alt="Teachers council Ireland"></div>
+          <br>
+          <div>
+            <md-checkbox ng-change="User.update()" ng-model="User.tci" aria-label="Finished?">
+              Are you registered with the TCI?
+            </md-checkbox>
+          </div>
         </div>
 
       </div>

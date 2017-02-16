@@ -4,7 +4,6 @@
 #
 #  id          :integer          not null, primary key
 #  description :string
-#  text        :string
 #  teacher_id  :integer
 #  start       :datetime
 #  end_time    :datetime
