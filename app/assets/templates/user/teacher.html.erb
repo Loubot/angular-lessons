@@ -132,10 +132,10 @@
       </md-autocomplete>
 
       <div class="margin_l_5" ng-messages="{ no_subjects:!User.subjects.length }" role="alert">
-        <div ng-message="no_subjects" style="color:rgb(221,44,0);">You must select a subject for your profile to be active</div>
+        <div ng-message="no_subjects" class="no_subjects_message">You must select a subject for your profile to be active</div>
       </div>
       
-      <md-list ng-if="User.subjects.length" class="slightly_desaturated_cyan_border margin_t_10">
+      <md-list ng-if="User.subjects.length" class="margin_t_10">
         <md-list-item class="md-2-line " layout="row" ng-repeat="subject in User.subjects">            
           
 
@@ -163,7 +163,7 @@
 
 
       <!-- Levels -->
-      <md-toolbar class="margin_t_30">
+      <md-toolbar >
         <div class="md-toolbar-tools padding_10">
           <span layout-margin>What level do you teach at? <small>(optional)</small></span>
         </div>
@@ -197,13 +197,11 @@
 
 
     <!-- EXPERIENCE -->
-    <md-card layout-padding layout-margin class="gutter_75 margin_t_10"> 
-      <div layout="column" layout-fill>
-        <md-toolbar>
-          <div class="md-toolbar-tools">
+    <md-card layout-padding layout-margin class="gutter_75 margin_t_10 no_padding"> 
+      <div class="no_padding" layout="column" layout-fill>
+        <md-toolbar >
+          <div class="md-toolbar-tools padding_10">
             <span layout-margin>Your Experience</span>
-            <!-- fill up the space between left and right area -->
-            
           </div>
         </md-toolbar>
         <md-content>
@@ -228,11 +226,15 @@
     <!-- END OF EXPERIENCE -->
 
     <!-- OVERVIEW -->
-    <md-content layout-padding  class="gutter_75 margin_t_10" >
-      <h3>Overview</h3>
+    <md-content layout-padding  class="gutter_75 margin_t_10 no_padding" >
+      <md-toolbar >
+        <div class="md-toolbar-tools">
+          <span layout-margin>Overview</span>
+        </div>
+      </md-toolbar>
       <md-divider></md-divider>
       <span ng-if="User.overview!=null" class="break_word">{{ User.overview }}</span>
-      <p ng-if="User.overview==null">No overview set yet.</p>
+      <p ng-if="User.overview==null" class="no_subjects_message">No overview set yet.</p>
       <p ng-if="User.overview==null">It's important to write a strong overview. Let people know about yourself</p>
 
       <md-divider></md-divider>
@@ -277,6 +279,61 @@
       
     </md-content>
     <!-- END OF QUALIFICATIONS -->
+
+    <!-- Travel option -->
+
+    <md-content layout-padding-gt-xs flex class="big_gutter margin_t_10"> 
+      <md-toolbar >
+        <div class="md-toolbar-tools padding_10">
+          <span layout-margin>Will you travel?</span>
+        </div>
+      </md-toolbar>
+      <md-subheader class="md-primary no_padding">Are you willing to travel to the students house?</md-subheader>
+
+        <div layout-padding>
+          <div><md-checkbox ng-model="User.travel" ng-change="User.update()" name="User.travel" aria-label="Travel">I'm willing to travel</md-checkbox></div>
+        </div>
+    </md-content> 
+    <!-- end of travel option -->
+
+
+    <!-- Vetting and tci option -->
+
+    <md-content layout-padding-gt-xs flex class="big_gutter margin_t_10" > 
+      <md-toolbar >
+        <div class="md-toolbar-tools padding_10">
+          <span layout-margin>Garda vetting, TCI</span>
+        </div>
+      </md-toolbar>
+      <md-subheader class="md-primary no_padding">Are you Garda vetted and TCI registered</md-subheader>
+      <div layout="row" layout-align="space-around center" class="margin_b_10">
+        <div layout="column" class="center_text" > <!-- ng-click="open_email_proof_dialog()" -->
+          <div>Click here to upload your Garda vetting proof. </div>
+          <div><img ng-src="<%= asset_url('trans_vetting.png')  %>" class="proof_image cursor_hand"></div>
+          <br>
+          <div>
+            <md-checkbox ng-change="User.update()" ng-model="User.garda" aria-label="Finished?">
+              Are you garda vetted?
+            </md-checkbox>
+          </div>
+        </div>
+
+        <div layout="column" class="center_text" > <!-- ng-click="open_email_proof_dialog()" -->
+          <div>Click here to upload your TCI registration. </div>
+          <div><img ng-src="<%= asset_url('tci.png')  %>" class="proof_image cursor_hand" alt="Teachers council Ireland"></div>
+          <br>
+          <div>
+            <md-checkbox ng-change="User.update()" ng-model="User.tci" aria-label="Finished?">
+              Are you registered with the TCI?
+            </md-checkbox>
+          </div>
+        </div>
+
+      </div>
+        
+        
+    </md-content> 
+    <!-- end of Vetting and tci option -->
 
     <!-- Password -->
     <md-content class="gutter_75 margin_t_10 center_text match_background" >

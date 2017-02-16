@@ -25,6 +25,7 @@ Rails.application.routes.draw do
     resources :teacher, only: [ :index, :show, :update ] do
       get       'show-teacher'            => 'teacher#show_teacher'
       post      'add-subject'             => 'subject#add_subject'
+      post      'garda-vetting'           => 'teacher#garda_vetting'
 
       # post    'pic'                       => "photos#create"
       # delete  'delete-pic'                => "photos#destroy"

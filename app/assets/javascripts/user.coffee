@@ -231,6 +231,9 @@ angular.module('lessons').factory 'User', [
     @email = teacher.email
     @id = teacher.id
     @is_teacher = teacher.is_teacher
+    @travel = teacher.travel
+    @garda = teacher.garda
+    @tci = teacher.tci
     @admin = teacher.admin
     @overview = teacher.overview
     @profile = teacher.profile
@@ -271,8 +274,8 @@ angular.module('lessons').factory 'User', [
       self= @
       Upload.upload(
         url: "#{ RESOURCES.DOMAIN }/teacher/#{ $rootScope.User.id }/photos"
-        file: pic
-        avatar: pic
+        # file: pic
+        # avatar: pic
         data:
           avatar: pic
       ).then( ( resp ) -> 

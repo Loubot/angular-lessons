@@ -1,0 +1,16 @@
+<md-dialog aria-label="List dialog">
+  <md-dialog-content>
+    <form class="md-inline-form" >
+      <md-button  
+        ng-model="proof" 
+        ngf-select="upload_proof( proof )"
+        aria-label="Upload proof">Click here to upload proof
+      </md-button>
+
+  
+    </form>
+  </md-dialog-content>
+  <md-dialog-actions>
+    <md-button ng-click="close_dialog()" class="md-primary">Close Dialog</md-button>
+  </md-dialog-actions>
+</md-dialog>

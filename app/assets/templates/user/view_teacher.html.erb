@@ -1,121 +1,278 @@
+<!-- Only address-->
+<div ng-if="teacher_loaded && !teacher.qualifications.length && !teacher.experience && !teacher.overview && !teacher.photos.length">
+  <div layout-xs="column" layout-sm="column" layout-gt-sm="row" layout-wrap flex class="gutter_90">
+    <div  flex-xs="100" flex-sm="100" flex-gt-sm="40" layout-fill >
+      <md-card class="no_margin_on_small">
+        <md-card-header>
+          <md-card-avatar ng-if="profile">
+            <img class="md-user-avatar" ng-src="{{ profile.avatar.url }}">
+          </md-card-avatar>
+          <md-card-header-text>
+            <span class="md-title">{{ teacher.first_name }} {{ teacher.last_name }}</span>
+            <!-- <span class="md-subhead">Sub header</span> -->
+          </md-card-header-text>
+        </md-card-header>
+        <img ng-if="profile" ng-src="{{ profile.avatar.url }}" class="md-card-image" alt="image caption">
+        <md-card-title>
+          <md-card-title-text>
+            <span class="md-headline">Subject(s)</span>
+            <md-chips>
+              <md-chip ng-repeat="subject in teacher.subjects">{{ subject.name }}</md-chip>           
+            </md-chips>
+            <span class="md-headline">Address</span>
+            {{ teacher.location.address }}<br>
+            {{ teacher.location.county }}
 
+            <!-- Travel option -->
+            <div ng-if="teacher.travel" class="margin_t_8 center_text raisedbox" layout-align="space-between" layout="row">
+              <div><md-icon  class="navy_icon"><i class="material-icons" >subway</i></md-icon> </div>
 
-<div layout="row" layout-xs="column" layout-wrap flex class="slightly_desaturated_cyan">
-  <div flex="30" flex-xs="100" layout-fill >
-    <md-card class="no_margin_on_small">
-      <md-card-header>
-        <md-card-avatar>
-          <img class="md-user-avatar" ng-src="{{ profile.avatar.url }}">
-        </md-card-avatar>
-        <md-card-header-text>
-          <span class="md-title">{{ teacher.first_name }} {{ teacher.last_name }}</span>
-          <!-- <span class="md-subhead">Sub header</span> -->
-        </md-card-header-text>
-      </md-card-header>
-      <img ng-if="profile" ng-src="{{ profile.avatar.url }}" class="md-card-image" alt="image caption">
-      <md-card-title>
-        <md-card-title-text>
-          <span class="md-headline">Subject(s)</span>
-          <md-chips>
-            <md-chip ng-repeat="subject in teacher.subjects">{{ subject.name }}</md-chip>           
-          </md-chips>
-          <span class="md-headline">Address</span>
-          {{ teacher.location.address }}<br>
-          {{ teacher.location.county }}
-        </md-card-title-text>
-      </md-card-title>
-      <md-card-actions layout="row" layout-align="start center">
-        <md-button ng-if="User" class="md-raised md-primary white_text icon_button " style="white-space: normal;" ng-click="open_message_dialog()">
-          Contact {{ teacher.first_name }} <i class="material-icons">contact_mail</i>
-        </md-button>
+              <div>This teacher will travel </div>
 
-        <md-button ng-if="!User" class="md-raised md-primary white_text icon_button" style="white-space: normal;" ng-click="open_login_or_register()">
-          Contact {{ teacher.first_name }} <i class="material-icons">contact_mail</i>
-        </md-button>
-
-
-        <!-- <md-button ><i class="material-icons">history</i></md-button> -->
-        <md-card-icon-actions>
-          <md-button class="md-icon-button" aria-label="icon">
-            <md-icon md-svg-icon="icon"></md-icon>
+              <div><md-icon  class="navy_icon"><i class="material-icons" >subway</i></md-icon></div>
+            </div>
+            <!-- End of travel option -->
+            
+          </md-card-title-text>
+        </md-card-title>
+        <md-card-actions layout="row" layout-align="start center">
+          <md-button ng-if="User" class="md-raised md-primary white_text icon_button " style="white-space: normal;" ng-click="open_message_dialog()">
+            Contact {{ teacher.first_name }} <i class="material-icons">contact_mail</i>
           </md-button>
-        </md-card-icon-actions>
-      </md-card-actions>
-      <md-card-content>
-        <p class="icon_button">
-         <i class="material-icons">remove_red_eye</i> {{ teacher.view_count }}
-        </p>
-      </md-card-content>
-    </md-card>
-  </div> <!-- end of flex=30 -->
+
+          <md-button ng-if="!User" class="md-raised md-primary white_text icon_button" style="white-space: normal;" ng-click="open_login_or_register()">
+            Contact {{ teacher.first_name }} <i class="material-icons">contact_mail</i>
+          </md-button>
 
 
-  <div flex="70" flex-xs="100" layout-fill >
+          <!-- <md-button ><i class="material-icons">history</i></md-button> -->
+          <md-card-icon-actions>
+            <md-button class="md-icon-button" aria-label="icon">
+              <md-icon md-svg-icon="icon"></md-icon>
+            </md-button>
+          </md-card-icon-actions>
+        </md-card-actions>
+        <md-card-content class="padding_5">
+          <p class="icon_button">
+           <i class="material-icons">remove_red_eye</i> {{ teacher.view_count }}
+          </p>
+          <!-- Display teachers levels -->
+          <div  ng-if="teacher.primary || teacher.jc || teacher.lc || teacher.third_level" 
+                class="margin_t_10" >
+            <md-toolbar>
+              <div class="md-toolbar-tools">
+                <span layout-margin>Levels taught</span>
+                <!-- fill up the space between left and right area -->            
+              </div>
+            </md-toolbar>
 
+            <div layout-xs="row"
+                layout-sm="row"
+                layout-gt-sm="row"
+                class="margin_t_10">
+              <div ng-if="teacher.primary">
+                <button  class="search_roundy_buttons primary">Primary</button>
+                
+              </div>
 
-    <!--  map div -->
-    <div flex="100" id="map" class="margin_t_10 margin_b_10"  ng-show="teacher.location"></div>
+              <div ng-if="teacher.jc">
+                <button  class="search_roundy_buttons jc" >Junior Cert</button>
+                
+              </div>
+              
+              <div ng-if="teacher.lc">
+                <button  class="search_roundy_buttons lc" >Leaving Cert</button>
+              </div>
 
-    <!-- end of map div -->
+              <div ng-if="teacher.third_level">
+                <button  class="search_roundy_buttons third_level" >Third level</button>
+              </div>            
+            </div>
+          </div>
 
-    <md-content ng-if="teacher.overview">
-      <md-card>
-        <md-card-title>
-          <md-card-title-text>
-            <span class="md-headline">Overview</span>
-          </md-card-title-text>
-          
-        </md-card-title>
-        <md-card-content class="break_word">
-          
-           {{ teacher.overview }}
+          <!-- End of display teachers levels -->
         </md-card-content>
       </md-card>
-    </md-content>
+    </div> <!-- end of flex=30 -->
 
-    <md-content ng-if="teacher.experience">
-      <md-card>
+
+    <div flex-gt-sm="60" layout-fill >
+
+
+      <span ng-include="'user/_map.html'"></span>
+    </div>
+  </div>
+</div>
+<!-- End of Only address -->
+
+<!-- Only Address and map -->
+<div ng-if="teacher_loaded && ( teacher.overview || teacher.qualifications.length > 0 || teacher.experience || teacher.photos.length )" >
+  <div layout-xs="column" layout-sm="column" layout-gt-sm="row" layout-wrap flex class="gutter_90">
+    <div  flex-xs="100" flex-sm="100" flex-gt-sm="40" layout-fill >
+      <md-card class="no_margin_on_small">
+        <md-card-header>
+          <md-card-avatar ng-if="profile">
+            <img class="md-user-avatar" ng-src="{{ profile.avatar.url }}">
+          </md-card-avatar>
+          <md-card-header-text>
+            <span class="md-title">{{ teacher.first_name }} {{ teacher.last_name }}</span>
+            <!-- <span class="md-subhead">Sub header</span> -->
+          </md-card-header-text>
+        </md-card-header>
+        <img ng-if="profile" ng-src="{{ profile.avatar.url }}" class="md-card-image" alt="image caption">
         <md-card-title>
           <md-card-title-text>
-            <span class="md-headline ">Experience</span>
+            <span class="md-headline">Subject(s)</span>
+            <div class="manual_chip_container">
+              <span class="manual_chip" ng-repeat="subject in teacher.subjects">{{ subject.name }}</span>
+            </div>
+            <span class="md-headline">Address</span>
+            {{ teacher.location.address }}<br>
+            {{ teacher.location.county }}
+
+            <!-- Travel option -->
+            <div ng-if="teacher.travel" class="margin_t_8 center_text raisedbox" layout-align="space-between" layout="row">
+              <div><md-icon  class="navy_icon"><i class="material-icons" >subway</i></md-icon> </div>
+
+              <div>This teacher will travel </div>
+
+              <div><md-icon  class="navy_icon"><i class="material-icons" >subway</i></md-icon></div>
+            </div>
+            <!-- End of travel option -->
+
           </md-card-title-text>
-          
         </md-card-title>
-        <md-card-content class="break_word">
-          
-           {{ teacher.experience.description }}
+        <md-card-actions layout="row" layout-align="center center">
+          <div ng-if="User">
+            <md-button  class="md-raised md-primary white_text icon_button " style="white-space: normal;" ng-click="open_message_dialog()">
+              Contact {{ teacher.first_name }} <i class="material-icons">contact_mail</i>
+            </md-button>
+          </div>
+
+          <div ng-if="!User">
+            <md-button  class="md-raised md-primary white_text icon_button" style="white-space: normal;" ng-click="open_login_or_register()">
+              Contact {{ teacher.first_name }} <i class="material-icons">contact_mail</i>
+            </md-button>
+          </div>
+
+
+          <!-- <md-button ><i class="material-icons">history</i></md-button> -->
+          <md-card-icon-actions>
+            <md-button class="md-icon-button" aria-label="icon">
+              <md-icon md-svg-icon="icon"></md-icon>
+            </md-button>
+          </md-card-icon-actions>
+        </md-card-actions>
+        <md-card-content class="padding_5">
+          <p class="icon_button">
+           <i class="material-icons">remove_red_eye</i> {{ teacher.view_count }}
+          </p>
+          <!-- Display teachers levels -->
+          <div  ng-if="teacher.primary || teacher.jc || teacher.lc || teacher.third_level" 
+                class="margin_t_10" >
+            <md-toolbar>
+              <div class="md-toolbar-tools">
+                <span layout-margin>Levels taught</span>
+                <!-- fill up the space between left and right area -->            
+              </div>
+            </md-toolbar>
+
+            <div layout-xs="row"
+                layout-sm="row"
+                layout-gt-sm="row"
+                class="margin_t_10">
+              <div ng-if="teacher.primary">
+                <button  class="search_roundy_buttons primary">Primary</button>
+                
+              </div>
+
+              <div ng-if="teacher.jc">
+                <button  class="search_roundy_buttons jc" >Junior Cert</button>
+                
+              </div>
+              
+              <div ng-if="teacher.lc">
+                <button  class="search_roundy_buttons lc" >Leaving Cert</button>
+              </div>
+
+              <div ng-if="teacher.third_level">
+                <button  class="search_roundy_buttons third_level" >Third level</button>
+              </div>            
+            </div>
+          </div>
+
+          <!-- End of display teachers levels -->
         </md-card-content>
       </md-card>
-    </md-content>
+    </div> <!-- end of flex=30 -->
 
-    <md-content ng-if="teacher.qualifications.length>0">
+
+    <div flex-gt-sm="60" layout-fill >
+
+
+     <span ng-include="'user/_map.html'"></span>
+
+      <md-content ng-if="teacher.overview">
       <md-toolbar>
         <div class="md-toolbar-tools">
-          <span layout-margin>Qualifications</span>
-          <!-- fill up the space between left and right area -->
-          
+          <span layout-margin>Overview</span>
+          <!-- fill up the space between left and right area -->            
         </div>
       </md-toolbar>
-      <md-card ng-repeat="qual in teacher.qualifications">
-        <md-card-title>
-          <md-card-title-text>
-            <span class="md-headline"><strong>Title: </strong>{{ qual.title }}</span>
-          </md-card-title-text>
+        <md-card>
           
-        </md-card-title>
-        <md-card-content>
-          
-           <strong>School: </strong>{{ qual.school }}
-        </md-card-content>
-      </md-card>
-    </md-content>
+          <md-card-content class="break_word">
+            
+             {{ teacher.overview }}
+          </md-card-content>
+        </md-card>
+      </md-content>
 
-    <md-content class="slide_container" style="background-color: #e0ebf4;">
-      <img ng-repeat="slide in slides" class="slide center_block" ng-src="{{slide.image}}" ng-show="slide.index==index"> 
-    </md-content> <!-- end of slide container -->
+      <md-content ng-if="teacher.experience">
+      <md-toolbar>
+        <div class="md-toolbar-tools">
+          <span layout-margin>Experience</span>
+          <!-- fill up the space between left and right area -->            
+        </div>
+      </md-toolbar>
+        <md-card>
+          
+          <md-card-content class="break_word">
+            
+             {{ teacher.experience.description }}
+          </md-card-content>
+        </md-card>
+      </md-content>
+
+      <md-content ng-if="teacher.qualifications.length>0">
+        <md-toolbar>
+          <div class="md-toolbar-tools">
+            <span layout-margin>Qualifications</span>
+            <!-- fill up the space between left and right area -->            
+          </div>
+        </md-toolbar>
+        <md-card ng-repeat="qual in teacher.qualifications">
+          <md-card-title>
+            <md-card-title-text>
+              <span class="md-headline"><strong>Title: </strong>{{ qual.title }}</span>
+            </md-card-title-text>
+            
+          </md-card-title>
+          <md-card-content>
+            
+             <strong>School: </strong>{{ qual.school }}
+          </md-card-content>
+        </md-card>
+      </md-content>
+
+      <md-content class="slide_container" style="background-color: #e0ebf4;">
+        <img ng-repeat="slide in slides" class="slide center_block" ng-src="{{slide.image}}" ng-show="slide.index==index"> 
+      </md-content> <!-- end of slide container -->
+      
+    </div> <!-- end of flex="70" -->
+
     
-  </div> <!-- end of flex="70" -->
+  </div> <!-- end of row -->
 
-  
-</div> <!-- end of row -->
-
+</div>
+<!-- End of only address and map -->
