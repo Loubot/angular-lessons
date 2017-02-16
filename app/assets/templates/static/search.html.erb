@@ -161,16 +161,16 @@
             <!-- End of display teachers levels -->
 
             <!-- Vetting and TCI -->
-              <div layout="row" layout-align="space-around">
-                <div>
-                  <img ng-src="<%= image_path('small_vetting.png')  %>" class="small_proof_image"> Garda vetted
-                </div>
-
-                <div>
-                  <img ng-src="<%= image_path('tci.png')  %>" class="small_proof_image">TCI registered
-                </div>
-
+            <div ng-if="teacher.garda || teacher.tci" layout="row" layout-align="space-around">
+              <div ng-if="teacher.garda">
+                <img ng-src="<%= image_path('small_vetting.png')  %>" class="small_proof_image"> Garda vetted
               </div>
+
+              <div ng-if="teacher.tci">
+                <img ng-src="<%= image_path('tci.png')  %>" class="small_proof_image">TCI registered
+              </div>
+
+            </div>
             <!-- End of vetting and TCI -->
 
           </md-card-actions>
