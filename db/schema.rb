@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170216161035) do
+ActiveRecord::Schema.define(version: 20170205113731) do
 
   create_table "categories", force: :cascade do |t|
     t.string   "name"
@@ -161,8 +161,8 @@ ActiveRecord::Schema.define(version: 20170216161035) do
     t.boolean  "lc"
     t.boolean  "third_level"
     t.boolean  "travel",                 default: false
-    t.boolean  "tci"
-    t.boolean  "garda"
+    t.boolean  "tci",                    default: false
+    t.boolean  "garda",                  default: false
   end
 
   add_index "teachers", ["email"], name: "index_teachers_on_email"
