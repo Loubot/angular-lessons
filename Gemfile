@@ -5,7 +5,7 @@ source 'http://rubygems.org'
 # ruby '2.1.8', platforms: [:mingw, :mswin, :x64_mingw]
 # ruby '2.0.0', platforms: [:mingw, :mswin], group: :development
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-# ruby '2.3.1'
+ruby '2.3.1'
 
 gem 'rails', '4.2.6'
 
