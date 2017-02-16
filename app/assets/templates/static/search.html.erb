@@ -126,7 +126,7 @@
           <md-card-actions class="no_margin" >
 
             <!-- Travel option -->
-            <div ng-if="teacher.travel" class="margin_t_8 center_text raisedbox" layout-align="space-between" layout="row">
+            <div ng-if="teacher.travel" class="margin_t_8 center_text raisedbox" layout-align="space-between" layout="row" layout-margin>
               <div><md-icon  class="navy_icon"><i class="material-icons" >subway</i></md-icon> </div>
 
               <div>This teacher will travel </div>
@@ -158,6 +158,19 @@
             </div>
 
             <!-- End of display teachers levels -->
+
+            <!-- Vetting and TCI -->
+              <div layout="row" layout-align="space-around">
+                <div>
+                  <img ng-src="<%= asset_url('small_vetting.png')  %>" class="small_proof_image"> Garda vetted
+                </div>
+
+                <div>
+                  <img ng-src="<%= asset_url('small_tci.png')  %>" class="small_proof_image"> Teacher Council of Ireland
+                </div>
+
+              </div>
+            <!-- End of vetting and TCI -->
 
           </md-card-actions>
         </md-card>
