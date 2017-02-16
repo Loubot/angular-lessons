@@ -61,11 +61,12 @@ angular.module('lessons').controller( 'SearchController', [
 
 
     $scope.subject_picked = ( subject )->
+      $scope.search_teachers() if subject?
       $scope.selected.subject_name = subject
       
 
     $scope.county_picked = ( county )->
-      console.log county
+      $scope.search_teachers() if county?
       $scope.selected_county_name = county
       
 
