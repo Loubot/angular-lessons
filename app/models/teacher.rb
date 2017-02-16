@@ -34,8 +34,8 @@
 #  lc                     :boolean
 #  third_level            :boolean
 #  travel                 :boolean          default(FALSE)
-#  garda                  :boolean          default(FALSE)
-#  tci                    :boolean          default(FALSE)
+#  tci                    :boolean
+#  garda                  :boolean
 #
 
 class Teacher < ActiveRecord::Base
