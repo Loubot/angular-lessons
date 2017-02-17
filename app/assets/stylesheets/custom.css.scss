@@ -269,8 +269,10 @@ md-sidenav.md-closed.md-locked-open-add-active.user_menu {
 }
 
 .small_proof_image{
-  height: 45px;
-  width: 45px;
+  height: 6vh;
+  width: 6vh;
+  max-width: 48px;
+  max-height: 48px;
 }
 
 .proof_image:hover {
