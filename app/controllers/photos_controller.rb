@@ -20,7 +20,7 @@ class PhotosController < ApplicationController
       end
     else
       @teacher.save
-      render json: { photos: @teacher.photos }
+      render json: { photos: @teacher.photos, teacher: @teacher }
     end
     
   end

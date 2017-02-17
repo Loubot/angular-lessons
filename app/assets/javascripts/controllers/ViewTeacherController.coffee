@@ -13,12 +13,14 @@ angular.module('lessons').controller( 'ViewTeacherController', [
     console.log "ViewTeacherController"
 
     $scope.message = {}
+    $scope.profile = null #Teacher profile pic
 
     $scope.map = {}
+    $scope.teacher_loaded = false
 
-    create_map = ->
+    $scope.create_map = ->
+      console.log 'hup'
       if $scope.teacher.location?
-
         $scope.map = new google.maps.Map(document.getElementById('map'), 
           center: 
             lat: $scope.teacher.location.latitude
@@ -45,16 +47,17 @@ angular.module('lessons').controller( 'ViewTeacherController', [
         )
 
 
-        google.maps.event.addDomListener window, 'resize', ->
+        # google.maps.event.addDomListener window, 'resize', ->
 
           
-          $scope.map.setCenter(
-            lat: $scope.teacher.location.latitude
-            lng: $scope.teacher.location.longitude
-          )
+        #   $scope.map.setCenter(
+        #     lat: $scope.teacher.location.latitude
+        #     lng: $scope.teacher.location.longitude
+        #   )
 
-      google.maps.event.addListenerOnce $scope.map, 'idle', ->
-        google.maps.event.trigger($scope.map, 'resize')
+
+        google.maps.event.addListenerOnce $scope.map, 'idle', ->
+          google.maps.event.trigger($scope.map, 'resize')
 
     
     
@@ -66,7 +69,8 @@ angular.module('lessons').controller( 'ViewTeacherController', [
       alertify.success "Got teacher info"
       $scope.teacher = resp.data.teacher
       set_profile()
-      create_map() if $scope.teacher.location?
+      # create_map() if $scope.teacher.location?
+      $scope.teacher_loaded = true
       create_fotorama()
     ).catch( ( err ) ->
       console.log err
@@ -86,8 +90,10 @@ angular.module('lessons').controller( 'ViewTeacherController', [
         if parseInt( photo.id ) == parseInt( $scope.teacher.profile )
           # console.log photo
           $scope.profile = photo
-          # console.log $scope.profile
-          $scope.profile
+          
+      console.log "profile"
+      console.log $scope.profile
+      $scope.profile
 
 
     #################### fotrama ########################################

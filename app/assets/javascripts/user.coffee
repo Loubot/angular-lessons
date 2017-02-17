@@ -226,12 +226,18 @@ angular.module('lessons').factory 'User', [
   # from GH API and *returns* a promise
 
   User::update_all = ( teacher ) ->
+    @admin = teacher.admin
+
+
     @first_name = teacher.first_name
     @last_name = teacher.last_name
     @email = teacher.email
     @id = teacher.id
     @is_teacher = teacher.is_teacher
-    @admin = teacher.admin
+    @travel = teacher.travel
+    @garda = teacher.garda
+    @tci = teacher.tci
+    @phone = teacher.phone
     @overview = teacher.overview
     @profile = teacher.profile
     @experience = teacher.experience
@@ -271,8 +277,8 @@ angular.module('lessons').factory 'User', [
       self= @
       Upload.upload(
         url: "#{ RESOURCES.DOMAIN }/teacher/#{ $rootScope.User.id }/photos"
-        file: pic
-        avatar: pic
+        # file: pic
+        # avatar: pic
         data:
           avatar: pic
       ).then( ( resp ) -> 

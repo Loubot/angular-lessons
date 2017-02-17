@@ -1,8 +1,8 @@
 # This file should contain all the record creation needed to seed the database with its default values.
 # The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
-#
+
 # Examples:
-#
+
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
@@ -20,6 +20,15 @@ Location.create(  address: "Galway", county: 'Co. Galway', teacher_id: t1.id )
 Location.create(  address: "Limerick", county: 'Co. Limerick', teacher_id: t2.id )
 Location.create(  address: "Dublin", county: 'Co. Dublin', teacher_id: t3.id )
 
+Teacher.create( first_name: "Bob", last_name: "Builder", password: "Football1", email: "lllouis4@yahoo.com", is_teacher: true, primary: true)
+Teacher.create( first_name: "Bob", last_name: "Builder", password: "Football1", email: "lllouis5@yahoo.com", is_teacher: true, primary: true)
+Teacher.create( first_name: "Bob", last_name: "Builder", password: "Football1", email: "lllouis6@yahoo.com", is_teacher: true, primary: true)
+Teacher.create( first_name: "Bob", last_name: "Builder", password: "Football1", email: "lllouis7@yahoo.com", is_teacher: true, primary: true)
+Teacher.create( first_name: "Bob", last_name: "Builder", password: "Football1", email: "lllouis8@yahoo.com", is_teacher: true, primary: true)
+Teacher.create( first_name: "Bob", last_name: "Builder", password: "Football1", email: "lllouis9@yahoo.com", is_teacher: true, primary: true)
+Teacher.create( first_name: "Bob", last_name: "Builder", password: "Football1", email: "lllouis10@yahoo.com", is_teacher: true, primary: true)
+Teacher.create( first_name: "Bob", last_name: "Builder", password: "Football1", email: "lllouis11@yahoo.com", is_teacher: true, primary: true)
+
 Teacher.all.each do |t|
   t.subjects << Subject.first
 end
@@ -29,15 +38,15 @@ Teacher.first.subjects << Subject.last
 
 
 
-# conversation = Conversation.create( user_email1: "lllouis@yahoo.com", user_email2: "louisangelini@gmail.com", user_name1: "Louis", user_name2: "Aidan" )
-# conversationb = Conversation.create( user_email1: "lllouis@yahoo.com", user_email2: "louisangelini2@gmail.com", user_name1: "Louis", user_name2: "Paul" )
+conversation = Conversation.create( user_email1: "lllouis@yahoo.com", user_email2: "louisangelini@gmail.com", user_name1: "Louis", user_name2: "Aidan" )
+conversationb = Conversation.create( user_email1: "lllouis@yahoo.com", user_email2: "louisangelini2@gmail.com", user_name1: "Louis", user_name2: "Paul" )
 
-# (0..5).each do |i|
-#   Message.create( text: "hello there", conversation_id: conversation.id )
-#   Message.create( text: "I am ze teacher", conversation_id: conversation.id )
-#   Message.create( text: "Alright boi", conversation_id: conversationb.id )
-#   Message.create( text: "hahahaha", conversation_id: conversationb.id )
-# end
+(0..5).each do |i|
+  Message.create( text: "hello there", conversation_id: conversation.id )
+  Message.create( text: "I am ze teacher", conversation_id: conversation.id )
+  Message.create( text: "Alright boi", conversation_id: conversationb.id )
+  Message.create( text: "hahahaha", conversation_id: conversationb.id )
+end
 
 
 for i in 0..5
@@ -52,3 +61,5 @@ conversation = Conversation.create( user_id1: Teacher.first.id, user_id2: Teache
   Message.create( text: "Alright boi", conversation_id: conversation.id )
   Message.create( text: "hahahaha", conversation_id: conversation.id )
 end
+
+Teacher.all.each do |t| t.update_attributes( tci: true, garda: true ) end

@@ -29,6 +29,13 @@
 #  updated_at             :datetime
 #  admin                  :boolean          default(FALSE)
 #  view_count             :integer          default(0)
+#  primary                :boolean
+#  jc                     :boolean
+#  lc                     :boolean
+#  third_level            :boolean
+#  travel                 :boolean          default(FALSE)
+#  tci                    :boolean          default(FALSE)
+#  garda                  :boolean          default(FALSE)
 #
 
 class Teacher < ActiveRecord::Base

@@ -1,10 +1,40 @@
 class AdminMailer < ActionMailer::Base
 
-  def send_message_to_boss( params )
 
-    p "Got here "
-    pp params
-    
+  def garda_vetting( params, email )
+    begin
+      require 'mandrill'
+      m = mandrill = Mandrill::API.new ENV['MANDRILL_APIKEY']
+      message = { 
+                  subject: "Garda vetting",
+                  :to=>[  
+                   {  
+                     :email=> "loubot@learnyourlesson.ie"
+                     # :name=> "#{student_name}"  
+                   }  
+                 ],
+                :from_email=> "GardaVetting@learnyourlesson.ie",
+                html:
+                  "#{ email } uploaded their garda vetting",
+                :attachments=> [{
+                    'content'=> Base64.encode64(params[:file].read),
+                    "name"=> params[:file].original_filename
+                  }]
+
+                }
+      async = false
+      result = mandrill.messages.send message, async
+      # sending = m.messages.send message  
+      puts result
+    rescue Mandrill::Error => e
+        # Mandrill errors are thrown as exceptions
+        logger.info "A mandrill error occurred: #{e.class} - #{e.message}"
+        # A mandrill error occurred: Mandrill::UnknownSubaccountError - No subaccount exists with the id 'customer-123'    
+    raise
+    end
+  end
+
+  def send_message_to_boss( params )
     begin
       require 'mandrill'
       m = mandrill = Mandrill::API.new ENV['MANDRILL_APIKEY']
