@@ -44,6 +44,15 @@
                       ng-model="User.last_name">
             </md-input-container>
             
+            <md-input-container md-no-float>
+              <label>Phone:(optional)</label>
+              <md-icon><i class="material-icons icon_green">phone</i></md-icon>
+              <input  type="text"
+                      ng-change="User.update()" 
+                      ng-model-options="{ debounce:750 }"
+                      ng-model="User.phone">
+            </md-input-container>
+            
           </form>
         </div>
 

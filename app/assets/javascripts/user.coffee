@@ -226,6 +226,9 @@ angular.module('lessons').factory 'User', [
   # from GH API and *returns* a promise
 
   User::update_all = ( teacher ) ->
+    @admin = teacher.admin
+
+
     @first_name = teacher.first_name
     @last_name = teacher.last_name
     @email = teacher.email
@@ -234,7 +237,7 @@ angular.module('lessons').factory 'User', [
     @travel = teacher.travel
     @garda = teacher.garda
     @tci = teacher.tci
-    @admin = teacher.admin
+    @phone = teacher.phone
     @overview = teacher.overview
     @profile = teacher.profile
     @experience = teacher.experience
