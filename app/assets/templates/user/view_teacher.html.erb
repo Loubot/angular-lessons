@@ -91,6 +91,9 @@
           </div>
 
           <!-- End of display teachers levels -->
+
+          <!-- Vetting and TCI -->
+          <div ng-if="teacher.tci || teacher.garda" ng-include="'includes/vetting_tci.html'"></div>
         </md-card-content>
       </md-card>
     </div> <!-- end of flex=30 -->
@@ -202,6 +205,9 @@
           </div>
 
           <!-- End of display teachers levels -->
+
+          <!-- Vetting and TCI -->
+          <div ng-if="teacher.tci || teacher.garda" ng-include="'includes/vetting_tci.html'"></div>
         </md-card-content>
       </md-card>
     </div> <!-- end of flex=30 -->
