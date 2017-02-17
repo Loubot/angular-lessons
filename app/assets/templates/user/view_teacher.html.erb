@@ -1,4 +1,4 @@
-<!-- Only address-->
+<!--Only address-->
 <div ng-if="teacher_loaded && !teacher.qualifications.length && !teacher.experience && !teacher.overview && !teacher.photos.length">
   <div layout-xs="column" layout-sm="column" layout-gt-sm="row" layout-wrap flex class="gutter_90">
     <div  flex-xs="100" flex-sm="100" flex-gt-sm="40" layout-fill >
@@ -36,14 +36,9 @@
           </md-card-title-text>
         </md-card-title>
         <md-card-actions layout="row" layout-align="start center">
-          <md-button ng-if="User" class="md-raised md-primary white_text icon_button " style="white-space: normal;" ng-click="open_message_dialog()">
-            Contact {{ teacher.first_name }} <i class="material-icons">contact_mail</i>
-          </md-button>
-
-          <md-button ng-if="!User" class="md-raised md-primary white_text icon_button" style="white-space: normal;" ng-click="open_login_or_register()">
-            Contact {{ teacher.first_name }} <i class="material-icons">contact_mail</i>
-          </md-button>
-
+          <!-- Contact buttons -->  
+            <div ng-include="'includes/contact_buttons.html'" flex="100"></div>
+          <!-- End od contact buttons -->
 
           <!-- <md-button ><i class="material-icons">history</i></md-button> -->
           <md-card-icon-actions>
@@ -146,17 +141,10 @@
           </md-card-title-text>
         </md-card-title>
         <md-card-actions layout="row" layout-align="center center">
-          <div ng-if="User">
-            <md-button  class="md-raised md-primary white_text icon_button " style="white-space: normal;" ng-click="open_message_dialog()">
-              Contact {{ teacher.first_name }} <i class="material-icons">contact_mail</i>
-            </md-button>
-          </div>
+          <!-- Contact buttons -->
+          <div ng-include="'includes/contact_buttons.html'" flex="100"></div>
 
-          <div ng-if="!User">
-            <md-button  class="md-raised md-primary white_text icon_button" style="white-space: normal;" ng-click="open_login_or_register()">
-              Contact {{ teacher.first_name }} <i class="material-icons">contact_mail</i>
-            </md-button>
-          </div>
+          <!-- End of cantact buttons -->
 
 
           <!-- <md-button ><i class="material-icons">history</i></md-button> -->
@@ -281,4 +269,4 @@
   </div> <!-- end of row -->
 
 </div>
-<!-- End of only address and map -->
+<!-- End of only address and map

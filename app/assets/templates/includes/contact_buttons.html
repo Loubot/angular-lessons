@@ -1,0 +1,20 @@
+<div ng-if="User" layout="row" layout-align="space-around center" flex>
+  <div>
+    <md-button  class="md-raised md-primary white_text icon_button "  ng-click="open_message_dialog()">
+      Contact {{ teacher.first_name }} <i class="material-icons">contact_mail</i>
+    </md-button>
+  </div>
+
+  <div>
+    <md-button class="md-raised md-primary white_text " ng-href="tel:0851231558">
+      Call {{ teacher.first_name }} <md-icon class=""><i class="material-icons icon_button">phone</i></md-icon>
+    </md-button>
+  </div>
+
+</div>
+
+<div ng-if="!User" ng-click="open_login_or_register()">
+  <md-button  class="md-raised md-primary white_text icon_button" >
+    Contact {{ teacher.first_name }} <i class="material-icons">contact_mail</i>
+  </md-button>
+</div>
