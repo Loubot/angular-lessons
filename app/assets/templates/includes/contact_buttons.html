@@ -13,8 +13,16 @@
 
 </div>
 
-<div ng-if="!User" ng-click="open_login_or_register()">
-  <md-button  class="md-raised md-primary white_text icon_button" >
-    Contact {{ teacher.first_name }} <i class="material-icons">contact_mail</i>
-  </md-button>
+<div ng-if="!User" ng-click="open_login_or_register()" layout="row" layout-align="space-around center" flex>
+  <div>
+    <md-button  class="md-raised md-primary white_text icon_button" >
+      Contact {{ teacher.first_name }} <i class="material-icons">contact_mail</i>
+    </md-button>
+  </div>
+
+  <div>
+    <md-button class="md-raised md-primary white_text " >
+      Call {{ teacher.first_name }} <md-icon class=""><i class="material-icons icon_button">phone</i></md-icon>
+    </md-button>
+  </div>  
 </div>
