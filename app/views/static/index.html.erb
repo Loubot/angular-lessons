@@ -1,265 +1,38 @@
+<div ng-controller="NavController" ng-cloak>
+  <!-- Start of menu bar-->
+  <div layout="row" layout-padding layout-align="space-between stretch" style="height: 107px;background-color: #f5f5f5;">
+    <div><img src="<%= asset_url 'lyl_joined.png' %>" alt="learn your lesson"></div>
+    <div>
+      <md-menu>
+        <md-button aria-label="Open demo menu" class="md-icon-button" ng-click="open_home_menu($mdOpenMenu, $event)">
+          <md-icon><i class="material-icons">menu</i></md-icon>
+        </md-button>
 
-<div class="main_page" ng-cloak layout="column" layout-fill ng-controller="NavController" >
+        <md-men-content>
+          <md-menu-item>a</md-menu-item>
+          <md-menu-item>a</md-menu-item>
+        </md-men-content>
+      </md-menu>
+    </div>
+  </div>
+  <!-- End of menu bar -->
 
-  <div class="toolbar_container">
-    <section class="toolbar_item">
-      <md-fab-speed-dial hide-xs md-direction="right" md-open="demo.isOpen"
-                       class="md-scale md-fab-top-left" ng-class="{ 'md-hover-full': demo.hover }"
-                       >
-        <md-fab-trigger>
-          <md-button aria-label="menu" class="md-fab md-warn">
-            <md-tooltip md-direction="bottom" md-visible="tooltipVisible">Menu</md-tooltip>
-            <md-icon  aria-label="menu"><i class="material-icons">menu</i></md-icon>
-          </md-button>
-        </md-fab-trigger>
+  <!--#################### Content ############################-->
 
-        <md-fab-actions ng-if="!User" >
-          <md-button class="md-button md-default-theme green_blue_text" ng-click="openLeftMenu(0)">Login</md-button>
-          <md-button class="md-button md-default-theme green_blue_text" ng-click="openLeftMenu(2)">Student Register</md-button>
-          <md-button class="md-button md-default-theme green_blue_text" ui-sref="register_teacher">Teacher Register</md-button>
-        </md-fab-actions> <!-- end of if !User -->
+  <div class="main main_page" layout="column" id="main" flex>
+    <md-content class="scroll_animate">
+      <div class="main_page top_bit" id="main_page" ui-view ng-cloak>
 
-        <md-fab-actions ng-if="User && User.is_teacher" class="green_blue_text">
-          <md-button ui-sref="teacher({id:User.id})" class="md-button md-default-theme green_text">Profile</md-button>
-          <md-button ui-sref="teacher_area({id:User.id})" class="md-button md-default-theme green_text">Calendar</md-button>
-          <md-button ui-sref="teacher_location({id:User.id})" class="md-button md-default-theme green_text">Location</md-button>
-          <md-button ui-sref="conversation" class="md-button md-default-theme green_text">Messages</md-button>
-          <md-button class="md-button md-default-theme gree_blue_text" ui-sref="admin" ng-if="User.admin">Admin</md-button>
+      </div> <!-- angular view rendered here -->
 
-          <md-button class="md-button md-default-theme green_blue_text" ng-click="auth.logout()">Logout</md-button>
-        </md-fab-actions>
-
-        <md-fab-actions ng-if="User && !User.is_teacher" class="green_blue_text">
-          <md-button ui-sref="student_profile({id:User.id})" class="md-button md-default-theme green_text">Profile</md-button>
-          <md-button ui-sref="conversation" class="md-button md-default-theme green_text">Messages</md-button>
-          <md-button class="md-button md-default-theme green_blue_text" ng-click="auth.logout()">Logout</md-button>
-        </md-fab-actions>
-
-      </md-fab-speed-dial>
-
-
-
-      <md-icon ng-show="!User" hide-gt-xs ng-click="user_menu()" class="white_text width_85px cursor_hand margin_t_10 padding_l_5px"><i class="material-icons">face</i></md-icon>
-      <md-icon ng-show="User" hide-gt-xs ng-click="user_menu()" class="white_text width_85px cursor_hand margin_t_10 padding_l_5px"><i class="material-icons">face</i></md-icon>
-    </section>
-
-
-    <section class="toolbar_item hide_when_small" >a</section>
-
-    <section class="toolbar_item center_text">
-      <img ui-sref="welcome" src="<%= asset_path('lylLogo.png') %>" class="md-48 cursor_hand">
-
-    </section>
-
-    <section class="toolbar_item align_right" style="text-align:right;">
-      <md-button class="md-default-theme white_text no_padding" ui-sref="contact" >
-        <md-icon hide-xs><i class="material-icons white_text">contact_mail</i></md-icon> Contact Us
-
-      </md-button>
-
-       <button ng-if="false" class="md-button md-default-theme white_text" ng-click="openRightMenu()"><i class="material-icons">menu</i></button>
-    </section>
+      <div class="bottom_bit" layout="row" layout-align="space-around none">
+        <div ><a class="white_text margin_r_10" ui-sref="contact">Contact Us</a></div>
+        <div ><a class="white_text" ui-sref="about">About Us</a></div>
+      </div>
+    </md-content>
   </div>
 
-  <div class="main_page" layout="column" flex>
-    <!-- ################## User left menu ############################# -->
-    <md-sidenav ng-if="!User" hide-gt-xs md-component-id="user_menu" class="md-sidenavleft user_menu height_50">
-      <md-toolbar class="md-theme-indigo">
-        <h1 class="md-toolbar-tools">Choices</h1>
-      </md-toolbar>
-      <md-content>
-        <md-button class="md-button md-default-theme " ng-click="openLeftMenu(0); user_menu()">Login</md-button>
-        <md-button class="md-button md-default-theme " ng-click="openLeftMenu(2); user_menu()">Student Register</md-button>
-        <md-button class="md-button md-default-theme " ui-sref="register_teacher" ng-click="user_menu()">Teacher Register</md-button>
-      </md-content>
-    </md-sidenav>
-
-    <md-sidenav ng-if="User && User.is_teacher" hide-gt-xs md-component-id="user_menu" class="md-sidenav-left user_menu">
-      <div layout="column"  layout-align="center end">
-        <md-toolbar class="dark_moderate_cyan_background white_text">
-          <h1 class="md-toolbar-tools">Choices</h1>
-        </md-toolbar>
-        <md-button ui-sref="teacher({id:User.id})" ng-click="user_menu()" class="md-button md-default-theme green_text">Profile</md-button>
-        <md-button ui-sref="teacher_area({id:User.id})" ng-click="user_menu()" class="md-button md-default-theme green_text">Calendar</md-button>
-        <md-button ui-sref="teacher_location({id:User.id})" ng-click="user_menu()" class="md-button md-default-theme green_text">Location</md-button>
-        <md-button ui-sref="conversation" ng-click="user_menu()" class="md-button md-default-theme green_text">Messages</md-button>
-
-        <md-button ng-if="User.admin" ui-sref="admin" class="md-button md-default-theme green_text">Admin</md-button>
-        <md-button class="md-button md-default-theme green_blue_text" ng-click="auth.logout();user_menu()">Logout</md-button>
-        <md-divider md-inset ></md-divider>
-        <md-icon ng-click="user_menu()"><i class="material-icons">arrow_back</i><md-icon>
-      </div>
-    </md-sidenav>
-
-    <md-sidenav ng-if="User && !User.is_teacher" hide-gt-xs md-component-id="user_menu" class="md-sidenav-left user_menu height_30">
-      <md-toolbar class="md-theme-indigo">
-        <h1 class="md-toolbar-tools">Choices</h1>
-      </md-toolbar>
-      <md-content>
-        <md-button ui-sref="student_profile({id:User.id})" ng-click="user_menu()" class="md-button md-default-theme green_text">Profile</md-button>
-        <md-button ui-sref="conversation" ng-click="user_menu()" class="md-button md-default-theme green_text">Messages</md-button>
-        <md-button class="md-button md-default-theme green_blue_text" ng-click="auth.logout()">Logout</md-button>
-      </md-content>
-    </md-sidenav>
-    <!-- ################# End of user left menu ######################### -->
-
-
-
-    
-    <!--#################### Left sidenav ############################-->
-    <md-sidenav class="sidenav white_text md-whiteframe=12 big_user_menu"  md-component-id="left" >
-      <div  ng-cloak ng-if="!User" class="white_background min_height_75vh" >
-         
-         
-          <div ng-if="auth_type!=0">
-              <md-toolbar class="md-theme-indigo">
-                <h1 class="md-toolbar-tools">Student Register</h1>
-              </md-toolbar>
-             <form ng-submit="register_teacher()" >
-               <md-input-container class="md-icon-float md-block black_text" >
-                 <!-- Use floating label instead of placeholder -->
-                 <label>First Name</label>
-                 <md-icon><i class="material-icons">person</i></md-icon>
-                 <input ng-model="teacher.first_name" type="text" name="first name" required class="black_text">
-               </md-input-container>
-
-               <md-input-container class="md-icon-float md-block black_text" >
-                 <!-- Use floating label instead of placeholder -->
-                 <label>Last Name</label>
-                 <md-icon><i class="material-icons">person</i></md-icon>
-                 <input ng-model="teacher.last_name" type="text" name="last name" class="black_text" required>
-               </md-input-container>
-
-              
-               <md-input-container class="md-block">
-                 <!-- Use floating placeholder instead of label -->
-                 <md-icon><i class="material-icons ">email</i></md-icon>
-                 <input ng-model="teacher.email" type="email" name="email" placeholder="Email (required)"  class="black_text" required>
-               </md-input-container>
-               
-               <md-input-container class="md-block">
-                 <!-- Use floating placeholder instead of label -->
-                 <md-icon  class="password"><i class="material-icons">lock</i></md-icon>
-                 <input ng-model="teacher.password" type="password" name="password" placeholder="Password (required)" class="black_text" required>
-               </md-input-container>
-
-               
-
-               <md-button class="md-primary md-raised not_transparent" name="submit" type="submit"> 
-                 Submit
-               </md-button>
-               <p flex-offset="15 "><strong class="black_text">or</strong></p>
-               <div ng-click="facebook()">
-                <%= image_tag('facebook_login.jpg', class: 'width_75') %>
-               </div>
-               <br>
-               <a ui-sref="reset_password">Forgot your password</a>
-             </form>
-          </div> <!-- end of ng-if="auth_type==1" -->
-
-          <div ng-if="auth_type==0" >
-            <md-toolbar class="md-theme-indigo">
-              <h1 class="md-toolbar-tools">Login</h1>
-            </md-toolbar>
-            <form ng-submit="auth.login( teacher)" >
-
-               <!-- <md-input-container class="md-block">
-                 <md-icon class="lastName"></md-icon>
-                 <input ng-model="teacher.lastName" type="text" placeholder="Last Name" required>
-               </md-input-container>
-      -->
-              <md-input-container class="md-block">
-                 <!-- Use floating placeholder instead of label -->
-                 <md-icon  class="email"><i class="material-icons">email</i></md-icon>
-                 <input ng-model="teacher.email" class="black_text" type="email" name="email" placeholder="Email (required)" required>
-              </md-input-container>
-
-              <md-input-container class="md-block">
-                 <!-- Use floating placeholder instead of label -->
-                <md-icon  class="password"><i class="material-icons">lock</i></md-icon>
-                <input ng-model="teacher.password" class="black_text" type="password" name="password" placeholder="Password (required)" required>
-              </md-input-container>
-
-               
-               
-              <md-button class="md-primary md-raised" type="submit"> 
-                 Submit
-              </md-button>
-
-              <p flex-offset="15 "><strong class="black_text">or</strong></p>
-              <md-input-container>
-                <div ng-click="facebook()">
-                  <%= image_tag('facebook_login.jpg', class: 'width_75') %>
-                </div>
-              </md-input-container>
-
-
-              
-              <md-input-container>
-                <a ui-sref="reset_password">Forgot your password</a>
-              </md-input-container>
-            </form>
-          </div> <!-- end of ng-if="auth_type==1" -->
-
-
-          <div layout="column" layout-align="space-between center">
-            
-
-            <div>
-              <md-button ng-if="false" ng-click="openLeftMenu(2); user_menu()" class="md-raised blue_background white_text">Student Register</md-button>
-            </div>
-
-            <div>
-              <md-button ng-if="false" ui-sref="register_teacher" class="md-raised md-primary">Teacher Register</md-button>
-            </div>
-
-            <div>
-
-              <button class="md-button md-default-theme icon_button" ng-click="openLeftMenu()"hide-gt-md="">
-                Close<i class="material-icons">close</i>
-              </button>
-
-            </div>
-
-          </div> <!-- end of column -->
-
-        
-      </div>
-
-    </md-sidenav>
-    <!--#################### End of Left sidenav ############################-->
-
-    <!--#################### Content ############################-->
-
-    <div class="main main_page" layout="column" id="main" flex>
-      <md-content class="scroll_animate">
-        <div class="main_page top_bit" id="main_page" ui-view ng-cloak> 
-
-        </div> <!-- angular view rendered here -->
-
-        <div class="bottom_bit" layout="row" layout-align="space-around none">
-          <div ><a class="white_text margin_r_10" ui-sref="contact">Contact Us</a></div>
-          <div ><a class="white_text" ui-sref="about">About Us</a></div>
-        </div>
-      </md-content>
-    </div>
-
-    <!--#################### End of content ############################-->
-
-    <md-sidenav class="md-sidenav-right md-whiteframe-12dp" md-component-id="right" >
-      <md-toolbar class="md-theme-light">
-        <h1 class="md-toolbar-tools">Sidenav Right</h1>
-      </md-toolbar>
-      <md-content  layout-padding >
-        <button class="md-button md-default-theme" ui-sref="register_teacher" ng-click="closeRightMenu()" md-ink-ripple="#FF0000">Become a teacher</button>
-       <!--  <button ui-sref="how_it_works" ng-click="closeRightMenu()" class="md-button md-default-theme " md-ink-ripple="#FF0000">How it works</button><br> -->
-        <button ui-sref="mailing_list" ng-click="closeRightMenu()" class="md-button md-default-theme " md-ink-ripple="#FF0000">
-          Mailing list
-        </button><br>
-        <md-button ng-click="closeRightMenu()" class="md-primary">
-          Close Sidenav Right
-        </md-button>
-      </md-content>
-    </md-sidenav> <!-- end of md-sidenav right -->
-  </div>  <!-- end of main_page -->
+  <!--#################### End of content ############################-->
 </div>
+
+

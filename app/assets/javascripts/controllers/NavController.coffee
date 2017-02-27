@@ -6,13 +6,18 @@ angular.module('lessons').controller('NavController', [
   '$state'
   '$window'  
   '$mdSidenav'
+  '$mdMenu'
   'alertify'
   'auth'
   '$auth'
-  ( $scope, $rootScope, $state, $window, $mdSidenav, alertify, auth, $auth ) ->
+  ( $scope, $rootScope, $state, $window, $mdSidenav, $mdMenu, alertify, auth, $auth ) ->
     console.log "NavController"
     $scope.teacher = {}
     $scope.auth_type = null
+
+    $scope.open_home_menu = ( $mdOpenMenu, e ) ->
+      console.log e
+      $mdOpenMenu( e )
 
     $scope.auth = auth
 
