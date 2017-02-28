@@ -583,6 +583,19 @@ md-sidenav.md-closed.md-locked-open-add-active.user_menu {
   width: 100%;
 }
 
+// welcome page
+.link_images{
+  width: 25vw;
+  height: 20vw;
+}
+@media ( max-width: 600px ){
+  .link_images{
+    width: 100vw;
+    height: 29vh;
+  }
+}
+// end of welcome page
+
 .match_background{
   background-color: #e0ebf4 !important;
 }
