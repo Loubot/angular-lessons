@@ -37,6 +37,10 @@ SitemapGenerator::Sitemap.create do
     add "/view-teacher/#{ t.id }"
   end
 
+  Subject.all.each do |s|
+    add "/search/#{ s.name }"
+  end
+
   add '/how-it-works'
 
   add 'register-teacher'
