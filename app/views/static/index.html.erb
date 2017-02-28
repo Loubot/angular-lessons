@@ -1,14 +1,20 @@
 <div ng-controller="NavController" ng-cloak>
   <!-- Start of menu bar-->
   <div class="bottom_bit" layout="row" layout-align="space-around none" style="background-color: #f5f5f5;">
-    <div ><a class="black_text margin_r_10" ui-sref="contact">Contact Us</a></div>
-    <div ><a class="black_text" ui-sref="about">About Us</a></div>
+    
   </div>
 
   <div  layout-padding  style="height: 80px;background-color: #f5f5f5;">
     <div layout="row" class="gutter_75" layout-align="space-between ">
       <div>
         <a ui-sref="welcome"><img src="<%= asset_url 'lyl_joined.png' %>" alt="learn your lesson"></a>
+      </div>
+
+      <div ui-sref-active="active" class="margin_t_10">
+        <a class="black_text margin_r_10" ui-sref-active="md-button md-primary no_margin no_padding" ui-sref="contact">Contact Us</a>
+      </div>
+      <div  class="margin_t_10">
+        <a class="black_text" ui-sref-active="md-button md-primary no_margin no_padding" ui-sref="about">About Us</a>
       </div>
       <div>
         <md-menu>
