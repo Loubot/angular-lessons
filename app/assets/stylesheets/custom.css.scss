@@ -29,6 +29,12 @@ html, body{
   text-align: right;
 }
 
+.active_bla{
+  background-color: #4caf50;
+  color: #111;
+  padding: 10px;
+}
+
 
 .white_placeholder::-webkit-input-placeholder { /* WebKit, Blink, Edge */
     color:    #FFF !important;
@@ -61,7 +67,7 @@ html, body{
 }
 
 .black_text{
-  color: #111 !important;
+  color: #111 ;
 }
 
 
