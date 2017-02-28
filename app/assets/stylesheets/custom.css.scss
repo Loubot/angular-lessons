@@ -566,7 +566,8 @@ md-sidenav.md-closed.md-locked-open-add-active.user_menu {
 }
 
 .main_page{
-  background-color: #e0ebf4;
+  background-color: #f5f5f5;
+  // background-color: #e0ebf4;
   // @extend .height_100;
 }
 
@@ -1023,7 +1024,17 @@ ul.share-buttons .sr-only {
     -webkit-background-size: 100% 100%;
     background-size: 100% 100%;
     background-repeat: no-repeat;
-    
+    animation: shrinker 5s;
+    -webkit-animation-fill-mode: forwards;
+  }
+
+  @keyframes shrinker {
+    from {
+      background-size: 120% 120%;
+    }
+    to {
+      background-size: 100% 100%;
+    }
   }
 
   .gutter_75{
@@ -1120,7 +1131,7 @@ ul.share-buttons .sr-only {
     background-image: asset_url('piano.jpg');
     background-repeat: no-repeat;
     // padding: 0 100px !important;
-    background-size: 110% 110%;
+    // background-size: 110% 110%;
     background-position: center center;
     animation: shrink 5s;
     -webkit-animation-fill-mode: forwards;
@@ -1129,7 +1140,7 @@ ul.share-buttons .sr-only {
 
   @keyframes shrink {
     from {
-      background-size: 110% 110%;
+      background-size: 120% 120%;
     }
     to {
       background-size: 100% 100%;

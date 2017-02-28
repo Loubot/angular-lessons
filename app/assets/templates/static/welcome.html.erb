@@ -69,10 +69,21 @@
     <div layout="row" layout-align="center center" flex>
       <md-button ng-click="search()" class="md-raised md-primary icon_button white_text">Search<i class="material-icons">search</i></md-button>
     </div> <!-- end of row -->
-
-    
     
   </div> <!-- end of main_page_search_container -->
+
+  <div class="margin_t_30" layout="row" layout-align="space-around center">
+    <div>
+      <a ui-sref="search({ name: 'Piano' })"><img src="<%= asset_url 'learn-to-play-piano.jpg' %>"></a>
+    </div>
+    <div>
+      <a ui-sref="search({ name: 'Guitar' })"><img src="<%= asset_url 'learn-to-play-guitar.jpg' %>"></a>
+    </div>
+    <div>
+      <a ui-sref="search({ name: 'Drums' })"><img src="<%= asset_url 'learn-to-play-drums.jpg' %>"></a>
+    </div>
+  </div>
+
   <div class="center_text">
     <md-button ui-sref="register_teacher" class="md-raised blue_button">Become a teacher</md-button>
   </div>

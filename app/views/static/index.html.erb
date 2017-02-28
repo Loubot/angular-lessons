@@ -7,7 +7,9 @@
 
   <div  layout-padding  style="height: 80px;background-color: #f5f5f5;">
     <div layout="row" class="gutter_75" layout-align="space-between ">
-      <div><img src="<%= asset_url 'lyl_joined.png' %>" alt="learn your lesson"></div>
+      <div>
+        <a ui-sref="welcome"><img src="<%= asset_url 'lyl_joined.png' %>" alt="learn your lesson"></a>
+      </div>
       <div>
         <md-menu>
           <md-button aria-label="Open demo menu" class="md-icon-button" ng-click="open_home_menu($mdOpenMenu, $event)">
