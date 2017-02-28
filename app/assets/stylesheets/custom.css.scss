@@ -578,12 +578,7 @@ md-sidenav.md-closed.md-locked-open-add-active.user_menu {
 .bottom_bit{
   // @extend .big_gutter;
   white-space: nowrap;
-  // height: 5vh !important;
-  max-height: 38px;
-  min-height: 35px;
-  background-color: #111;
   padding: 0 150px;
-  color: #fff;
   width: 100%;
 }
 
@@ -1123,13 +1118,24 @@ ul.share-buttons .sr-only {
   .main_page_search_container{
     min-height: 400px;
     background-image: asset_url('piano.jpg');
-    -moz-background-size: 100% 100%;
-    -webkit-background-size: 100% 100%;
-    background-size: 100% 100%;
     background-repeat: no-repeat;
     // padding: 0 100px !important;
+    background-size: 110% 110%;
+    background-position: center center;
+    animation: shrink 5s;
+    -webkit-animation-fill-mode: forwards;
 
   }
+
+  @keyframes shrink {
+    from {
+      background-size: 110% 110%;
+    }
+    to {
+      background-size: 100% 100%;
+    }
+  }
+
   .gutter_75{
     min-width: 75% !important;
     max-width: 75%;
