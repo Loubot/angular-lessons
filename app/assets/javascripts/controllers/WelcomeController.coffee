@@ -120,7 +120,7 @@ angular.module('lessons').controller('WelcomeController', [
           elementTop <= pageBottom and elementBottom >= pageTop
 
     if $state.current.url == "/welcome" or $state.current.url == '/'
-      $('.scroll_animate').scroll(->
+      $(document).scroll(->
         $('.anchor1').addClass 'animated' if isElementInView('.anchor1')
         
         $('.anchor2').addClass 'animated' if isElementInView('.anchor2')
