@@ -44,7 +44,7 @@ angular.module('lessons').controller('WelcomeController', [
 
     $scope.search_teachers = ->
       $scope.subjects_list = $scope.master_subjects_list
-      $scope.subjects_list = $filter('filter')( $scope.subjects_list, subject )
+      $scope.subjects_list = $filter('filter')( $scope.subjects_list, $scope.searchText.subject_name )
     #   COMMS.GET(
     #     "/search"
     #     $scope.selected
