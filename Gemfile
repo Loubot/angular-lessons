@@ -111,3 +111,5 @@ gem 'sitemap_generator', '~> 5.2.0'
 gem 'htmlcompressor', '~> 0.2.0'
 
 gem 'gibbon', '~> 1.2'
+
+gem 'material_icons'
