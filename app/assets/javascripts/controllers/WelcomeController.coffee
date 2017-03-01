@@ -26,7 +26,7 @@ angular.module('lessons').controller('WelcomeController', [
     $scope.selected_subject = $stateParams.name
 
     pic_no = 1
-
+    clearTimeout timeout
     main_pic_animation = ( pic_no ) ->
       cont = document.getElementsByClassName 'main_page_search_container'
       new_cont = cont[0].cloneNode(true)
@@ -44,7 +44,7 @@ angular.module('lessons').controller('WelcomeController', [
         pic_no = 1
       
       
-      setTimeout (->
+      timeout = setTimeout (->
         $('.main_page_search_container').removeClass 'add_shrink'
         main_pic_animation( pic_no )
       ), 5000
