@@ -598,6 +598,12 @@ md-sidenav.md-closed.md-locked-open-add-active.user_menu {
     height: 29vh;
   }
 }
+
+@media ( min-width: 600px ){
+  .full_height_on_big{
+    height: 100vh;
+  }
+}
 // end of welcome page
 
 .match_background{
@@ -1042,6 +1048,7 @@ ul.share-buttons .sr-only {
     background-repeat: no-repeat;
     animation: shrink 5s;
     -webkit-animation-fill-mode: forwards;
+    background-image: asset_url('portrait_piano.jpg');
   }
 
   @keyframes shrink {

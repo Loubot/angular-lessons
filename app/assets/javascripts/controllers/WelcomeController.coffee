@@ -27,31 +27,31 @@ angular.module('lessons').controller('WelcomeController', [
 
     pic_no = 1
 
-    main_pic_animation = ( pic_no ) ->
-      cont = document.getElementsByClassName 'main_page_search_container'
-      new_cont = cont[0].cloneNode(true)
-      document.getElementById('hook').replaceChild new_cont, cont[0]
-      if pic_no == 1
-        $('.main_page_search_container').removeClass 'main_page_search_container_piano_background'
-        $('.main_page_search_container').addClass 'main_page_search_container_band_background'
-        $('.main_page_search_container').addClass 'add_shrink'
-        pic_no = 2
-      else if pic_no == 2
-        $('.main_page_search_container').removeClass 'main_page_search_container_band_background'
-        $('.main_page_search_container').addClass 'main_page_search_container_piano_background'
-        $('.main_page_search_container').addClass 'add_shrink'
+    # main_pic_animation = ( pic_no ) ->
+    #   cont = document.getElementsByClassName 'main_page_search_container'
+    #   new_cont = cont[0].cloneNode(true)
+    #   document.getElementById('hook').replaceChild new_cont, cont[0]
+    #   if pic_no == 1
+    #     $('.main_page_search_container').removeClass 'main_page_search_container_piano_background'
+    #     $('.main_page_search_container').addClass 'main_page_search_container_band_background'
+    #     $('.main_page_search_container').addClass 'add_shrink'
+    #     pic_no = 2
+    #   else if pic_no == 2
+    #     $('.main_page_search_container').removeClass 'main_page_search_container_band_background'
+    #     $('.main_page_search_container').addClass 'main_page_search_container_piano_background'
+    #     $('.main_page_search_container').addClass 'add_shrink'
 
-        pic_no = 1
+    #     pic_no = 1
       
       
-      setTimeout (->
-        $('.main_page_search_container').removeClass 'add_shrink'
-        main_pic_animation( pic_no )
-      ), 5000
+    #   setTimeout (->
+    #     $('.main_page_search_container').removeClass 'add_shrink'
+    #     main_pic_animation( pic_no )
+    #   ), 5000
 
       
 
-    main_pic_animation( pic_no )
+    # main_pic_animation( pic_no )
 
     
 
