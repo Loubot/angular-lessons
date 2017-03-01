@@ -26,40 +26,26 @@ angular.module('lessons').controller('WelcomeController', [
     $scope.selected_subject = $stateParams.name
 
 
-    define_subjects = ( subjects ) ->
-      $scope.master_subjects_list = []
-      for subject in subjects
-        $scope.master_subjects_list.push( subject.name )
 
-    COMMS.GET(
-        '/search-subjects'
-    ).then( ( resp ) ->
-      console.log resp
-      $scope.subjects_list = resp.data.subjects
-      define_subjects( resp.data.subjects )
-    ).catch( ( err ) ->
-      console.log err
-    )
-
-
-    $scope.search_teachers = ->
-      $scope.subjects_list = $scope.master_subjects_list
-      $scope.subjects_list = $filter('filter')( $scope.subjects_list, $scope.searchText.subject_name )
-    #   COMMS.GET(
-    #     "/search"
-    #     $scope.selected
-    #   ).then( ( resp ) ->
-    #     # console.log resp
-    #     alertify.success "Found #{ resp.data.teachers.length } teacher(s)"
-    #     $scope.teachers = resp.data.teachers
-    #   ).catch( ( err ) ->
+    # $scope.search_teachers = ->
+    #   $scope.subjects_list = $scope.master_subjects_list
+    #   $scope.subjects_list = $filter('filter')( $scope.subjects_list, $scope.searchText.subject_name )
+    #   console.log $scope.subjects_list
+    # #   COMMS.GET(
+    # #     "/search"
+    # #     $scope.selected
+    # #   ).then( ( resp ) ->
+    # #     # console.log resp
+    # #     alertify.success "Found #{ resp.data.teachers.length } teacher(s)"
+    # #     $scope.teachers = resp.data.teachers
+    # #   ).catch( ( err ) ->
         
-    #     console.log err
-    #     alertify.error "Failed to find teachers"
-    #   )
+    # #     console.log err
+    # #     alertify.error "Failed to find teachers"
+    # #   )
 
-    # if $stateParams.name? or $stateParams.location
-    #   $scope.search_teachers()
+    # # if $stateParams.name? or $stateParams.location
+    # #   $scope.search_teachers()
 
 
     $scope.search = ->
@@ -81,7 +67,7 @@ angular.module('lessons').controller('WelcomeController', [
       # $state.go( "search", { name: $scope.selected.subject_name, location: $scope.selected.county_name } )
 
     $scope.subject_picked = ( subject )->
-      
+      console.log 'hup'
       if $scope.selected.subject_name?
         $scope.selected.subject_name = subject
         
