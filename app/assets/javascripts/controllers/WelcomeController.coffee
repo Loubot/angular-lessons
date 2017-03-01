@@ -26,7 +26,7 @@ angular.module('lessons').controller('WelcomeController', [
     $scope.selected_subject = $stateParams.name
 
     pic_no = 1
-    clearTimeout timeout
+    clearTimeout timeout if timeout?
     main_pic_animation = ( pic_no ) ->
       cont = document.getElementsByClassName 'main_page_search_container'
       new_cont = cont[0].cloneNode(true)
