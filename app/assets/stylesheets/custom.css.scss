@@ -1036,16 +1036,15 @@ ul.share-buttons .sr-only {
 
   .main_page_search_container{
     min-height: 30em;
-    background-image: asset_url('portrait_piano.jpg');
     -moz-background-size: 100% 100%;
     -webkit-background-size: 100% 100%;
     background-size: 100% 100%;
     background-repeat: no-repeat;
-    animation: shrinker 5s;
+    animation: shrink 5s;
     -webkit-animation-fill-mode: forwards;
   }
 
-  @keyframes shrinker {
+  @keyframes shrink {
     from {
       background-size: 120% 120%;
     }
@@ -1145,14 +1144,26 @@ ul.share-buttons .sr-only {
   
   .main_page_search_container{
     min-height: 400px;
-    background-image: asset_url('piano.jpg');
     background-repeat: no-repeat;
     // padding: 0 100px !important;
-    // background-size: 110% 110%;
+    background-size: 120% 120%;
     background-position: center center;
+
+  }
+
+  .main_page_search_container_piano_background{
+    background-image: asset_url('piano.jpg');
+    background-size: 120% 120%;
+  }
+
+  .main_page_search_container_band_background{
+    background-image: asset_url('band_practise.jpg');
+    background-size: 120% 120%;
+  }
+
+  .add_shrink{
     animation: shrink 5s;
     -webkit-animation-fill-mode: forwards;
-
   }
 
   @keyframes shrink {
