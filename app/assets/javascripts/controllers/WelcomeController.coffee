@@ -29,7 +29,6 @@ angular.module('lessons').controller('WelcomeController', [
 
     main_pic_animation = ( pic_no ) ->
       cont = document.getElementsByClassName 'main_page_search_container'
-      console.log cont[0]
       new_cont = cont[0].cloneNode(true)
       document.getElementById('hook').replaceChild new_cont, cont[0]
       if pic_no == 1
