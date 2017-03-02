@@ -19,6 +19,10 @@ angular.module('lessons').controller('NavController', [
       console.log e
       $mdOpenMenu( e )
 
+    $scope.open_subjects_menu = ( $mdOpenMenu, e ) ->
+      console.log e
+      $mdOpenMenu( e )
+
     $scope.auth = auth
 
     $scope.facebook = ->

@@ -77,6 +77,8 @@ angular.module('lessons').controller('WelcomeController', [
         
 
     define_subjects = ( subjects ) ->
+      console.log subjects
+      $scope.master_subjects_list = []
       $scope.master_subjects_list = []
       for subject in subjects
         $scope.master_subjects_list.push( subject.name )
@@ -100,6 +102,7 @@ angular.module('lessons').controller('WelcomeController', [
     ).then( ( resp ) ->
       # console.log resp
       $scope.subjects_list = resp.data.subjects
+      $rootScope.subject_list_for_menu = resp.data.subjects
       define_subjects( resp.data.subjects )
     ).catch( ( err ) ->
       console.log err
