@@ -28,22 +28,21 @@ angular.module('lessons').controller('WelcomeController', [
     pic_no = 1
 
     change_image = ( pic_no ) ->
-      console.log pic_no
-      if pic_no == 1
-        $('.main_page_search_container').removeClass 'main_page_search_container_piano_background'
-        $('.main_page_search_container').addClass 'main_page_search_container_band_background'
-        # $('.main_page_search_container').addClass 'cssSlideUp'
-        pic_no = 2
-      else if pic_no == 2
-        $('.main_page_search_container').removeClass 'main_page_search_container_band_background'
-        $('.main_page_search_container').addClass 'main_page_search_container_piano_background'
+      if pic_no == 2
+        $('.main_page_search_container').removeClass 'main_page_search_container_first_background'
+        $('.main_page_search_container').addClass 'main_page_search_container_second_background'
         # $('.main_page_search_container').addClass 'cssSlideUp'
         pic_no = 1
+      else if pic_no == 1
+        $('.main_page_search_container').removeClass 'main_page_search_container_second_background'
+        $('.main_page_search_container').addClass 'main_page_search_container_first_background'
+        # $('.main_page_search_container').addClass 'cssSlideUp'
+        pic_no = 2
 
       setTimeout (->
         # $('.main_page_search_container').removeClass 'cssSlideUp'
         change_image( pic_no )
-      ), 3000
+      ), 5000
 
     change_image( pic_no )
 
