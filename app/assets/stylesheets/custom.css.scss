@@ -1,7 +1,13 @@
+@font-face {
+  font-family: 'Neue Helvetica';
+  src:url('HelveticaNeueLTW1G-Bd.otf') format('embedded-opentype');
+  font-style: normal;
+}
+
 html, body{
   height: 100%;
   max-width: 100% !important;
-  font-family: 'Roboto', sans-serif !important;
+  font-family: 'Neue Helvetica', sans-serif !important;
 }
 
 .cursor_hand{
