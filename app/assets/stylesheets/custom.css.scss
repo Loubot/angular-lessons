@@ -1046,6 +1046,7 @@ ul.share-buttons .sr-only {
     -webkit-background-size: 100% 100%;
     background-size: 100% 100%;
     background-repeat: no-repeat;
+    transition: .5s linear all;
   }
 
   .main_page_search_container_first_background{
@@ -1135,12 +1136,17 @@ ul.share-buttons .sr-only {
   .main_page_search_container{
     min-height: 400px;
     background-repeat: no-repeat;
-    
+    background-image: asset_url('piano.jpg');
     // padding: 0 100px !important;
     // background-size: 120% 120%;
     background-position: center center;
     // animation: shrink 5s infinite;
     // -webkit-animation-fill-mode: forwards;
+    -webkit-transition: 3s;
+    -moz-transition: 3s;
+    -ms-transition: 3s;
+    -o-transition: 3s;
+    transition: 3s;
   }
 
   .main_page_search_container_first_background{

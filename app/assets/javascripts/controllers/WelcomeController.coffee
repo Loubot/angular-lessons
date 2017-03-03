@@ -29,13 +29,14 @@ angular.module('lessons').controller('WelcomeController', [
 
     change_image = ( pic_no ) ->
       if pic_no == 2
-        $('.main_page_search_container').removeClass 'main_page_search_container_first_background'
-        $('.main_page_search_container').addClass 'main_page_search_container_second_background'
+        $('.main_page_search_container').addClass 'main_page_search_container_second_background', duration: 1000
+        $('.main_page_search_container').removeClass 'main_page_search_container_first_background', duration: 1000
+        
         # $('.main_page_search_container').addClass 'cssSlideUp'
         pic_no = 1
       else if pic_no == 1
-        $('.main_page_search_container').removeClass 'main_page_search_container_second_background'
-        $('.main_page_search_container').addClass 'main_page_search_container_first_background'
+        $('.main_page_search_container').removeClass 'main_page_search_container_second_background', duration: 1000
+        $('.main_page_search_container').addClass 'main_page_search_container_first_background', duration: 1000
         # $('.main_page_search_container').addClass 'cssSlideUp'
         pic_no = 2
 
@@ -44,6 +45,7 @@ angular.module('lessons').controller('WelcomeController', [
         change_image( pic_no )
       ), 5000
 
+    $('.main_page_search_container').addClass 'main_page_search_container_first_background'
     change_image( pic_no )
 
 
