@@ -1,5 +1,5 @@
 <div >
-  <div id="hook" class="full_height_on_big">
+  <div id="hook" class="full_height_on_big ">
     <div class="main_page_search_container" flex  >
 
       <img ng-src="<%= asset_path 'portrait_band_practise.jpg' %>" style="display:none; visibility: hidden;">
@@ -74,30 +74,30 @@
       
     </div> <!-- end of main_page_search_container -->
 
-    <div class="margin_t_30" layout-gt-xs="row" layout="column" layout-align="space-around center">
+    <div class="margin_t_30" layout-gt-xs="row" layout="column" layout-align="space-around center" ng-cloak>
       <div>
-        <a ui-sref="search({ name: 'Piano' })"><img src="<%= asset_url 'learn-to-play-piano.jpg' %>" class="link_images"></a>
+        <a ui-sref="search({ name: 'Piano' })"><img ng-src="<%= asset_url 'learn-to-play-piano.jpg' %>" class="link_images"></a>
       </div>
       <div class="margin_t_8">
-        <a ui-sref="search({ name: 'Guitar' })"><img src="<%= asset_url 'learn-to-play-guitar.jpg' %>" class="link_images"></a>
+        <a ui-sref="search({ name: 'Guitar' })"><img ng-src="<%= asset_url 'learn-to-play-guitar.jpg' %>" class="link_images"></a>
       </div>
       <div class="margin_t_8">
-        <a ui-sref="search({ name: 'Drums' })"><img src="<%= asset_url 'learn-to-play-drums.jpg' %>" class="link_images"></a>
+        <a ui-sref="search({ name: 'Drums' })"><img ng-src="<%= asset_url 'learn-to-play-drums.jpg' %>" class="link_images"></a>
       </div>
     </div>
 
-    <div class="center_text">
+    <div class="center_text " >
       <md-button ui-sref="register_teacher" class="md-raised blue_button">Become a teacher</md-button>
     </div>
   </div>
 
   
-  <div class="full_height_on_big" style="margin-bottom: 50px;">
+  <div class="full_height_on_big" >
     <div layout="row"  layout-margin-gt-xs flex >
       
       <md-content class="grey_green_background how_it_works" >
         <div layout="column" class="center_text">
-          <h1 class="green_text" flex="100">How it works</h1><br><br>
+          <h1 class="green_text neue" flex="100">How it works</h1><br><br>
           <h4 flex="100">From finding the perfect teacher to managing bookings and scheduling lessons - we take care of all the details, so you can focus on learning. <a ui-sref="how_it_works"></a></h4> <br>
         </div>
         <div layout="row" layout-xs="column" >

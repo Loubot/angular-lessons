@@ -4,14 +4,18 @@
 
 @font-face {
   font-family: 'Neue Helvetica';
-  src: asset_url('HelveticaNeueLTW1G-Bd.otf') format('embedded-opentype');
+  src: asset_url("HelveticaNeueLTW1G-HvCn.otf");
   font-style: normal;
 }
 
 html, body{
   height: 100%;
   max-width: 100% !important;
-  font-family: 'Neue Helvetica', sans-serif !important;
+  font-family: 'Neue Helvetica';
+}
+
+.neue{
+  font-family: 'Neue Helvetica' !important;
 }
 
 .cursor_hand{
@@ -611,7 +615,7 @@ md-sidenav.md-closed.md-locked-open-add-active.user_menu {
 
 @media ( min-width: 600px ){
   .full_height_on_big{
-    height: 100vh;
+    height: 100% !important;
   }
 }
 // end of welcome page
