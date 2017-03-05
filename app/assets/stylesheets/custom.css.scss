@@ -1060,7 +1060,11 @@ ul.share-buttons .sr-only {
     -webkit-background-size: 100% 100%;
     background-size: 100% 100%;
     background-repeat: no-repeat;
-    transition: .5s linear all;
+    -webkit-transition: 3s;
+    -moz-transition: 3s;
+    -ms-transition: 3s;
+    -o-transition: 3s;
+    transition: 3s;
   }
 
   .main_page_search_container_first_background{

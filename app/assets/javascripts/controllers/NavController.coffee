@@ -7,13 +7,24 @@ angular.module('lessons').controller('NavController', [
   '$window'  
   '$mdSidenav'
   '$mdMenu'
+  '$mdDialog'
   'alertify'
   'auth'
   '$auth'
-  ( $scope, $rootScope, $state, $window, $mdSidenav, $mdMenu, alertify, auth, $auth ) ->
+  ( $scope, $rootScope, $state, $window, $mdSidenav, $mdMenu, $mdDialog, alertify, auth, $auth ) ->
     console.log "NavController"
     $scope.teacher = {}
     $scope.auth_type = null
+
+    $scope.open_login = ->
+      console.log 'a'
+      
+      $mdDialog.show(
+        templateUrl: "dialogs/login.html"
+        scope: $scope
+        preserveScope: true
+      )
+        
 
     $scope.open_home_menu = ( $mdOpenMenu, e ) ->
       console.log e
