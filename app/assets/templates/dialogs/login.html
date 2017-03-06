@@ -21,9 +21,17 @@
         <input ng-model="teacher.password" type="password" required>
       </md-input-container> <br>
 
-      <md-input-container class="width_90 center_text">
+      <div class="width_90 center_text">
         <input type="submit" value="Login" class="md-button md-raised md-primary width_100" aria-label="Login">
-      </md-input-container>
+      </div>
+      
+      <div class="width_100 center_text">
+        <span class="center_text">or</span>
+      </div>
+
+      <div class="width_90 center_text">
+        <md-button ui-sref="register_teacher" ng-click="close_dialog()" class="md-button md-raised md-warn width_100">Register</md-button>
+      </div>
 
     </form>
 
