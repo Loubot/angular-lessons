@@ -11,36 +11,44 @@
         <a ui-sref="welcome"><img src="<%= asset_url 'small_logo.jpg' %>" alt="learn your lesson"></a>
       </div>
 
-      <div hide-xs  ui-sref-active="active_bla" class="margin_t_10">
+      <div ng-if="false" hide-xs  ui-sref-active="active_bla" class="margin_t_10">
         <a class="black_text margin_r_10" ui-sref-active="active_bla white_text" ui-sref="contact">Contact Us</a>
       </div>
 
-      <div hide-xs class="margin_t_10 no_padding">
-        <md-menu>
-         <!-- Trigger element is a md-button with an icon -->
-         <span ng-click="open_subjects_menu($mdOpenMenu, $event)" class=" width_auto no_padding no_margin" aria-label="Open sample menu">
-           Subjects <md-icon><i class="material-icons">keyboard_arrow_down</i></md-icon>
-         </span>
-         <md-menu-content width="4">
-           <md-menu-item ng-repeat="s in subject_list_for_menu">
-            <md-button ui-sref="search({ name: s.name })">{{ s.name }}</md-button>
-          </md-menu-item>
-         </md-menu-content>
-        </md-menu>
-      </div>
+      <div hide-xs flex-sm="18" flex-gt-sm="40"></div>
 
-      <div hide-xs  class="margin_t_10">
-        <a class="black_text" ui-sref-active="active_bla white_text" ui-sref="about">About Us</a>
-      </div>
+      <div layout="row">
+        <div hide-xs class="margin_t_8 no_padding">
+          <md-menu>
+           <!-- Trigger element is a md-button with an icon -->
+           <span ng-click="open_subjects_menu($mdOpenMenu, $event)" class=" width_auto no_padding no_margin" aria-label="Open sample menu">
+             Subjects<md-icon><i class="material-icons">keyboard_arrow_down</i></md-icon>
+           </span>
+           <md-menu-content width="4">
+             <md-menu-item ng-repeat="s in subject_list_for_menu">
+              <md-button ui-sref="search({ name: s.name })">{{ s.name }}</md-button>
+            </md-menu-item>
+           </md-menu-content>
+          </md-menu>
+        </div>
 
-      <!-- Teacher/User menu mess -->
+        <div hide-xs  class="margin_t_10">
+          <a class="black_text" ui-sref-active="active_bla white_text" ui-sref="about">|&nbsp; About Us &nbsp;</a>
+        </div>
 
-      <div ng-if="User && User.is_teacher" ng-include="'includes/teacher_logged_in_menu.html'">
-        
-      </div>
+        <!-- Teacher/User menu mess -->
 
-      <div class="margin_t_10 no_padding" ng-if="!User">
-        <div id="login_hook" ng-click="open_login()">Teacher Login</div>
+        <div ng-if="User && User.is_teacher" ng-include="'includes/teacher_logged_in_menu.html'">
+          
+        </div>
+
+        <div hide-xs ng-if="!User" class="margin_t_10">
+          <a class="black_text"  ui-sref="register_teacher">|&nbsp; Become a teacher&nbsp;</a>
+        </div>
+
+        <div class="margin_t_10 no_padding" ng-if="!User">
+          <div id="login_hook" ng-click="open_login()"><span hide-xs>|</span>&nbsp; Login</div>
+        </div>
       </div>
 
       <!-- End of Teacher/User mess -->

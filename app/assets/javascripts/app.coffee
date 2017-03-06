@@ -157,6 +157,11 @@ angular.module('lessons').config [
     templateUrl: "static/register_teacher.html"
     controller: "RegisterController"
   
+  $stateProvider.state 'student_register',
+    url: "/register-student"
+    templateUrl: "static/register_student.html"
+    controller: "RegisterController"
+  
 
   $stateProvider.state 'how_it_works',
     url: '/how-it-works'

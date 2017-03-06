@@ -16,10 +16,15 @@ angular.module('lessons').controller('NavController', [
     $scope.teacher = {}
 
     $scope.open_login = ->
-      console.log 'a'
-      
       $mdDialog.show(
         templateUrl: "dialogs/login.html"
+        scope: $scope
+        preserveScope: true
+      )
+
+    $scope.open_register = ->
+      $mdDialog.show(
+        templateUrl: "dialogs/student_register.html"
         scope: $scope
         preserveScope: true
       )
