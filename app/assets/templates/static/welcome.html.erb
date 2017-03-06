@@ -13,7 +13,7 @@
         </h1>
       </div> <!-- end of white_text -->
 
-      <form  layout="row" layout-align="center center" name="search_form" flex>          
+      <form  layout="column" layout-align="center center" name="search_form" flex>          
             
           
         <div layout="row" layout-xs="column">
@@ -22,7 +22,7 @@
                 md-select-on-match
                 md-autoselect
                 id="select_subject"
-                class="black_text subject_search"
+                class="black_text"
                 md-selected-item="selected.subject_name" 
                 md-input-name="subject"
                 md-search-text="searchText.subject_name"
@@ -46,31 +46,14 @@
             </md-autocomplete>
 
           </div>
-
-          <div  layout-align="center center" class="county_search" flex>
-            <md-autocomplete 
-                class="black_text subject_search"
-                md-selected-item="selected.county_name" 
-                md-input-name="county"
-                md-search-text="searchText.county_name" 
-                md-items="county in counties" 
-                md-item-text="county" 
-                md-search-text-change="search_counties( searchText.county_name )"
-                placeholder="County?"
-                md-selected-item-change="county_picked( county )">
-              <md-item-template>
-                <span md-highlight-text="county">{{county}}</span>
-              </md-item-template>
-              
-            </md-autocomplete>    
-          </div>
-
+          <div>
+            <md-button style="height:40px;" ng-click="search()" class="md-raised md-primary icon_button white_text no_margin no_padding">  Search<i class="material-icons">search</i>
+            </md-button>
+          </div> <!-- end of row -->
           
         </div> <!-- end of row -->   
       </form> <!-- end of search() -->
-      <div layout="row" layout-align="center center" flex>
-        <md-button ng-click="search()" class="md-raised md-primary icon_button white_text">Search<i class="material-icons">search</i></md-button>
-      </div> <!-- end of row -->
+      
       
     </div> <!-- end of main_page_search_container -->
 
