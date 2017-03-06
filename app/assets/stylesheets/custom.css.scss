@@ -4,7 +4,7 @@
 
 @font-face {
   font-family: 'Neue Helvetica';
-  src: asset_url("HelveticaNeueLTW1G-HvCn.otf");
+  src: asset_url("HelveticaNeueLTW1G-Md.otf");
   font-style: normal;
 }
 
@@ -259,6 +259,10 @@ md-sidenav.md-closed.md-locked-open-add-active.user_menu {
 
 .width_75{
   width: 75% !important;
+}
+
+.width_90{
+  width: 90% !important;
 }
 
 .width_50{

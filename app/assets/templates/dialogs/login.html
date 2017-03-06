@@ -1,0 +1,34 @@
+<md-dialog aria-label="Login dialog">
+  <md-dialog-content>
+
+    <form ng-submit="login_form.$valid && auth.login( teacher )" name="login_form" novalidate>
+
+      <md-input-container class="md-icon-float md-block">
+        <!-- Use floating label instead of placeholder -->
+        <label>Email</label>
+        <md-icon ><i class="material-icons">email</i></md-icon> 
+        <input ng-model="teacher.name" type="text" name="email" ng-pattern="/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/" required>
+
+        <div ng-messages="login_form.email.$error">
+          <div ng-message="required">Enter email</div>
+          <div ng-message="pattern">Must be a valid email</div>
+        </div>
+      </md-input-container>
+
+      <md-input-container>
+        <label>Password</label>
+        <md-icon><i class="material-icons">vpn_key</i></md-icon>
+        <input ng-model="teacher.password" type="password" required>
+      </md-input-container> <br>
+
+      <md-input-container class="width_90 center_text">
+        <input type="submit" value="Login" class="md-button md-raised md-primary width_100" aria-label="Login">
+      </md-input-container>
+
+    </form>
+
+  </md-dialog-content>
+  <md-dialog-actions>
+    <md-button ng-click="close_dialog()" class="md-primary">Close Dialog</md-button>
+  </md-dialog-actions>
+</md-dialog>

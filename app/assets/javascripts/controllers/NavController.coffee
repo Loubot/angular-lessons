@@ -14,7 +14,6 @@ angular.module('lessons').controller('NavController', [
   ( $scope, $rootScope, $state, $window, $mdSidenav, $mdMenu, $mdDialog, alertify, auth, $auth ) ->
     console.log "NavController"
     $scope.teacher = {}
-    $scope.auth_type = null
 
     $scope.open_login = ->
       console.log 'a'
@@ -40,34 +39,8 @@ angular.module('lessons').controller('NavController', [
       console.log 'facebook'
       $auth.authenticate('facebook', {params: {resource_class: 'Teacher'}})
       # $auth.authenticate('facebook')
-
-    $scope.user_menu = ->
-      $mdSidenav('user_menu').toggle()
       
-    $scope.openLeftMenu = ( auth_type ) -> # 0=login; 1= register
-      $scope.auth_type = auth_type
-      if auth_type == 0
-        console.log 'Login'
-        $scope.auth_type = 0
-      else if auth_type == 2
-        console.log "register student"
-        $scope.auth_type == 2
-      else
-        console.log 'register teacher'
-        $scope.auth_type = 2
-      $mdSidenav('left').toggle()
-
-    # $scope.$watch('demo.isOpen', ( isOpen ) ->
-    #   console.log isOpen
-    # )
-
-    $scope.openRightMenu = ->
-      console.log "yep"
-      $mdSidenav('right').toggle()
-
-    $scope.closeRightMenu = ->
-      $mdSidenav('right').toggle()
-
+    
     $scope.register_teacher = ->
       
       $scope.teacher.is_teacher = true if $scope.auth_type == 1
@@ -86,4 +59,7 @@ angular.module('lessons').controller('NavController', [
 
     $scope.logout = ->
       auth.logout()
+
+    $scope.close_dialog = ->
+      $mdDialog.cancel()
 ])
