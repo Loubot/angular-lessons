@@ -491,6 +491,12 @@ md-sidenav.md-closed.md-locked-open-add-active.user_menu {
   margin-top: 30px !important;
 }
 
+@media ( min-width: 600px ){
+  .margin_t_5_sm{
+    margin-top: 5px;
+  }
+}
+
 .margin_t_b_8{
   margin: 8px 0px;
 }
