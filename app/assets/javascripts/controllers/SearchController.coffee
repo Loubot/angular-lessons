@@ -50,6 +50,7 @@ angular.module('lessons').controller( 'SearchController', [
         console.log resp
         alertify.success "Found #{ resp.data.teachers.length } teacher(s)"
         $scope.teachers = resp.data.teachers
+        $scope.search_nav()
       ).catch( ( err ) ->
         console.log err
         alertify.error "Failed to find teachers"

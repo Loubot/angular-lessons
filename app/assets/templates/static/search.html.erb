@@ -80,16 +80,19 @@
         
       </div>
 
-      <md-input-container >
-        <input class="no_padding no_margin md-button md-primary md-raised white_text"
-               type="submit"
-               ng-click="search_nav()" 
-               value="Search" 
-               aria-label="Search">
-      </md-input-container>
-<br>
-      
-        <md-button ng-click="search_nav()" hide-gt-xs>Close search</md-button>
+      <div layout="column" layout-align="space-around center">
+        <div>
+          <input class="md-button md-primary md-raised white_text"
+                 type="submit"
+                 ng-click="search_nav()" 
+                 value="Search" 
+                 aria-label="Search">
+        </div>
+        
+        <div>
+          <md-button class="md-warn md-raised" ng-click="search_nav()" hide-gt-xs>Close search</md-button>
+        </div>
+      </div>
       
     </form>
     
