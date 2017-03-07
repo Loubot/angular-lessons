@@ -22,7 +22,7 @@
       </md-input-container> <br>
 
       <div class="width_90 center_text">
-        <input type="submit" value="Login" class="md-button md-raised md-primary width_100" aria-label="Login">
+        <input type="submit" value="Login" class="md-button md-raised md-primary width_100"  aria-label="Login">
       </div>
       
       <div class="width_100 center_text">
@@ -30,7 +30,7 @@
       </div>
 
       <div class="width_90 center_text">
-        <md-button ui-sref="student_register" class="md-button md-raised md-warn width_100">Register</md-button>
+        <md-button  ng-click="close_dialog(); open_register_dialog();" class="md-button md-raised md-warn width_100">Register</md-button>
       </div>
 
     </form>

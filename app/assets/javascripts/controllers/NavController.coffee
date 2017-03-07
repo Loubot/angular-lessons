@@ -22,9 +22,9 @@ angular.module('lessons').controller('NavController', [
         preserveScope: true
       )
 
-    $scope.open_register = ->
+    $scope.open_register_dialog = ->
       $mdDialog.show(
-        templateUrl: "dialogs/student_register.html"
+        templateUrl: "dialogs/register_student.html"
         scope: $scope
         preserveScope: true
       )

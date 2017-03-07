@@ -1,0 +1,60 @@
+<md-dialog aria-label="Student registration form">
+  <md-dialog-content>
+
+    <form layout="column" name="student_form" ng-submit="student_form.$valid && auth.register( student )" novalidate>
+
+      <div>
+        <md-input-container >
+          <label>Email</label>
+          <md-icon><i class="material-icons ">email</i></md-icon>
+          <input  type="email" 
+                  ng-model="student.email"
+                  ng-pattern="/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/"
+                  required>
+          <div ng-messages="register_teacher_form.email.$error">
+            <div ng-message="required">This is required.</div>
+            <div ng-message="pattern">Must be a valid email</div>
+          </div>
+        </md-input-container>
+      </div>
+
+      <div>
+        <md-input-container>
+          <label>Password:</label>
+          <md-icon><i class="material-icons">vpn_key</i></md-icon>
+          <input type="password" name="password" required>
+
+          <div ng-messages="student_form.password">
+            <div ng-message="required">Password required</div>
+          </div>
+        </md-input-container>
+      </div>
+
+      <div>
+        <md-input-container>
+          <label>Confirm Password:</label>
+          <md-icon><i class="material-icons">vpn_key</i></md-icon>
+          <input type="password" name="confirm_password" required>
+
+          <div ng-messages="student_form.confirm_password">
+            <div ng-message="required">Password required</div>
+            <div ng-message="student_form.password != student_form.confirm_password">Passwords must match</div>
+          </div>
+        </md-input-container>
+      </div>
+
+      <div class="width_90 center_text">
+        <input type="submit" value="Register" class="md-button md-raised md-primary width_100"  aria-label="Register as student">
+      </div>
+      
+      <div class="width_100 center_text">
+        <span class="center_text">or</span>
+      </div>
+
+      <div class="width_90 center_text">
+        <md-button  ng-click="close_dialog(); open_login();" class="md-button md-raised md-warn width_100">Login</md-button>
+      </div>
+
+    </form>
+  </md-dialog-content>
+</md-dialog>
