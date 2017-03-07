@@ -29,6 +29,7 @@ angular.module('lessons').controller('NavController', [
         templateUrl: "dialogs/register_student.html"
         scope: $scope
         preserveScope: true
+        fullscreen: true
       )
         
 
