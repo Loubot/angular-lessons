@@ -107,7 +107,7 @@
 
   <div layout="column" class="boxWithHeight margin_l_5 min_height_50vh" flex-xs="100" layout-align="start center" >
     <div>
-      <md-content layout="row" layout-wrap class="search_content">
+      <md-content layout="row" layout-wrap class="search_content" >
 
         <md-card 
               ng-repeat="teacher in teachers | start_from:(current_page - 1) * page_size | limitTo: page_size" 
