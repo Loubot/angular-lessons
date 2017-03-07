@@ -37,6 +37,14 @@ html, body{
   text-align: right;
 }
 
+/* Full screen on small */
+@media ( max-width: 600px ){
+  .full_screen_on_small{
+    min-width: 100% !important;
+    min-height: 100% !important;
+  }
+}
+
 .active_bla{
   background-color: #4caf50;
   color: #111;
