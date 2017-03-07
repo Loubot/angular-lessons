@@ -57,14 +57,14 @@
       
     </div> <!-- end of main_page_search_container -->
 
-    <div class="margin_t_30" layout-gt-xs="row" layout="column" layout-align="space-around center" ng-cloak>
-      <div>
+    <div class="margin_t_30 no_padding no_margin" layout-gt-xs="row" layout="column" layout-align="space-around center" ng-cloak>
+      <div class="full_width_on_big">
         <a ui-sref="search({ name: 'Piano' })"><img ng-src="<%= asset_url 'learn-to-play-piano.jpg' %>" class="link_images"></a>
       </div>
-      <div class="margin_t_8">
+      <div class="margin_t_8 full_width_on_big" >
         <a ui-sref="search({ name: 'Guitar' })"><img ng-src="<%= asset_url 'learn-to-play-guitar.jpg' %>" class="link_images"></a>
       </div>
-      <div class="margin_t_8">
+      <div class="margin_t_8 full_width_on_big" >
         <a ui-sref="search({ name: 'Drums' })"><img ng-src="<%= asset_url 'learn-to-play-drums.jpg' %>" class="link_images"></a>
       </div>
     </div>
