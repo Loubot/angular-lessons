@@ -11,17 +11,18 @@
 
   <md-dialog-content>
 
-    <form layout="column" name="student_form" ng-submit="student_form.$valid && auth.register( student )" novalidate>
+    <form layout="column" name="student_form" ng-submit="student_form.$valid && register_student()" novalidate>
 
       <div>
         <md-input-container >
           <label>Email</label>
           <md-icon><i class="material-icons ">email</i></md-icon>
-          <input  type="email" 
+          <input  type="email"
+                  name="email"
                   ng-model="student.email"
                   ng-pattern="/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/"
                   required>
-          <div ng-messages="register_teacher_form.email.$error">
+          <div ng-messages="student_form.email.$error">
             <div ng-message="required">This is required.</div>
             <div ng-message="pattern">Must be a valid email</div>
           </div>
@@ -32,9 +33,9 @@
         <md-input-container>
           <label>Password:</label>
           <md-icon><i class="material-icons">vpn_key</i></md-icon>
-          <input type="password" name="password" required>
+          <input type="password" name="password" ng-model="student.password" required>
 
-          <div ng-messages="student_form.password">
+          <div ng-messages="student_form.password.$error" >
             <div ng-message="required">Password required</div>
           </div>
         </md-input-container>
@@ -44,11 +45,11 @@
         <md-input-container>
           <label>Confirm Password:</label>
           <md-icon><i class="material-icons">vpn_key</i></md-icon>
-          <input type="password" name="confirm_password" required>
+          <input type="password" name="confirm_password" ng-model="student.confirm_password" required>
 
-          <div ng-messages="student_form.confirm_password">
-            <div ng-message="required">Password required</div>
-            <div ng-message="student_form.password != student_form.confirm_password">Passwords must match</div>
+          <div ng-messages="student_form.confirm_password.$error" md-auto-hide="false">
+            <div ng-message="requireds" >Password required</div>
+            <div ng-message="matching_password" >Passwords must match</div>
           </div>
         </md-input-container>
       </div>

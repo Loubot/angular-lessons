@@ -15,6 +15,8 @@ angular.module('lessons').controller('NavController', [
     console.log "NavController"
     $scope.teacher = {}
 
+    ### Opening closing menus ###
+
     $scope.open_login = ->
       $mdDialog.show(
         templateUrl: "dialogs/login.html"
@@ -40,12 +42,14 @@ angular.module('lessons').controller('NavController', [
 
     $scope.auth = auth
 
+    ### Finish opening closing menus###
     $scope.facebook = ->
       console.log 'facebook'
       $auth.authenticate('facebook', {params: {resource_class: 'Teacher'}})
       # $auth.authenticate('facebook')
       
     
+    ### Registration stuff ###
     $scope.register_teacher = ->
       
       $scope.teacher.is_teacher = true if $scope.auth_type == 1
@@ -59,6 +63,40 @@ angular.module('lessons').controller('NavController', [
         console.log err
         alertify.error "Failed to register"
       )
+
+    $scope.register_student = ->
+      console.log $scope.student.confirm_password
+      $scope.student_form.confirm_password.$error.matching_password = false
+      $scope.student_form.confirm_password.$error.requireds = false
+      if $scope.student.confirm_password == "" or !$scope.student.confirm_password?
+        
+        console.log "nothing"
+        $scope.student_form.confirm_password.$error.requireds = true
+        
+        console.log $scope.student_form
+
+
+      else if $scope.student.password != $scope.student.confirm_password
+        console.log "error"
+        $scope.student_form.confirm_password.$error.matching_password = true
+      else if $scope.student.password == $scope.student.confirm_password
+        console.log "No error"
+        $scope.student_form.confirm_password.$error.matching_password = false
+        $scope.student_form.confirm_password.$error.requireds = false
+
+        for att of $scope.student_form.confirm_password.$error
+          if $scope.student_form.confirm_password.$error.hasOwnProperty(att)
+            console.log att
+            $scope.student_form.confirm_password.$setValidity att, true
+
+        auth.register( $scope.student )
+
+    $rootScope.$on 'auth:registered_user', ( user ) ->
+      console.log user
+      alertify.success "Student account created"
+      $scope.close_dialog()
+
+    ### End of registration stuff ###
 
   
 

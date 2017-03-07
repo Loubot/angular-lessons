@@ -56,7 +56,7 @@ class Teacher < ActiveRecord::Base
   include DeviseTokenAuth::Concerns::User
 
   validates :email,  uniqueness: { case_sensitive: false }
-  validates :email, :first_name, presence: true
+  validates :email, presence: true
   validates_confirmation_of :password, message: "should match verification"
 
 
