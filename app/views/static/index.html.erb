@@ -42,8 +42,8 @@
           
         </div>
 
-        <div hide-xs ng-if="!User" class="margin_t_10">
-          <a class="black_text"  ui-sref="register_teacher">|&nbsp; Become a teacher&nbsp;</a>
+        <div ng-if="!User" class="margin_t_10">
+          <a class="black_text"  ui-sref="register_teacher"><span hide-xs>|</span>&nbsp; Become a teacher&nbsp;</a>
         </div>
 
         <div class="margin_t_10 no_padding" ng-if="!User">

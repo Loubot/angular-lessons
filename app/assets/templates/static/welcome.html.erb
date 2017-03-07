@@ -22,7 +22,7 @@
                 md-select-on-match
                 md-autoselect
                 id="select_subject"
-                class="black_text"
+                class="black_text no_border_radius "
                 md-selected-item="selected.subject_name" 
                 md-input-name="subject"
                 md-search-text="searchText.subject_name"
@@ -47,7 +47,7 @@
 
           </div>
           <div class="center_text">
-            <md-button style="height:40px;" ng-click="search()" class="md-raised md-primary icon_button white_text no_margin no_padding">  Search<i class="material-icons">search</i>
+            <md-button style="height:40px;" ng-click="search()" class="md-raised md-primary icon_button white_text no_margin no_padding no_border_radius">  Search<i class="material-icons">search</i>
             </md-button>
           </div> <!-- end of row -->
           
@@ -72,7 +72,7 @@
     <div class="center_text " >
       <md-button ui-sref="register_teacher" class="md-raised blue_button">Become a teacher</md-button>
     </div>
-  </div>
+  </div> <!-- end of hook -->
 
   
   <div class="full_height_on_big" ng-cloak>
