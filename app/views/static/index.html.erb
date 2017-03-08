@@ -38,9 +38,11 @@
 
         <!-- Teacher/User menu mess -->
 
-        <div ng-if="User && User.is_teacher" ng-include="'includes/teacher_logged_in_menu.html'">
-          
-        </div>
+        <!-- Teacher menu -->
+        <div ng-if="User && User.is_teacher" ng-include="'includes/teacher_logged_in_menu.html'"></div>
+
+        <!-- Student menu -->
+        <div ng-if="User && !User.is_teacher" ng-include="'includes/student_logged_in_menu.html'"></div>
 
         <div ng-if="!User" class="margin_t_10">
           <a class="black_text"  ui-sref="register_teacher"><span hide-xs>|</span>&nbsp; Become a teacher&nbsp;</a>

@@ -51,6 +51,7 @@ angular.module('lessons').service 'auth', [
       #   throw 'There was an error'
 
     auth.login = ( teacher ) ->
+      console.log teacher
       $auth.submitLogin( teacher )
         .then( (resp) ->
 
@@ -60,7 +61,7 @@ angular.module('lessons').service 'auth', [
             #   resp
             # ]
             alertify.success "Welcome back #{ $rootScope.User.first_name }"
-            $mdSidenav('left').close()
+            # $mdSidenav('left').close()
           )
           
         )
@@ -71,7 +72,7 @@ angular.module('lessons').service 'auth', [
         )   
 
     auth.register = ( teacher ) ->
-
+      console.log teacher
       console.log teacher.county
       $auth.submitRegistration( teacher )
         .then( (resp) ->
@@ -108,6 +109,7 @@ angular.module('lessons').service 'auth', [
     auth.check_if_logged_in = ->
       $q ( resolve, reject ) ->
         $auth.validateUser().then( ( user ) ->
+          
           if !$rootScope.User?
             new User().then( ( resp ) ->
               resolve $rootScope.User
@@ -117,6 +119,8 @@ angular.module('lessons').service 'auth', [
           else
             resolve $rootScope.User
         ).catch( ( validate_err ) ->
+          console.log 'Right here'
+          console.log validate_err
           reject validate_err
         )
 
@@ -141,6 +145,7 @@ angular.module('lessons').service 'auth', [
     auth.check_if_logged_in_and_admin = ->
       $q ( resolve, reject ) ->
         $auth.validateUser().then( ( user ) ->
+
           if !$rootScope.User?
             new User().then( ( resp ) ->
               if !user.admin
@@ -155,6 +160,8 @@ angular.module('lessons').service 'auth', [
             resolve $rootScope.User
           
         ).catch( ( validate_err ) ->
+          console.log "Maybe here"
+          console.log validate_err
           reject validate_err
         )
         

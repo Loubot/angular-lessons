@@ -1,0 +1,20 @@
+<md-menu>
+  <md-button aria-label="Open demo menu" class="md-icon-button" ng-click="open_home_menu($mdOpenMenu, $event)">
+    <md-icon><i class="material-icons">menu</i></md-icon>
+  </md-button>
+
+  <md-menu-content width="4">
+    <md-menu-item>
+    <md-button ui-sref="student_profile({id:User.id})" class="md-button md-default-theme green_text">Profile</md-button>
+    </md-menu-item>
+
+    <md-menu-item>
+      <md-button ui-sref="conversation" class="md-button md-default-theme green_text">Messages</md-button>
+    </md-menu-item>
+
+    <md-menu-item>
+      <md-button class="md-button md-default-theme " ng-click="auth.logout()">Logout</md-button>
+    </md-menu-item>
+
+  </md-menu-content>
+</md-menu>

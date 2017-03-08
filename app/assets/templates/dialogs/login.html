@@ -1,25 +1,39 @@
 <md-dialog aria-label="Login dialog">
+
+  <md-toolbar>
+    <div class="md-toolbar-tools">
+      <h4>Login</h4>
+      <span flex></span>
+      <md-button class="md-icon-button" ng-click="close_dialog()">
+        <md-icon ><i class="material-icons">close</i></md-icon>
+      </md-button>
+    </div>
+  </md-toolbar>
   <md-dialog-content>
 
-    <form ng-submit="login_form.$valid && auth.login( teacher )" name="login_form" novalidate>
+    <form layout="column" ng-submit="login_form.$valid && auth.login( teacher )" name="login_form" novalidate>
 
-      <md-input-container class="md-icon-float md-block">
-        <!-- Use floating label instead of placeholder -->
-        <label>Email</label>
-        <md-icon ><i class="material-icons">email</i></md-icon> 
-        <input ng-model="teacher.name" type="text" name="email" ng-pattern="/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/" required>
+      <div>
+        <md-input-container class="md-icon-float">
+          <!-- Use floating label instead of placeholder -->
+          <label>Email</label>
+          <md-icon ><i class="material-icons">email</i></md-icon> 
+          <input ng-model="teacher.email" type="text" name="email" ng-pattern="/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/" required>
 
-        <div ng-messages="login_form.email.$error">
-          <div ng-message="required">Enter email</div>
-          <div ng-message="pattern">Must be a valid email</div>
-        </div>
-      </md-input-container>
+          <div ng-messages="login_form.email.$error">
+            <div ng-message="required">Enter email</div>
+            <div ng-message="pattern">Must be a valid email</div>
+          </div>
+        </md-input-container>
+      </div>
 
-      <md-input-container>
-        <label>Password</label>
-        <md-icon><i class="material-icons">vpn_key</i></md-icon>
-        <input ng-model="teacher.password" type="password" required>
-      </md-input-container> <br>
+      <div>
+        <md-input-container>
+          <label>Password</label>
+          <md-icon><i class="material-icons">vpn_key</i></md-icon>
+          <input ng-model="teacher.password" type="password" required>
+        </md-input-container> 
+      </div>
 
       <div class="width_90 center_text">
         <input type="submit" value="Login" class="md-button md-raised md-primary width_100"  aria-label="Login">
