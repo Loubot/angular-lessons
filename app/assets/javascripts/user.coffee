@@ -6,8 +6,9 @@ angular.module('lessons').service 'auth', [
   "$state"
   "$window"
   "$mdSidenav"
+  "$mdDialog"
   "$q"
-  ( $rootScope, $auth, User, alertify, $state, $window, $mdSidenav, $q ) ->
+  ( $rootScope, $auth, User, alertify, $state, $window, $mdSidenav, $mdDialog, $q ) ->
     valid = false
     auth = {}
     auth.county_lists =
@@ -62,6 +63,7 @@ angular.module('lessons').service 'auth', [
             # ]
             alertify.success "Welcome back #{ $rootScope.User.first_name }"
             # $mdSidenav('left').close()
+            $mdDialog.cancel()
           )
           
         )
