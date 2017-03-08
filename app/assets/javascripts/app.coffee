@@ -138,9 +138,11 @@ angular.module('lessons').config [
     resolve:
       authenticate: [
         "$auth"
-        ( $auth ) ->
+        "$rootScope"
+        ( $auth, $rootScope ) ->
           $auth.validateUser().catch( ( err ) ->
             console.log err
+            $rootScope.$broadcast( "auth:invalid", [ 'no_good', 'no_sir' ] )
           )
       ]
 
@@ -152,9 +154,11 @@ angular.module('lessons').config [
     resolve:
       authenticate: [
         "$auth"
-        ( $auth ) ->
+        "$rootScope"
+        ( $auth, $rootScope ) ->
           $auth.validateUser().catch( ( err ) ->
             console.log err
+            $rootScope.$broadcast( "auth:invalid", [ 'no_good', 'no_sir' ] )
           )
       ]
 
