@@ -45,9 +45,13 @@ html, body{
   }
 }
 
+/* Fix for dialog not resizing when keyboard is close */
+
 .md-dialog-container {
-  height: 100% !important;
+    height: 100% !important;
 }
+
+/* End of fix for dialog not resizing when keyboard is close */
 
 .active_bla{
   background-color: #4caf50;
