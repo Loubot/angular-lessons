@@ -1,4 +1,4 @@
-<div ng-controller="NavController" ng-cloak>
+<div ng-controller="NavController" ng-cloak ng-show="isPageFullyLoaded">
   <!-- Start of menu bar-->
   <div class="bottom_bit" layout="row" layout-align="space-around none" style="background-color: #f5f5f5;">
     
@@ -17,7 +17,7 @@
 
       <div hide-xs flex-sm="18" flex-gt-sm="40"></div>
 
-      <div layout="row">
+      <div ng-cloak layout="row">
         <div hide-xs class="margin_t_8 no_padding">
           <md-menu>
            <!-- Trigger element is a md-button with an icon -->
@@ -39,16 +39,16 @@
         <!-- Teacher/User menu mess -->
 
         <!-- Teacher menu -->
-        <div ng-if="User && User.is_teacher" ng-include="'includes/teacher_logged_in_menu.html'"></div>
+        <div ng-cloak ng-if="User && User.is_teacher" ng-include="'includes/teacher_logged_in_menu.html'"></div>
 
         <!-- Student menu -->
-        <div ng-if="User && !User.is_teacher" ng-include="'includes/student_logged_in_menu.html'"></div>
+        <div ng-cloak ng-if="User && !User.is_teacher" ng-include="'includes/student_logged_in_menu.html'"></div>
 
-        <div ng-if="!User" class="margin_t_10">
+        <div ng-cloak ng-if="!User" class="margin_t_10">
           <a class="black_text"  ui-sref="register_teacher"><span hide-xs>|</span>&nbsp; Become a teacher&nbsp;</a>
         </div>
 
-        <div class="margin_t_10 no_padding" ng-if="!User">
+        <div ng-cloak class="margin_t_10 no_padding" ng-if="!User">
           <div id="login_hook" ng-click="open_login()"><span hide-xs>|</span>&nbsp; Login</div>
         </div>
       </div>

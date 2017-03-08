@@ -22,11 +22,11 @@
     <form ng-submit="search_teachers()" name="searchForm">
       
       <md-chips >
-        <md-chip class="min_height_32 background_color_slightly_desaturated_cyan white_text" ng-show="selected.subject_name">
+        <md-chip class="min_height_32px background_color_slightly_desaturated_cyan white_text" ng-show="selected.subject_name">
           {{ selected.subject_name }}
         </md-chip>
         <span ng-if="selected_county_name">/</span>
-        <md-chip class="min_height_32 background_color_slightly_desaturated_pink white_text" ng-show="selected_county_name">
+        <md-chip class="min_height_32px background_color_slightly_desaturated_pink white_text" ng-show="selected_county_name">
           {{ selected_county_name }}
         </md-chip>        
       </md-chips>
@@ -109,7 +109,7 @@
 
   <div layout="column" class="boxWithHeight margin_l_5 min_height_50vh" flex-xs="100" layout-align="start center" >
     <div>
-      <md-content layout="row" layout-wrap class="search_content" >
+      <md-content layout="row" layout-wrap class="grey_content" >
 
         <md-card 
               ng-repeat="teacher in teachers | start_from:(current_page - 1) * page_size | limitTo: page_size" 

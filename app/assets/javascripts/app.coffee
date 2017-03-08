@@ -35,7 +35,6 @@ angular.module('lessons').service 'counties', [ ->
   
 
 ]
-
     
 
 angular.module('lessons').run ( $rootScope ) ->
@@ -129,18 +128,35 @@ angular.module('lessons').config [
   "$stateProvider"
   "$urlRouterProvider"
   "$locationProvider"
- ($stateProvider, $urlRouterProvider, $locationProvider) ->
+ ($stateProvider, $urlRouterProvider, $locationProvider ) ->
   # $locationProvider.html5Mode(true)
   
   $stateProvider.state 'home',
     url: '/'
     templateUrl: "static/welcome.html"
     controller: "WelcomeController"
+    resolve:
+      authenticate: [
+        "$auth"
+        ( $auth ) ->
+          $auth.validateUser().catch( ( err ) ->
+            console.log err
+          )
+      ]
+
   
   $stateProvider.state 'welcome',
     url: '/welcome'
     templateUrl: "static/welcome.html"
     controller: "WelcomeController"
+    resolve:
+      authenticate: [
+        "$auth"
+        ( $auth ) ->
+          $auth.validateUser().catch( ( err ) ->
+            console.log err
+          )
+      ]
 
   $stateProvider.state 'search',
     url: '/search/:name/:location'
@@ -393,10 +409,10 @@ angular.module('lessons').service 'COMMS', ( $http, $state, RESOURCES, $rootScop
       )
 
       
-angular.module('lessons').run [
-  '$rootScope'
-  'auth'
-  ($rootScope, auth) ->
+# angular.module('lessons').run [
+#   '$rootScope'
+#   'auth'
+#   ($rootScope, auth) ->
     # $rootScope.$on 'auth:validation-success', ( e ) ->
     #   console.log 'bl'
     #   console.log e
@@ -431,7 +447,7 @@ angular.module('lessons').run [
 #       return
 
 
-]
+# ]
 
 # angular.module('lessons').run(['$rootScope', '$state',
 #   ($rootScope, $state)->

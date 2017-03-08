@@ -1,6 +1,13 @@
 <!DOCTYPE html>
 <html ng-app="lessons">
 <head>
+  <style type="text/css">
+    [ng-cloak]
+    {
+      display: none !important;
+    }
+  </style>
+  <%= javascript_include_tag 'application' %>
   <base href="/">
   <meta name="google-site-verification" content="w-AjB4ZfZJeA_zvgq94G8gjGKTHjbIlZme7cA_1a5cM" />
   <title>grinds, lessons, learn, music, languages, piano, guitar, french, german, spanish | Learn Your Lesson</title>
@@ -12,7 +19,7 @@
   <meta name="description" content="Learn Your Lesson is your place to connect with local teachers on languages, music lessons, or any other skill you wish to learn in Ireland.">
   <meta name="keywords" content="Ireland,education,tutorials,lessons,languages,skills,school,grinds,music">
   <%= stylesheet_link_tag    'application', media: 'all' %>
-  <%= javascript_include_tag 'application' %>
+  
   <%= favicon_link_tag 'favicon3.ico' %>
   
   <script >

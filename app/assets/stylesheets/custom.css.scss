@@ -1,3 +1,6 @@
+[ng-cloak] {
+        display: none !important;
+    }
 @font-face {
   font-family: 'Neue Helvetica';
   src: asset_url("HelveticaNeueLTW1G-Md.otf");
@@ -374,6 +377,10 @@ md-sidenav.md-closed.md-locked-open-add-active.user_menu {
   min-height:50vh;
 }
 
+.min_height_25{
+  min-height: 25%;
+}
+
 .height_auto{
   height: auto !important;
 }
@@ -420,15 +427,15 @@ md-sidenav.md-closed.md-locked-open-add-active.user_menu {
   height: 0;
 }
 
-.min_height_128{
+.min_height_128px{
   min-height: 128px !important;
 }
 
-.min_height_195{
+.min_height_195px{
   min-height: 195px !important;
 }
 
-.min_height_32{
+.min_height_32px{
   min-height: 32px !important;
 }
 
@@ -436,7 +443,7 @@ md-sidenav.md-closed.md-locked-open-add-active.user_menu {
   min-height: 75vh;
 }
 
-.min_height_32.ng-hide{
+.min_height_32px.ng-hide{
   display: inline !important;
 }
 
@@ -448,7 +455,7 @@ md-sidenav.md-closed.md-locked-open-add-active.user_menu {
   min-width: 200px !important;
 }
 
-.md-chips > .min_height_32.ng-hide{
+.md-chips > .min_height_32px.ng-hide{
   visibility: hidden !important;
 }
 
@@ -937,7 +944,7 @@ md-sidenav.md-closed.md-locked-open-add-active.user_menu {
 // End of messages
 
 // search page
-.search_content{
+.grey_content{
   background-color: #e8e8e8 !important;
 }
 
