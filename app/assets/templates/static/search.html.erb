@@ -12,7 +12,7 @@
 
   <md-sidenav  
           md-component-id="search_nav" 
-          class="md-sidenav-left width_l_30p max_height_75vh margin_t_l_20 margin_t_5_sm" 
+          class="md-sidenav-left width_l_30p max_height_75vh margin_t_5_sm" 
           md-is-locked-open="$mdMedia('gt-xs')"
           md-is-open="search_nav_opened">
 
@@ -117,7 +117,7 @@
               ng-click="view_teacher( teacher )"
               ng-if="teachers.length>0"
               >
-          <md-card-title>
+          <md-card-title class="padding_10">
             <md-card-title-text class="margin_r_5">
               <span class="md-headline">{{ teacher.first_name }} {{ teacher.last_name }}  </span>
               <span ng-if="teacher.location" class="md-subhead address">{{ teacher.location.address }}</span>
