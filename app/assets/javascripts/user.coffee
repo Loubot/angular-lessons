@@ -93,6 +93,7 @@ angular.module('lessons').service 'auth', [
           auth.auth_errors( resp.data )
           Promise.reject resp
         )
+
     auth.logout = ->
       $auth.signOut()
         .then( ( resp ) ->
@@ -106,6 +107,20 @@ angular.module('lessons').service 'auth', [
           $rootScope.User = null
           alertify.error "Failed to log out"
           $state.go 'welcome'
+        )
+
+    auth.check_basic_validation = ->
+      $q ( resolve, reject ) ->
+        $auth.validateUser().then( ( user ) ->
+          new User().then( ( resp ) ->
+            resolve $rootScope.User
+          ).catch( ( err ) ->
+            # $rootScope.$broadcast( "auth:invalid", [ 'nope', 'no way' ] )
+          )
+        ).catch( ( validate_err ) ->
+          console.log 'Validate error'
+          # $rootScope.$broadcast( "auth:invalid", [ 'nope', 'no way' ] )
+          resolve "I'll allow it"
         )
 
     auth.check_if_logged_in = ->
@@ -129,6 +144,7 @@ angular.module('lessons').service 'auth', [
     auth.check_if_logged_in_and_teacher = ->
       $q ( resolve, reject ) ->
         $auth.validateUser().then( ( user ) ->
+          console.log 'check_if_logged_in_and_teacher'
           if !$rootScope.User?
             new User().then( ( resp ) ->
               if !user.is_teacher
@@ -171,7 +187,6 @@ angular.module('lessons').service 'auth', [
 
     do -> 
 
-      
       # set listener for validation error
       $rootScope.$on "auth:invalid" , ( e, v ) ->
         console.log "validation error"
@@ -192,7 +207,7 @@ angular.module('lessons').service 'auth', [
             console.log $rootScope.User
             $rootScope.isPageFullyLoaded = true
             console.log "$rootScope.isPageFullyLoaded #{ $rootScope.isPageFullyLoaded }"
-          )
+          ) 
         
 
     auth

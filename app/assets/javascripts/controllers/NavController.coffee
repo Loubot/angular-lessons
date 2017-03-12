@@ -105,6 +105,4 @@ angular.module('lessons').controller('NavController', [
 
     $scope.close_dialog = ->
       $mdDialog.cancel()
-
-    $rootScope.isPageFullyLoaded = true
 ])

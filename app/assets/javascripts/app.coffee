@@ -38,9 +38,20 @@ angular.module('lessons').service 'counties', [ ->
     
 
 angular.module('lessons').run ( $rootScope ) ->
-
+  $rootScope.isPageFullyLoaded = false
   angular.element(document).ready ->
     $('.main_page').removeClass( 'invisible' )
+
+angular.module('lessons').config ( $authProvider ) ->
+  $authProvider.configure({
+    apiUrl: '/api'
+    passwordResetPath:       '/auth/password'
+    passwordUpdatePath:      '/auth/password'
+    authProviderPaths: 
+      facebook: '/auth/facebook'
+    validateOnPageLoad: false
+      
+  })
     
 
 angular.module('lessons').service 'OG', ->
@@ -131,20 +142,17 @@ angular.module('lessons').config [
  ($stateProvider, $urlRouterProvider, $locationProvider ) ->
   # $locationProvider.html5Mode(true)
   
-  $stateProvider.state 'home',
-    url: '/'
-    templateUrl: "static/welcome.html"
-    controller: "WelcomeController"
-    resolve:
-      authenticate: [
-        "$auth"
-        "$rootScope"
-        ( $auth, $rootScope ) ->
-          $auth.validateUser().catch( ( err ) ->
-            console.log err
-            $rootScope.$broadcast( "auth:invalid", [ 'no_good', 'no_sir' ] )
-          )
-      ]
+  # $stateProvider.state 'home',
+  #   url: '/'
+  #   templateUrl: "static/welcome.html"
+  #   controller: "WelcomeController"
+  #   resolve:
+  #     authenticate: [
+  #       "$auth"
+  #       "$rootScope"
+  #       ( $auth, $rootScope ) ->
+  #         $auth.validateUser()
+  #     ]
 
   
   $stateProvider.state 'welcome',
@@ -153,29 +161,43 @@ angular.module('lessons').config [
     controller: "WelcomeController"
     resolve:
       authenticate: [
-        "$auth"
-        "$rootScope"
-        ( $auth, $rootScope ) ->
-          $auth.validateUser().catch( ( err ) ->
-            console.log err
-            $rootScope.$broadcast( "auth:invalid", [ 'no_good', 'no_sir' ] )
-          )
+        "auth"
+        ( auth ) ->
+          auth.check_basic_validation()
       ]
 
   $stateProvider.state 'search',
     url: '/search/:name/:location'
     templateUrl: "static/search.html"
-    controller: "SearchController"  
+    controller: "SearchController"
+    resolve:
+      authenticate: [
+        "auth"
+        ( auth ) ->
+          auth.check_basic_validation()
+      ]
 
   $stateProvider.state 'view_teacher',
     url: '/view-teacher/:id'
     templateUrl: "user/view_teacher.html"
     controller: "ViewTeacherController"
+    resolve:
+      authenticate: [
+        "auth"
+        ( auth ) ->
+          auth.check_basic_validation()
+      ]
 
   $stateProvider.state 'register_teacher',
     url: "/register-teacher"
     templateUrl: "static/register_teacher.html"
     controller: "RegisterController"
+    resolve:
+      authenticate: [
+        "auth"
+        ( auth ) ->
+          auth.check_basic_validation()
+      ]
   
   # $stateProvider.state 'student_register',
   #   url: "/register-student"
@@ -187,31 +209,67 @@ angular.module('lessons').config [
     url: '/how-it-works'
     templateUrl: 'static/how_it_works.html'
     controller: "UserController"
+    resolve:
+      authenticate: [
+        "auth"
+        ( auth ) ->
+          auth.check_basic_validation()
+      ]
 
   $stateProvider.state 'contact',
     url: '/contact'
     templateUrl: 'static/contact.html'
     controller: "ContactController"
+    resolve:
+      authenticate: [
+        "auth"
+        ( auth ) ->
+          auth.check_basic_validation()
+      ]
 
   $stateProvider.state 'about',
     url: '/about'
     templateUrl: 'static/about.html'
     controller: "ContactController"
+    resolve:
+      authenticate: [
+        "auth"
+        ( auth ) ->
+          auth.check_basic_validation()
+      ]
 
   $stateProvider.state "pl",
     url: "api/auth/password/edit"
     templateUrl: "password/reset_password.html"
     controller: "PasswordController"
+    resolve:
+      authenticate: [
+        "auth"
+        ( auth ) ->
+          auth.check_basic_validation()
+      ]
 
   $stateProvider.state "change_password",
     url: "/change-password"
     templateUrl: "password/change_password.html"
     controller: "PasswordController"
+    resolve:
+      authenticate: [
+        "auth"
+        ( auth ) ->
+          auth.check_basic_validation()
+      ]
 
   $stateProvider.state 'reset_password',
     url: '/reset-password/'
     templateUrl: 'password/reset_password.html'
     controller: "PasswordController"
+    resolve:
+      authenticate: [
+        "auth"
+        ( auth ) ->
+          auth.check_basic_validation()
+      ]
 
   $stateProvider.state 'conversation',
     url: "/conversation/:id"
@@ -281,19 +339,9 @@ angular.module('lessons').config [
           auth.check_if_logged_in()
       ]
 
-  $urlRouterProvider.otherwise "/"
+  $urlRouterProvider.otherwise "/welcome"
   
 ]  
-
-angular.module('lessons').config ( $authProvider ) ->
-  $authProvider.configure({
-    apiUrl: '/api'
-    passwordResetPath:       '/auth/password'
-    passwordUpdatePath:      '/auth/password'
-    authProviderPaths: 
-      facebook: '/auth/facebook'
-      
-  })
 
 
 ############## Theme #######################################
