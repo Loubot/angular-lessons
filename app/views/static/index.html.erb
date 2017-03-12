@@ -1,8 +1,6 @@
-<div ng-controller="NavController" ng-cloak ng-show="isPageFullyLoaded">
+
+<div class="main_page" ng-cloak layout="column" layout-fill ng-controller="NavController" >
   <!-- Start of menu bar-->
-  <div class="bottom_bit" layout="row" layout-align="space-around none" style="background-color: #f5f5f5;">
-    
-  </div>
 
   <div  layout-padding  style="height: 80px;background-color: #f5f5f5;">
     <div layout="row" class="gutter_90" layout-align="space-between ">
@@ -60,11 +58,12 @@
   </div>
   <!-- End of menu bar -->
 
+ 
   <!--#################### Content ############################-->
 
   <div class="main main_page" layout="column" id="main" flex>
-    <div class="scroll_animate">
-      <div class="main_page top_bit" id="main_page" ui-view ng-cloak>
+    <md-content class="scroll_animate">
+      <div class="main_page top_bit" id="main_page" ui-view ng-cloak> 
 
       </div> <!-- angular view rendered here -->
 
@@ -72,7 +71,7 @@
         <div ><a class="white_text margin_r_10" ui-sref="contact">Contact Us</a></div>
         <div ><a class="white_text" ui-sref="about">About Us</a></div>
       </div>
-    </div>
+    </md-content>
   </div>
 
   <!--#################### End of content ############################-->
