@@ -179,6 +179,7 @@ angular.module('lessons').service 'auth', [
         console.log $state.current.name
         $rootScope.User = null
         $rootScope.isPageFullyLoaded = true
+        console.log "$rootScope.isPageFullyLoaded #{ $rootScope.isPageFullyLoaded }"
 
       # set listener for validation success
       $rootScope.$on 'auth:validation-success', ( e, v ) ->
@@ -190,6 +191,7 @@ angular.module('lessons').service 'auth', [
             console.log 'end of do'
             console.log $rootScope.User
             $rootScope.isPageFullyLoaded = true
+            console.log "$rootScope.isPageFullyLoaded #{ $rootScope.isPageFullyLoaded }"
           )
         
 
