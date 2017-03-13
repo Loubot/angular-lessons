@@ -11,9 +11,23 @@ angular.module('lessons').controller('NavController', [
   'alertify'
   'auth'
   '$auth'
-  ( $scope, $rootScope, $state, $window, $mdSidenav, $mdMenu, $mdDialog, alertify, auth, $auth ) ->
+  'COMMS'
+  ( $scope, $rootScope, $state, $window, $mdSidenav, $mdMenu, $mdDialog, alertify, auth, $auth, COMMS ) ->
     console.log "NavController"
     $scope.teacher = {}
+
+    # Get subjects for subjects menu
+
+    COMMS.GET(
+        '/search-subjects'
+    ).then( ( resp ) ->
+      # console.log resp
+      
+      $rootScope.subject_list_for_menu = resp.data.subjects
+      # define_subjects( resp.data.subjects )
+    ).catch( ( err ) ->
+      console.log err
+    )
 
     ### Opening closing menus ###
 

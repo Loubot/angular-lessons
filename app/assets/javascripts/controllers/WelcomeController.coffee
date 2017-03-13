@@ -97,18 +97,11 @@ angular.module('lessons').controller('WelcomeController', [
       $scope.counties = $filter('filter')( $scope.county_list, county )
 
 
+    $rootScope.$watch 'subject_list_for_menu', ( nv, ov ) ->
+      $scope.master_subjects_list = nv
+      
     $scope.county_list = counties.county_list() #counties factory
 
-    COMMS.GET(
-        '/search-subjects'
-    ).then( ( resp ) ->
-      # console.log resp
-      $scope.subjects_list = resp.data.subjects
-      $rootScope.subject_list_for_menu = resp.data.subjects
-      define_subjects( resp.data.subjects )
-    ).catch( ( err ) ->
-      console.log err
-    )
 
 
     ############## Animate explanation blocks when in view #############################
