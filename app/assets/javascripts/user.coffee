@@ -118,7 +118,7 @@ angular.module('lessons').service 'auth', [
             # $rootScope.$broadcast( "auth:invalid", [ 'nope', 'no way' ] )
           )
         ).catch( ( validate_err ) ->
-          console.log 'Validate error'
+          # console.log 'Validate error'
           # $rootScope.$broadcast( "auth:invalid", [ 'nope', 'no way' ] )
           resolve "I'll allow it"
         )
