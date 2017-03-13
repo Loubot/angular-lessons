@@ -28,13 +28,13 @@
                 md-search-text="searchText.subject_name"
                 md-search-text-change="search_subjects( searchText.subject_name )"
                 md-items="subject in subjects_list" 
-                md-item-text="subject"            
+                md-item-text="subject.name"            
                 md-selected-item-change="subject_picked( subject )"
                 ng-model-options="{ debounce: 200 }"
                 placeholder="Pick your subject"
                 md-min-length="2">
               <md-item-template>
-                <span md-highlight-text="searchText">{{subject}}</span>
+                <span md-highlight-text="searchText">{{subject.name}}</span>
               </md-item-template>
               <div ng-messages="search_form.subject.$error">
                 <div ng-message="required">This is required</div>
