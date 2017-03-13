@@ -190,8 +190,8 @@ angular.module('lessons').service 'auth', [
       # set listener for validation error
       $rootScope.$on "auth:invalid" , ( e, v ) ->
         console.log "validation error"
-        alertify.error 'auth:validation-error'
-        console.log $state.current.name
+        # alertify.error 'auth:validation-error'
+        # console.log $state.current.name
         $rootScope.User = null
         $rootScope.isPageFullyLoaded = true
         console.log "$rootScope.isPageFullyLoaded #{ $rootScope.isPageFullyLoaded }"
