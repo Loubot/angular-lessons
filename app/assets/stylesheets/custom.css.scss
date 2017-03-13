@@ -588,7 +588,13 @@ md-sidenav.md-closed.md-locked-open-add-active.user_menu {
 }
 
 .max_height_75vh{
-  max-height: 75vh !important;
+  max-height: 75vh;
+}
+
+@media ( max-height: 600px ) {
+  .max_height_75vh{
+    max-height: none;
+  }
 }
 
 .max_width_50{
