@@ -116,7 +116,6 @@ angular.module('lessons').controller('WelcomeController', [
     isElementInView = (element, fullyInView) ->
       
       if $state.current.url == "/welcome" or $state.current.url == '/'
-        
         pageTop = $(window).scrollTop()
         pageBottom = pageTop + $(window).height()
         elementTop = $(element).offset().top 
@@ -127,7 +126,8 @@ angular.module('lessons').controller('WelcomeController', [
           elementTop <= pageBottom and elementBottom >= pageTop
 
     if $state.current.url == "/welcome" or $state.current.url == '/'
-      $(document).scroll(->
+      console.log "hello0"
+      $('.scroll_animate').scroll(->
         $('.anchor1').addClass 'animated' if isElementInView('.anchor1')
         
         $('.anchor2').addClass 'animated' if isElementInView('.anchor2')
