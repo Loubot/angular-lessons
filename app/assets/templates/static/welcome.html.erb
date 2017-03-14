@@ -81,7 +81,15 @@
         </div>
 
         <div class="margin_t_8 full_width_on_big" >
-          <a ui-sref="search({ name: 'Drums' })"><img ng-src="<%= asset_url 'learn-to-play-drums.jpg' %>" class="link_images"></a>
+          <a ui-sref="search({ name: 'Drums' })">
+            
+            <picture>
+              <source ng-srcset="<%= asset_url 'learn-to-play-drums.jpg' %>"  media="(min-width: 600px)">
+              <source ng-srcset="<%= asset_url 'wide_learn_to_play_drums.jpg' %>">
+              <img ng-src="<%= asset_url 'learn-to-play-drums.jpg' %>" alt="Flowers" class="link_images">
+            </picture>    
+            
+          </a>
         </div>
 
       </div>
