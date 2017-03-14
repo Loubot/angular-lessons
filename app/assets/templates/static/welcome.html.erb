@@ -3,7 +3,7 @@
     <div class="main_page_search_container" flex  >
 
       <img ng-src="<%= asset_path 'portrait_piano.jpg' %>" style="display:none; visibility: hidden;">
-      <img ng-src="<%= asset_path 'possible.jpg' %>" style="display:none; visibility: hidden;">
+      <img ng-src="<%= asset_path 'wide_screen_piano.jpg' %>" style="display:none; visibility: hidden;">
       <div class="white_text center_text" layout="row" layout-align="center"  >
         <h1><span class="header_font">A place</span> 
           <p hide-gt-xs > to connect with local teachers <span hide-xs> on languages, music lessons,<br> or any other skill you wish to learn
@@ -61,14 +61,29 @@
 
       <div class="margin_t_30 no_padding no_margin" layout-gt-xs="row" layout="column" layout-align="space-around center" ng-cloak>
         <div class="full_width_on_big">
-          <a ui-sref="search({ name: 'Piano' })"><img ng-src="<%= asset_url 'learn-to-play-piano.jpg' %>" class="link_images"></a>
+          <a ui-sref="search({ name: 'Piano' })">
+            <picture>
+              <source ng-srcset="<%= asset_url 'learn-to-play-piano.jpg' %>"  media="(min-width: 600px)">
+              <source ng-srcset="<%= asset_url 'wide_learn_to_play_piano.jpg' %>">
+              <img ng-src="<%= asset_url 'learn-to-play-piano.jpg' %>" alt="Flowers" class="link_images">
+            </picture>    
+          </a>
         </div>
+
         <div class="margin_t_8 full_width_on_big" >
-          <a ui-sref="search({ name: 'Guitar' })"><img ng-src="<%= asset_url 'learn-to-play-guitar.jpg' %>" class="link_images"></a>
+          <a ui-sref="search({ name: 'Guitar' })">
+            <picture>
+              <source ng-srcset="<%= asset_url 'learn-to-play-guitar.jpg' %>"  media="(min-width: 600px)">
+              <source ng-srcset="<%= asset_url 'wide_learn_to_play_guitar.jpg' %>">
+              <img ng-src="<%= asset_url 'learn-to-play-guitar.jpg' %>" alt="Flowers" class="link_images">
+            </picture> 
+          </a>         
         </div>
+
         <div class="margin_t_8 full_width_on_big" >
           <a ui-sref="search({ name: 'Drums' })"><img ng-src="<%= asset_url 'learn-to-play-drums.jpg' %>" class="link_images"></a>
         </div>
+
       </div>
 
       <div class="margin_t_30 no_padding no_margin" layout-gt-xs="row" layout="column" layout-align="space-around center" ng-cloak>
