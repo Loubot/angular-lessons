@@ -87,7 +87,6 @@ angular.module('lessons').controller('TeacherController', [
     $scope.show_overview_sheet = ->
       $mdBottomSheet.show(
         templateUrl: "sheets/overview_sheet.html"
-        controller: "TeacherController"
         scope: $scope
         preserveScope: true
       )
@@ -95,7 +94,6 @@ angular.module('lessons').controller('TeacherController', [
     $scope.show_qualification_sheet = ->
       $mdBottomSheet.show(
         templateUrl: "sheets/qualification_sheet.html"
-        controller: "TeacherController"
         scope: $scope
         preserveScope: true
       )
@@ -104,7 +102,6 @@ angular.module('lessons').controller('TeacherController', [
 
       $mdBottomSheet.show(
         templateUrl: "sheets/subject_request_sheet.html"
-        controller: "TeacherController"
         scope: $scope
         preserveScope: true
       )
