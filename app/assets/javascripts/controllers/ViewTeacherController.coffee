@@ -163,9 +163,9 @@ angular.module('lessons').controller( 'ViewTeacherController', [
         console.log err
       )
 
-    $scope.open_login_or_register = ->
+    $scope.open_login = ->
       $mdDialog.show(
-        templateUrl: "dialogs/login_or_register_dialog.html"
+        templateUrl: "dialogs/login.html"
         scope: $scope
         openFrom: "left"
         closeTo: "right"
