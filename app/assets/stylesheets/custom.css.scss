@@ -1,9 +1,20 @@
-
+[ng-cloak] {
+        display: none !important;
+    }
+@font-face {
+  font-family: 'Neue Helvetica';
+  src: url("/assets/HelveticaNeueLTW1G-Md.otf");
+  font-style: normal;
+}
 
 html, body{
   height: 100%;
   max-width: 100% !important;
-  font-family: 'Roboto', sans-serif !important;
+  font-family: 'Neue Helvetica';
+}
+
+.neue{
+  font-family: 'Neue Helvetica' !important;
 }
 
 .cursor_hand{
@@ -27,6 +38,28 @@ html, body{
 
 .align_right{
   text-align: right;
+}
+
+/* Full screen on small */
+@media ( max-width: 600px ){
+  .full_screen_on_small{
+    min-width: 100% !important;
+    min-height: 85% !important;
+  }
+}
+
+/* Fix for dialog not resizing when keyboard is close */
+
+.md-dialog-container {
+    height: 100% !important;
+}
+
+/* End of fix for dialog not resizing when keyboard is close */
+
+.active_bla{
+  background-color: #4caf50;
+  color: #111;
+  padding: 10px;
 }
 
 
@@ -61,7 +94,7 @@ html, body{
 }
 
 .black_text{
-  color: #111 !important;
+  color: #111 ;
 }
 
 
@@ -243,12 +276,16 @@ md-sidenav.md-closed.md-locked-open-add-active.user_menu {
   width: 75% !important;
 }
 
+.width_90{
+  width: 90% !important;
+}
+
 .width_50{
   width: 50% !important;
 }
 
-.width_49{
-  width: auto;
+.width_auto{
+  width: auto !important;
 }
 
 .width_33{
@@ -261,6 +298,11 @@ md-sidenav.md-closed.md-locked-open-add-active.user_menu {
 
 .width_100{
   width: 100% !important;
+}
+
+.responsive_image{
+  width: 100%;
+  height: auto;
 }
 
 .proof_image{
@@ -287,17 +329,17 @@ md-sidenav.md-closed.md-locked-open-add-active.user_menu {
 .header_font{
   font-size: 4rem;
   // font-size: 72px;
-  background: -webkit-linear-gradient(#555, #fff);
+  // background: -webkit-linear-gradient(#555, #fff);
   -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  // -webkit-text-fill-color: transparent;
 }
 
 .reduced_header_font{
   font-size: 3rem;
   // font-size: 72px;
-  background: -webkit-linear-gradient(#999, #fff);
+  // background: -webkit-linear-gradient(#999, #fff);
   -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  // -webkit-text-fill-color: transparent;
 }
 
 .x_large_font{
@@ -333,6 +375,10 @@ md-sidenav.md-closed.md-locked-open-add-active.user_menu {
 
 .min_height_50vh{
   min-height:50vh;
+}
+
+.min_height_25{
+  min-height: 25%;
 }
 
 .height_auto{
@@ -381,15 +427,15 @@ md-sidenav.md-closed.md-locked-open-add-active.user_menu {
   height: 0;
 }
 
-.min_height_128{
+.min_height_128px{
   min-height: 128px !important;
 }
 
-.min_height_195{
+.min_height_195px{
   min-height: 195px !important;
 }
 
-.min_height_32{
+.min_height_32px{
   min-height: 32px !important;
 }
 
@@ -397,7 +443,7 @@ md-sidenav.md-closed.md-locked-open-add-active.user_menu {
   min-height: 75vh;
 }
 
-.min_height_32.ng-hide{
+.min_height_32px.ng-hide{
   display: inline !important;
 }
 
@@ -409,7 +455,11 @@ md-sidenav.md-closed.md-locked-open-add-active.user_menu {
   min-width: 200px !important;
 }
 
-.md-chips > .min_height_32.ng-hide{
+.max_width_200px{
+  max-width: 200px !important;
+}
+
+.md-chips > .min_height_32px.ng-hide{
   visibility: hidden !important;
 }
 
@@ -456,12 +506,22 @@ md-sidenav.md-closed.md-locked-open-add-active.user_menu {
   margin-top: 8px !important;
 }
 
+.margin_t_8{
+  margin-top: 8px !important;
+}
+
 .margin_t_10{
   margin-top: 10px !important;
 }
 
 .margin_t_30{
   margin-top: 30px !important;
+}
+
+@media ( min-width: 600px ){
+  .margin_t_5_sm{
+    margin-top: 5px;
+  }
 }
 
 .margin_t_b_8{
@@ -519,12 +579,22 @@ md-sidenav.md-closed.md-locked-open-add-active.user_menu {
   padding: 0px 20px;
 }
 
+.no_border_radius{
+  border-radius: 0px !important;
+}
+
 .max_width_400{
   max-width: 400px !important;
 }
 
 .max_height_75vh{
-  max-height: 75vh !important;
+  max-height: 75vh;
+}
+
+@media ( max-height: 600px ) {
+  .max_height_75vh{
+    max-height: none;
+  }
 }
 
 .max_width_50{
@@ -566,7 +636,8 @@ md-sidenav.md-closed.md-locked-open-add-active.user_menu {
 }
 
 .main_page{
-  background-color: #e0ebf4;
+  background-color: #dcdcdc;
+  // background-color: #e0ebf4;
   // @extend .height_100;
 }
 
@@ -578,30 +649,37 @@ md-sidenav.md-closed.md-locked-open-add-active.user_menu {
 .bottom_bit{
   // @extend .big_gutter;
   white-space: nowrap;
-  // height: 5vh !important;
-  max-height: 38px;
-  min-height: 35px;
-  background-color: #111;
   padding: 0 150px;
-  color: #fff;
   width: 100%;
+  background-color: #111;
 }
 
-.match_background{
-  background-color: #e0ebf4 !important;
+// welcome page
+.link_images{
+  width: 25vw;
+  height: 20vw;
 }
 
-.subject_search{
-  padding: 0 12px !important;
-  line-height: 40px !important;
-  // min-width: 60%;
-  -webkit-border-radius: 50px !important;
-  -moz-border-radius: 50px !important;
-  border-radius: 50px !important;
-  max-width: 200px !important;
-  min-width: 200px !important;
-  background-color: #FFF !important;
+@media ( max-width: 600px ){
+  .link_images{
+    width: 100%;
+    height: 40vw;
+  }
 }
+
+@media ( min-width: 600px ){
+  .full_height_on_big{
+    height: 100% !important;
+  }
+}
+
+@media ( max-width: 600px ){
+  .full_width_on_big{
+    width: 100%;
+  }
+}
+// end of welcome page
+
 
 .subject_container{
   max-height: 180px !important;
@@ -876,8 +954,8 @@ md-sidenav.md-closed.md-locked-open-add-active.user_menu {
 // End of messages
 
 // search page
-.search_content{
-  background-color: rgba(255, 250, 250, 0.5) !important;
+.grey_content{
+  background-color: #e8e8e8 !important;
 }
 
 .address{
@@ -1023,12 +1101,23 @@ ul.share-buttons .sr-only {
 
   .main_page_search_container{
     min-height: 30em;
-    background-image: asset_url('portrait_piano.jpg');
     -moz-background-size: 100% 100%;
-    -webkit-background-size: 100% 100%;
+    -webkit-background-size: 100% 100%; 
     background-size: 100% 100%;
     background-repeat: no-repeat;
-    
+    -webkit-transition: background-image 2s;
+    -moz-transition: background-image 2s;
+    -ms-transition: background-image 2s;
+    -o-transition: background-image 2s;
+    transition: background-image 2s;
+  }
+
+  .main_page_search_container_first_background{
+    background-image: asset_url('portrait_chalk.jpg');
+  }
+
+  .main_page_search_container_second_background{
+    background-image: asset_url('portrait_piano.jpg');
   }
 
   .gutter_75{
@@ -1066,10 +1155,6 @@ ul.share-buttons .sr-only {
 } /* 250px */
 
 @media ( min-width: 600px ){
-
-  .margin_t_l_20{
-    padding-top: 20px;
-  }
 
   .width_l_30p{
     min-width: 200px !important;
@@ -1111,6 +1196,30 @@ ul.share-buttons .sr-only {
 
   }
 
+  .main_page_search_container{
+    min-height: 400px;
+    background-repeat: no-repeat;
+    background-image: asset_url('wide_screen_book.jpg');
+    // padding: 0 100px !important;
+    // background-size: 120% 120%;
+    background-position: center center;
+    // animation: shrink 5s infinite;
+    // -webkit-animation-fill-mode: forwards;
+    -webkit-transition: background-image 2s;
+    -moz-transition: background-image 2s;
+    -ms-transition: background-image 2s;
+    -o-transition: background-image 2s;
+    transition: background-image 2s;
+  }
+
+  .main_page_search_container_first_background{
+    background-image: asset_url('wide_screen_book.jpg');
+  }
+
+  .main_page_search_container_second_background{
+    background-image: asset_url('wide_screen_piano.jpg');
+  }
+
 } /* 600px */
 
 @media ( min-width: 768px ){
@@ -1120,16 +1229,6 @@ ul.share-buttons .sr-only {
     overflow: initial;
   }
   
-  .main_page_search_container{
-    min-height: 400px;
-    background-image: asset_url('piano.jpg');
-    -moz-background-size: 100% 100%;
-    -webkit-background-size: 100% 100%;
-    background-size: 100% 100%;
-    background-repeat: no-repeat;
-    // padding: 0 100px !important;
-
-  }
   .gutter_75{
     min-width: 75% !important;
     max-width: 75%;
@@ -1183,7 +1282,7 @@ ul.share-buttons .sr-only {
 }
 
 .alertify{
-  max-height: 35% !important;
+  max-height: 43% !important;
 }
 
 // move fab completely into toolbar

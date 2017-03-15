@@ -1,6 +1,13 @@
 <!DOCTYPE html>
 <html ng-app="lessons">
 <head>
+  <style type="text/css">
+    [ng-cloak]
+    {
+      display: none !important;
+    }
+  </style>
+  <%= javascript_include_tag 'application' %>
   <base href="/">
   <meta name="google-site-verification" content="w-AjB4ZfZJeA_zvgq94G8gjGKTHjbIlZme7cA_1a5cM" />
   <title>grinds, lessons, learn, music, languages, piano, guitar, french, german, spanish, Dublin, Cork, Limerick, Galway | Learn Your Lesson</title>
@@ -12,25 +19,25 @@
   <meta name="description" content="Learn Your Lesson is your place to connect with local teachers on languages, music lessons, or any other skill you wish to learn in Ireland.">
   <meta name="keywords" content="piano lessons dublin, guitar lessons dublin, French lessons dublin, piano lesson cork, guitar lessons cork, French lessons cork, French lessons dublin, Spanish teachers dublin">
   <%= stylesheet_link_tag    'application', media: 'all' %>
-  <%= javascript_include_tag 'application' %>
+  
   <%= favicon_link_tag 'favicon3.ico' %>
   
   <script >
-    window.WebFontConfig = {
-      google: { families: ['Roboto:300,400,500,700,400italic'] },
-      listeners: [],
-      active: function() {
-        this.called_ready = true;
-        for(var i = 0; i < this.listeners.length; i++) {
-          this.listeners[i]();
-        }
-      }
-    }
+    // window.WebFontConfig = {
+    //   google: { families: ['Roboto:300,400,500,700,400italic'] },
+    //   listeners: [],
+    //   active: function() {
+    //     this.called_ready = true;
+    //     for(var i = 0; i < this.listeners.length; i++) {
+    //       this.listeners[i]();
+    //     }
+    //   }
+    // }
   </script>
   <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js" async></script>
   
 
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" async defer>
+  <!-- <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" async defer> -->
   <script src="https://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyBpOd04XM28WtAk1LcJyhlQzNW6P6OT2Q0" async defer></script>
 
   

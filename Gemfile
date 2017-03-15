@@ -7,7 +7,7 @@ source 'http://rubygems.org'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 # ruby '2.3.1'
 
-gem 'rails', '4.2.6'
+gem 'rails', '4.2.8'
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
@@ -111,3 +111,5 @@ gem 'sitemap_generator', '~> 5.2.0'
 gem 'htmlcompressor', '~> 0.2.0'
 
 gem 'gibbon', '~> 1.2'
+
+gem 'material_icons'

@@ -2,22 +2,25 @@
   <div  flex-xs="100">
 
     <md-card >
-      <md-card-header>
+      <md-card-header ng-if="User.first_name || User.last_name || profile">
         <md-card-avatar ng-if="profile">
           <img ng-src="{{ profile.avatar.thumb.url }}" class="md-user-avatar ">
         </md-card-avatar>
-        <md-card-header-text>
-          <span class="md-title">
+        <md-card-header-text ng-if="User.first_name || User.last_name">
+          <span class="md-title" >
 
-            {{ User.get_full_name() }}
-
+            <span>
+              <span ng-if="User.first_name">{{ User.first_name }}</span> 
+              <span ng-if="User.last_name">{{ User.last_name }}</span>
+            </span>
+            
           </span>
           <span class="md-subhead">
             
           </span>
         </md-card-header-text>
       </md-card-header>
-      <img ng-if="profile" ng-src="{{ profile.avatar.url }}" 
+      <img ng-if="User.profile_url" ng-src="{{ User.profile_url }}" 
           class="md-card-image" 
           alt="{{ User.first_name }} profile pic">
 
@@ -65,7 +68,7 @@
       </md-card-content>
     </md-card> 
 
-    <md-card ng-if="User.photos.length>0" class="min_height_128">
+    <md-card ng-if="User.photos.length>0" class="min_height_128px">
       <md-grid-list md-cols="3" md-row-height="6:2">
         <md-grid-tile class="gray"
             md-rowspan="3" md-colspan="1" md-colspan-sm="1" md-colspan-xs="1" ng-repeat="photo in User.photos">
@@ -94,7 +97,7 @@
       
     </md-card>
 
-    <md-content class="gutter_75 margin_t_10 center_text match_background" >
+    <md-content class="margin_t_10 center_text" >
       <span id="left"></span>
       <div class="center_block">
         <md-button class="md-raised greyish_blue white_text"  ng-click="open_change_password()">Change your password</md-button>
@@ -102,7 +105,7 @@
       <span id="right"></span>
     </md-content>
 
-    <md-content class="margin_t_10 center_text match_background">
+    <md-content class="margin_t_10 center_text">
       <md-card>
         <%= image_tag('want_more.jpg', class: 'md-card-image width_50 center_block') %>
         <md-card-title>

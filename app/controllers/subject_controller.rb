@@ -69,8 +69,12 @@ class SubjectController < ApplicationController
     render json: { subjects: teacher.subjects }
   end
 
-  def missing_subject 
-    AdminMailer.delay.request_subject_mail( params )
+  def missing_subject
+    if Rails.env.production?
+      AdminMailer.delay.request_subject_mail( params )
+    else
+      AdminMailer.request_subject_mail( params ).deliver_now
+    end
     render json: { message: 'p'}
   end
 

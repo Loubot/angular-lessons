@@ -10,9 +10,10 @@
           <input  ng-value="User.get_full_name()"
                   class="black_text" 
                   type="text"
+                  ng-model="message.user_name1"
                   placeholder="Your full name (required)"
                   aria-label="Name"
-                  disabled
+                  ng-disabled="User.get_full_name()"
                   required>
         </md-input-container>
 

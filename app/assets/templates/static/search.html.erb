@@ -12,19 +12,21 @@
 
   <md-sidenav  
           md-component-id="search_nav" 
-          class="md-sidenav-left width_l_30p max_height_75vh margin_t_l_20" 
+          class="md-sidenav-left width_l_30p max_height_75vh margin_t_5_sm" 
           md-is-locked-open="$mdMedia('gt-xs')"
           md-is-open="search_nav_opened">
-    
-    <form ng-submit="search_teachers()" name="searchForm">
-      <p>Change your search</p>
 
+    <md-toolbar class="md-theme-indigo">
+      <h5 class="md-toolbar-tools">Refine</h5>
+    </md-toolbar>
+    <form ng-submit="search_teachers()" name="searchForm">
+      
       <md-chips >
-        <md-chip class="min_height_32 background_color_slightly_desaturated_cyan white_text" ng-show="selected.subject_name">
+        <md-chip class="min_height_32px background_color_slightly_desaturated_cyan white_text" ng-show="selected.subject_name">
           {{ selected.subject_name }}
         </md-chip>
         <span ng-if="selected_county_name">/</span>
-        <md-chip class="min_height_32 background_color_slightly_desaturated_pink white_text" ng-show="selected_county_name">
+        <md-chip class="min_height_32px background_color_slightly_desaturated_pink white_text" ng-show="selected_county_name">
           {{ selected_county_name }}
         </md-chip>        
       </md-chips>
@@ -80,16 +82,19 @@
         
       </div>
 
-      <md-input-container >
-        <input class="no_padding no_margin md-button md-primary md-raised white_text"
-               type="submit"
-               ng-click="search_nav()" 
-               value="Search" 
-               aria-label="Search">
-      </md-input-container>
-<br>
-      
-        <md-button ng-click="search_nav()" hide-gt-xs>Close search</md-button>
+      <div layout="column" layout-align="space-around center">
+        <div>
+          <input class="md-button md-primary md-raised white_text"
+                 type="submit"
+                 ng-click="search_nav()" 
+                 value="Search" 
+                 aria-label="Search">
+        </div>
+        
+        <div>
+          <md-button class="md-warn md-raised" ng-click="search_nav()" hide-gt-xs>Close search</md-button>
+        </div>
+      </div>
       
     </form>
     
@@ -104,7 +109,7 @@
 
   <div layout="column" class="boxWithHeight margin_l_5 min_height_50vh" flex-xs="100" layout-align="start center" >
     <div>
-      <md-content layout="row" layout-wrap class="search_content">
+      <md-content layout="row" layout-wrap class="grey_content" >
 
         <md-card 
               ng-repeat="teacher in teachers | start_from:(current_page - 1) * page_size | limitTo: page_size" 
@@ -112,7 +117,7 @@
               ng-click="view_teacher( teacher )"
               ng-if="teachers.length>0"
               >
-          <md-card-title>
+          <md-card-title class="padding_10">
             <md-card-title-text class="margin_r_5">
               <span class="md-headline">{{ teacher.first_name }} {{ teacher.last_name }}  </span>
               <span ng-if="teacher.location" class="md-subhead address">{{ teacher.location.address }}</span>

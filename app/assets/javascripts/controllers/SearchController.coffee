@@ -13,7 +13,7 @@ angular.module('lessons').controller( 'SearchController', [
   ( $scope, $rootScope, $state, $stateParams, $filter, COMMS, alertify, $mdSidenav , counties ) ->
     console.log "SearchController"
 
-    
+    $scope.search_nav_opened = false
     #pagination
     $scope.page_size = 5
     $scope.current_page = 1
@@ -50,6 +50,7 @@ angular.module('lessons').controller( 'SearchController', [
         console.log resp
         alertify.success "Found #{ resp.data.teachers.length } teacher(s)"
         $scope.teachers = resp.data.teachers
+        $scope.search_nav_opened = false
       ).catch( ( err ) ->
         console.log err
         alertify.error "Failed to find teachers"

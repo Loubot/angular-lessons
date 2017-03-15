@@ -88,7 +88,7 @@ angular.module('lessons').controller('ConversationController', [
 
     open_login_or_register = ->
       $mdDialog.show(
-        templateUrl: "dialogs/login_or_register_dialog.html"
+        templateUrl: "dialogs/login.html"
         scope: $scope
         openFrom: "left"
         closeTo: "right"

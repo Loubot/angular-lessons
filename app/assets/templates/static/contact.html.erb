@@ -26,7 +26,7 @@
 
         <div flex>
           <md-input-container class="width_100">
-            <textarea md-maxlength="300" name="text" ng-model="message.text" max-rows="5" required aria-label="message"></textarea>
+            <textarea md-maxlength="300" name="text" ng-model="message.text" max-rows="5" placeholder="Your message" required aria-label="message"></textarea>
             <div ng-messages="contact_us_form.text.$error">
               <div ng-message="required">Don't forget your message!</div>
             </div>

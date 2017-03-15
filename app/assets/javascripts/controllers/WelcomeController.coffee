@@ -25,24 +25,28 @@ angular.module('lessons').controller('WelcomeController', [
     $scope.selected.county_name = $stateParams.location
     $scope.selected_subject = $stateParams.name
 
+    pic_no = 1
 
-
-    $scope.search_teachers = ->
-      COMMS.GET(
-        "/search"
-        $scope.selected
-      ).then( ( resp ) ->
-        # console.log resp
-        alertify.success "Found #{ resp.data.teachers.length } teacher(s)"
-        $scope.teachers = resp.data.teachers
-      ).catch( ( err ) ->
+    change_image = ( pic_no ) ->
+      if pic_no == 2
+        $('.main_page_search_container').addClass 'main_page_search_container_second_background', duration: 1000
+        $('.main_page_search_container').removeClass 'main_page_search_container_first_background', duration: 1000
         
-        console.log err
-        alertify.error "Failed to find teachers"
-      )
+        # $('.main_page_search_container').addClass 'cssSlideUp'
+        pic_no = 1
+      else if pic_no == 1
+        $('.main_page_search_container').removeClass 'main_page_search_container_second_background', duration: 1000
+        $('.main_page_search_container').addClass 'main_page_search_container_first_background', duration: 1000
+        # $('.main_page_search_container').addClass 'cssSlideUp'
+        pic_no = 2
 
-    if $stateParams.name? or $stateParams.location
-      $scope.search_teachers()
+      setTimeout (->
+        # $('.main_page_search_container').removeClass 'cssSlideUp'
+        change_image( pic_no )
+      ), 5000
+
+    $('.main_page_search_container').addClass 'main_page_search_container_first_background'
+    change_image( pic_no )
 
 
     $scope.search = ->
@@ -64,7 +68,7 @@ angular.module('lessons').controller('WelcomeController', [
       # $state.go( "search", { name: $scope.selected.subject_name, location: $scope.selected.county_name } )
 
     $scope.subject_picked = ( subject )->
-      
+      console.log 'hup'
       if $scope.selected.subject_name?
         $scope.selected.subject_name = subject
         
@@ -75,6 +79,8 @@ angular.module('lessons').controller('WelcomeController', [
         
 
     define_subjects = ( subjects ) ->
+      console.log subjects
+      $scope.master_subjects_list = []
       $scope.master_subjects_list = []
       for subject in subjects
         $scope.master_subjects_list.push( subject.name )
@@ -91,17 +97,11 @@ angular.module('lessons').controller('WelcomeController', [
       $scope.counties = $filter('filter')( $scope.county_list, county )
 
 
+    $rootScope.$watch 'subject_list_for_menu', ( nv, ov ) ->
+      $scope.master_subjects_list = nv
+      
     $scope.county_list = counties.county_list() #counties factory
 
-    COMMS.GET(
-        '/search-subjects'
-    ).then( ( resp ) ->
-      # console.log resp
-      $scope.subjects_list = resp.data.subjects
-      define_subjects( resp.data.subjects )
-    ).catch( ( err ) ->
-      console.log err
-    )
 
 
     ############## Animate explanation blocks when in view #############################
@@ -109,7 +109,6 @@ angular.module('lessons').controller('WelcomeController', [
     isElementInView = (element, fullyInView) ->
       
       if $state.current.url == "/welcome" or $state.current.url == '/'
-        
         pageTop = $(window).scrollTop()
         pageBottom = pageTop + $(window).height()
         elementTop = $(element).offset().top 

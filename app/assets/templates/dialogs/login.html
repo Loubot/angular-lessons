@@ -1,0 +1,56 @@
+<md-dialog aria-label="Login dialog" class="full_screen_on_small">
+
+  <md-toolbar>
+    <div class="md-toolbar-tools">
+      <h4>Login</h4>
+      <span flex></span>
+      <md-button class="md-icon-button" ng-click="close_dialog()">
+        <md-icon ><i class="material-icons">close</i></md-icon>
+      </md-button>
+    </div>
+  </md-toolbar>
+  <md-dialog-content>
+
+    <form layout="column" ng-submit="login_form.$valid && auth.login( teacher )" name="login_form" novalidate>
+
+      <div class="padding_t_8">
+        <md-input-container class="md-icon-float">
+          <!-- Use floating label instead of placeholder -->
+          <label>Email</label>
+          <md-icon ><i class="material-icons">email</i></md-icon> 
+          <input ng-model="teacher.email" type="text" name="email" ng-pattern="/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/" required>
+
+          <div ng-messages="login_form.email.$error">
+            <div ng-message="required">Enter email</div>
+            <div ng-message="pattern">Must be a valid email</div>
+          </div>
+        </md-input-container>
+      </div>
+
+      <div>
+        <md-input-container>
+          <label>Password</label>
+          <md-icon><i class="material-icons">vpn_key</i></md-icon>
+          <input ng-model="teacher.password" type="password" required>
+        </md-input-container> 
+      </div>
+
+      <div class="width_90 center_text">
+        <input type="submit" value="Login" class="md-button md-raised md-primary width_100"  aria-label="Login">
+      </div>
+      
+      <div class="width_100 center_text">
+        <span class="center_text">or</span>
+      </div>
+
+      <div class="width_90 center_text">
+        <md-button  ng-click="close_dialog(); open_register_dialog();" class="md-button md-raised md-warn width_100">Register</md-button>
+      </div>
+
+    </form>
+
+  </md-dialog-content>
+  <md-dialog-actions>
+    <md-button ng-click="close_dialog()" class="md-primary">Close Dialog</md-button>
+  </md-dialog-actions>
+</md-dialog>

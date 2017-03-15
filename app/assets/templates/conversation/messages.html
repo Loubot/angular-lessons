@@ -5,49 +5,51 @@
 
 <div hide-gt-xs>
   <md-toolbar>
-    <div class="md-toolbar-tools search_toolbar" >
 
+    <div ng-if="conversations" class="md-toolbar-tools search_toolbar" >
       <md-button ng-click="search_conversations()" class="black_text">
-
         <md-icon ><i class="material-icons black_text">search</i></md-icon> 
         Search messages
       </md-button>
     </div>
+
   </md-toolbar>
 </div>
 
 <div layout="row" class="height_100_min_56">
-  <md-sidenav  
-          md-component-id="conversation_search" 
-          class="md-sidenav-left height_50" 
-          md-is-locked-open="$mdMedia('gt-xs')"
-          md-is-open="false"
-          >
+  <div>
+    <md-sidenav  
+            md-component-id="conversation_search" 
+            class="md-sidenav-left min_height_25 margin_t_5_sm" 
+            md-is-locked-open="$mdMedia('gt-xs')"
+            md-is-open="false"
+            >
 
-    <md-content class="md-padding">
-      <input placeholder="Search by name" class="margin_b_10" ng-model="search_text">
-      <div  ng-repeat="convo in conversations | filter:search_text" 
-            ng-click="select_conversation( convo.id )" 
-            class="margin_t_10"
-            flex="100">
+      <md-content class="md-padding">
+        <input placeholder="Search by name" class="margin_b_10" ng-model="search_text">
+        <div  ng-repeat="convo in conversations | filter:search_text" 
+              ng-click="select_conversation( convo.id )" 
+              class="margin_t_10"
+              flex="100">
 
-        <div class="message_box" ng-class="{selected_conversation : convo.id==conversation.id}">
-          {{ convo.user_id1 == User.id ? convo.user_name2 : convo.user_name1 }}
-        </div>
+          <div class="message_box" ng-class="{selected_conversation : convo.id==conversation.id}">
+            {{ convo.user_id1 == User.id ? convo.user_name2 : convo.user_name1 }}
+          </div>
 
-        <md-divider></md-divider>
-      </div> <!-- end of conversations -->
-    </md-content>
+          <md-divider></md-divider>
+        </div> <!-- end of conversations -->
+      </md-content>
 
-    <md-button ng-click="search_conversations()" hide-gt-xs>Close search</md-button>
-    
-  </md-sidenav>
+      <md-button ng-click="search_conversations()" hide-gt-xs>Close search</md-button>
+      
+    </md-sidenav>
+  </div>
 
 
 
-  <div flex="100"  style="overflow-y:hidden;">
+  <div flex="100" class="margin_l_5"  style="overflow-y:hidden;">
 
-    <md-content class=" padding_5" id="message_container">
+    <md-content class="grey_content padding_5" id="message_container">
       <div layout="column" layout-fill flex>
         <div        class="margin_t_10"
                     ng-class="{ 'flex-offset-45': message.sender_id != User.id }"

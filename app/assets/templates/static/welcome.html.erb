@@ -1,118 +1,179 @@
-<div >
-  <div class="main_page_search_container" flex  ng-cloak>
+<div ng-cloak>
+  <div id="hook" class="full_height_on_big ">
+    <div class="main_page_search_container" flex  >
 
+      <img ng-src="<%= asset_path 'portrait_piano.jpg' %>" style="display:none; visibility: hidden;">
+      <img ng-src="<%= asset_path 'wide_screen_piano.jpg' %>" style="display:none; visibility: hidden;">
+      <div class="white_text center_text" layout="row" layout-align="center"  >
+        <h1><span class="header_font">A place</span> 
+          <p hide-gt-xs > to connect with local teachers <span hide-xs> on languages, music lessons,<br> or any other skill you wish to learn
 
-    <div class="white_text center_text" layout="row" layout-align="center"  >
-      <h1><span class="header_font">Learn Your Lesson</span> 
-        <p hide-gt-xs >is your place to connect with local teachers <span hide-xs> on languages, music lessons,<br> or any other skill you wish to learn
-<div ></p>
-        <p hide-xs class="reduced_header_font">is your place to connect with local teachers on languages,<br> music lessons, or any other skill you wish to learn</p> </span>
-       
-      </h1>
-    </div> <!-- end of white_text -->
+          <p hide-xs class="reduced_header_font"> to connect with local teachers on languages,<br> music lessons, or any other skill you wish to learn</p> </span>
+         
+        </h1>
+      </div> <!-- end of white_text -->
 
-    <form  layout="row" layout-align="center center" name="search_form" flex>          
-          
-        
-      <div layout="row" layout-xs="column">
-        <div flex>
-            <md-autocomplete 
-              md-select-on-match
-              md-autoselect
-              id="select_subject"
-              class="black_text subject_search"
-              md-selected-item="selected.subject_name" 
-              md-input-name="subject"
-              md-search-text="searchText.subject_name"
-              md-search-text-change="search_subjects( searchText.subject_name )"
-              md-items="subject in subjects_list" 
-              md-item-text="subject"            
-              md-selected-item-change="subject_picked( subject )"
-              ng-model-options="{ debounce: 500 }"
-              placeholder="Subject?"
-              md-min-length="2">
-            <md-item-template>
-              <span md-highlight-text="searchText">{{subject}}</span>
-            </md-item-template>
-            <div ng-messages="search_form.subject.$error">
-              <div ng-message="required">This is required</div>
-              <div ng-message="no_select">Please click one of the provied options</div>
-            </div>
-            <md-not-found>
-              No matches found.
-            </md-not-found>
-          </md-autocomplete>
-
-        </div>
-
-        <div  layout-align="center center" class="county_search" flex>
-          <md-autocomplete 
-              class="black_text subject_search"
-              md-selected-item="selected.county_name" 
-              md-input-name="county"
-              md-search-text="searchText.county_name" 
-              md-items="county in counties" 
-              md-item-text="county" 
-              md-search-text-change="search_counties( searchText.county_name )"
-              placeholder="County?"
-              md-selected-item-change="county_picked( county )">
-            <md-item-template>
-              <span md-highlight-text="county">{{county}}</span>
-            </md-item-template>
+      <form  layout="column" layout-align="center center" name="search_form" flex>          
             
-          </md-autocomplete>    
+          
+        <div layout="row" >
+          <div flex>
+              <md-autocomplete 
+                md-select-on-match
+                md-autoselect
+                id="select_subject"
+                class="black_text no_border_radius max_width_200px"
+                md-selected-item="selected.subject_name" 
+                md-input-name="subject"
+                md-search-text="searchText.subject_name"
+                md-search-text-change="search_subjects( searchText.subject_name )"
+                md-items="subject in subjects_list" 
+                md-item-text="subject.name"            
+                md-selected-item-change="subject_picked( subject )"
+                ng-model-options="{ debounce: 200 }"
+                placeholder="Pick your subject"
+                md-min-length="2">
+              <md-item-template>
+                <span md-highlight-text="searchText">{{subject.name}}</span>
+              </md-item-template>
+              <div ng-messages="search_form.subject.$error">
+                <div ng-message="required">This is required</div>
+                <div ng-message="no_select">Please click one of the provied options</div>
+              </div>
+              <md-not-found>
+                No matches found.
+              </md-not-found>
+            </md-autocomplete>
+
+          </div>
+          <div class="center_text">
+            <md-button style="height:40px;" ng-click="search()" class="md-raised md-primary icon_button white_text no_margin no_padding no_border_radius">  Search<i class="material-icons">search</i>
+            </md-button>
+          </div> <!-- end of row -->
+          
+        </div> <!-- end of row -->   
+      </form> <!-- end of search() -->
+      
+      
+    </div> <!-- end of main_page_search_container -->
+
+    <div layout="column">
+
+      <div class="margin_t_30 no_padding no_margin" layout-gt-xs="row" layout="column" layout-align="space-around center" ng-cloak>
+        <div class="full_width_on_big">
+          <a ui-sref="search({ name: 'Piano' })">
+            <picture>
+              <source ng-srcset="<%= asset_url 'learn-to-play-piano.jpg' %>"  media="(min-width: 600px)">
+              <source ng-srcset="<%= asset_url 'wide_learn_to_play_piano.jpg' %>">
+              <img ng-src="<%= asset_url 'learn-to-play-piano.jpg' %>" alt="Flowers" class="link_images">
+            </picture>    
+          </a>
         </div>
 
-        
-      </div> <!-- end of row -->   
-    </form> <!-- end of search() -->
-    <div layout="row" layout-align="center center" flex>
-      <md-button ng-click="search()" class="md-raised md-primary icon_button white_text">Search<i class="material-icons">search</i></md-button>
-    </div> <!-- end of row -->
+        <div class="margin_t_8 full_width_on_big" >
+          <a ui-sref="search({ name: 'Guitar' })">
+            <picture>
+              <source ng-srcset="<%= asset_url 'learn-to-play-guitar.jpg' %>"  media="(min-width: 600px)">
+              <source ng-srcset="<%= asset_url 'wide_learn_to_play_guitar.jpg' %>">
+              <img ng-src="<%= asset_url 'learn-to-play-guitar.jpg' %>" alt="Flowers" class="link_images">
+            </picture> 
+          </a>         
+        </div>
 
-    
-    
-  </div> <!-- end of main_page_search_container -->
-  <div class="center_text">
-    <md-button ui-sref="register_teacher" class="md-raised blue_button">Become a teacher</md-button>
-  </div>
-  <div layout="row"  layout-margin-gt-xs flex >
-    
-    <md-content class="grey_green_background how_it_works" >
-      <div layout="column" class="center_text">
-        <h1 class="green_text" flex="100">How it works</h1><br><br>
-        <h4 flex="100">From finding the perfect teacher to managing bookings and scheduling lessons - we take care of all the details, so you can focus on learning. <a ui-sref="how_it_works"></a></h4> <br>
+        <div class="margin_t_8 full_width_on_big" >
+          <a ui-sref="search({ name: 'Drums' })">
+            
+            <picture>
+              <source ng-srcset="<%= asset_url 'learn-to-play-drums.jpg' %>"  media="(min-width: 600px)">
+              <source ng-srcset="<%= asset_url 'wide_learn_to_play_drums.jpg' %>">
+              <img ng-src="<%= asset_url 'learn-to-play-drums.jpg' %>" alt="Flowers" class="link_images">
+            </picture>    
+            
+          </a>
+        </div>
+
       </div>
-      <div layout="row" layout-xs="column" >
-        
-        <div class="center_text " flex>
-          <%= image_tag 'search_for_a_teacher.jpg' %>
-          <h3>Search for your teacher</h3>
-          Compare teachers based on the criteria that matter to to you -from age and location to experience and price.
-        </div> <!-- end of col-xs-4 -->
 
-        <div class="center_text " flex>
-          <%= image_tag 'schedule_your_lessons.jpg' %>
-          <h3>Schedule your lessons</h3>
-          When you've found your preferred teacher, schedule your lessons via direct email with the teacher
-          deposit to confirm the lesson.
-        </div> <!-- end of col-xs-4 -->
-
-        <div class="center_text " flex>
-          <%= image_tag 'connect_with_your_teacher.jpg' %>
-          <h3>Connect with your teacher</h3>
-          On the scheduled date and at the agreed venue - you can meet your teacher and learn your lesson. 
-        </div> <!-- end of col-xs-4 -->
+      <div class="margin_t_30 no_padding no_margin" layout-gt-xs="row" layout="column" layout-align="space-around center" ng-cloak>
+        <div class="full_width_on_big">
+          <a ui-sref="search({ name: 'Maths' })">
+            <picture>
+              <source ng-srcset="<%= asset_url 'learn-maths.jpg' %>"  media="(min-width: 600px)">
+              <source ng-srcset="<%= asset_url 'wide_learn_maths.jpg' %>">
+              <img ng-src="<%= asset_url 'learn-maths.jpg' %>" alt="Flowers" class="link_images">
+            </picture>  
+          </a>
+        </div>
+        <div class="margin_t_8 full_width_on_big" >
+          <a ui-sref="search({ name: 'French' })">
+            <picture>
+              <source ng-srcset="<%= asset_url 'learn-to-speak-french.jpg' %>"  media="(min-width: 600px)">
+              <source ng-srcset="<%= asset_url 'wide_learn_to_speak_french.jpg' %>">
+              <img ng-src="<%= asset_url 'learn-to-speak-french.jpg' %>" alt="Flowers" class="link_images">
+            </picture>  
+          </a>
+        </div>
+        <div class="margin_t_8 full_width_on_big" >
+          <a ui-sref="search({ name: 'Italian' })">
+            <picture>
+              <source ng-srcset="<%= asset_url 'learn-to-speak-italian.jpg' %>"  media="(min-width: 600px)">
+              <source ng-srcset="<%= asset_url 'wide_learn_to_speak_italian.jpg' %>">
+              <img ng-src="<%= asset_url 'learn-to-speak-italian.jpg' %>" alt="Flowers" class="link_images">
+            </picture> 
+          </a>
+        </div>
       </div>
+
+    </div>
+
+    <div class="center_text margin_t_30" >
+      <md-button ui-sref="register_teacher" class="md-raised blue_button">Become a teacher</md-button>
+    </div>
+  </div> <!-- end of hook -->
+
+  
+  <div class="full_height_on_big margin_t_30" ng-cloak>
+    <div layout="row"  layout-margin-gt-xs flex >
       
-      
-    </md-content>
-   
-  </div> <!-- end of flex -->
-  <div class="center_text">
-    <md-button ui-sref="register_teacher" class="md-raised blue_button">Become a teacher</md-button>
+      <md-content class="grey_green_background how_it_works" >
+        <div layout="column" class="center_text">
+          <h1 class="green_text neue" flex="100">How it works</h1><br><br>
+          <h4 flex="100">From finding the perfect teacher to managing bookings and scheduling lessons - we take care of all the details, so you can focus on learning. <a ui-sref="how_it_works"></a></h4> <br>
+        </div>
+
+        <div layout="row" layout-xs="column" >
+          
+          <div class="center_text " flex>
+            <img ng-src="<%= asset_url 'search_for_a_teacher.jpg' %>" class="responsive_image">
+            <h3>Search for your teacher</h3>
+            Compare teachers based on the criteria that matter to to you -from age and location to experience and price.
+          </div> <!-- end of col-xs-4 -->
+
+          <div class="center_text " flex>
+            <img ng-src="<%= asset_url 'schedule_your_lessons.jpg' %>" class="responsive_image">
+            <h3>Schedule your lessons</h3>
+            When you've found your preferred teacher, schedule your lessons via direct email with the teacher
+            deposit to confirm the lesson.
+          </div> <!-- end of col-xs-4 -->
+
+          <div class="center_text " flex>
+            <img ng-src="<%= asset_url 'connect_with_your_teacher.jpg' %>" class="responsive_image">
+            <h3>Connect with your teacher</h3>
+            On the scheduled date and at the agreed venue - you can meet your teacher and learn your lesson. 
+          </div> <!-- end of col-xs-4 -->
+        </div>
+        
+        
+      </md-content>
+     
+    </div> <!-- end of flex -->
+
+    <div class="center_text margin_t_30 animateblock btm anchor1" >
+      <md-button ui-sref="register_teacher" class="md-raised blue_button">Become a teacher</md-button>
+    </div>
   </div>
-  <div flex class="x_large_font animateblock btm anchor1" style="max-width:100vw !important;">
+
+  <div flex class="x_large_font animateblock btm anchor1 margin_t_30" style="max-width:100vw !important; ">
     <div layout="row" flex="100">
       <md-content layout-margin-gt-xs class="center_text pale_orange_background">
         <h1><strong>Are you a teacher?</strong></h1>
@@ -124,11 +185,12 @@
       </md-content> <!-- end of are_you_a_teacher -->
     </div>
   </div>
-  <div class="center_text">
+  <div class="center_text margin_t_30 animateblock centerright anchor2">
     <md-button ui-sref="register_teacher" class="md-raised blue_button">Become a teacher</md-button>
   </div>
-  <div flex class="x_large_font animateblock centerright anchor2" style="max-width:100vw !important;">
-    <div layout="row" flex="100">
+
+  <div flex class="x_large_font animateblock centerright anchor2 full_height_on_big margin_t_30" style="max-width:100vw !important;">
+    <div layout="row" >
       <md-content layout-margin-gt-xs class="center_text pale_orange_background">
         <p>Well, call us the middle man. We have built a platform that students rely on to find teachers and we help teachers get more students without having to invest time and money on marketing. With a free profile on LearnYourLesson.ie, your skills will be visible to the students who search our site every day for teachers like you. And with mobile optimisation you'll extend your reach even further.</p>
 
@@ -154,15 +216,16 @@
             <p>With LearnYourLesson, you can manage your lessons, earnings, and more all in one place. With our platform you can reset the balance of power: more teaching, less administration. You can personalise your prices, teaching instruments, location and lesson duration.</p>
           </div> <!-- end of are_you_a_teacher_container -->
 
-          <div class="center_text">
-            <md-button ui-sref="register_teacher" class="md-raised blue_button">Become a teacher</md-button>
-          </div>
+          
 
         </div> <!-- end of are_you_a_teacher -->
+
+
       </md-content>
+    </div>
+
+    <div class="center_text">
+      <md-button ui-sref="register_teacher" class="md-raised blue_button">Become a teacher</md-button>
     </div>
   </div>
 </div> <!-- end of column -->
-
-
-{{ USER.get_full_name() }}

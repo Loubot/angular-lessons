@@ -6,8 +6,9 @@ angular.module('lessons').service 'auth', [
   "$state"
   "$window"
   "$mdSidenav"
+  "$mdDialog"
   "$q"
-  ( $rootScope, $auth, User, alertify, $state, $window, $mdSidenav, $q ) ->
+  ( $rootScope, $auth, User, alertify, $state, $window, $mdSidenav, $mdDialog, $q ) ->
     valid = false
     auth = {}
     auth.county_lists =
@@ -51,6 +52,7 @@ angular.module('lessons').service 'auth', [
       #   throw 'There was an error'
 
     auth.login = ( teacher ) ->
+      console.log teacher
       $auth.submitLogin( teacher )
         .then( (resp) ->
 
@@ -60,7 +62,8 @@ angular.module('lessons').service 'auth', [
             #   resp
             # ]
             alertify.success "Welcome back #{ $rootScope.User.first_name }"
-            $mdSidenav('left').close()
+            # $mdSidenav('left').close()
+            $mdDialog.cancel()
           )
           
         )
@@ -71,7 +74,7 @@ angular.module('lessons').service 'auth', [
         )   
 
     auth.register = ( teacher ) ->
-
+      console.log teacher
       console.log teacher.county
       $auth.submitRegistration( teacher )
         .then( (resp) ->
@@ -82,7 +85,7 @@ angular.module('lessons').service 'auth', [
               resp
             ]
             
-            if $rootScope.User.is_teacher then $state.go( "teacher", id: $rootScope.User.id ) else $state.go( 'student_profile', id: $rootScope.User.id )
+            if $rootScope.User.is_teacher then $state.go( "teacher", id: $rootScope.User.id ) 
           )
           
         )
@@ -90,6 +93,7 @@ angular.module('lessons').service 'auth', [
           auth.auth_errors( resp.data )
           Promise.reject resp
         )
+
     auth.logout = ->
       $auth.signOut()
         .then( ( resp ) ->
@@ -105,9 +109,28 @@ angular.module('lessons').service 'auth', [
           $state.go 'welcome'
         )
 
+    auth.check_basic_validation = ->
+      console.log 'hilly'
+      $q ( resolve, reject ) ->
+        $auth.validateUser().then( ( user ) ->
+          new User().then( ( resp ) ->
+            resolve $rootScope.User
+            $rootScope.isPageFullyLoaded = true
+          ).catch( ( err ) ->
+            # $rootScope.$broadcast( "auth:invalid", [ 'nope', 'no way' ] )
+            $rootScope.isPageFullyLoaded = true
+          )
+        ).catch( ( validate_err ) ->
+          # console.log 'Validate error'
+          # $rootScope.$broadcast( "auth:invalid", [ 'nope', 'no way' ] )
+          $rootScope.isPageFullyLoaded = true
+          resolve "I'll allow it"
+        )
+
     auth.check_if_logged_in = ->
       $q ( resolve, reject ) ->
         $auth.validateUser().then( ( user ) ->
+          
           if !$rootScope.User?
             new User().then( ( resp ) ->
               resolve $rootScope.User
@@ -117,12 +140,15 @@ angular.module('lessons').service 'auth', [
           else
             resolve $rootScope.User
         ).catch( ( validate_err ) ->
+          console.log 'Right here'
+          console.log validate_err
           reject validate_err
         )
 
     auth.check_if_logged_in_and_teacher = ->
       $q ( resolve, reject ) ->
         $auth.validateUser().then( ( user ) ->
+          console.log 'check_if_logged_in_and_teacher'
           if !$rootScope.User?
             new User().then( ( resp ) ->
               if !user.is_teacher
@@ -141,6 +167,7 @@ angular.module('lessons').service 'auth', [
     auth.check_if_logged_in_and_admin = ->
       $q ( resolve, reject ) ->
         $auth.validateUser().then( ( user ) ->
+
           if !$rootScope.User?
             new User().then( ( resp ) ->
               if !user.admin
@@ -155,6 +182,8 @@ angular.module('lessons').service 'auth', [
             resolve $rootScope.User
           
         ).catch( ( validate_err ) ->
+          console.log "Maybe here"
+          console.log validate_err
           reject validate_err
         )
         
@@ -162,13 +191,14 @@ angular.module('lessons').service 'auth', [
 
     do -> 
 
-      
       # set listener for validation error
-      $rootScope.$on "auth:validation-error" , ( e, v ) ->
+      $rootScope.$on "auth:invalid" , ( e, v ) ->
         console.log "validation error"
-        alertify.error 'auth:validation-error'
-        console.log $state.current.name
+        # alertify.error 'auth:validation-error'
+        # console.log $state.current.name
         $rootScope.User = null
+        $rootScope.isPageFullyLoaded = true
+        console.log "$rootScope.isPageFullyLoaded #{ $rootScope.isPageFullyLoaded }"
 
       # set listener for validation success
       $rootScope.$on 'auth:validation-success', ( e, v ) ->
@@ -179,7 +209,9 @@ angular.module('lessons').service 'auth', [
           new User().then( ( res ) ->
             console.log 'end of do'
             console.log $rootScope.User
-          )
+            $rootScope.isPageFullyLoaded = true
+            console.log "$rootScope.isPageFullyLoaded #{ $rootScope.isPageFullyLoaded }"
+          ) 
         
 
     auth
@@ -254,9 +286,8 @@ angular.module('lessons').factory 'User', [
     $rootScope.User = @
     
 
-  User::get_full_name = ->
-    
-    return @.first_name + ' ' + @.last_name
+  User::get_full_name = ->    
+    return @.first_name + ' ' + @.last_name if ( @.first_name? or @.last_name? )
 
   User::update = ->
     console.log @
