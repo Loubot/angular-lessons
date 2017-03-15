@@ -85,7 +85,7 @@ angular.module('lessons').service 'auth', [
               resp
             ]
             
-            if $rootScope.User.is_teacher then $state.go( "teacher", id: $rootScope.User.id ) else $state.go( 'student_profile', id: $rootScope.User.id )
+            if $rootScope.User.is_teacher then $state.go( "teacher", id: $rootScope.User.id ) 
           )
           
         )
@@ -110,16 +110,20 @@ angular.module('lessons').service 'auth', [
         )
 
     auth.check_basic_validation = ->
+      console.log 'hilly'
       $q ( resolve, reject ) ->
         $auth.validateUser().then( ( user ) ->
           new User().then( ( resp ) ->
             resolve $rootScope.User
+            $rootScope.isPageFullyLoaded = true
           ).catch( ( err ) ->
             # $rootScope.$broadcast( "auth:invalid", [ 'nope', 'no way' ] )
+            $rootScope.isPageFullyLoaded = true
           )
         ).catch( ( validate_err ) ->
           # console.log 'Validate error'
           # $rootScope.$broadcast( "auth:invalid", [ 'nope', 'no way' ] )
+          $rootScope.isPageFullyLoaded = true
           resolve "I'll allow it"
         )
 
@@ -282,9 +286,8 @@ angular.module('lessons').factory 'User', [
     $rootScope.User = @
     
 
-  User::get_full_name = ->
-    
-    return @.first_name + ' ' + @.last_name
+  User::get_full_name = ->    
+    return @.first_name + ' ' + @.last_name if ( @.first_name? or @.last_name? )
 
   User::update = ->
     console.log @

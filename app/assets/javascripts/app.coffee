@@ -120,10 +120,12 @@ angular.module('lessons').run [
         $rootScope.User = null
         $state.go "welcome"
         alertify.error "Please login again."
+        $rootScope.isPageFullyLoaded = true
       else if error.status ==  401 and  error.error == "non_teacher"
         $state.go "welcome"
         alertify.error "You are not Authorised"
-
+        $rootScope.User = null
+        $rootScope.isPageFullyLoaded = true
       return 
 
 

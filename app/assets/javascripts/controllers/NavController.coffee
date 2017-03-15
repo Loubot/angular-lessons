@@ -79,7 +79,6 @@ angular.module('lessons').controller('NavController', [
       )
 
     $scope.register_student = ->
-      console.log $scope.student.confirm_password
       $scope.student_form.confirm_password.$error.matching_password = false
       $scope.student_form.confirm_password.$error.requireds = false
       if $scope.student.confirm_password == "" or !$scope.student.confirm_password?

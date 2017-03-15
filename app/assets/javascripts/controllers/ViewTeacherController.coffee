@@ -147,7 +147,7 @@ angular.module('lessons').controller( 'ViewTeacherController', [
       $scope.conversation.user_id2 = $scope.teacher.id
       $scope.conversation.user_email1 = $rootScope.User.email
       $scope.conversation.user_email2 = $scope.teacher.email
-      $scope.conversation.user_name1 = $rootScope.User.get_full_name()
+      $scope.conversation.user_name1 = $scope.message.user_name1
       $scope.conversation.user_name2 = "#{ $scope.teacher.first_name } #{ $scope.teacher.last_name }"
       $scope.message.sender_id = $rootScope.User.id
 
