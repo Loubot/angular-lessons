@@ -105,10 +105,22 @@
           </a>
         </div>
         <div class="margin_t_8 full_width_on_big" >
-          <a ui-sref="search({ name: 'French' })"><img ng-src="<%= asset_url 'learn-to-speak-french.jpg' %>" class="link_images"></a>
+          <a ui-sref="search({ name: 'French' })">
+            <picture>
+              <source ng-srcset="<%= asset_url 'learn-to-speak-french.jpg' %>"  media="(min-width: 600px)">
+              <source ng-srcset="<%= asset_url 'wide_learn_to_speak_french.jpg' %>">
+              <img ng-src="<%= asset_url 'learn-to-speak-french.jpg' %>" alt="Flowers" class="link_images">
+            </picture>  
+          </a>
         </div>
         <div class="margin_t_8 full_width_on_big" >
-          <a ui-sref="search({ name: 'Italian' })"><img ng-src="<%= asset_url 'learn-to-speak-italian.jpg' %>" class="link_images"></a>
+          <a ui-sref="search({ name: 'Italian' })">
+            <picture>
+              <source ng-srcset="<%= asset_url 'learn-to-speak-italian.jpg' %>"  media="(min-width: 600px)">
+              <source ng-srcset="<%= asset_url 'wide_learn_to_speak_italian.jpg' %>">
+              <img ng-src="<%= asset_url 'learn-to-speak-italian.jpg' %>" alt="Flowers" class="link_images">
+            </picture> 
+          </a>
         </div>
       </div>
 
