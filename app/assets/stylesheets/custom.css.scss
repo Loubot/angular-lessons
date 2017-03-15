@@ -329,15 +329,15 @@ md-sidenav.md-closed.md-locked-open-add-active.user_menu {
 .header_font{
   font-size: 4rem;
   // font-size: 72px;
-  background: -webkit-linear-gradient(#555, #fff);
+  // background: -webkit-linear-gradient(#555, #fff);
   -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  // -webkit-text-fill-color: transparent;
 }
 
 .reduced_header_font{
   font-size: 3rem;
   // font-size: 72px;
-  background: -webkit-linear-gradient(#999, #fff);
+  // background: -webkit-linear-gradient(#999, #fff);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
@@ -1113,7 +1113,7 @@ ul.share-buttons .sr-only {
   }
 
   .main_page_search_container_first_background{
-    background-image: asset_url('portrait_orchestra.jpg');
+    background-image: asset_url('portrait_chalk.jpg');
   }
 
   .main_page_search_container_second_background{
