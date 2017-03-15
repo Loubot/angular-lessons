@@ -96,7 +96,13 @@
 
       <div class="margin_t_30 no_padding no_margin" layout-gt-xs="row" layout="column" layout-align="space-around center" ng-cloak>
         <div class="full_width_on_big">
-          <a ui-sref="search({ name: 'Maths' })"><img ng-src="<%= asset_url 'learn-maths.jpg' %>" class="link_images"></a>
+          <a ui-sref="search({ name: 'Maths' })">
+            <picture>
+              <source ng-srcset="<%= asset_url 'learn-maths.jpg' %>"  media="(min-width: 600px)">
+              <source ng-srcset="<%= asset_url 'wide_learn_maths.jpg' %>">
+              <img ng-src="<%= asset_url 'learn-maths.jpg' %>" alt="Flowers" class="link_images">
+            </picture>  
+          </a>
         </div>
         <div class="margin_t_8 full_width_on_big" >
           <a ui-sref="search({ name: 'French' })"><img ng-src="<%= asset_url 'learn-to-speak-french.jpg' %>" class="link_images"></a>
