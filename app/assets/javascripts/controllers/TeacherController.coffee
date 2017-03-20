@@ -151,8 +151,8 @@ angular.module('lessons').controller('TeacherController', [
       alertify.error 'Registration failed: ' + reason.errors[0]
       return
 
-    $scope.update_teacher = ->
-      console.log $scope.teacher_update_form.$valid
+    ### Submit user form. This enables validations on phone number to run. ###
+    $scope.update_teacher = -> 
       $rootScope.User.update() if $scope.teacher_update_form.$valid
     ####################### End of password ##############################
 

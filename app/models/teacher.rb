@@ -57,7 +57,7 @@ class Teacher < ActiveRecord::Base
 
   validates :email,  uniqueness: { case_sensitive: false }
   validates :email, presence: true
-  validates :phone, numericality: true, allow_nil: true
+  validates :phone, numericality: true, allow_nil: true, allow_blank: true
   validates_confirmation_of :password, message: "should match verification"
 
 

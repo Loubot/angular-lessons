@@ -290,6 +290,7 @@ angular.module('lessons').factory 'User', [
     return @.first_name + ' ' + @.last_name if ( @.first_name? or @.last_name? )
 
   User::update = ->
+    console.log 'hup'
     console.log @
     COMMS.POST(
       "/teacher"

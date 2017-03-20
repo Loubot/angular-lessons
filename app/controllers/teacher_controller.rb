@@ -20,7 +20,7 @@ class TeacherController < ApplicationController
 
   def update
     p "Teacher params with levels"
-    #pp teacher_params
+    # pp teacher_params
     @teacher = Teacher.find( current_teacher.id )
     if @teacher.update_attributes( teacher_params )
       render json: { :status => :updated, teacher: @teacher.as_json }
