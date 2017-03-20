@@ -48,7 +48,7 @@ group :production do
   gem 'render_static'
   gem 'daemons'
   gem 'rails_12factor'
-  gem 'tunemygc'
+  gem 'unicorn-worker-killer'
 end
 
 group :development, :test do
