@@ -27,31 +27,50 @@
         >
 
         <div class="margin_t_10 padding_10">
-          <form ng-submit="update_teacher()">
-            <md-input-container md-no-float>
-              <label>First name:</label>
-              <input  type="text"
-                      ng-change="User.update()"
-                      ng-model-options="{ debounce:750 }"
-                      ng-model="User.first_name">
-            </md-input-container>
+          <form name="teacher_update_form" ng-submit="teacher_update_form.$valid && update_teacher()"  novalidate>
 
-            <md-input-container md-no-float>
-              <label>Last name:</label>
-              <input  type="text"
-                      ng-change="User.update()" 
-                      ng-model-options="{ debounce:750 }"
-                      ng-model="User.last_name">
-            </md-input-container>
-            
-            <md-input-container md-no-float>
-              <label>Phone:(optional)</label>
-              <md-icon><i class="material-icons icon_green">phone</i></md-icon>
-              <input  type="text"
-                      ng-change="User.update()" 
-                      ng-model-options="{ debounce:750 }"
-                      ng-model="User.phone">
-            </md-input-container>
+            <div layout="column">
+
+              <div layout-xs="column" layout-gt-xs="row">
+                <div>
+                  <md-input-container md-no-float>
+                    <label>First name:</label>
+                    <input  type="text"
+                            ng-change="User.update()"
+                            ng-model-options="{ debounce:750 }"
+                            ng-model="User.first_name">
+                  </md-input-container>
+                </div>
+
+                <div>
+                  <md-input-container md-no-float>
+                    <label>Last name:</label>
+                    <input  type="text"
+                            ng-change="User.update()" 
+                            ng-model-options="{ debounce:750 }"
+                            ng-model="User.last_name">
+                  </md-input-container>
+                </div>
+
+              </div>
+              
+              <div>
+                <md-input-container md-no-float>
+                  <label>Phone:(optional)</label>
+                  <md-icon><i class="material-icons icon_green">phone</i></md-icon>
+                  <input  type="text"
+                          ng-change="teacher_update_form.phone.$validate(); update_teacher();" 
+                          ng-pattern="/^\d{0,9}(\.\d{1,9})?$/"
+                          ng-model-options="{ debounce:750 }"
+                          ng-model="User.phone"
+                          name="phone">
+                  <div ng-messages="teacher_update_form.phone.$error" ng-if='teacher_update_form.phone.$dirty'>
+                    <div ng-message="pattern">Not a phone number</div>
+                  </div>
+                </md-input-container>
+              </div>
+
+            </div>
             
           </form>
         </div>

@@ -22,8 +22,11 @@ class TeacherController < ApplicationController
     p "Teacher params with levels"
     #pp teacher_params
     @teacher = Teacher.find( current_teacher.id )
-    @teacher.update_attributes( teacher_params )
-    render json: { :status => :updated, teacher: @teacher.as_json }
+    if @teacher.update_attributes( teacher_params )
+      render json: { :status => :updated, teacher: @teacher.as_json }
+    else
+      render json: { errors: @teacher.errors.full_messages }, status: 422
+    end
   end
 
   def profile

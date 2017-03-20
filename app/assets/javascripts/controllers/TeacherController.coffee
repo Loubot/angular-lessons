@@ -150,6 +150,10 @@ angular.module('lessons').controller('TeacherController', [
       $scope.update_password = null
       alertify.error 'Registration failed: ' + reason.errors[0]
       return
+
+    $scope.update_teacher = ->
+      console.log $scope.teacher_update_form.$valid
+      $rootScope.User.update() if $scope.teacher_update_form.$valid
     ####################### End of password ##############################
 
     ####################### Upload proof #################################
