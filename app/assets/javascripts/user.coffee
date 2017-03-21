@@ -110,7 +110,6 @@ angular.module('lessons').service 'auth', [
         )
 
     auth.check_basic_validation = ->
-      console.log 'hilly'
       $q ( resolve, reject ) ->
         $auth.validateUser().then( ( user ) ->
           new User().then( ( resp ) ->

@@ -53,6 +53,14 @@ angular.module('lessons').config ( $authProvider ) ->
       
   })
     
+angular.module('lessons').factory 'change_title', [
+  () ->
+    set_to: ( new_title ) ->
+      $('title').replaceWith """ #{ new_title }"""
+      console.log $('title').html()
+      return true
+
+]
 
 angular.module('lessons').service 'OG', ->
   set_tags: ->

@@ -9,8 +9,10 @@ angular.module('lessons').controller( 'ViewTeacherController', [
   "COMMS"
   "alertify"
   "$mdDialog"
-  ( $scope, $rootScope, $state, $stateParams, $filter, COMMS, alertify, $mdDialog ) ->
+  "change_title"
+  ( $scope, $rootScope, $state, $stateParams, $filter, COMMS, alertify, $mdDialog, change_title ) ->
     console.log "ViewTeacherController"
+
 
     $scope.message = {}
     $scope.profile = null #Teacher profile pic
@@ -72,6 +74,7 @@ angular.module('lessons').controller( 'ViewTeacherController', [
       # create_map() if $scope.teacher.location?
       $scope.teacher_loaded = true
       create_fotorama()
+      run_change_title()
     ).catch( ( err ) ->
       console.log err
       alertify.error err.data.errors.full_messages
@@ -82,7 +85,12 @@ angular.module('lessons').controller( 'ViewTeacherController', [
 
 
     
+    run_change_title = ->
+      x = ""
+      for subject in $scope.teacher.subjects
+        x + "#{ subject.name } lessons in #{ $scope.teacher.location.county }"
 
+      change_title.set_to x
 
     set_profile = ->
       for photo in $scope.teacher.photos

@@ -16,8 +16,9 @@
         <md-card-title>
           <md-card-title-text>
             <span class="md-headline">Subject(s)</span>
-            <md-chips>
-              <md-chip ng-repeat="subject in teacher.subjects">{{ subject.name }}</md-chip>           
+
+            <md-chips ng-model="teacher.subjects" readonly="true" >
+              <md-chip-template>{{ $chip.name }}</md-chip-template>
             </md-chips>
             <span class="md-headline">Address</span>
             {{ teacher.location.address }}<br>
