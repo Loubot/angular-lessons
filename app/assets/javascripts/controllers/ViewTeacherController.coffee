@@ -88,11 +88,14 @@ angular.module('lessons').controller( 'ViewTeacherController', [
     run_change_title = ->
       x = ""
       for subject in $scope.teacher.subjects
-        x + "#{ subject.name } lessons in #{ $scope.teacher.location.county }"
-
+        
+        x = "#{ x } #{ subject.name } lessons in #{ $scope.teacher.location.county }"
+        
       change_title.set_to x
 
     set_profile = ->
+      return true if $scope.teacher.photos? && $scope.teacher.photos.length == 0
+
       for photo in $scope.teacher.photos
         # console.log photo.avatar.url
         if parseInt( photo.id ) == parseInt( $scope.teacher.profile )
@@ -114,7 +117,7 @@ angular.module('lessons').controller( 'ViewTeacherController', [
           description: "Image #{ index + 1 }"
         )
 
-      console.log $scope.slides
+      # console.log $scope.slides
       $scope.index = 1
       
       id = setInterval((->
