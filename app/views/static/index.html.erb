@@ -19,7 +19,7 @@
         <div hide-xs class="margin_t_8 no_padding">
           <md-menu>
            <!-- Trigger element is a md-button with an icon -->
-           <span ng-click="open_subjects_menu($mdOpenMenu, $event)" class=" width_auto no_padding no_margin" aria-label="Open sample menu">
+           <span ng-click="open_subjects_menu($mdMenu.open, $event)" class=" width_auto no_padding no_margin" aria-label="Open sample menu">
              Subjects<md-icon><i class="material-icons">keyboard_arrow_down</i></md-icon>
            </span>
            <md-menu-content width="4">
@@ -31,7 +31,7 @@
         </div>
 
         <div hide-xs  class="margin_t_10">
-          <a class="black_text" ui-sref-active="active_bla white_text" ui-sref="about">|&nbsp; About Us &nbsp;</a>
+          <a class="black_text" ui-sref-active="active_bla white_text" ui-sref="about">|&nbsp;About Us&nbsp;</a>
         </div>
 
         <!-- Teacher/User menu mess -->
@@ -43,11 +43,11 @@
         <div ng-cloak ng-if="User && !User.is_teacher" ng-include="'includes/student_logged_in_menu.html'"></div>
 
         <div ng-cloak ng-if="!User" class="margin_t_10">
-          <a class="black_text"  ui-sref="register_teacher"><span hide-xs>|</span>&nbsp; Become a teacher&nbsp;</a>
+          <span hide-xs>|</span><a class="black_text"  ui-sref="register_teacher">&nbsp;Become a teacher&nbsp;</a>
         </div>
 
         <div ng-cloak class="margin_t_10 no_padding" ng-if="!User">
-          <div id="login_hook" ng-click="open_login()"><span hide-xs>|</span>&nbsp; Login</div>
+          <div id="login_hook" ng-click="open_login()"><span hide-xs>|</span>&nbsp;Login</div>
         </div>
       </div>
 

@@ -46,12 +46,12 @@ angular.module('lessons').controller('NavController', [
       )
         
 
-    $scope.open_home_menu = ( $mdOpenMenu, e ) ->
-      console.log e
+    $scope.open_home_menu = ( $mdOpenMenu, e ) -> #This $mdOpenMenu is actually $mdMenu.open being passed from html
+      # console.log e
       $mdOpenMenu( e )
 
-    $scope.open_subjects_menu = ( $mdOpenMenu, e ) ->
-      console.log e
+    $scope.open_subjects_menu = ( $mdOpenMenu, e ) -> #This $mdOpenMenu is actually $mdMenu.open being passed from html
+      # console.log e
       $mdOpenMenu( e )
 
     $scope.auth = auth
