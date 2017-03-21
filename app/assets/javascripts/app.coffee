@@ -57,7 +57,6 @@ angular.module('lessons').factory 'change_title', [
   () ->
     set_to: ( new_title ) ->
       $('title').replaceWith """<title> #{ new_title } </title>"""
-      console.log $('title').html()
       return true
 
 ]

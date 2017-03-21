@@ -64,7 +64,7 @@ angular.module('lessons').controller('TeacherAreaController', [
     
 
     format_events = ( events ) ->
-      console.log events
+      # console.log events
       if events? && events.length > 0
         bla = []
         for event in events
@@ -89,14 +89,14 @@ angular.module('lessons').controller('TeacherAreaController', [
       gapi.client.calendar.events.list(
         'calendarId': "#{ $scope.calendar_id }"
       ).execute( ( resp ) ->
-        console.log "Calendar list"
+        # console.log "Calendar list"
         # console.log resp
         if resp.error?  
           alertify.error "Couldn't load your calendar"
           $scope.calendar_id = null
         else
 
-          console.log "List events"
+          # console.log "List events"
 
           format_events( resp.items )
           $scope.create_event_button_bool = true
@@ -104,12 +104,12 @@ angular.module('lessons').controller('TeacherAreaController', [
       )
 
     check_if_calendar_exists = ( calendars ) ->
-      console.log calendars
+      # console.log calendars
       calendar_exists = false
       for calendar in calendars
         if calendar.summary == "LYL Calendar"
           
-          console.log calendar
+          # console.log calendar
           $scope.calendar_id = calendar.id
           $scope.calendar_event_details.calendar_id = calendar.id
           calendar_exists = true
@@ -117,11 +117,11 @@ angular.module('lessons').controller('TeacherAreaController', [
 
       if calendar_exists
         alertify.success "Found your calendar"
-        console.log $scope.calendar_id
+        # console.log $scope.calendar_id
         fetch_events()
       else
         alertify.error "Couldn't find your calender"
-        console.log "Can't find calendar"
+        # console.log "Can't find calendar"
         $scope.calendar_id = null
         $scope.create_calendar()
         
@@ -135,27 +135,25 @@ angular.module('lessons').controller('TeacherAreaController', [
 
     calendar_loaded = ->
       alertify.success "Calendar api loaded"
-      console.log "hup0"
       if !(localStorage.getItem("calendar_explanation") == "done")
-        console.log "hup"
         show_explanation_sheet()
       
     load_calendar_list = ->
       gapi.client.calendar.calendarList.list().execute( ( resp ) ->
-          console.log "Calendar list"
+          # console.log "Calendar list"
           # console.log resp
           if resp.error?  
             alertify.error "Couldn't load your calendar"
           else
             check_if_calendar_exists ( resp.items )
-            console.log "List events"
+            # console.log "List events"
             # format_events( resp.items )
             alertify.success "Got events" 
         )
       
 
     oauth2_loaded = ->
-      console.log "Oauth"
+      # console.log "Oauth"
       gapi.client.oauth2.userinfo.get().execute( ( resp ) ->
         # console.log "should be here " 
         # console.log resp
@@ -168,11 +166,11 @@ angular.module('lessons').controller('TeacherAreaController', [
     
 
     handleAuthResult = ( auth ) ->
-      console.log "auth"
+      # console.log "auth"
       # console.log auth
       if ( auth? and !auth.error? )
         $scope.show_auth_button = false
-        console.log "Begin calendar api load"
+        # console.log "Begin calendar api load"
         $scope.$digest()
         $scope.api_loaded = true
         $scope.$digest()
@@ -191,7 +189,7 @@ angular.module('lessons').controller('TeacherAreaController', [
       return false
       
     window.checkAuth = ->
-      console.log "Checkauth"
+      # console.log "Checkauth"
       gapi.auth.authorize(
         {
           'client_id': CLIENT_ID,
@@ -202,7 +200,7 @@ angular.module('lessons').controller('TeacherAreaController', [
       
 
     insert_calendar_into_list = ->
-      console.log "start list insert"
+      # console.log "start list insert"
       resource =
         id: $scope.calendar_id
         "colorRgbFormat": true 
@@ -241,13 +239,13 @@ angular.module('lessons').controller('TeacherAreaController', [
       gapi.client.calendar.calendarList.insert(
         resource
       ).execute( ( resp ) ->
-        console.log "List insert response"
-        console.log resp
+        # console.log "List insert response"
+        # console.log resp
       )
        
     $scope.create_calendar = ->
 
-      console.log "Create calendar"
+      # console.log "Create calendar"
       alertify.success "Trying to create a new calendar"
       # console.log "user:#{ $scope.google_id_email }"
       gapi.client.calendar.calendars.insert(
@@ -257,7 +255,7 @@ angular.module('lessons').controller('TeacherAreaController', [
         'timeZone': "GMT+01:00 Dublin"
         'backgroundColor': '#2a602a'
       ).execute( ( resp ) ->
-        console.log resp
+        # console.log resp
         $scope.calendar_id = resp.id
         alertify.success "Created calendar for you"
         $scope.create_event_button_bool = true
@@ -290,11 +288,11 @@ angular.module('lessons').controller('TeacherAreaController', [
       return
 
     $scope.onEventSelected = (event) ->
-      console.log event
+      # console.log event
       $scope.event = event
       $scope.event.start_date = new Date( ( event.startTime ) )
-      console.log $scope.event.start_date
-      console.log new Date()
+      # console.log $scope.event.start_date
+      # console.log new Date()
       $mdDialog.show(
         scope: $scope
         preserveScope: true
@@ -308,7 +306,7 @@ angular.module('lessons').controller('TeacherAreaController', [
       return
 
     $scope.onTimeSelected = (selectedTime) ->
-      console.log 'Selected time: ' + selectedTime
+      # console.log 'Selected time: ' + selectedTime
       return
 
     
@@ -331,16 +329,16 @@ angular.module('lessons').controller('TeacherAreaController', [
 
 
     $scope.submit_event_details = ->
-      console.log $scope.calendar_event_details
+      # console.log $scope.calendar_event_details
       start_date_time = moment( $scope.calendar_event_details.start_date )     
       start_date_time.hour( moment( $scope.calendar_event_details.start_time ).format( "HH" ) )
       start_date_time.minute( moment( $scope.calendar_event_details.start_time ).format( 'mm' ) )
-      console.log start_date_time.toString()
+      # console.log start_date_time.toString()
 
       end_date_time = moment( $scope.calendar_event_details.start_date )
       end_date_time.hour( moment( $scope.calendar_event_details.end_time ).format( "HH" ) )
       end_date_time.minute( moment( $scope.calendar_event_details.end_time).format( "mm" ) )
-      console.log end_date_time.toString()
+      # console.log end_date_time.toString()
       if start_date_time == end_date_time
         alertify.error "Times are equal"
         $scope.event_creation_form.start_date.$error.not_the_same = true
@@ -354,7 +352,7 @@ angular.module('lessons').controller('TeacherAreaController', [
         $scope.event_creation_form.start_date.$error.not_the_same = false
      
       
-      console.log $scope.calendar_event_details.student_email
+      # console.log $scope.calendar_event_details.student_email
       resource = {
         'summary': $scope.calendar_event_details.student_email
         # location: $rootScope.USER.location.address if $rootScope.USER.location?
@@ -368,7 +366,7 @@ angular.module('lessons').controller('TeacherAreaController', [
           'timeZone': 'GMT'
         }
       }
-      console.log resource
+      # console.log resource
       gapi.client.calendar.events.insert(
         'calendarId': $scope.calendar_id
         'resource': resource
@@ -379,7 +377,7 @@ angular.module('lessons').controller('TeacherAreaController', [
       )
 
     $scope.update_event_details = ( event ) ->
-      console.log event
+      # console.log event
       start_date_time = moment( event.start_date )     
       start_date_time.hour( moment( event.start_time ).format( "HH" ) )
       start_date_time.minute( moment( event.start_time ).format( 'mm' ) )
@@ -421,7 +419,7 @@ angular.module('lessons').controller('TeacherAreaController', [
         'eventId': event.id
         'resource': resource
       ).execute( ( resp ) ->
-        console.log resp
+        # console.log resp
         fetch_events()
         $mdDialog.hide()
       )

@@ -147,7 +147,6 @@ angular.module('lessons').service 'auth', [
     auth.check_if_logged_in_and_teacher = ->
       $q ( resolve, reject ) ->
         $auth.validateUser().then( ( user ) ->
-          console.log 'check_if_logged_in_and_teacher'
           if !$rootScope.User?
             new User().then( ( resp ) ->
               if !user.is_teacher
@@ -203,9 +202,7 @@ angular.module('lessons').service 'auth', [
         console.log 'validation success'
 
         if !$rootScope.User? && $rootScope.user.first_name?
-          console.log "Doing it"
           new User().then( ( res ) ->
-            console.log 'end of do'
             # console.log $rootScope.User
             $rootScope.isPageFullyLoaded = true
           ) 
