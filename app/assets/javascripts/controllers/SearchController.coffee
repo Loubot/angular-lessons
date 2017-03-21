@@ -10,8 +10,21 @@ angular.module('lessons').controller( 'SearchController', [
   "alertify"
   "$mdSidenav"
   "counties"
-  ( $scope, $rootScope, $state, $stateParams, $filter, COMMS, alertify, $mdSidenav , counties ) ->
+  "change_title"
+  ( $scope, $rootScope, $state, $stateParams, $filter, COMMS, alertify, $mdSidenav , counties, change_title ) ->
     console.log "SearchController"
+
+    #Change title to match search
+
+    run_change_title = ->
+      new_title = """ Search for a #{ $scope.selected.subject_name } teacher """ 
+      if $scope.selected_county_name?
+        new_title = "#{ new_title } near #{ $scope.selected_county_name }"
+      else
+        new_title = "#{ new_title } near you"
+
+      change_title.set_to new_title
+     #End of change title to match search
 
     $scope.search_nav_opened = false
     #pagination
@@ -26,12 +39,14 @@ angular.module('lessons').controller( 'SearchController', [
     $scope.selected_county_name = $stateParams.location
 
 
-    set_params = ->      
+    set_params = ->
+      console.log 'jup' 
       $state.transitionTo(
         'search',
         { name: $scope.selected.subject_name, location: $scope.selected_county_name  }
-        { notify: false }
+        { notify: false, location: 'replace' }
       )
+      run_change_title()
 
     $scope.view_teacher = ( teacher ) ->
       $state.go('view_teacher', id: teacher.id )
