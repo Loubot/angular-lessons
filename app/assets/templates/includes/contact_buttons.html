@@ -6,7 +6,7 @@
   </div>
 
   <div ng-if="teacher.phone">
-    <md-button class="md-raised md-primary white_text " ng-href="tel:{{ teacher.phone }}">
+    <md-button class="md-raised md-primary white_text " ng-attr-href="{{ is_mobile == true ? 'tel: teacher.phone' : undefined }}">
       <md-icon class=""><i class="material-icons icon_button">phone</i></md-icon>{{ teacher.phone }}
     </md-button>
   </div>

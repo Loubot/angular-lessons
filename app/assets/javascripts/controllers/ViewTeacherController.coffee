@@ -14,7 +14,8 @@ angular.module('lessons').controller( 'ViewTeacherController', [
   ( $scope, $rootScope, $state, $stateParams, $filter, COMMS, alertify, $mdDialog, change_title, is_mobile ) ->
     console.log "ViewTeacherController"
 
-    alert is_mobile
+    $scope.is_mobile = is_mobile
+    console.log $scope.is_mobile
     $scope.message = {}
     $scope.profile = null #Teacher profile pic
 
