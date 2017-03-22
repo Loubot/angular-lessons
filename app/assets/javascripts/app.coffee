@@ -52,6 +52,12 @@ angular.module('lessons').config ( $authProvider ) ->
     validateOnPageLoad: false
       
   })
+
+angular.module('lessons').factory 'is_mobile', [
+  () ->
+    return /iPhone|iPad|iPod|Android/i.test(navigator.userAgent)
+]
+  
     
 angular.module('lessons').factory 'change_title', [
   () ->
