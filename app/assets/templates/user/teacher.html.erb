@@ -59,13 +59,15 @@
                   <label>Phone:(optional)</label>
                   <md-icon><i class="material-icons icon_green">phone</i></md-icon>
                   <input  type="text"
-                          ng-change="teacher_update_form.phone.$validate(); update_teacher();" 
-                          ng-pattern="/^\d{0,9}(\.\d{1,9})?$/"
+                          ng-change="teacher_update_form.phone.$validate(); update_teacher();"                           
                           ng-model-options="{ debounce:750 }"
                           ng-model="User.phone"
-                          name="phone">
+                          name="phone"
+                          ng-pattern="/^[0-9]{1,10}$/"
+                          minlength="6">
                   <div ng-messages="teacher_update_form.phone.$error" ng-if='teacher_update_form.phone.$dirty'>
                     <div ng-message="pattern">Not a phone number</div>
+                    <div ng-message="minlength">Not long engough</div>
                   </div>
                 </md-input-container>
               </div>
@@ -274,8 +276,11 @@
 
     <!-- QUALIFICATIONS -->
     <md-content class="gutter_75 margin_t_10" >
-      <h3>Qualifications</h3>
-      <md-divider></md-divider>     
+      <md-toolbar >
+        <div class="md-toolbar-tools">
+          <span layout-margin>Qualifications</span>
+        </div>
+      </md-toolbar>     
 
       <p ng-if="User.qualifications.length==0">You can add qualifications here. e.g. Degrees, Diplomas</p>
 

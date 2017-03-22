@@ -7,8 +7,17 @@ angular.module( 'lessons' ).controller( 'ContactController', [
   "COMMS"
   "alertify"
   "$mdDialog"
-  ( $scope, $rootScope, COMMS, alertify, $mdDialog ) ->
+  "$state"
+  "change_title"
+  ( $scope, $rootScope, COMMS, alertify, $mdDialog, $state, change_title ) ->
     console.log "ContactController"
+
+    console.log $state.current.name == "about"
+
+    if $state.current.name == "contact"
+      change_title.set_to "Contact Learn Your Lesson | Contact Us | learnyourlesson"
+    else if $state.current.name == "about"
+      change_title.set_to "Learn your lesson story | How it all started | learnyourlesson"
 
     $scope.contact_boss = ->
       console.log $scope.email
