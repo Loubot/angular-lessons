@@ -23,9 +23,9 @@ class SearchController < ApplicationController
     p "search subjects controller"
 
     if Rails.env.development?
-      subjects = Subject.where( "name LIKE ?", "%#{ search_params[:name] }%" ).select([ :name, :id ])
+      subjects = Subject.where( "name LIKE ?", "%#{ search_params[:name] }%" ).select([ :name, :id ]).order('name DESC')
     else
-      subjects = Subject.where( "name ILIKE ?", "%#{ search_params[:name] }%" ).select([ :name, :id ])
+      subjects = Subject.where( "name ILIKE ?", "%#{ search_params[:name] }%" ).select([ :name, :id ]).order('name DESC')
     end
     
     # pp subjects

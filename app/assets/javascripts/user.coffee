@@ -52,10 +52,10 @@ angular.module('lessons').service 'auth', [
       #   throw 'There was an error'
 
     auth.login = ( teacher ) ->
-      console.log teacher
+      # console.log teacher
       $auth.submitLogin( teacher )
         .then( (resp) ->
-
+          console.log resp
           new User().then( ( resp ) ->
             console.log resp
             # $rootScope.$emit 'auth:logged-in-user', [
