@@ -41,7 +41,7 @@ gem 'hashie', '3.4.4'
 # gem 'capistrano-rails', group: :development
 
 group :production do
-  gem "fog", '~> 1.38'
+  # gem "fog", '~> 1.38'
   gem "fog-aws", '~> 0.12.0'
   gem 'unicorn', '~> 5.1.0'
   gem 'pg', '~> 0.19.0'
