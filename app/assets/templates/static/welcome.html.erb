@@ -4,13 +4,18 @@
 
       <img src="<%= asset_path 'portrait_piano.jpg' %>" style="display:none; visibility: hidden;">
       <img src="<%= asset_path 'wide_screen_piano.jpg' %>" style="display:none; visibility: hidden;">
-      <div class="white_text center_text" layout="row" layout-align="center"  >
-        <h1><span class="header_font">A place</span> 
-          <p hide-gt-xs > to connect with local teachers <span hide-xs> on languages, music lessons,<br> or any other skill you wish to learn
-
-          <p hide-xs class="reduced_header_font"> to connect with local teachers on languages,<br> music lessons, or any other skill you wish to learn</p> </span>
+      <div class="white_text center_text" layout="column" layout-align="center">
+        <div>
+          <span class="header_font">A place</span>
+        </div>
          
-        </h1>
+        <div>
+          <span class="reduced_header_font">
+            to connect with local teachers <span hide-xs>on languages, <br> music lessons, or any other skill you wish to learn</span>
+          </span>
+        </div>
+         
+        
       </div> <!-- end of white_text -->
 
       <form  layout="column" layout-align="center center" name="search_form" flex>          
