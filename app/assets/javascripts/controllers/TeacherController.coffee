@@ -5,18 +5,18 @@ angular.module('lessons').controller('TeacherController', [
   '$rootScope'
   'User'
   'RESOURCES'
-  'alertify'
+  'Alertify'
   'COMMS'
   '$auth'
   'Upload'
   '$mdBottomSheet'
   '$mdDialog'
   '$mdToast'
-  ( $scope, $rootScope, User, RESOURCES, alertify, COMMS, $auth, Upload, $mdBottomSheet, $mdDialog, $mdToast ) ->
+  ( $scope, $rootScope, User, RESOURCES, Alertify, COMMS, $auth, Upload, $mdBottomSheet, $mdDialog, $mdToast ) ->
     console.log "TeacherController"
 
     display_subject_warning = ->
-      alertify.error "Your profile is not visible till you select a subject" 
+      Alertify.error "Your profile is not visible till you select a subject" 
 
     display_subject_warning() if $rootScope.User.subjects.length==0
 
@@ -56,13 +56,13 @@ angular.module('lessons').controller('TeacherController', [
         search: $scope.searchText
       ).then( ( resp ) ->
         console.log resp
-        # alertify.success "Got subjects"
+        # Alertify.success "Got subjects"
         $scope.search_subjects = resp.data
         $scope.returned_subjects = true
         return resp.data.subjects
       ).catch( ( err ) ->
         console.log err
-        alertify.error "Failed to get subjects"
+        Alertify.error "Failed to get subjects"
       )
 
     $scope.request_subject = ->
@@ -73,12 +73,12 @@ angular.module('lessons').controller('TeacherController', [
         $scope.no_subject
       ).then( ( resp ) ->
         console.log resp
-        alertify.success "Request made. Thank you."
+        Alertify.success "Request made. Thank you."
         hide_sheet()
       ).catch( ( err ) ->
         console.log err
-        alertify.error "Failed to send request"
-        alertify.error "Please use the Contact Us button"
+        Alertify.error "Failed to send request"
+        Alertify.error "Please use the Contact Us button"
       )
     ####################### end of Subjects ###############################
    
@@ -139,7 +139,7 @@ angular.module('lessons').controller('TeacherController', [
 
     $scope.$on 'auth:password-change-success', (ev) ->
 
-      alertify.success 'Your password has been successfully updated!' if !$scope.announce_password_once
+      Alertify.success 'Your password has been successfully updated!' if !$scope.announce_password_once
       $scope.announce_password_once = true
       $scope.closeDialog()
       $scope.update_password = null
@@ -148,7 +148,7 @@ angular.module('lessons').controller('TeacherController', [
     $scope.$on 'auth:password-change-error', (ev, reason) ->
       $scope.closeDialog()
       $scope.update_password = null
-      alertify.error 'Registration failed: ' + reason.errors[0]
+      Alertify.error 'Registration failed: ' + reason.errors[0]
       return
 
     ### Submit user form. This enables validations on phone number to run. ###
@@ -167,12 +167,12 @@ angular.module('lessons').controller('TeacherController', [
         #   avatar: pic
       ).then( ( resp ) ->
         console.log resp
-        alertify.success "Uploaded successfully"
+        Alertify.success "Uploaded successfully"
         $mdDialog.cancel()
         $scope.proof = null
       ).catch( ( err ) ->
         console.log err
-        alertify.error "Failed to upload"
+        Alertify.error "Failed to upload"
       )
 
     $scope.open_email_proof_dialog = ->

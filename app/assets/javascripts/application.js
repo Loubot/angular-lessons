@@ -14,7 +14,7 @@
 //= require rails_client_logger
 //= require lodash/dist/lodash.min
 //= require angular/angular
-//= require alertify.js/dist/js/ngAlertify
+//= require ng-alertify/dist/ng-alertify
 //= require angular-ui-router/release/angular-ui-router.min 
 //= require angular-animate/angular-animate.min
 //= require angular-aria/angular-aria.min

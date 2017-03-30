@@ -8,11 +8,11 @@ angular.module('lessons').controller('NavController', [
   '$mdSidenav'
   '$mdMenu'
   '$mdDialog'
-  'alertify'
+  'Alertify'
   'auth'
   '$auth'
   'COMMS'
-  ( $scope, $rootScope, $state, $window, $mdSidenav, $mdMenu, $mdDialog, alertify, auth, $auth, COMMS ) ->
+  ( $scope, $rootScope, $state, $window, $mdSidenav, $mdMenu, $mdDialog, Alertify, auth, $auth, COMMS ) ->
     console.log "NavController"
     $scope.teacher = {}
 
@@ -72,10 +72,10 @@ angular.module('lessons').controller('NavController', [
       auth.register( $scope.teacher ).then( ( resp ) ->
         $mdSidenav('left').toggle()
         
-        alertify.success "Welcome #{ $rootScope.User.email }"
+        Alertify.success "Welcome #{ $rootScope.User.email }"
       ).catch( ( err ) ->
         console.log err
-        alertify.error "Failed to register"
+        Alertify.error "Failed to register"
       )
 
     $scope.register_student = ->
@@ -106,7 +106,7 @@ angular.module('lessons').controller('NavController', [
 
     $rootScope.$on 'auth:registered_user', ( user ) ->
       console.log user
-      alertify.success "Student account created"
+      Alertify.success "Student account created"
       $scope.close_dialog()
 
     ### End of registration stuff ###

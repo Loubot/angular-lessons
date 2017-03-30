@@ -1,7 +1,7 @@
 'use strict'
 
 angular.module('lessons', [
-  'ngAlertify'
+  'Alertify'
   'ui.bootstrap' 
   'ui.router'
   'templates'
@@ -125,18 +125,18 @@ angular.module('lessons').config [
 angular.module('lessons').run [
   '$rootScope'
   "$state"
-  "alertify"
-  ( $rootScope, $state, alertify ) ->
+  "Alertify"
+  ( $rootScope, $state, Alertify ) ->
     $rootScope.$on '$stateChangeError', (event, toState, toParams, fromState, fromParams, error) ->
       console.log error
       if error.status = 401 and error.error = 'non_admin'
         $rootScope.User = null
         $state.go "welcome"
-        alertify.error "Please login again."
+        Alertify.error "Please login again."
         $rootScope.isPageFullyLoaded = true
       else if error.status ==  401 and  error.error == "non_teacher"
         $state.go "welcome"
-        alertify.error "You are not Authorised"
+        Alertify.error "You are not Authorised"
         $rootScope.User = null
         $rootScope.isPageFullyLoaded = true
       return 
@@ -368,7 +368,7 @@ angular.module('lessons').config ( $mdThemingProvider ) ->
 
 
 
-angular.module('lessons').service 'AUTH', ( $http, $rootScope, RESOURCES, $q, $auth, alertify ) ->
+angular.module('lessons').service 'AUTH', ( $http, $rootScope, RESOURCES, $q, $auth, Alertify ) ->
 
   signin: ( auth_hash ) ->
     $q ( resolve, reject ) ->
@@ -376,12 +376,12 @@ angular.module('lessons').service 'AUTH', ( $http, $rootScope, RESOURCES, $q, $a
         .then( (resp) ->
           # handle success response
           # console.log resp
-          alertify.success "Logged in successfully"
+          Alertify.success "Logged in successfully"
           resolve resp
         )
         .catch( (resp) ->
           console.log resp
-          alertify.error resp.data.errors.full_messages
+          Alertify.error resp.data.errors.full_messages
           $rootScope.USER = null
           reject resp
         )
@@ -392,14 +392,14 @@ angular.module('lessons').service 'AUTH', ( $http, $rootScope, RESOURCES, $q, $a
         .then( (resp) ->
           # handle success response
           console.log resp
-          alertify.success "Registered successfully"
+          Alertify.success "Registered successfully"
           window.localStorage.setItem 'user_email', resp.data.email
           $rootScope.USER = resp.data
           resolve resp
         )
         .catch( (resp) ->
           console.log resp
-          alertify.error resp.data.errors.full_messages
+          Alertify.error resp.data.errors.full_messages
           $rootScope.USER = null
           reject resp
         )

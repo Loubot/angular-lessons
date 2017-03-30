@@ -2,13 +2,13 @@ angular.module('lessons').service 'auth', [
   "$rootScope"
   "$auth"
   "User"
-  "alertify"
+  "Alertify"
   "$state"
   "$window"
   "$mdSidenav"
   "$mdDialog"
   "$q"
-  ( $rootScope, $auth, User, alertify, $state, $window, $mdSidenav, $mdDialog, $q ) ->
+  ( $rootScope, $auth, User, Alertify, $state, $window, $mdSidenav, $mdDialog, $q ) ->
     valid = false
     auth = {}
     auth.county_lists =
@@ -40,14 +40,14 @@ angular.module('lessons').service 'auth', [
       if resp.errors? and resp.errors.full_messages?
         for mess in resp.errors.full_messages
           console.log mess
-          alertify.error mess
+          Alertify.error mess
           return
       for mess in resp.errors
         console.log mess
-        alertify.error mess
+        Alertify.error mess
       # if resp.data.errors.full_messages? and resp.data.errors.full_messages.length > 0
       #   for mess in resp.data.errors.full_messages
-      #     alertify.error mess
+      #     Alertify.error mess
 
       #   throw 'There was an error'
 
@@ -61,7 +61,7 @@ angular.module('lessons').service 'auth', [
             # $rootScope.$emit 'auth:logged-in-user', [
             #   resp
             # ]
-            alertify.success "Welcome back #{ $rootScope.User.first_name }"
+            Alertify.success "Welcome back #{ $rootScope.User.first_name }"
             # $mdSidenav('left').close()
             $mdDialog.cancel()
           )
@@ -98,14 +98,14 @@ angular.module('lessons').service 'auth', [
       $auth.signOut()
         .then( ( resp ) ->
           console.log resp
-          alertify.success "Logged out successfully"
+          Alertify.success "Logged out successfully"
           $rootScope.User = null
           $state.go 'welcome'
           $window.location.reload()
         ).catch( ( err ) ->
           console.log err
           $rootScope.User = null
-          alertify.error "Failed to log out"
+          Alertify.error "Failed to log out"
           $state.go 'welcome'
         )
 
@@ -192,7 +192,7 @@ angular.module('lessons').service 'auth', [
       # set listener for validation error
       $rootScope.$on "auth:invalid" , ( e, v ) ->
         console.log "validation error"
-        # alertify.error 'auth:validation-error'
+        # Alertify.error 'auth:validation-error'
         # console.log $state.current.name
         $rootScope.User = null
         $rootScope.isPageFullyLoaded = true
@@ -225,10 +225,10 @@ angular.module('lessons').factory 'User', [
   "$rootScope"
   "$q"
   "$state"
-  "alertify"
+  "Alertify"
   "Upload"
   '$mdBottomSheet'
- ( COMMS, RESOURCES, $http, $rootScope, $q, $state, alertify, Upload, $mdBottomSheet ) ->
+ ( COMMS, RESOURCES, $http, $rootScope, $q, $state, Alertify, Upload, $mdBottomSheet ) ->
   # instantiate our initial object
 
   
@@ -288,7 +288,7 @@ angular.module('lessons').factory 'User', [
       "/teacher"
       @
     ).then( ( resp ) ->
-      alertify.success "User updated "
+      Alertify.success "User updated "
       console.log resp
       $mdBottomSheet.hide()
     ).catch( ( err ) ->
@@ -308,11 +308,11 @@ angular.module('lessons').factory 'User', [
       ).then( ( resp ) -> 
         console.log resp
         self.photos = resp.data.photos
-        alertify.success("Photo uploaded ok")
+        Alertify.success("Photo uploaded ok")
         $rootScope.User.profile = resp.data.teacher.profile
         
         self.get_profile()
-        alertify.success "Profile pic set"
+        Alertify.success "Profile pic set"
 
         pic = null
       ).catch( ( err ) ->
@@ -342,11 +342,11 @@ angular.module('lessons').factory 'User', [
       console.log resp
       self.photos = resp.data.teacher.photos
       self.profile = resp.data.teacher.profile
-      alertify.success "Deleted photo ok"
+      Alertify.success "Deleted photo ok"
       self.get_profile()
     ).catch( ( err ) ->
       console.log err
-      alertify.error "Failed to delete photo"
+      Alertify.error "Failed to delete photo"
     )
 
   User::get_profile = ->
@@ -371,7 +371,7 @@ angular.module('lessons').factory 'User', [
       # if $rootScope.User.is_teacher then $state.go( "teacher", id: $rootScope.User.id ) else $state.go( 'student_profile', id: $rootScope.User.id )
     ).catch( ( err ) ->
       console.log err
-      alertify.success "Failed to create location"
+      Alertify.success "Failed to create location"
     )
 
   User::update_address = ( location ) ->
@@ -385,7 +385,7 @@ angular.module('lessons').factory 'User', [
       self.location = resp.data.location
     ).catch( ( err ) ->
       console.log err
-      alertify.error "Failed to update location"
+      Alertify.error "Failed to update location"
     )
 
   User::format_address = ( google_address ) ->
@@ -404,11 +404,11 @@ angular.module('lessons').factory 'User', [
       "/teacher/#{ self.id }/location/#{ self.location.id }"
     ).then( ( resp ) ->
       console.log resp
-      alertify.success "Deleted location successfully"
+      Alertify.success "Deleted location successfully"
       self.location = resp.data.location
     ).catch( ( err ) ->
       console.log err
-      alertify.error "Failed to delete location"
+      Alertify.error "Failed to delete location"
     )
 
 #################### ENd of address ###########################################
@@ -422,13 +422,13 @@ angular.module('lessons').factory 'User', [
       subject: subject
     ).then( ( resp ) ->
       console.log resp
-      alertify.success "Successfully added subject"
+      Alertify.success "Successfully added subject"
       self.subjects = resp.data.subjects
-      alertify.success "Your profile is now visible to students" if $rootScope.User.subjects.length > 0
+      Alertify.success "Your profile is now visible to students" if $rootScope.User.subjects.length > 0
       $('#subject_select').val ""
     ).catch( ( err ) ->
       console.log err
-      alertify.error err.data.error if err.data.error?
+      Alertify.error err.data.error if err.data.error?
     )
 
   User::remove_subject = ( subject ) ->
@@ -438,12 +438,12 @@ angular.module('lessons').factory 'User', [
       subject: subject
     ).then( ( resp ) ->
       console.log resp
-      alertify.success "Successfully removed subject"
+      Alertify.success "Successfully removed subject"
       self.subjects = resp.data.subjects
       $rootScope.$emit "no_subject_alert", [ 'no subjects' ] if resp.data.subjects.length == 0
     ).catch( ( err ) ->
       console.log err
-      alertify.error err.data.error
+      Alertify.error err.data.error
     )
 ####################End of subjects ############################################
 
@@ -457,11 +457,11 @@ angular.module('lessons').factory 'User', [
     ).then( ( resp ) ->
       console.log resp
       self.qualifications = resp.data.qualifications
-      alertify.success "Created qualification"
+      Alertify.success "Created qualification"
       $mdBottomSheet.hide()
     ).catch( ( err ) ->
       console.log err
-      alertify.error err.errors.full_messages
+      Alertify.error err.errors.full_messages
     )
 
   User::delete_qualification = ( qualification ) ->
@@ -471,10 +471,10 @@ angular.module('lessons').factory 'User', [
     ).then( ( resp ) ->
       console.log resp
       self.qualifications = resp.data.qualifications
-      alertify.success "Deleted qualification"
+      Alertify.success "Deleted qualification"
     ).catch( ( err ) ->
       console.log err
-      alertify.error "Failed to delete qualification"
+      Alertify.error "Failed to delete qualification"
     )
   
 ###################End of qualfications ########################################
@@ -490,11 +490,11 @@ angular.module('lessons').factory 'User', [
     ).then( ( resp ) ->
       console.log resp
       self.experience = resp.data.experience
-      alertify.success "Experience added"
+      Alertify.success "Experience added"
 
     ).catch( ( err ) ->
       console.log err
-      alertify.error "Failed to add experience"
+      Alertify.error "Failed to add experience"
     )
 
 ###################End of experiences###########################################

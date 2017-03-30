@@ -9,14 +9,14 @@ angular.module('lessons').controller('WelcomeController', [
   '$location'
   'User'
   '$mdSidenav'
-  'alertify'
+  'Alertify'
   '$auth'
   'COMMS'
   '$window'
   'OG'
   'counties'
   'change_title'
-  ( $scope, $rootScope, $state, $filter, $stateParams, $location, User, $mdSidenav, alertify, $auth, COMMS, $window, OG, counties, change_title ) ->
+  ( $scope, $rootScope, $state, $filter, $stateParams, $location, User, $mdSidenav, Alertify, $auth, COMMS, $window, OG, counties, change_title ) ->
     console.log "WelcomeController"
 
     change_title.set_to "Find teachers Dublin | Find teachers Ireland| grinds Ireland | Learn Your Lesson"
