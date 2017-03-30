@@ -1,7 +1,9 @@
 <div ng-show="!i_want_map" class="big_gutter center_text margin_b_30" style="position:relative;">
   
   <md-content  class="fancy">
-    <md-subheader class="md-primary left_header">Option 1</md-subheader>
+    <md-toolbar>
+    <div class="md-toolbar-tools">Option 1</div>
+  </md-toolbar>
 
     <span class="margin_b_10 give_height"></span>  
 
@@ -36,7 +38,9 @@
 
 <div ng-show="!i_want_map" ng-if="User.location.county" class="big_gutter center_text">
   <md-content>
-    <md-subheader class="md-primary left_header">Option 2</md-subheader>
+    <md-toolbar>
+      <div class="md-toolbar-tools">Option 2</div>
+    </md-toolbar>
     <span class="margin_b_10 give_height"></span>  
     <div ng-show="!i_want_map" class=" center_block fancy">
       <md-button class="md-raised md-warn margin_b_30" ng-click="i_want_map_toggle()">Use the map instead?</md-button>
