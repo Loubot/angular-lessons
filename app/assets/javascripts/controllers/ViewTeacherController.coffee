@@ -7,11 +7,11 @@ angular.module('lessons').controller( 'ViewTeacherController', [
   "$stateParams"
   "$filter"
   "COMMS"
-  "alertify"
+  "Alertify"
   "$mdDialog"
   "change_title"
   "is_mobile"
-  ( $scope, $rootScope, $state, $stateParams, $filter, COMMS, alertify, $mdDialog, change_title, is_mobile ) ->
+  ( $scope, $rootScope, $state, $stateParams, $filter, COMMS, Alertify, $mdDialog, change_title, is_mobile ) ->
     console.log "ViewTeacherController"
 
     $scope.is_mobile = is_mobile
@@ -70,7 +70,7 @@ angular.module('lessons').controller( 'ViewTeacherController', [
     ).then( ( resp ) ->
       console.log "got teacher info"
       console.log resp
-      alertify.success "Got teacher info"
+      Alertify.success "Got teacher info"
       $scope.teacher = resp.data.teacher
       set_profile()
       # create_map() if $scope.teacher.location?
@@ -79,7 +79,7 @@ angular.module('lessons').controller( 'ViewTeacherController', [
       run_change_title()
     ).catch( ( err ) ->
       console.log err
-      alertify.error err.data.errors.full_messages
+      Alertify.error err.data.errors.full_messages
       $state.go 'welcome'
     )
     
@@ -170,7 +170,7 @@ angular.module('lessons').controller( 'ViewTeacherController', [
         message: $scope.message
       ).then( ( resp ) ->
         console.log resp
-        alertify.success "Message sent!"
+        Alertify.success "Message sent!"
         $mdDialog.hide()
       ).catch( ( err ) ->
         console.log err

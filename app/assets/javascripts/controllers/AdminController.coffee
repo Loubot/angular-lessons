@@ -6,10 +6,10 @@ angular.module('lessons').controller('AdminController', [
   "auth"
   "$state"
   "COMMS"
-  "alertify"
+  "Alertify"
   "$mdDialog"
 
-  ( $scope, $rootScope, auth, $state, COMMS, alertify, $mdDialog ) ->
+  ( $scope, $rootScope, auth, $state, COMMS, Alertify, $mdDialog ) ->
     console.log "AdminController"
 
 
@@ -24,10 +24,10 @@ angular.module('lessons').controller('AdminController', [
     ).then( ( resp ) ->
       console.log resp
       $scope.categories = resp.data.categories
-      alertify.success "Got categories"
+      Alertify.success "Got categories"
     ).catch( ( err ) ->
       console.log err
-      alertify.error "Failed to fetch categories"
+      Alertify.error "Failed to fetch categories"
     )
     
 
@@ -40,10 +40,10 @@ angular.module('lessons').controller('AdminController', [
           console.log resp
           $scope.teachers = resp.data.teachers
           $scope.$digest
-          alertify.success "Got teachers list"
+          Alertify.success "Got teachers list"
         ).catch( ( err ) ->
           console.log err
-          alertify.error "Failed to get teachers list"
+          Alertify.error "Failed to get teachers list"
         )
 
     $scope.open_teacher_dialog = ( teacher ) ->
@@ -65,12 +65,12 @@ angular.module('lessons').controller('AdminController', [
         name: $scope.name
       ).then( ( resp ) ->
         console.log resp
-        alertify.success "Created category"
+        Alertify.success "Created category"
         $('.admin_inputs').val ""
         $scope.categories = resp.data.categories
       ).catch( ( err ) ->
         console.log err
-        alertify.error "Failed to create category"
+        Alertify.error "Failed to create category"
       )
 
     $scope.create_subject = ->
@@ -80,12 +80,12 @@ angular.module('lessons').controller('AdminController', [
         $scope.subject
       ).then( ( resp ) ->
         console.log resp
-        alertify.success "Created subject"
+        Alertify.success "Created subject"
         $scope.category_subjects = resp.data.subjects
         $('.admin_inputs').val ""
       ).catch( ( err ) ->
         console.log err
-        alertify.error "Failed to create subject"
+        Alertify.error "Failed to create subject"
       )
 
     $scope.delete_category = ( name, id ) ->
@@ -93,10 +93,10 @@ angular.module('lessons').controller('AdminController', [
         "/category/#{ id }"
       ).then( ( resp ) ->
         console.log resp
-        alertify.success "Deleted category ok"
+        Alertify.success "Deleted category ok"
         $scope.categories = resp.data.categories
       ).catch( ( err ) ->
-        alertify.error "Failed to delete category"
+        Alertify.error "Failed to delete category"
         console.log err
       )
 
@@ -106,11 +106,11 @@ angular.module('lessons').controller('AdminController', [
         name: name
       ).then( ( resp ) ->
         console.log resp
-        alertify.success "Update category ok"
+        Alertify.success "Update category ok"
         $scope.categories = resp.data.categories
       ).catch( ( err ) ->
         console.log err
-        alertify.error "Couldn't update category"
+        Alertify.error "Couldn't update category"
 
       )
 
@@ -119,11 +119,11 @@ angular.module('lessons').controller('AdminController', [
         "/category/#{ id }/category-subjects"
       ).then( ( resp ) ->
         console.log resp
-        alertify.success "Got subjects"
+        Alertify.success "Got subjects"
         $scope.category_subjects = resp.data.category_subjects
       ).catch( ( err ) ->
         console.log err
-        alertify.error "Failed to get subjects"
+        Alertify.error "Failed to get subjects"
       )
 
 
@@ -133,12 +133,12 @@ angular.module('lessons').controller('AdminController', [
         name: name
       ).then( ( resp ) ->
         console.log resp
-        alertify.success "Update subject successfully"
+        Alertify.success "Update subject successfully"
         $scope.subjects = resp.data.subjects
         $scope.edit_item = false
       ).catch( ( err ) ->
         console.log err
-        alertify.error "Failed to update subjects"
+        Alertify.error "Failed to update subjects"
         $scope.edit_item = false
       )
 
@@ -164,11 +164,11 @@ angular.module('lessons').controller('AdminController', [
             "/subject"
           ).then( ( resp ) ->
             console.log resp
-            alertify.success "Got subjects"
+            Alertify.success "Got subjects"
             $scope.subjects = resp.data.subjects
           ).catch( ( err ) ->
             console.log err
-            alertify.error "Failed to get subjects"
+            Alertify.error "Failed to get subjects"
           )      
       )
 

@@ -4,10 +4,10 @@ angular.module('lessons').controller("RegisterController", [
   "$scope"
   "$rootScope"
   "auth"
-  "alertify"
+  "Alertify"
   "COMMS"
   "counties"
-  ( $scope, $rootScope, auth, alertify, COMMS, counties ) ->
+  ( $scope, $rootScope, auth, Alertify, COMMS, counties ) ->
     console.log "RegisterController"
 
     $scope.register_with_facebook = ->
@@ -42,7 +42,7 @@ angular.module('lessons').controller("RegisterController", [
 
 
       if !$scope.teacher.county?
-        alertify.error "You must select your county"
+        Alertify.error "You must select your county"
 
       else
         console.log "made it"
@@ -52,9 +52,9 @@ angular.module('lessons').controller("RegisterController", [
     # On successful registration create user location after user_ready is broadcast
 
     $rootScope.$on 'auth:registered_user', ( user ) ->
-      alertify.success "Welcome #{ $rootScope.User.get_full_name() }"
-      alertify.success "Registered as teacher" if $rootScope.User.is_teacher
-      alertify.success "Registered as student" if !$rootScope.User.is_teacher
+      Alertify.success "Welcome #{ $rootScope.User.get_full_name() }"
+      Alertify.success "Registered as teacher" if $rootScope.User.is_teacher
+      Alertify.success "Registered as student" if !$rootScope.User.is_teacher
       # $state.go('teacher', id: $rootScope.User.id )
       $rootScope.User.create_location( county: $scope.teacher.county )
         

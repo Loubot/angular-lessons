@@ -5,11 +5,11 @@ angular.module( 'lessons' ).controller( 'ContactController', [
   "$scope"
   "$rootScope"
   "COMMS"
-  "alertify"
+  "Alertify"
   "$mdDialog"
   "$state"
   "change_title"
-  ( $scope, $rootScope, COMMS, alertify, $mdDialog, $state, change_title ) ->
+  ( $scope, $rootScope, COMMS, Alertify, $mdDialog, $state, change_title ) ->
     console.log "ContactController"
 
     console.log $state.current.name == "about"
@@ -27,11 +27,11 @@ angular.module( 'lessons' ).controller( 'ContactController', [
         $scope.email
       ).then( ( resp ) ->
         console.log resp
-        alertify.success "Message sent"
+        Alertify.success "Message sent"
         $mdDialog.cancel()
       ).catch( ( err ) ->
         console.log err
-        alertify.error "Failed to send message"
+        Alertify.error "Failed to send message"
       )
 
     $scope.close_dialog = ->
@@ -59,10 +59,10 @@ angular.module( 'lessons' ).controller( 'ContactController', [
         $scope.message
       ).then( ( resp ) ->
         console.log resp
-        alertify.success "Message sent"
+        Alertify.success "Message sent"
       ).catch( ( err ) ->
         console.log err
-        alertify.error "Failed to deliver message"
+        Alertify.error "Failed to deliver message"
       )
 
 

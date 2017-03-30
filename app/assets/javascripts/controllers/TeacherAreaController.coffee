@@ -4,12 +4,12 @@ angular.module('lessons').controller('TeacherAreaController', [
   '$scope'
   'auth'
   '$stateParams'
-  'alertify'
+  'Alertify'
   '$mdDialog'
   "$mdBottomSheet"
   '$mdpDatePicker'
   '$mdpTimePicker'
-  ( $scope, auth, $stateParams, alertify, $mdDialog, $mdBottomSheet, $mdpDatePicker, $mdpTimePicker ) ->
+  ( $scope, auth, $stateParams, Alertify, $mdDialog, $mdBottomSheet, $mdpDatePicker, $mdpTimePicker ) ->
     console.log "TeacherAreaController"
 
     $scope.create_event_button_bool = false
@@ -77,7 +77,7 @@ angular.module('lessons').controller('TeacherAreaController', [
             # allDay: true
 
         $scope.eventSource = bla
-        alertify.success "Loaded #{ events.length } event(s)"
+        Alertify.success "Loaded #{ events.length } event(s)"
         $scope.create_event_button_bool = true
         $scope.$apply()
 
@@ -92,7 +92,7 @@ angular.module('lessons').controller('TeacherAreaController', [
         # console.log "Calendar list"
         # console.log resp
         if resp.error?  
-          alertify.error "Couldn't load your calendar"
+          Alertify.error "Couldn't load your calendar"
           $scope.calendar_id = null
         else
 
@@ -116,11 +116,11 @@ angular.module('lessons').controller('TeacherAreaController', [
           insert_calendar_into_list() if calendar.defaultReminders.length == 0
 
       if calendar_exists
-        alertify.success "Found your calendar"
+        Alertify.success "Found your calendar"
         # console.log $scope.calendar_id
         fetch_events()
       else
-        alertify.error "Couldn't find your calender"
+        Alertify.error "Couldn't find your calender"
         # console.log "Can't find calendar"
         $scope.calendar_id = null
         $scope.create_calendar()
@@ -134,7 +134,7 @@ angular.module('lessons').controller('TeacherAreaController', [
       gapi.client.load('oauth2', 'v2', oauth2_loaded)
 
     calendar_loaded = ->
-      alertify.success "Calendar api loaded"
+      Alertify.success "Calendar api loaded"
       if !(localStorage.getItem("calendar_explanation") == "done")
         show_explanation_sheet()
       
@@ -143,12 +143,12 @@ angular.module('lessons').controller('TeacherAreaController', [
           # console.log "Calendar list"
           # console.log resp
           if resp.error?  
-            alertify.error "Couldn't load your calendar"
+            Alertify.error "Couldn't load your calendar"
           else
             check_if_calendar_exists ( resp.items )
             # console.log "List events"
             # format_events( resp.items )
-            alertify.success "Got events" 
+            Alertify.success "Got events" 
         )
       
 
@@ -178,7 +178,7 @@ angular.module('lessons').controller('TeacherAreaController', [
         load_calendar_api()
       else
         $scope.show_auth_button = true
-        alertify.confirm "Please log in with google to use the calendar"
+        Alertify.confirm "Please log in with google to use the calendar"
         $scope.$apply()
 
     $scope.handleAuthClick = (event) ->
@@ -246,7 +246,7 @@ angular.module('lessons').controller('TeacherAreaController', [
     $scope.create_calendar = ->
 
       # console.log "Create calendar"
-      alertify.success "Trying to create a new calendar"
+      Alertify.success "Trying to create a new calendar"
       # console.log "user:#{ $scope.google_id_email }"
       gapi.client.calendar.calendars.insert(
         'description': "LYL calendar for #{ $rootScope.User.get_full_name() }"
@@ -257,7 +257,7 @@ angular.module('lessons').controller('TeacherAreaController', [
       ).execute( ( resp ) ->
         # console.log resp
         $scope.calendar_id = resp.id
-        alertify.success "Created calendar for you"
+        Alertify.success "Created calendar for you"
         $scope.create_event_button_bool = true
         insert_calendar_into_list()
         $scope.$digest()
@@ -340,12 +340,12 @@ angular.module('lessons').controller('TeacherAreaController', [
       end_date_time.minute( moment( $scope.calendar_event_details.end_time).format( "mm" ) )
       # console.log end_date_time.toString()
       if start_date_time == end_date_time
-        alertify.error "Times are equal"
+        Alertify.error "Times are equal"
         $scope.event_creation_form.start_date.$error.not_the_same = true
         return false
       else if !$scope.calendar_event_details.start_date? or !$scope.calendar_event_details.start_time? or !$scope.calendar_event_details.end_time?
 
-        alertify.error "Something not defined"
+        Alertify.error "Something not defined"
         $scope.event_creation_form.start_date.$error.not_the_same = true
         return false
       else
@@ -388,12 +388,12 @@ angular.module('lessons').controller('TeacherAreaController', [
       end_date_time.minute( moment( event.end_time).format( "mm" ) )
       # console.log end_date_time.toString()
       if event.startTime == event.endTime
-        alertify.error "Times are equal"
+        Alertify.error "Times are equal"
         $scope.event_update_form.start_date.$error.not_the_same = true
         return false
       else if !event.start_date? or !event.startTime? or !event.endTime?
 
-        alertify.error "Something not defined"
+        Alertify.error "Something not defined"
         $scope.event_update_form.start_date.$error.not_the_same = true
         return false
       else

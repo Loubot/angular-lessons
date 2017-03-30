@@ -6,14 +6,14 @@ angular.module('lessons').controller( 'StudentController', [
   '$stateParams'
   '$state'
   'User'
-  'alertify'
+  'Alertify'
   'COMMS'
   '$mdDialog'
   '$auth'
   'Upload'
   'RESOURCES'
 
-  ( $scope, $rootScope, $stateParams, $state, User, alertify, COMMS, $mdDialog, $auth, Upload, RESOURCES ) ->
+  ( $scope, $rootScope, $stateParams, $state, User, Alertify, COMMS, $mdDialog, $auth, Upload, RESOURCES ) ->
     console.log "StudentController"
 
     console.log $rootScope.User
@@ -29,12 +29,12 @@ angular.module('lessons').controller( 'StudentController', [
         console.log resp
         $rootScope.User.photos = resp.data.photos if resp.data != ""
         console.log $rootScope.User.photos
-        alertify.success("Photo uploaded ok")
+        Alertify.success("Photo uploaded ok")
         if resp.data.status == "updated"
           $rootScope.User = resp.data.teacher
           $rootScope.User.photos = resp.data.photos if resp.data != ""
           profile_pic()
-          alertify.success "Profile pic set"
+          Alertify.success "Profile pic set"
 
         $scope.file = null
       ).catch( ( err ) ->
@@ -83,7 +83,7 @@ angular.module('lessons').controller( 'StudentController', [
         return
 
     $scope.$on 'auth:password-change-success', (ev) ->
-      alertify.success 'Your password has been successfully updated!'
+      Alertify.success 'Your password has been successfully updated!'
       $scope.closeDialog()
       $scope.update_password = null
       return
@@ -91,7 +91,7 @@ angular.module('lessons').controller( 'StudentController', [
     $scope.$on 'auth:password-change-error', (ev, reason) ->
       $scope.closeDialog()
       $scope.update_password = null
-      alertify.error 'Registration failed: ' + reason.errors[0]
+      Alertify.error 'Registration failed: ' + reason.errors[0]
       return
 
 ])

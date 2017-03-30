@@ -7,11 +7,11 @@ angular.module('lessons').controller( 'SearchController', [
   "$stateParams"
   "$filter"
   "COMMS"
-  "alertify"
+  "Alertify"
   "$mdSidenav"
   "counties"
   "change_title"
-  ( $scope, $rootScope, $state, $stateParams, $filter, COMMS, alertify, $mdSidenav , counties, change_title ) ->
+  ( $scope, $rootScope, $state, $stateParams, $filter, COMMS, Alertify, $mdSidenav , counties, change_title ) ->
     console.log "SearchController"
 
     #Change title to match search
@@ -63,12 +63,12 @@ angular.module('lessons').controller( 'SearchController', [
         search_params
       ).then( ( resp ) ->
         console.log resp
-        alertify.success "Found #{ resp.data.teachers.length } teacher(s)"
+        Alertify.success "Found #{ resp.data.teachers.length } teacher(s)"
         $scope.teachers = resp.data.teachers
         $scope.search_nav_opened = false
       ).catch( ( err ) ->
         console.log err
-        alertify.error "Failed to find teachers"
+        Alertify.error "Failed to find teachers"
       )
 
     $scope.search_teachers()

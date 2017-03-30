@@ -4,11 +4,11 @@ angular.module('lessons').controller('UserController', [
   '$scope'
   '$rootScope'
   'USER'
-  'alertify'
+  'Alertify'
   'COMMS'
   '$auth'
   '$interval'
-  ( $scope, $rootScope, USER, alertify, COMMS, $auth, $interval ) ->
+  ( $scope, $rootScope, USER, Alertify, COMMS, $auth, $interval ) ->
     console.log "User Controller"
 
     $scope.teacher = {}
@@ -21,11 +21,11 @@ angular.module('lessons').controller('UserController', [
 
 
     USER.get_user().then( ( user ) ->
-      alertify.success "Got user"
+      Alertify.success "Got user"
       console.log $rootScope.USER
 
     ).catch( ( err ) ->
-      alertify.error "No user"
+      Alertify.error "No user"
       $rootScope.USER = null
     )
     

@@ -7,8 +7,8 @@ angular.module('lessons').controller( "PasswordController", [
   "$http"
   "$stateParams"
   "$state"
-  "alertify"
-  ( $scope, $rootScope, $auth, $http, $stateParams, $state, alertify ) ->
+  "Alertify"
+  ( $scope, $rootScope, $auth, $http, $stateParams, $state, Alertify ) ->
     console.log "PasswordController"
     console.log $stateParams
     $scope.disable_button = false
@@ -24,20 +24,20 @@ angular.module('lessons').controller( "PasswordController", [
         return
 
     $scope.$on 'auth:password-reset-request-success', (ev, data) ->
-      alertify.success 'Password reset instructions were sent to ' + data.email
+      Alertify.success 'Password reset instructions were sent to ' + data.email
       console.log ev
       console.log data
       return
 
     $scope.$on 'auth:password-reset-request-error', (ev, resp) ->
-      alertify.error 'Password reset request failed: ' + resp.errors[0]
+      Alertify.error 'Password reset request failed: ' + resp.errors[0]
       console.log ev
       console.log resp
       return
 
     $rootScope.$on 'auth:password-reset-confirm-success', ->
-      alertify.success "Temporary log in successful."
-      alertify.success "Please change your password immediately"
+      Alertify.success "Temporary log in successful."
+      Alertify.success "Please change your password immediately"
       $state.go "change_password"
       return
 
@@ -56,7 +56,7 @@ angular.module('lessons').controller( "PasswordController", [
         return
 
     $scope.$on 'auth:password-change-success', (ev) ->
-      alertify.success 'Your password has been successfully updated!'
+      Alertify.success 'Your password has been successfully updated!'
       return
     $scope.$on 'auth:password-change-error', (ev, reason) ->
       alert 'Registration failed: ' + reason.errors[0]

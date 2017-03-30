@@ -6,11 +6,11 @@ angular.module('lessons').controller('ConversationController', [
   "$rootScope"
   "$stateParams"
   "$mdSidenav"
-  "alertify"
+  "Alertify"
   "COMMS"
   "$timeout"
   "$mdDialog"
-  ( $scope, $state, $rootScope, $stateParams, $mdSidenav, alertify, COMMS, $timeout , $mdDialog) ->
+  ( $scope, $state, $rootScope, $stateParams, $mdSidenav, Alertify, COMMS, $timeout , $mdDialog) ->
     console.log "ConversationController"
     $scope.show_form = false
     console.log $stateParams.id
@@ -27,13 +27,13 @@ angular.module('lessons').controller('ConversationController', [
       
       $scope.conversations = resp.data.conversations
       if $scope.conversations?
-        alertify.success "Got conversations"
+        Alertify.success "Got conversations"
       else
-        alertify.error "Failed to find conversations"
+        Alertify.error "Failed to find conversations"
       scroll_to_bottom()
     ).catch( ( err ) ->
       console.log err
-      alertify.error "Failed to get conversation"
+      Alertify.error "Failed to get conversation"
     )
 
     
@@ -42,13 +42,13 @@ angular.module('lessons').controller('ConversationController', [
         "/conversation/#{ id }"
       ).then( ( resp ) ->
         console.log resp
-        alertify.success "Got conversation"
+        Alertify.success "Got conversation"
         $scope.conversation = resp.data.conversation
         scroll_to_bottom()
         $mdSidenav('conversation_search').close()
       ).catch( ( err ) ->
         console.log err
-        alertify.error "Failed to get conversation"
+        Alertify.error "Failed to get conversation"
         $mdSidenav('conversation_search').close()
       )
 
@@ -58,8 +58,8 @@ angular.module('lessons').controller('ConversationController', [
     $scope.send_message = ( message )  ->
       
       if !$rootScope.User?
-        alertify.logPosition("bottom left")
-        alertify.log("You must be registered to respond")
+        Alertify.logPosition("bottom left")
+        Alertify.log("You must be registered to respond")
         open_login_or_register()
       else
         message.sender_id = $rootScope.User.id
@@ -70,13 +70,13 @@ angular.module('lessons').controller('ConversationController', [
           message: message
         ).then( ( resp ) ->
           console.log resp
-          alertify.success "Email sent ok"
+          Alertify.success "Email sent ok"
           $scope.conversation = resp.data.conversation
           $('.message_text_area').val ""
           scroll_to_bottom()
         ).catch( ( err ) ->
           console.log err
-          alertify.error "Failed to send message"
+          Alertify.error "Failed to send message"
         )
 
     scroll_to_bottom = ->

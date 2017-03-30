@@ -6,12 +6,12 @@ angular.module('lessons').controller( "TeacherLocationController" , [
   '$state'
   '$stateParams'
   "COMMS"
-  'alertify'
+  'Alertify'
   '$mdBottomSheet' 
   '$mdToast'
   '$q'
   'counties'
-  ( $scope, $rootScope, $state, $stateParams, COMMS, alertify, $mdBottomSheet, $mdToast, $q, counties ) ->
+  ( $scope, $rootScope, $state, $stateParams, COMMS, Alertify, $mdBottomSheet, $mdToast, $q, counties ) ->
     console.log "TeacherLocationController"
     # $scope.addresses = null
     # $scope.address = {}
@@ -62,8 +62,8 @@ angular.module('lessons').controller( "TeacherLocationController" , [
           zoom: 8
           mapTypeId: google.maps.MapTypeId.ROADMAP
         })
-        alertify.log "Use the search box to find your location"
-        alertify.log "Just enter your county if you don't want to enter your address"
+        Alertify.log "Use the search box to find your location"
+        Alertify.log "Just enter your county if you don't want to enter your address"
 
       # google.maps.event.addListenerOnce $scope.map, 'idle', ->
       #   $scope.map.setCenter(
@@ -84,9 +84,9 @@ angular.module('lessons').controller( "TeacherLocationController" , [
 
           $mdToast.showSimple "Select your address from the list by checking the box next to it"
           $mdToast.showSimple """If you don't see your address then click "Enter manually" and type it in yourself """
-          # alertify.logPosition("top left")
-          # alertify.log("Select your address from the list by checking the box next to it")
-          # alertify.log("""If you don't see your address then click "Enter manually" and type it in yourself """)
+          # Alertify.logPosition("top left")
+          # Alertify.log("Select your address from the list by checking the box next to it")
+          # Alertify.log("""If you don't see your address then click "Enter manually" and type it in yourself """)
 
         )
       )
@@ -106,7 +106,7 @@ angular.module('lessons').controller( "TeacherLocationController" , [
         )
         $scope.map.setZoom( 15 )
         $mdToast.showSimple "Click on the map to locate your address"
-        # alertify.log("Click on the map to locate your address")
+        # Alertify.log("Click on the map to locate your address")
       )
 
       google.maps.event.addListenerOnce $scope.map, 'idle', ->
@@ -159,7 +159,7 @@ angular.module('lessons').controller( "TeacherLocationController" , [
         $scope.addresses = null
       ).catch( ( err ) ->
         console.log err
-        alertify.error err.data.error[0]
+        Alertify.error err.data.error[0]
       )
 
     
