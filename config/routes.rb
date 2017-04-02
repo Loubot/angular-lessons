@@ -66,5 +66,5 @@ Rails.application.routes.draw do
   root to: 'static#index'
   
   get '/sitemap.xml.gz', to: redirect("https://#{ENV['FOG_DIRECTORY']}.s3.amazonaws.com/sitemap.xml.gz"), as: :sitemap
-  get '*path'   , to: redirect("https://angular-lessons.herokuapp.com")
+  get '*path'   , to: redirect("https://www.learnyourlesson.ie")
 end
