@@ -10,20 +10,24 @@ angular.module('lessons').controller( 'SearchController', [
   "Alertify"
   "$mdSidenav"
   "counties"
-  "change_title"
-  ( $scope, $rootScope, $state, $stateParams, $filter, COMMS, Alertify, $mdSidenav , counties, change_title ) ->
+  "change_tags"
+  ( $scope, $rootScope, $state, $stateParams, $filter, COMMS, Alertify, $mdSidenav , counties, change_tags ) ->
     console.log "SearchController"
 
     #Change title to match search
 
-    run_change_title = ->
-      new_title = """ Search for a #{ $scope.selected.subject_name } teacher """ 
-      if $scope.selected_county_name?
+    run_change_tags = ->
+      new_title = """#{ $scope.selected.subject_name } lessons """ 
+      new_description = "Search results for #{ $scope.selected.subject_name } lessons"
+      if $scope.selected_county_name? and $scope.selected_county_name != ""
         new_title = "#{ new_title } near #{ $scope.selected_county_name }"
+        new_description = "#{ new_description } near #{ $scope.selected_county_name }"
       else
         new_title = "#{ new_title } near you"
+        new_description = "#{ new_description } near you"
 
-      change_title.set_to new_title
+      change_tags.set_title new_title
+      change_tags.set_description new_description
      #End of change title to match search
 
     $scope.search_nav_opened = false
@@ -46,7 +50,7 @@ angular.module('lessons').controller( 'SearchController', [
         { name: $scope.selected.subject_name, location: $scope.selected_county_name  }
         { notify: false, location: 'replace' }
       )
-      run_change_title()
+      run_change_tags()
 
     $scope.view_teacher = ( teacher ) ->
       $state.go('view_teacher', id: teacher.id )

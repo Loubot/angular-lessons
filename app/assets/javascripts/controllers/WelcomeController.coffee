@@ -14,11 +14,14 @@ angular.module('lessons').controller('WelcomeController', [
   '$window'
   'OG'
   'counties'
-  'change_title'
-  ( $scope, $rootScope, $state, $filter, $stateParams, $location, User, $mdSidenav, $auth, COMMS, $window, OG, counties, change_title ) ->
+  'change_tags'
+  ( $scope, $rootScope, $state, $filter, $stateParams, $location, User, $mdSidenav, $auth, COMMS, $window, OG, counties, change_tags ) ->
     console.log "WelcomeController"
 
-    change_title.set_to "Find teachers Dublin | Find teachers Ireland| grinds Ireland | Learn Your Lesson"
+    #Seo title and description stuff
+    change_tags.set_title "Find teachers Dublin | Find teachers Ireland| grinds Ireland | Learn Your Lesson"
+    change_tags.set_description "Hello boi"
+    #End of seo title and description stuff
 
     OG.set_tags()
 

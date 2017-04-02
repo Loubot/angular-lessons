@@ -8,16 +8,16 @@ angular.module( 'lessons' ).controller( 'ContactController', [
   "Alertify"
   "$mdDialog"
   "$state"
-  "change_title"
-  ( $scope, $rootScope, COMMS, Alertify, $mdDialog, $state, change_title ) ->
+  "change_tags"
+  ( $scope, $rootScope, COMMS, Alertify, $mdDialog, $state, change_tags ) ->
     console.log "ContactController"
 
     console.log $state.current.name == "about"
 
     if $state.current.name == "contact"
-      change_title.set_to "Contact Learn Your Lesson | Contact Us | learnyourlesson"
+      change_tags.set_title "Contact Learn Your Lesson | Contact Us | learnyourlesson"
     else if $state.current.name == "about"
-      change_title.set_to "Learn your lesson story | How it all started | learnyourlesson"
+      change_tags.set_title "Learn your lesson story | How it all started | learnyourlesson"
 
     $scope.contact_boss = ->
       console.log $scope.email

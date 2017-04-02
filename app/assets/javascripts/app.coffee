@@ -59,12 +59,15 @@ angular.module('lessons').factory 'is_mobile', [
 ]
   
     
-angular.module('lessons').factory 'change_title', [
+angular.module('lessons').factory 'change_tags', [
   () ->
-    set_to: ( new_title ) ->
+    set_title: ( new_title ) ->
       $('title').replaceWith """<title> #{ new_title } </title>"""
       return true
 
+    set_description: ( new_description ) ->
+      $('meta[name=description]').attr('content', new_description)
+      return true
 ]
 
 angular.module('lessons').service 'OG', ->
