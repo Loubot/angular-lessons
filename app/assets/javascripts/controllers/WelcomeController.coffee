@@ -20,7 +20,6 @@ angular.module('lessons').controller('WelcomeController', [
 
     #Seo title and description stuff
     change_tags.set_title "Find teachers Dublin | Find teachers Ireland| grinds Ireland | Learn Your Lesson"
-    change_tags.set_description "Hello boi"
     #End of seo title and description stuff
 
     OG.set_tags()
