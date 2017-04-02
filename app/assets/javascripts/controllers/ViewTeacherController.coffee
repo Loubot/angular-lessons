@@ -77,14 +77,41 @@ angular.module('lessons').controller( 'ViewTeacherController', [
       $scope.teacher_loaded = true
       create_fotorama()
       run_change_tags()
+      create_subjects_list()
+      add_json_ld()
     ).catch( ( err ) ->
       console.log err
       Alertify.error err.data.errors.full_messages
       $state.go 'welcome'
     )
     
-      
 
+    add_json_ld = ->
+      script = document.createElement 'script'
+      script.type  = "application/ld+json"
+      script.text = """{
+            "@context": "http://schema.org",
+            "@type": "Person",
+            "address": {
+              "@type": "PostalAddress",
+              "addressLocality": "#{ $scope.teacher.location.county }",
+              "streetAddress": "#{ $scope.teacher.location.address }"
+            },
+            "email": "mailto:#{ $scope.teacher.email }",
+            "jobTitle": "#{ $scope.subject_list } $scope.teacher",
+            "name": "#{ $scope.teacher.first_name } #{ $scope.teacher.last_name }",
+            "telephone": "#{ $scope.teacher.phone }",
+            "url": "#{ window.location.href }",
+            "description": "#{ $scope.teacher.first_name } #{ $scope.teacher.last_name } teaches #{ $scope.subject_list }. Contact them here to arrange a lesson"
+          }"""
+      console.log script
+      $('#teacher_info').append script
+      
+    create_subjects_list = ->
+      $scope.subject_list = ""
+      for s in $scope.teacher.subjects
+        $scope.subject_list = "#{ $scope.subject_list } #{ s.name }"
+      $scope.subject_list = "#{ $scope.subject_list }"
 
     
     run_change_tags = ->
@@ -103,9 +130,7 @@ angular.module('lessons').controller( 'ViewTeacherController', [
         if parseInt( photo.id ) == parseInt( $scope.teacher.profile )
           # console.log photo
           $scope.profile = photo
-          
-      console.log "profile"
-      console.log $scope.profile
+
       $scope.profile
 
 
