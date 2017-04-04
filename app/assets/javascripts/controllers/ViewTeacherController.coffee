@@ -110,9 +110,15 @@ angular.module('lessons').controller( 'ViewTeacherController', [
     
     run_change_tags = ->
       title = ""
-      for subject in $scope.teacher.subjects
-        
-        title = "#{ title } #{ subject.name } lessons in #{ $scope.teacher.location.county }"
+      if $scope.teacher.location?
+
+        for subject in $scope.teacher.subjects
+          
+          title = "#{ title } #{ subject.name } lessons in #{ $scope.teacher.location.county }"
+      else
+        for subject in $scope.teacher.subjects
+          
+          title = "#{ title } #{ subject.name } lessons "
         
       change_tags.set_title title
 
