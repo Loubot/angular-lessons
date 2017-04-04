@@ -478,22 +478,5 @@ angular.module('lessons').service 'COMMS', ( $http, $state, RESOURCES, $rootScop
         reject err_result
       )
 
-angular.module('lessons').directive 'jsonld', [
-  '$filter'
-  '$sce'
-  ($filter, $sce) ->
-    {
-      restrict: 'E'
-      template: ->
-        '<script type="application/ld+json" ng-bind-html="onGetJson()"></script>'
-      scope: json: '=json'
-      link: (scope, element, attrs) ->
 
-        scope.onGetJson = ->
-          $sce.trustAsHtml $filter('json')(scope.json)
-
-        return
-      replace: true
-    }
-]
 # 360 519
