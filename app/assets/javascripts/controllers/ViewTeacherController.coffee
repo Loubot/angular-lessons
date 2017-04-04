@@ -95,7 +95,7 @@ angular.module('lessons').controller( 'ViewTeacherController', [
         "name": "#{ $scope.teacher.first_name } #{ $scope.teacher.last_name }",
         "url": "#{ window.location.href }",
         "description": "#{ $scope.teacher.first_name } #{ $scope.teacher.last_name } teaches #{ $scope.subject_list }. Contact them here to arrange a lesson",
-        "primaryImageOfPage": "#{ $scope.profile.avatar.url }",
+        "primaryImageOfPage": "#{ if $scope.profile? then $scope.profile.avatar.url else '' }",
         "specialty": "education",
         "about": "#{ $scope.teacher.first_name } #{ $scope.teacher.last_name } is offering lessons in #{ $scope.subject_list }",
         "keywords": "grind, lesson, #{ $scope.subject_list } }"
@@ -110,7 +110,7 @@ angular.module('lessons').controller( 'ViewTeacherController', [
     
     run_change_tags = ->
       title = ""
-      if $scope.teacher.location?
+      if $scope.teacher.location.county?
 
         for subject in $scope.teacher.subjects
           
