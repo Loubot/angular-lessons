@@ -132,4 +132,16 @@ angular.module('lessons').controller('WelcomeController', [
 
     ############## End of animation ###############################################
 
+    
+
+    $scope.jsonId =
+      "@context": "http://schema.org",
+      "@type": "WebSite",
+      "name": "Learn Your Lesson",
+      "description": "Learn Your Lesson is your place to connect with local teachers on languages, music lessons, or any other skill you wish to learn in Ireland",
+      "url": "https://www.learnyourlesson.ie",
+      "keywords": "Piano lessons, Guitar lessons, French lessons, Spanish lessons, Dublin, Cork, Galway, Limerick",
+      "image": "https://s3-eu-west-1.amazonaws.com/angular-lessons/static_assets/facebook_logo.jpg"
+    return
+
 ])

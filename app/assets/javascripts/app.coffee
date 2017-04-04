@@ -478,77 +478,22 @@ angular.module('lessons').service 'COMMS', ( $http, $state, RESOURCES, $rootScop
         reject err_result
       )
 
-      
-# angular.module('lessons').run [
-#   '$rootScope'
-#   'auth'
-#   ($rootScope, auth) ->
-    # $rootScope.$on 'auth:validation-success', ( e ) ->
-    #   console.log 'bl'
-    #   console.log e
-    # see what's going on when the route tries to change
-    # $rootScope.$on '$viewContentLoading', (event, toState, toParams, fromState, fromParams) ->
-    #   console.log '23'
-    #   auth.check_is_valid()
-    #   return
-#     $rootScope.$on '$stateChangeError', (event, toState, toParams, fromState, fromParams, error) ->
-#       console.log '$stateChangeError - fired when an error occurs during transition.'
-#       console.log arguments
-#       return
-    # $rootScope.$on '$stateChangeSuccess', (event, toState, toParams, fromState, fromParams) ->
-    #   console.log '$stateChangeSuccess to ' + toState.name + '- fired once the state transition is complete.'
-    #   alert $('.main_page').height()
-    #   return
-#     $rootScope.$on '$viewContentLoading', (event, viewConfig) ->
-#       console.log '$viewContentLoading - view begins loading - dom not rendered', viewConfig
-#       console.log viewConfig
-#       console.log event
-#       return
+angular.module('lessons').directive 'jsonld', [
+  '$filter'
+  '$sce'
+  ($filter, $sce) ->
+    {
+      restrict: 'E'
+      template: ->
+        '<script type="application/ld+json" ng-bind-html="onGetJson()"></script>'
+      scope: json: '=json'
+      link: (scope, element, attrs) ->
 
-    # $(document).ready ->
-      
-    # $rootScope.$on '$viewContentLoaded', ->
-     # // runs on individual scopes, so putting it in "run" doesn't work.
-     
-     # console.log('$viewContentLoaded - fired after dom rendered', event)
-#     $rootScope.$on '$stateNotFound', (event, unfoundState, fromState, fromParams) ->
-#       console.log '$stateNotFound ' + unfoundState.to + '  - fired when a state cannot be found by its name.'
-#       console.log unfoundState, fromState, fromParams
-#       return
+        scope.onGetJson = ->
+          $sce.trustAsHtml $filter('json')(scope.json)
 
-
-# ]
-
-# angular.module('lessons').run(['$rootScope', '$state',
-#   ($rootScope, $state)->
-#     $rootScope.isAuthenticated = false
-
-#     $rootScope.$on('auth:validation-success', (e)->
-#       $rootScope.isAuthenticated = true
-      
-#     )
-#     $rootScope.$on('auth:login-success', (e)->
-#       $rootScope.isAuthenticated = true
-#       # $state.go 'welcome'
-#     )
-
-#     $rootScope.$on('auth:validation-error', (e)->
-#       $rootScope.isAuthenticated = false
-#     )
-#     $rootScope.$on('auth:invalid', (e)->
-#       $rootScope.isAuthenticated = false
-#     )
-#     $rootScope.$on('auth:login-error', (e)->
-#       $rootScope.isAuthenticated = false
-#     )
-#     $rootScope.$on('auth:logout-success', (e)->
-#       $rootScope.isAuthenticated = false
-#     )
-#     $rootScope.$on('auth:account-destroy-success', (e)->
-#       $rootScope.isAuthenticated = false
-#     )
-#     $rootScope.$on('auth:session-expired', (e)->
-#       $rootScope.isAuthenticated = false
-#     )
-# ])
+        return
+      replace: true
+    }
+]
 # 360 519
