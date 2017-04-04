@@ -65,5 +65,29 @@ angular.module( 'lessons' ).controller( 'ContactController', [
         Alertify.error "Failed to deliver message"
       )
 
+    $scope.jsonId = 
+      "@context": "http://schema.org",
+      "@type": "Organization",
+      "url": "https://www.learnyourlesson.ie",
+      "logo": "https://s3-eu-west-1.amazonaws.com/angular-lessons/static_assets/facebook_logo.jpg",
+      "contactPoint": [
+        {
+          "@type": "ContactPoint",
+          "telephone": "0863778875",
+          "contactType": "sales"
+        },
+        {
+          "@type": "ContactPoint",
+          "telephone": "0851231558",
+          "contactType": "technical support"
+        },
+        {
+          "@type": "ContactPoint",
+          "telephone": "0851231558",
+          "contactType": "customer service"
+        }
+
+      ]
+
 
 ])

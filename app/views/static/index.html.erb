@@ -63,7 +63,9 @@
   <div class="main main_page" layout="column" id="main" flex>
     <md-content class="scroll_animate">
       <div class="main_page top_bit" id="main_page" ui-view ng-cloak> 
-
+        <!-- ld-json bit -->
+        <jsonld data-json="jsonId"></jsonld>
+        <!-- end of ld-json bit -->
       </div> <!-- angular view rendered here -->
 
       <div class="bottom_bit" layout="row" layout-align="space-around none" ng-if="isPageFullyLoaded">

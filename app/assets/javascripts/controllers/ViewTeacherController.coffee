@@ -87,25 +87,19 @@ angular.module('lessons').controller( 'ViewTeacherController', [
     
 
     add_json_ld = ->
-      script = document.createElement 'script'
-      script.type  = "application/ld+json"
-      script.text = """{
-            "@context": "http://schema.org",
-            "@type": "Person",
-            "address": {
-              "@type": "PostalAddress",
-              "addressLocality": "#{ $scope.teacher.location.county }",
-              "streetAddress": "#{ $scope.teacher.location.address }"
-            },
-            "email": "mailto:#{ $scope.teacher.email }",
-            "jobTitle": "#{ $scope.subject_list } $scope.teacher",
-            "name": "#{ $scope.teacher.first_name } #{ $scope.teacher.last_name }",
-            "telephone": "#{ $scope.teacher.phone }",
-            "url": "#{ window.location.href }",
-            "description": "#{ $scope.teacher.first_name } #{ $scope.teacher.last_name } teaches #{ $scope.subject_list }. Contact them here to arrange a lesson"
-          }"""
-      console.log script
-      $('#teacher_info').append script
+      $scope.jsonId =
+        "@context": "http://schema.org",
+        "@type": "ProfilePage",
+        "learningResourceType": "teacher"
+        "email": "mailto:#{ $scope.teacher.email }",
+        "name": "#{ $scope.teacher.first_name } #{ $scope.teacher.last_name }",
+        "url": "#{ window.location.href }",
+        "description": "#{ $scope.teacher.first_name } #{ $scope.teacher.last_name } teaches #{ $scope.subject_list }. Contact them here to arrange a lesson",
+        "primaryImageOfPage": "#{ $scope.profile.avatar.url }",
+        "specialty": "education",
+        "about": "#{ $scope.teacher.first_name } #{ $scope.teacher.last_name } is offering lessons in #{ $scope.subject_list }",
+        "keywords": "grind, lesson, #{ $scope.subject_list }, #{ $scope.teacher.location.county }"
+       
       
     create_subjects_list = ->
       $scope.subject_list = ""
