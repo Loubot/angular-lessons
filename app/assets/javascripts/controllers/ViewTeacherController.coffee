@@ -98,7 +98,7 @@ angular.module('lessons').controller( 'ViewTeacherController', [
         "primaryImageOfPage": "#{ $scope.profile.avatar.url }",
         "specialty": "education",
         "about": "#{ $scope.teacher.first_name } #{ $scope.teacher.last_name } is offering lessons in #{ $scope.subject_list }",
-        "keywords": "grind, lesson, #{ $scope.subject_list }, #{ $scope.teacher.location.county }"
+        "keywords": "grind, lesson, #{ $scope.subject_list } }"
        
       
     create_subjects_list = ->
