@@ -138,29 +138,29 @@ angular.module('lessons').controller( 'SearchController', [
     ################ End of show profile pic ##############################
 
     define_json = ->
+      result_list = []
+      for teacher, i in $scope.teachers
+        result_list.push {
+            "@type": "ListItem",
+            "position": i,
+            "item": {
+                "@type": "Person",
+                "url": "https://www.learnyourlesson.ie/#/view-teacher/#{ teacher.id }",
+                "brand": "LearnYourLesson",
+                "email": "#{ teacher.email }",
+                "familyName": "#{ teacher.last_name }",
+                "givenName": "#{ teacher.first_name }",
+                "jobTitle": "#{ $stateParams.name } teacher"
+            }
+
+          }
+
       $scope.jsonId =
         "@context": "http://schema.org",
-          "@type": "SearchResultsPage",
-          "mainEntity": [{
-            "@type": "ItemList",
-            "name": "Primary Care Physicians Chicago, IL 60646",
-            "itemListOrder": "http://schema.org/ItemListOrderAscending",
-            "itemListElement":[{
-                "@type": "ListItem",
-                "position": 1,
-                "item": {
-                    "@type": "Physician",
-                    "url": "https://healthjoy.com/doctor/bernadette-b-mayer/5365-w-devon-ave-chicago-il-60646/"
-                }
-
-            },
-            {
-                "@type": "ListItem",
-                "position": 2,
-                "item": {
-                    "@type": "Physician",
-                    "url": "https://healthjoy.com/doctor/vaidotas-petrus/6225-w-touhy-ave-chicago-il-60646/"
-                }
-            }]
-          }]
+        "@type": "SearchResultsPage",
+        "mainEntity": [{
+          "@type": "ItemList",
+          "name": "#{ $stateParams.name } teachers Ireland",
+          "itemListElement":result_list
+        }]
 ])
