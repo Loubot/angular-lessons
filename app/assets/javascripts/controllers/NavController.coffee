@@ -118,4 +118,19 @@ angular.module('lessons').controller('NavController', [
 
     $scope.close_dialog = ->
       $mdDialog.cancel()
+
+    $scope.jsonId =
+      "@context" : "http://schema.org",
+      "@type" : "Organization",
+      "name" : "Learn Your Lesson",
+      "logo" : "https://s3-eu-west-1.amazonaws.com/angular-lessons/static_assets/facebook_logo.jpg",
+      "url" : "https://www.learnyourlesson.ie",
+      "sameAs" : [
+        "https://twitter.com/LearnYLesson",
+        "https://www.facebook.com/Learn-Your-Lesson-534105600060664/"      
+        ]
+
+      # 
+      #"https://www.linkedin.com/company/[username]",
+      # "https://plus.google.com/[username]/posts"
 ])
