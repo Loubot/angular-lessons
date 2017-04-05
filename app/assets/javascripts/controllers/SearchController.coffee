@@ -69,6 +69,7 @@ angular.module('lessons').controller( 'SearchController', [
         console.log resp
         Alertify.success "Found #{ resp.data.teachers.length } teacher(s)"
         $scope.teachers = resp.data.teachers
+        define_json()
         $scope.search_nav_opened = false
       ).catch( ( err ) ->
         console.log err
@@ -135,4 +136,31 @@ angular.module('lessons').controller( 'SearchController', [
       
 
     ################ End of show profile pic ##############################
+
+    define_json = ->
+      $scope.jsonId =
+        "@context": "http://schema.org",
+          "@type": "SearchResultsPage",
+          "mainEntity": [{
+            "@type": "ItemList",
+            "name": "Primary Care Physicians Chicago, IL 60646",
+            "itemListOrder": "http://schema.org/ItemListOrderAscending",
+            "itemListElement":[{
+                "@type": "ListItem",
+                "position": 1,
+                "item": {
+                    "@type": "Physician",
+                    "url": "https://healthjoy.com/doctor/bernadette-b-mayer/5365-w-devon-ave-chicago-il-60646/"
+                }
+
+            },
+            {
+                "@type": "ListItem",
+                "position": 2,
+                "item": {
+                    "@type": "Physician",
+                    "url": "https://healthjoy.com/doctor/vaidotas-petrus/6225-w-touhy-ave-chicago-il-60646/"
+                }
+            }]
+          }]
 ])
