@@ -29,7 +29,7 @@
 //= require angular-loading-bar/build/loading-bar.min
 //= require angular-validation-match/dist/angular-validation-match.min
 //= require ui-bootstrap/ui-bootstrap-custom-tpls-2.4.0.min
-//= require instantclick/instantclick.min.js
+//= require instantclick/instantclick
 //= require moment/min/moment.min
 //= require mdPickers/dist/mdPickers.min
 //= require app
