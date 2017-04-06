@@ -13,7 +13,7 @@
 //= require jquery.min
 //= require rails_client_logger
 //= require lodash/dist/lodash.min
-//= require angular/angular
+//= require angular/angular.min
 //= require ng-alertify/dist/ng-alertify
 //= require angular-ui-router/release/angular-ui-router.min 
 //= require angular-animate/angular-animate.min
@@ -29,7 +29,7 @@
 //= require angular-loading-bar/build/loading-bar.min
 //= require angular-validation-match/dist/angular-validation-match.min
 //= require ui-bootstrap/ui-bootstrap-custom-tpls-2.4.0.min
-//= require instantclick/instantclick
+//= require instantclick/instantclick.min
 //= require moment/min/moment.min
 //= require mdPickers/dist/mdPickers.min
 //= require app
