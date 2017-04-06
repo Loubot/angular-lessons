@@ -136,10 +136,15 @@ angular.module('lessons').controller('WelcomeController', [
 
     $scope.jsonId =
       "@context": "http://www.schema.org",
-      "@type": "product",
-      "brand": "Learn Your Lesson",
+      "@type": "product",      
       "name": "Learn Your Lesson",
       "image": "https://s3-eu-west-1.amazonaws.com/angular-lessons/static_assets/facebook_logo.jpg",
-      "description": "Learn Your Lesson is your place to connect with local teachers on languages, music lessons, or any other skill you wish to learn in Ireland"
+      "description": "Find teachers locally and book a lesson using Learn Your Lesson anywhere in Ireland",
+      "brand": {
+        "@type": "Thing",
+        "name": "Learn Your Lesson",
+        "url": "https://www.learnyourlesson.ie"
+      }
+
 
 ])
