@@ -87,19 +87,43 @@ angular.module('lessons').controller( 'ViewTeacherController', [
     
 
     add_json_ld = ->
+      
       $scope.jsonId =
-        "@context": "http://schema.org",
-        "@type": "ProfilePage",
-        "learningResourceType": "teacher"
-        "email": "mailto:#{ $scope.teacher.email }",
-        "name": "#{ $scope.teacher.first_name } #{ $scope.teacher.last_name }",
-        "url": "#{ window.location.href }",
-        "description": "#{ $scope.teacher.first_name } #{ $scope.teacher.last_name } teaches #{ $scope.subject_list }. Contact them here to arrange a lesson",
-        "primaryImageOfPage": "#{ if $scope.profile? then $scope.profile.avatar.templateUrl else '' }",
-        "specialty": "education",
-        "about": "#{ $scope.teacher.first_name } #{ $scope.teacher.last_name } is offering lessons in #{ $scope.subject_list }",
-        "keywords": "grind, lesson, #{ $scope.subject_list } "
-       
+        "@context": "http://schema.org/",
+        "@type": "Product",
+        "category": "education",
+        "name": "#{ $scope.subject_list } lessons",
+        "audience": {
+          "@type": "Audience",
+          "name": "students"
+        },
+        "image": "http://www.example.com/anvil_executive.jpg",
+        "description": "Get a #{ $scope.subject_list } lesson from #{ $scope.teacher.first_name }",
+        "brand": {
+          "@type": "Thing",
+          "name": "Learn Your Lesson"
+        },
+        "logo": "https://s3-eu-west-1.amazonaws.com/angular-lessons/static_assets/facebook_logo.jpg",
+        "offers": {
+         "@type": "Offer",
+         "priceSpecification": {
+            "@type": "priceSpecification",
+            "price": "0.00",
+            "priceCurrency": "EUR"
+          },
+         "priceCurrency": "EUR",
+         "offeredBy": {
+           "@type": "Organization",
+           "name": "Learn Your Lesson"         
+         },
+         "seller": {
+           "@type": "Organization",
+           "name": "Learn Your Lesson"
+         }
+        },
+        
+        "image": "#{ if $scope.avatar? then $scope.avatar.url else '' }"
+        
       
     create_subjects_list = ->
       $scope.subject_list = ""
