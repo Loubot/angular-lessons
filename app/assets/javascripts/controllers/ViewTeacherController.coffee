@@ -131,8 +131,9 @@ angular.module('lessons').controller( 'ViewTeacherController', [
       
     create_subjects_list = ->
       $scope.subject_list = ""
-      for s in $scope.teacher.subjects
+      for s, i in $scope.teacher.subjects
         $scope.subject_list = "#{ $scope.subject_list } #{ s.name }"
+        $scope.subject_list = "#{ $scope.subject_list }, " if $scope.teacher.subjects.length >= 1 and i != $scope.teacher.subjects.length - 1
       $scope.subject_list = "#{ $scope.subject_list }"
 
     
