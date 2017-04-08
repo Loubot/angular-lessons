@@ -97,7 +97,7 @@ angular.module('lessons').controller( 'ViewTeacherController', [
           "@type": "Audience",
           "name": "students"
         },
-        "image": "http://www.example.com/anvil_executive.jpg",
+        "image": "#{ if $scope.profile? then $scope.profile.avatar.url else '' }",
         "description": "Get a #{ $scope.subject_list } lesson from #{ $scope.teacher.first_name }",
         "brand": {
           "@type": "Thing",
@@ -106,6 +106,10 @@ angular.module('lessons').controller( 'ViewTeacherController', [
         "logo": "https://s3-eu-west-1.amazonaws.com/angular-lessons/static_assets/facebook_logo.jpg",
         "offers": {
          "@type": "Offer",
+         "itemOffered": {
+            "@type": "Offer",
+            "name": "lesson"
+          },
          "priceSpecification": {
             "@type": "priceSpecification",
             "price": "0.00",
