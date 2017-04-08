@@ -74,17 +74,20 @@ angular.module( 'lessons' ).controller( 'ContactController', [
         {
           "@type": "ContactPoint",
           "telephone": "+353863778875",
-          "contactType": "sales"
+          "contactType": "sales",
+          "email": "alan@learnyourlesson.ie"
         },
         {
           "@type": "ContactPoint",
           "telephone": "+353851231558",
-          "contactType": "technical support"
+          "contactType": "technical support",
+          "email": "loubot@learnyourlesson.ie"
         },
         {
           "@type": "ContactPoint",
           "telephone": "+353851231558",
-          "contactType": "customer service"
+          "contactType": "customer service",
+          "email": "loubot@learnyourlesson.ie"
         }
 
       ]

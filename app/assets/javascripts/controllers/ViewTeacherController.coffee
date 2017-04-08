@@ -87,32 +87,6 @@ angular.module('lessons').controller( 'ViewTeacherController', [
     
 
     add_json_ld = ->
-      console.log "subject list"
-      console.log $scope.subject_list
-      offers = []
-      for subject, i in $scope.teacher.subjects
-        console.log i
-        offers.push {
-            "@type": "Offer",
-            "itemOffered": {
-              "@type": "Offer",
-              "name": "private lesson in #{ subject.name }"
-            },
-            "priceSpecification": {
-              "@type": "priceSpecification",
-              "price": "0.00",
-              "priceCurrency": "EUR"
-            },
-            "priceCurrency": "EUR",
-            "offeredBy": {
-              "@type": "Organization",
-              "name": "Learn Your Lesson"         
-            },
-            "seller": {
-             "@type": "Organization",
-             "name": "Learn Your Lesson"
-            }
-          }
       
       $scope.jsonId =
         "@context": "http://schema.org/",
@@ -130,7 +104,27 @@ angular.module('lessons').controller( 'ViewTeacherController', [
           "name": "Learn Your Lesson"
         },
         "logo": "https://s3-eu-west-1.amazonaws.com/angular-lessons/static_assets/facebook_logo.jpg",
-        "offers": offers,
+        "offers": {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Offer",
+            "name": "lesson"
+          },
+          "priceSpecification": {
+            "@type": "priceSpecification",
+            "price": "0.00",
+            "priceCurrency": "EUR"
+          },
+          "priceCurrency": "EUR",
+          "offeredBy": {
+            "@type": "Organization",
+            "name": "Learn Your Lesson"         
+          },
+          "seller": {
+            "@type": "Organization",
+            "name": "Learn Your Lesson"
+          }
+        },
         
         "image": "#{ if $scope.avatar? then $scope.avatar.url else '' }"
         
