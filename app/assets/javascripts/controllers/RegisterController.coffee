@@ -67,4 +67,32 @@ angular.module('lessons').controller("RegisterController", [
     #   console.log $scope.county_lists["#{ county }"]
     #   return $scope.county_lists["#{ county }"]
 
+    $scope.jsonId = 
+      "@context": "http://schema.org",
+      "@type": "WebPage",
+      "author": {
+          "@type": "Thing",
+          "name": "Louis Angelini"
+        },
+      "inLanguage": "English",
+      "name": "Register as a teacher with Learn Your Lesson",
+      "publisher": {
+          "@type": "Thing",
+          "name": "www.learnyourlesson.ie"
+        },
+      "url": "https://www.learnyourlesson.ie/#/register-teacher",
+      "about": {
+        "@type": "Thing",
+        "name": "Register as a teacher with Learn Your Lesson"
+      },
+      "audience": {
+        "@type": "Audience",
+        "name": "students"
+      },
+      "keywords": "registration, sign-up, become a teacher, find students",
+      "learningResourceType": [
+        "lesson plan",
+        "learning activity"
+        ]
+
 ])

@@ -73,17 +73,17 @@ angular.module( 'lessons' ).controller( 'ContactController', [
       "contactPoint": [
         {
           "@type": "ContactPoint",
-          "telephone": "0863778875",
+          "telephone": "+353863778875",
           "contactType": "sales"
         },
         {
           "@type": "ContactPoint",
-          "telephone": "0851231558",
+          "telephone": "+353851231558",
           "contactType": "technical support"
         },
         {
           "@type": "ContactPoint",
-          "telephone": "0851231558",
+          "telephone": "+353851231558",
           "contactType": "customer service"
         }
 
