@@ -71,9 +71,19 @@ angular.module('lessons').factory 'change_tags', [
 ]
 
 angular.module('lessons').service 'OG', ->
-  set_tags: ->
+  set_tags: ( url, title, type, image, description ) ->
     $('.added_og').remove()
-    $('head').append """ <meta property="og:title" content="Learn Your Lesson." class="added_og"/>"""
+    if url?
+      $('head').append """ <meta property="og:title" content="#{ url }" class="added_og"/>"""
+    if title?
+      $('head').append """ <meta property="og:title" content="#{ title }" class="added_og"/>"""
+    if type?
+      $('head').append """ <meta property="og:title" content="#{ type }" class="added_og"/>"""
+    # if image?
+
+    # if description?
+
+    
     # $('head').append """ <meta property="" content="" />"""
     # $('head').append """ <meta property="" content="" />"""
     # $('head').append """ <meta property="" content="" />"""

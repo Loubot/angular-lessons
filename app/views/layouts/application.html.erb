@@ -11,11 +11,13 @@
   <base href="/">
   <meta name="google-site-verification" content="w-AjB4ZfZJeA_zvgq94G8gjGKTHjbIlZme7cA_1a5cM" />
   <title>Find teachers Dublin | Find teachers Ireland | grinds Ireland | Learn Your Lesson</title>
-  <meta property="og:url"                content="https://www.learnyourlesson.ie" />
-  <meta property="fb:app_id"             content="180552122371678" />
-  <meta property="og:type"               content="website" />
-  <meta property="og:image"              content="https://s3-eu-west-1.amazonaws.com/angular-lessons/static_assets/facebook_logo.jpg" />
-  <meta property="og:description"        content="Learn Your Lesson is your place to connect with local teachers on languages, music lessons, or any other skill you wish to learn in Ireland" />
+  <meta property="og:url"                content="https://www.learnyourlesson.ie" class="added_og"/>
+
+  <meta property="og:title" "Learn You Lesson" class="added_og">
+  <meta property="fb:app_id"             content="180552122371678" class="added_og"/>
+  <meta property="og:type"               content="website" class="added_og"/>
+  <meta property="og:image"              content="https://s3-eu-west-1.amazonaws.com/angular-lessons/static_assets/facebook_logo.jpg" class="added_og"/>
+  <meta property="og:description"        content="Learn Your Lesson is your place to connect with local teachers on languages, music lessons, or any other skill you wish to learn in Ireland" class="added_og"/>
   <meta name="description" content="Learn Your Lesson is your place to connect with local teachers on languages, music lessons, or any other skill you wish to learn in Ireland.">
   <meta name="keywords" content="piano lessons dublin, guitar lessons dublin, French lessons dublin, piano lesson cork, guitar lessons cork, French lessons cork, French lessons dublin, Spanish teachers dublin">
   <%= stylesheet_link_tag    'application', media: 'all' %>
@@ -130,8 +132,10 @@
       <%= image_tag('LinkedIn.png', alt: "Share on linkedin") %></a>
     </li>
   </ul>
+  <script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');ga('create', 'UA-85789811-1', 'auto');ga('send', 'pageview');</script>
   <script>
-    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');ga('create', 'UA-85789811-1', 'auto');ga('send', 'pageview');</script>
+    window.fbAsyncInit=function(){FB.init({appId:"180552122371678",xfbml:!0,version:"v2.8"}),FB.AppEvents.logPageView()},function(e,n,t){var o,i=e.getElementsByTagName(n)[0];e.getElementById(t)||(o=e.createElement(n),o.id=t,o.src="//connect.facebook.net/en_US/sdk.js",i.parentNode.insertBefore(o,i))}(document,"script","facebook-jssdk");
+  </script>
 </body>
 </html>
 

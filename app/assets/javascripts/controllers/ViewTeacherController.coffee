@@ -11,7 +11,8 @@ angular.module('lessons').controller( 'ViewTeacherController', [
   "$mdDialog"
   "change_tags"
   "is_mobile"
-  ( $scope, $rootScope, $state, $stateParams, $filter, COMMS, Alertify, $mdDialog, change_tags, is_mobile ) ->
+  "OG"
+  ( $scope, $rootScope, $state, $stateParams, $filter, COMMS, Alertify, $mdDialog, change_tags, is_mobile, OG ) ->
     console.log "ViewTeacherController"
 
     $scope.is_mobile = is_mobile
@@ -79,12 +80,21 @@ angular.module('lessons').controller( 'ViewTeacherController', [
       run_change_tags()
       create_subjects_list()
       add_json_ld()
+      set_og_tags()
     ).catch( ( err ) ->
       console.log err
       Alertify.error err.data.errors.full_messages
       $state.go 'welcome'
     )
-    
+
+    # set_og_tags = ->
+    #   OG.set_tags( 
+    #     "https://www.learnyourlesson.ie/#/view-teacher/#{ $scope.teacher.id }", 
+    #     "Get a #{ $scope.subject_list } lesson with #{ $scope.teacher.first_name } #{ $scope.teacher.last_name }", 
+    #     "profile", 
+    #     "image", 
+    #     "description" 
+    #   )
 
     add_json_ld = ->
       
@@ -132,7 +142,7 @@ angular.module('lessons').controller( 'ViewTeacherController', [
     create_subjects_list = ->
       $scope.subject_list = ""
       for s, i in $scope.teacher.subjects
-        $scope.subject_list = "#{ $scope.subject_list } #{ s.name }"
+        $scope.subject_list = "#{ $scope.subject_list }#{ s.name }"
         $scope.subject_list = "#{ $scope.subject_list }, " if $scope.teacher.subjects.length >= 1 and i != $scope.teacher.subjects.length - 1
       $scope.subject_list = "#{ $scope.subject_list }"
 

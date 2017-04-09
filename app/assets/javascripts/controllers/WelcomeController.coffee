@@ -22,7 +22,7 @@ angular.module('lessons').controller('WelcomeController', [
     change_tags.set_title "Find teachers Dublin | Find teachers Ireland| grinds Ireland | Learn Your Lesson"
     #End of seo title and description stuff
 
-    OG.set_tags()
+    # OG.set_tags()
 
     $scope.selected = {}
     $scope.selected.subject_name = $stateParams.name
