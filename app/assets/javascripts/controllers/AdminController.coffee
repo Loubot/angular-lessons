@@ -87,6 +87,7 @@ angular.module('lessons').controller('AdminController', [
           # console.log photo
           $scope.profile = photo
 
+      console.log $scope.profile
       $scope.profile.avatar.url
 
     run_fb = ->
