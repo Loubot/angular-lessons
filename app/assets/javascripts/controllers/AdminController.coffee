@@ -68,7 +68,7 @@ angular.module('lessons').controller('AdminController', [
       $scope.subject_list = "#{ $scope.subject_list }"
 
     set_profile = ( teacher ) ->
-      return true if teacher.photos? && teacher.photos.length == 0
+      return "https://s3-eu-west-1.amazonaws.com/angular-lessons/static_assets/facebook_logo.jpg" if teacher.photos? && teacher.photos.length == 0
 
       for photo in teacher.photos
         # console.log photo.avatar.url
