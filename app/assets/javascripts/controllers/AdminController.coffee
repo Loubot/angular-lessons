@@ -40,7 +40,6 @@ angular.module('lessons').controller('AdminController', [
           console.log resp
           $scope.teachers = resp.data.teachers
           $scope.$digest
-          run_fb()
           Alertify.success "Got teachers list"
         ).catch( ( err ) ->
           console.log err
