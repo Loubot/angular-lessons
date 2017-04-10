@@ -78,13 +78,23 @@ angular.module('lessons').controller('AdminController', [
         $scope.subject_list = "#{ $scope.subject_list }, " if $scope.teachers[0].subjects.length >= 1 and i != $scope.teachers[0].subjects.length - 1
       $scope.subject_list = "#{ $scope.subject_list }"
 
+    set_profile = ->
+      return true if $rootScope.User.photos? && $rootScope.User.photos.length == 0
+
+      for photo in $rootScope.User.photos
+        # console.log photo.avatar.url
+        if parseInt( photo.id ) == parseInt( $rootScope.User.profile )
+          # console.log photo
+          $scope.profile = photo
+
+      $scope.profile.avatar.url
+
     run_fb = ->
-      console.log ';'
       FB.ui {
         method: 'feed'
         href: "http://www.learnyourlesson.ie/#/view-teacher/81"
-        picture: "https://angular-lessons.s3-eu-west-1.amazonaws.com/uploads/photo/avatar/49/15355781_1384871084857827_6348996694857614271_n.jpg?X-Amz-Expires=600&X-Amz-Date=20170410T221023Z&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAJSLYTZXICEURPCAA/20170410/eu-west-1/s3/aws4_request&X-Amz-SignedHeaders=host&X-Amz-Signature=4fb73ce116e953b9f39f28dc170a367f0c98bcb8d21ff0ae5e06defbe259f30c"
-        from: "534105600060664"
+        picture: "$rootScope.User."
+        from: set_profile()
         caption: "#{ create_subjects_list() } lessons"
       }, (response) ->
 
