@@ -87,15 +87,14 @@ angular.module('lessons').controller('AdminController', [
           # console.log photo
           $scope.profile = photo
 
-      console.log $scope.profile
-      $scope.profile.avatar.url
+      $scope.profile
 
     run_fb = ->
       FB.ui {
         method: 'feed'
         href: "http://www.learnyourlesson.ie/#/view-teacher/81"
-        picture: "$rootScope.User."
-        from: set_profile()
+        picture: set_profile()
+        from: '534105600060664'
         caption: "#{ create_subjects_list() } lessons"
       }, (response) ->
 
