@@ -4,9 +4,9 @@ class TeacherController < ApplicationController
   require 'pp'
 
   def index
-    teachers = Teacher.includes( :subjects, :experience, :qualifications, :location ).where( is_teacher: true ).order( "created_at DESC" )
+    teachers = Teacher.includes( :subjects, :experience, :qualifications, :location, :photos ).where( is_teacher: true ).order( "created_at DESC" )
     #pp teachers
-    render json: { teachers: teachers.as_json( include: [ :subjects, :experience, :qualifications, :location ] ) }
+    render json: { teachers: teachers.as_json( include: [ :subjects, :experience, :qualifications, :location, :photos ] ) }
   end
 
   def show

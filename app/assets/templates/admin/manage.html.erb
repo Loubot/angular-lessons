@@ -75,13 +75,15 @@
               ng-repeat="teacher in teachers | start_from:(current_page - 1) * page_size | limitTo: page_size"
           >
           <!-- <md-checkbox ng-model="item.done"></md-checkbox> -->
-          <div class="md-list-item-text" ng-click="open_teacher_dialog( teacher )">
-            <h3>email:{{teacher.email}}, name: {{ teacher.first_name }} {{ teacher.last_name }}, registered: {{ teacher.created_at | date:'dd-MM-yyyy ' }}</h3>
-            <span>Subjects {{ teacher.subjects.length }}</span> ||
-            <span>Location {{ ( teacher.location != null ) }}</span> ||
-            <span>Experience {{ (teacher.experience.length > 0) }}</span> ||
-            <span>Quals {{ (teacher.qualifications.length ) }}</span> 
-
+          <div class="md-list-item-text" >
+            <span ng-click="open_teacher_dialog( teacher )">
+              <h3>email:{{teacher.email}}, name: {{ teacher.first_name }} {{ teacher.last_name }}, registered: {{ teacher.created_at | date:'dd-MM-yyyy ' }}</h3>
+              <span>Subjects {{ teacher.subjects.length }}</span> ||
+              <span>Location {{ ( teacher.location != null ) }}</span> ||
+              <span>Experience {{ (teacher.experience.length > 0) }}</span> ||
+              <span>Quals {{ (teacher.qualifications.length ) }}</span> ||
+            </span>
+            <span ng-click="open_admin_share_dialog( teacher )"><img ng-src="<%= asset_url 'Facebook.png' %>"></span>
             <md-divider md-inset></md-divider>
           </div>
         </md-list-item>

@@ -40,6 +40,7 @@ angular.module('lessons').controller('AdminController', [
           console.log resp
           $scope.teachers = resp.data.teachers
           $scope.$digest
+          run_fb()
           Alertify.success "Got teachers list"
         ).catch( ( err ) ->
           console.log err
@@ -57,6 +58,44 @@ angular.module('lessons').controller('AdminController', [
         clickOutsideToClose: true
         fullscreen: $(window).width() < 600
       )
+
+    # Facebook share stuff
+
+    $scope.open_admin_share_dialog = ( teacher ) ->
+      $scope.share_teacher = teacher
+      $mdDialog.show(
+        templateUrl: "dialogs/admin_share_teacher_dialog.html"
+        scope: $scope
+        preserveScope: true
+        clickOutsideToClose: true
+        fullscreen: $(window).width() < 600
+      )
+
+    create_subjects_list = ->
+      $scope.subject_list = ""
+      for s, i in $scope.teachers[0].subjects
+        $scope.subject_list = "#{ $scope.subject_list }#{ s.name }"
+        $scope.subject_list = "#{ $scope.subject_list }, " if $scope.teachers[0].subjects.length >= 1 and i != $scope.teachers[0].subjects.length - 1
+      $scope.subject_list = "#{ $scope.subject_list }"
+
+    run_fb = ->
+      console.log ';'
+      FB.ui {
+        method: 'feed'
+        href: "http://www.learnyourlesson.ie/#/view-teacher/81"
+        picture: "https://angular-lessons.s3-eu-west-1.amazonaws.com/uploads/photo/avatar/49/15355781_1384871084857827_6348996694857614271_n.jpg?X-Amz-Expires=600&X-Amz-Date=20170410T221023Z&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAJSLYTZXICEURPCAA/20170410/eu-west-1/s3/aws4_request&X-Amz-SignedHeaders=host&X-Amz-Signature=4fb73ce116e953b9f39f28dc170a367f0c98bcb8d21ff0ae5e06defbe259f30c"
+        from: "534105600060664"
+        caption: "#{ create_subjects_list() } lessons"
+      }, (response) ->
+
+    $scope.open_fb_share = ->
+      FB.ui {
+        method: 'feed'
+        href: "http://www.learnyourlesson.ie/#/view-teacher/#{ $scope.share_teacher.id }"
+        from: "534105600060664"
+      }, (response) ->
+
+    # End of facebook share stuff
 
     $scope.create_category = ->
       console.log "hup"
