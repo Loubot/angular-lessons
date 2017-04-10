@@ -61,50 +61,34 @@ angular.module('lessons').controller('AdminController', [
 
     # Facebook share stuff
 
-    $scope.open_admin_share_dialog = ( teacher ) ->
-      $scope.share_teacher = teacher
-      $mdDialog.show(
-        templateUrl: "dialogs/admin_share_teacher_dialog.html"
-        scope: $scope
-        preserveScope: true
-        clickOutsideToClose: true
-        fullscreen: $(window).width() < 600
-      )
-
-    create_subjects_list = ->
+    create_subjects_list = ( teacher ) ->
       $scope.subject_list = ""
-      for s, i in $scope.teachers[0].subjects
+      for s, i in teacher.subjects
         $scope.subject_list = "#{ $scope.subject_list }#{ s.name }"
-        $scope.subject_list = "#{ $scope.subject_list }, " if $scope.teachers[0].subjects.length >= 1 and i != $scope.teachers[0].subjects.length - 1
+        $scope.subject_list = "#{ $scope.subject_list }, " if teacher.subjects.length >= 1 and i != teacher.subjects.length - 1
       $scope.subject_list = "#{ $scope.subject_list }"
 
-    set_profile = ->
-      return true if $rootScope.User.photos? && $rootScope.User.photos.length == 0
+    set_profile = ( teacher ) ->
+      return true if teacher.photos? && teacher.photos.length == 0
 
-      for photo in $rootScope.User.photos
+      for photo in teacher.photos
         # console.log photo.avatar.url
-        if parseInt( photo.id ) == parseInt( $rootScope.User.profile )
+        if parseInt( photo.id ) == parseInt( teacher.profile )
           # console.log photo
           $scope.profile = photo
 
       console.log $scope.profile
       $scope.profile.avatar.url
 
-    run_fb = ->
+    fb_share = ( teacher ) ->
       FB.ui {
         method: 'feed'
-        href: "http://www.learnyourlesson.ie/#/view-teacher/81"
-        picture: set_profile()
+        href: "http://www.learnyourlesson.ie/#/view-teacher/#{ teacher.id }"
+        picture: set_profile( teacher )
         from: '534105600060664'
-        caption: "#{ create_subjects_list() } lessons"
+        caption: "#{ create_subjects_list( teacher ) } lessons"
       }, (response) ->
-
-    $scope.open_fb_share = ->
-      FB.ui {
-        method: 'feed'
-        href: "http://www.learnyourlesson.ie/#/view-teacher/#{ $scope.share_teacher.id }"
-        from: "534105600060664"
-      }, (response) ->
+        console.log response
 
     # End of facebook share stuff
 

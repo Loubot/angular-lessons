@@ -83,7 +83,7 @@
               <span>Experience {{ (teacher.experience.length > 0) }}</span> ||
               <span>Quals {{ (teacher.qualifications.length ) }}</span> ||
             </span>
-            <span ng-click="open_admin_share_dialog( teacher )"><img ng-src="<%= asset_url 'Facebook.png' %>"></span>
+            <span ng-click="fb_share( teacher )"><img ng-src="<%= asset_url 'Facebook.png' %>"></span>
             <md-divider md-inset></md-divider>
           </div>
         </md-list-item>
