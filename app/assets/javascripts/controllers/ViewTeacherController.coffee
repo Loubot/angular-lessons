@@ -80,13 +80,21 @@ angular.module('lessons').controller( 'ViewTeacherController', [
       run_change_tags()
       create_subjects_list()
       add_json_ld()
-      set_og_tags()
+      # set_og_tags()
+      do_fb()
     ).catch( ( err ) ->
       console.log err
       Alertify.error err.data.errors.full_messages
       $state.go 'welcome'
     )
 
+    do_fb = ->
+      FB.ui {
+        method: 'share'
+        href: 'https://developers.facebook.com/docs/'
+      }, (response) ->
+        console.log "fb"
+        console.log response
     # set_og_tags = ->
     #   OG.set_tags( 
     #     "https://www.learnyourlesson.ie/#/view-teacher/#{ $scope.teacher.id }", 
