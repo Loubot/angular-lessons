@@ -80,6 +80,7 @@ angular.module('lessons').controller('AdminController', [
       $scope.profile.avatar.url
 
     $scope.fb_share = ( teacher ) ->
+      console.log teacher
       FB.ui {
         method: 'feed'
         href: "http://www.learnyourlesson.ie/#/view-teacher/#{ teacher.id }"
