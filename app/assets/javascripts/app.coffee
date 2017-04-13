@@ -168,7 +168,7 @@ angular.module('lessons').config [
   "$locationProvider"
  ($stateProvider, $urlRouterProvider, $locationProvider ) ->
  
-  $locationProvider.html5Mode(true)
+  $locationProvider.html5Mode({ enabled: true, requireBase: true })
   
   # $stateProvider.state 'home',
   #   url: '/'
@@ -184,7 +184,7 @@ angular.module('lessons').config [
 
   
   $stateProvider.state 'welcome',
-    url: '/welcome'
+    url: '/'
     templateUrl: "static/welcome.html"
     controller: "WelcomeController"
     resolve:
@@ -367,7 +367,7 @@ angular.module('lessons').config [
           auth.check_if_logged_in()
       ]
 
-  $urlRouterProvider.otherwise "/welcome"
+  $urlRouterProvider.otherwise "/"
   
 ]  
 

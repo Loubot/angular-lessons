@@ -62,9 +62,9 @@ Rails.application.routes.draw do
     # Define routes for Teacher within this block.
 
   end
-  
-  root to: 'static#index'
+
   
   get '/sitemap.xml.gz', to: redirect("https://#{ENV['FOG_DIRECTORY']}.s3.amazonaws.com/sitemap.xml.gz"), as: :sitemap
-  get '*path'   , to: redirect("/")
+  get '*path'   , to: redirect('/#/%{path}')
+  root to: 'static#index'
 end
