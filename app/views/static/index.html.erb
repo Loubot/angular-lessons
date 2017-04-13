@@ -1,7 +1,7 @@
-<div  class="main_page invisible" ng-cloak layout="column" layout-fill ng-controller="NavController" >
+<div  class="main_page " ng-cloak layout="column" layout-fill ng-controller="NavController" >
   <!-- Start of menu bar-->
 
-  <div ng-if="isPageFullyLoaded" layout-padding  style="height: 80px;background-color: #f5f5f5;">
+  <div ng-if="isPageFullyLoaded && angular_is_ready" layout-padding  style="height: 80px;background-color: #f5f5f5;">
     <div  layout="row" class="gutter_90" layout-align="space-between ">
 
       <div >

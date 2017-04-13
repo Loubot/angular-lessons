@@ -31,16 +31,15 @@ angular.module('lessons').service 'counties', [ ->
       'Co. Louth','Co. Mayo','Co. Meath','Co. Monaghan','Co. Offaly','Co. Roscommon','Co. Sligo','Co. Tipperary','Co. Tyrone',
       'Co. Waterford','Co. Westmeath','Co. Wexford','Co. Wicklow'
     ]
-
-  
-
 ]
     
 
 angular.module('lessons').run ( $rootScope ) ->
   $rootScope.isPageFullyLoaded = false
   angular.element(document).ready ->
-    $('.main_page').removeClass( 'invisible' )
+    $rootScope.angular_is_ready = true
+    # $('.main_page').removeClass( 'invisible' )
+    InstantClick.init();
 
 angular.module('lessons').config ( $authProvider ) ->
   $authProvider.configure({
