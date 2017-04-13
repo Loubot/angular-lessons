@@ -32,20 +32,27 @@ SitemapGenerator::Sitemap.create do
   #     add article_path(article), :lastmod => article.updated_at
   #   end
 
-  Teacher.where( is_teacher: true ).each do |t|
+  add '/welcome'
 
-    add "/view-teacher/#{ t.id }"
-  end
+  add '/how-it-works'
+
+  add '/register-teacher'
+
+  add '/contact'
+
+  add '/about'
 
   Subject.all.each do |s|
     add "/search/#{ s.name }"
   end
 
-  add '/how-it-works'
+  Teacher.where( is_teacher: true ).each do |t|
 
-  add 'register-teacher'
+    add "/view-teacher/#{ t.id }"
+  end
 
-  add '/welcome'
+  
+  
 end
 
 SitemapGenerator::Sitemap.ping_search_engines('https://www.learnyourlesson.ie/sitemap.xml.gz')
