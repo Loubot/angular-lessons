@@ -5,19 +5,19 @@
 
   <md-menu-content width="4">
     <md-menu-item>
-    <md-button ui-sref="teacher({id:User.id})" class="md-button md-default-theme green_text">Profile</md-button>
+    <md-button ng-href="/teacher/{{ User.id }}" class="md-button md-default-theme green_text">Profile</md-button>
     </md-menu-item>
 
     <md-menu-item>
-      <md-button ui-sref="teacher_area({id:User.id})" class="md-button md-default-theme green_text">Calendar</md-button>
+      <md-button ng-href="/teacher-area/{{ User.id }}/" class="md-button md-default-theme green_text">Calendar</md-button>
     </md-menu-item>
     
     <md-menu-item>
-      <md-button ui-sref="teacher_location({id:User.id})" class="md-button md-default-theme green_text">Location</md-button>
+      <md-button ng-href="/teacher-location/{{ User.id }}" class="md-button md-default-theme green_text">Location</md-button>
     </md-menu-item>
 
     <md-menu-item>
-      <md-button ui-sref="conversation" class="md-button md-default-theme green_text">Messages</md-button>
+      <md-button ng-href="/conversation/" class="md-button md-default-theme green_text">Messages</md-button>
     </md-menu-item>
     
     <md-menu-item ng-if="User.admin">

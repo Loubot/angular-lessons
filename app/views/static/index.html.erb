@@ -1,11 +1,11 @@
 <div  class="main_page " ng-cloak layout="column" layout-fill ng-controller="NavController" >
   <!-- Start of menu bar-->
 
-  <div ng-if="true" layout-padding  style="height: 80px;background-color: #f5f5f5;">
+  <div ng-if="isPageFullyLoaded && angular_is_ready" layout-padding  style="height: 80px;background-color: #f5f5f5;">
     <div  layout="row" class="gutter_90" layout-align="space-between ">
 
       <div >
-        <a ui-sref="welcome"><img src="<%= asset_url 'small_logo.jpg' %>" alt="learn your lesson"></a>
+        <a ng-href="/welcome"><img src="<%= asset_url 'small_logo.jpg' %>" alt="learn your lesson"></a>
       </div>
 
       <div ng-if="false" hide-xs  ui-sref-active="active_bla" class="margin_t_10">
@@ -23,7 +23,7 @@
            </span>
            <md-menu-content width="4">
              <md-menu-item ng-repeat="s in subject_list_for_menu">
-              <md-button ui-sref="search({ name: s.name })">{{ s.name }}</md-button>
+              <md-button ng-href="/search/{{ s.name }}/">{{ s.name }}</md-button>
             </md-menu-item>
            </md-menu-content>
           </md-menu>
@@ -42,7 +42,7 @@
         <div ng-cloak ng-if="User && !User.is_teacher" ng-include="'includes/student_logged_in_menu.html'"></div>
 
         <div ng-cloak ng-if="!User" class="margin_t_10">
-          <span hide-xs>|</span><a class="black_text" ui-sref-active="active_bla"  ui-sref="register_teacher">&nbsp;Become a teacher&nbsp;</a>
+          <span hide-xs>|</span><a class="black_text" ui-sref-active="active_bla" ng-href="/register-teacher">&nbsp;Become a teacher&nbsp;</a>
         </div>
 
         <div ng-cloak class="margin_t_10 no_padding" ng-if="!User">
@@ -69,8 +69,8 @@
       </div> <!-- angular view rendered here -->
 
       <div class="bottom_bit" layout="row" layout-align="space-around none" ng-if="isPageFullyLoaded">
-        <div ><a class="white_text margin_r_10" ui-sref="contact">Contact Us</a></div>
-        <div ><a class="white_text" ui-sref="about">About Us</a></div>
+        <div ><a class="white_text margin_r_10" ng-href="/contact">Contact Us</a></div>
+        <div ><a class="white_text"ng-href="/about">About Us</a></div>
       </div>
     </md-content>
   </div>
