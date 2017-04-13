@@ -49,6 +49,7 @@ group :production do
   gem 'daemons'
   gem 'rails_12factor'
   gem 'unicorn-worker-killer'
+  gem 'prerender_rails'
 end
 
 group :development, :test do
