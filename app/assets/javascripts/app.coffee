@@ -167,8 +167,8 @@ angular.module('lessons').config [
   "$urlRouterProvider"
   "$locationProvider"
  ($stateProvider, $urlRouterProvider, $locationProvider ) ->
-  $locationProvider.hashPrefix('!')
-  # $locationProvider.html5Mode(true)
+ 
+  $locationProvider.html5Mode(true)
   
   # $stateProvider.state 'home',
   #   url: '/'

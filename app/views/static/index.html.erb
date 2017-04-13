@@ -1,7 +1,7 @@
 <div  class="main_page " ng-cloak layout="column" layout-fill ng-controller="NavController" >
   <!-- Start of menu bar-->
 
-  <div ng-if="isPageFullyLoaded && angular_is_ready" layout-padding  style="height: 80px;background-color: #f5f5f5;">
+  <div ng-if="true" layout-padding  style="height: 80px;background-color: #f5f5f5;">
     <div  layout="row" class="gutter_90" layout-align="space-between ">
 
       <div >
@@ -9,7 +9,7 @@
       </div>
 
       <div ng-if="false" hide-xs  ui-sref-active="active_bla" class="margin_t_10">
-        <a class="black_text margin_r_10" ui-sref-active="active_bla white_text" ui-sref="contact">Contact Us</a>
+        <a class="black_text margin_r_10" ui-sref-active="active_bla white_text" ng-href="/contact">Contact Us</a>
       </div>
 
       <div hide-xs flex-sm="18" flex-gt-sm="40"></div>
@@ -30,7 +30,7 @@
         </div>
 
         <div hide-xs  class="margin_t_10">
-          |<a class="black_text" ui-sref-active="active_bla" ui-sref="about">&nbsp;About Us&nbsp;</a>
+          |<a class="black_text" ui-sref-active="active_bla" ng-href="/about">&nbsp;About Us&nbsp;</a>
         </div>
 
         <!-- Teacher/User menu mess -->
