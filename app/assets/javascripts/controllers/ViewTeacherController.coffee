@@ -89,7 +89,7 @@ angular.module('lessons').controller( 'ViewTeacherController', [
 
     # set_og_tags = ->
     #   OG.set_tags( 
-    #     "https://www.learnyourlesson.ie/#/view-teacher/#{ $scope.teacher.id }", 
+    #     "https://www.learnyourlesson.ie/#!/view-teacher/#{ $scope.teacher.id }", 
     #     "Get a #{ $scope.subject_list } lesson with #{ $scope.teacher.first_name } #{ $scope.teacher.last_name }", 
     #     "profile", 
     #     "image", 

@@ -145,7 +145,7 @@ angular.module('lessons').controller( 'SearchController', [
             "position": i,
             "item": {
                 "@type": "Person",
-                "url": "https://www.learnyourlesson.ie/#/view-teacher/#{ teacher.id }",
+                "url": "https://www.learnyourlesson.ie/#!/view-teacher/#{ teacher.id }",
                 "brand": "LearnYourLesson",
                 "email": "#{ teacher.email }",
                 "familyName": "#{ teacher.last_name }",
