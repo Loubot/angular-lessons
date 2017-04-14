@@ -8,7 +8,7 @@ if Rails.env.production?
     }
     config.storage = :fog
     config.fog_directory = 'angular-lessons' # required
-    config.fog_public = false # optional, defaults to true
+    config.fog_public = true # optional, defaults to true
     config.fog_attributes = {'Cache-Control'=>'max-age=315576000'} #
 
     
