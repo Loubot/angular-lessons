@@ -18,6 +18,7 @@ Rails.application.routes.draw do
 
 
     get      'search'                     => "search#search"
+    get      'search-with-offset'          => "search#search_with_offset"
     get      'search-subjects'            => "search#search_subjects"
 
     post     'contact-us'                 => "static#contact_us"

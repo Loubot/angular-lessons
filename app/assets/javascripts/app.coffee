@@ -14,6 +14,7 @@ angular.module('lessons', [
   'validation.match'
   'ngMessages'
   'mdPickers'
+  'infinite-scroll'
 ])
 
 

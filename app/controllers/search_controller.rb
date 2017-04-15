@@ -7,6 +7,7 @@ class SearchController < ApplicationController
     
     begin
       teachers = search_query( search_params )
+      pp teachers
       render json: { teachers: teachers }
     rescue Geokit::Geocoders::GeocodeError
       render json: { errors: "Gecoder failed" }, status: 500
@@ -14,7 +15,17 @@ class SearchController < ApplicationController
   end
     
     
-    
+  def search_with_offset
+    teachers = []
+    subjects = Subject.includes( :teachers ).where( "NAME #{ ilike } ?", "%#{ params[ :subject_name ] }%").select( [ :name, :id ] )
+    subjects.all.each do |s| 
+      s.teachers.where( is_teacher: true ).includes( :photos, :location, :subjects ).offset( params[ :offset ] ).limit( 15 ).all.each do |t|
+        teachers << t
+      end
+    end
+    pp teachers
+    render json: { teachers: teachers }
+  end
     
   
 
@@ -36,7 +47,7 @@ class SearchController < ApplicationController
   private
 
     def search_params
-      params.permit( :subject_name, :county_name )
+      params.permit( :subject_name, :county_name, :offset )
     end
 
 

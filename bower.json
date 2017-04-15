@@ -27,6 +27,7 @@
     "mdPickers": "^0.7.5",
     "ng-token-auth": "^0.0.29",
     "ng-alertify": "^1.0.2",
-    "instantclick": "^3.1.0"
+    "instantclick": "^3.1.0",
+    "ngInfiniteScroll": "1.0.0"
   }
 }

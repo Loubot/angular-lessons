@@ -60,11 +60,11 @@ angular.module('lessons').controller( 'SearchController', [
       console.log "search teachers"
       set_params()
         
-      search_params = { subject_name: $scope.selected.subject_name, county_name: $scope.selected_county_name }
+      $scope.search_params = { subject_name: $scope.selected.subject_name, county_name: $scope.selected_county_name, offset: 0 }
       
       COMMS.GET(
         "/search"
-        search_params
+        $scope.search_params
       ).then( ( resp ) ->
         console.log resp
         Alertify.success "Found #{ resp.data.teachers.length } teacher(s)"
@@ -77,6 +77,22 @@ angular.module('lessons').controller( 'SearchController', [
       )
 
     $scope.search_teachers()
+
+    
+    $scope.addMoreItems = ->
+      console.log "addMoreItems"
+      $scope.search_params.offset = $scope.search_params.offset + 7
+      COMMS.GET(
+        "/search-with-offset"
+        $scope.search_params
+      ).then( ( resp ) ->
+        console.log resp
+        Alertify.success "Found #{ resp.data.teachers.length } teacher(s)"
+        $scope.teachers = resp.data.teachers
+      ).catch( ( err ) ->
+        console.log err
+        Alertify.error "Failed to find teachers"
+      )
 
     
 
