@@ -82,16 +82,11 @@ angular.module('lessons').controller( 'SearchController', [
 
     counter = 0
     $scope.addMoreItems = ->
-
-      console.log "busy #{ $scope.busy }"
       if $scope.busy == true
         return false
       else 
         counter += 1
         $scope.busy = true
-        console.log "set it #{ $scope.busy }"
-        console.log "addMoreItems #{ counter }"
-        console.log $scope.teachers
         $scope.search_params.offset = $scope.search_params.offset + 15
         COMMS.GET(
           "/search-with-offset"
