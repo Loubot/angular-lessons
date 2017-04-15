@@ -7,7 +7,7 @@ class SearchController < ApplicationController
     
     begin
       teachers = search_query( search_params )
-      pp teachers
+     
       render json: { teachers: teachers }
     rescue Geokit::Geocoders::GeocodeError
       render json: { errors: "Gecoder failed" }, status: 500
@@ -23,7 +23,8 @@ class SearchController < ApplicationController
         teachers << t
       end
     end
-    pp teachers
+    teachers = teachers.as_json(include: [ :photos, :location, :subjects ]).uniq
+    
     render json: { teachers: teachers }
   end
     

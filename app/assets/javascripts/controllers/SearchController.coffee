@@ -14,6 +14,8 @@ angular.module('lessons').controller( 'SearchController', [
   ( $scope, $rootScope, $state, $stateParams, $filter, COMMS, Alertify, $mdSidenav , counties, change_tags ) ->
     console.log "SearchController"
 
+    $scope.busy = false
+
     #Change title to match search
 
     run_change_tags = ->
@@ -78,21 +80,36 @@ angular.module('lessons').controller( 'SearchController', [
 
     $scope.search_teachers()
 
-    
+    counter = 0
     $scope.addMoreItems = ->
-      console.log "addMoreItems"
-      $scope.search_params.offset = $scope.search_params.offset + 7
-      COMMS.GET(
-        "/search-with-offset"
-        $scope.search_params
-      ).then( ( resp ) ->
-        console.log resp
-        Alertify.success "Found #{ resp.data.teachers.length } teacher(s)"
-        $scope.teachers = resp.data.teachers
-      ).catch( ( err ) ->
-        console.log err
-        Alertify.error "Failed to find teachers"
-      )
+
+      console.log "busy #{ $scope.busy }"
+      if $scope.busy == true
+        return false
+      else 
+        counter += 1
+        $scope.busy = true
+        console.log "set it #{ $scope.busy }"
+        console.log "addMoreItems #{ counter }"
+        console.log $scope.teachers
+        $scope.search_params.offset = $scope.search_params.offset + 15
+        COMMS.GET(
+          "/search-with-offset"
+          $scope.search_params
+        ).then( ( resp ) ->
+          # console.log resp
+          Alertify.success "Found #{ resp.data.teachers.length } teacher(s)"
+          for t in resp.data.teachers
+            $scope.teachers.push t
+          console.log $scope.teachers
+          setTimeout (->
+            $scope.busy = false if resp.data.teachers.length > 0
+          ), 500
+        ).catch( ( err ) ->
+          console.log err
+          Alertify.error "Failed to find teachers"
+        )
+
 
     
 

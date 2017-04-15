@@ -104,7 +104,9 @@
     <div>
       <div layout="row" layout-wrap class="grey_content" 
             infinite-scroll="addMoreItems()"  
-            infinite-scroll-container="'#scroll_hook'">
+            infinite-scroll-container="'#scroll_hook'"
+            infinite-scroll-disabled="busy"
+            infinite-scroll-immediate-check="false">
 
         <md-card 
             ng-repeat="teacher in teachers"
@@ -114,7 +116,7 @@
             >
           <md-card-title class="padding_10">
             <md-card-title-text class="margin_r_5">
-              <span class="md-headline">{{ teacher.first_name }} {{ teacher.last_name }}  </span>
+              <span class="md-headline">{{ teacher.email }}  </span>
               <span ng-if="teacher.location" class="md-subhead address">{{ teacher.location.address }}</span>
               <span ng-repeat="subject in teacher.subjects">{{ subject.name }}</span>
             </md-card-title-text>
