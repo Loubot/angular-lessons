@@ -35,6 +35,7 @@ end
 
 Teacher.all.each do |t|
   t.subjects << Subject.first
+  Location.create( address: "Dublin", county: "Co. Dublin", teacher_id: t.id ) if t.id > 3
 end
 
 Teacher.last.subjects << Subject.last

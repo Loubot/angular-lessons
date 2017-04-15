@@ -16,6 +16,8 @@ angular.module('lessons').controller( 'SearchController', [
 
     $scope.busy = false
 
+    alertify_once = false
+
     #Change title to match search
 
     run_change_tags = ->
@@ -70,6 +72,7 @@ angular.module('lessons').controller( 'SearchController', [
       ).then( ( resp ) ->
         console.log resp
         Alertify.success "Found #{ resp.data.teachers.length } teacher(s)"
+        alertify_once = true
         $scope.teachers = resp.data.teachers
         define_json()
         $scope.search_nav_opened = false
@@ -89,11 +92,12 @@ angular.module('lessons').controller( 'SearchController', [
         $scope.busy = true
         $scope.search_params.offset = $scope.search_params.offset + 15
         COMMS.GET(
-          "/search-with-offset"
+          "/search"
           $scope.search_params
         ).then( ( resp ) ->
           # console.log resp
-          Alertify.success "Found #{ resp.data.teachers.length } teacher(s)"
+          Alertify.success "Found #{ resp.data.teachers.length } teacher(s)" if !alertify_once
+
           for t in resp.data.teachers
             $scope.teachers.push t
           console.log $scope.teachers
