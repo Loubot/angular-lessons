@@ -90,7 +90,7 @@ angular.module('lessons').controller( 'SearchController', [
       else 
         counter += 1
         $scope.busy = true
-        $scope.search_params.offset = $scope.search_params.offset + 15
+        $scope.search_params.offset = $scope.search_params.offset += <%= ENV['OFFSET'] %>
         COMMS.GET(
           "/search"
           $scope.search_params
