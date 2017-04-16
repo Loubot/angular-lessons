@@ -90,7 +90,10 @@ angular.module('lessons').controller( 'SearchController', [
       else 
         counter += 1
         $scope.busy = true
-        $scope.search_params.offset = $scope.search_params.offset += 7
+        #  !!!!!!!!!!!!!!!  Important !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        #  ENV variable TEACHER_LIMIT tied to offset                     #
+        #  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        $scope.search_params.offset = $scope.search_params.offset += 7 #ENV TEACHER_LIMIT must be changed!!!!
         COMMS.GET(
           "/search"
           $scope.search_params

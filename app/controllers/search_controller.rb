@@ -19,7 +19,7 @@ class SearchController < ApplicationController
     teachers = []
     subjects = Subject.includes( :teachers ).where( "NAME #{ ilike } ?", "%#{ params[ :subject_name ] }%").select( [ :name, :id ] )
     subjects.all.each do |s| 
-      s.teachers.where( is_teacher: true ).includes( :photos, :location, :subjects ).offset( params[ :offset ] ).limit( 15 ).all.each do |t|
+      s.teachers.where( is_teacher: true ).includes( :photos, :location, :subjects ).offset( params[ :offset ] ).limit( ENV[' TEACHER_LIMIT' ] ).all.each do |t|
         teachers << t
       end
     end
