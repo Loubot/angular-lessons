@@ -37,7 +37,7 @@ module SearchHelper
     teachers = []
     subjects = Subject.includes( :teachers ).where( "NAME #{ ilike } ?", "%#{ params[ :subject_name ] }%").select( [ :name, :id ] )
     subjects.all.each do |s| 
-      s.teachers.where( is_teacher: true ).includes( :photos, :location, :subjects ).limit( ENV['TEACHER_LIMIT'] ).offset( params[ :offset ] ).all.each do |t|
+      s.teachers.where( is_teacher: true ).includes( :photos, :location, :subjects ).limit( ENV['TEACHER_LIMIT'] ).offset( params[ :offset ] ).order('id DESC').all.each do |t|
         teachers << t
       end
     end
@@ -52,7 +52,7 @@ module SearchHelper
     ids = run_geo_locate()
      subjects = Subject.where( "NAME #{ ilike } ?", "%#{ params[ :subject_name ] }%" ).select( [ :name, :id ] )
       subjects.all.each do |s| 
-        s.teachers.where( is_teacher: true).includes( :photos, :location, :subjects ).limit( ENV[ 'TEACHER_LIMIT' ] ).offset( params[ :offset ] ).where( id: ids ).all.each do |t|
+        s.teachers.where( is_teacher: true).includes( :photos, :location, :subjects ).limit( ENV[ 'TEACHER_LIMIT' ] ).offset( params[ :offset ] ).order('id DESC').where( id: ids ).all.each do |t|
           teachers << t
         end
       end
