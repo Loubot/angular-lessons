@@ -85,13 +85,12 @@ angular.module('lessons').controller( 'SearchController', [
 
     counter = 0
     $scope.addMoreItems = ->
-      console.log "limit #{ ENV['TEACHER_LIMIT']}"
       if $scope.busy == true
         return false
       else 
         counter += 1
         $scope.busy = true
-        $scope.search_params.offset = $scope.search_params.offset += "<%= ENV['TEACHER_LIMIT'] %>"
+        $scope.search_params.offset = $scope.search_params.offset += 7
         COMMS.GET(
           "/search"
           $scope.search_params
