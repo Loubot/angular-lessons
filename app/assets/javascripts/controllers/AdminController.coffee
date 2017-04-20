@@ -100,7 +100,6 @@ angular.module('lessons').controller('AdminController', [
     # End of facebook share stuff
 
     $scope.create_category = ->
-      console.log "hup"
       COMMS.POST(
         "/category"
         name: $scope.name

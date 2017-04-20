@@ -63,8 +63,10 @@
   <md-content class="margin_t_10 white_background">
     <md-toolbar>
       <div class="md-toolbar-tools">
-        <span layout-margin ng-click="fetch_teachers()">List of teachers <span ng-if="teachers">{{ teachers.length }}</span><i class="material-icons">touch_app</i></span>
-        
+        <span layout-margin ng-click="fetch_teachers()" flex>
+          List of teachers <span ng-if="teachers">{{ teachers.length }}</span><i class="material-icons">touch_app</i>
+        </span>
+        <span nf-if="teachers">Refine Teachers</span>
       </div>
       
     </md-toolbar>
