@@ -237,11 +237,9 @@ angular.module('lessons').controller('AdminController', [
           if teacher.location? and teacher.location.county == $scope.selection.county
             $scope.teachers.push teacher
       else if $scope.selection.subject?
-        console.log $scope.selection.subject.name
         for teacher in $scope.original_teachers
           if teacher.subjects?
             for subject in teacher.subjects
-              console.log subject.name
               if subject.name == $scope.selection.subject.name
                 $scope.teachers.push teacher
 
