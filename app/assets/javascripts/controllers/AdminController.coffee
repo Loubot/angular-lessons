@@ -8,13 +8,16 @@ angular.module('lessons').controller('AdminController', [
   "COMMS"
   "Alertify"
   "$mdDialog"
+  "counties"
 
-  ( $scope, $rootScope, auth, $state, COMMS, Alertify, $mdDialog ) ->
+  ( $scope, $rootScope, auth, $state, COMMS, Alertify, $mdDialog, counties ) ->
     console.log "AdminController"
 
 
     $scope.page_size = 10
     $scope.current_page = 1
+    $scope.selection = {}
+    $scope.counties = counties.county_list()
       
 
     $scope.show_teachers = false
@@ -39,6 +42,7 @@ angular.module('lessons').controller('AdminController', [
         ).then( ( resp ) ->
           console.log resp
           $scope.teachers = resp.data.teachers
+          $scope.original_teachers = $scope.teachers
           $scope.$digest
           Alertify.success "Got teachers list"
         ).catch( ( err ) ->
@@ -216,5 +220,38 @@ angular.module('lessons').controller('AdminController', [
     $scope.close_dialog = ->
       $mdDialog.hide()
 
+    ### Sorting teachers stuff ###
+    $scope.filter = ->      
+      $scope.teachers = []
+
+      if $scope.selection.county? and $scope.selection.subject?
+        for teacher in $scope.original_teachers
+          if teacher.location? and teacher.location.county == $scope.selection.county and teacher.subjects?
+            for subject in teacher.subjects
+              if subject.name == $scope.selection.subject.name
+                $scope.teachers.push teacher
+
+
+      else if $scope.selection.county?
+        for teacher in $scope.original_teachers
+          if teacher.location? and teacher.location.county == $scope.selection.county
+            $scope.teachers.push teacher
+      else if $scope.selection.subject?
+        console.log $scope.selection.subject.name
+        for teacher in $scope.original_teachers
+          if teacher.subjects?
+            for subject in teacher.subjects
+              console.log subject.name
+              if subject.name == $scope.selection.subject.name
+                $scope.teachers.push teacher
+
+
+    $scope.clear = ->
+      $scope.selection.county = null
+      $scope.selection.subject = null
+      $scope.teachers = $scope.original_teachers
+
+
+    ### End of sorting teachers stuff###
 
 ])

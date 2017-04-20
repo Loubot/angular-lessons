@@ -66,11 +66,30 @@
         <span layout-margin ng-click="fetch_teachers()" flex>
           List of teachers <span ng-if="teachers">{{ teachers.length }}</span><i class="material-icons">touch_app</i>
         </span>
-        <span nf-if="teachers">Refine Teachers</span>
-      </div>
-      
+        
+      </div>      
     </md-toolbar>
-    <div ng-if="teachers">
+
+    <div ng-if="teachers" class="cssFade" layout="row" layout-align="space-around center">
+
+      <div>
+        <md-select ng-model="selection.county" placeholder="County" ng-change="filter()">
+          <md-option ng-value="county" ng-repeat="county in counties">{{ county }}</md-option>
+        </md-select>
+      </div>
+
+      <div>
+        <md-select ng-model="selection.subject" placeholder="Subject" ng-change="filter()">
+          <md-option ng-value="subject" ng-repeat="subject in subject_list_for_menu">{{ subject.name }}</md-option>
+        </md-select>
+      </div>
+
+      <div>
+        <md-button ng-click="clear()">Clear</md-button>
+      </div>
+
+    </div> <!-- end of row -->
+    <div ng-if="teachers" class="cssFade">
       <md-list>
         <md-list-item                
               class="md-2-line"
