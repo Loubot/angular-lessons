@@ -48,7 +48,6 @@ angular.module('lessons').controller( 'SearchController', [
 
 
     set_params = ->
-      console.log 'jup' 
       $state.transitionTo(
         'search',
         { name: $scope.selected.subject_name, location: $scope.selected_county_name  }
@@ -85,6 +84,7 @@ angular.module('lessons').controller( 'SearchController', [
 
     counter = 0
     $scope.addMoreItems = ->
+      console.log 'hup'
       if $scope.busy == true
         return false
       else 
