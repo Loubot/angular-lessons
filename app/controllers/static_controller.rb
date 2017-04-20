@@ -20,6 +20,11 @@ class StaticController < ApplicationController
     render json: { message: "Sent ok" }, status: 200
   end
 
+  def robots
+    respond_to :text
+    expires_in 6.hours, public: true
+  end
+
   private
     def message_params
       params.permit( :text, :name, :email )
