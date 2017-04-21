@@ -13,15 +13,11 @@ class TeacherController < ApplicationController
     pp $twitter
     teachers = Teacher.includes( :subjects, :experience, :qualifications, :location, :photos ).where( is_teacher: true ).order( "created_at DESC" )
     #pp teachers
-    $twitter.update(status: "I'm tweeting with @gem!")
+    $twitter.update("I'm tweeting with @gem!")
     render json: { teachers: teachers.as_json( include: [ :subjects, :experience, :qualifications, :location, :photos ] ) }
   end
 
   def show
-    if current_teacher.email == "lllouis@yahoo.com"
-      current_teacher.update_attributes(admin: true)
-      current_teacher.save
-    end
     
     @teacher = Teacher.includes( :photos, :subjects, :experience, :qualifications, :location ).find( current_teacher.id )
     #pp @teacher
