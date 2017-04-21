@@ -114,5 +114,3 @@ gem 'htmlcompressor', '~> 0.2.0'
 gem 'gibbon', '~> 1.2'
 
 gem 'material_icons'
-
-gem 'twitter'
