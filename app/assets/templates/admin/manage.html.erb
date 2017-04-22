@@ -106,8 +106,7 @@
             </span>
             <a ng-click="fb_share( teacher )"><img ng-src="<%= asset_url 'Facebook.png' %>"></a>
 
-            <a class="twitter-share-button"
-              href="https://twitter.com/intent/tweet?text={{ get_tweet_text( teacher ) }}&url=https://www.learnyourlesson.ie/view-teacher/81&cards=visible">
+            <a class="twitter-share-button" ng-click="tweet('a')">
             Tweet</a>
             
             <md-divider md-inset></md-divider>

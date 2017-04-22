@@ -9,8 +9,9 @@ angular.module('lessons').controller('AdminController', [
   "Alertify"
   "$mdDialog"
   "counties"
+  "change_tags"
 
-  ( $scope, $rootScope, auth, $state, COMMS, Alertify, $mdDialog, counties ) ->
+  ( $scope, $rootScope, auth, $state, COMMS, Alertify, $mdDialog, counties, change_tags ) ->
     console.log "AdminController"
 
 
@@ -103,6 +104,44 @@ angular.module('lessons').controller('AdminController', [
 
     # End of facebook share stuff
 
+    ### Tweet stuff ###
+    get_address = ( teacher ) ->
+      if !teacher.location?
+        return false
+      else if teacher.location.address?
+        return teacher.location.address
+      else if teacher.location.county?
+        return teacher.location.county
+      else
+        return "Ireland"
+
+    $scope.get_tweet_text = ( teacher ) ->
+      """#{ teacher.first_name } #{ teacher.last_name } offering #{ subject_list } lessons in #{ get_address( teacher ) }. Contact them now to arrange a lesson."""
+
+    $scope.tweet = ( teacher ) -> # ( title )
+      $.ajax(
+        type: 'POST'
+        url: 'https://api.twitter.com/1.1/statuses/update.json'
+        status: 'this is a test'
+        dataType: 'jsonp'
+      ).done( ( res ) ->
+        console.log res
+      ).fail( ( err ) ->
+        console.log err
+      )
+
+
+      # subject_list = create_subjects_list( teacher )
+      # change_tags.set_twitter_tags(
+      #   "#{ subject_list } lessons",
+      #   """#{ teacher.first_name } #{ teacher.last_name } offering #{ subject_list } lessons in #{ get_address( teacher ) }. Contact them now to arrange a lesson."""
+      # )
+
+      # twttr.widgets.createTweet(1,document.getElementById('teacher_container'),align: 'left').then (el) ->
+      #   console.log 'Tweet displayed.'
+      #   return
+
+    ### End of tweet stuff ###
 
     $scope.create_category = ->
       COMMS.POST(
