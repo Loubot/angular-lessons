@@ -68,10 +68,10 @@ angular.module('lessons').controller('AdminController', [
     create_subjects_list = ( teacher ) ->
       $scope.subject_list = ""
       for s, i in teacher.subjects
-        $scope.subject_list = "#{ $scope.subject_list }#{ s.name }"
-        $scope.subject_list = "#{ $scope.subject_list }, " if teacher.subjects.length >= 1 and i != teacher.subjects.length - 1
-      $scope.subject_list = "#{ $scope.subject_list }"
-      return $scope.subject_list
+        subject_list = "#{ subject_list }#{ s.name }"
+        subject_list = "#{ subject_list }, " if teacher.subjects.length >= 1 and i != teacher.subjects.length - 1
+      subject_list = "#{ subject_list }"
+      return subject_list
 
     set_profile = ( teacher ) ->
       return "https://s3-eu-west-1.amazonaws.com/angular-lessons/static_assets/facebook_logo.jpg" if teacher.photos? && teacher.photos.length == 0
@@ -115,12 +115,19 @@ angular.module('lessons').controller('AdminController', [
       else
         return "Ireland"
 
+    $scope.get_tweet_text = ( teacher ) ->
+      """#{ teacher.first_name } #{ teacher.last_name } offering #{ create_subjects_list( teacher ) } lessons in #{ get_address( teacher ) }. Contact them now to arrange a lesson."""
+
     $scope.tweet = ( teacher ) -> # ( title )
       subject_list = create_subjects_list( teacher )
       change_tags.set_twitter_tags(
         "#{ subject_list } lessons",
         """#{ teacher.first_name } #{ teacher.last_name } offering #{ subject_list } lessons in #{ get_address( teacher ) }. Contact them now to arrange a lesson."""
       )
+
+      twttr.widgets.createTweet(1,document.getElementById('teacher_container'),align: 'left').then (el) ->
+        console.log 'Tweet displayed.'
+        return
 
     ### End of tweet stuff ###
 

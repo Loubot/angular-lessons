@@ -89,7 +89,7 @@
       </div>
 
     </div> <!-- end of row -->
-    <div ng-if="teachers" class="cssFade">
+    <div ng-if="teachers" class="cssFade" id="teacher_container">
       <md-list>
         <md-list-item                
               class="md-2-line"
@@ -105,7 +105,11 @@
               <span>Quals {{ (teacher.qualifications.length ) }}</span> ||
             </span>
             <a ng-click="fb_share( teacher )"><img ng-src="<%= asset_url 'Facebook.png' %>"></a>
-            <a ng-click="tweet( teacher )">Tweet</a>
+
+            <a class="twitter-share-button"
+              href="https://twitter.com/intent/tweet?text={{ get_tweet_text( teacher ) }}">
+            Tweet</a>
+            
             <md-divider md-inset></md-divider>
           </div>
         </md-list-item>
