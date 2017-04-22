@@ -75,6 +75,7 @@ angular.module('lessons').factory 'change_tags', [
       $('head').append('<meta name="twitter:site" content="@LearnYLesson" class="twitter_meta">')
       $('head').append("""<meta name="twitter:title" content="#{ title }" class="twitter_meta">""")
       $('head').append("""<meta name="twitter:description" content="#{ description }" class="twitter_meta">""")
+      $('head').append("""<meta name="twitter:image" content="https://angular-lessons.s3-eu-west-1.amazonaws.com/uploads/photo/avatar/49/15355781_1384871084857827_6348996694857614271_n.jpg?X-Amz-Expires=600&X-Amz-Date=20170422T140002Z&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAJSLYTZXICEURPCAA/20170422/eu-west-1/s3/aws4_request&X-Amz-SignedHeaders=host&X-Amz-Signature=f19472d5154697204f471cf8f847a9cb442986606eaeb13d97552b677a0e1e32">""")
       return true
 
 ]
