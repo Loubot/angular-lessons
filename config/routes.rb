@@ -65,6 +65,7 @@ Rails.application.routes.draw do
   end
 
   get '/robots.:format' => 'static#robots'
+  get '/blog/robots.:format' => 'static#robots'
   get '/sitemap.xml.gz', to: redirect("https://#{ENV['FOG_DIRECTORY']}.s3.amazonaws.com/sitemap.xml.gz"), as: :sitemap
   get '*path'   , to: 'static#index'
   root to: 'static#index'

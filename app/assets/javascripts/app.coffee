@@ -40,7 +40,6 @@ angular.module('lessons').run ( $rootScope ) ->
   angular.element(document).ready ->
     $rootScope.angular_is_ready = true
     # $('.main_page').removeClass( 'invisible' )
-    # InstantClick.init();
 
 angular.module('lessons').config ( $authProvider ) ->
   $authProvider.configure({
