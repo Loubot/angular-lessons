@@ -12,8 +12,10 @@ class TeacherController < ApplicationController
   def show
     
     @teacher = Teacher.includes( :photos, :subjects, :experience, :qualifications, :location ).find( current_teacher.id )
-    # s = $client.upload(File.new(@teacher.photos.last.avatar.file.file))
+    # s = $client.upload(File.new(@teacher.photos.first.avatar.file.file))
     # pp "Think it's done #{ s }"
+    # x = $client.update({ status: "Is it done?", media_id: [s] })
+    # pp "Tweet done #{ x }"
     #pp @teacher
     render json: { teacher: @teacher.as_json( include: [ :photos, :subjects, :experience, :qualifications, :location ] )
                   
