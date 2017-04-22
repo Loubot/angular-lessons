@@ -68,6 +68,15 @@ angular.module('lessons').factory 'change_tags', [
     set_description: ( new_description ) ->
       $('meta[name=description]').attr('content', new_description)
       return true
+
+    set_twitter_tags: ( title, description ) ->
+      $('.twitter_meta').remove()
+      $('head').append('<meta name="twitter:card" content="summary_large_image" class="twitter_meta">')
+      $('head').append('<meta name="twitter:site" content="@LearnYLesson" class="twitter_meta">')
+      $('head').append("""<meta name="twitter:title" content="#{ title }" class="twitter_meta">""")
+      $('head').append("""<meta name="twitter:description" content="#{ description }" class="twitter_meta">""")
+      return true
+
 ]
 
 angular.module('lessons').service 'OG', ->

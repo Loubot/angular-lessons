@@ -9,8 +9,9 @@ angular.module('lessons').controller('AdminController', [
   "Alertify"
   "$mdDialog"
   "counties"
+  "change_tags"
 
-  ( $scope, $rootScope, auth, $state, COMMS, Alertify, $mdDialog, counties ) ->
+  ( $scope, $rootScope, auth, $state, COMMS, Alertify, $mdDialog, counties, change_tags ) ->
     console.log "AdminController"
 
 
@@ -70,6 +71,7 @@ angular.module('lessons').controller('AdminController', [
         $scope.subject_list = "#{ $scope.subject_list }#{ s.name }"
         $scope.subject_list = "#{ $scope.subject_list }, " if teacher.subjects.length >= 1 and i != teacher.subjects.length - 1
       $scope.subject_list = "#{ $scope.subject_list }"
+      return $scope.subject_list
 
     set_profile = ( teacher ) ->
       return "https://s3-eu-west-1.amazonaws.com/angular-lessons/static_assets/facebook_logo.jpg" if teacher.photos? && teacher.photos.length == 0
@@ -84,14 +86,13 @@ angular.module('lessons').controller('AdminController', [
       $scope.profile.avatar.url
 
     $scope.fb_share = ( teacher ) ->
-      console.log window.location
-      console.log {
-        method: 'feed'
-        href: "https://www.learnyourlesson.ie/#!/view-teacher/#{ teacher.id }"
-        picture: set_profile( teacher )
-        from: '534105600060664'
-        caption: "https://www.learnyourlesson.ie/#!/view-teacher/#{ teacher.id }"
-      }
+      # console.log {
+      #   method: 'feed'
+      #   href: "https://www.learnyourlesson.ie/#!/view-teacher/#{ teacher.id }"
+      #   picture: set_profile( teacher )
+      #   from: '534105600060664'
+      #   caption: "https://www.learnyourlesson.ie/#!/view-teacher/#{ teacher.id }"
+      # }
       FB.ui {
         method: 'feed',
         href: "https://www.learnyourlesson.ie/#!/view-teacher/#{ teacher.id }",
@@ -102,6 +103,26 @@ angular.module('lessons').controller('AdminController', [
         console.log response
 
     # End of facebook share stuff
+
+    ### Tweet stuff ###
+    get_address = ( teacher ) ->
+      if !teacher.location?
+        return false
+      else if teacher.location.address?
+        return teacher.location.address
+      else if teacher.location.county?
+        return teacher.location.county
+      else
+        return "Ireland"
+
+    $scope.tweet = ( teacher ) -> # ( title )
+      subject_list = create_subjects_list( teacher )
+      change_tags.set_twitter_tags(
+        "#{ subject_list } lessons",
+        """#{ teacher.first_name } #{ teacher.last_name } offering #{ subject_list } lessons in #{ get_address( teacher ) }. Contact them now to arrange a lesson."""
+      )
+
+    ### End of tweet stuff ###
 
     $scope.create_category = ->
       COMMS.POST(

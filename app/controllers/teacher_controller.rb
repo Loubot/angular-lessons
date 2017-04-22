@@ -10,7 +10,7 @@ class TeacherController < ApplicationController
   end
 
   def show
-    $client.update("https://www.learnyourlesson.ie/view-teacher/81")
+    # $client.update("https://www.learnyourlesson.ie/view-teacher/81")
     @teacher = Teacher.includes( :photos, :subjects, :experience, :qualifications, :location ).find( current_teacher.id )
     #pp @teacher
     render json: { teacher: @teacher.as_json( include: [ :photos, :subjects, :experience, :qualifications, :location ] )

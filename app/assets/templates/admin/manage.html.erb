@@ -104,7 +104,8 @@
               <span>Experience {{ (teacher.experience.length > 0) }}</span> ||
               <span>Quals {{ (teacher.qualifications.length ) }}</span> ||
             </span>
-            <span ng-click="fb_share( teacher )"><img ng-src="<%= asset_url 'Facebook.png' %>"></span>
+            <a ng-click="fb_share( teacher )"><img ng-src="<%= asset_url 'Facebook.png' %>"></a>
+            <a ng-click="tweet( teacher )">Tweet</a>
             <md-divider md-inset></md-divider>
           </div>
         </md-list-item>
@@ -122,3 +123,20 @@
     </div>
   </md-content>
 </md-content>
+
+<script>window.twttr = (function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0],
+    t = window.twttr || {};
+  if (d.getElementById(id)) return t;
+  js = d.createElement(s);
+  js.id = id;
+  js.src = "https://platform.twitter.com/widgets.js";
+  fjs.parentNode.insertBefore(js, fjs);
+
+  t._e = [];
+  t.ready = function(f) {
+    t._e.push(f);
+  };
+
+  return t;
+}(document, "script", "twitter-wjs"));</script>
