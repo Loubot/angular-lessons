@@ -12,12 +12,7 @@ class TeacherController < ApplicationController
   def show
     
     @teacher = Teacher.includes( :photos, :subjects, :experience, :qualifications, :location ).find( current_teacher.id )
-    # s = $client.upload(File.new(@teacher.photos.first.avatar.file.file))
-    # pp "Think it's done #{ s }"
-    x = $client.update_with_media("I am the king", File.new(@teacher.photos.last.avatar.file.file))
-    pp "I think it works #{ x }"
-    # pp "Tweet done #{ x }"
-    #pp @teacher
+    
     render json: { teacher: @teacher.as_json( include: [ :photos, :subjects, :experience, :qualifications, :location ] )
                   
                   }
@@ -40,7 +35,23 @@ class TeacherController < ApplicationController
     render json: {  teacher: @teacher.as_json( include: [ :photos, :subjects, :experience, :qualifications, :location ] )
                     
                   }
+  end
 
+  def tweet_teacher
+    teacher = Teacher.find( params[ :teacher_id ] )
+    if teacher.profile != nil
+      s = $client.update_with_media( 'ANother test with pic', File.new(Photo.find( teacher.profile ).avatar.file.file ) )
+
+      render json: { message: s }
+    else
+      rener json: { error: "Can't do it" }
+    end
+    # s = $client.upload(File.new(@teacher.photos.first.avatar.file.file))
+    # pp "Think it's done #{ s }"
+    # x = $client.update_with_media("I am the king", File.new(@teacher.photos.last.avatar.file.file))
+    # pp "I think it works #{ x }"
+    # pp "Tweet done #{ x }"
+    #pp @teacher
   end
 
   def show_teacher
@@ -56,13 +67,6 @@ class TeacherController < ApplicationController
     end    
   end
 
-  def garda_vetting
-    # pp params[:file].original_filename
-    AdminMailer.garda_vetting( params, current_teacher.email ).deliver_now
-
-
-    render json: { message: 'a ok ' } and return
-  end
 
   def chunks
     render json: 'ok'
