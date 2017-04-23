@@ -80,20 +80,14 @@ angular.module('lessons').controller('AdminController', [
       $scope.profile.avatar.url
 
     $scope.fb_share = ( teacher ) ->
-      console.log window.location
-      console.log {
-        method: 'feed'
-        href: "https://www.learnyourlesson.ie/#!/view-teacher/#{ teacher.id }"
-        picture: set_profile( teacher )
-        from: '534105600060664'
-        caption: "https://www.learnyourlesson.ie/#!/view-teacher/#{ teacher.id }"
-      }
       FB.ui {
         method: 'feed',
-        href: "https://www.learnyourlesson.ie/#!/view-teacher/#{ teacher.id }",
-        picture: set_profile( teacher ),
+        display: 'popup',
+        link: "https://www.learnyourlesson.ie/#/view-teacher/#{ teacher.id }",
+        picture: "#{set_profile( teacher )}",
         from: '534105600060664',
-        caption: "https://www.learnyourlesson.ie/#!/view-teacher/#{ teacher.id }"
+        app_id: '734492879977460',
+        caption: "https://www.learnyourlesson.ie/#/view-teacher/#{ teacher.id }"
       }, (response) ->
         console.log response
 
