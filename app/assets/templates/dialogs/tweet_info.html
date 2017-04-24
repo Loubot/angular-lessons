@@ -4,12 +4,14 @@
     <form name="tweet_form" ng-submit="send_tweet()" novalidate>
       <md-input-container>
         <label>Tweet text</label>
-        <textarea name="tweet_text" ng-model="tweet_info.text" required md-maxlength="140" ng-value="create_subjects_list( tweeting_teacher )"></textarea>
+        <input name="tweet_text" ng-model="tweet_info.text" type="text" required md-maxlength="140" >
         
       </md-input-container>
 
       <input type="submit" value="tweet">
     </form>
+
+    <img ng-src="{{profile.avatar.url}}">
   <md-dialog-actions>
     <md-button ng-click="close_dialog()" class="md-primary">Close Dialog</md-button>
   </md-dialog-actions>

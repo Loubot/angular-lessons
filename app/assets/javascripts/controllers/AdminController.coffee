@@ -65,13 +65,17 @@ angular.module('lessons').controller('AdminController', [
 
     # Facebook share stuff
 
-    $scope.create_subjects_list = ( teacher ) ->
-      subject_list = ""
-      for s, i in teacher.subjects
-        subject_list = "#{ subject_list }#{ s.name }"
-        subject_list = "#{ subject_list }, " if teacher.subjects.length >= 1 and i != teacher.subjects.length - 1
-      # $scope.subject_list = "#{ $scope.subject_list }"
-      return "#{subject_list} lessons"
+    create_subjects_list = ( teacher ) ->
+      
+      if $scope.subject_list? and $scope.subject_list == ""
+        console.log teacher
+        for s, i in teacher.subjects
+          $scope.subject_list = "#{ $scope.subject_list }#{ s.name }"
+          $scope.subject_list = "#{ $scope.subject_list }, " if teacher.subjects.length >= 1 and i != teacher.subjects.length - 1
+        # $scope.subject_list = "#{ $scope.subject_list }"
+        $scope.tweet_info.text = "#{$scope.subject_list} lessons"
+        console.log $scope.tweet_info.text
+        return "#{$scope.subject_list} lessons"
 
     set_profile = ( teacher ) ->
       return "https://s3-eu-west-1.amazonaws.com/angular-lessons/static_assets/facebook_logo.jpg" if teacher.photos? && teacher.photos.length == 0
@@ -102,6 +106,7 @@ angular.module('lessons').controller('AdminController', [
     ### Tweet stuff ###
 
     $scope.tweet = ( teacher ) ->
+      $scope.subject_list = ""
       $scope.tweeting_teacher = teacher
       $scope.tweet_info = {} # initialise tweet_info for form in dialogs/tweet_info.html
       $scope.tweet_info.id = teacher.id
@@ -109,6 +114,9 @@ angular.module('lessons').controller('AdminController', [
         templateUrl: "dialogs/tweet_info.html"
         scope: $scope
         preserveScope: true
+        onShowing: ->
+          create_subjects_list( teacher )
+          set_profile( teacher )
       )
     
     $scope.send_tweet = -> # ( title )
