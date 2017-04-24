@@ -8,7 +8,7 @@ class AdminController < ApplicationController
     if teacher.profile == nil
       x = $client.update( tweet_params[ :tweet ][ :text ] )
     else
-      require 'open-uri'
+      require './lib/image.rb' 
       image = Twitter::Image.open_from_url( Photo.find( teacher.profile ).avatar.url ) 
       
       
