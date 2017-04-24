@@ -7,7 +7,10 @@ class AdminController < ApplicationController
     if teacher.profile == nil
       x = $client.update( tweet_params[ :tweet ][ :text ] )
     else
-      x = $client.update_with_media( tweet_params[ :tweet ][ :text ], File.new( Photo.find( teacher.profile ).avatar.file.file ) )
+      file = Photo.find( teacher.profile ).avatar.url
+      pp file
+      x = 'aok'
+      # x = $client.update_with_media( tweet_params[ :tweet ][ :text ], file )
     end
     render json: { tweet_response: x }
   end
