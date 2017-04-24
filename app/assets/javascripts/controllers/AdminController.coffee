@@ -127,8 +127,10 @@ angular.module('lessons').controller('AdminController', [
         tweet: $scope.tweet_info
       ).then( ( resp ) ->
         console.log resp
+        $scope.close_dialog()
       ).catch( ( err ) ->
         console.log err
+        $scope.close_dialog()
       )
 
     ### End of tweet stuff ###
