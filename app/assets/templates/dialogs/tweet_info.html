@@ -1,17 +1,26 @@
 <md-dialog aria-label="teacher dialog" class="min_width_400" layout-padding>
 
   <md-dialog-content>
-    <form name="tweet_form" ng-submit="send_tweet()" novalidate>
-      <md-input-container>
-        <label>Tweet text</label>
-        <input name="tweet_text" ng-model="tweet_info.text" type="text" required md-maxlength="140" >
-        
-      </md-input-container>
+    <form name="tweet_form" ng-submit="send_tweet()" class="margin_b_10" novalidate layout="column">
+      <div>
+        <md-input-container class="width_100">
+          <label>Tweet text</label>
+          <input name="tweet_text" ng-model="tweet_info.text" type="text" required md-maxlength="140" >
+          
+        </md-input-container>
+      </div>
+      
+      <div>
+        <img class="width_50 margin_b_10" ng-src="{{profile.avatar.url}}">
+      </div>
+      
+      <div>
+        <md-input-container><input type="submit" value="tweet" class="md-button md-raised md-primary"></md-input-container>
+      </div>
 
-      <input type="submit" value="tweet">
     </form>
 
-    <img ng-src="{{profile.avatar.url}}">
+    
   <md-dialog-actions>
     <md-button ng-click="close_dialog()" class="md-primary">Close Dialog</md-button>
   </md-dialog-actions>

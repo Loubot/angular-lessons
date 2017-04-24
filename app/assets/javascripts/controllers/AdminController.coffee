@@ -64,6 +64,8 @@ angular.module('lessons').controller('AdminController', [
       )
 
     # Facebook share stuff
+    create_tweet_text = ( teacher ) ->
+      $scope.tweet_info.text =  "https://www.learnyourlesson.ie/view-teacher/#{ teacher.id }  #{ create_subjects_list( teacher ) }"
 
     create_subjects_list = ( teacher ) ->
       
@@ -73,8 +75,8 @@ angular.module('lessons').controller('AdminController', [
           $scope.subject_list = "#{ $scope.subject_list }#{ s.name }"
           $scope.subject_list = "#{ $scope.subject_list }, " if teacher.subjects.length >= 1 and i != teacher.subjects.length - 1
         # $scope.subject_list = "#{ $scope.subject_list }"
-        $scope.tweet_info.text = "#{$scope.subject_list} lessons"
-        console.log $scope.tweet_info.text
+        
+        
         return "#{$scope.subject_list} lessons"
 
     set_profile = ( teacher ) ->
@@ -115,7 +117,7 @@ angular.module('lessons').controller('AdminController', [
         scope: $scope
         preserveScope: true
         onShowing: ->
-          create_subjects_list( teacher )
+          create_tweet_text( teacher )
           set_profile( teacher )
       )
     
