@@ -3,13 +3,14 @@ class AdminController < ApplicationController
   before_action :check_admin
 
   def tweet
+    require 'open-uri'
     teacher = Teacher.find( tweet_params[ :tweet ][ :id ] )
     if teacher.profile == nil
       x = $client.update( tweet_params[ :tweet ][ :text ] )
     else
-      file = Photo.find( teacher.profile ).avatar.url
-      pp file
-      x = 'aok'
+      download << open( Photo.find( teacher.profile ).avatar.url )
+      x = IO.copy_stream( download, '~/image.png')
+      
       # x = $client.update_with_media( tweet_params[ :tweet ][ :text ], file )
     end
     render json: { tweet_response: x }
