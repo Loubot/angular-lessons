@@ -37,15 +37,6 @@ class TeacherController < ApplicationController
                   }
   end
 
-  def tweet_teacher
-    render json: { error: "Can't do it" }
-    # s = $client.upload(File.new(@teacher.photos.first.avatar.file.file))
-    # pp "Think it's done #{ s }"
-    # x = $client.update_with_media("I am the king", File.new(@teacher.photos.last.avatar.file.file))
-    # pp "I think it works #{ x }"
-    # pp "Tweet done #{ x }"
-    #pp @teacher
-  end
 
   def show_teacher
     teacher = Teacher.includes( :photos, :subjects, :location, :experience, :qualifications )\
