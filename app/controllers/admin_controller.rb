@@ -9,10 +9,10 @@ class AdminController < ApplicationController
       x = $client.update( tweet_params[ :tweet ][ :text ] )
     else
       require 'open-uri'
-      x = open( Photo.find( teacher.profile ).avatar.url ).read
+      download = open( Photo.find( teacher.profile ).avatar.url ).read
       
       
-      # x = $client.update_with_media( tweet_params[ :tweet ][ :text ], file )
+      x = $client.update_with_media( tweet_params[ :tweet ][ :text ], download )
     end
     render json: { tweet_response: x }
   end
