@@ -65,13 +65,13 @@ angular.module('lessons').controller('AdminController', [
 
     # Facebook share stuff
 
-    create_subjects_list = ( teacher ) ->
-      $scope.subject_list = ""
+    $scope.create_subjects_list = ( teacher ) ->
+      subject_list = ""
       for s, i in teacher.subjects
-        $scope.subject_list = "#{ $scope.subject_list }#{ s.name }"
-        $scope.subject_list = "#{ $scope.subject_list }, " if teacher.subjects.length >= 1 and i != teacher.subjects.length - 1
-      $scope.subject_list = "#{ $scope.subject_list }"
-      return $scope.subject_list
+        subject_list = "#{ subject_list }#{ s.name }"
+        subject_list = "#{ subject_list }, " if teacher.subjects.length >= 1 and i != teacher.subjects.length - 1
+      # $scope.subject_list = "#{ $scope.subject_list }"
+      return "#{subject_list} lessons"
 
     set_profile = ( teacher ) ->
       return "https://s3-eu-west-1.amazonaws.com/angular-lessons/static_assets/facebook_logo.jpg" if teacher.photos? && teacher.photos.length == 0
@@ -86,13 +86,6 @@ angular.module('lessons').controller('AdminController', [
       $scope.profile.avatar.url
 
     $scope.fb_share = ( teacher ) ->
-      # console.log {
-      #   method: 'feed'
-      #   href: "https://www.learnyourlesson.ie/#!/view-teacher/#{ teacher.id }"
-      #   picture: set_profile( teacher )
-      #   from: '534105600060664'
-      #   caption: "https://www.learnyourlesson.ie/#!/view-teacher/#{ teacher.id }"
-      # }
       FB.ui {
         method: 'feed',
         display: 'popup',
@@ -107,10 +100,21 @@ angular.module('lessons').controller('AdminController', [
     # End of facebook share stuff
 
     ### Tweet stuff ###
+
+    $scope.tweet = ( teacher ) ->
+      $scope.tweeting_teacher = teacher
+      $scope.tweet_info = {} # initialise tweet_info for form in dialogs/tweet_info.html
+      $scope.tweet_info.id = teacher.id
+      $mdDialog.show(
+        templateUrl: "dialogs/tweet_info.html"
+        scope: $scope
+        preserveScope: true
+      )
     
-    $scope.tweet = ( id ) -> # ( title )
+    $scope.send_tweet = -> # ( title )
       COMMS.POST(
-        "/teacher/#{ id }/tweet-teacher"
+        "/tweet"
+        tweet: $scope.tweet_info
       ).then( ( resp ) ->
         console.log resp
       ).catch( ( err ) ->

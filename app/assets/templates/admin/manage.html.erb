@@ -104,10 +104,9 @@
               <span>Experience {{ (teacher.experience.length > 0) }}</span> ||
               <span>Quals {{ (teacher.qualifications.length ) }}</span> ||
             </span>
-            <a ng-click="fb_share( teacher )"><img ng-src="<%= asset_url 'Facebook.png' %>"></a>
+            <a class="cursor_hand" ng-click="fb_share( teacher )"><img ng-src="<%= asset_url 'Facebook.png' %>"></a>
 
-            <a class="twitter-share-button" ng-click="tweet( teacher.id )">
-            Tweet</a>
+            <a class="cursor_hand" ng-click="tweet( teacher )"><%= image_tag( asset_url('Twitter.png') ) %></a>
             
             <md-divider md-inset></md-divider>
           </div>

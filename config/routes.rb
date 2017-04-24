@@ -22,11 +22,13 @@ Rails.application.routes.draw do
     get      'search-subjects'            => "search#search_subjects"
 
     post     'contact-us'                 => "static#contact_us"
-    post      'message-bosses'            => 'conversation#message_bosses'
+    post     'message-bosses'             => 'conversation#message_bosses'
+
+    post     'tweet'                      => 'admin#tweet'
+
     resources :teacher, only: [ :index, :show, :update ] do
       get       'show-teacher'            => 'teacher#show_teacher'
       post      'add-subject'             => 'subject#add_subject'
-      post      'tweet-teacher'           => 'teacher#tweet_teacher'
 
       # post    'pic'                       => "photos#create"
       # delete  'delete-pic'                => "photos#destroy"

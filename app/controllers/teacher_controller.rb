@@ -38,14 +38,7 @@ class TeacherController < ApplicationController
   end
 
   def tweet_teacher
-    teacher = Teacher.find( params[ :teacher_id ] )
-    if teacher.profile != nil
-      s = $client.update_with_media( 'ANother test with pic', File.new(Photo.find( teacher.profile ).avatar.file.file ) )
-
-      render json: { message: s }
-    else
-      rener json: { error: "Can't do it" }
-    end
+    render json: { error: "Can't do it" }
     # s = $client.upload(File.new(@teacher.photos.first.avatar.file.file))
     # pp "Think it's done #{ s }"
     # x = $client.update_with_media("I am the king", File.new(@teacher.photos.last.avatar.file.file))
