@@ -9,6 +9,7 @@ class AdminController < ApplicationController
       x = $client.update( tweet_params[ :tweet ][ :text ] )
     else
       require 'open-uri'
+      p "url #{ Photo.find( teacher.profile ).avatar.url }"
       download = open( Photo.find( teacher.profile ).avatar.url ).read
       
       
