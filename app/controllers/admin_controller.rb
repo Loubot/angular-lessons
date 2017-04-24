@@ -8,7 +8,7 @@ class AdminController < ApplicationController
     if teacher.profile == nil
       x = $client.update( tweet_params[ :tweet ][ :text ] )
     else
-      download << open( Photo.find( teacher.profile ).avatar.url )
+      download = open( Photo.find( teacher.profile ).avatar.url )
       x = IO.copy_stream( download, '~/image.png')
       
       # x = $client.update_with_media( tweet_params[ :tweet ][ :text ], file )
