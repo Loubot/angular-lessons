@@ -50,7 +50,8 @@
     </form>
 
   </md-dialog-content>
-  <md-dialog-actions>
-    <md-button ng-click="close_dialog()" class="md-primary">Close Dialog</md-button>
+  <md-dialog-actions layout="row" layout-align="space-between">
+    <div><a ng-href="/reset-password" ng-click="close_dialog()" class="md-primary md-button">Forgot password</a></div>
+    <div><md-button ng-click="close_dialog()" class="md-primary">Close Dialog</md-button></div>
   </md-dialog-actions>
 </md-dialog>

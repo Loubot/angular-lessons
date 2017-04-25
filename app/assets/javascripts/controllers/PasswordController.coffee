@@ -23,6 +23,10 @@ angular.module('lessons').controller( "PasswordController", [
         console.log resp
         return
 
+    $rootScope.$on 'a-user-is-logged-in', ( event, teacher ) ->
+      console.log "user logged in"
+      $state.go("teacher", id: teacher.id)
+      
     $scope.$on 'auth:password-reset-request-success', (ev, data) ->
       Alertify.success 'Password reset instructions were sent to ' + data.email
       console.log ev

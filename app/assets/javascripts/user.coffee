@@ -201,9 +201,11 @@ angular.module('lessons').service 'auth', [
       $rootScope.$on 'auth:validation-success', ( e, v ) ->
         console.log 'validation success'
 
+
+
         if !$rootScope.User? && $rootScope.user.first_name?
           new User().then( ( res ) ->
-            # console.log $rootScope.User
+            $rootScope.$emit( "a-user-is-logged-in", $rootScope.User )
             $rootScope.isPageFullyLoaded = true
           ) 
         

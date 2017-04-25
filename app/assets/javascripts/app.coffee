@@ -296,11 +296,11 @@ angular.module('lessons').config [
       authenticate: [
         "auth"
         ( auth ) ->
-          auth.check_basic_validation()
+          auth.check_if_logged_in()
       ]
 
   $stateProvider.state 'reset_password',
-    url: '/reset-password/'
+    url: '/reset-password'
     templateUrl: 'password/reset_password.html'
     controller: "PasswordController"
     resolve:
