@@ -5,7 +5,13 @@
       <div>
         <md-input-container class="width_100">
           <label>Tweet text</label>
-          <input name="tweet_text" ng-model="tweet_info.text" type="text" required md-maxlength="140" >
+          <textarea ng-model="tweet_info.text"
+                    aria-label="Tweet text" 
+                    class="black_text" 
+                    md-maxlength="140" 
+                    name="tweet_text"  
+                    md-select-on-focus required>
+          </textarea>
           
         </md-input-container>
       </div>

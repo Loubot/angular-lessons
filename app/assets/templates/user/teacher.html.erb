@@ -19,11 +19,14 @@
         </md-card-header>
         <img ng-if="User.profile" ng-src="{{ User.profile_url }}" 
             class="md-card-image" 
-            alt="{{ User.first_name }} profile pic">
+            alt="{{ User.first_name }} profile pic"
+            >
 
         <img ng-if="!User.profile" ng-src="<%= asset_url('silhouette.jpg') %>"
-          class="md-card-image"
+          class="md-card-image cursor_hand"
           alt="No profile selected"
+          ng-model="file" 
+          ngf-select="User.upload_pic( file )"
         >
 
         <div class="margin_t_10 padding_10">
