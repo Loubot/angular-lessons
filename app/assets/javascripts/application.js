@@ -31,6 +31,7 @@
 //= require ui-bootstrap/ui-bootstrap-custom-tpls-2.4.0.min
 //= require moment/min/moment.min
 //= require mdPickers/dist/mdPickers.min
+//= require ngInfiniteScroll/build/ng-infinite-scroll.min
 //= require app
 //= require user
 //= require controllers/WelcomeController

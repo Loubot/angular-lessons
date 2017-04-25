@@ -12,7 +12,7 @@ class TeacherController < ApplicationController
   def show
     
     @teacher = Teacher.includes( :photos, :subjects, :experience, :qualifications, :location ).find( current_teacher.id )
-    #pp @teacher
+    
     render json: { teacher: @teacher.as_json( include: [ :photos, :subjects, :experience, :qualifications, :location ] )
                   
                   }
@@ -35,8 +35,8 @@ class TeacherController < ApplicationController
     render json: {  teacher: @teacher.as_json( include: [ :photos, :subjects, :experience, :qualifications, :location ] )
                     
                   }
-
   end
+
 
   def show_teacher
     teacher = Teacher.includes( :photos, :subjects, :location, :experience, :qualifications )\
@@ -51,13 +51,6 @@ class TeacherController < ApplicationController
     end    
   end
 
-  def garda_vetting
-    # pp params[:file].original_filename
-    AdminMailer.garda_vetting( params, current_teacher.email ).deliver_now
-
-
-    render json: { message: 'a ok ' } and return
-  end
 
   def chunks
     render json: 'ok'

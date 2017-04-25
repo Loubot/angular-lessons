@@ -62,21 +62,6 @@ angular.module('lessons').controller('NavController', [
       $auth.authenticate('facebook', {params: {resource_class: 'Teacher'}})
       # $auth.authenticate('facebook')
       
-    
-    ### Registration stuff ###
-    $scope.register_teacher = ->
-      
-      $scope.teacher.is_teacher = true if $scope.auth_type == 1
-      console.log $scope.teacher
-      console.log $scope.auth_type
-      auth.register( $scope.teacher ).then( ( resp ) ->
-        $mdSidenav('left').toggle()
-        
-        Alertify.success "Welcome #{ $rootScope.User.email }"
-      ).catch( ( err ) ->
-        console.log err
-        Alertify.error "Failed to register"
-      )
 
     $scope.register_student = ->
       $scope.student_form.confirm_password.$error.matching_password = false
@@ -105,8 +90,6 @@ angular.module('lessons').controller('NavController', [
         auth.register( $scope.student )
 
     $rootScope.$on 'auth:registered_user', ( user ) ->
-      console.log user
-      Alertify.success "Student account created"
       $scope.close_dialog()
 
     ### End of registration stuff ###

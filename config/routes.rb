@@ -18,14 +18,17 @@ Rails.application.routes.draw do
 
 
     get      'search'                     => "search#search"
+    get      'search-with-offset'          => "search#search_with_offset"
     get      'search-subjects'            => "search#search_subjects"
 
     post     'contact-us'                 => "static#contact_us"
-    post      'message-bosses'            => 'conversation#message_bosses'
+    post     'message-bosses'             => 'conversation#message_bosses'
+
+    post     'tweet'                      => 'admin#tweet'
+
     resources :teacher, only: [ :index, :show, :update ] do
       get       'show-teacher'            => 'teacher#show_teacher'
       post      'add-subject'             => 'subject#add_subject'
-      post      'garda-vetting'           => 'teacher#garda_vetting'
 
       # post    'pic'                       => "photos#create"
       # delete  'delete-pic'                => "photos#destroy"
@@ -62,9 +65,15 @@ Rails.application.routes.draw do
     # Define routes for Teacher within this block.
 
   end
-  
-  root to: 'static#index'
+  get 'oauth2/callback' => 'static#welcome'
+  as :teacher do
+    # Define routes for Teacher within this block.
+
+  end
+
   get '/robots.:format' => 'static#robots'
+  get '/blog/robots.:format' => 'static#robots'
   get '/sitemap.xml.gz', to: redirect("https://#{ENV['FOG_DIRECTORY']}.s3.amazonaws.com/sitemap.xml.gz"), as: :sitemap
-  get '*path'   , to: redirect("https://www.learnyourlesson.ie")
+  get '*path'   , to: 'static#index'
+  root to: 'static#index'
 end

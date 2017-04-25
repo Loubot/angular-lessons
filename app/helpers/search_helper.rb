@@ -36,11 +36,11 @@ module SearchHelper
   def return_teachers
     teachers = []
     subjects = Subject.includes( :teachers ).where( "NAME #{ ilike } ?", "%#{ params[ :subject_name ] }%").select( [ :name, :id ] )
-      subjects.all.each do |s| 
-        s.teachers.where( is_teacher: true ).includes( :photos, :location, :subjects ).all.each do |t|
-          teachers << t
-        end
+    subjects.all.each do |s| 
+      s.teachers.where( is_teacher: true ).includes( :photos, :location, :subjects ).offset( params[ :offset ] ).limit( ENV['TEACHER_LIMIT'] ).order('id DESC').all.each do |t|
+        teachers << t
       end
+    end
     
     teachers 
   end
@@ -52,7 +52,7 @@ module SearchHelper
     ids = run_geo_locate()
      subjects = Subject.where( "NAME #{ ilike } ?", "%#{ params[ :subject_name ] }%" ).select( [ :name, :id ] )
       subjects.all.each do |s| 
-        s.teachers.where( is_teacher: true).includes( :photos, :location, :subjects ).where( id: ids ).all.each do |t|
+        s.teachers.where( is_teacher: true).includes( :photos, :location, :subjects ).offset( params[ :offset ] ).limit( ENV[ 'TEACHER_LIMIT' ] ).order('id DESC').where( id: ids ).all.each do |t|
           teachers << t
         end
       end
@@ -69,7 +69,7 @@ module SearchHelper
 
   def run_geo_locate
     p "Running geo locate Distance: 20"
-    Location.within( 80, origin: params[ :county_name ] ).select( [ 'teacher_id' ] ).map( &:teacher_id )
+    Location.within( 10, origin: params[ :county_name ] ).select( [ 'teacher_id' ] ).map( &:teacher_id )
   end
 
 end

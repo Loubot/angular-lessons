@@ -4,7 +4,7 @@ class StaticController < ApplicationController
   end
 
   def index
-    
+    render layout: 'application'
   end
 
   def contact_us
@@ -18,6 +18,11 @@ class StaticController < ApplicationController
     
     
     render json: { message: "Sent ok" }, status: 200
+  end
+
+  def robots
+    respond_to :text
+    expires_in 6.hours, public: true
   end
 
   private

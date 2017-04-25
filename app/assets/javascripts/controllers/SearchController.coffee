@@ -14,6 +14,10 @@ angular.module('lessons').controller( 'SearchController', [
   ( $scope, $rootScope, $state, $stateParams, $filter, COMMS, Alertify, $mdSidenav , counties, change_tags ) ->
     console.log "SearchController"
 
+    $scope.busy = false
+
+    alertify_once = false
+
     #Change title to match search
 
     run_change_tags = ->
@@ -44,7 +48,6 @@ angular.module('lessons').controller( 'SearchController', [
 
 
     set_params = ->
-      console.log 'jup' 
       $state.transitionTo(
         'search',
         { name: $scope.selected.subject_name, location: $scope.selected_county_name  }
@@ -60,14 +63,15 @@ angular.module('lessons').controller( 'SearchController', [
       console.log "search teachers"
       set_params()
         
-      search_params = { subject_name: $scope.selected.subject_name, county_name: $scope.selected_county_name }
+      $scope.search_params = { subject_name: $scope.selected.subject_name, county_name: $scope.selected_county_name, offset: 0 }
       
       COMMS.GET(
         "/search"
-        search_params
+        $scope.search_params
       ).then( ( resp ) ->
         console.log resp
         Alertify.success "Found #{ resp.data.teachers.length } teacher(s)"
+        alertify_once = true
         $scope.teachers = resp.data.teachers
         define_json()
         $scope.search_nav_opened = false
@@ -77,6 +81,37 @@ angular.module('lessons').controller( 'SearchController', [
       )
 
     $scope.search_teachers()
+
+    counter = 0
+    $scope.addMoreItems = ->
+      console.log 'hup'
+      if $scope.busy == true
+        return false
+      else 
+        counter += 1
+        $scope.busy = true
+        #  !!!!!!!!!!!!!!!  Important !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        #  ENV variable TEACHER_LIMIT tied to offset                     #
+        #  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        $scope.search_params.offset = $scope.search_params.offset += 7 #ENV TEACHER_LIMIT must be changed!!!!
+        COMMS.GET(
+          "/search"
+          $scope.search_params
+        ).then( ( resp ) ->
+          # console.log resp
+          Alertify.success "Found #{ resp.data.teachers.length } teacher(s)" if !alertify_once
+
+          for t in resp.data.teachers
+            $scope.teachers.push t
+          console.log $scope.teachers
+          setTimeout (->
+            $scope.busy = false if resp.data.teachers.length > 0
+          ), 500
+        ).catch( ( err ) ->
+          console.log err
+          Alertify.error "Failed to find teachers"
+        )
+
 
     
 
@@ -145,7 +180,7 @@ angular.module('lessons').controller( 'SearchController', [
             "position": i,
             "item": {
                 "@type": "Person",
-                "url": "https://www.learnyourlesson.ie/#/view-teacher/#{ teacher.id }",
+                "url": "https://www.learnyourlesson.ie/#!/view-teacher/#{ teacher.id }",
                 "brand": "LearnYourLesson",
                 "email": "#{ teacher.email }",
                 "familyName": "#{ teacher.last_name }",

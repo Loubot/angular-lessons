@@ -28,6 +28,7 @@ module ConversationHelper
         current_teacher.email
       )
     else
+      return true
       delivered = ConversationMailer.send_message(
         to,
         from, 

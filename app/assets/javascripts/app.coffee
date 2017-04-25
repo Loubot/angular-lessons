@@ -14,6 +14,7 @@ angular.module('lessons', [
   'validation.match'
   'ngMessages'
   'mdPickers'
+  'infinite-scroll'
 ])
 
 
@@ -66,6 +67,17 @@ angular.module('lessons').factory 'change_tags', [
     set_description: ( new_description ) ->
       $('meta[name=description]').attr('content', new_description)
       return true
+
+    set_twitter_tags: ( title, description ) ->
+      console.log 'twitter'
+      $('.twitter_meta').remove()
+      $('head').append('<meta name="twitter:card" content="summary_large_image" class="twitter_meta">')
+      $('head').append('<meta name="twitter:site" content="@LearnYLesson" class="twitter_meta">')
+      $('head').append("""<meta name="twitter:title" content="#{ title }" class="twitter_meta">""")
+      $('head').append("""<meta name="twitter:description" content="#{ description }" class="twitter_meta">""")
+      $('head').append("""<meta name="twitter:image" content="https://angular-lessons.s3-eu-west-1.amazonaws.com/uploads/photo/avatar/49/15355781_1384871084857827_6348996694857614271_n.jpg?X-Amz-Expires=600&X-Amz-Date=20170422T140002Z&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAJSLYTZXICEURPCAA/20170422/eu-west-1/s3/aws4_request&X-Amz-SignedHeaders=host&X-Amz-Signature=f19472d5154697204f471cf8f847a9cb442986606eaeb13d97552b677a0e1e32">""")
+      return true
+
 ]
 
 angular.module('lessons').service 'OG', ->
@@ -166,7 +178,8 @@ angular.module('lessons').config [
   "$urlRouterProvider"
   "$locationProvider"
  ($stateProvider, $urlRouterProvider, $locationProvider ) ->
-  # $locationProvider.html5Mode(true)
+ 
+  $locationProvider.html5Mode({ enabled: true, requireBase: true })
   
   # $stateProvider.state 'home',
   #   url: '/'
@@ -182,7 +195,7 @@ angular.module('lessons').config [
 
   
   $stateProvider.state 'welcome',
-    url: '/welcome'
+    url: '/'
     templateUrl: "static/welcome.html"
     controller: "WelcomeController"
     resolve:
@@ -283,11 +296,11 @@ angular.module('lessons').config [
       authenticate: [
         "auth"
         ( auth ) ->
-          auth.check_basic_validation()
+          auth.check_if_logged_in()
       ]
 
   $stateProvider.state 'reset_password',
-    url: '/reset-password/'
+    url: '/reset-password'
     templateUrl: 'password/reset_password.html'
     controller: "PasswordController"
     resolve:
@@ -365,7 +378,7 @@ angular.module('lessons').config [
           auth.check_if_logged_in()
       ]
 
-  $urlRouterProvider.otherwise "/welcome"
+  $urlRouterProvider.otherwise "/"
   
 ]  
 

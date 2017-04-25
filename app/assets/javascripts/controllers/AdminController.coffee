@@ -8,13 +8,17 @@ angular.module('lessons').controller('AdminController', [
   "COMMS"
   "Alertify"
   "$mdDialog"
+  "counties"
+  "change_tags"
 
-  ( $scope, $rootScope, auth, $state, COMMS, Alertify, $mdDialog ) ->
+  ( $scope, $rootScope, auth, $state, COMMS, Alertify, $mdDialog, counties, change_tags ) ->
     console.log "AdminController"
 
 
     $scope.page_size = 10
     $scope.current_page = 1
+    $scope.selection = {}
+    $scope.counties = counties.county_list()
       
 
     $scope.show_teachers = false
@@ -39,6 +43,7 @@ angular.module('lessons').controller('AdminController', [
         ).then( ( resp ) ->
           console.log resp
           $scope.teachers = resp.data.teachers
+          $scope.original_teachers = $scope.teachers
           $scope.$digest
           Alertify.success "Got teachers list"
         ).catch( ( err ) ->
@@ -59,13 +64,20 @@ angular.module('lessons').controller('AdminController', [
       )
 
     # Facebook share stuff
+    create_tweet_text = ( teacher ) ->
+      $scope.tweet_info.text =  "https://www.learnyourlesson.ie/view-teacher/#{ teacher.id }  #{ create_subjects_list( teacher ) }"
 
     create_subjects_list = ( teacher ) ->
-      $scope.subject_list = ""
-      for s, i in teacher.subjects
-        $scope.subject_list = "#{ $scope.subject_list }#{ s.name }"
-        $scope.subject_list = "#{ $scope.subject_list }, " if teacher.subjects.length >= 1 and i != teacher.subjects.length - 1
-      $scope.subject_list = "#{ $scope.subject_list }"
+      
+      if $scope.subject_list? and $scope.subject_list == ""
+        console.log teacher
+        for s, i in teacher.subjects
+          $scope.subject_list = "#{ $scope.subject_list }#{ s.name }"
+          $scope.subject_list = "#{ $scope.subject_list }, " if teacher.subjects.length >= 1 and i != teacher.subjects.length - 1
+        # $scope.subject_list = "#{ $scope.subject_list }"
+        
+        
+        return "#{$scope.subject_list} lessons"
 
     set_profile = ( teacher ) ->
       return "https://s3-eu-west-1.amazonaws.com/angular-lessons/static_assets/facebook_logo.jpg" if teacher.photos? && teacher.photos.length == 0
@@ -83,18 +95,47 @@ angular.module('lessons').controller('AdminController', [
       FB.ui {
         method: 'feed',
         display: 'popup',
-        link: "https://www.learnyourlesson.ie/#/view-teacher/#{ teacher.id }",
+        link: "https://www.learnyourlesson.ie/view-teacher/#{ teacher.id }",
         picture: "#{set_profile( teacher )}",
         from: '534105600060664',
         app_id: '734492879977460',
-        caption: "https://www.learnyourlesson.ie/#/view-teacher/#{ teacher.id }"
+        caption: "https://www.learnyourlesson.ie/view-teacher/#{ teacher.id }"
       }, (response) ->
         console.log response
 
     # End of facebook share stuff
 
+    ### Tweet stuff ###
+
+    $scope.tweet = ( teacher ) ->
+      $scope.subject_list = ""
+      $scope.tweeting_teacher = teacher
+      $scope.tweet_info = {} # initialise tweet_info for form in dialogs/tweet_info.html
+      $scope.tweet_info.id = teacher.id
+      $mdDialog.show(
+        templateUrl: "dialogs/tweet_info.html"
+        scope: $scope
+        preserveScope: true
+        onShowing: ->
+          create_tweet_text( teacher )
+          set_profile( teacher )
+      )
+    
+    $scope.send_tweet = -> # ( title )
+      COMMS.POST(
+        "/tweet"
+        tweet: $scope.tweet_info
+      ).then( ( resp ) ->
+        console.log resp
+        $scope.close_dialog()
+      ).catch( ( err ) ->
+        console.log err
+        $scope.close_dialog()
+      )
+
+    ### End of tweet stuff ###
+
     $scope.create_category = ->
-      console.log "hup"
       COMMS.POST(
         "/category"
         name: $scope.name
@@ -211,5 +252,36 @@ angular.module('lessons').controller('AdminController', [
     $scope.close_dialog = ->
       $mdDialog.hide()
 
+    ### Sorting teachers stuff ###
+    $scope.filter = ->      
+      $scope.teachers = []
+
+      if $scope.selection.county? and $scope.selection.subject?
+        for teacher in $scope.original_teachers
+          if teacher.location? and teacher.location.county == $scope.selection.county and teacher.subjects?
+            for subject in teacher.subjects
+              if subject.name == $scope.selection.subject.name
+                $scope.teachers.push teacher
+
+
+      else if $scope.selection.county?
+        for teacher in $scope.original_teachers
+          if teacher.location? and teacher.location.county == $scope.selection.county
+            $scope.teachers.push teacher
+      else if $scope.selection.subject?
+        for teacher in $scope.original_teachers
+          if teacher.subjects?
+            for subject in teacher.subjects
+              if subject.name == $scope.selection.subject.name
+                $scope.teachers.push teacher
+
+
+    $scope.clear = ->
+      $scope.selection.county = null
+      $scope.selection.subject = null
+      $scope.teachers = $scope.original_teachers
+
+
+    ### End of sorting teachers stuff###
 
 ])

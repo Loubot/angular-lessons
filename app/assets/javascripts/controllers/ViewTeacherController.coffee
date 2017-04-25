@@ -89,7 +89,7 @@ angular.module('lessons').controller( 'ViewTeacherController', [
 
     # set_og_tags = ->
     #   OG.set_tags( 
-    #     "https://www.learnyourlesson.ie/#/view-teacher/#{ $scope.teacher.id }", 
+    #     "https://www.learnyourlesson.ie/#!/view-teacher/#{ $scope.teacher.id }", 
     #     "Get a #{ $scope.subject_list } lesson with #{ $scope.teacher.first_name } #{ $scope.teacher.last_name }", 
     #     "profile", 
     #     "image", 
@@ -148,6 +148,7 @@ angular.module('lessons').controller( 'ViewTeacherController', [
 
     
     run_change_tags = ->
+      console.log 
       title = ""
       if $scope.teacher.location && $scope.teacher.location.county?
 
@@ -160,6 +161,35 @@ angular.module('lessons').controller( 'ViewTeacherController', [
           title = "#{ title } #{ subject.name } lessons "
         
       change_tags.set_title title
+
+
+      ### Tweet stuff ###
+      get_address = ( teacher ) ->
+        if !teacher.location?
+          return false
+        else if teacher.location.address?
+          return teacher.location.address
+        else if teacher.location.county?
+          return teacher.location.county
+        else
+          return "Ireland"
+
+      
+      """#{ $scope.teacher.first_name } #{ $scope.teacher.last_name } offering #{ subject_list } lessons in #{ get_address( $scope.teacher ) }. Contact them now to arrange a lesson."""
+
+      
+      subject_list = create_subjects_list( $scope.teacher )
+      change_tags.set_twitter_tags(
+        "#{ subject_list } lessons",
+        """#{ $scope.teacher.first_name } #{ $scope.teacher.last_name } offering #{ subject_list } lessons in #{ get_address( $scope.teacher ) }. Contact them now to arrange a lesson."""
+      )
+      $scope.tweet = () ->
+
+        twttr.widgets.createTweet(1,document.getElementById('teacher_container'),align: 'left').then (el) ->
+          console.log 'Tweet displayed.'
+          return
+
+      ### End of tweet stuff ###
 
     set_profile = ->
       return true if $scope.teacher.photos? && $scope.teacher.photos.length == 0

@@ -29,8 +29,13 @@ Teacher.create( first_name: "Bob", last_name: "Builder", password: "Football1", 
 Teacher.create( first_name: "Bob", last_name: "Builder", password: "Football1", email: "lllouis10@yahoo.com", is_teacher: true, primary: true)
 Teacher.create( first_name: "Bob", last_name: "Builder", password: "Football1", email: "lllouis11@yahoo.com", is_teacher: true, primary: true)
 
+(12..100).each do |i|
+  Teacher.create( first_name: "Bob", last_name: "Builder", password: "Football1", email: "lllouis#{ i }@yahoo.com", is_teacher: true, primary: true)
+end
+
 Teacher.all.each do |t|
   t.subjects << Subject.first
+  Location.create( address: "Dublin", county: "Co. Dublin", teacher_id: t.id ) if t.id > 3
 end
 
 Teacher.last.subjects << Subject.last

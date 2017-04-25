@@ -63,12 +63,33 @@
   <md-content class="margin_t_10 white_background">
     <md-toolbar>
       <div class="md-toolbar-tools">
-        <span layout-margin ng-click="fetch_teachers()">List of teachers <span ng-if="teachers">{{ teachers.length }}</span><i class="material-icons">touch_app</i></span>
+        <span layout-margin ng-click="fetch_teachers()" flex>
+          List of teachers <span ng-if="teachers">{{ teachers.length }}</span><i class="material-icons">touch_app</i>
+        </span>
         
-      </div>
-      
+      </div>      
     </md-toolbar>
-    <div ng-if="teachers">
+
+    <div ng-if="teachers" class="cssFade" layout="row" layout-align="space-around center">
+
+      <div>
+        <md-select ng-model="selection.county" placeholder="County" ng-change="filter()">
+          <md-option ng-value="county" ng-repeat="county in counties">{{ county }}</md-option>
+        </md-select>
+      </div>
+
+      <div>
+        <md-select ng-model="selection.subject" placeholder="Subject" ng-change="filter()">
+          <md-option ng-value="subject" ng-repeat="subject in subject_list_for_menu">{{ subject.name }}</md-option>
+        </md-select>
+      </div>
+
+      <div>
+        <md-button ng-click="clear()">Clear</md-button>
+      </div>
+
+    </div> <!-- end of row -->
+    <div ng-if="teachers" class="cssFade" id="teacher_container">
       <md-list>
         <md-list-item                
               class="md-2-line"
@@ -84,7 +105,10 @@
               <span>Experience {{ (teacher.experience.length > 0) }}</span> ||
               <span>Quals {{ (teacher.qualifications.length ) }}</span> ||
             </span>
-            <span ng-click="fb_share( teacher )"><img ng-src="<%= asset_url 'Facebook.png' %>"></span>
+            <a class="cursor_hand" ng-click="fb_share( teacher )"><img ng-src="<%= asset_url 'Facebook.png' %>"></a>
+
+            <a class="cursor_hand" ng-click="tweet( teacher )"><%= image_tag( asset_url('Twitter.png') ) %></a>
+            
             <md-divider md-inset></md-divider>
           </div>
         </md-list-item>
@@ -102,3 +126,20 @@
     </div>
   </md-content>
 </md-content>
+
+<script>window.twttr = (function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0],
+    t = window.twttr || {};
+  if (d.getElementById(id)) return t;
+  js = d.createElement(s);
+  js.id = id;
+  js.src = "https://platform.twitter.com/widgets.js";
+  fjs.parentNode.insertBefore(js, fjs);
+
+  t._e = [];
+  t.ready = function(f) {
+    t._e.push(f);
+  };
+
+  return t;
+}(document, "script", "twitter-wjs"));</script>

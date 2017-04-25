@@ -49,6 +49,7 @@ group :production do
   gem 'daemons'
   gem 'rails_12factor'
   gem 'unicorn-worker-killer'
+  gem 'prerender_rails'
 end
 
 group :development, :test do
@@ -113,3 +114,5 @@ gem 'htmlcompressor', '~> 0.2.0'
 gem 'gibbon', '~> 1.2'
 
 gem 'material_icons'
+
+gem 'twitter'
