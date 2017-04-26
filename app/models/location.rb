@@ -63,6 +63,7 @@ class Location < ActiveRecord::Base
   # after_update
 
   def set_touched
+    p "it is called sir"
     self.touched = true
   end
 
