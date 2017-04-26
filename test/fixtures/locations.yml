@@ -11,6 +11,7 @@
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #  county     :text
+#  touched    :boolean          default(FALSE)
 #
 
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html

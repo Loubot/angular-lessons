@@ -20,4 +20,11 @@ class Conversation < ActiveRecord::Base
   validates :user_id1, :user_id2, :user_email1, :user_email2, :user_name1, :user_name2, presence: true
 
  
+  after_touch :unread_message_update
+
+  def unread_message_update
+    require 'pp'
+    pp self.messages.last
+  end
+
 end

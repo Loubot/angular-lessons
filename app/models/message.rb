@@ -12,7 +12,7 @@
 
 class Message < ActiveRecord::Base
   validates :text, :conversation_id, presence: true
-  belongs_to :conversation
+  belongs_to :conversation, touch: true
 
   
 end
