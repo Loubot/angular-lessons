@@ -34,6 +34,8 @@ class Location < ActiveRecord::Base
 
   include LocationHelper
 
+  after_create :set_as_initial
+
 
   def add_name
     self.name = "#{ self.teacher.get_full_name } address"
