@@ -29,12 +29,13 @@ class Location < ActiveRecord::Base
   after_save :add_name
 
   # after_update :geocode_address
+  before_update :set_touched
 
   before_validation :check_if_only_county
 
   include LocationHelper
 
-  after_create :set_as_initial
+
 
 
   def add_name
@@ -60,6 +61,10 @@ class Location < ActiveRecord::Base
 
 
   # after_update
+
+  def set_touched
+    self.touched = true
+  end
 
   def geocode_address
     pp self

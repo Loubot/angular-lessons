@@ -1,6 +1,7 @@
 class LocationController < ApplicationController
   before_action :authenticate_teacher!
   include LocationHelper
+  require 'pp'
 
   def create
     p "This is create"
