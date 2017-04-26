@@ -29,7 +29,7 @@ class Location < ActiveRecord::Base
   after_save :add_name
 
   # after_update :geocode_address
-  before_update :set_touched
+  before_validation :set_touched, on: [ :update ]
 
   before_validation :check_if_only_county
 
