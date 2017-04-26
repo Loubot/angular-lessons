@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170217145903) do
+ActiveRecord::Schema.define(version: 20170426104241) do
 
   create_table "categories", force: :cascade do |t|
     t.string   "name"
@@ -72,9 +72,10 @@ ActiveRecord::Schema.define(version: 20170217145903) do
     t.float    "longitude"
     t.string   "name"
     t.text     "address"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
     t.text     "county"
+    t.boolean  "touched",    default: false
   end
 
   create_table "messages", force: :cascade do |t|
