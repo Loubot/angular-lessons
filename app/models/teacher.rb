@@ -37,6 +37,7 @@
 #  tci                    :boolean          default(FALSE)
 #  garda                  :boolean          default(FALSE)
 #  phone                  :string           default("")
+#  unread                 :boolean          default(FALSE)
 #
 
 class Teacher < ActiveRecord::Base

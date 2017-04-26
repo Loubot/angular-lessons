@@ -279,6 +279,8 @@ angular.module('lessons').factory 'User', [
     @jc = teacher.jc
     @lc = teacher.lc
     @third_level = teacher.third_level
+    @.unread = teacher.unread
+    console.log @
     $rootScope.User = @
     
 

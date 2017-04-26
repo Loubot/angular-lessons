@@ -24,7 +24,12 @@ class Conversation < ActiveRecord::Base
 
   def unread_message_update
     require 'pp'
-    pp self.messages.last
+    id = self.messages.last.sender_id
+    pp "Teachers id #{ id }"
+    t = Teacher.find( id )
+    pp t
+    t.update_attributes( unread: true )
+    t.save!
   end
 
 end
