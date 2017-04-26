@@ -24,13 +24,15 @@ angular.module('lessons').controller( 'ViewTeacherController', [
     $scope.teacher_loaded = false
 
     $scope.create_map = ->
+
       console.log 'hup'
       if $scope.teacher.location?
+        zoom = if $scope.teacher.location.touched then 15 else 12
         $scope.map = new google.maps.Map(document.getElementById('map'), 
           center: 
             lat: $scope.teacher.location.latitude
             lng: $scope.teacher.location.longitude
-          zoom: 15
+          zoom: zoom
           mapTypeId: google.maps.MapTypeId.ROADMAP
           
         )
