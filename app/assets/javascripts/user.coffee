@@ -380,7 +380,7 @@ angular.module('lessons').factory 'User', [
     console.log location
     self = @
     COMMS.PUT(
-      "/teacher/#{ self.ie }/location/#{ location.id }"
+      "/teacher/#{ self.id }/location/#{ location.id }"
       location
     ).then( ( resp ) ->
       console.log resp
