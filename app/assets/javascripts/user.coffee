@@ -245,6 +245,7 @@ angular.module('lessons').factory 'User', [
       ).catch( ( err ) ->
         console.log "failed to get teacher"
         console.log err
+        reject err
         $rootScope.User = null
       )
         
