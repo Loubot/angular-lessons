@@ -24,11 +24,11 @@ class ConversationController < ApplicationController
       # conversation is a result of where statement so must call .first
       conversation = conversation.first
     end
+    #
+    # pp "Conversation is this"
 
-    pp "Conversation is this"
 
-
-    pp conversation
+    # pp conversation
 
     
     message = Message.new( conversation_id: conversation.id, text: conversation_params[:message][:text], sender_id: conversation_params[ :message ][ :sender_id ] )
