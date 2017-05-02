@@ -24,7 +24,7 @@ class Conversation < ActiveRecord::Base
 
   def unread_message_update
     require 'pp'
-    id = self.messages.last.sender_id
+    id = self.messages.last.sender_id == self.user_id1 ? self.user_id2 : self.user_id1
     pp "Teachers id #{ id }"
     t = Teacher.find( id )
     pp t
