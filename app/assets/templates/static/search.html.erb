@@ -104,7 +104,7 @@
     <div>
       <div  layout="row" 
             layout-wrap 
-            class="grey_content width_100" 
+            class="grey_content" 
             infinite-scroll="addMoreItems()"  
             infinite-scroll-container="'#scroll_hook'"
             infinite-scroll-disabled="busy"
@@ -121,7 +121,7 @@
             <md-card-title-text class="margin_r_5">
               <span class="md-headline teacher_card_font" 
                     ng-class="{ small_teacher_email_font : teacher.email.length > 20, extra_small_teacher_email_font : teacher.email.length > 25 }">
-                    {{ teacher.email }}
+                    {{ teacher.first_name }} {{ teacher.last_name }}
               </span>
               <span ng-if="teacher.location" class="md-subhead address">{{ teacher.location.address }}</span>
               <span ng-repeat="subject in teacher.subjects">{{ subject.name }}</span>
