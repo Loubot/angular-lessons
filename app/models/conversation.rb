@@ -34,9 +34,9 @@ class Conversation < ActiveRecord::Base
 
     if self.user_id1 == messages.last.sender_id
       p "Got as far as here"
-      self.update_attributes( user_id2_notification: true )
+      self.update_attributes( user_id2_notification: self.user_id2 )
     else
-      self.update_attributes( user_id1_notification: true )
+      self.update_attributes( user_id1_notification: self.user_id1 )
       p "or even here"
     end
   end

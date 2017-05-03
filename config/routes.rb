@@ -39,9 +39,6 @@ Rails.application.routes.draw do
       resources :location,            only: [ :create, :update, :destroy ], defaults: {format: :json} 
       post    'manual-address'            => 'location#manual_address'
       resources :photos,              only: [ :create, :destroy ], defaults: {format: :json}
-      
-
-
 
     end
     
@@ -50,7 +47,7 @@ Rails.application.routes.draw do
       resources :subject,             only: [ :create, :destroy ]
     end
 
-    resources :conversation,        only: [ :create, :index, :show ] 
+    resources :conversation,        only: [ :create, :index, :show ]
     resources :subject,             only: [ :index, :update ]
 
     

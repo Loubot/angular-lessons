@@ -9,7 +9,10 @@
     </md-menu-item>
 
     <md-menu-item>
-      <md-button ui-sref="conversation" class="md-button md-default-theme green_text">Messages</md-button>
+      <md-button ui-sref="conversation" class="md-button md-default-theme green_text">
+          Messages
+          <span class="unread_message" ng-if="user.unread">New mail!</span>
+      </md-button>
     </md-menu-item>
 
     <md-menu-item>

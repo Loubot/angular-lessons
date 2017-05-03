@@ -32,8 +32,8 @@ class ConversationController < ApplicationController
 
     
     message = Message.new( conversation_id: conversation.id, text: conversation_params[:message][:text], sender_id: conversation_params[ :message ][ :sender_id ] )
-    p "message *************"
-    pp message
+    # p "message *************"
+    # pp message
 
     message.save!
 
@@ -61,9 +61,13 @@ class ConversationController < ApplicationController
     if current_teacher
       conversation = Conversation.includes( :messages ).find( params[ :id ] )
 
-      only_show_to_correct( conversation )
-      
-      
+      if only_show_to_correct( conversation )
+        reset_notifications( conversation )
+        render json: { conversation: conversation.as_json( include: [ :messages ] ) }, status: 200 and return
+      else
+        render json: { errors: [ 'tut tut' ] }, status: 403
+      end
+
     else
       render json: { errors: [ 'tut tut' ] }, status: 401
     end
@@ -92,11 +96,25 @@ class ConversationController < ApplicationController
       render json: { errors: "tut tut "}, status: 403 and return if !( conversation_params[:conversation][:user_id1] == current_teacher.id or conversation_params[:conversation][:user_id2] == current_teacher.id )
     end
 
+    def reset_notifications( conversation )
+      current_teacher.update( unread: false )
+      if conversation.user_id1_notification == current_teacher.id
+        conversation.update_attributes( user_id1_notification: 0 )
+        return true
+      elsif conversation.user_id2_notification == current_teacher.id
+        conversation.update_attributes( user_id2_notification: 0 )
+        return true
+      else
+        return false
+      end
+    end
+
     def only_show_to_correct( conversation )
       if conversation.user_id1 == current_teacher.id or conversation.user_id2 == current_teacher.id 
-        render json: { conversation: conversation.as_json( include: [ :messages ] ) }
+        return true
       else
-        render json: { errors: [ 'tut tut' ] }, status: 403
+        return false
+
       end
     end
 

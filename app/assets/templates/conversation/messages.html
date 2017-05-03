@@ -34,6 +34,7 @@
 
           <div class="message_box" ng-class="{selected_conversation : convo.id==conversation.id}">
             {{ convo.user_id1 == User.id ? convo.user_name2 : convo.user_name1 }}
+              <md-icon ng-if="convo.user_id1_notification==User.id||convo.user_id2_notification==User.id" class="unread_message"><i class="material-icons">email</i></md-icon>
           </div>
 
           <md-divider></md-divider>
