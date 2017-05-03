@@ -37,7 +37,9 @@ angular.module('lessons').controller('ConversationController', [
     )
 
     
-    $scope.select_conversation = ( id ) ->
+    $scope.select_conversation = ( id, dom_element ) ->
+      
+      $( dom_element.target ).find('md-icon').remove()
       COMMS.GET(
         "/conversation/#{ id }"
       ).then( ( resp ) ->
@@ -51,6 +53,8 @@ angular.module('lessons').controller('ConversationController', [
         Alertify.error "Failed to get conversation"
         $mdSidenav('conversation_search').close()
       )
+
+      return true
 
     $scope.select_conversation( $stateParams.id ) if $stateParams.id #fetch specific conversation if id is present. i.e. from email link
 
