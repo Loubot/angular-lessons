@@ -121,7 +121,6 @@
                     ng-class="{ small_teacher_email_font : teacher.email.length > 20, extra_small_teacher_email_font : teacher.email.length > 25 }">
                     {{ teacher.email }}
               </span>
-              {{ teacher.email.length > 20 }}
               <span ng-if="teacher.location" class="md-subhead address">{{ teacher.location.address }}</span>
               <span ng-repeat="subject in teacher.subjects">{{ subject.name }}</span>
             </md-card-title-text>
