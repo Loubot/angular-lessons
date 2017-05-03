@@ -962,12 +962,24 @@ md-sidenav.md-closed.md-locked-open-add-active.user_menu {
 
 // search page
 
-.small_teacher_email_font{
-  font-size: 7vw !important;
+@media ( min-width: 600px ) {
+  .teacher_card_font{
+    font-size: 2em !important;
+  }
 }
 
-.extra_small_teacher_email_font{
-  font-size: 5vw !important;
+@media ( max-width: 600px ) {
+  .teacher_card_font{
+    font-size: 1em !important;
+  }
+
+  .small_teacher_email_font{
+    font-size: 7vw !important;
+  }
+
+  .extra_small_teacher_email_font{
+    font-size: 5vw !important;
+  }
 }
 
 .grey_content{

@@ -102,76 +102,77 @@
   <div layout="column" class="boxWithHeight margin_l_5 min_height_50vh" flex-xs="100" layout-align="start center" >
     
     <div>
-      <div layout="row" layout-wrap class="grey_content" 
+      <div  layout="row" 
+            layout-wrap 
+            class="grey_content width_100" 
             infinite-scroll="addMoreItems()"  
             infinite-scroll-container="'#scroll_hook'"
             infinite-scroll-disabled="busy"
             infinite-scroll-distance=".25"
-            infinite-scroll-immediate-check="false">
+            infinite-scroll-immediate-check="false" >
 
-
-        <md-card ng-repeat="teacher in teachers"
-                md-theme-watch 
-                ng-click="view_teacher( teacher )"
-                ng-if="teachers.length>0">
-          <md-card-title>
-            <md-card-title-text>
-              <span class="md-headline"
+        <md-card 
+            ng-repeat="teacher in teachers"
+            md-theme-watch 
+            ng-click="view_teacher( teacher )"
+            ng-if="teachers.length>0"
+            >
+          <md-card-title class="padding_10">
+            <md-card-title-text class="margin_r_5">
+              <span class="md-headline teacher_card_font" 
                     ng-class="{ small_teacher_email_font : teacher.email.length > 20, extra_small_teacher_email_font : teacher.email.length > 25 }">
                     {{ teacher.email }}
               </span>
               <span ng-if="teacher.location" class="md-subhead address">{{ teacher.location.address }}</span>
               <span ng-repeat="subject in teacher.subjects">{{ subject.name }}</span>
             </md-card-title-text>
+            <md-card-title-media ng-if="teacher.photos.length">
+              <div class="md-media-lg ">
+                <img ng-src="{{ teacher_profile( teacher ) }}" class="">
+              </div>
+            </md-card-title-media>
           </md-card-title>
-          <md-card-content layout="row" layout-align="space-between">
-            <div ng-if="teacher.photos.length">
-              <img ng-src="{{ teacher_profile( teacher ) }}" class="display_teacher_image">
+          <md-card-actions class="no_margin" >
+
+            <!-- Travel option -->
+            <div ng-if="teacher.travel" class="margin_t_8 center_text raisedbox" layout-align="space-between" layout="row" layout-margin>
+              <div><md-icon  class="navy_icon"><i class="material-icons" >subway</i></md-icon> </div>
+
+              <div>This teacher will travel </div>
+
+              <div><md-icon  class="navy_icon"><i class="material-icons" >subway</i></md-icon></div>
+            </div>
+            <!-- End of travel option -->
+
+            <!-- Display teachers levels -->
+            <div ng-if="teacher.primary || teacher.jc || teacher.lc || teacher.third_level" class="margin_t_10 padding_5" layout="row">
+
+              <div ng-if="teacher.primary">
+                <button  class="search_roundy_buttons primary">Primary</button>
+                
+              </div>
+
+              <div ng-if="teacher.jc">
+                <button  class="search_roundy_buttons jc" >Junior Cert</button>
+                
+              </div>
+              
+              <div ng-if="teacher.lc">
+                <button  class="search_roundy_buttons lc" >Leaving Cert</button>
+              </div>
+
+              <div ng-if="teacher.third_level">
+                <button  class="search_roundy_buttons third_level" >Third level</button>
+              </div>            
             </div>
 
-            <md-card-actions class="no_margin" >
+            <!-- End of display teachers levels -->
 
-                        <!-- Travel option -->
-              <div ng-if="teacher.travel" class="margin_t_8 center_text raisedbox" layout-align="space-between" layout="row" layout-margin>
-                <div><md-icon  class="navy_icon"><i class="material-icons" >subway</i></md-icon> </div>
+            <!-- Vetting and TCI -->
+            <div ng-if="teacher.tci || teacher.garda" ng-include="'includes/vetting_tci.html'"></div>
 
-                <div>This teacher will travel </div>
-
-                <div><md-icon  class="navy_icon"><i class="material-icons" >subway</i></md-icon></div>
-              </div>
-              <!-- End of travel option -->
-
-              <!-- Display teachers levels -->
-              <div ng-if="teacher.primary || teacher.jc || teacher.lc || teacher.third_level" class="margin_t_10 padding_5" layout="row">
-
-                <div ng-if="teacher.primary">
-                  <button  class="search_roundy_buttons primary">Primary</button>
-                  
-                </div>
-
-                <div ng-if="teacher.jc">
-                  <button  class="search_roundy_buttons jc" >Junior Cert</button>
-                  
-                </div>
-                
-                <div ng-if="teacher.lc">
-                  <button  class="search_roundy_buttons lc" >Leaving Cert</button>
-                </div>
-
-                <div ng-if="teacher.third_level">
-                  <button  class="search_roundy_buttons third_level" >Third level</button>
-                </div>            
-              </div>
-
-              <!-- End of display teachers levels -->
-
-              <!-- Vetting and TCI -->
-              <div ng-if="teacher.tci || teacher.garda" ng-include="'includes/vetting_tci.html'"></div>
-
-            </md-card-actions>
-          </md-card-content>
+          </md-card-actions>
         </md-card>
-
 
 
         <div ng-if="teachers.length==0" layout-fill flex="100">
