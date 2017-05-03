@@ -38,7 +38,7 @@ angular.module('lessons').controller('ConversationController', [
 
     
     $scope.select_conversation = ( id, dom_element ) ->
-      
+
       $( dom_element.target ).find('md-icon').remove()
       COMMS.GET(
         "/conversation/#{ id }"
