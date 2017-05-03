@@ -883,6 +883,10 @@ md-sidenav.md-closed.md-locked-open-add-active.user_menu {
 
   // Messages
 
+.unread_message{
+  color: #ffd700;
+}
+
 .selected_conversation{
   background-color: #f6f6f6;
   opacity: .8;
@@ -957,6 +961,15 @@ md-sidenav.md-closed.md-locked-open-add-active.user_menu {
 // End of messages
 
 // search page
+
+.small_teacher_email_font{
+  font-size: 7vw !important;
+}
+
+.extra_small_teacher_email_font{
+  font-size: 5vw !important;
+}
+
 .grey_content{
   background-color: #e8e8e8 !important;
 }
