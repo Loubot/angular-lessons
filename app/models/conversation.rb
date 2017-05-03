@@ -27,17 +27,14 @@ class Conversation < ActiveRecord::Base
   def unread_message_update
     require 'pp'
     id = self.messages.last.sender_id == self.user_id1 ? self.user_id2 : self.user_id1
-    pp "Teachers id #{ id }"
     t = Teacher.find( id )
     t.update_attributes( unread: true )
     t.save!
 
     if self.user_id1 == messages.last.sender_id
-      p "Got as far as here"
       self.update_attributes( user_id2_notification: self.user_id2 )
     else
       self.update_attributes( user_id1_notification: self.user_id1 )
-      p "or even here"
     end
   end
 
