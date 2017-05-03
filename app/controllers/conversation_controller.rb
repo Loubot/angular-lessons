@@ -53,7 +53,7 @@ class ConversationController < ApplicationController
   end
 
   def index
-    conversations = Conversation.where( user_id1: current_teacher.id ).or( Conversation.where( user_id2: current_teacher.id ) )
+    conversations = Conversation.where( user_id1: current_teacher.id ).or( Conversation.where( user_id2: current_teacher.id ) ).order( "updated_at DESC" )
     render json: { conversations: conversations.as_json }
   end
 
