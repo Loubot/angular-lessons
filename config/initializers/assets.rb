@@ -23,73 +23,73 @@ Rails.application.config.assets.precompile += %w( vendor\assets\bower_components
 
 
 if Rails.env.production?
+  config.assets.debug = true
+  # Rails.application.configure do
+  #   # Use environment names or environment variables:
+  #   # break unless Rails.env.production?
+  #   # break unless ENV['ENABLE_COMPRESSION'] == '1'
 
-  Rails.application.configure do
-    # Use environment names or environment variables:
-    # break unless Rails.env.production? 
-    # break unless ENV['ENABLE_COMPRESSION'] == '1'
-    
-    # Strip all comments from JavaScript files, even copyright notices.
-    # By doing so, you are legally required to acknowledge
-    # the use of the software somewhere in your Web site or app:
-    # uglifier = Uglifier.new(mangle: false)
+  #   # Strip all comments from JavaScript files, even copyright notices.
+  #   # By doing so, you are legally required to acknowledge
+  #   # the use of the software somewhere in your Web site or app:
+  #   # uglifier = Uglifier.new(mangle: false)
 
-    # To keep all comments instead or only keep copyright notices (the default):
-    # uglifier = Uglifier.new output: { comments: :all }
-    # uglifier = Uglifier.new output: { comments: :copyright }
+  #   # To keep all comments instead or only keep copyright notices (the default):
+  #   # uglifier = Uglifier.new output: { comments: :all }
+  #   # uglifier = Uglifier.new output: { comments: :copyright }
 
-     # config.serve_static_files = true
+  #    # config.serve_static_files = true
 
-    config.cache_classes = true
-    config.eager_load = true if Rails.env.production?
-    config.consider_all_requests_local       = false
-    config.action_controller.perform_caching = true
-    config.serve_static_files = true
-    # config.assets.js_compressor = :uglifier
-    config.assets.css_compressor = :sass
-    config.assets.compile = true
-    config.assets.digest = true
-    config.assets.version = '2.5'
-    config.log_level = :info
-    config.i18n.fallbacks = true
-    config.active_support.deprecation = :notify
-    config.assets.css_compressor = :sass
+  #   config.cache_classes = true
+  #   config.eager_load = true if Rails.env.production?
+  #   config.consider_all_requests_local       = false
+  #   config.action_controller.perform_caching = true
+  #   config.serve_static_files = true
+  #   # config.assets.js_compressor = :uglifier
+  #   config.assets.css_compressor = :sass
+  #   config.assets.compile = true
+  #   config.assets.digest = true
+  #   config.assets.version = '2.5'
+  #   config.log_level = :info
+  #   config.i18n.fallbacks = true
+  #   config.active_support.deprecation = :notify
+  #   config.assets.css_compressor = :sass
 
-    config.middleware.use Rack::Deflater
-    config.middleware.insert_before ActionDispatch::Static, Rack::Deflater
+  #   config.middleware.use Rack::Deflater
+  #   config.middleware.insert_before ActionDispatch::Static, Rack::Deflater
 
-    config.middleware.use HtmlCompressor::Rack
+  #   config.middleware.use HtmlCompressor::Rack
 
-    # config.middleware.use Rack::Deflater
-    # config.middleware.insert_before ActionDispatch::Static, Rack::Deflater
+  #   # config.middleware.use Rack::Deflater
+  #   # config.middleware.insert_before ActionDispatch::Static, Rack::Deflater
 
-    # config.middleware.use HtmlCompressor::Rack,
-    #   compress_css: true,
-    #   css_compressor: Sass,
-    #   enabled: true,
-    #   compress_javascript: true,
-    #   javascript_compressor: uglifier
-    # config.middleware.use HtmlCompressor::Rack,
-    #   compress_css: true,
-    #   compress_javascript: true,
-    #   css_compressor: Sass,
-    #   enabled: true,
-    #   javascript_compressor: uglifier,
-    #   preserve_line_breaks: false
-      # remove_comments: true,
-      # remove_form_attributes: false,
-      # remove_http_protocol: false,
-      # remove_https_protocol: false,
-      # remove_input_attributes: true,
-      # remove_intertag_spaces: false,
-      # remove_javascript_protocol: true,
-      # remove_link_attributes: true,
-      # remove_multi_spaces: true,
-      # remove_quotes: true,
-      # remove_script_attributes: true,
-      # remove_style_attributes: true,
-      # simple_boolean_attributes: true,
-      # simple_doctype: false
-  end
+  #   # config.middleware.use HtmlCompressor::Rack,
+  #   #   compress_css: true,
+  #   #   css_compressor: Sass,
+  #   #   enabled: true,
+  #   #   compress_javascript: true,
+  #   #   javascript_compressor: uglifier
+  #   # config.middleware.use HtmlCompressor::Rack,
+  #   #   compress_css: true,
+  #   #   compress_javascript: true,
+  #   #   css_compressor: Sass,
+  #   #   enabled: true,
+  #   #   javascript_compressor: uglifier,
+  #   #   preserve_line_breaks: false
+  #     # remove_comments: true,
+  #     # remove_form_attributes: false,
+  #     # remove_http_protocol: false,
+  #     # remove_https_protocol: false,
+  #     # remove_input_attributes: true,
+  #     # remove_intertag_spaces: false,
+  #     # remove_javascript_protocol: true,
+  #     # remove_link_attributes: true,
+  #     # remove_multi_spaces: true,
+  #     # remove_quotes: true,
+  #     # remove_script_attributes: true,
+  #     # remove_style_attributes: true,
+  #     # simple_boolean_attributes: true,
+  #     # simple_doctype: false
+  # end
 
 end
