@@ -210,7 +210,7 @@ angular.module('lessons').controller( 'ViewTeacherController', [
       $scope.slides = []
       for photo, index in $scope.teacher.photos
         $scope.slides.push(
-          image: photo.avatar.url
+          pic: photo.avatar.url
           index: index + 1
           description: "Image #{ index + 1 }"
         )
