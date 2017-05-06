@@ -136,9 +136,7 @@ angular.module('lessons').controller( 'ViewTeacherController', [
             "@type": "Organization",
             "name": "Learn Your Lesson"
           }
-        },
-        
-        "image": "#{ if $scope.avatar? then $scope.avatar.url else '' }"
+        }
         
       
     create_subjects_list = ->
