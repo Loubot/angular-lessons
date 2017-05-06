@@ -133,14 +133,17 @@ angular.module('lessons').service 'auth', [
           if !$rootScope.User?
             new User().then( ( resp ) ->
               resolve $rootScope.User
+              $rootScope.isPageFullyLoaded = true
             ).catch( ( err ) ->
               reject status: 401, error: 'non_user'
+              $rootScope.isPageFullyLoaded = true
             )
           else
             resolve $rootScope.User
         ).catch( ( validate_err ) ->
           console.log 'Right here'
           console.log validate_err
+          $rootScope.isPageFullyLoaded = true
           reject validate_err
         )
 
@@ -245,6 +248,7 @@ angular.module('lessons').factory 'User', [
       ).catch( ( err ) ->
         console.log "failed to get teacher"
         console.log err
+        reject err
         $rootScope.User = null
       )
         
@@ -279,6 +283,7 @@ angular.module('lessons').factory 'User', [
     @jc = teacher.jc
     @lc = teacher.lc
     @third_level = teacher.third_level
+    @.unread = teacher.unread
     $rootScope.User = @
     
 

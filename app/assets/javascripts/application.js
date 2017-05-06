@@ -13,7 +13,7 @@
 //= require jquery.min
 //= require rails_client_logger
 //= require lodash/dist/lodash.min
-//= require angular/angular.min
+//= require angular/angular
 //= require ng-alertify/dist/ng-alertify.min
 //= require angular-ui-router/release/angular-ui-router.min 
 //= require angular-animate/angular-animate.min
@@ -22,7 +22,7 @@
 //= require angular-cookie/angular-cookie.min
 //= require ng-token-auth/dist/ng-token-auth.min
 //= require angular-messages/angular-messages.min
-//= require ng-file-upload/ng-file-upload-all.min
+//= require ng-file-upload/ng-file-upload.min
 //= require angular-sanitize/angular-sanitize.min
 //= require ng-responsive-calendar/dist/js/calendar-tpls.min
 //= require angular-simple-logger/dist/angular-simple-logger.min
