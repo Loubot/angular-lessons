@@ -34,7 +34,6 @@ angular.module('lessons').controller( 'StudentController', [
           $rootScope.User = resp.data.teacher
           $rootScope.User.photos = resp.data.photos if resp.data != ""
           profile_pic()
-          Alertify.success "Profile pic set"
 
         $scope.file = null
       ).catch( ( err ) ->

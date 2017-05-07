@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170426182426) do
+ActiveRecord::Schema.define(version: 20170502230436) do
 
   create_table "categories", force: :cascade do |t|
     t.string   "name"
@@ -20,14 +20,16 @@ ActiveRecord::Schema.define(version: 20170426182426) do
   end
 
   create_table "conversations", force: :cascade do |t|
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",                        null: false
+    t.datetime "updated_at",                        null: false
     t.integer  "user_id1"
     t.integer  "user_id2"
     t.string   "user_email1"
     t.string   "user_email2"
     t.string   "user_name1"
     t.string   "user_name2"
+    t.integer  "user_id1_notification", default: 0
+    t.integer  "user_id2_notification", default: 0
   end
 
   create_table "delayed_jobs", force: :cascade do |t|

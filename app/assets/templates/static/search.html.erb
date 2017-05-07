@@ -102,12 +102,14 @@
   <div layout="column" class="boxWithHeight margin_l_5 min_height_50vh" flex-xs="100" layout-align="start center" >
     
     <div>
-      <div layout="row" layout-wrap class="grey_content" 
+      <div  layout="row" 
+            layout-wrap 
+            class="grey_content" 
             infinite-scroll="addMoreItems()"  
             infinite-scroll-container="'#scroll_hook'"
             infinite-scroll-disabled="busy"
             infinite-scroll-distance=".25"
-            infinite-scroll-immediate-check="false">
+            infinite-scroll-immediate-check="false" >
 
         <md-card 
             ng-repeat="teacher in teachers"
@@ -117,12 +119,14 @@
             >
           <md-card-title class="padding_10">
             <md-card-title-text class="margin_r_5">
-              <span class="md-headline">{{ teacher.email }}  </span>
+              <span class="md-headline teacher_card_font" >
+                    {{ teacher.first_name }} {{ teacher.last_name }}
+              </span>
               <span ng-if="teacher.location" class="md-subhead address">{{ teacher.location.address }}</span>
               <span ng-repeat="subject in teacher.subjects">{{ subject.name }}</span>
             </md-card-title-text>
             <md-card-title-media ng-if="teacher.photos.length">
-              <div class="md-media-lg card-media height_auto">
+              <div class="md-media-lg ">
                 <img ng-src="{{ teacher_profile( teacher ) }}" class="">
               </div>
             </md-card-title-media>
