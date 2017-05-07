@@ -26,9 +26,9 @@ if Rails.env.production?
 
   Rails.application.configure do
     # Use environment names or environment variables:
-    # break unless Rails.env.production?
+    # break unless Rails.env.production? 
     # break unless ENV['ENABLE_COMPRESSION'] == '1'
-
+    
     # Strip all comments from JavaScript files, even copyright notices.
     # By doing so, you are legally required to acknowledge
     # the use of the software somewhere in your Web site or app:
@@ -40,27 +40,25 @@ if Rails.env.production?
 
      # config.serve_static_files = true
 
-     config.assets.debug = true
+    config.cache_classes = true
+    config.eager_load = true if Rails.env.production?
+    config.consider_all_requests_local       = false
+    config.action_controller.perform_caching = true
+    config.serve_static_files = true
+    # config.assets.js_compressor = :uglifier
+    config.assets.css_compressor = :sass
+    config.assets.compile = true
+    config.assets.digest = true
+    config.assets.version = '2.5'
+    config.log_level = :info
+    config.i18n.fallbacks = true
+    config.active_support.deprecation = :notify
+    config.assets.css_compressor = :sass
 
-    # config.cache_classes = true
-    # config.eager_load = true if Rails.env.production?
-    # config.consider_all_requests_local       = false
-    # config.action_controller.perform_caching = true
-    # config.serve_static_files = true
-    # # config.assets.js_compressor = :uglifier
-    # config.assets.css_compressor = :sass
-    # config.assets.compile = true
-    # config.assets.digest = true
-    # config.assets.version = '2.5'
-    # config.log_level = :info
-    # config.i18n.fallbacks = true
-    # config.active_support.deprecation = :notify
-    # config.assets.css_compressor = :sass
+    config.middleware.use Rack::Deflater
+    config.middleware.insert_before ActionDispatch::Static, Rack::Deflater
 
-    # config.middleware.use Rack::Deflater
-    # config.middleware.insert_before ActionDispatch::Static, Rack::Deflater
-
-    # config.middleware.use HtmlCompressor::Rack
+    config.middleware.use HtmlCompressor::Rack
 
     # config.middleware.use Rack::Deflater
     # config.middleware.insert_before ActionDispatch::Static, Rack::Deflater
