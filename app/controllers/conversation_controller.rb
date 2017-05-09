@@ -35,13 +35,16 @@ class ConversationController < ApplicationController
     # p "message *************"
     # pp message
 
-    message.save!
+    if message.save
 
-
-    render json: { conversation: conversation.as_json( include: [ :messages ] ) }
+      render json: { conversation: conversation.as_json( include: [ :messages ] ) }
+      send_to_correct_users( conversation_params, conversation ) #make sure email is sent to correct emails
+    else
+      render json: { errors: message.errors }, status: 400
+    end
     
 
-    send_to_correct_users( conversation_params, conversation ) #make sure email is sent to correct emails
+    
 
 
   end

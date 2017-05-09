@@ -247,7 +247,16 @@ angular.module('lessons').controller( 'ViewTeacherController', [
     $scope.closeDialog = ->
       $mdDialog.hide()
 
+    check_user_name_exists = ->
+      if !$rootScope.User.get_full_name()
+        names = $scope.message.user_name1.split( " " )
+        if names.length > 0
+          $rootScope.User.first_name = names[0]
+          $rootScope.User.last_name = names[1] if names[1]?
+          $rootScope.User.update( $rootScope.User )
+
     $scope.send_message = ->
+      check_user_name_exists( $scope.conversation )
       console.log $scope.message
       $scope.conversation = {}
       $scope.conversation.user_id1 = $rootScope.User.id
@@ -268,6 +277,7 @@ angular.module('lessons').controller( 'ViewTeacherController', [
         $mdDialog.hide()
       ).catch( ( err ) ->
         console.log err
+        Alertify.error "Failed to send your message"
       )
 
     $scope.open_login = ->
