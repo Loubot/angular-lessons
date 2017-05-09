@@ -26,10 +26,10 @@ class PhotosController < ApplicationController
   end
 
   def destroy
-    photo = Photo.find( Integer( pic_params[ :id ] ) )
+    photo = Photo.find( pic_params[ :id ] )
     if photo.destroy
       teacher = Teacher.includes( :photos ).find( current_teacher.id )
-      if Integer( teacher.profile ) == Integer( pic_params[ :id ] )
+      if teacher.profile and Integer( teacher.profile ) == Integer( pic_params[ :id ] )
         p "Update teacher profile"
         teacher.update_attributes( profile: nil )
       end
