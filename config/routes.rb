@@ -27,6 +27,7 @@ Rails.application.routes.draw do
     post     'tweet'                      => 'admin#tweet'
 
     resources :teacher, only: [ :index, :show, :update ] do
+      get       'check-unread'            => 'teacher#check_for_unread'
       get       'show-teacher'            => 'teacher#show_teacher'
       post      'add-subject'             => 'subject#add_subject'
 

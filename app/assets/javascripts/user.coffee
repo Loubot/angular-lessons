@@ -55,12 +55,12 @@ angular.module('lessons').service 'auth', [
       # console.log teacher
       $auth.submitLogin( teacher )
         .then( (resp) ->
-          console.log resp
+          # console.log resp
           new User().then( ( resp ) ->
-            console.log resp
-            # $rootScope.$emit 'auth:logged-in-user', [
-            #   resp
-            # ]
+            # console.log resp
+            $rootScope.$emit 'auth:validation-success', [
+              resp
+            ]
             Alertify.success "Welcome back #{ $rootScope.User.first_name }"
             # $mdSidenav('left').close()
             $mdDialog.cancel()
@@ -99,6 +99,7 @@ angular.module('lessons').service 'auth', [
         .then( ( resp ) ->
           console.log resp
           Alertify.success "Logged out successfully"
+          $rootScope.User.stop_unread()
           $rootScope.User = null
           $state.go 'welcome'
           $window.location.reload()
@@ -188,8 +189,6 @@ angular.module('lessons').service 'auth', [
           reject validate_err
         )
         
-
-
     do -> 
 
       # set listener for validation error
@@ -203,8 +202,6 @@ angular.module('lessons').service 'auth', [
       # set listener for validation success
       $rootScope.$on 'auth:validation-success', ( e, v ) ->
         console.log 'validation success'
-
-
 
         if !$rootScope.User? && $rootScope.user.first_name?
           new User().then( ( res ) ->
@@ -233,16 +230,24 @@ angular.module('lessons').factory 'User', [
   "Alertify"
   "Upload"
   '$mdBottomSheet'
- ( COMMS, RESOURCES, $http, $rootScope, $q, $state, Alertify, Upload, $mdBottomSheet ) ->
+  "$interval"
+ ( COMMS, RESOURCES, $http, $rootScope, $q, $state, Alertify, Upload, $mdBottomSheet, $interval ) ->
   # instantiate our initial object
+  stop = undefined # variable required to cancel message checking
 
-  
+  check_unread = ->
+    COMMS.GET(
+      "/teacher/#{ User.id }/check-unread"
+    ).then( ( res ) -> 
+      console.log res
+      $rootScope.User.unread = res.data.teacher.unread
+    )
 
   User = ( cb ) ->
     self = this
     $q ( resolve, reject ) ->
       $http.get("/api/teacher/#{ $rootScope.user.id }").then( (response) ->
-        
+        stop = $interval( check_unread, 5000 )
         user = self.update_all( response.data.teacher )
         resolve user
       ).catch( ( err ) ->
@@ -546,9 +551,10 @@ angular.module('lessons').factory 'User', [
     self = this
     return self.subjects = subjects
 
-    
+  User::stop_unread = ->
+    $interval.cancel( stop )
+    stop = undefined
 
-  
 
   User
 

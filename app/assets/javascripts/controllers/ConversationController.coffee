@@ -39,7 +39,8 @@ angular.module('lessons').controller('ConversationController', [
     
     $scope.select_conversation = ( id, dom_element ) ->
 
-      $( dom_element.target ).find('md-icon').remove()
+      $( dom_element.target ).find('md-icon').remove() if dom_element? and dom_element.target? and $( dom_element.target ).find('md-icon')?
+      
       COMMS.GET(
         "/conversation/#{ id }"
       ).then( ( resp ) ->

@@ -13,9 +13,12 @@ class TeacherController < ApplicationController
     
     @teacher = Teacher.includes( :photos, :subjects, :experience, :qualifications, :location ).find( current_teacher.id )
     
-    render json: { teacher: @teacher.as_json( include: [ :photos, :subjects, :experience, :qualifications, :location ] )
-                  
-                  }
+    render json: { teacher: @teacher.as_json( include: [ :photos, :subjects, :experience, :qualifications, :location ] ) }
+
+  end
+
+  def check_for_unread
+    render json: { teacher: Teacher.select( :unread ).find( current_teacher.id ) }
   end
 
   def update
