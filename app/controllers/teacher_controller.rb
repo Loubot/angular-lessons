@@ -18,6 +18,7 @@ class TeacherController < ApplicationController
   end
 
   def check_for_unread
+    pp Teacher.select( :unread ).find( current_teacher.id )
     render json: { teacher: Teacher.select( :unread ).find( current_teacher.id ) }
   end
 

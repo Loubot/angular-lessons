@@ -241,10 +241,13 @@ angular.module('lessons').factory 'User', [
 
   check_unread = ->
     console.log 'calling unread'
-    COMMS.GET(
-      "/teacher/#{ User.id }/check-unread"
+    $http(
+      method: 'GET'
+      headers: { "Content-Type": "application/json" }
+      url: "/api/teacher/#{ $rootScope.User.id }/check-unread"
+      ignoreLoadingBar: true
     ).then( ( res ) -> 
-      # console.log res
+      console.log res
       $rootScope.User.unread = res.data.teacher.unread
       $rootScope.$broadcast "new:message", res.data.teacher if res.data.teacher.unread == true
     )
@@ -304,8 +307,10 @@ angular.module('lessons').factory 'User', [
       return "#{ @.first_name } #{ @.last_name }"
     else if @.first_name? and !@.last_name?
       return "#{ @.first_name }"
-    else 
+    else if !@first_name? and @.last_name
       return "#{ @.last_name }"
+    else
+      return null
 
   User::update = ->
     COMMS.POST(

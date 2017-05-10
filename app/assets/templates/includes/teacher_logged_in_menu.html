@@ -17,7 +17,7 @@
     </md-menu-item>
 
     <md-menu-item>
-      <md-button ng-href="/conversation/" class="md-button md-default-theme green_text" ng-click="remove_unread( $event )">
+      <md-button ui-sref="conversation" class="md-button md-default-theme green_text" ng-click="remove_unread( $event )">
           Messages
           <span class="unread_message user_menu_icon blink_me" ng-if="User.unread">New mail!</span>
     </md-menu-item>
