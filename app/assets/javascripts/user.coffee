@@ -52,7 +52,7 @@ angular.module('lessons').service 'auth', [
       #   throw 'There was an error'
 
     auth.login = ( teacher ) ->
-      # console.log teacher
+      console.log "login"
       $auth.submitLogin( teacher )
         .then( (resp) ->
           # console.log resp
@@ -111,9 +111,12 @@ angular.module('lessons').service 'auth', [
         )
 
     auth.check_basic_validation = ->
+
       $q ( resolve, reject ) ->
         $auth.validateUser().then( ( user ) ->
+
           new User().then( ( resp ) ->
+            console.log "basic validation"
             resolve $rootScope.User
             $rootScope.isPageFullyLoaded = true
           ).catch( ( err ) ->
@@ -200,14 +203,14 @@ angular.module('lessons').service 'auth', [
         $rootScope.isPageFullyLoaded = true
 
       # set listener for validation success
-      $rootScope.$on 'auth:validation-success', ( e, v ) ->
-        console.log 'validation success'
+      # $rootScope.$on 'auth:validation-success', ( e, v ) ->
+        # console.log 'validation success'
 
-        if !$rootScope.User? && $rootScope.user.first_name?
-          new User().then( ( res ) ->
-            $rootScope.$emit( "a-user-is-logged-in", $rootScope.User )
-            $rootScope.isPageFullyLoaded = true
-          ) 
+        # if !$rootScope.User? && $rootScope.user.first_name?
+        #   new User().then( ( res ) ->
+        #     $rootScope.$emit( "a-user-is-logged-in", $rootScope.User )
+        #     $rootScope.isPageFullyLoaded = true
+        #   ) 
         
 
     auth
@@ -234,18 +237,21 @@ angular.module('lessons').factory 'User', [
  ( COMMS, RESOURCES, $http, $rootScope, $q, $state, Alertify, Upload, $mdBottomSheet, $interval ) ->
   # instantiate our initial object
   stop = undefined # variable required to cancel message checking
+  $rootScope.only_once = false
 
   check_unread = ->
+    console.log 'calling unread'
     COMMS.GET(
       "/teacher/#{ User.id }/check-unread"
     ).then( ( res ) -> 
-      console.log res
+      # console.log res
       $rootScope.User.unread = res.data.teacher.unread
       $rootScope.$broadcast "new:message", res.data.teacher if res.data.teacher.unread == true
     )
 
   User = ( cb ) ->
     self = this
+    console.log "new user being called"
     $q ( resolve, reject ) ->
       $http.get("/api/teacher/#{ $rootScope.user.id }").then( (response) ->
         stop = $interval( check_unread, 60000 )

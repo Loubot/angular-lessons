@@ -39,6 +39,7 @@ angular.module('lessons').controller('ConversationController', [
 
     get_conversations()
     $rootScope.$on "new:message", ->
+      console.log "Got emit"
       get_conversations()
 
     
@@ -90,10 +91,11 @@ angular.module('lessons').controller('ConversationController', [
         )
 
     scroll_to_bottom = ->
-      $timeout (->
-        height = document.getElementById("message_container").scrollHeight
-        $("#message_container").animate({ scrollTop: height }, "slow");
-      ), 2000
+      if document.getElementById("message_container") != null && document.getElementById("message_container") != undefined
+        $timeout (->
+          height = document.getElementById("message_container").scrollHeight
+          $("#message_container").animate({ scrollTop: height }, "slow");
+        ), 2000
 
     open_login_or_register = ->
       $mdDialog.show(
