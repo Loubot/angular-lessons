@@ -254,6 +254,8 @@ angular.module('lessons').controller( 'ViewTeacherController', [
           $rootScope.User.first_name = names[0]
           $rootScope.User.last_name = names[1] if names[1]?
           $rootScope.User.update( $rootScope.User )
+      else
+        $rootScope.User.get_full_name()
 
     $scope.send_message = ->
       check_user_name_exists( $scope.conversation )
@@ -263,7 +265,7 @@ angular.module('lessons').controller( 'ViewTeacherController', [
       $scope.conversation.user_id2 = $scope.teacher.id
       $scope.conversation.user_email1 = $rootScope.User.email
       $scope.conversation.user_email2 = $scope.teacher.email
-      $scope.conversation.user_name1 = $scope.message.user_name1
+      $scope.conversation.user_name1 = check_user_name_exists()
       $scope.conversation.user_name2 = "#{ $scope.teacher.first_name } #{ $scope.teacher.last_name }"
       $scope.message.sender_id = $rootScope.User.id
 

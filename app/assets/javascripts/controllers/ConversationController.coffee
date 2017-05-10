@@ -20,27 +20,32 @@ angular.module('lessons').controller('ConversationController', [
       $mdSidenav('conversation_search').toggle()
 
     
-    COMMS.GET(
-      "/conversation"
-    ).then( ( resp ) ->
-      console.log resp
-      
-      $scope.conversations = resp.data.conversations
-      if $scope.conversations?
-        Alertify.success "Got conversations"
-      else
-        Alertify.error "Failed to find conversations"
-      scroll_to_bottom()
-    ).catch( ( err ) ->
-      console.log err
-      Alertify.error "Failed to get conversation"
-    )
+    get_conversations = ->
+      COMMS.GET(
+        "/conversation"
+      ).then( ( resp ) ->
+        console.log resp
+        
+        $scope.conversations = resp.data.conversations
+        if $scope.conversations?
+          Alertify.success "Got conversations"
+        else
+          Alertify.error "Failed to find conversations"
+        scroll_to_bottom()
+      ).catch( ( err ) ->
+        console.log err
+        Alertify.error "Failed to get conversation"
+      )
+
+    get_conversations()
+    $rootScope.$on "new:message", ->
+      get_conversations()
 
     
     $scope.select_conversation = ( id, dom_element ) ->
 
       $( dom_element.target ).find('md-icon').remove() if dom_element? and dom_element.target? and $( dom_element.target ).find('md-icon')?
-      
+
       COMMS.GET(
         "/conversation/#{ id }"
       ).then( ( resp ) ->

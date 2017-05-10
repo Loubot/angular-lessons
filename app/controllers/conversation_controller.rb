@@ -65,7 +65,7 @@ class ConversationController < ApplicationController
       conversation = Conversation.includes( :messages ).find( params[ :id ] )
 
       if only_show_to_correct( conversation )
-        reset_notifications( conversation )
+        reset_notifications( conversation ) # set users unread attribute to false and update unread notifications
         render json: { conversation: conversation.as_json( include: [ :messages ] ) }, status: 200 and return
       else
         render json: { errors: [ 'tut tut' ] }, status: 403

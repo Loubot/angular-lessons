@@ -241,13 +241,14 @@ angular.module('lessons').factory 'User', [
     ).then( ( res ) -> 
       console.log res
       $rootScope.User.unread = res.data.teacher.unread
+      $rootScope.$broadcast "new:message", res.data.teacher if res.data.teacher.unread == true
     )
 
   User = ( cb ) ->
     self = this
     $q ( resolve, reject ) ->
       $http.get("/api/teacher/#{ $rootScope.user.id }").then( (response) ->
-        stop = $interval( check_unread, 5000 )
+        stop = $interval( check_unread, 60000 )
         user = self.update_all( response.data.teacher )
         resolve user
       ).catch( ( err ) ->
@@ -292,8 +293,13 @@ angular.module('lessons').factory 'User', [
     $rootScope.User = @
     
 
-  User::get_full_name = ->    
-    return @.first_name + ' ' + @.last_name if ( @.first_name? or @.last_name? )
+  User::get_full_name = ->
+    if @.first_name? and @.last_name?
+      return "#{ @.first_name } #{ @.last_name }"
+    else if @.first_name? and !@.last_name?
+      return "#{ @.first_name }"
+    else 
+      return "#{ @.last_name }"
 
   User::update = ->
     COMMS.POST(
