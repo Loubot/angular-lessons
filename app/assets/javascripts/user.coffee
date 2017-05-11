@@ -324,18 +324,17 @@ angular.module('lessons').factory 'User', [
       console.log "Failed to update user class"
     )
 
-  User::update_quietly = ->
+  User::update_quietly =  ->
     $http(
       method: 'POST'
-      url: "/api/teacher/"
       headers: { "Content-Type": "application/json" }
-      @
-      ignoreLoadingBar: true
-    ).then( ( resp ) ->
-      # console.log resp
-      $mdBottomSheet.hide()
-    ).catch( ( err ) ->
-      console.log "Failed to update user class"
+      url: "/api/teacher/"
+      data: @
+      { ignoreLoadingBar: true }
+    ).then( ( res ) -> 
+      console.log res
+      $rootScope.User.unread = res.data.teacher.unread
+      $rootScope.$broadcast "new:message", res.data.teacher if res.data.teacher.unread == true
     )
 
 ###################### pics ###################################################
