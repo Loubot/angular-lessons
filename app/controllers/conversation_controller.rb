@@ -56,6 +56,7 @@ class ConversationController < ApplicationController
   end
 
   def index
+    
     conversations = Conversation.where( user_id1: current_teacher.id ).or( Conversation.where( user_id2: current_teacher.id ) ).order( "updated_at DESC" )
     render json: { conversations: conversations.as_json }
   end
@@ -65,7 +66,7 @@ class ConversationController < ApplicationController
       conversation = Conversation.includes( :messages ).find( params[ :id ] )
 
       if only_show_to_correct( conversation )
-        reset_notifications( conversation ) # set users unread attribute to false and update unread notifications
+        reset_notifications( conversation ) # update unread notifications
         render json: { conversation: conversation.as_json( include: [ :messages ] ) }, status: 200 and return
       else
         render json: { errors: [ 'tut tut' ] }, status: 403
@@ -100,7 +101,7 @@ class ConversationController < ApplicationController
     end
 
     def reset_notifications( conversation )
-      current_teacher.update( unread: false )
+      
       if conversation.user_id1_notification == current_teacher.id
         conversation.update_attributes( user_id1_notification: 0 )
         return true

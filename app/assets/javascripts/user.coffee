@@ -332,8 +332,7 @@ angular.module('lessons').factory 'User', [
       @
       ignoreLoadingBar: true
     ).then( ( resp ) ->
-      Alertify.success "User updated "
-      console.log resp
+      # console.log resp
       $mdBottomSheet.hide()
     ).catch( ( err ) ->
       console.log "Failed to update user class"
