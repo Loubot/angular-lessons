@@ -253,7 +253,7 @@ angular.module('lessons').controller( 'ViewTeacherController', [
         if names.length > 0
           $rootScope.User.first_name = names[0]
           $rootScope.User.last_name = names[1] if names[1]?
-          $rootScope.User.update( $rootScope.User )
+          $rootScope.User.update_quietly( $rootScope.User )
       else
         $rootScope.User.get_full_name()
 
@@ -269,18 +269,18 @@ angular.module('lessons').controller( 'ViewTeacherController', [
       $scope.conversation.user_name2 = "#{ $scope.teacher.first_name } #{ $scope.teacher.last_name }"
       $scope.message.sender_id = $rootScope.User.id
 
-      COMMS.POST(
-        "/conversation"
-        conversation: $scope.conversation
-        message: $scope.message
-      ).then( ( resp ) ->
-        console.log resp
-        Alertify.success "Message sent!"
-        $mdDialog.hide()
-      ).catch( ( err ) ->
-        console.log err
-        Alertify.error "Failed to send your message"
-      )
+      # COMMS.POST(
+      #   "/conversation"
+      #   conversation: $scope.conversation
+      #   message: $scope.message
+      # ).then( ( resp ) ->
+      #   console.log resp
+      #   Alertify.success "Message sent!"
+      #   $mdDialog.hide()
+      # ).catch( ( err ) ->
+      #   console.log err
+      #   Alertify.error "Failed to send your message"
+      # )
 
     $scope.open_login = ->
       $mdDialog.show(

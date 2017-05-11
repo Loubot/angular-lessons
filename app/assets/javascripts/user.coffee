@@ -324,6 +324,21 @@ angular.module('lessons').factory 'User', [
       console.log "Failed to update user class"
     )
 
+  User::update_quietly = ->
+    $http(
+      method: 'POST'
+      url: "/api/teacher/"
+      headers: { "Content-Type": "application/json" }
+      @
+      ignoreLoadingBar: true
+    ).then( ( resp ) ->
+      Alertify.success "User updated "
+      console.log resp
+      $mdBottomSheet.hide()
+    ).catch( ( err ) ->
+      console.log "Failed to update user class"
+    )
+
 ###################### pics ###################################################
   User::upload_pic = ( pic ) ->
     if pic?
