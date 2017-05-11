@@ -38,12 +38,15 @@ angular.module('lessons').controller('ConversationController', [
       )
 
     get_conversations()
-    $rootScope.$on "new:message", ->
+    $scope.$on "new:message", ->
+
       console.log "Got emit"
       get_conversations()
 
     
     $scope.select_conversation = ( id, dom_element ) ->
+      $rootScope.User.unread = false
+      $rootScope.User.update_quietly()
 
       $( dom_element.target ).find('md-icon').remove() if dom_element? and dom_element.target? and $( dom_element.target ).find('md-icon')?
 

@@ -1,6 +1,6 @@
 <md-menu>
   <md-button aria-label="Open demo menu" class="md-icon-button" ng-click="open_home_menu($mdOpenMenu, $event)">
-    <md-icon><i class="material-icons">menu</i></md-icon>
+    <md-icon><i class="material-icons" ng-class="{'unread_message blink_me': User.unread}">menu</i></md-icon>
   </md-button>
 
   <md-menu-content width="4">
