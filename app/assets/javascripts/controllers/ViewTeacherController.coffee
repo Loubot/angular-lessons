@@ -276,6 +276,7 @@ angular.module('lessons').controller( 'ViewTeacherController', [
       ).then( ( resp ) ->
         console.log resp
         Alertify.success "Message sent!"
+        $scope.message.text = ""
         $mdDialog.hide()
       ).catch( ( err ) ->
         console.log err
