@@ -68,6 +68,8 @@ class Teacher < ActiveRecord::Base
 
   serialize :levels
 
+  after_save :update_conversations
+
 
   def get_full_name
     "#{ self.first_name } #{ self.last_name }"
@@ -155,6 +157,15 @@ class Teacher < ActiveRecord::Base
         puts "list subscription failed !!!!!!!!!!"
         logger.info e.to_s
         # flash[:danger] = e.to_s
+      end
+    end
+
+    def update_conversations
+      if first_name_changed? or last_name_changed?
+        conversations = Conversation.where( user_id1: self.id )
+        conversations.update_all( user_name1: "#{ self.first_name } #{ self.last_name }" )
+        conversations = Conversation.where( user_id2: self.id )
+        conversations.update_all( user_name2: "#{ self.first_name } #{ self.last_name }" )
       end
     end
 

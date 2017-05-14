@@ -240,14 +240,14 @@ angular.module('lessons').factory 'User', [
   $rootScope.only_once = false
 
   check_unread = ->
-    console.log 'calling unread'
+    # console.log 'calling unread'
     $http(
       method: 'GET'
       headers: { "Content-Type": "application/json" }
       url: "/api/teacher/#{ $rootScope.User.id }/check-unread"
       ignoreLoadingBar: true
     ).then( ( res ) -> 
-      console.log res
+      # console.log res
       $rootScope.User.unread = res.data.teacher.unread
       $rootScope.$broadcast "new:message", res.data.teacher if res.data.teacher.unread == true
     )
@@ -257,7 +257,7 @@ angular.module('lessons').factory 'User', [
     console.log "new user being called"
     $q ( resolve, reject ) ->
       $http.get("/api/teacher/#{ $rootScope.user.id }").then( (response) ->
-        stop = $interval( check_unread, 60000 )
+        stop = $interval( check_unread, 600000 )
         user = self.update_all( response.data.teacher )
         resolve user
       ).catch( ( err ) ->
