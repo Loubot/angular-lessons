@@ -68,7 +68,7 @@ class Teacher < ActiveRecord::Base
 
   serialize :levels
 
-  after_save :update_conversations
+  after_save :update_conversations #If user changes name all names in conversations have to be changed too. 
 
 
   def get_full_name
@@ -160,12 +160,12 @@ class Teacher < ActiveRecord::Base
       end
     end
 
-    def update_conversations
+    def update_conversations # Update users conversations to refelct names if names are changed. 
       if first_name_changed? or last_name_changed?
         conversations = Conversation.where( user_id1: self.id )
-        conversations.update_all( user_name1: "#{ self.first_name } #{ self.last_name }" )
+        conversations.update_all( user_name1: self.get_full_name() )
         conversations = Conversation.where( user_id2: self.id )
-        conversations.update_all( user_name2: "#{ self.first_name } #{ self.last_name }" )
+        conversations.update_all( user_name2: self.get_full_name() )
       end
     end
 
