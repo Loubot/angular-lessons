@@ -263,6 +263,7 @@ angular.module('lessons').controller( 'ViewTeacherController', [
       $scope.conversation = {}
       $scope.conversation.user_id1 = $rootScope.User.id
       $scope.conversation.user_id2 = $scope.teacher.id
+      $scope.conversation.phone1 = $scope.message.phone
       $scope.conversation.user_email1 = $rootScope.User.email
       $scope.conversation.user_email2 = $scope.teacher.email
       $scope.conversation.user_name1 = check_user_name_exists()

@@ -81,7 +81,7 @@ class ConversationController < ApplicationController
 
   private
     def conversation_params
-      params.permit(  { conversation: [ :user_id1, :user_id2, :user_email1, :user_email2, :user_name1, :user_name2 ] },
+      params.permit(  { conversation: [ :user_id1, :user_id2, :user_email1, :user_email2, :user_name1, :user_name2, :phone1 ] },
                       { message: [ :text, :sender_id ] }
                    )
       # params.permit( :name, :phone, :email, :teacher_id )

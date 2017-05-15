@@ -54,6 +54,7 @@
 
     <md-content class="grey_content padding_5 no_x_overflow" id="message_container">
       <div layout="column" layout-fill flex>
+        {{ conversation.phone1 }}
         <div        class="margin_t_10"
                     ng-class="{ 'flex-offset-45': message.sender_id != User.id }"
                     ng-repeat="message in conversation.messages">

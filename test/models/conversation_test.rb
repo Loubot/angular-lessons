@@ -13,6 +13,8 @@
 #  user_name2            :string
 #  user_id1_notification :integer          default(0)
 #  user_id2_notification :integer          default(0)
+#  phone1                :text
+#  phone2                :text
 #
 
 require 'test_helper'
