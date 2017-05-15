@@ -23,7 +23,11 @@
                   type="tel" 
                   ng-pattern="/^[0-9]{1,10}$/"
                   placeholder="Phone Number (Optional)"
-                  aria-label="Phone number">
+                  aria-label="Phone number"
+                  name="phone">
+          <div ng-messages="message_form.phone.$error" ng-if="message_form.phone.$dirty">
+            <div ng-message="pattern">Not a phone number</div>
+          </div>
         </md-input-container>
 
         
@@ -31,15 +35,6 @@
           <label >Message</label>
           <textarea ng-model="message.text" aria-label="Message" class="black_text" md-maxlength="300"  md-select-on-focus required></textarea>
         </md-input-container>
-
-
-        <md-input-container >
-          <div ng-show="message_form.confirm_email.$error.match">
-            <br>
-            Emails don't match
-          </div>
-        </md-input-container>
-
         <br>
         
         <md-input-container>
