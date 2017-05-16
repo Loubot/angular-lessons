@@ -16,6 +16,13 @@ angular.module('lessons').controller('NavController', [
     console.log "NavController"
     $scope.teacher = {}
 
+    $scope.remove_unread = ( dom_element ) ->
+      $rootScope.User.update_quietly()
+      $( document ).find( '.unread_message.user_menu_icon' ).remove()
+      $rootScope.User.unread = false
+      
+      return true
+
     # Get subjects for subjects menu
 
     COMMS.GET(

@@ -52,15 +52,15 @@ angular.module('lessons').service 'auth', [
       #   throw 'There was an error'
 
     auth.login = ( teacher ) ->
-      # console.log teacher
+      console.log "login"
       $auth.submitLogin( teacher )
         .then( (resp) ->
-          console.log resp
+          # console.log resp
           new User().then( ( resp ) ->
-            console.log resp
-            # $rootScope.$emit 'auth:logged-in-user', [
-            #   resp
-            # ]
+            # console.log resp
+            $rootScope.$emit 'auth:validation-success', [
+              resp
+            ]
             Alertify.success "Welcome back #{ $rootScope.User.first_name }"
             # $mdSidenav('left').close()
             $mdDialog.cancel()
@@ -99,6 +99,7 @@ angular.module('lessons').service 'auth', [
         .then( ( resp ) ->
           console.log resp
           Alertify.success "Logged out successfully"
+          $rootScope.User.stop_unread()
           $rootScope.User = null
           $state.go 'welcome'
           $window.location.reload()
@@ -110,9 +111,12 @@ angular.module('lessons').service 'auth', [
         )
 
     auth.check_basic_validation = ->
+
       $q ( resolve, reject ) ->
         $auth.validateUser().then( ( user ) ->
+
           new User().then( ( resp ) ->
+            console.log "basic validation"
             resolve $rootScope.User
             $rootScope.isPageFullyLoaded = true
           ).catch( ( err ) ->
@@ -188,8 +192,6 @@ angular.module('lessons').service 'auth', [
           reject validate_err
         )
         
-
-
     do -> 
 
       # set listener for validation error
@@ -201,16 +203,14 @@ angular.module('lessons').service 'auth', [
         $rootScope.isPageFullyLoaded = true
 
       # set listener for validation success
-      $rootScope.$on 'auth:validation-success', ( e, v ) ->
-        console.log 'validation success'
+      # $rootScope.$on 'auth:validation-success', ( e, v ) ->
+        # console.log 'validation success'
 
-
-
-        if !$rootScope.User? && $rootScope.user.first_name?
-          new User().then( ( res ) ->
-            $rootScope.$emit( "a-user-is-logged-in", $rootScope.User )
-            $rootScope.isPageFullyLoaded = true
-          ) 
+        # if !$rootScope.User? && $rootScope.user.first_name?
+        #   new User().then( ( res ) ->
+        #     $rootScope.$emit( "a-user-is-logged-in", $rootScope.User )
+        #     $rootScope.isPageFullyLoaded = true
+        #   ) 
         
 
     auth
@@ -233,16 +233,31 @@ angular.module('lessons').factory 'User', [
   "Alertify"
   "Upload"
   '$mdBottomSheet'
- ( COMMS, RESOURCES, $http, $rootScope, $q, $state, Alertify, Upload, $mdBottomSheet ) ->
+  "$interval"
+ ( COMMS, RESOURCES, $http, $rootScope, $q, $state, Alertify, Upload, $mdBottomSheet, $interval ) ->
   # instantiate our initial object
+  stop = undefined # variable required to cancel message checking
+  $rootScope.only_once = false
 
-  
+  check_unread = ->
+    # console.log 'calling unread'
+    $http(
+      method: 'GET'
+      headers: { "Content-Type": "application/json" }
+      url: "/api/teacher/#{ $rootScope.User.id }/check-unread"
+      ignoreLoadingBar: true
+    ).then( ( res ) -> 
+      # console.log res
+      $rootScope.User.unread = res.data.teacher.unread
+      $rootScope.$broadcast "new:message", res.data.teacher if res.data.teacher.unread == true
+    )
 
   User = ( cb ) ->
     self = this
+    console.log "new user being called"
     $q ( resolve, reject ) ->
       $http.get("/api/teacher/#{ $rootScope.user.id }").then( (response) ->
-        
+        stop = $interval( check_unread, 600000 )
         user = self.update_all( response.data.teacher )
         resolve user
       ).catch( ( err ) ->
@@ -287,8 +302,15 @@ angular.module('lessons').factory 'User', [
     $rootScope.User = @
     
 
-  User::get_full_name = ->    
-    return @.first_name + ' ' + @.last_name if ( @.first_name? or @.last_name? )
+  User::get_full_name = ->
+    if @.first_name? and @.last_name?
+      return "#{ @.first_name } #{ @.last_name }"
+    else if @.first_name? and !@.last_name?
+      return "#{ @.first_name }"
+    else if !@first_name? and @.last_name
+      return "#{ @.last_name }"
+    else
+      return null
 
   User::update = ->
     COMMS.POST(
@@ -300,6 +322,19 @@ angular.module('lessons').factory 'User', [
       $mdBottomSheet.hide()
     ).catch( ( err ) ->
       console.log "Failed to update user class"
+    )
+
+  User::update_quietly =  ->
+    $http(
+      method: 'POST'
+      headers: { "Content-Type": "application/json" }
+      url: "/api/teacher/"
+      data: @
+      { ignoreLoadingBar: true }
+    ).then( ( res ) -> 
+      console.log res
+      $rootScope.User.unread = res.data.teacher.unread
+      $rootScope.$broadcast "new:message", res.data.teacher if res.data.teacher.unread == true
     )
 
 ###################### pics ###################################################
@@ -546,9 +581,10 @@ angular.module('lessons').factory 'User', [
     self = this
     return self.subjects = subjects
 
-    
+  User::stop_unread = ->
+    $interval.cancel( stop )
+    stop = undefined
 
-  
 
   User
 

@@ -20,24 +20,36 @@ angular.module('lessons').controller('ConversationController', [
       $mdSidenav('conversation_search').toggle()
 
     
-    COMMS.GET(
-      "/conversation"
-    ).then( ( resp ) ->
-      console.log resp
-      
-      $scope.conversations = resp.data.conversations
-      if $scope.conversations?
-        Alertify.success "Got conversations"
-      else
-        Alertify.error "Failed to find conversations"
-      scroll_to_bottom()
-    ).catch( ( err ) ->
-      console.log err
-      Alertify.error "Failed to get conversation"
-    )
+    get_conversations = ->
+      COMMS.GET(
+        "/conversation"
+      ).then( ( resp ) ->
+        console.log resp
+        
+        $scope.conversations = resp.data.conversations
+        if $scope.conversations?
+          Alertify.success "Got conversations"
+        else
+          Alertify.error "Failed to find conversations"
+        scroll_to_bottom()
+      ).catch( ( err ) ->
+        console.log err
+        Alertify.error "Failed to get conversation"
+      )
+
+    get_conversations()
+    $scope.$on "new:message", ->
+
+      console.log "Got emit"
+      get_conversations()
 
     
-    $scope.select_conversation = ( id ) ->
+    $scope.select_conversation = ( id, dom_element ) ->
+      $rootScope.User.unread = false
+      $rootScope.User.update_quietly()
+
+      $( dom_element.target ).find('md-icon').remove() if dom_element? and dom_element.target? and $( dom_element.target ).find('md-icon')?
+
       COMMS.GET(
         "/conversation/#{ id }"
       ).then( ( resp ) ->
@@ -51,6 +63,8 @@ angular.module('lessons').controller('ConversationController', [
         Alertify.error "Failed to get conversation"
         $mdSidenav('conversation_search').close()
       )
+
+      return true
 
     $scope.select_conversation( $stateParams.id ) if $stateParams.id #fetch specific conversation if id is present. i.e. from email link
 
@@ -80,10 +94,11 @@ angular.module('lessons').controller('ConversationController', [
         )
 
     scroll_to_bottom = ->
-      $timeout (->
-        height = document.getElementById("message_container").scrollHeight
-        $("#message_container").animate({ scrollTop: height }, "slow");
-      ), 2000
+      if document.getElementById("message_container") != null && document.getElementById("message_container") != undefined
+        $timeout (->
+          height = document.getElementById("message_container").scrollHeight
+          $("#message_container").animate({ scrollTop: height }, "slow");
+        ), 2000
 
     open_login_or_register = ->
       $mdDialog.show(

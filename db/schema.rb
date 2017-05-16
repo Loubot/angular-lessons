@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170426104241) do
+ActiveRecord::Schema.define(version: 20170515110242) do
 
   create_table "categories", force: :cascade do |t|
     t.string   "name"
@@ -20,14 +20,18 @@ ActiveRecord::Schema.define(version: 20170426104241) do
   end
 
   create_table "conversations", force: :cascade do |t|
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",                        null: false
+    t.datetime "updated_at",                        null: false
     t.integer  "user_id1"
     t.integer  "user_id2"
     t.string   "user_email1"
     t.string   "user_email2"
     t.string   "user_name1"
     t.string   "user_name2"
+    t.integer  "user_id1_notification", default: 0
+    t.integer  "user_id2_notification", default: 0
+    t.text     "phone1"
+    t.text     "phone2"
   end
 
   create_table "delayed_jobs", force: :cascade do |t|
@@ -165,6 +169,7 @@ ActiveRecord::Schema.define(version: 20170426104241) do
     t.boolean  "tci",                    default: false
     t.boolean  "garda",                  default: false
     t.string   "phone",                  default: ""
+    t.boolean  "unread",                 default: false
   end
 
   add_index "teachers", ["email"], name: "index_teachers_on_email"

@@ -34,7 +34,10 @@
 #  lc                     :boolean
 #  third_level            :boolean
 #  travel                 :boolean          default(FALSE)
+#  tci                    :boolean          default(FALSE)
+#  garda                  :boolean          default(FALSE)
 #  phone                  :string           default("")
+#  unread                 :boolean          default(FALSE)
 #
 
 class Teacher < ActiveRecord::Base
@@ -64,6 +67,8 @@ class Teacher < ActiveRecord::Base
   after_create :send_new_message, :add_to_mailchimp
 
   serialize :levels
+
+  after_save :update_conversations #If user changes name all names in conversations have to be changed too. 
 
 
   def get_full_name
@@ -152,6 +157,15 @@ class Teacher < ActiveRecord::Base
         puts "list subscription failed !!!!!!!!!!"
         logger.info e.to_s
         # flash[:danger] = e.to_s
+      end
+    end
+
+    def update_conversations # Update users conversations to refelct names if names are changed. 
+      if first_name_changed? or last_name_changed?
+        conversations = Conversation.where( user_id1: self.id )
+        conversations.update_all( user_name1: self.get_full_name() )
+        conversations = Conversation.where( user_id2: self.id )
+        conversations.update_all( user_name2: self.get_full_name() )
       end
     end
 

@@ -28,12 +28,15 @@
       <md-content class="md-padding">
         <input placeholder="Search by name" class="margin_b_10" ng-model="search_text">
         <div  ng-repeat="convo in conversations | filter:search_text" 
-              ng-click="select_conversation( convo.id )" 
+              ng-click="select_conversation( convo.id, $event )"
               class="margin_t_10"
               flex="100">
 
           <div class="message_box" ng-class="{selected_conversation : convo.id==conversation.id}">
             {{ convo.user_id1 == User.id ? convo.user_name2 : convo.user_name1 }}
+              <md-icon ng-if="convo.user_id1_notification==User.id||convo.user_id2_notification==User.id" class="unread_message">
+                  <i class="material-icons">email</i>
+              </md-icon>
           </div>
 
           <md-divider></md-divider>
@@ -51,6 +54,7 @@
 
     <md-content class="grey_content padding_5 no_x_overflow" id="message_container">
       <div layout="column" layout-fill flex>
+        {{ conversation.phone1 }}
         <div        class="margin_t_10"
                     ng-class="{ 'flex-offset-45': message.sender_id != User.id }"
                     ng-repeat="message in conversation.messages">

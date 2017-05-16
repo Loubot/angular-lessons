@@ -13,9 +13,13 @@ class TeacherController < ApplicationController
     
     @teacher = Teacher.includes( :photos, :subjects, :experience, :qualifications, :location ).find( current_teacher.id )
     
-    render json: { teacher: @teacher.as_json( include: [ :photos, :subjects, :experience, :qualifications, :location ] )
-                  
-                  }
+    render json: { teacher: @teacher.as_json( include: [ :photos, :subjects, :experience, :qualifications, :location ] ) }
+
+  end
+
+  def check_for_unread
+    pp Teacher.select( :unread ).find( current_teacher.id )
+    render json: { teacher: Teacher.select( :unread ).find( current_teacher.id ) }
   end
 
   def update
@@ -70,6 +74,6 @@ class TeacherController < ApplicationController
     end
 
     def teacher_params
-      params.permit( :profile, :id, :teacher_id, :overview, :experience, :calendar_id, :first_name, :last_name, :is_teacher, :third_level, :jc, :lc, :primary, :travel, :tci, :garda, :phone )
+      params.permit( :profile, :id, :teacher_id, :overview, :experience, :calendar_id, :first_name, :last_name, :is_teacher, :third_level, :jc, :lc, :primary, :travel, :tci, :garda, :phone, :unread )
     end
 end

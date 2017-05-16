@@ -208,7 +208,7 @@ angular.module('lessons').controller( 'ViewTeacherController', [
       $scope.slides = []
       for photo, index in $scope.teacher.photos
         $scope.slides.push(
-          image: photo.avatar.url
+          pic: photo.avatar.url
           index: index + 1
           description: "Image #{ index + 1 }"
         )
@@ -247,14 +247,26 @@ angular.module('lessons').controller( 'ViewTeacherController', [
     $scope.closeDialog = ->
       $mdDialog.hide()
 
+    check_user_name_exists = ->
+      if !$rootScope.User.get_full_name()
+        names = $scope.message.user_name1.split( " " )
+        if names.length > 0
+          $rootScope.User.first_name = names[0]
+          $rootScope.User.last_name = names[1] if names[1]?
+          $rootScope.User.update_quietly( $rootScope.User )
+      else
+        $rootScope.User.get_full_name()
+
     $scope.send_message = ->
+      check_user_name_exists( $scope.conversation )
       console.log $scope.message
       $scope.conversation = {}
       $scope.conversation.user_id1 = $rootScope.User.id
       $scope.conversation.user_id2 = $scope.teacher.id
+      $scope.conversation.phone1 = $scope.message.phone
       $scope.conversation.user_email1 = $rootScope.User.email
       $scope.conversation.user_email2 = $scope.teacher.email
-      $scope.conversation.user_name1 = $scope.message.user_name1
+      $scope.conversation.user_name1 = check_user_name_exists()
       $scope.conversation.user_name2 = "#{ $scope.teacher.first_name } #{ $scope.teacher.last_name }"
       $scope.message.sender_id = $rootScope.User.id
 
@@ -265,9 +277,11 @@ angular.module('lessons').controller( 'ViewTeacherController', [
       ).then( ( resp ) ->
         console.log resp
         Alertify.success "Message sent!"
+        $scope.message.text = ""
         $mdDialog.hide()
       ).catch( ( err ) ->
         console.log err
+        Alertify.error "Failed to send your message"
       )
 
     $scope.open_login = ->

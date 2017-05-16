@@ -883,8 +883,16 @@ md-sidenav.md-closed.md-locked-open-add-active.user_menu {
 
   // Messages
 
+  .blink_me {
+    animation: blinker 5s linear infinite;
+  }
+
+  @keyframes blinker {  
+    50% { opacity: 0; }
+  }
+
 .unread_message{
-  color: #ffd700;
+  color: #ffd700 !important;
 }
 
 .selected_conversation{
@@ -971,6 +979,14 @@ md-sidenav.md-closed.md-locked-open-add-active.user_menu {
 @media ( max-width: 600px ) {
   .teacher_card_font{
     font-size: 1em !important;
+  }
+
+  .small_teacher_email_font{
+    font-size: 7vw !important;
+  }
+
+  .extra_small_teacher_email_font{
+    font-size: 5vw !important;
   }
 }
 
