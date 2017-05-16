@@ -26,6 +26,7 @@
                     ng-model="message.phone"
                     name="phone"
                     ng-pattern="/^[0-9]{1,10}$/"
+                    placeholder="Phone number ( optional )"
                     minlength="6"
                     aria-label="Phone number">
             <div ng-messages="message_form.phone.$error" ng-if='message_form.phone.$dirty'>
