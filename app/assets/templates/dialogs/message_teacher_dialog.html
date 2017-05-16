@@ -3,40 +3,49 @@
     <md-content class="md-no-momentum">
       <form name="message_form" ng-submit="message_form.$valid && send_message()" novalidate>
 
-        <md-input-container md-no-float class="md-block">
-          <!-- Use floating label instead of placeholder -->
-          
-          <i class="material-icons">person_outline</i>
-          <input  ng-value="User.get_full_name()"
-                  class="black_text" 
-                  type="text"
-                  ng-model="message.user_name1"
-                  placeholder="Your full name (required)"
-                  aria-label="Name"
-                  ng-disabled="User.get_full_name()"
-                  required>
-        </md-input-container>
+        <div>
+          <md-input-container md-no-float>
+            <i class="material-icons">person_outline</i>
+            <input type="text"
+                    ng-model="message.user_name1"
+                    placeholder="Your full name ( required )"
+                    arial-label="Name"
+                    name="text"
+                    required>
 
-        <md-input-container md-no-float placeholder="Name" class="md-block">
-          <i class="material-icons">phone</i>
-          <input  ng-model="message.phone" 
-                  type="tel" 
-                  ng-pattern="/^[0-9]{1,10}$/"
-                  placeholder="Phone Number (Optional)"
-                  aria-label="Phone number"
-                  name="phone">
-          <div ng-messages="message_form.phone.$error" ng-if="message_form.phone.$dirty">
-            <div ng-message="pattern">Not a phone number</div>
-          </div>
-        </md-input-container>
+            <div ng-messages="message_form.text.$error" ng-if="message_form.text.$dirty">
+              <div ng-message="required">Name is required</div>
+            </div>
+          </md-input-container>
+        </div>
 
-        
-        <md-input-container class="width_75">
-          <label >Message</label>
-          <textarea ng-model="message.text" aria-label="Message" class="black_text" md-maxlength="300"  md-select-on-focus required></textarea>
-        </md-input-container>
-        <br>
-        
+        <div>
+          <md-input-container md-no-float>
+            <md-icon><i class="material-icons icon_green">phone</i></md-icon>
+            <input  type="tel"                          
+                    ng-model="message.phone"
+                    name="phone"
+                    ng-pattern="/^[0-9]{1,10}$/"
+                    placeholder="Phone number ( optional )"
+                    minlength="6"
+                    aria-label="Phone number">
+            <div ng-messages="message_form.phone.$error" ng-if='message_form.phone.$dirty'>
+              <div ng-message="pattern">Not a phone number</div>
+              <div ng-message="minlength">Not long engough</div>
+            </div>
+          </md-input-container>
+        </div>
+
+        <div>
+          <md-input-container class="width_75">
+            <label >Message</label>
+            <input ng-model="message.text" name="text" aria-label="Message" class="black_text" md-maxlength="300"  md-select-on-focus required>
+            <div ng-messages="message_form.text.$error">
+              <div ng-message="required">Message is required</div>
+            </div>
+          </md-input-container>
+        </div>
+
         <md-input-container>
           <input type="submit" value="Send message" class="md-button md-raised md-primary white_text" aria-label="Send message">
         </md-input-container>

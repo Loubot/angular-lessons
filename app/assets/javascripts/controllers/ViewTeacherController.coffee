@@ -242,6 +242,8 @@ angular.module('lessons').controller( 'ViewTeacherController', [
         scope: $scope
         preserveScope: true
         templateUrl: "dialogs/message_teacher_dialog.html"
+        onShowing: ->
+          $scope.message.user_name1 = $rootScope.User.get_full_name()
       )
 
     $scope.closeDialog = ->
