@@ -21,6 +21,7 @@
 
         <div>
           <md-input-container md-no-float>
+          
             <md-icon><i class="material-icons icon_green">phone</i></md-icon>
             <input  type="tel"                          
                     ng-model="message.phone"
@@ -40,7 +41,7 @@
           <md-input-container class="width_75">
             <label >Message</label>
             <input ng-model="message.text" name="text" aria-label="Message" class="black_text" md-maxlength="300"  md-select-on-focus required>
-            <div ng-messages="message_form.text.$error">
+            <div ng-messages="message_form.text.$error" ng-if='message_form.text.$dirty'>
               <div ng-message="required">Message is required</div>
             </div>
           </md-input-container>
