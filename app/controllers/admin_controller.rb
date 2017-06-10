@@ -10,7 +10,7 @@ class AdminController < ApplicationController
     else
       
       image = Twitter::Image.open_from_url( Photo.find( teacher.profile ).avatar.url ) 
-      
+      pp image
       if image[ "status" ] == "failure"
         x = $client.update_with_media( tweet_params[ :tweet ][ :text ], Twitter::Image.open_from_url("https://s3-eu-west-1.amazonaws.com/angular-lessons/static_assets/facebook_logo.jpg")  )
       else
