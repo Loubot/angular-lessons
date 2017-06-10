@@ -9,13 +9,14 @@ class AdminController < ApplicationController
       x = $client.update_with_media( tweet_params[ :tweet ][ :text ], Twitter::Image.open_from_url("https://s3-eu-west-1.amazonaws.com/angular-lessons/static_assets/facebook_logo.jpg")  )
     else
       
-      image = Teacher.last.photos.last.avatar.file.file
+      image = Twitter::Image.open_from_url( Teacher.last.photos.last.avatar.file.file ) 
       pp image
-      if image[ "status" ] == "failure"
-        x = $client.update_with_media( tweet_params[ :tweet ][ :text ], Twitter::Image.open_from_url("https://s3-eu-west-1.amazonaws.com/angular-lessons/static_assets/facebook_logo.jpg")  )
-      else
-        x = $client.update_with_media( tweet_params[ :tweet ][ :text ], image )
-      end
+      x = $client.update_with_media( tweet_params[ :tweet ][ :text ], image )
+      # if image[ "status" ] == "failure"
+      #   x = $client.update_with_media( tweet_params[ :tweet ][ :text ], Twitter::Image.open_from_url("https://s3-eu-west-1.amazonaws.com/angular-lessons/static_assets/facebook_logo.jpg")  )
+      # else
+      #   x = $client.update_with_media( tweet_params[ :tweet ][ :text ], image )
+      # end
 
     end
     render json: { tweet_response: x }
