@@ -154,6 +154,7 @@ angular.module('lessons').service 'auth', [
     auth.check_if_logged_in_and_teacher = ->
       $q ( resolve, reject ) ->
         $auth.validateUser().then( ( user ) ->
+          $rootScope.isPageFullyLoaded = true
           if !$rootScope.User?
             new User().then( ( resp ) ->
               if !user.is_teacher
@@ -167,6 +168,7 @@ angular.module('lessons').service 'auth', [
             resolve $rootScope.User         
         ).catch( ( validate_err ) ->
           reject validate_err
+          $rootScope.isPageFullyLoaded = true
         )
 
     auth.check_if_logged_in_and_admin = ->
