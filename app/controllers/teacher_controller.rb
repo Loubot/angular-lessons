@@ -11,9 +11,9 @@ class TeacherController < ApplicationController
 
   def show
     
-    @teacher = Teacher.includes( :photos, :subjects, :experience, :qualifications, :location ).find( current_teacher.id )
+    @teacher = Teacher.includes( :photos, :subjects, :experience, :qualifications, :location, :charges ).find( current_teacher.id )
     
-    render json: { teacher: @teacher.as_json( include: [ :photos, :subjects, :experience, :qualifications, :location ] ) }
+    render json: { teacher: @teacher.as_json( include: [ :photos, :subjects, :experience, :qualifications, :location, :charges ] ) }
 
   end
 
@@ -43,13 +43,13 @@ class TeacherController < ApplicationController
 
 
   def show_teacher
-    teacher = Teacher.includes( :photos, :subjects, :location, :experience, :qualifications )\
+    teacher = Teacher.includes( :photos, :subjects, :location, :experience, :qualifications, :charges )\
               .select( :id, :email, :first_name, :last_name, :profile, :overview, :view_count, :primary, :jc, :lc, :third_level, :travel, :tci, :garda, :phone )\
               .find_by_id( params[:teacher_id])
 
     Teacher.increment_counter( :view_count, params[:teacher_id] )
     if teacher
-      render json: { teacher: teacher.as_json( include: [ :photos, :subjects, :location, :experience, :qualifications ] ) }
+      render json: { teacher: teacher.as_json( include: [ :photos, :subjects, :location, :experience, :qualifications, :charges ] ) }
     else
       render json: { errors: { full_messages: "Can't find teacher with that id" } }, status: 404
     end    

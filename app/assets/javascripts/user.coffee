@@ -301,7 +301,10 @@ angular.module('lessons').factory 'User', [
     @lc = teacher.lc
     @third_level = teacher.third_level
     @.unread = teacher.unread
+    @.charges = teacher.charges
     $rootScope.User = @
+    console.log $rootScope.User
+    $rootScope.User
     
 
   User::get_full_name = ->
