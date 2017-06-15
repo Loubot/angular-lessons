@@ -333,6 +333,32 @@
     <!-- end of travel option -->
 
 
+    <!-- Price option -->
+
+    <md-content layout-padding-gt-xs flex class="big_gutter margin_t_10"> 
+      <md-toolbar >
+        <div class="md-toolbar-tools padding_10">
+          <span layout-margin>How much do you charge?</span>
+        </div>
+      </md-toolbar>
+      <md-input-container flex="50">
+        <label>Price</label>
+        <md-select name="type" ng-model="teacher.price" required>
+          <md-option ng-repeat="n in [].constructor(100) track by $index" ng-if="$index%5==0&&$index>25">{{ $index }}</md-option>
+          
+        </md-select>
+      </md-input-container>
+      <md-input-container flex="50">
+        <label>per mins</label>
+        <md-select name="type" ng-model="teacher.price" required>
+          <md-option ng-repeat="n in [].constructor(121) track by $index" ng-if="$index%15==0&&$index>15">{{ $index }}</md-option>
+          
+        </md-select>
+      </md-input-container>
+    </md-content> 
+    <!-- end of price option -->
+
+
     <!-- Vetting and tci option -->
 
     <md-content layout-padding-gt-xs flex class="big_gutter margin_t_10" > 
