@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  teacher_id: 1
+  mins: 1
+  price: 9.99
+
+two:
+  teacher_id: 1
+  mins: 1
+  price: 9.99
