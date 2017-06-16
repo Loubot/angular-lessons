@@ -15,6 +15,10 @@ angular.module('lessons').controller('TeacherController', [
   ( $scope, $rootScope, User, RESOURCES, Alertify, COMMS, $auth, Upload, $mdBottomSheet, $mdDialog, $mdToast ) ->
     console.log "TeacherController"
 
+    
+    $scope.price_options = ( x for x in [ 0..150 ] by 5 )
+    $scope.time_options = ( x for x in [ 0..120 ] by 15 )
+
     display_subject_warning = ->
       Alertify.error "Your profile is not visible till you select a subject" 
 

@@ -341,20 +341,39 @@
           <span layout-margin>How much do you charge?</span>
         </div>
       </md-toolbar>
-      <md-input-container flex="50">
-        <label>Price</label>
-        <md-select name="type" ng-model="teacher.price" required>
-          <md-option ng-repeat="n in [].constructor(100) track by $index" ng-if="$index%5==0&&$index>25">{{ $index }}</md-option>
-          
-        </md-select>
-      </md-input-container>
-      <md-input-container flex="50">
-        <label>per mins</label>
-        <md-select name="type" ng-model="teacher.price" required>
-          <md-option ng-repeat="n in [].constructor(121) track by $index" ng-if="$index%15==0&&$index>15">{{ $index }}</md-option>
-          
-        </md-select>
-      </md-input-container>
+      <div layout="row">
+
+        <div>
+          <md-input-container>
+            <label>Price €:</label>
+            <md-select name="type" ng-model="User.charge.price" ng-change="log_it()" class="black_text" required>
+              <md-option ng-value="price" ng-repeat="price in price_options">{{ price }}</md-option>
+              
+            </md-select>
+          </md-input-container>
+        </div>
+
+      <div class="width_85px center_text"><md-input-container>per</md-input-container></div>
+
+       <div flex>
+        <md-input-container>
+          <label>Mins:</label>
+          <md-select name="mins" ng-model="User.charge.mins" ng-change="log_it()" class="black_text" required>
+            <md-option ng-value="time" ng-repeat="time in time_options">{{ time }}</md-option>
+            
+          </md-select>
+        </md-input-container>
+       </div>
+
+       
+
+        <div class="margin_r_10">
+          <md-input-container>
+            <md-button class="md-button no_margin md-primary md-raised white_text" ng-click="User.update_charge( User.charge )">Save</md-button>
+          </md-input-container>
+        </div>
+
+      </div>
     </md-content> 
     <!-- end of price option -->
 

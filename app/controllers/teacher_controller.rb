@@ -11,9 +11,9 @@ class TeacherController < ApplicationController
 
   def show
     
-    @teacher = Teacher.includes( :photos, :subjects, :experience, :qualifications, :location, :charges ).find( current_teacher.id )
+    @teacher = Teacher.includes( :photos, :subjects, :experience, :qualifications, :location, :charge ).find( current_teacher.id )
     
-    render json: { teacher: @teacher.as_json( include: [ :photos, :subjects, :experience, :qualifications, :location, :charges ] ) }
+    render json: { teacher: @teacher.as_json( include: [ :photos, :subjects, :experience, :qualifications, :location, :charge ] ) }
 
   end
 
