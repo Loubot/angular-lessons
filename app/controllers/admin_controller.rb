@@ -1,24 +1,32 @@
-class AdminController < ApplicationController
+  class AdminController < ApplicationController
   before_action :authenticate_teacher!
   before_action :check_admin
 
   def tweet
     require './lib/image.rb' 
     teacher = Teacher.find( tweet_params[ :tweet ][ :id ] )
+
+    
     if teacher.profile == nil
-      x = $client.update_with_media( tweet_params[ :tweet ][ :text ], Twitter::Image.open_from_url("https://s3-eu-west-1.amazonaws.com/angular-lessons/static_assets/facebook_logo.jpg")  )
+      image_id = $client.upload( Twitter::Image.open_from_url("https://s3-eu-west-1.amazonaws.com/angular-lessons/static_assets/facebook_logo.jpg")  )
+      x = $client.update( tweet_params[ :tweet ][ :text ], image_id )
     else
+      if Rails.env.development?
+        image = Twitter::Image.open_from_url( Teacher.last.photos.last.avatar.file.file )
+      else
+        image = Twitter::Image.open_from_url( Photo.find( teacher.profile ).avatar.url )        
+      end
+       
+
+      image_id = $client.upload( image )
+
+      pp "Image_id #{ image_id }"
       
-      image = Twitter::Image.open_from_url( Teacher.last.photos.last.avatar.file.file ) 
-      pp image
-      x = $client.update_with_media( tweet_params[ :tweet ][ :text ], image )
-      # if image[ "status" ] == "failure"
-      #   x = $client.update_with_media( tweet_params[ :tweet ][ :text ], Twitter::Image.open_from_url("https://s3-eu-west-1.amazonaws.com/angular-lessons/static_assets/facebook_logo.jpg")  )
-      # else
-      #   x = $client.update_with_media( tweet_params[ :tweet ][ :text ], image )
-      # end
+      x = $client.update( tweet_params[ :tweet ][ :text ], media_ids: image_id )
+      
 
     end
+
     render json: { tweet_response: x }
   end
 
