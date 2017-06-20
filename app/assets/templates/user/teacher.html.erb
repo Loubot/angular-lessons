@@ -105,7 +105,67 @@
     </div> <!-- end of flex -->
 
     <div flex="50" flex-xs="100">      
-      
+      <!-- Price option -->
+
+      <md-content layout-padding-gt-xs flex class="big_gutter margin_t_10"> 
+        <md-toolbar >
+          <div class="md-toolbar-tools padding_10">
+            <span layout-margin>How much do you charge?</span>
+          </div>
+        </md-toolbar>
+
+        <div layout="row">
+
+          <div>
+            <md-input-container>
+              <label>Price €:</label>
+              <md-select name="type" ng-model="charge.price" ng-change="log_it()" class="black_text" required>
+                <md-option ng-value="price" ng-repeat="price in price_options">{{ price }}</md-option>
+                
+              </md-select>
+            </md-input-container>
+          </div>
+
+          <div class="width_85px center_text"><md-input-container>per</md-input-container></div>
+
+          <div flex>
+            <md-input-container>
+              <label>Mins:</label>
+              <md-select name="mins" ng-model="charge.mins" ng-change="log_it()" class="black_text" required>
+                <md-option ng-value="time" ng-repeat="time in time_options">{{ time }}</md-option>
+                
+              </md-select>
+            </md-input-container>
+          </div>
+
+         
+          <div class="margin_r_10">
+            <md-input-container>
+              <md-button class="md-button no_margin md-primary md-raised white_text" ng-click="User.update_charge( charge )">Update</md-button>
+            </md-input-container>
+          </div>
+
+        </div> <!-- end of row -->
+        <style type="text/css">.this_circle
+              {
+                width: 150px;
+                height: 150px;
+                border-radius: 150px;
+                font-size: 20px;
+                color: #fff;
+                line-height: 50px;
+                text-align: center;
+                background: #FFD700;
+                margin: auto;
+              }
+        </style>
+
+
+        <div ng-if="User.charge">
+          <div class="this_circle">€{{ User.charge.price }} <br> per <br> {{ User.charge.mins }} mins</div>
+        </div>
+      </md-content> 
+      <!-- end of price option -->
       
 
     </div> <!-- end of flex=50 flex-xs=100 -->
@@ -335,51 +395,6 @@
         </div>
     </md-content> 
     <!-- end of travel option -->
-
-
-    <!-- Price option -->
-
-    <md-content layout-padding-gt-xs flex class="big_gutter margin_t_10"> 
-      <md-toolbar >
-        <div class="md-toolbar-tools padding_10">
-          <span layout-margin>How much do you charge?</span>
-        </div>
-      </md-toolbar>
-      <div layout="row">
-
-        <div>
-          <md-input-container>
-            <label>Price €:</label>
-            <md-select name="type" ng-model="User.charge.price" ng-change="log_it()" class="black_text" required>
-              <md-option ng-value="price" ng-repeat="price in price_options">{{ price }}</md-option>
-              
-            </md-select>
-          </md-input-container>
-        </div>
-
-      <div class="width_85px center_text"><md-input-container>per</md-input-container></div>
-
-       <div flex>
-        <md-input-container>
-          <label>Mins:</label>
-          <md-select name="mins" ng-model="User.charge.mins" ng-change="log_it()" class="black_text" required>
-            <md-option ng-value="time" ng-repeat="time in time_options">{{ time }}</md-option>
-            
-          </md-select>
-        </md-input-container>
-       </div>
-
-       
-
-        <div class="margin_r_10">
-          <md-input-container>
-            <md-button class="md-button no_margin md-primary md-raised white_text" ng-click="User.update_charge( User.charge )">Save</md-button>
-          </md-input-container>
-        </div>
-
-      </div>
-    </md-content> 
-    <!-- end of price option -->
 
 
     <!-- Vetting and tci option -->

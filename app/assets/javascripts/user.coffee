@@ -407,13 +407,14 @@ angular.module('lessons').factory 'User', [
 
 #################### Prices ####################################################
 
-  User::update_charge = ( charge ) ->
+  User::update_charge = ( charge ) ->    
     self = @
     COMMS.POST(
       "/teacher/#{ self.id }/charge/"
       charge
     ).then( ( resp ) ->
       console.log resp
+      $rootScope.User.charge = resp.data.charge
       Alertify.success "Charge updated"
     ).catch( ( err ) ->
       console.log err
