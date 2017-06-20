@@ -80,7 +80,7 @@ angular.module('lessons').service 'auth', [
         .then( (resp) ->
           
           new User().then( ( resp ) ->
-            console.log resp
+            # console.log resp
             $rootScope.$emit 'auth:registered_user', [
               resp
             ]
@@ -301,7 +301,10 @@ angular.module('lessons').factory 'User', [
     @lc = teacher.lc
     @third_level = teacher.third_level
     @.unread = teacher.unread
+    @.charge = teacher.charge
     $rootScope.User = @
+    console.log $rootScope.User
+    $rootScope.User
     
 
   User::get_full_name = ->
@@ -402,6 +405,23 @@ angular.module('lessons').factory 'User', [
     @.profile_url
 #################### end of pics ###############################################
 
+#################### Prices ####################################################
+
+  User::update_charge = ( charge ) ->
+    self = @
+    COMMS.POST(
+      "/teacher/#{ self.id }/charge/"
+      charge
+    ).then( ( resp ) ->
+      console.log resp
+      Alertify.success "Charge updated"
+    ).catch( ( err ) ->
+      console.log err
+      Alertify.error "Failed to create charge"
+    )
+
+#################### end of prices #############################################
+
 #################### Location ##################################################
 
   User::create_location = ( location ) ->
@@ -415,7 +435,7 @@ angular.module('lessons').factory 'User', [
       # if $rootScope.User.is_teacher then $state.go( "teacher", id: $rootScope.User.id ) else $state.go( 'student_profile', id: $rootScope.User.id )
     ).catch( ( err ) ->
       console.log err
-      Alertify.success "Failed to create location"
+      Alertify.error "Failed to create location"
     )
 
   User::update_address = ( location ) ->

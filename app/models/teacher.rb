@@ -56,6 +56,8 @@ class Teacher < ActiveRecord::Base
   has_many :identities, dependent: :destroy
   
   has_many :qualifications, dependent: :destroy
+
+  has_one :charge, dependent: :destroy
   include DeviseTokenAuth::Concerns::User
 
   validates :email,  uniqueness: { case_sensitive: false }

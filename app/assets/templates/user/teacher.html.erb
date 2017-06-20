@@ -333,6 +333,51 @@
     <!-- end of travel option -->
 
 
+    <!-- Price option -->
+
+    <md-content layout-padding-gt-xs flex class="big_gutter margin_t_10"> 
+      <md-toolbar >
+        <div class="md-toolbar-tools padding_10">
+          <span layout-margin>How much do you charge?</span>
+        </div>
+      </md-toolbar>
+      <div layout="row">
+
+        <div>
+          <md-input-container>
+            <label>Price €:</label>
+            <md-select name="type" ng-model="User.charge.price" ng-change="log_it()" class="black_text" required>
+              <md-option ng-value="price" ng-repeat="price in price_options">{{ price }}</md-option>
+              
+            </md-select>
+          </md-input-container>
+        </div>
+
+      <div class="width_85px center_text"><md-input-container>per</md-input-container></div>
+
+       <div flex>
+        <md-input-container>
+          <label>Mins:</label>
+          <md-select name="mins" ng-model="User.charge.mins" ng-change="log_it()" class="black_text" required>
+            <md-option ng-value="time" ng-repeat="time in time_options">{{ time }}</md-option>
+            
+          </md-select>
+        </md-input-container>
+       </div>
+
+       
+
+        <div class="margin_r_10">
+          <md-input-container>
+            <md-button class="md-button no_margin md-primary md-raised white_text" ng-click="User.update_charge( User.charge )">Save</md-button>
+          </md-input-container>
+        </div>
+
+      </div>
+    </md-content> 
+    <!-- end of price option -->
+
+
     <!-- Vetting and tci option -->
 
     <md-content layout-padding-gt-xs flex class="big_gutter margin_t_10" > 
