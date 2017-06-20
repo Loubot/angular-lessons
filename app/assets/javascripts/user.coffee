@@ -359,7 +359,7 @@ angular.module('lessons').factory 'User', [
         $rootScope.User.profile = resp.data.teacher.profile
         
         self.get_profile()
-        Alertify.success "Profile pic set"
+        Alertify.success "Profile pic set" if resp.data.photos.length == 1
 
         pic = null
       ).catch( ( err ) ->
