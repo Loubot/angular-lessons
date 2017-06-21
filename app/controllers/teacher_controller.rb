@@ -43,7 +43,7 @@ class TeacherController < ApplicationController
 
 
   def show_teacher
-    teacher = Teacher.includes( :photos, :subjects, :location, :experience, :qualifications, :charges )\
+    teacher = Teacher.includes( :photos, :subjects, :location, :experience, :qualifications, :charge )\
               .select( :id, :email, :first_name, :last_name, :profile, :overview, :view_count, :primary, :jc, :lc, :third_level, :travel, :tci, :garda, :phone )\
               .find_by_id( params[:teacher_id])
 
