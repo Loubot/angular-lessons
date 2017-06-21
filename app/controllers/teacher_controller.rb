@@ -49,7 +49,7 @@ class TeacherController < ApplicationController
 
     Teacher.increment_counter( :view_count, params[:teacher_id] )
     if teacher
-      render json: { teacher: teacher.as_json( include: [ :photos, :subjects, :location, :experience, :qualifications, :charges ] ) }
+      render json: { teacher: teacher.as_json( include: [ :photos, :subjects, :location, :experience, :qualifications, :charge ] ) }
     else
       render json: { errors: { full_messages: "Can't find teacher with that id" } }, status: 404
     end    
