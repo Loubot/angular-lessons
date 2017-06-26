@@ -24,6 +24,15 @@
             {{ teacher.location.address }}<br>
             {{ teacher.location.county }}
 
+            <!-- Price option -->
+            <div ng-if="teacher.charge" class="charge_circle_rec padding_10" layout-align="space-between" layout="row">
+              <div><md-icon class="gold_icon"><i class="material-icons">euro_symbol</i></div>
+              <div >{{ teacher.charge.price }}€ per {{ teacher.charge.mins }} mins</div>
+              <div><md-icon class="gold_icon"><i class="material-icons">euro_symbol</i></div>
+            </div>
+
+            <!-- End of price option -->
+
             <!-- Travel option -->
             <div ng-if="teacher.travel" class="margin_t_8 center_text raisedbox" layout-align="space-between" layout="row">
               <div><md-icon  class="navy_icon"><i class="material-icons" >subway</i></md-icon> </div>
@@ -129,6 +138,15 @@
             <span class="md-headline">Address</span>
             {{ teacher.location.address }}<br>
             {{ teacher.location.county }}
+
+            <!-- Price option -->
+            <div ng-if="teacher.charge" class="charge_circle_rec padding_10" layout-align="space-between" layout="row" >
+              <div><md-icon class="gold_icon"><i class="material-icons">euro_symbol</i></div>
+              <div >{{ teacher.charge.price }}€ per {{ teacher.charge.mins }} mins</div>
+              <div><md-icon class="gold_icon"><i class="material-icons">euro_symbol</i></div>
+            </div>
+
+            <!-- End of price option -->
 
             <!-- Travel option -->
             <div ng-if="teacher.travel" class="margin_t_8 center_text raisedbox" layout-align="space-between" layout="row">

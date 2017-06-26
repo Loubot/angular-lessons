@@ -19,11 +19,11 @@ class SearchController < ApplicationController
     teachers = []
     subjects = Subject.includes( :teachers ).where( "NAME #{ ilike } ?", "%#{ params[ :subject_name ] }%").select( [ :name, :id ] )
     subjects.all.each do |s| 
-      s.teachers.where( is_teacher: true ).includes( :photos, :location, :subjects ).offset( params[ :offset ] ).limit( ENV[' TEACHER_LIMIT' ] ).order('id DESC').all.each do |t|
+      s.teachers.where( is_teacher: true ).includes( :photos, :location, :subjects, :charge ).offset( params[ :offset ] ).limit( ENV[' TEACHER_LIMIT' ] ).order('id DESC').all.each do |t|
         teachers << t
       end
     end
-    teachers = teachers.as_json(include: [ :photos, :location, :subjects ]).uniq
+    teachers = teachers.as_json(include: [ :photos, :location, :subjects, :charge ]).uniq
     
     render json: { teachers: teachers }
   end

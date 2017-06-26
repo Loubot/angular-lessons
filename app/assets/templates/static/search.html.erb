@@ -123,6 +123,7 @@
                     {{ teacher.first_name }} {{ teacher.last_name }}
               </span>
               <span ng-if="teacher.location" class="md-subhead address">{{ teacher.location.address }}</span>
+              <span ng-if="teacher.location.county" class="md-subhead address"><strong>{{ teacher.location.county }}</strong></span>
               <span ng-repeat="subject in teacher.subjects">{{ subject.name }}</span>
             </md-card-title-text>
             <md-card-title-media ng-if="teacher.photos.length">
@@ -133,9 +134,18 @@
           </md-card-title>
           <md-card-actions class="no_margin" >
 
+            <!-- Price option -->
+            <div ng-if="teacher.charge" class="charge_circle_rec padding_5" layout-align="space-between" layout="row" layout-margin>
+              <div><md-icon class="gold_icon"><i class="material-icons">euro_symbol</i></div>
+              <div >{{ teacher.charge.price }}€ per {{ teacher.charge.mins }} mins</div>
+              <div><md-icon class="gold_icon"><i class="material-icons">euro_symbol</i></div>
+            </div>
+
+            <!-- End of price option -->
+
             <!-- Travel option -->
             <div ng-if="teacher.travel" class="margin_t_8 center_text raisedbox" layout-align="space-between" layout="row" layout-margin>
-              <div><md-icon  class="navy_icon"><i class="material-icons" >subway</i></md-icon> </div>
+              <div><md-icon class="navy_icon"><i class="material-icons" >subway</i></md-icon> </div>
 
               <div>This teacher will travel </div>
 

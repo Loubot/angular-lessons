@@ -6,26 +6,26 @@ module SearchHelper
       p "county_name and subject_name 1111111111111111"
       
       teachers =  geo_return_teachers
-      teachers.as_json( include: [ :photos, :location, :subjects ] ).uniq
+      teachers.as_json( include: [ :photos, :location, :subjects, :charge ] ).uniq
 
     elsif params.has_key?( :county_name ) && params[ :county_name ] != ""
 
       p "county_name only 2222222222222222"
       ids = run_geo_locate()
       teachers = Teacher.includes( :photos, :location, :subjects ).find( ids )
-      teachers.as_json( include: [ :photos, :location, :subjects ] ).uniq
+      teachers.as_json( include: [ :photos, :location, :subjects, :charge ] ).uniq
 
     elsif params.has_key?( :subject_name ) && params[ :subject_name ] != ""
 
       p "subject_name only 3333333333333333333"
       teachers = return_teachers
-      teachers.as_json( include: [ :photos, :location, :subjects ] ).uniq
+      teachers.as_json( include: [ :photos, :location, :subjects, :charge ] ).uniq
 
     else
       p "Search helper params #{ params }"
       teachers = return_teachers
       # teachers = subject.teachers.where( is_teacher: true ).select( "email, id, first_name, last_name" ).uniq
-      teachers.as_json(include: [ :photos, :location, :subjects ]).uniq
+      teachers.as_json(include: [ :photos, :location, :subjects, :charge ]).uniq
     end
 
   end
@@ -37,7 +37,7 @@ module SearchHelper
     teachers = []
     subjects = Subject.includes( :teachers ).where( "NAME #{ ilike } ?", "%#{ params[ :subject_name ] }%").select( [ :name, :id ] )
     subjects.all.each do |s| 
-      s.teachers.where( is_teacher: true ).includes( :photos, :location, :subjects ).offset( params[ :offset ] ).limit( ENV['TEACHER_LIMIT'] ).order('id DESC').all.each do |t|
+      s.teachers.where( is_teacher: true ).includes( :photos, :location, :subjects, :charge, ).offset( params[ :offset ] ).limit( ENV['TEACHER_LIMIT'] ).order('id DESC').all.each do |t|
         teachers << t
       end
     end
@@ -52,7 +52,7 @@ module SearchHelper
     ids = run_geo_locate()
      subjects = Subject.where( "NAME #{ ilike } ?", "%#{ params[ :subject_name ] }%" ).select( [ :name, :id ] )
       subjects.all.each do |s| 
-        s.teachers.where( is_teacher: true).includes( :photos, :location, :subjects ).offset( params[ :offset ] ).limit( ENV[ 'TEACHER_LIMIT' ] ).order('id DESC').where( id: ids ).all.each do |t|
+        s.teachers.where( is_teacher: true).includes( :photos, :location, :subjects, :charge ).offset( params[ :offset ] ).limit( ENV[ 'TEACHER_LIMIT' ] ).order('id DESC').where( id: ids ).all.each do |t|
           teachers << t
         end
       end

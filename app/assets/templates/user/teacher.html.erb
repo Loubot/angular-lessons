@@ -146,23 +146,10 @@
           </div>
 
         </div> <!-- end of row -->
-        <style type="text/css">.this_circle
-              {
-                width: 150px;
-                height: 150px;
-                border-radius: 150px;
-                font-size: 20px;
-                color: #fff;
-                line-height: 50px;
-                text-align: center;
-                background: #FFD700;
-                margin: auto;
-              }
-        </style>
 
 
         <div ng-if="User.charge">
-          <div class="this_circle">€{{ User.charge.price }} <br> per <br> {{ User.charge.mins }} mins</div>
+          <div class="charge_circle_big">€{{ User.charge.price }} <br> per <br> {{ User.charge.mins }} mins</div>
         </div>
       </md-content> 
       <!-- end of price option -->

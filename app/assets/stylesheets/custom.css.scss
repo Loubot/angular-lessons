@@ -1012,6 +1012,33 @@ md-sidenav.md-closed.md-locked-open-add-active.user_menu {
   
 // end of search page
 
+// Charge css for teacher, search and view_teacher pages
+
+.charge_circle_big{
+  width: 150px;
+  height: 150px;
+  border-radius: 150px;
+  font-size: 20px;
+  color: #fff;
+  line-height: 50px;
+  text-align: center;
+  background: #FFD700;
+  margin: auto;
+}
+
+.charge_circle_rec{
+  background-color: #FFF;
+  border: 1px solid #FFD700;
+  color: #141100;
+}
+
+.gold_icon{
+  background-color: #FFD700;  
+  color: #FFF;
+}
+
+// End of charge css
+
 // Teacher area
 .calendar_container{
   // height: calc( 100% - 200px ) !important;
