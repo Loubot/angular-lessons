@@ -22,12 +22,10 @@ ActiveRecord::Schema.define(version: 20170615151630) do
   create_table "charges", force: :cascade do |t|
     t.integer  "teacher_id"
     t.integer  "mins"
-    t.integer  "price",      default: 0
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
+    t.decimal  "price",      precision: 8, scale: 2
+    t.datetime "created_at",                         null: false
+    t.datetime "updated_at",                         null: false
   end
-
-  add_index "charges", ["teacher_id"], name: "index_charges_on_teacher_id"
 
   create_table "conversations", force: :cascade do |t|
     t.datetime "created_at",                        null: false

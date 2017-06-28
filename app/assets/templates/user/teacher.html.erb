@@ -114,28 +114,30 @@
           </div>
         </md-toolbar>
 
-        <div layout="row">
+        <div layout="column" layout-gt-sm="row">
 
-          <div>
-            <md-input-container>
-              <label>Price €:</label>
-              <md-select name="type" ng-model="charge.price" ng-change="log_it()" class="black_text" required>
-                <md-option ng-value="price" ng-repeat="price in price_options">{{ price }}</md-option>
-                
-              </md-select>
-            </md-input-container>
-          </div>
+          <div layout="row">
+            <div>
+              <md-input-container>
+                <label>Price €:</label>
+                <md-select name="type" ng-model="charge.price" ng-change="log_it()" class="black_text" required>
+                  <md-option ng-value="price" ng-repeat="price in price_options">{{ price }}</md-option>
+                  
+                </md-select>
+              </md-input-container>
+            </div>
 
-          <div class="width_85px center_text"><md-input-container>per</md-input-container></div>
+            <div class="width_85px center_text"><md-input-container>per</md-input-container></div>
 
-          <div flex>
-            <md-input-container>
-              <label>Mins:</label>
-              <md-select name="mins" ng-model="charge.mins" ng-change="log_it()" class="black_text" required>
-                <md-option ng-value="time" ng-repeat="time in time_options">{{ time }}</md-option>
-                
-              </md-select>
-            </md-input-container>
+            <div flex>
+              <md-input-container>
+                <label>Mins:</label>
+                <md-select name="mins" ng-model="charge.mins" ng-change="log_it()" class="black_text" required>
+                  <md-option ng-value="time" ng-repeat="time in time_options">{{ time }}</md-option>
+                  
+                </md-select>
+              </md-input-container>
+            </div>
           </div>
 
          
